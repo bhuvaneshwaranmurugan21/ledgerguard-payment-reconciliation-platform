@@ -1,0 +1,21 @@
+project: ledgerguard-payment-reconciliation-platform
+updated: 2026-08-14
+claims:
+  financial_invariants:
+    level: LOCAL_VERIFIED
+    evidence: [tests/, evidence/local-simulation.json]
+  terraform_topology:
+    level: DESIGN_ONLY
+    evidence: [infra/terraform/]
+  aws_reconciliation:
+    level: DESIGN_ONLY
+    validator: src/ledgerguard/aws_evidence.py
+    required:
+      - Step Functions execution ARN
+      - Glue run and Athena query identifiers
+      - settlement mismatch and recovery proof
+      - monetary totals before and after repair
+      - runtime, cost, and teardown evidence
+  pci_compliance:
+    level: DESIGN_ONLY
+    note: No PCI certification claim is made.

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:external-payment-record:v1",
+  "type": "object",
+  "required": ["record_id", "payment_id", "source", "kind", "amount_cents", "currency", "occurred_at"],
+  "properties": {
+    "record_id": {"type": "string", "minLength": 1},
+    "payment_id": {"type": "string", "minLength": 1},
+    "source": {"enum": ["processor", "bank"]},
+    "kind": {"enum": ["capture", "refund", "reversal", "settlement"]},
+    "amount_cents": {"type": "integer", "minimum": 1},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "occurred_at": {"type": "integer"},
+    "reference_id": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
+

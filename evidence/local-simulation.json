@@ -1,0 +1,101 @@
+{
+  "architecture": "three-way-auditable-reconciliation",
+  "checks": [
+    {
+      "check": "processor_capture",
+      "passed": true,
+      "proof": "applied"
+    },
+    {
+      "check": "processor_replay",
+      "passed": true,
+      "proof": "replayed"
+    },
+    {
+      "check": "conflicting_identity_blocked",
+      "passed": true,
+      "proof": "IdentityConflict"
+    },
+    {
+      "check": "balanced_ledger",
+      "passed": true,
+      "proof": "applied"
+    },
+    {
+      "check": "unbalanced_ledger_blocked",
+      "passed": true,
+      "proof": "ContractViolation"
+    },
+    {
+      "check": "missing_settlement_detected",
+      "passed": true,
+      "proof": {
+        "bank_cents": 0,
+        "currency": "INR",
+        "difference_cents": 10000,
+        "ledger_cents": 10000,
+        "payment_id": "pay-1",
+        "policy_version": "v1",
+        "processor_cents": 10000,
+        "status": "EXCEPTION"
+      }
+    },
+    {
+      "check": "one_to_many_settlement",
+      "passed": true,
+      "proof": "applied"
+    },
+    {
+      "check": "three_way_match",
+      "passed": true,
+      "proof": "MATCHED"
+    },
+    {
+      "check": "atomic_feed_failure",
+      "passed": true,
+      "proof": "InjectedFailure"
+    },
+    {
+      "check": "atomic_rollback",
+      "passed": true,
+      "proof": true
+    },
+    {
+      "check": "reversal_before_original_blocked",
+      "passed": true,
+      "proof": "ContractViolation"
+    },
+    {
+      "check": "case_transition_audited",
+      "passed": true,
+      "proof": [
+        "NEW->EXCEPTION:dfca550b9e32",
+        "EXCEPTION->MATCHED:af5d59a7303a"
+      ]
+    },
+    {
+      "check": "evidence_digest",
+      "passed": true,
+      "proof": "c221d1e4e1316f2bb8679b930e7d5a82ab60bf70bd471e90c2acfd5b75ea8c7d"
+    }
+  ],
+  "claim_level": "LOCAL_VERIFIED",
+  "evidence_digest": "93fe1a47bee37851617186981b151cecf3492640b6dd79b7213865d189f0961d",
+  "metrics": {
+    "checks_passed": 13,
+    "checks_total": 13
+  },
+  "production_claim": false,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "result": "PASS",
+  "terminal_result": {
+    "bank_cents": 10000,
+    "currency": "INR",
+    "difference_cents": 0,
+    "ledger_cents": 10000,
+    "payment_id": "pay-1",
+    "policy_version": "v1",
+    "processor_cents": 10000,
+    "status": "MATCHED"
+  }
+}
