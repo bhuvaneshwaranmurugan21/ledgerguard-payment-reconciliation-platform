@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "stage": "PART1_STAGE3",
+  "source_digest": {
+    "record": {
+      "schema_version": "2.0",
+      "source_record_id": "capture-1",
+      "source_batch_id": "batch-1",
+      "processor": "processor-a",
+      "merchant_id": "merchant-1",
+      "payment_id": "payment-1",
+      "event_type": "CAPTURE",
+      "amount_minor": 100,
+      "currency": "INR",
+      "occurred_at": "2026-09-01T06:30:00+05:30",
+      "received_at": "2026-09-01T06:31:00+05:30",
+      "payload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "equivalent_redelivery": {
+      "source_batch_id": "batch-2",
+      "received_at": "2026-09-01T02:00:00Z"
+    },
+    "conflicting_redelivery": {"amount_minor": 101},
+    "expected_canonical_json": "{\"amount_minor\":100,\"currency\":\"INR\",\"event_type\":\"CAPTURE\",\"merchant_id\":\"merchant-1\",\"occurred_at\":\"2026-09-01T01:00:00Z\",\"payment_id\":\"payment-1\",\"processor\":\"processor-a\",\"schema_version\":\"2.0\",\"source_record_id\":\"capture-1\"}",
+    "expected_sha256": "52aca57fe62b2ed726ec3ee381f908f91a3e92a0aeda11f5791e7c4c82805e90"
+  },
+  "transaction_key": {
+    "components": {
+      "processor": "processor-a",
+      "merchant_id": "merchant-1",
+      "payment_id": "payment-1",
+      "event_class": "CAPTURE",
+      "currency": "INR"
+    },
+    "expected_canonical_json": "{\"currency\":\"INR\",\"event_class\":\"CAPTURE\",\"merchant_id\":\"merchant-1\",\"payment_id\":\"payment-1\",\"processor\":\"processor-a\"}",
+    "expected_key": "txn:7f5185560995fb0a625c814367c1019e8c6742df35ec22cb650c54be9ae0e102"
+  },
+  "settlement_key": {
+    "components": {
+      "processor": "processor-a",
+      "merchant_id": "merchant-1",
+      "settlement_id": "settlement-1",
+      "settlement_cycle": "2026-09-01",
+      "currency": "INR"
+    },
+    "expected_canonical_json": "{\"currency\":\"INR\",\"merchant_id\":\"merchant-1\",\"processor\":\"processor-a\",\"settlement_cycle\":\"2026-09-01\",\"settlement_id\":\"settlement-1\"}",
+    "expected_key": "stl:6f63aaa7cc45d45249420f1a0b427348f870c23ceb0faa3e3d24c38b315d779c"
+  },
+  "policy_manifest_proof_case_chain": {
+    "policy": {
+      "schema_version": "2.0",
+      "policy_version": "v1",
+      "currency_rules": {
+        "INR": {"exponent": 2, "transaction_tolerance_minor": 0, "settlement_tolerance_minor": 1},
+        "JPY": {"exponent": 0, "transaction_tolerance_minor": 0, "settlement_tolerance_minor": 1},
+        "USD": {"exponent": 2, "transaction_tolerance_minor": 0, "settlement_tolerance_minor": 1}
+      },
+      "transaction_rules": {
+        "event_signs": {"CAPTURE": 1, "REFUND": -1, "CHARGEBACK": -1, "REVERSAL": -1},
+        "ledger_role": "PROCESSOR_CLEARING",
+        "ledger_side_signs": {"DEBIT": 1, "CREDIT": -1},
+        "allowed_counterpart_roles": ["MERCHANT_PAYABLE", "REFUND_LIABILITY", "CHARGEBACK_RESERVE"],
+        "reference_rules": {
+          "capture_reference": "FORBIDDEN",
+          "negative_event_reference": "EXACT_CAPTURE_REFERENCE",
+          "negative_reference_chain_forbidden": true,
+          "cumulative_negative_must_not_exceed_capture": true
+        }
+      },
+      "settlement_rules": {
+        "formula": "gross_minor-fee_minor-refund_minor-chargeback_minor-reserve_minor",
+        "reported_net_must_equal_recomputed_net": true,
+        "expected_net_may_be_negative": true,
+        "ledger_role": "PROCESSOR_CLEARING",
+        "ledger_side_signs": {"DEBIT": -1, "CREDIT": 1},
+        "bank_side_signs": {"CREDIT": 1, "DEBIT": -1},
+        "bank_allocation": {
+          "strategy": "EXACT_SETTLEMENT_REFERENCE",
+          "normalization": ["UNICODE_NFC", "TRIM_OUTER_WHITESPACE"],
+          "case_sensitive": true,
+          "punctuation_preserved": true,
+          "amount_date_heuristic_forbidden": true,
+          "ambiguous_reference": "FAIL_ADMISSION",
+          "one_bank_identity_one_allocation": true,
+          "split_entries_allowed": true,
+          "unknown_reference": "UNALLOCATED_BANK_MOVEMENT"
+        },
+        "permitted_bank_accounts": [
+          {"merchant_id": "merchant-1", "currency": "INR", "bank_account_ids": ["bank-account-1"]}
+        ]
+      },
+      "status_rules": {
+        "matched": "ZERO_DIFFERENCE_AND_NO_REASON",
+        "within_tolerance": "NONZERO_DIFFERENCE_WITHIN_BOUND_AND_ONLY_TOLERATED_REASON",
+        "exception": "SEMANTIC_REASON_OR_DIFFERENCE_ABOVE_TOLERANCE",
+        "tolerance_cannot_hide": [
+          "ADMISSION_FAILURE",
+          "IDENTITY_CONFLICT",
+          "MISSING_EVIDENCE",
+          "REFERENCE_FAILURE",
+          "POLICY_FAILURE",
+          "SETTLEMENT_FORMULA_MISMATCH"
+        ]
+      },
+      "late_data_strategy": "NEW_IMMUTABLE_REVISION",
+      "policy_sha256": "009dff5a6d87df826f6a9caa6842ace316549178c3eb30a7a57f6d7966a93ea6"
+    },
+    "expected_policy_sha256": "009dff5a6d87df826f6a9caa6842ace316549178c3eb30a7a57f6d7966a93ea6",
+    "expected_policy_canonical_bytes": 1947,
+    "manifest": {
+      "schema_version": "2.0",
+      "run_id": "run-0001",
+      "source_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "policy_version": "v1",
+      "policy_sha256": "009dff5a6d87df826f6a9caa6842ace316549178c3eb30a7a57f6d7966a93ea6",
+      "created_at": "2026-09-01T01:00:00Z",
+      "objects": [
+        {"family": "PROCESSOR_EVENTS", "schema_version": "2.0", "locator_type": "LOCAL_FILE", "relative_path": "fixtures/processor-events.jsonl", "size_bytes": 100, "record_count": 1, "sha256": "1111111111111111111111111111111111111111111111111111111111111111"},
+        {"family": "PROCESSOR_SETTLEMENTS", "schema_version": "2.0", "locator_type": "LOCAL_FILE", "relative_path": "fixtures/processor-settlements.jsonl", "size_bytes": 100, "record_count": 1, "sha256": "2222222222222222222222222222222222222222222222222222222222222222"},
+        {"family": "LEDGER_JOURNALS", "schema_version": "2.0", "locator_type": "LOCAL_FILE", "relative_path": "fixtures/ledger-journals.jsonl", "size_bytes": 100, "record_count": 1, "sha256": "3333333333333333333333333333333333333333333333333333333333333333"},
+        {"family": "BANK_ENTRIES", "schema_version": "2.0", "locator_type": "LOCAL_FILE", "relative_path": "fixtures/bank-entries.jsonl", "size_bytes": 100, "record_count": 1, "sha256": "4444444444444444444444444444444444444444444444444444444444444444"}
+      ],
+      "manifest_sha256": "7bd738c4b0e7047418ee074350e347880d6a825c5787cf3ea7078d4e7d848f65"
+    },
+    "expected_manifest_sha256": "7bd738c4b0e7047418ee074350e347880d6a825c5787cf3ea7078d4e7d848f65",
+    "expected_manifest_canonical_bytes": 1220,
+    "proof": {
+      "schema_version": "2.0",
+      "proof_id": "prf:f58231f88971bba2f2802a6e2c48149fd867fcba9d97ec0c3365769fb72390f8",
+      "run_id": "run-0001",
+      "grain": "TRANSACTION",
+      "reconciliation_key": "txn:7f5185560995fb0a625c814367c1019e8c6742df35ec22cb650c54be9ae0e102",
+      "key_components": {
+        "processor": "processor-a",
+        "merchant_id": "merchant-1",
+        "payment_id": "payment-1",
+        "event_class": "CAPTURE",
+        "currency": "INR"
+      },
+      "revision": 1,
+      "currency": "INR",
+      "policy_version": "v1",
+      "source_manifest_sha256": "7bd738c4b0e7047418ee074350e347880d6a825c5787cf3ea7078d4e7d848f65",
+      "policy_sha256": "009dff5a6d87df826f6a9caa6842ace316549178c3eb30a7a57f6d7966a93ea6",
+      "totals": {
+        "processor_minor": 100,
+        "ledger_minor": 99,
+        "processor_ledger_delta_minor": 1,
+        "difference_minor": 1,
+        "processor_record_count": 1,
+        "ledger_journal_count": 1
+      },
+      "status": "EXCEPTION",
+      "reason_codes": ["PROCESSOR_LEDGER_MISMATCH"],
+      "created_at": "2026-09-01T01:00:01Z",
+      "proof_sha256": "0fb3ae96bd1d906e1827d9f7909db0ee1b88a1a19e63c5a2cfb3ae3d4d84b9bf"
+    },
+    "expected_proof_id": "prf:f58231f88971bba2f2802a6e2c48149fd867fcba9d97ec0c3365769fb72390f8",
+    "expected_proof_sha256": "0fb3ae96bd1d906e1827d9f7909db0ee1b88a1a19e63c5a2cfb3ae3d4d84b9bf",
+    "expected_proof_canonical_bytes": 864,
+    "case_revision_one": {
+      "schema_version": "2.0",
+      "case_id": "case:82a8dfc701ad85801af0c3b4e80c26033d13dbd536c821128045e0df8836b117",
+      "grain": "TRANSACTION",
+      "reconciliation_key": "txn:7f5185560995fb0a625c814367c1019e8c6742df35ec22cb650c54be9ae0e102",
+      "initial_exception_proof_id": "prf:f58231f88971bba2f2802a6e2c48149fd867fcba9d97ec0c3365769fb72390f8",
+      "revision": 1,
+      "status": "OPEN",
+      "reason_codes": ["PROCESSOR_LEDGER_MISMATCH"],
+      "proof_id": "prf:f58231f88971bba2f2802a6e2c48149fd867fcba9d97ec0c3365769fb72390f8",
+      "actor_type": "SYSTEM",
+      "occurred_at": "2026-09-01T01:00:02Z",
+      "case_revision_sha256": "9b8461fdbca5a5faed3038348ab2973193bfadf570241355907e1239906cfa23"
+    },
+    "expected_case_id": "case:82a8dfc701ad85801af0c3b4e80c26033d13dbd536c821128045e0df8836b117",
+    "expected_case_revision_one_sha256": "9b8461fdbca5a5faed3038348ab2973193bfadf570241355907e1239906cfa23",
+    "expected_case_revision_one_canonical_bytes": 535,
+    "case_revision_two": {
+      "schema_version": "2.0",
+      "case_id": "case:82a8dfc701ad85801af0c3b4e80c26033d13dbd536c821128045e0df8836b117",
+      "grain": "TRANSACTION",
+      "reconciliation_key": "txn:7f5185560995fb0a625c814367c1019e8c6742df35ec22cb650c54be9ae0e102",
+      "initial_exception_proof_id": "prf:f58231f88971bba2f2802a6e2c48149fd867fcba9d97ec0c3365769fb72390f8",
+      "revision": 2,
+      "prior_case_revision_id": "9b8461fdbca5a5faed3038348ab2973193bfadf570241355907e1239906cfa23",
+      "status": "RESOLVED_BY_LATE_DATA",
+      "reason_codes": ["PROCESSOR_LEDGER_MISMATCH"],
+      "proof_id": "prf:f58231f88971bba2f2802a6e2c48149fd867fcba9d97ec0c3365769fb72390f8",
+      "actor_type": "SYSTEM",
+      "occurred_at": "2026-09-01T01:05:00Z",
+      "case_revision_sha256": "a3c68b396934b9f1fd81a253f4d2a789a6562debfdf1b03d59105413dbee1617"
+    },
+    "expected_case_revision_two_sha256": "a3c68b396934b9f1fd81a253f4d2a789a6562debfdf1b03d59105413dbee1617"
+  },
+  "timestamp_vectors": [
+    {"input": "2026-09-01T06:30:00+05:30", "expected": "2026-09-01T01:00:00Z"},
+    {"input": "2026-09-01T01:00:00.120000Z", "expected": "2026-09-01T01:00:00.12Z"},
+    {"input": "2028-02-29T00:00:00Z", "expected": "2028-02-29T00:00:00Z"}
+  ],
+  "invalid_timestamps": [
+    "2026-02-30T00:00:00Z",
+    "2026-13-01T00:00:00Z",
+    "2026-09-01T01:00:00",
+    "2026-09-01T01:00:00.1234567Z",
+    "2026-12-31T23:59:60Z",
+    "2026-09-01T01:00:00+24:00"
+  ],
+  "invalid_json_numbers": ["1.0", "1e0", "NaN", "Infinity", "-Infinity", "9223372036854775808"]
+}

@@ -26,8 +26,9 @@ of rewriting historical evidence.
 ## Current status
 
 Part 1 is undergoing a fail-closed correction. Stage 0 establishes the corrective baseline, Stage 1
-freezes the financial semantics, and Stage 2 encodes those semantics in a versioned active contract
-set. Final Part 1 coherence and completion governance remain outstanding.
+freezes the financial semantics, Stage 2 encodes them in a versioned active contract set, and Stage
+3 validates canonical bytes and complete contract coherence. Final Part 1 completion governance
+remains outstanding.
 
 | Area | Status |
 |---|---|
@@ -35,6 +36,7 @@ set. Final Part 1 coherence and completion governance remain outstanding.
 | Financial semantic decisions | `DESIGNED/MODELED` and frozen |
 | Semantic acceptance examples | `LOCAL_VERIFIED` after CI |
 | Corrected active `v2` contracts | `LOCAL_VERIFIED` after CI |
+| Canonical contract coherence | `LOCAL_VERIFIED` after CI |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
 | Managed AWS reconciliation | `UNCLAIMED` |
@@ -46,7 +48,10 @@ See the [architecture](docs/architecture.md), [correctness model](docs/correctne
 [project completion contract](contracts/project-completion-v1.json). The active contract authority
 is the [version registry](contracts/active-contract-set-v1.json), supported by the
 [contract model](docs/contract-model.md), [Stage 2 requirements](docs/part1-stage2-requirements.md),
-and [Stage 2 gap audit](docs/stage2-gap-audit.md). Stage 1 semantic artifacts remain immutable.
+and [Stage 2 gap audit](docs/stage2-gap-audit.md). Canonical byte and linked-artifact authority is
+defined by the [coherence model](docs/contract-coherence.md) and
+[Stage 3 gap audit](docs/stage3-gap-audit.md). Stage 0–2 artifacts and every v1/v2 schema remain
+immutable.
 
 ## Foundation validation
 

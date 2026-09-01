@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "stage": "PART1_STAGE3",
+  "state": "BIDIRECTIONAL_TRACEABILITY_COMPLETE",
+  "requirements": [
+    {"id": "COH-001", "profile_sections": ["strict_json"], "vector_ids": ["invalid_json_numbers"], "gates": ["STRICT_JSON_FAILS_CLOSED"], "test_ids": ["COH-T001", "COH-T002"]},
+    {"id": "COH-002", "profile_sections": ["canonicalization"], "vector_ids": ["source_digest"], "gates": ["CANONICAL_UNICODE_JSON_STABLE"], "test_ids": ["COH-T003"]},
+    {"id": "COH-003", "profile_sections": ["canonicalization"], "vector_ids": ["timestamp_vectors", "invalid_timestamps"], "gates": ["CALENDAR_VALID_UTC_CANONICALIZATION"], "test_ids": ["COH-T004"]},
+    {"id": "COH-004", "profile_sections": ["digest_scopes"], "vector_ids": ["source_digest", "policy_manifest_proof_case_chain"], "gates": ["DIGEST_SCOPES_HAVE_GOLDEN_BYTES"], "test_ids": ["COH-T005", "COH-T006"]},
+    {"id": "COH-005", "profile_sections": ["identity_derivations"], "vector_ids": ["transaction_key", "settlement_key", "policy_manifest_proof_case_chain"], "gates": ["IDENTITY_DERIVATIONS_HAVE_GOLDEN_BYTES"], "test_ids": ["COH-T007"]},
+    {"id": "COH-006", "profile_sections": ["manifest_family_contracts"], "vector_ids": ["policy_manifest_proof_case_chain"], "gates": ["MANIFEST_FAMILIES_RESOLVE_TO_ACTIVE_SCHEMAS"], "test_ids": ["COH-T008"]},
+    {"id": "COH-007", "profile_sections": ["binding_rules"], "vector_ids": ["policy_manifest_proof_case_chain"], "gates": ["POLICY_MANIFEST_PROOF_CASE_BINDINGS_HOLD"], "test_ids": ["COH-T009"]},
+    {"id": "COH-008", "profile_sections": ["manifest_family_contracts"], "vector_ids": [], "gates": ["ALL_REFERENCE_FRAGMENTS_RESOLVE", "CROSS_CONTRACT_DOMAINS_ARE_COHERENT"], "test_ids": ["COH-T010", "COH-T011"]},
+    {"id": "COH-009", "profile_sections": ["identity_derivations"], "vector_ids": ["policy_manifest_proof_case_chain"], "gates": ["APPEND_ONLY_PREDECESSOR_BINDINGS_HOLD"], "test_ids": ["COH-T012"]},
+    {"id": "COH-010", "profile_sections": ["requirements"], "vector_ids": [], "gates": ["BIDIRECTIONAL_TRACEABILITY_IS_COMPLETE"], "test_ids": ["COH-T013"]},
+    {"id": "COH-011", "profile_sections": ["strict_artifact_paths", "unresolved_coherence_decisions"], "vector_ids": [], "gates": ["ADVERSARIAL_MUTATIONS_FAIL_CLOSED", "STAGE3_VALIDATOR_IS_DETERMINISTIC"], "test_ids": ["COH-T014", "COH-T015"]},
+    {"id": "COH-012", "profile_sections": ["execution_boundary"], "vector_ids": [], "gates": ["STAGE0_TO_STAGE2_VALIDATORS_ARE_PRESERVED", "HISTORICAL_V1_AND_ACTIVE_V2_BYTES_ARE_PRESERVED", "NO_RECONCILIATION_ENGINE_OR_AWS_EXECUTION", "EXACT_HEAD_CI_SUCCESS", "POST_MERGE_MAIN_CI_SUCCESS"], "test_ids": ["COH-T016", "COH-T017"]}
+  ],
+  "artifact_ownership": [
+    {"path": "spec/contract-coherence-v1.json", "requirement_ids": ["COH-001", "COH-002", "COH-003", "COH-004", "COH-005", "COH-006", "COH-007", "COH-008", "COH-009", "COH-010", "COH-011", "COH-012"]},
+    {"path": "spec/contract-coherence-vectors-v1.json", "requirement_ids": ["COH-001", "COH-002", "COH-003", "COH-004", "COH-005", "COH-006", "COH-007", "COH-009"]},
+    {"path": "spec/contract-coherence-traceability-v1.json", "requirement_ids": ["COH-010"]},
+    {"path": "src/ledgerguard/foundation.py", "requirement_ids": ["COH-001", "COH-002", "COH-003", "COH-004", "COH-005", "COH-006", "COH-007", "COH-008", "COH-009", "COH-010", "COH-011", "COH-012"]},
+    {"path": "tests/test_contract_coherence.py", "requirement_ids": ["COH-001", "COH-002", "COH-003", "COH-004", "COH-005", "COH-006", "COH-007", "COH-008", "COH-009"]},
+    {"path": "tests/test_part1_stage3.py", "requirement_ids": ["COH-010", "COH-011", "COH-012"]},
+    {"path": "contracts/part1-stage3-completion-v1.json", "requirement_ids": ["COH-010", "COH-011", "COH-012"]},
+    {"path": "evidence/part1-stage3-local.json", "requirement_ids": ["COH-011", "COH-012"]}
+  ],
+  "upstream_coverage": {
+    "semantic_decision_ids": ["SEM-001", "SEM-002", "SEM-003", "SEM-004", "SEM-005", "SEM-006", "SEM-007", "SEM-008", "SEM-009", "SEM-010", "SEM-011", "SEM-012", "SEM-013", "SEM-014", "SEM-015", "SEM-016", "SEM-017", "SEM-018"],
+    "contract_invariant_ids": ["CTR-001", "CTR-002", "CTR-003", "CTR-004", "CTR-005", "CTR-006", "CTR-007", "CTR-008", "CTR-009", "CTR-010", "CTR-011", "CTR-012", "CTR-013", "CTR-014", "CTR-015", "CTR-016", "CTR-017", "CTR-018"],
+    "part1_requirement_ids": ["P1-R01", "P1-R02", "P1-R03", "P1-R04", "P1-R05", "P1-R06", "P1-R07", "P1-R08", "P1-R09", "P1-R10", "P1-R11", "P1-R12"]
+  },
+  "unmapped_requirement_ids": [],
+  "unowned_gate_ids": [],
+  "unowned_artifact_paths": []
+}

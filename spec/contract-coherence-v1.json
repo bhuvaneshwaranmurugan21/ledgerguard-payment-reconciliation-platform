@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 3,
+  "state": "PART1_CONTRACT_COHERENCE_VALIDATED",
+  "active_contract_version": "2.0",
+  "strict_json": {
+    "encoding": "UTF-8",
+    "bom_allowed": false,
+    "duplicate_keys": "FAIL_ADMISSION",
+    "nfc_key_collisions": "FAIL_ADMISSION",
+    "decimal_or_exponent_numbers": "FAIL_ADMISSION",
+    "non_finite_numbers": "FAIL_ADMISSION",
+    "integer_domain": "SIGNED_64_BIT",
+    "booleans_are_integers": false,
+    "unicode_surrogates": "FAIL_ADMISSION"
+  },
+  "canonicalization": {
+    "unicode": "NFC",
+    "object_key_order": "UNICODE_CODE_POINT",
+    "json_separators": [",", ":"],
+    "ascii_escape": false,
+    "timestamp_input": "RFC3339_OFFSET_AWARE",
+    "timestamp_output": "RFC3339_UTC_Z",
+    "timestamp_fields": ["occurred_at", "received_at", "effective_at", "value_at", "created_at"],
+    "fractional_second_digits_max": 6,
+    "fractional_trailing_zeroes": "TRIM",
+    "calendar_validation": "REQUIRED",
+    "leap_seconds": "FAIL_ADMISSION"
+  },
+  "digest_scopes": {
+    "source_payload_sha256": {
+      "exclude": ["payload_sha256", "received_at", "source_batch_id"]
+    },
+    "policy_sha256": {"exclude": ["policy_sha256"]},
+    "manifest_sha256": {"exclude": ["manifest_sha256"]},
+    "proof_sha256": {"exclude": ["proof_sha256"]},
+    "case_revision_sha256": {"exclude": ["case_revision_sha256"]}
+  },
+  "identity_derivations": {
+    "transaction_key": {
+      "prefix": "txn:",
+      "fields": ["processor", "merchant_id", "payment_id", "event_class", "currency"]
+    },
+    "settlement_key": {
+      "prefix": "stl:",
+      "fields": ["processor", "merchant_id", "settlement_id", "settlement_cycle", "currency"]
+    },
+    "proof_id": {
+      "prefix": "prf:",
+      "fields": ["grain", "reconciliation_key", "revision", "source_manifest_sha256", "policy_sha256"]
+    },
+    "case_id": {
+      "prefix": "case:",
+      "fields": ["grain", "reconciliation_key", "initial_exception_proof_id"]
+    },
+    "prior_proof_id": "PREVIOUS_PROOF_ID",
+    "prior_case_revision_id": "PREVIOUS_CASE_REVISION_SHA256"
+  },
+  "manifest_family_contracts": {
+    "PROCESSOR_EVENTS": "urn:ledgerguard:processor-event:v2",
+    "PROCESSOR_SETTLEMENTS": "urn:ledgerguard:processor-settlement:v2",
+    "LEDGER_JOURNALS": "urn:ledgerguard:journal:v2",
+    "BANK_ENTRIES": "urn:ledgerguard:bank-entry:v2"
+  },
+  "binding_rules": [
+    "MANIFEST_POLICY_VERSION_EQUALS_POLICY_VERSION",
+    "MANIFEST_POLICY_SHA256_EQUALS_CANONICAL_POLICY_SHA256",
+    "MANIFEST_OBJECT_FAMILIES_RESOLVE_TO_ACTIVE_SCHEMA_IDS",
+    "PROOF_RUN_ID_EQUALS_MANIFEST_RUN_ID",
+    "PROOF_SOURCE_MANIFEST_SHA256_EQUALS_CANONICAL_MANIFEST_SHA256",
+    "PROOF_POLICY_VERSION_EQUALS_POLICY_VERSION",
+    "PROOF_POLICY_SHA256_EQUALS_CANONICAL_POLICY_SHA256",
+    "PROOF_KEY_COMPONENTS_DERIVE_RECONCILIATION_KEY",
+    "PROOF_ID_DERIVES_FROM_FROZEN_IDENTITY_COMPONENTS",
+    "CASE_ID_DERIVES_FROM_INITIAL_EXCEPTION_PROOF",
+    "CASE_PROOF_ID_EQUALS_CURRENT_PROOF_ID",
+    "LATER_CASE_REVISION_LINKS_PREVIOUS_CASE_REVISION_SHA256"
+  ],
+  "strict_artifact_paths": [
+    "contracts/active-contract-set-v1.json",
+    "contracts/v2/bank-entry-v2.schema.json",
+    "contracts/v2/case-revision-v2.schema.json",
+    "contracts/v2/common-v2.schema.json",
+    "contracts/v2/journal-v2.schema.json",
+    "contracts/v2/processor-event-v2.schema.json",
+    "contracts/v2/processor-settlement-v2.schema.json",
+    "contracts/v2/reconciliation-policy-v2.schema.json",
+    "contracts/v2/reconciliation-proof-v2.schema.json",
+    "contracts/v2/run-manifest-v2.schema.json",
+    "spec/contract-coherence-traceability-v1.json",
+    "spec/contract-coherence-v1.json",
+    "spec/contract-coherence-vectors-v1.json",
+    "spec/contract-invariants-v1.json",
+    "spec/contract-traceability-v1.json",
+    "spec/financial-semantics-v1.json"
+  ],
+  "requirements": [
+    {"id": "COH-001", "topic": "strict_json_admission"},
+    {"id": "COH-002", "topic": "canonical_unicode_and_json"},
+    {"id": "COH-003", "topic": "calendar_valid_timestamp_normalization"},
+    {"id": "COH-004", "topic": "digest_scopes_and_golden_bytes"},
+    {"id": "COH-005", "topic": "grain_and_output_identity_derivation"},
+    {"id": "COH-006", "topic": "manifest_family_contract_resolution"},
+    {"id": "COH-007", "topic": "policy_manifest_proof_case_binding"},
+    {"id": "COH-008", "topic": "schema_reference_and_domain_set_coherence"},
+    {"id": "COH-009", "topic": "append_only_predecessor_binding"},
+    {"id": "COH-010", "topic": "bidirectional_traceability"},
+    {"id": "COH-011", "topic": "fail_closed_mutation_and_determinism"},
+    {"id": "COH-012", "topic": "preservation_claim_and_ci_boundary"}
+  ],
+  "execution_boundary": {
+    "legacy_v1_schema_mutation": false,
+    "active_v2_schema_mutation": false,
+    "reconciliation_engine_added": false,
+    "spark_workload_added": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false,
+    "managed_evidence_claimed": false
+  },
+  "unresolved_coherence_decisions": []
+}
