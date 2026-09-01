@@ -45,14 +45,16 @@ def test_foundation_candidate_passes_deterministically() -> None:
     second = validate_foundation(ROOT)
     assert first == second
     assert first["state"] == "PART1_FOUNDATION_CORRECTION_IN_PROGRESS"
-    assert first["stage"] == 1
-    assert first["stage_state"] == "PART1_FINANCIAL_SEMANTICS_FROZEN"
+    assert first["stage"] == 2
+    assert first["stage_state"] == "PART1_FINANCIAL_CONTRACTS_ENCODED"
     assert first["aws_execution"] is False
     assert len(first["stage0_sha256"]) == 64
     assert len(first["stage1_sha256"]) == 64
+    assert len(first["stage2_sha256"]) == 64
     assert len(first["schema_digests"]) == 8
+    assert len(first["active_schema_digests"]) == 9
     assert len(first["foundation_sha256"]) == 64
-    evidence = json.loads((ROOT / "evidence/part1-stage1-local.json").read_text(encoding="utf-8"))
+    evidence = json.loads((ROOT / "evidence/part1-stage2-local.json").read_text(encoding="utf-8"))
     assert evidence["local_validation"]["foundation_candidate_sha256"] == first["foundation_sha256"]
 
 

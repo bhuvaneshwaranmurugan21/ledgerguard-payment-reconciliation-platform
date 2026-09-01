@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:bank-entry:v2",
+  "title": "Bank statement entry v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bank_record_id",
+    "source_batch_id",
+    "bank_account_id",
+    "merchant_id",
+    "direction",
+    "amount_minor",
+    "currency",
+    "value_at",
+    "received_at",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "bank_record_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "source_batch_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "bank_account_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "merchant_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "settlement_reference": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "direction": {"enum": ["CREDIT", "DEBIT"]},
+    "amount_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/positiveInt64"},
+    "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"},
+    "value_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "received_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "payload_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  }
+}

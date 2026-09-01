@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "state": "ACTIVE_CONTRACT_SET_V2",
+  "active_schema_version": "2.0",
+  "legacy_contract_set": {
+    "schema_version": "1.0",
+    "status": "SUPERSEDED_BEFORE_RUNTIME_USE",
+    "reason": "The preserved v1 contracts predate the frozen Stage 1 semantics and remain only as historical evidence.",
+    "digests": {
+      "bank-entry-v1.schema.json": "2e166412e617bbd4456eeb69b6804861c6f0e40d433f9376253f4a9f13f996b5",
+      "case-revision-v1.schema.json": "b754befa40ab11f0d1ef6cc310e4b5df00378f779693a4c2c47bae2f8f5989a9",
+      "journal-v1.schema.json": "0a663eab588c7389a9a01566e05965a390ed19c469933ae265e5e1ac8c67556d",
+      "processor-event-v1.schema.json": "abdb7c1a29042d5a1c8a092ca3b0dfbf61d67f6a9449fbcb6cbd5bbfd2e00420",
+      "processor-settlement-v1.schema.json": "9fdef0259b580f799fc93878231ddeb9af8d663ff8bb32ac26e8ecb471a4e53f",
+      "reconciliation-policy-v1.schema.json": "6d460f9336a8c546097813ff8888dc89243f7fa8c89114c48f7d48549d75fa19",
+      "reconciliation-proof-v1.schema.json": "9b3705bd4bb79b19804bee530c44e705755a04c6904fc7beaed4a8e9233c0e4f",
+      "run-manifest-v1.schema.json": "409aaf6e889e18cca1b7c040df65b5df7f095c8bba6cad3d5d4ea9c893449dd6"
+    }
+  },
+  "contracts": [
+    {
+      "family": "COMMON",
+      "path": "contracts/v2/common-v2.schema.json",
+      "id": "urn:ledgerguard:common:v2",
+      "sha256": "1d7f57a165e52b1c3ca3a4c8d9321ae18dd364928ce181570fb2377c51bf5ddd",
+      "role": "SHARED_DEFINITIONS"
+    },
+    {
+      "family": "BANK_ENTRY",
+      "path": "contracts/v2/bank-entry-v2.schema.json",
+      "id": "urn:ledgerguard:bank-entry:v2",
+      "sha256": "3e1a69488ceb91bc8d8e894b58c782aa28dd6e721e78f3ceb5ab51270f1e0470",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "CASE_REVISION",
+      "path": "contracts/v2/case-revision-v2.schema.json",
+      "id": "urn:ledgerguard:case-revision:v2",
+      "sha256": "029463cad2665db74ae247640d6a6fcc044fcef900a6c19c2dbfb312b90dc3e1",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "LEDGER_JOURNAL",
+      "path": "contracts/v2/journal-v2.schema.json",
+      "id": "urn:ledgerguard:journal:v2",
+      "sha256": "8fe2a989f13263fded0b0a645de64c299283c3698c3de821326950d2578e123f",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "PROCESSOR_EVENT",
+      "path": "contracts/v2/processor-event-v2.schema.json",
+      "id": "urn:ledgerguard:processor-event:v2",
+      "sha256": "648cdb70cd5693f505d650440913e2ab95f419c0be384122fb0ed0e7d537b91f",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "PROCESSOR_SETTLEMENT",
+      "path": "contracts/v2/processor-settlement-v2.schema.json",
+      "id": "urn:ledgerguard:processor-settlement:v2",
+      "sha256": "aeb2fb8828eddf95118700fd9b55072b68da54a60652064214dfba0a7bad35ca",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "RECONCILIATION_POLICY",
+      "path": "contracts/v2/reconciliation-policy-v2.schema.json",
+      "id": "urn:ledgerguard:reconciliation-policy:v2",
+      "sha256": "f908528f2a727f4c50f23791d3e1df4cb0ba73ec4babd80d559947e211813b70",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "RECONCILIATION_PROOF",
+      "path": "contracts/v2/reconciliation-proof-v2.schema.json",
+      "id": "urn:ledgerguard:reconciliation-proof:v2",
+      "sha256": "6abe1e8caf86781cc68ee8c60e90c1ad3bb3a63ad820bdcc179d321ac0005f41",
+      "role": "DOMAIN_CONTRACT"
+    },
+    {
+      "family": "RUN_MANIFEST",
+      "path": "contracts/v2/run-manifest-v2.schema.json",
+      "id": "urn:ledgerguard:run-manifest:v2",
+      "sha256": "f795ba6241b24ff0d2c8338abbd8c043a7312e881b6480154ca69a9beef31e64",
+      "role": "DOMAIN_CONTRACT"
+    }
+  ]
+}

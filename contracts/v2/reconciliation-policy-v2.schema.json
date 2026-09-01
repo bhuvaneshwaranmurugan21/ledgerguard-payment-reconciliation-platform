@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:reconciliation-policy:v2",
+  "title": "LedgerGuard reconciliation policy v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "currency_rules",
+    "transaction_rules",
+    "settlement_rules",
+    "status_rules",
+    "late_data_strategy",
+    "policy_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "policy_version": {"type": "string", "pattern": "^v[1-9][0-9]*$"},
+    "currency_rules": {"$ref": "#/$defs/currencyRules"},
+    "transaction_rules": {"$ref": "#/$defs/transactionRules"},
+    "settlement_rules": {"$ref": "#/$defs/settlementRules"},
+    "status_rules": {"$ref": "#/$defs/statusRules"},
+    "late_data_strategy": {"const": "NEW_IMMUTABLE_REVISION"},
+    "policy_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  },
+  "$defs": {
+    "currencyRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exponent", "transaction_tolerance_minor", "settlement_tolerance_minor"],
+      "properties": {
+        "exponent": {"type": "integer", "minimum": 0, "maximum": 3},
+        "transaction_tolerance_minor": {
+          "$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"
+        },
+        "settlement_tolerance_minor": {
+          "$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"
+        }
+      }
+    },
+    "currencyRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["INR", "JPY", "USD"],
+      "properties": {
+        "INR": {"allOf": [{"$ref": "#/$defs/currencyRule"}, {"properties": {"exponent": {"const": 2}}}]},
+        "JPY": {"allOf": [{"$ref": "#/$defs/currencyRule"}, {"properties": {"exponent": {"const": 0}}}]},
+        "USD": {"allOf": [{"$ref": "#/$defs/currencyRule"}, {"properties": {"exponent": {"const": 2}}}]}
+      }
+    },
+    "transactionRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_signs",
+        "ledger_role",
+        "ledger_side_signs",
+        "allowed_counterpart_roles",
+        "reference_rules"
+      ],
+      "properties": {
+        "event_signs": {
+          "const": {"CAPTURE": 1, "REFUND": -1, "CHARGEBACK": -1, "REVERSAL": -1}
+        },
+        "ledger_role": {"const": "PROCESSOR_CLEARING"},
+        "ledger_side_signs": {"const": {"DEBIT": 1, "CREDIT": -1}},
+        "allowed_counterpart_roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "urn:ledgerguard:common:v2#/$defs/accountRole"},
+          "not": {"contains": {"const": "PROCESSOR_CLEARING"}}
+        },
+        "reference_rules": {
+          "const": {
+            "capture_reference": "FORBIDDEN",
+            "negative_event_reference": "EXACT_CAPTURE_REFERENCE",
+            "negative_reference_chain_forbidden": true,
+            "cumulative_negative_must_not_exceed_capture": true
+          }
+        }
+      }
+    },
+    "settlementRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "formula",
+        "reported_net_must_equal_recomputed_net",
+        "expected_net_may_be_negative",
+        "ledger_role",
+        "ledger_side_signs",
+        "bank_side_signs",
+        "bank_allocation",
+        "permitted_bank_accounts"
+      ],
+      "properties": {
+        "formula": {
+          "const": "gross_minor-fee_minor-refund_minor-chargeback_minor-reserve_minor"
+        },
+        "reported_net_must_equal_recomputed_net": {"const": true},
+        "expected_net_may_be_negative": {"const": true},
+        "ledger_role": {"const": "PROCESSOR_CLEARING"},
+        "ledger_side_signs": {"const": {"DEBIT": -1, "CREDIT": 1}},
+        "bank_side_signs": {"const": {"CREDIT": 1, "DEBIT": -1}},
+        "bank_allocation": {
+          "const": {
+            "strategy": "EXACT_SETTLEMENT_REFERENCE",
+            "normalization": ["UNICODE_NFC", "TRIM_OUTER_WHITESPACE"],
+            "case_sensitive": true,
+            "punctuation_preserved": true,
+            "amount_date_heuristic_forbidden": true,
+            "ambiguous_reference": "FAIL_ADMISSION",
+            "one_bank_identity_one_allocation": true,
+            "split_entries_allowed": true,
+            "unknown_reference": "UNALLOCATED_BANK_MOVEMENT"
+          }
+        },
+        "permitted_bank_accounts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/permittedBankAccounts"}
+        }
+      }
+    },
+    "permittedBankAccounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["merchant_id", "currency", "bank_account_ids"],
+      "properties": {
+        "merchant_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"},
+        "bank_account_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"}
+        }
+      }
+    },
+    "statusRules": {
+      "const": {
+        "matched": "ZERO_DIFFERENCE_AND_NO_REASON",
+        "within_tolerance": "NONZERO_DIFFERENCE_WITHIN_BOUND_AND_ONLY_TOLERATED_REASON",
+        "exception": "SEMANTIC_REASON_OR_DIFFERENCE_ABOVE_TOLERANCE",
+        "tolerance_cannot_hide": [
+          "ADMISSION_FAILURE",
+          "IDENTITY_CONFLICT",
+          "MISSING_EVIDENCE",
+          "REFERENCE_FAILURE",
+          "POLICY_FAILURE",
+          "SETTLEMENT_FORMULA_MISMATCH"
+        ]
+      }
+    }
+  }
+}

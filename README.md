@@ -25,17 +25,17 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 is undergoing a fail-closed correction. Stage 0 establishes the corrective baseline; Stage 1
-freezes the complete financial semantics and validates worked acceptance examples. The existing
-schemas still require the corresponding contract corrections before Part 1 can be declared
-complete.
+Part 1 is undergoing a fail-closed correction. Stage 0 establishes the corrective baseline, Stage 1
+freezes the financial semantics, and Stage 2 encodes those semantics in a versioned active contract
+set. Final Part 1 coherence and completion governance remain outstanding.
 
 | Area | Status |
 |---|---|
 | Stage 0 baseline governance | `LOCAL_VERIFIED` after CI |
 | Financial semantic decisions | `DESIGNED/MODELED` and frozen |
 | Semantic acceptance examples | `LOCAL_VERIFIED` after CI |
-| Corrected domain contracts | `UNCLAIMED` until encoded and validated |
+| Corrected active `v2` contracts | `LOCAL_VERIFIED` after CI |
+| Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
 | Managed AWS reconciliation | `UNCLAIMED` |
 | Performance and cost | `UNCLAIMED` |
@@ -43,12 +43,10 @@ complete.
 
 See the [architecture](docs/architecture.md), [correctness model](docs/correctness.md),
 [failure model](docs/failure-model.md), [scorecard](docs/scorecard.md), and
-[project completion contract](contracts/project-completion-v1.json). The active gate is the
-[Stage 1 completion contract](contracts/part1-stage1-completion-v1.json); its evidence is the
-[semantic decision register](docs/semantic-decisions.md),
-[requirements ledger](docs/part1-requirements.md), and
-[worked financial examples](docs/financial-examples.md). The corrective integration record is the
-[Stage 1 gap audit](docs/stage1-gap-audit.md).
+[project completion contract](contracts/project-completion-v1.json). The active contract authority
+is the [version registry](contracts/active-contract-set-v1.json), supported by the
+[contract model](docs/contract-model.md), [Stage 2 requirements](docs/part1-stage2-requirements.md),
+and [Stage 2 gap audit](docs/stage2-gap-audit.md). Stage 1 semantic artifacts remain immutable.
 
 ## Foundation validation
 

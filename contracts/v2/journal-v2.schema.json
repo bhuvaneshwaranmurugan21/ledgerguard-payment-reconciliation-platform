@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:journal:v2",
+  "title": "Internal ledger journal v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "journal_id",
+    "source_batch_id",
+    "ledger_system",
+    "processor",
+    "merchant_id",
+    "entry_type",
+    "currency",
+    "effective_at",
+    "received_at",
+    "postings",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "journal_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "source_batch_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "ledger_system": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "processor": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "merchant_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "payment_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "settlement_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "settlement_cycle": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "entry_type": {"$ref": "urn:ledgerguard:common:v2#/$defs/journalEntryType"},
+    "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"},
+    "effective_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "received_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "postings": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/posting"}
+    },
+    "payload_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "entry_type": {"enum": ["CAPTURE", "REFUND", "CHARGEBACK", "REVERSAL"]}
+        },
+        "required": ["entry_type"]
+      },
+      "then": {
+        "required": ["payment_id"],
+        "not": {"anyOf": [{"required": ["settlement_id"]}, {"required": ["settlement_cycle"]}]}
+      },
+      "else": {
+        "required": ["settlement_id", "settlement_cycle"],
+        "not": {"required": ["payment_id"]}
+      }
+    }
+  ],
+  "$defs": {
+    "posting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["line_id", "account_role", "side", "amount_minor"],
+      "properties": {
+        "line_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "account_role": {"$ref": "urn:ledgerguard:common:v2#/$defs/accountRole"},
+        "side": {"enum": ["DEBIT", "CREDIT"]},
+        "amount_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/positiveInt64"}
+      }
+    }
+  }
+}

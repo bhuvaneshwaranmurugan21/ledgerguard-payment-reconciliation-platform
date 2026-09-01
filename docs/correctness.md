@@ -6,7 +6,8 @@ This document defines LedgerGuard's financial semantics. The machine-readable co
 [`financial-semantics-v1.json`](../spec/financial-semantics-v1.json). If prose and the specification
 disagree, the discrepancy is a defect; neither silently overrides the other.
 
-The semantics and acceptance examples are locally validated. No reconciliation engine or managed
+The semantics, examples, and active `v2` contract structures are locally validated. Arithmetic and
+cross-record requirements remain assigned to Part 2; no reconciliation engine or managed
 reconciliation is claimed by this stage.
 
 ## Glossary

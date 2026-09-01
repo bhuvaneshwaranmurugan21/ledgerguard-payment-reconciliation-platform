@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:processor-event:v2",
+  "title": "Processor payment event v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_record_id",
+    "source_batch_id",
+    "processor",
+    "merchant_id",
+    "payment_id",
+    "event_type",
+    "amount_minor",
+    "currency",
+    "occurred_at",
+    "received_at",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "source_record_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "source_batch_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "processor": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "merchant_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "payment_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "event_type": {"$ref": "urn:ledgerguard:common:v2#/$defs/eventType"},
+    "amount_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/positiveInt64"},
+    "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"},
+    "occurred_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "received_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "reference_event_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "payload_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"event_type": {"const": "CAPTURE"}},
+        "required": ["event_type"]
+      },
+      "then": {"not": {"required": ["reference_event_id"]}},
+      "else": {"required": ["reference_event_id"]}
+    }
+  ]
+}

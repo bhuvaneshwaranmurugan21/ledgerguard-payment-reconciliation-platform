@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:case-revision:v2",
+  "title": "LedgerGuard exception case revision v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "grain",
+    "reconciliation_key",
+    "initial_exception_proof_id",
+    "revision",
+    "status",
+    "reason_codes",
+    "proof_id",
+    "actor_type",
+    "occurred_at",
+    "case_revision_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "case_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "grain": {"$ref": "urn:ledgerguard:common:v2#/$defs/grain"},
+    "reconciliation_key": {"type": "string", "minLength": 68},
+    "initial_exception_proof_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "revision": {"$ref": "urn:ledgerguard:common:v2#/$defs/positiveInt64"},
+    "prior_case_revision_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "status": {"$ref": "urn:ledgerguard:common:v2#/$defs/caseStatus"},
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "urn:ledgerguard:common:v2#/$defs/financialReason"}
+    },
+    "proof_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "actor_type": {"enum": ["SYSTEM", "OPERATOR"]},
+    "actor_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "occurred_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "case_revision_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"grain": {"const": "TRANSACTION"}}, "required": ["grain"]},
+      "then": {"properties": {"reconciliation_key": {"pattern": "^txn:[0-9a-f]{64}$"}}},
+      "else": {"properties": {"reconciliation_key": {"pattern": "^stl:[0-9a-f]{64}$"}}}
+    },
+    {
+      "if": {"properties": {"revision": {"const": 1}}, "required": ["revision"]},
+      "then": {"not": {"required": ["prior_case_revision_id"]}},
+      "else": {"required": ["prior_case_revision_id"]}
+    },
+    {
+      "if": {"properties": {"actor_type": {"const": "SYSTEM"}}, "required": ["actor_type"]},
+      "then": {
+        "not": {"required": ["actor_id"]},
+        "properties": {
+          "status": {
+            "enum": ["OPEN", "RESOLVED_BY_LATE_DATA", "RESOLVED_BY_CORRECTION"]
+          }
+        }
+      },
+      "else": {"required": ["actor_id"]}
+    }
+  ]
+}

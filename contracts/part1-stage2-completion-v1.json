@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 2,
+  "name": "Financial contract encoding",
+  "state": "PART1_FINANCIAL_CONTRACTS_ENCODED",
+  "overall_part1_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "baseline": {
+    "main_sha": "155211c5df0985b332d3ba8c9d7b82ec4fc10c6a",
+    "main_tree_sha": "0bb7631d533418ecf78c2d4b9f3e44959fee767d",
+    "accepted_stage1_head_sha": "46b1f4e852ea40b24adaa30625074a2a05654259",
+    "stage1_post_merge_ci_run_id": 33505222160,
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b",
+    "stage1_sha256": "4234ac61999de769b87b2329512a8741761023b6c258dfd2207beb66f7dbc191",
+    "stage1_completion_contract_sha256": "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece"
+  },
+  "contract_artifacts": {
+    "active_registry": {
+      "path": "contracts/active-contract-set-v1.json",
+      "sha256": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288"
+    },
+    "invariant_register": {
+      "path": "spec/contract-invariants-v1.json",
+      "sha256": "50ee82f8126661ca1acba3d91f8bb9d7c47b2267357e31fdbf200c0385b6e212"
+    },
+    "traceability": {
+      "path": "spec/contract-traceability-v1.json",
+      "sha256": "e43f50ac64bb3f41d042be2c37f055dc883c0c1ce1a6a5d5ad2745f094d53477"
+    },
+    "gap_audit": {
+      "path": "docs/stage2-gap-audit.md",
+      "sha256": "254c9012db0b90eb219ccb793768d1c10e93abce940cac33d34ee85906aa1cb0"
+    },
+    "contract_model": {
+      "path": "docs/contract-model.md",
+      "sha256": "1ee33cdd3513b7562928b3b9c4627006def828119df11c8f7a36dd146bc629ab"
+    },
+    "requirements": {
+      "path": "docs/part1-stage2-requirements.md",
+      "sha256": "272f29db1726810a01f55e38fcc20a5601f1a9af22afd3b9e5ed07be369f307e"
+    },
+    "versioning_adr": {
+      "path": "docs/adr/0007-versioned-contract-set-and-enforcement-layers.md",
+      "sha256": "90e9a01b44b9e5fdb4a8479362232eed8121de7a11f0502f92a0ec85fd36af86"
+    },
+    "contract_tests": {
+      "path": "tests/test_financial_contracts_v2.py",
+      "sha256": "ab8738a3f9493bad64fbd8d849194a8134a42591e44618aa6400764837518ff8"
+    },
+    "governance_tests": {
+      "path": "tests/test_part1_stage2.py",
+      "sha256": "3d27aeffda1bab7865d496ed9c6348ac91c545a3704bffb7b79ba2995fe06a81"
+    }
+  },
+  "acceptance_inventory": {
+    "preserved_v1_schema_count": 8,
+    "active_schema_count": 9,
+    "active_domain_contract_count": 8,
+    "shared_schema_count": 1,
+    "semantic_decision_count": 18,
+    "requirement_count": 12,
+    "contract_rule_count": 18,
+    "positive_specimen_count": 11,
+    "contract_test_count": 26,
+    "governance_test_count": 10,
+    "unmapped_decision_count": 0,
+    "unmapped_requirement_count": 0
+  },
+  "required_gates": [
+    "EXACT_STAGE1_BASELINE_BOUND",
+    "STAGE0_VALIDATOR_PRESERVED",
+    "STAGE1_VALIDATOR_PRESERVED",
+    "LEGACY_V1_BYTES_PRESERVED",
+    "ACTIVE_V2_REGISTRY_DIGEST_BOUND",
+    "ACTIVE_SCHEMA_IDS_UNIQUE",
+    "DRAFT_2020_12_SCHEMAS_VALID",
+    "OFFLINE_REFERENCES_RESOLVE",
+    "SIGNED_64_BIT_BOUNDARIES_ENFORCED",
+    "GRAIN_SPECIFIC_PROOFS_ENFORCED",
+    "CLOSED_REASON_TAXONOMY_ENFORCED",
+    "CASE_ACTOR_AND_REVISION_RULES_ENFORCED",
+    "LOCAL_AND_S3_MANIFESTS_ENFORCED",
+    "SEMANTIC_DECISIONS_FULLY_MAPPED",
+    "REQUIREMENTS_FULLY_MAPPED",
+    "NO_RECONCILIATION_ENGINE",
+    "NO_AWS_EXECUTION",
+    "EXACT_HEAD_CI_SUCCESS",
+    "POST_MERGE_MAIN_CI_SUCCESS"
+  ],
+  "execution_boundary": {
+    "legacy_v1_schema_mutation": false,
+    "reconciliation_engine_added": false,
+    "spark_workload_added": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false,
+    "managed_evidence_claimed": false
+  },
+  "remaining_part1_work": [
+    "VALIDATE_COMPLETE_CONTRACT_COHERENCE",
+    "FREEZE_FINAL_PART1_COMPLETION_GOVERNANCE"
+  ]
+}
