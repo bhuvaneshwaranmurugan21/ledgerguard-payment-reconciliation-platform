@@ -2,11 +2,6 @@ name: AWS OIDC Identity Check
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/ledgerguard-target.json
-      - .github/workflows/aws-oidc-identity.yml
 
 permissions:
   contents: read
