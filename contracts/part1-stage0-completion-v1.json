@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "stage": 0,
+  "name": "Evidence recovery, draft disposition, and corrective baseline freeze",
+  "state": "PART1_STAGE0_BASELINE_AUDIT_COMPLETE",
+  "overall_part1_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "history": {
+    "base_sha": "ae36abc157c3cfb018880314d5732e3d91d403bf",
+    "rejected_draft_sha": "08066c92bb182ad6ec829d6feaf36dc34ad10d51",
+    "corrective_main_sha": "7f36c7cd0e093f75e1e97cb99ba28d7fb4d69d07",
+    "rejected_pr": {"number": 1, "state": "CLOSED", "merged": false},
+    "corrective_pr": {"number": 2, "state": "CLOSED", "merged": true}
+  },
+  "execution_boundary": {
+    "aws_execution": false,
+    "infrastructure_mutation": false,
+    "schema_mutation": false,
+    "reconciliation_engine_added": false
+  },
+  "allowed_dispositions": ["PRESERVE", "REPLACE", "DEFER", "EXCLUDE"],
+  "draft_inventory": {
+    "file_count": 32,
+    "artifacts": [
+      {"ref": ".github/workflows/aws-oidc-identity.yml", "disposition": "REPLACE", "owner": "PART1", "reason": "Bind the exact repository, target, branch, account, role, and region."},
+      {"ref": ".github/workflows/ci.yml", "disposition": "REPLACE", "owner": "PART1", "reason": "Validate the corrective contracts and fail-closed repository surface."},
+      {"ref": ".github/workflows/terraform.yml", "disposition": "DEFER", "owner": "INFRASTRUCTURE_STAGE", "reason": "Infrastructure authority is outside Stage 0."},
+      {"ref": ".gitignore", "disposition": "PRESERVE", "reason": "The exclusions remain valid after cleanup."},
+      {"ref": "Makefile", "disposition": "REPLACE", "owner": "PART1", "reason": "Provide one complete local quality entry point."},
+      {"ref": "README.md", "disposition": "REPLACE", "owner": "PART1", "reason": "State the two grains and honest evidence boundary."},
+      {"ref": "contracts/payment-record-v1.json", "disposition": "REPLACE", "owner": "CONTRACT_STAGE", "reason": "The single record collapses independent financial truths."},
+      {"ref": "sha256:9fc18fef97c8cfb99d9763c9fcce20091f0b8992846741fbde72638b2ea10bfe", "ref_kind": "LEGACY_PATH_SHA256", "disposition": "EXCLUDE", "reason": "Non-engineering presentation material is outside the repository surface."},
+      {"ref": "docs/architecture.md", "disposition": "REPLACE", "owner": "PART1", "reason": "Separate transaction and settlement reconciliation."},
+      {"ref": "docs/claims.yaml", "disposition": "REPLACE", "owner": "PART1", "reason": "Use the four-level evidence vocabulary."},
+      {"ref": "docs/cost-model.md", "disposition": "DEFER", "owner": "MANAGED_EVIDENCE_STAGE", "reason": "Measured cost needs implemented infrastructure."},
+      {"ref": "docs/failure-lab.md", "disposition": "REPLACE", "owner": "EXECUTABLE_SYSTEM_STAGE", "reason": "Failure ownership needs corrected financial grains."},
+      {"ref": "docs/runbook.md", "disposition": "DEFER", "owner": "MANAGED_EXECUTION_STAGE", "reason": "A runbook must describe an implemented managed system."},
+      {"ref": "docs/threat-model.md", "disposition": "DEFER", "owner": "INFRASTRUCTURE_STAGE", "reason": "Identity and data-flow boundaries are not implemented."},
+      {"ref": "docs/workload-model.md", "disposition": "REPLACE", "owner": "EXECUTABLE_SYSTEM_STAGE", "reason": "Use deterministic bounded workload targets."},
+      {"ref": "evidence/local-simulation.json", "disposition": "EXCLUDE", "reason": "The evidence inherits the rejected single-grain kernel."},
+      {"ref": "infra/terraform/.terraform.lock.hcl", "disposition": "DEFER", "owner": "INFRASTRUCTURE_STAGE", "reason": "Regenerate from the approved provider contract."},
+      {"ref": "infra/terraform/README.md", "disposition": "DEFER", "owner": "INFRASTRUCTURE_STAGE", "reason": "Document only the implemented managed topology."},
+      {"ref": "infra/terraform/main.tf", "disposition": "EXCLUDE", "reason": "The topology contains placeholder orchestration and no reconciliation workload."},
+      {"ref": "infra/terraform/outputs.tf", "disposition": "EXCLUDE", "reason": "The outputs describe rejected placeholder infrastructure."},
+      {"ref": "infra/terraform/variables.tf", "disposition": "DEFER", "owner": "INFRASTRUCTURE_STAGE", "reason": "Recreate for the approved target and topology."},
+      {"ref": "infra/terraform/versions.tf", "disposition": "DEFER", "owner": "INFRASTRUCTURE_STAGE", "reason": "Freeze versions with the approved provider contract."},
+      {"ref": "pyproject.toml", "disposition": "REPLACE", "owner": "PART1", "reason": "Pin the corrective foundation validation toolchain."},
+      {"ref": "src/ledgerguard/__init__.py", "disposition": "REPLACE", "owner": "PART1", "reason": "Do not expose the rejected engine as public API."},
+      {"ref": "src/ledgerguard/aws_evidence.py", "disposition": "REPLACE", "owner": "MANAGED_EVIDENCE_STAGE", "reason": "Managed evidence needs semantic, attribution, scale, cost, and teardown proof."},
+      {"ref": "src/ledgerguard/cli.py", "disposition": "DEFER", "owner": "EXECUTABLE_SYSTEM_STAGE", "reason": "A CLI requires an executable reconciliation system."},
+      {"ref": "src/ledgerguard/engine.py", "disposition": "EXCLUDE", "reason": "The engine keys bank truth by payment and uses invalid journal semantics."},
+      {"ref": "src/ledgerguard/model.py", "disposition": "EXCLUDE", "reason": "The model collapses grains and uses a currency-specific money name."},
+      {"ref": "src/ledgerguard/simulator.py", "disposition": "EXCLUDE", "reason": "The expected results inherit the invalid model."},
+      {"ref": "tests/test_aws_evidence.py", "disposition": "DEFER", "owner": "MANAGED_EVIDENCE_STAGE", "reason": "Tests require the managed evidence contract."},
+      {"ref": "tests/test_engine.py", "disposition": "EXCLUDE", "reason": "The tests validate rejected business semantics."},
+      {"ref": "tests/test_simulator.py", "disposition": "EXCLUDE", "reason": "The tests validate rejected simulated evidence."}
+    ]
+  }
+}

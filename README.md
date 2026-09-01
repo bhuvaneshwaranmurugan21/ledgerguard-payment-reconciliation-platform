@@ -25,13 +25,15 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 freezes the domain contracts, correctness model, AWS target, completion contract, and
-scorecard. It performs no managed reconciliation and creates no AWS workload claim.
+Part 1 is undergoing a fail-closed correction. Stage 0 verifies the rejected-draft disposition,
+authoritative repository history, target identity, and truthful baseline claims. It changes no
+financial schema and creates no reconciliation or AWS workload claim.
 
 | Area | Status |
 |---|---|
-| Domain and completion contracts | `LOCAL_VERIFIED` after CI |
-| Reconciliation implementation | `DESIGNED/MODELED` |
+| Stage 0 baseline governance | `LOCAL_VERIFIED` after CI |
+| Domain and completion contracts | `DESIGNED/MODELED` |
+| Reconciliation implementation | `UNCLAIMED` |
 | Managed AWS reconciliation | `UNCLAIMED` |
 | Performance and cost | `UNCLAIMED` |
 | Production custody or compliance | `UNCLAIMED` |

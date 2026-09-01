@@ -4,22 +4,22 @@
 
 - Project: LedgerGuard
 - Part: 1 — Foundation and completion contract
-- State: `PART1_FOUNDATION_COMPLETE`
+- Stage: 0 — Evidence recovery and corrective baseline
+- Stage state: `PART1_STAGE0_BASELINE_AUDIT_COMPLETE`
+- Overall Part 1 state: `PART1_FOUNDATION_CORRECTION_IN_PROGRESS`
 - Managed workload executed: no
 - AWS infrastructure mutated: no
-- Highest claim: `LOCAL_VERIFIED` after successful CI
+- Highest claim: `LOCAL_VERIFIED` for baseline governance after successful CI
 
 ## Completed
 
-- Exact disposition audit of the draft foundation.
-- Corrected transaction- and settlement-grain financial model.
-- Versioned source, policy, proof, case, manifest, and completion contracts.
-- Frozen scorecard and project completion gates.
-- Repository target corrected to the approved AWS region and role.
-- Executable foundation validation and adversarial tests.
+- Immutable history and exact 32-artifact disposition for the rejected draft.
+- Reproduction record for the historical validation claims and material semantic defects.
+- Authoritative repository, account, region, role, and default-branch target.
+- Frozen Stage 0 completion contract and digest-bound local evidence.
+- Fail-closed Stage 0 validation and adversarial tests.
 
-## Next authorized work
+## Remaining Part 1 work
 
-Part 2 may implement the deterministic generator, reference oracle, Spark reconciliation engine,
-failure laboratory, and Glue-compatible local integration. No managed AWS workload is authorized
-by Part 1.
+The corrective stages must still freeze and encode the complete financial semantics, contracts, and
+foundation governance. No managed AWS workload is authorized by Part 1.

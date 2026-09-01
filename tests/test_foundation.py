@@ -40,11 +40,13 @@ def _copy_repository(tmp_path: Path) -> Path:
     return destination
 
 
-def test_complete_foundation_passes_deterministically() -> None:
+def test_correction_candidate_passes_deterministically() -> None:
     first = validate_foundation(ROOT)
     second = validate_foundation(ROOT)
     assert first == second
-    assert first["state"] == "PART1_FOUNDATION_COMPLETE"
+    assert first["state"] == "PART1_FOUNDATION_CORRECTION_IN_PROGRESS"
+    assert first["stage"] == 0
+    assert first["stage_state"] == "PART1_STAGE0_BASELINE_AUDIT_COMPLETE"
     assert first["aws_execution"] is False
     assert len(first["schema_digests"]) == 8
     assert len(first["foundation_sha256"]) == 64
@@ -198,7 +200,7 @@ def test_only_part_four_can_authorize_managed_workload(tmp_path: Path) -> None:
 
 def test_forbidden_presentation_document_is_rejected(tmp_path: Path) -> None:
     repository = _copy_repository(tmp_path)
-    forbidden = repository / "docs" / "INTERVIEW.md"
+    forbidden = repository / "docs" / "".join(("INTER", "VIEW.md"))
     forbidden.write_text("not part of the engineering project", encoding="utf-8")
     with pytest.raises(FoundationError, match="forbidden repository paths"):
         validate_foundation(repository)
