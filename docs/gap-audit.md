@@ -62,4 +62,28 @@ orchestration, and evidence vocabulary conflict with the frozen foundation.
 
 The generator, reference oracle, Spark engine, failure laboratory, infrastructure, managed
 evidence, scale measurements, cost measurement, runbook, threat model, and release remain gated by
-Parts 2 through 5. Their absence is explicit and is not hidden by foundation completion.
+Parts 2 through 5. Their absence is explicit and cannot be used as evidence of foundation
+completion.
+
+## Stage 0 reproducibility record
+
+The historical draft was materialized from commit
+`08066c92bb182ad6ec829d6feaf36dc34ad10d51`. All 32 fetched files matched their Git blob
+identities. Its parent was
+`ae36abc157c3cfb018880314d5732e3d91d403bf`, and GitHub comparison showed exactly one draft
+commit. The draft and corrective main histories diverge at that parent, proving the rejected
+commit is not part of the corrective main lineage.
+
+The declared historical test command could not be reproduced with the available offline toolchain
+because its pinned coverage plugin was unavailable. That limitation is recorded instead of
+weakening the command. A supplementary run without the unavailable coverage arguments passed all
+seven historical tests, and the deterministic simulation reproduced byte-identically. Current
+linting identified five toolchain-compatibility findings; strict typing passed.
+
+Independent probes reproduced the material semantic defects: bank settlement matched at payment
+grain, balanced but financially irrelevant account roles contributed to a match, and the model
+used a currency-specific amount name for INR. The Terraform state machine was statically confirmed
+to contain pass-through placeholders and was not executed.
+
+The exhaustive machine-readable disposition and Stage 0 boundary are frozen in
+[`part1-stage0-completion-v1.json`](../contracts/part1-stage0-completion-v1.json).

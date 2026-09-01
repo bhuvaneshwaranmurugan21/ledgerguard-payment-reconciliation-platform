@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "stage": 0,
+  "stage_state": "PART1_STAGE0_BASELINE_AUDIT_COMPLETE",
+  "overall_part1_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "observed_at_utc": "2026-09-01T10:57:09Z",
+  "base_sha": "ae36abc157c3cfb018880314d5732e3d91d403bf",
+  "draft_sha": "08066c92bb182ad6ec829d6feaf36dc34ad10d51",
+  "main_sha": "7f36c7cd0e093f75e1e97cb99ba28d7fb4d69d07",
+  "history": {
+    "retrieval": "READ_ONLY",
+    "pr1_state": "CLOSED_UNMERGED",
+    "pr2_state": "CLOSED_MERGED",
+    "pr3_state": "OPEN_UNMODIFIED",
+    "base_to_draft": "AHEAD_BY_1",
+    "main_to_draft": "DIVERGED_AT_BASE"
+  },
+  "draft_blob_integrity": "VERIFIED_32_OF_32",
+  "draft_file_count": 32,
+  "disposition_counts": {
+    "DEFER": 10,
+    "EXCLUDE": 9,
+    "PRESERVE": 1,
+    "REPLACE": 12
+  },
+  "draft_reproduction": {
+    "declared_toolchain": {
+      "mypy": "1.17.1",
+      "pytest": "8.4.1",
+      "pytest_cov": "6.2.1",
+      "ruff": "0.12.8"
+    },
+    "available_toolchain": {
+      "mypy": "2.3.1",
+      "pytest": "9.1.1",
+      "pytest_cov": "UNAVAILABLE_OFFLINE",
+      "ruff": "0.16.5",
+      "terraform": "UNAVAILABLE"
+    },
+    "original_pytest": "BLOCKED_MISSING_PINNED_PLUGIN",
+    "original_pytest_exit_code": 4,
+    "supplementary_tests": "PASS_7",
+    "current_ruff_compatibility": "FAIL_5",
+    "current_mypy_compatibility": "PASS",
+    "terraform_format": "NOT_RUN_TOOL_UNAVAILABLE",
+    "simulation_determinism": "PASS",
+    "simulation_sha256": "447130aeec4228430496cc7d97d26b4a81b734914eb63fd5b31e0f66efa66304",
+    "counterexamples": [
+      "PAYMENT_GRAIN_BANK_MATCH_REPRODUCED",
+      "ACCOUNT_ROLE_BLIND_MATCH_REPRODUCED",
+      "CURRENCY_SPECIFIC_AMOUNT_NAME_REPRODUCED",
+      "PASS_THROUGH_STATE_MACHINE_CONFIRMED_STATICALLY"
+    ]
+  },
+  "contract_sha256": "81fb7b9863b255cdc19768e80972e2174f940e0d0be97c31cf6ab0cecd4b66c5",
+  "gap_audit_sha256": "59540fe2e9e5cea0ce608f5527571939686be399ada0c6c4f6abf4a5c2559ff2",
+  "schema_digests": {
+    "bank-entry-v1.schema.json": "2e166412e617bbd4456eeb69b6804861c6f0e40d433f9376253f4a9f13f996b5",
+    "case-revision-v1.schema.json": "b754befa40ab11f0d1ef6cc310e4b5df00378f779693a4c2c47bae2f8f5989a9",
+    "journal-v1.schema.json": "0a663eab588c7389a9a01566e05965a390ed19c469933ae265e5e1ac8c67556d",
+    "processor-event-v1.schema.json": "abdb7c1a29042d5a1c8a092ca3b0dfbf61d67f6a9449fbcb6cbd5bbfd2e00420",
+    "processor-settlement-v1.schema.json": "9fdef0259b580f799fc93878231ddeb9af8d663ff8bb32ac26e8ecb471a4e53f",
+    "reconciliation-policy-v1.schema.json": "6d460f9336a8c546097813ff8888dc89243f7fa8c89114c48f7d48549d75fa19",
+    "reconciliation-proof-v1.schema.json": "9b3705bd4bb79b19804bee530c44e705755a04c6904fc7beaed4a8e9233c0e4f",
+    "run-manifest-v1.schema.json": "409aaf6e889e18cca1b7c040df65b5df7f095c8bba6cad3d5d4ea9c893449dd6"
+  },
+  "expected_local_test_count": 20,
+  "aws_execution": false,
+  "infrastructure_mutation": false,
+  "schemas_changed": false,
+  "reconciliation_engine_added": false
+}
