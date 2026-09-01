@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:journal:v1",
+  "title": "Internal ledger journal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "journal_id",
+    "source_batch_id",
+    "merchant_id",
+    "currency",
+    "effective_at",
+    "received_at",
+    "postings",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "journal_id": {"type": "string", "minLength": 1},
+    "source_batch_id": {"type": "string", "minLength": 1},
+    "merchant_id": {"type": "string", "minLength": 1},
+    "payment_id": {"type": ["string", "null"], "minLength": 1},
+    "settlement_id": {"type": ["string", "null"], "minLength": 1},
+    "entry_type": {
+      "enum": ["CAPTURE", "REFUND", "CHARGEBACK", "REVERSAL", "SETTLEMENT", "FEE", "RESERVE"]
+    },
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "effective_at": {"type": "string", "format": "date-time"},
+    "received_at": {"type": "string", "format": "date-time"},
+    "postings": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["line_id", "account_role", "side", "amount_minor"],
+        "properties": {
+          "line_id": {"type": "string", "minLength": 1},
+          "account_role": {
+            "enum": [
+              "PROCESSOR_CLEARING",
+              "BANK_CASH",
+              "MERCHANT_PAYABLE",
+              "PROCESSING_FEE_EXPENSE",
+              "REFUND_LIABILITY",
+              "CHARGEBACK_RESERVE",
+              "ROLLING_RESERVE"
+            ]
+          },
+          "side": {"enum": ["DEBIT", "CREDIT"]},
+          "amount_minor": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "anyOf": [{"required": ["payment_id"]}, {"required": ["settlement_id"]}]
+}

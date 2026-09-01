@@ -5,6 +5,7 @@ on:
   push:
     branches: [main]
     paths:
+      - .github/ledgerguard-target.json
       - .github/workflows/aws-oidc-identity.yml
 
 permissions:
@@ -20,23 +21,54 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Assume repository-specific AWS role
-        uses: aws-actions/configure-aws-credentials@v6.2.3
-        with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
-          role-session-name: github-oidc-identity-check
-          mask-aws-account-id: true
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
-      - name: Verify caller role
-        env:
-          EXPECTED_ROLE: LedgerGuardGitHubOidcRole
+      - name: Validate checked-in target
+        id: target
         shell: bash
         run: |
           set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          target = json.loads(Path(".github/ledgerguard-target.json").read_text())
+          assert target["repository"] == "${{ github.repository }}"
+          assert target["default_branch"] == "main"
+          assert target["region"] == "ap-southeast-2"
+          assert target["oidc_role_name"] == "LedgerGuardGitHubOidcRole"
+          with Path("$GITHUB_OUTPUT").open("a", encoding="utf-8") as output:
+              output.write(f"account_id={target['account_id']}\n")
+              output.write(f"region={target['region']}\n")
+              output.write(f"role_name={target['oidc_role_name']}\n")
+          PY
+
+      - name: Require configured region parity
+        env:
+          CONFIGURED_REGION: ${{ vars.AWS_REGION }}
+          TARGET_REGION: ${{ steps.target.outputs.region }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$CONFIGURED_REGION" = "$TARGET_REGION"
+
+      - name: Assume repository-specific AWS role
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ steps.target.outputs.region }}
+          role-session-name: ledgerguard-identity-check
+          mask-aws-account-id: true
+
+      - name: Verify exact caller
+        env:
+          EXPECTED_ACCOUNT: ${{ steps.target.outputs.account_id }}
+          EXPECTED_ROLE: ${{ steps.target.outputs.role_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          account="$(aws sts get-caller-identity --query Account --output text)"
           caller_arn="$(aws sts get-caller-identity --query Arn --output text)"
-          if [[ "$caller_arn" != *":assumed-role/${EXPECTED_ROLE}/"* ]]; then
-            echo "::error::Unexpected AWS caller role"
-            exit 1
-          fi
-          echo "OIDC identity verified for ${EXPECTED_ROLE}."
+          test "$account" = "$EXPECTED_ACCOUNT"
+          [[ "$caller_arn" == *":assumed-role/${EXPECTED_ROLE}/"* ]]
+          echo "LedgerGuard OIDC identity verified."

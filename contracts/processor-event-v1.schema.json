@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:processor-event:v1",
+  "title": "Processor payment event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_record_id",
+    "source_batch_id",
+    "processor",
+    "merchant_id",
+    "payment_id",
+    "event_type",
+    "amount_minor",
+    "currency",
+    "occurred_at",
+    "received_at",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source_record_id": {"type": "string", "minLength": 1},
+    "source_batch_id": {"type": "string", "minLength": 1},
+    "processor": {"type": "string", "minLength": 1},
+    "merchant_id": {"type": "string", "minLength": 1},
+    "payment_id": {"type": "string", "minLength": 1},
+    "event_type": {"enum": ["CAPTURE", "REFUND", "CHARGEBACK", "REVERSAL"]},
+    "amount_minor": {"type": "integer", "minimum": 1},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "received_at": {"type": "string", "format": "date-time"},
+    "reference_event_id": {"type": ["string", "null"], "minLength": 1},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"enum": ["REFUND", "CHARGEBACK", "REVERSAL"]}}},
+      "then": {"required": ["reference_event_id"]}
+    }
+  ]
+}

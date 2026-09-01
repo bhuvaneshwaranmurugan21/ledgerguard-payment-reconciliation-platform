@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:run-manifest:v1",
+  "title": "LedgerGuard run manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "source_commit",
+    "policy_version",
+    "created_at",
+    "objects"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{7,63}$"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "policy_version": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "objects": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "family",
+          "schema_version",
+          "uri",
+          "version_id",
+          "size_bytes",
+          "record_count",
+          "sha256"
+        ],
+        "properties": {
+          "family": {
+            "enum": ["PROCESSOR_EVENTS", "PROCESSOR_SETTLEMENTS", "LEDGER_JOURNALS", "BANK_ENTRIES"]
+          },
+          "schema_version": {"const": "1.0"},
+          "uri": {"type": "string", "pattern": "^s3://"},
+          "version_id": {"type": "string", "minLength": 1},
+          "size_bytes": {"type": "integer", "minimum": 1},
+          "record_count": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

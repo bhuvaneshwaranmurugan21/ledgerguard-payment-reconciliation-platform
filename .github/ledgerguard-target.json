@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+  "default_branch": "main",
+  "account_id": "857229544428",
+  "region": "ap-southeast-2",
+  "oidc_role_name": "LedgerGuardGitHubOidcRole",
+  "managed_runtime": {
+    "glue_version": "5.1",
+    "python_version": "3.11",
+    "spark_version": "3.5.6"
+  }
+}
