@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:reconciliation-proof:v2",
+  "title": "LedgerGuard reconciliation proof v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "proof_id",
+    "run_id",
+    "grain",
+    "reconciliation_key",
+    "key_components",
+    "revision",
+    "currency",
+    "policy_version",
+    "source_manifest_sha256",
+    "policy_sha256",
+    "totals",
+    "status",
+    "reason_codes",
+    "created_at",
+    "proof_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "proof_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{7,63}$"},
+    "grain": {"$ref": "urn:ledgerguard:common:v2#/$defs/grain"},
+    "reconciliation_key": {"type": "string", "minLength": 68},
+    "key_components": {"type": "object"},
+    "revision": {"$ref": "urn:ledgerguard:common:v2#/$defs/positiveInt64"},
+    "prior_proof_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+    "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"},
+    "policy_version": {"type": "string", "pattern": "^v[1-9][0-9]*$"},
+    "source_manifest_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"},
+    "policy_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"},
+    "totals": {"type": "object"},
+    "status": {"enum": ["MATCHED", "WITHIN_TOLERANCE", "EXCEPTION"]},
+    "reason_codes": {"type": "array", "uniqueItems": true},
+    "created_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "proof_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"grain": {"const": "TRANSACTION"}}, "required": ["grain"]},
+      "then": {
+        "properties": {
+          "reconciliation_key": {"pattern": "^txn:[0-9a-f]{64}$"},
+          "key_components": {"$ref": "#/$defs/transactionKey"},
+          "totals": {"$ref": "#/$defs/transactionTotals"}
+        }
+      },
+      "else": {
+        "properties": {
+          "reconciliation_key": {"pattern": "^stl:[0-9a-f]{64}$"},
+          "key_components": {"$ref": "#/$defs/settlementKey"},
+          "totals": {"$ref": "#/$defs/settlementTotals"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"revision": {"const": 1}}, "required": ["revision"]},
+      "then": {"not": {"required": ["prior_proof_id"]}},
+      "else": {"required": ["prior_proof_id"]}
+    },
+    {
+      "if": {"properties": {"status": {"const": "MATCHED"}}, "required": ["status"]},
+      "then": {"properties": {"reason_codes": {"maxItems": 0}}}
+    },
+    {
+      "if": {
+        "properties": {"status": {"const": "WITHIN_TOLERANCE"}},
+        "required": ["status"]
+      },
+      "then": {"properties": {"reason_codes": {"const": ["TOLERATED_DIFFERENCE"]}}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "EXCEPTION"}}, "required": ["status"]},
+      "then": {
+        "properties": {
+          "reason_codes": {
+            "minItems": 1,
+            "items": {"$ref": "urn:ledgerguard:common:v2#/$defs/financialReason"}
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "transactionKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processor", "merchant_id", "payment_id", "event_class", "currency"],
+      "properties": {
+        "processor": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "merchant_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "payment_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "event_class": {"$ref": "urn:ledgerguard:common:v2#/$defs/eventType"},
+        "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"}
+      }
+    },
+    "settlementKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processor", "merchant_id", "settlement_id", "settlement_cycle", "currency"],
+      "properties": {
+        "processor": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "merchant_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "settlement_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "settlement_cycle": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"},
+        "currency": {"$ref": "urn:ledgerguard:common:v2#/$defs/supportedCurrency"}
+      }
+    },
+    "transactionTotals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "processor_minor",
+        "ledger_minor",
+        "processor_ledger_delta_minor",
+        "difference_minor",
+        "processor_record_count",
+        "ledger_journal_count"
+      ],
+      "properties": {
+        "processor_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "ledger_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "processor_ledger_delta_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "difference_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"},
+        "processor_record_count": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"},
+        "ledger_journal_count": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"}
+      }
+    },
+    "settlementTotals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "processor_net_minor",
+        "ledger_clearing_minor",
+        "bank_minor",
+        "processor_ledger_delta_minor",
+        "processor_bank_delta_minor",
+        "ledger_bank_delta_minor",
+        "difference_minor",
+        "processor_settlement_count",
+        "ledger_journal_count",
+        "allocated_bank_entry_count"
+      ],
+      "properties": {
+        "processor_net_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "ledger_clearing_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "bank_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "processor_ledger_delta_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "processor_bank_delta_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "ledger_bank_delta_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/signedInt64"},
+        "difference_minor": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"},
+        "processor_settlement_count": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"},
+        "ledger_journal_count": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"},
+        "allocated_bank_entry_count": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"}
+      }
+    }
+  }
+}

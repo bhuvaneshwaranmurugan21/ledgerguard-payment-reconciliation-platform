@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "stage": "PART1_STAGE2",
+  "state": "PART1_FINANCIAL_CONTRACTS_ENCODED",
+  "active_contract_version": "2.0",
+  "enforcement_layers": [
+    "JSON_SCHEMA",
+    "STAGE2_GOVERNANCE",
+    "PART2_RUNTIME"
+  ],
+  "invariants": [
+    {
+      "id": "CTR-001",
+      "decision_ids": ["SEM-001"],
+      "requirement_ids": ["P1-R01"],
+      "contracts": ["processor-event", "journal", "processor-settlement", "bank-entry", "reconciliation-proof"],
+      "schema_enforcement": "Independent source and grain-specific proof shapes",
+      "runtime_enforcement": "Reconstruct each source independently without substitution"
+    },
+    {
+      "id": "CTR-002",
+      "decision_ids": ["SEM-002"],
+      "requirement_ids": ["P1-R03"],
+      "contracts": ["common"],
+      "schema_enforcement": "Signed 64-bit integer primitives and floating-point rejection",
+      "runtime_enforcement": "Checked arithmetic rejects overflow before aggregation"
+    },
+    {
+      "id": "CTR-003",
+      "decision_ids": ["SEM-003"],
+      "requirement_ids": ["P1-R04"],
+      "contracts": ["common", "reconciliation-policy", "reconciliation-proof"],
+      "schema_enforcement": "Closed currency domain on every record and proof key",
+      "runtime_enforcement": "Cross-currency source sets fail admission without a proof"
+    },
+    {
+      "id": "CTR-004",
+      "decision_ids": ["SEM-004"],
+      "requirement_ids": ["P1-R05"],
+      "contracts": ["all-source-contracts", "run-manifest", "reconciliation-policy"],
+      "schema_enforcement": "Canonical timestamp and digest field shapes",
+      "runtime_enforcement": "UTF-8, NFC, ordered-key canonicalization and digest exclusions"
+    },
+    {
+      "id": "CTR-005",
+      "decision_ids": ["SEM-005"],
+      "requirement_ids": ["P1-R05"],
+      "contracts": ["processor-event", "processor-settlement", "journal", "bank-entry"],
+      "schema_enforcement": "Every family contains its complete source-identity components",
+      "runtime_enforcement": "Same identity and digest is replay; changed digest is conflict"
+    },
+    {
+      "id": "CTR-006",
+      "decision_ids": ["SEM-006"],
+      "requirement_ids": ["P1-R02"],
+      "contracts": ["processor-event", "journal", "reconciliation-proof", "case-revision"],
+      "schema_enforcement": "Transaction key and txn-prefixed proof/case structures",
+      "runtime_enforcement": "Canonical transaction-key digest construction"
+    },
+    {
+      "id": "CTR-007",
+      "decision_ids": ["SEM-007"],
+      "requirement_ids": ["P1-R06"],
+      "contracts": ["processor-event", "reconciliation-policy"],
+      "schema_enforcement": "Closed event taxonomy and exact policy sign map",
+      "runtime_enforcement": "Apply the policy sign to each positive raw amount"
+    },
+    {
+      "id": "CTR-008",
+      "decision_ids": ["SEM-008"],
+      "requirement_ids": ["P1-R06"],
+      "contracts": ["processor-event", "reconciliation-policy"],
+      "schema_enforcement": "Capture forbids a reference and negative events require one",
+      "runtime_enforcement": "Resolve exact capture, forbid chains and enforce cumulative capacity"
+    },
+    {
+      "id": "CTR-009",
+      "decision_ids": ["SEM-009"],
+      "requirement_ids": ["P1-R06"],
+      "contracts": ["journal"],
+      "schema_enforcement": "Required namespace, entry type, postings and exclusive grain key",
+      "runtime_enforcement": "Unique line identifiers, one currency and balanced positive totals"
+    },
+    {
+      "id": "CTR-010",
+      "decision_ids": ["SEM-010"],
+      "requirement_ids": ["P1-R06"],
+      "contracts": ["reconciliation-policy", "reconciliation-proof"],
+      "schema_enforcement": "Transaction clearing role and debit/credit signs are frozen",
+      "runtime_enforcement": "Compute clearing debits minus clearing credits"
+    },
+    {
+      "id": "CTR-011",
+      "decision_ids": ["SEM-011"],
+      "requirement_ids": ["P1-R02"],
+      "contracts": ["processor-settlement", "journal", "reconciliation-proof", "case-revision"],
+      "schema_enforcement": "Settlement key and stl-prefixed proof/case structures",
+      "runtime_enforcement": "Canonical settlement-key digest and uniqueness-domain checks"
+    },
+    {
+      "id": "CTR-012",
+      "decision_ids": ["SEM-012"],
+      "requirement_ids": ["P1-R07"],
+      "contracts": ["processor-settlement", "reconciliation-policy"],
+      "schema_enforcement": "Five components, reported net and exact policy formula are required",
+      "runtime_enforcement": "Recompute net and preserve formula mismatch as a financial exception"
+    },
+    {
+      "id": "CTR-013",
+      "decision_ids": ["SEM-013"],
+      "requirement_ids": ["P1-R01"],
+      "contracts": ["reconciliation-policy", "reconciliation-proof"],
+      "schema_enforcement": "Settlement clearing and bank side signs are frozen",
+      "runtime_enforcement": "Compute clearing credits minus debits and signed bank movement"
+    },
+    {
+      "id": "CTR-014",
+      "decision_ids": ["SEM-014"],
+      "requirement_ids": ["P1-R08"],
+      "contracts": ["bank-entry", "reconciliation-policy", "reconciliation-proof"],
+      "schema_enforcement": "Reference, permitted-account and allocation policies are explicit",
+      "runtime_enforcement": "Exact normalized allocation, ambiguity rejection and no double use"
+    },
+    {
+      "id": "CTR-015",
+      "decision_ids": ["SEM-015"],
+      "requirement_ids": ["P1-R10"],
+      "contracts": ["reconciliation-policy", "reconciliation-proof"],
+      "schema_enforcement": "Status-specific closed reason shapes and non-negative tolerances",
+      "runtime_enforcement": "Apply tolerance only to complete semantically valid evidence"
+    },
+    {
+      "id": "CTR-016",
+      "decision_ids": ["SEM-016"],
+      "requirement_ids": ["P1-R01", "P1-R02"],
+      "contracts": ["reconciliation-proof"],
+      "schema_enforcement": "Mutually exclusive transaction and settlement totals and counts",
+      "runtime_enforcement": "Recompute deltas, maximum difference, key and proof identity"
+    },
+    {
+      "id": "CTR-017",
+      "decision_ids": ["SEM-017"],
+      "requirement_ids": ["P1-R09"],
+      "contracts": ["reconciliation-proof", "case-revision"],
+      "schema_enforcement": "Revision-one and predecessor-linked shapes plus actor restrictions",
+      "runtime_enforcement": "Sequential append-only histories and immutable prior bytes"
+    },
+    {
+      "id": "CTR-018",
+      "decision_ids": ["SEM-018"],
+      "requirement_ids": ["P1-R11", "P1-R12"],
+      "contracts": ["common", "reconciliation-proof", "case-revision"],
+      "schema_enforcement": "Authoritative proofs and cases admit only financial reasons",
+      "runtime_enforcement": "Admission and execution failure cannot finalize authoritative output"
+    }
+  ],
+  "unmapped_decision_ids": [],
+  "unmapped_requirement_ids": []
+}

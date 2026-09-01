@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:common:v2",
+  "title": "LedgerGuard shared contract definitions v2",
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!\\s)(?:.*\\S)?$"
+    },
+    "signedInt64": {
+      "type": "integer",
+      "minimum": -9223372036854775808,
+      "maximum": 9223372036854775807
+    },
+    "nonNegativeInt64": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9223372036854775807
+    },
+    "positiveInt64": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9223372036854775807
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "supportedCurrency": {
+      "enum": ["INR", "JPY", "USD"]
+    },
+    "utcTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]*[1-9])?Z$"
+    },
+    "grain": {
+      "enum": ["TRANSACTION", "SETTLEMENT"]
+    },
+    "eventType": {
+      "enum": ["CAPTURE", "REFUND", "CHARGEBACK", "REVERSAL"]
+    },
+    "journalEntryType": {
+      "enum": ["CAPTURE", "REFUND", "CHARGEBACK", "REVERSAL", "SETTLEMENT", "FEE", "RESERVE"]
+    },
+    "accountRole": {
+      "enum": [
+        "PROCESSOR_CLEARING",
+        "BANK_CASH",
+        "MERCHANT_PAYABLE",
+        "PROCESSING_FEE_EXPENSE",
+        "REFUND_LIABILITY",
+        "CHARGEBACK_RESERVE",
+        "ROLLING_RESERVE"
+      ]
+    },
+    "financialReason": {
+      "enum": [
+        "INVALID_ACCOUNT_ROLE",
+        "UNRESOLVED_REFERENCE",
+        "OVER_APPLIED_REFERENCE",
+        "MISSING_LEDGER_MOVEMENT",
+        "MISSING_PROCESSOR_ACTIVITY",
+        "MISSING_BANK_SETTLEMENT",
+        "UNALLOCATED_BANK_MOVEMENT",
+        "INVALID_BANK_ACCOUNT",
+        "DUPLICATE_BANK_MOVEMENT",
+        "SETTLEMENT_FORMULA_MISMATCH",
+        "PROCESSOR_LEDGER_MISMATCH",
+        "PROCESSOR_BANK_MISMATCH",
+        "LEDGER_BANK_MISMATCH"
+      ]
+    },
+    "caseStatus": {
+      "enum": [
+        "OPEN",
+        "RESOLVED_BY_LATE_DATA",
+        "RESOLVED_BY_CORRECTION",
+        "ACCEPTED_VARIANCE",
+        "WRITTEN_OFF"
+      ]
+    }
+  }
+}

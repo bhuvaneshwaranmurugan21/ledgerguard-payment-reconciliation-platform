@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:run-manifest:v2",
+  "title": "LedgerGuard run manifest v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "source_commit",
+    "policy_version",
+    "policy_sha256",
+    "created_at",
+    "objects",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{7,63}$"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "policy_version": {"type": "string", "pattern": "^v[1-9][0-9]*$"},
+    "policy_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"},
+    "created_at": {"$ref": "urn:ledgerguard:common:v2#/$defs/utcTimestamp"},
+    "objects": {
+      "type": "array",
+      "minItems": 4,
+      "items": {"oneOf": [{"$ref": "#/$defs/localObject"}, {"$ref": "#/$defs/s3Object"}]},
+      "allOf": [
+        {"contains": {"properties": {"family": {"const": "PROCESSOR_EVENTS"}}, "required": ["family"]}, "minContains": 1},
+        {"contains": {"properties": {"family": {"const": "PROCESSOR_SETTLEMENTS"}}, "required": ["family"]}, "minContains": 1},
+        {"contains": {"properties": {"family": {"const": "LEDGER_JOURNALS"}}, "required": ["family"]}, "minContains": 1},
+        {"contains": {"properties": {"family": {"const": "BANK_ENTRIES"}}, "required": ["family"]}, "minContains": 1}
+      ]
+    },
+    "manifest_sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+  },
+  "$defs": {
+    "objectBase": {
+      "type": "object",
+      "required": [
+        "family",
+        "schema_version",
+        "locator_type",
+        "size_bytes",
+        "record_count",
+        "sha256"
+      ],
+      "properties": {
+        "family": {
+          "enum": ["PROCESSOR_EVENTS", "PROCESSOR_SETTLEMENTS", "LEDGER_JOURNALS", "BANK_ENTRIES"]
+        },
+        "schema_version": {"const": "2.0"},
+        "locator_type": {"enum": ["LOCAL_FILE", "S3_OBJECT"]},
+        "size_bytes": {"$ref": "urn:ledgerguard:common:v2#/$defs/positiveInt64"},
+        "record_count": {"$ref": "urn:ledgerguard:common:v2#/$defs/nonNegativeInt64"},
+        "sha256": {"$ref": "urn:ledgerguard:common:v2#/$defs/sha256"}
+      }
+    },
+    "localObject": {
+      "allOf": [
+        {"$ref": "#/$defs/objectBase"},
+        {
+          "required": ["relative_path"],
+          "properties": {
+            "locator_type": {"const": "LOCAL_FILE"},
+            "relative_path": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "s3Object": {
+      "allOf": [
+        {"$ref": "#/$defs/objectBase"},
+        {
+          "required": ["s3_uri", "version_id"],
+          "properties": {
+            "locator_type": {"const": "S3_OBJECT"},
+            "s3_uri": {"type": "string", "pattern": "^s3://[^/]+/.+"},
+            "version_id": {"$ref": "urn:ledgerguard:common:v2#/$defs/identifier"}
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

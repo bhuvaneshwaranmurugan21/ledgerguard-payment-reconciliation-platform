@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 2,
+  "stage_state": "PART1_FINANCIAL_CONTRACTS_ENCODED",
+  "overall_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "baseline": {
+    "main_sha": "155211c5df0985b332d3ba8c9d7b82ec4fc10c6a",
+    "main_tree_sha": "0bb7631d533418ecf78c2d4b9f3e44959fee767d",
+    "accepted_stage1_head_sha": "46b1f4e852ea40b24adaa30625074a2a05654259",
+    "stage1_post_merge_ci_run_id": 33505222160,
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b",
+    "stage1_sha256": "4234ac61999de769b87b2329512a8741761023b6c258dfd2207beb66f7dbc191",
+    "stage1_completion_contract_sha256": "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece"
+  },
+  "completion_contract_sha256": "8464ce66ddc8dcf153f8a09915d0676778caf140e28533a864ab14e40adb7fe9",
+  "active_schema_digests": {
+    "COMMON": "1d7f57a165e52b1c3ca3a4c8d9321ae18dd364928ce181570fb2377c51bf5ddd",
+    "BANK_ENTRY": "3e1a69488ceb91bc8d8e894b58c782aa28dd6e721e78f3ceb5ab51270f1e0470",
+    "CASE_REVISION": "029463cad2665db74ae247640d6a6fcc044fcef900a6c19c2dbfb312b90dc3e1",
+    "LEDGER_JOURNAL": "8fe2a989f13263fded0b0a645de64c299283c3698c3de821326950d2578e123f",
+    "PROCESSOR_EVENT": "648cdb70cd5693f505d650440913e2ab95f419c0be384122fb0ed0e7d537b91f",
+    "PROCESSOR_SETTLEMENT": "aeb2fb8828eddf95118700fd9b55072b68da54a60652064214dfba0a7bad35ca",
+    "RECONCILIATION_POLICY": "f908528f2a727f4c50f23791d3e1df4cb0ba73ec4babd80d559947e211813b70",
+    "RECONCILIATION_PROOF": "6abe1e8caf86781cc68ee8c60e90c1ad3bb3a63ad820bdcc179d321ac0005f41",
+    "RUN_MANIFEST": "f795ba6241b24ff0d2c8338abbd8c043a7312e881b6480154ca69a9beef31e64"
+  },
+  "legacy_v1_schema_digests": {
+    "bank-entry-v1.schema.json": "2e166412e617bbd4456eeb69b6804861c6f0e40d433f9376253f4a9f13f996b5",
+    "case-revision-v1.schema.json": "b754befa40ab11f0d1ef6cc310e4b5df00378f779693a4c2c47bae2f8f5989a9",
+    "journal-v1.schema.json": "0a663eab588c7389a9a01566e05965a390ed19c469933ae265e5e1ac8c67556d",
+    "processor-event-v1.schema.json": "abdb7c1a29042d5a1c8a092ca3b0dfbf61d67f6a9449fbcb6cbd5bbfd2e00420",
+    "processor-settlement-v1.schema.json": "9fdef0259b580f799fc93878231ddeb9af8d663ff8bb32ac26e8ecb471a4e53f",
+    "reconciliation-policy-v1.schema.json": "6d460f9336a8c546097813ff8888dc89243f7fa8c89114c48f7d48549d75fa19",
+    "reconciliation-proof-v1.schema.json": "9b3705bd4bb79b19804bee530c44e705755a04c6904fc7beaed4a8e9233c0e4f",
+    "run-manifest-v1.schema.json": "409aaf6e889e18cca1b7c040df65b5df7f095c8bba6cad3d5d4ea9c893449dd6"
+  },
+  "contract_artifact_digests": {
+    "active_registry": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288",
+    "invariant_register": "50ee82f8126661ca1acba3d91f8bb9d7c47b2267357e31fdbf200c0385b6e212",
+    "traceability": "e43f50ac64bb3f41d042be2c37f055dc883c0c1ce1a6a5d5ad2745f094d53477",
+    "gap_audit": "254c9012db0b90eb219ccb793768d1c10e93abce940cac33d34ee85906aa1cb0",
+    "contract_model": "1ee33cdd3513b7562928b3b9c4627006def828119df11c8f7a36dd146bc629ab",
+    "requirements": "272f29db1726810a01f55e38fcc20a5601f1a9af22afd3b9e5ed07be369f307e",
+    "versioning_adr": "90e9a01b44b9e5fdb4a8479362232eed8121de7a11f0502f92a0ec85fd36af86",
+    "contract_tests": "ab8738a3f9493bad64fbd8d849194a8134a42591e44618aa6400764837518ff8",
+    "governance_tests": "3d27aeffda1bab7865d496ed9c6348ac91c545a3704bffb7b79ba2995fe06a81"
+  },
+  "local_validation": {
+    "test_count": 95,
+    "contract_test_count": 26,
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_mypy": "PASS",
+    "pytest": "PASS",
+    "fresh_install": "PASS",
+    "offline_reference_resolution": "PASS",
+    "diff_check": "PASS",
+    "determinism": "PASS",
+    "stage2_validator_sha256": "3e8a3cdb753d94d013f592429bd8691f5ad100221496eb17e61864dc8d3b270c",
+    "foundation_candidate_sha256": "59488910e0dfe501953c03ef5ac406b82f9cdb146d55f6726b41f4c38f2135b8"
+  },
+  "claim_boundary": {
+    "semantic_design": "DESIGNED/MODELED",
+    "semantic_acceptance_examples": "LOCAL_VERIFIED",
+    "contract_structure": "LOCAL_VERIFIED",
+    "reconciliation_execution": "UNCLAIMED",
+    "aws_execution": false,
+    "aws_infrastructure_mutated": false
+  }
+}

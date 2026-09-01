@@ -11,8 +11,8 @@ from typing import Any
 from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
-from .stage0 import validate_stage0
-from .stage1 import validate_stage1
+from .stage0 import Stage0Error, validate_stage0
+from .stage1 import Stage1Error, validate_stage1
 
 PROJECT = "ledgerguard-payment-reconciliation-platform"
 EXPECTED_TARGET = {
@@ -26,6 +26,19 @@ EXPECTED_RUNTIME = {
     "glue_version": "5.1",
     "python_version": "3.11",
     "spark_version": "3.5.6",
+}
+STAGE2_STATE = "PART1_FINANCIAL_CONTRACTS_ENCODED"
+PART1_STATE = "PART1_FOUNDATION_CORRECTION_IN_PROGRESS"
+STAGE2_BASELINE = {
+    "main_sha": "155211c5df0985b332d3ba8c9d7b82ec4fc10c6a",
+    "main_tree_sha": "0bb7631d533418ecf78c2d4b9f3e44959fee767d",
+    "accepted_stage1_head_sha": "46b1f4e852ea40b24adaa30625074a2a05654259",
+    "stage1_post_merge_ci_run_id": 33505222160,
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b",
+    "stage1_sha256": "4234ac61999de769b87b2329512a8741761023b6c258dfd2207beb66f7dbc191",
+    "stage1_completion_contract_sha256": (
+        "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece"
+    ),
 }
 EVIDENCE_LEVELS = ["DESIGNED/MODELED", "LOCAL_VERIFIED", "AWS_VERIFIED", "UNCLAIMED"]
 SCHEMA_NAMES = {
@@ -63,6 +76,15 @@ REQUIRED_DOCS = {
     "contracts/part1-stage1-completion-v1.json",
     "spec/financial-examples-v1.json",
     "spec/financial-semantics-v1.json",
+    "contracts/active-contract-set-v1.json",
+    "contracts/part1-stage2-completion-v1.json",
+    "docs/adr/0007-versioned-contract-set-and-enforcement-layers.md",
+    "docs/contract-model.md",
+    "docs/part1-stage2-requirements.md",
+    "docs/stage2-gap-audit.md",
+    "evidence/part1-stage2-local.json",
+    "spec/contract-invariants-v1.json",
+    "spec/contract-traceability-v1.json",
 }
 FORBIDDEN_PATHS = {"docs/" + "".join(("INTER", "VIEW.md"))}
 FORBIDDEN_TEXT = (
@@ -86,6 +108,18 @@ def _load_json(path: Path) -> dict[str, Any]:
         raise FoundationError(f"cannot load JSON {path}: {error}") from error
     if not isinstance(value, dict):
         raise FoundationError(f"JSON object required: {path}")
+    return value
+
+
+def _mapping(value: object, message: str) -> Mapping[str, Any]:
+    if not isinstance(value, Mapping):
+        raise FoundationError(message)
+    return value
+
+
+def _list(value: object, message: str) -> list[Any]:
+    if not isinstance(value, list):
+        raise FoundationError(message)
     return value
 
 
@@ -114,6 +148,268 @@ def _validate_schemas(root: Path) -> dict[str, str]:
         identifiers.add(identifier)
         digests[name] = sha256(path.read_bytes()).hexdigest()
     return digests
+
+
+def _artifact_digests(root: Path, artifacts: Mapping[str, Any]) -> dict[str, str]:
+    digests: dict[str, str] = {}
+    for name, artifact_value in artifacts.items():
+        artifact = _mapping(artifact_value, f"Stage 2 artifact {name} must be an object")
+        relative = artifact.get("path")
+        expected = artifact.get("sha256")
+        if not isinstance(relative, str) or not relative:
+            raise FoundationError(f"Stage 2 artifact path missing: {name}")
+        relative_path = Path(relative)
+        _require(
+            not relative_path.is_absolute() and ".." not in relative_path.parts,
+            f"Stage 2 artifact path escapes repository: {name}",
+        )
+        path = root / relative_path
+        _require(path.is_file(), f"Stage 2 artifact missing: {relative}")
+        actual = sha256(path.read_bytes()).hexdigest()
+        _require(actual == expected, f"Stage 2 artifact digest differs: {relative}")
+        digests[name] = actual
+    return digests
+
+
+def _iter_references(value: object) -> list[str]:
+    references: list[str] = []
+    if isinstance(value, Mapping):
+        reference = value.get("$ref")
+        if isinstance(reference, str):
+            references.append(reference)
+        for child in value.values():
+            references.extend(_iter_references(child))
+    elif isinstance(value, list):
+        for child in value:
+            references.extend(_iter_references(child))
+    return references
+
+
+def _validate_stage2(
+    root: Path, stage0: Mapping[str, Any], stage1: Mapping[str, Any]
+) -> dict[str, Any]:
+    contract_path = root / "contracts/part1-stage2-completion-v1.json"
+    evidence_path = root / "evidence/part1-stage2-local.json"
+    contract = _load_json(contract_path)
+    evidence = _load_json(evidence_path)
+
+    _require(contract.get("project") == PROJECT, "Stage 2 project differs")
+    _require(contract.get("part") == 1 and contract.get("stage") == 2, "Stage 2 identity differs")
+    _require(contract.get("state") == STAGE2_STATE, "Stage 2 state differs")
+    _require(contract.get("overall_part1_state") == PART1_STATE, "Stage 2 Part 1 state differs")
+    baseline = _mapping(contract.get("baseline"), "Stage 2 baseline missing")
+    _require(dict(baseline) == STAGE2_BASELINE, "Stage 2 baseline differs")
+    _require(stage0.get("stage0_sha256") == STAGE2_BASELINE["stage0_sha256"], "Stage 0 differs")
+    _require(stage1.get("stage1_sha256") == STAGE2_BASELINE["stage1_sha256"], "Stage 1 differs")
+
+    completion_artifacts = _mapping(
+        contract.get("contract_artifacts"), "Stage 2 contract artifacts missing"
+    )
+    artifact_digests = _artifact_digests(root, completion_artifacts)
+    required_gates = _list(contract.get("required_gates"), "Stage 2 required gates missing")
+    _require(len(required_gates) == len(set(required_gates)), "Stage 2 gates must be unique")
+    _require("EXACT_HEAD_CI_SUCCESS" in required_gates, "Stage 2 exact-head CI gate missing")
+    _require("POST_MERGE_MAIN_CI_SUCCESS" in required_gates, "Stage 2 post-merge CI gate missing")
+    inventory = _mapping(contract.get("acceptance_inventory"), "Stage 2 inventory missing")
+    _require(inventory.get("preserved_v1_schema_count") == 8, "v1 inventory differs")
+    _require(inventory.get("active_schema_count") == 9, "v2 inventory differs")
+    _require(inventory.get("contract_rule_count") == 18, "contract rule inventory differs")
+    _require(inventory.get("requirement_count") == 12, "requirement inventory differs")
+    _require(inventory.get("contract_test_count") == 26, "contract test inventory differs")
+    _require(inventory.get("governance_test_count") == 10, "governance test inventory differs")
+    _require(
+        contract.get("remaining_part1_work")
+        == [
+            "VALIDATE_COMPLETE_CONTRACT_COHERENCE",
+            "FREEZE_FINAL_PART1_COMPLETION_GOVERNANCE",
+        ],
+        "Stage 2 remaining Part 1 work differs",
+    )
+
+    active = _load_json(root / "contracts/active-contract-set-v1.json")
+    _require(active.get("state") == "ACTIVE_CONTRACT_SET_V2", "active contract state differs")
+    _require(active.get("active_schema_version") == "2.0", "active schema version differs")
+    legacy = _mapping(active.get("legacy_contract_set"), "legacy contract set missing")
+    _require(
+        legacy.get("status") == "SUPERSEDED_BEFORE_RUNTIME_USE",
+        "legacy contract status differs",
+    )
+    actual_v1 = {
+        path.name: sha256(path.read_bytes()).hexdigest()
+        for path in sorted((root / "contracts").glob("*-v1.schema.json"))
+    }
+    _require(legacy.get("digests") == actual_v1, "historical v1 schema bytes differ")
+    _require(len(actual_v1) == 8, "historical v1 schema inventory differs")
+
+    entries = _list(active.get("contracts"), "active contracts missing")
+    _require(len(entries) == 9, "active schema inventory differs")
+    identifiers: set[str] = set()
+    families: set[str] = set()
+    schemas: dict[str, Mapping[str, Any]] = {}
+    active_digests: dict[str, str] = {}
+    for entry_value in entries:
+        entry = _mapping(entry_value, "every active contract must be an object")
+        relative = entry.get("path")
+        identifier = entry.get("id")
+        family = entry.get("family")
+        expected_digest = entry.get("sha256")
+        if not isinstance(relative, str) or not relative:
+            raise FoundationError("active contract path missing")
+        relative_path = Path(relative)
+        _require(
+            not relative_path.is_absolute() and ".." not in relative_path.parts,
+            "active contract path escapes repository",
+        )
+        if not isinstance(identifier, str) or not identifier:
+            raise FoundationError("active contract ID missing")
+        if not isinstance(family, str) or not family:
+            raise FoundationError("active contract family missing")
+        _require(identifier not in identifiers, f"duplicate active contract ID: {identifier}")
+        _require(family not in families, f"duplicate active contract family: {family}")
+        identifiers.add(identifier)
+        families.add(family)
+        path = root / relative_path
+        _require(path.is_file(), f"active contract missing: {relative}")
+        actual_digest = sha256(path.read_bytes()).hexdigest()
+        _require(actual_digest == expected_digest, f"active contract digest differs: {relative}")
+        schema = _load_json(path)
+        _require(schema.get("$id") == identifier, f"active contract ID differs: {relative}")
+        try:
+            Draft202012Validator.check_schema(schema)
+        except SchemaError as error:
+            raise FoundationError(f"invalid active schema {relative}: {error.message}") from error
+        schemas[identifier] = schema
+        active_digests[family] = actual_digest
+    for active_identifier, active_schema in schemas.items():
+        for reference in _iter_references(active_schema):
+            if reference.startswith("#"):
+                continue
+            target = reference.split("#", maxsplit=1)[0]
+            _require(
+                target in identifiers,
+                f"unresolved active schema reference: {active_identifier} -> {target}",
+            )
+
+    invariants = _load_json(root / "spec/contract-invariants-v1.json")
+    rules = _list(invariants.get("invariants"), "contract invariants missing")
+    _require(len(rules) == 18, "contract invariant count differs")
+    _require(
+        [item.get("id") if isinstance(item, Mapping) else None for item in rules]
+        == [f"CTR-{number:03d}" for number in range(1, 19)],
+        "contract invariant IDs differ",
+    )
+    decision_ids = {
+        decision
+        for item in rules
+        if isinstance(item, Mapping)
+        for decision in _list(item.get("decision_ids"), "contract decision ownership missing")
+    }
+    requirement_ids = {
+        requirement
+        for item in rules
+        if isinstance(item, Mapping)
+        for requirement in _list(
+            item.get("requirement_ids"), "contract requirement ownership missing"
+        )
+    }
+    _require(
+        decision_ids == {f"SEM-{number:03d}" for number in range(1, 19)},
+        "semantic contract ownership differs",
+    )
+    _require(
+        requirement_ids == {f"P1-R{number:02d}" for number in range(1, 13)},
+        "requirement contract ownership differs",
+    )
+    _require(invariants.get("unmapped_decision_ids") == [], "unmapped semantic decisions remain")
+    _require(invariants.get("unmapped_requirement_ids") == [], "unmapped requirements remain")
+
+    traceability = _load_json(root / "spec/contract-traceability-v1.json")
+    requirements = _list(traceability.get("requirements"), "Stage 2 traceability missing")
+    _require(
+        [item.get("id") if isinstance(item, Mapping) else None for item in requirements]
+        == [f"P1-R{number:02d}" for number in range(1, 13)],
+        "Stage 2 traceability order differs",
+    )
+
+    boundary = _mapping(contract.get("execution_boundary"), "Stage 2 boundary missing")
+    for field in (
+        "legacy_v1_schema_mutation",
+        "reconciliation_engine_added",
+        "spark_workload_added",
+        "aws_execution",
+        "infrastructure_mutation",
+        "managed_evidence_claimed",
+    ):
+        _require(boundary.get(field) is False, f"Stage 2 {field} must be false")
+
+    contract_digest = sha256(contract_path.read_bytes()).hexdigest()
+    _require(evidence.get("project") == PROJECT, "Stage 2 evidence project differs")
+    _require(evidence.get("part") == 1 and evidence.get("stage") == 2, "Stage 2 evidence differs")
+    _require(evidence.get("stage_state") == STAGE2_STATE, "Stage 2 evidence state differs")
+    _require(evidence.get("overall_state") == PART1_STATE, "Stage 2 evidence Part 1 state differs")
+    _require(evidence.get("baseline") == dict(baseline), "Stage 2 evidence baseline differs")
+    _require(
+        evidence.get("completion_contract_sha256") == contract_digest,
+        "Stage 2 completion contract digest differs",
+    )
+    _require(
+        evidence.get("active_schema_digests") == active_digests,
+        "Stage 2 active schema evidence differs",
+    )
+    _require(evidence.get("legacy_v1_schema_digests") == actual_v1, "v1 evidence differs")
+    _require(
+        evidence.get("contract_artifact_digests") == artifact_digests, "artifact evidence differs"
+    )
+    local = _mapping(evidence.get("local_validation"), "Stage 2 local validation missing")
+    _require(
+        isinstance(local.get("test_count"), int) and local["test_count"] > 59,
+        "Stage 2 test count must exceed the Stage 1 baseline",
+    )
+    _require(local.get("contract_test_count") == 26, "Stage 2 contract test count differs")
+    for field in (
+        "ruff_format",
+        "ruff_lint",
+        "strict_mypy",
+        "pytest",
+        "fresh_install",
+        "offline_reference_resolution",
+        "diff_check",
+        "determinism",
+    ):
+        _require(local.get(field) == "PASS", f"Stage 2 local validation {field} differs")
+    claims = _mapping(evidence.get("claim_boundary"), "Stage 2 claim boundary missing")
+    _require(claims.get("contract_structure") == "LOCAL_VERIFIED", "contract claim differs")
+    _require(claims.get("reconciliation_execution") == "UNCLAIMED", "runtime claim differs")
+    _require(claims.get("aws_execution") is False, "Stage 2 evidence claims AWS execution")
+    _require(
+        claims.get("aws_infrastructure_mutated") is False,
+        "Stage 2 evidence claims infrastructure mutation",
+    )
+
+    payload: dict[str, Any] = {
+        "project": PROJECT,
+        "part": 1,
+        "stage": 2,
+        "stage_state": STAGE2_STATE,
+        "overall_part1_state": PART1_STATE,
+        "baseline_main_sha": STAGE2_BASELINE["main_sha"],
+        "baseline_main_tree_sha": STAGE2_BASELINE["main_tree_sha"],
+        "stage0_sha256": stage0["stage0_sha256"],
+        "stage1_sha256": stage1["stage1_sha256"],
+        "completion_contract_sha256": contract_digest,
+        "active_registry_sha256": artifact_digests["active_registry"],
+        "active_schema_digests": active_digests,
+        "contract_rule_count": len(rules),
+        "requirement_count": len(requirements),
+        "aws_execution": False,
+    }
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    payload["stage2_sha256"] = sha256(canonical).hexdigest()
+    _require(
+        local.get("stage2_validator_sha256") == payload["stage2_sha256"],
+        "Stage 2 validator digest differs",
+    )
+    return payload
 
 
 def _validate_target(root: Path) -> dict[str, Any]:
@@ -204,20 +500,26 @@ def validate_foundation(root: Path | None = None) -> dict[str, Any]:
     schema_digests = _validate_schemas(repository)
     target = _validate_target(repository)
     completion = _validate_completion(repository, target)
-    stage0 = validate_stage0(repository)
-    stage1 = validate_stage1(repository)
+    try:
+        stage0 = validate_stage0(repository)
+        stage1 = validate_stage1(repository)
+    except (Stage0Error, Stage1Error) as error:
+        raise FoundationError(f"preserved stage validation failed: {error}") from error
+    stage2 = _validate_stage2(repository, stage0, stage1)
     _validate_repository_surface(repository)
 
     payload: dict[str, Any] = {
         "project": PROJECT,
         "part": 1,
-        "state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
-        "stage": 1,
-        "stage_state": "PART1_FINANCIAL_SEMANTICS_FROZEN",
+        "state": PART1_STATE,
+        "stage": 2,
+        "stage_state": STAGE2_STATE,
         "aws_execution": False,
         "stage0_sha256": stage0["stage0_sha256"],
         "stage1_sha256": stage1["stage1_sha256"],
+        "stage2_sha256": stage2["stage2_sha256"],
         "schema_digests": schema_digests,
+        "active_schema_digests": stage2["active_schema_digests"],
         "target": {
             "repository": target["repository"],
             "default_branch": target["default_branch"],

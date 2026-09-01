@@ -6,8 +6,9 @@ LedgerGuard keeps three financial truths independent and creates a versioned rec
 It does not mutate source records to make them agree.
 
 The financial meaning is frozen in
-[`financial-semantics-v1.json`](../spec/financial-semantics-v1.json). The current stage validates that
-specification and its worked examples; it does not claim an implemented reconciliation runtime.
+[`financial-semantics-v1.json`](../spec/financial-semantics-v1.json) and encoded by the active
+[`v2` contract set](../contracts/active-contract-set-v1.json). Contract validation does not claim an
+implemented reconciliation runtime.
 
 ```mermaid
 flowchart TD

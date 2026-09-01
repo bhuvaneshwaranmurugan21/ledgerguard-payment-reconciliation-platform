@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "stage": "PART1_STAGE2",
+  "requirements": [
+    {"id": "P1-R01", "decisions": ["SEM-001", "SEM-013", "SEM-016"], "rules": ["CTR-001", "CTR-013", "CTR-016"]},
+    {"id": "P1-R02", "decisions": ["SEM-006", "SEM-011", "SEM-016"], "rules": ["CTR-006", "CTR-011", "CTR-016"]},
+    {"id": "P1-R03", "decisions": ["SEM-002"], "rules": ["CTR-002"]},
+    {"id": "P1-R04", "decisions": ["SEM-003"], "rules": ["CTR-003"]},
+    {"id": "P1-R05", "decisions": ["SEM-004", "SEM-005"], "rules": ["CTR-004", "CTR-005"]},
+    {"id": "P1-R06", "decisions": ["SEM-007", "SEM-008", "SEM-009", "SEM-010"], "rules": ["CTR-007", "CTR-008", "CTR-009", "CTR-010"]},
+    {"id": "P1-R07", "decisions": ["SEM-012"], "rules": ["CTR-012"]},
+    {"id": "P1-R08", "decisions": ["SEM-014"], "rules": ["CTR-014"]},
+    {"id": "P1-R09", "decisions": ["SEM-017"], "rules": ["CTR-017"]},
+    {"id": "P1-R10", "decisions": ["SEM-015"], "rules": ["CTR-015"]},
+    {"id": "P1-R11", "decisions": ["SEM-018"], "rules": ["CTR-018"]},
+    {"id": "P1-R12", "decisions": ["SEM-018"], "rules": ["CTR-018"]}
+  ],
+  "required_evidence": [
+    "VALID_SCHEMA_SPECIMENS",
+    "INVALID_SCHEMA_SPECIMENS",
+    "SIGNED_64_BIT_BOUNDARIES",
+    "CANONICAL_TIMESTAMP_BOUNDARIES",
+    "LOCAL_AND_S3_MANIFEST_VARIANTS",
+    "GRAIN_SPECIFIC_PROOFS",
+    "CASE_ACTOR_AND_REVISION_RULES",
+    "CLOSED_REASON_TAXONOMY",
+    "OFFLINE_REFERENCE_RESOLUTION",
+    "LEGACY_V1_BYTES_PRESERVED"
+  ]
+}
