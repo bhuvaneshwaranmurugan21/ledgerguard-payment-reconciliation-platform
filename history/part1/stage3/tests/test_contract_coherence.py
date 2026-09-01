@@ -15,8 +15,8 @@ from ledgerguard.foundation import (
     canonical_timestamp,
     derive_contract_id,
     parse_contract_json,
+    validate_contract_coherence,
 )
-from ledgerguard.part1 import reproduce_stage3
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE: dict[str, Any] = json.loads(
@@ -142,14 +142,14 @@ def test_coh_t008_manifest_families_bind_exact_active_contract_ids() -> None:
 
 
 def test_coh_t009_binding_chain_is_validated_by_the_independent_oracle() -> None:
-    result = reproduce_stage3(ROOT)
+    result = validate_contract_coherence(ROOT)
     assert result["stage"] == 3
     assert result["stage_state"] == "PART1_CONTRACT_COHERENCE_VALIDATED"
     assert result["aws_execution"] is False
 
 
 def test_coh_t010_every_active_reference_fragment_resolves() -> None:
-    result = reproduce_stage3(ROOT)
+    result = validate_contract_coherence(ROOT)
     evidence = json.loads((ROOT / "evidence/part1-stage3-local.json").read_text())
     assert evidence["local_validation"]["reference_fragment_count"] == 131
     assert len(result["active_schema_digests"]) == 9

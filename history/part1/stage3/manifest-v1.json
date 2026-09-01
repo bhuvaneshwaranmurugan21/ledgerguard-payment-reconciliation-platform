@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 3,
+  "purpose": "Preserve accepted Stage 3 bytes for append-only historical reproduction after active Part 1 status advances.",
+  "source": {
+    "pr_number": 6,
+    "accepted_head_sha": "0d42a71af0295728ad5745f130ddf7710c317ad7",
+    "merge_sha": "e83ff73ea725fd930dc3bdd85442506da4248efa",
+    "tree_sha": "4607f15c133972f168b4fdab9257c4fdbffce6bb",
+    "exact_head_ci_run_id": 33520421011,
+    "post_merge_main_ci_run_id": 33521251470,
+    "completion_contract_sha256": "91135fd72ef6ebd8275cac6172d27a44cf9751c213d79dd2abf407478854fc98",
+    "evidence_sha256": "bc1e11be4995d8748e50f687ade5ed139758952d49232f29b5680a42c423bcc8",
+    "stage3_sha256": "7df73e3b2cbcd5a000c3a6238ff5801eed05d51024c90a6a861d390ac2c750cf",
+    "foundation_sha256": "10754ed611ef0bca50c741821de2aa9a699826e03da2e3a436866c2028d2b6ab"
+  },
+  "snapshots": [
+    {
+      "logical_path": "README.md",
+      "snapshot_path": "history/part1/stage3/README.md",
+      "sha256": "3950b52c0f68b127ea602eca9eb3d38bfb6c6739e7886024220eaf35f3614687",
+      "git_blob_sha": "8e2c874dab58ce16826892c907c46a4030448032"
+    },
+    {
+      "logical_path": "PROJECT_STATUS.md",
+      "snapshot_path": "history/part1/stage3/PROJECT_STATUS.md",
+      "sha256": "74d3a2250d872dcf32fec050a2e9e7cf8d146875ec5831330b3e3a8875d30c4f",
+      "git_blob_sha": "0c5dc0b8c9b2ee6e6652e2e651bd8a03efb4a9a1"
+    },
+    {
+      "logical_path": "tests/test_contract_coherence.py",
+      "snapshot_path": "history/part1/stage3/tests/test_contract_coherence.py",
+      "sha256": "16202874220a81e1add901dfb637397b6408ced46cc84ba2324b6f86c9c32772",
+      "git_blob_sha": "bd13e273047992bb6f3b8b19c3a3de69b9efc2b3"
+    },
+    {
+      "logical_path": "tests/test_part1_stage3.py",
+      "snapshot_path": "history/part1/stage3/tests/test_part1_stage3.py",
+      "sha256": "7f3542ba781f6213fdc2545ab578dfe44f4e649acaaea20b18b6239da68a0f7f",
+      "git_blob_sha": "d91538315e371973a0949a3a340a548ae6daff9a"
+    }
+  ],
+  "execution_boundary": {
+    "historical_contract_rewritten": false,
+    "historical_evidence_rewritten": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  }
+}

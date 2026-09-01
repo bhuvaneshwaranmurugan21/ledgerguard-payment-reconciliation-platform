@@ -4,13 +4,13 @@
 
 - Project: LedgerGuard
 - Part: 1 — Foundation and completion contract
-- Stage: 4 — Part 1 completion governance
-- Stage state: `PART1_COMPLETION_GOVERNANCE_FROZEN`
-- Overall Part 1 state: `PART1_FOUNDATION_COMPLETE`
-- Overall project state: `PROJECT_IN_PROGRESS`
+- Stage: 3 — Contract coherence validation
+- Stage state: `PART1_CONTRACT_COHERENCE_VALIDATED`
+- Overall Part 1 state: `PART1_FOUNDATION_CORRECTION_IN_PROGRESS`
 - Managed workload executed: no
 - AWS infrastructure mutated: no
-- Highest claim: `LOCAL_VERIFIED` for Part 1 governance after successful CI
+- Highest claim: `LOCAL_VERIFIED` for Stage 0 governance, Stage 1 semantic examples, Stage 2
+  contract structure, and Stage 3 contract coherence after successful CI
 
 ## Completed
 
@@ -27,11 +27,9 @@
   policy → manifest → proof → case bindings.
 - Offline resolution of every active JSON-reference fragment and bidirectional Stage 3
   traceability.
-- Append-only Stage 3 historical reproduction and final Part 1 cross-stage traceability.
-- Exact resolution of all six Part 1 project gates and the frozen Part 2 entry contract.
 
-## Remaining project work
+## Remaining Part 1 work
 
-Part 1 has zero remaining work after the Stage 4 external CI gates close. Reconciliation execution,
-Spark parity, managed AWS execution, scale, measured cost and release remain `UNCLAIMED` and are
-owned by Parts 2–5. Stage 4 does not authorize a reconciliation engine or managed AWS workload.
+The active contracts have passed the Stage 3 local coherence gate. Final Part 1
+completion-governance freeze remains. No reconciliation engine or managed AWS workload is
+authorized by Stage 3.
