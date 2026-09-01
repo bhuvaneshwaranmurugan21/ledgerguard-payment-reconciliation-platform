@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:case-revision:v1",
+  "title": "LedgerGuard exception case revision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "revision",
+    "reconciliation_key",
+    "currency",
+    "status",
+    "reason_codes",
+    "proof_id",
+    "actor_type",
+    "occurred_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 1},
+    "prior_revision": {"type": ["integer", "null"], "minimum": 1},
+    "reconciliation_key": {"type": "string", "minLength": 1},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "status": {
+      "enum": [
+        "OPEN",
+        "INVESTIGATING",
+        "RESOLVED_BY_LATE_DATA",
+        "RESOLVED_BY_CORRECTION",
+        "ACCEPTED_VARIANCE",
+        "WRITTEN_OFF"
+      ]
+    },
+    "reason_codes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "proof_id": {"type": "string", "minLength": 1},
+    "actor_type": {"enum": ["SYSTEM", "OPERATOR"]},
+    "actor_id": {"type": ["string", "null"], "minLength": 1},
+    "occurred_at": {"type": "string", "format": "date-time"}
+  }
+}
