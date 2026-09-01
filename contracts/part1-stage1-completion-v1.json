@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 1,
+  "name": "Financial semantics freeze",
+  "state": "PART1_FINANCIAL_SEMANTICS_FROZEN",
+  "overall_part1_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "baseline": {
+    "main_sha": "9a920a300b50fe46bb534e7fc9f32ad5eda1224c",
+    "main_tree_sha": "738221ba63364837f12c2ce3279b0514db08f2e5",
+    "stage0_state": "PART1_STAGE0_BASELINE_AUDIT_COMPLETE",
+    "stage0_foundation_sha256": "4d7bf84f88b7cd0826a637aa9da74cb5e5ffc5d4dc0f390c82340ef083a7dc60",
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b"
+  },
+  "semantic_artifacts": {
+    "specification": {
+      "path": "spec/financial-semantics-v1.json",
+      "sha256": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9"
+    },
+    "examples": {
+      "path": "spec/financial-examples-v1.json",
+      "sha256": "241863761f97abc49e69f19a2f22f4c034c89e99acffe3fc021203f8e979bc78"
+    },
+    "requirements": {
+      "path": "docs/part1-requirements.md",
+      "sha256": "967227fe821f2e2bdc2e6722b68c6a1cddc919dd1d47d6c0441933409b1a2e4d"
+    },
+    "decision_register": {
+      "path": "docs/semantic-decisions.md",
+      "sha256": "1addecd2a40be211d07d00a6d48e5c3c8f1b7b7477b3c021ec5a2439c9e5d8e4"
+    },
+    "worked_examples": {
+      "path": "docs/financial-examples.md",
+      "sha256": "749640accba133005f56bd45c2a076ed8e3a4f0fefb3bdac6ab5402e9a9860d9"
+    },
+    "gap_audit": {
+      "path": "docs/stage1-gap-audit.md",
+      "sha256": "9907138b20ea2d0af5ad1e0ce8228c74aa99e94f4265486429e33b1cb1d64470"
+    }
+  },
+  "acceptance_inventory": {
+    "decision_count": 18,
+    "unresolved_decision_count": 0,
+    "transaction_case_count": 5,
+    "settlement_case_count": 6,
+    "identity_rule_count": 3,
+    "required_admission_counterexamples": [
+      "CURRENCY_DOMAIN_VIOLATION",
+      "AMBIGUOUS_BANK_ALLOCATION",
+      "IDENTITY_CONFLICT",
+      "SIGNED_64_BIT_OVERFLOW"
+    ],
+    "required_financial_counterexamples": [
+      "INVALID_ACCOUNT_ROLE",
+      "UNRESOLVED_REFERENCE",
+      "OVER_APPLIED_REFERENCE",
+      "MISSING_LEDGER_MOVEMENT",
+      "MISSING_BANK_SETTLEMENT",
+      "UNALLOCATED_BANK_MOVEMENT",
+      "INVALID_BANK_ACCOUNT",
+      "DUPLICATE_BANK_MOVEMENT",
+      "SETTLEMENT_FORMULA_MISMATCH"
+    ]
+  },
+  "required_gates": [
+    "STAGE0_VALIDATOR_PRESERVED",
+    "EXACT_STAGE0_BASELINE_BOUND",
+    "SEMANTIC_DECISIONS_CLOSED",
+    "FAILURE_OWNERSHIP_DISJOINT",
+    "ADMISSION_FAILURES_AUTHORIZE_NO_PROOF",
+    "TRANSACTION_EXAMPLES_PASS",
+    "SETTLEMENT_EXAMPLES_PASS",
+    "IDENTITY_AND_CANONICALIZATION_EXAMPLES_PASS",
+    "EVIDENCE_DIGESTS_MATCH",
+    "FINANCIAL_SCHEMAS_BYTE_UNCHANGED",
+    "NO_RECONCILIATION_ENGINE",
+    "NO_AWS_EXECUTION",
+    "EXACT_HEAD_CI_SUCCESS",
+    "POST_MERGE_MAIN_CI_SUCCESS"
+  ],
+  "execution_boundary": {
+    "schema_mutation": false,
+    "reconciliation_engine_added": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false,
+    "managed_evidence_claimed": false
+  },
+  "remaining_part1_work": [
+    "ENCODE_FROZEN_SEMANTICS_IN_CORRECTED_SCHEMAS",
+    "VALIDATE_COMPLETE_CONTRACT_COHERENCE",
+    "FREEZE_FINAL_PART1_COMPLETION_GOVERNANCE"
+  ]
+}

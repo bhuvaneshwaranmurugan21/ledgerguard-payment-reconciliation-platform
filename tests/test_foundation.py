@@ -40,16 +40,20 @@ def _copy_repository(tmp_path: Path) -> Path:
     return destination
 
 
-def test_correction_candidate_passes_deterministically() -> None:
+def test_foundation_candidate_passes_deterministically() -> None:
     first = validate_foundation(ROOT)
     second = validate_foundation(ROOT)
     assert first == second
     assert first["state"] == "PART1_FOUNDATION_CORRECTION_IN_PROGRESS"
-    assert first["stage"] == 0
-    assert first["stage_state"] == "PART1_STAGE0_BASELINE_AUDIT_COMPLETE"
+    assert first["stage"] == 1
+    assert first["stage_state"] == "PART1_FINANCIAL_SEMANTICS_FROZEN"
     assert first["aws_execution"] is False
+    assert len(first["stage0_sha256"]) == 64
+    assert len(first["stage1_sha256"]) == 64
     assert len(first["schema_digests"]) == 8
     assert len(first["foundation_sha256"]) == 64
+    evidence = json.loads((ROOT / "evidence/part1-stage1-local.json").read_text(encoding="utf-8"))
+    assert evidence["local_validation"]["foundation_candidate_sha256"] == first["foundation_sha256"]
 
 
 def test_processor_event_contract_requires_reference_for_refund() -> None:

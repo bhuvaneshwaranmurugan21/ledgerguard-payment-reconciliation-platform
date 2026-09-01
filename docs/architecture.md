@@ -5,6 +5,10 @@
 LedgerGuard keeps three financial truths independent and creates a versioned reconciliation proof.
 It does not mutate source records to make them agree.
 
+The financial meaning is frozen in
+[`financial-semantics-v1.json`](../spec/financial-semantics-v1.json). The current stage validates that
+specification and its worked examples; it does not claim an implemented reconciliation runtime.
+
 ```mermaid
 flowchart TD
     A["Processor events and payouts"] --> D["Versioned run manifest"]
@@ -21,6 +25,8 @@ flowchart TD
 The transaction key is processor, merchant, payment, event class, and currency. Processor activity
 is compared with the movement of explicitly relevant ledger account roles. A balanced journal is
 necessary but not sufficient: a journal can balance while posting the wrong accounts or amount.
+The canonical identifier uses the `txn:` namespace plus a digest of the structured key, while the
+inspectable key components remain in the proof.
 
 ## Settlement grain
 
@@ -28,6 +34,8 @@ The settlement key is processor, merchant, settlement identifier, settlement cyc
 Processor gross activity and explicit deductions produce expected net settlement. That value is
 compared with clearing-account movement and one or more bank entries. Bank records need not carry a
 payment identifier.
+Allocation is exact-reference only; equal amount or nearby date cannot create a match. The
+settlement proof preserves processor-ledger, processor-bank, and ledger-bank deltas independently.
 
 ## Planned managed components
 
