@@ -25,14 +25,17 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 is undergoing a fail-closed correction. Stage 0 verifies the rejected-draft disposition,
-authoritative repository history, target identity, and truthful baseline claims. It changes no
-financial schema and creates no reconciliation or AWS workload claim.
+Part 1 is undergoing a fail-closed correction. Stage 0 establishes the corrective baseline; Stage 1
+freezes the complete financial semantics and validates worked acceptance examples. The existing
+schemas still require the corresponding contract corrections before Part 1 can be declared
+complete.
 
 | Area | Status |
 |---|---|
 | Stage 0 baseline governance | `LOCAL_VERIFIED` after CI |
-| Domain and completion contracts | `DESIGNED/MODELED` |
+| Financial semantic decisions | `DESIGNED/MODELED` and frozen |
+| Semantic acceptance examples | `LOCAL_VERIFIED` after CI |
+| Corrected domain contracts | `UNCLAIMED` until encoded and validated |
 | Reconciliation implementation | `UNCLAIMED` |
 | Managed AWS reconciliation | `UNCLAIMED` |
 | Performance and cost | `UNCLAIMED` |
@@ -40,7 +43,12 @@ financial schema and creates no reconciliation or AWS workload claim.
 
 See the [architecture](docs/architecture.md), [correctness model](docs/correctness.md),
 [failure model](docs/failure-model.md), [scorecard](docs/scorecard.md), and
-[completion contract](contracts/project-completion-v1.json).
+[project completion contract](contracts/project-completion-v1.json). The active gate is the
+[Stage 1 completion contract](contracts/part1-stage1-completion-v1.json); its evidence is the
+[semantic decision register](docs/semantic-decisions.md),
+[requirements ledger](docs/part1-requirements.md), and
+[worked financial examples](docs/financial-examples.md). The corrective integration record is the
+[Stage 1 gap audit](docs/stage1-gap-audit.md).
 
 ## Foundation validation
 

@@ -1,0 +1,250 @@
+{
+  "schema_version": "1.0",
+  "stage": "PART1_STAGE1",
+  "state": "PART1_FINANCIAL_SEMANTICS_FROZEN",
+  "baseline": {
+    "main_sha": "9a920a300b50fe46bb534e7fc9f32ad5eda1224c",
+    "main_tree_sha": "738221ba63364837f12c2ce3279b0514db08f2e5",
+    "foundation_sha256": "4d7bf84f88b7cd0826a637aa9da74cb5e5ffc5d4dc0f390c82340ef083a7dc60",
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b"
+  },
+  "claim_boundary": {
+    "semantic_design": "DESIGNED/MODELED",
+    "semantic_acceptance_examples": "LOCAL_VERIFIED",
+    "stage0_baseline_governance": "LOCAL_VERIFIED",
+    "reconciliation_execution": "UNCLAIMED",
+    "aws_execution": false
+  },
+  "money": {
+    "representation": "SIGNED_INTEGER_MINOR_UNITS",
+    "floating_point_forbidden": true,
+    "cross_currency_aggregation": "FORBIDDEN",
+    "supported_currency_exponents": {
+      "INR": 2,
+      "JPY": 0,
+      "USD": 2
+    },
+    "overflow_behavior": "FAIL_ADMISSION"
+  },
+  "canonical_identity": {
+    "encoding": "UTF-8",
+    "unicode_normalization": "NFC",
+    "unicode_key_collision": "FAIL_ADMISSION",
+    "json_object_keys": "LEXICOGRAPHIC",
+    "timestamps": "RFC3339_UTC",
+    "canonical_utc_fractional_seconds": "TRIM_TRAILING_ZEROES",
+    "business_digest_algorithm": "SHA-256",
+    "business_digest_excludes": [
+      "payload_sha256",
+      "received_at",
+      "source_batch_id"
+    ],
+    "source_identity": {
+      "PROCESSOR_EVENT": ["family", "processor", "source_record_id"],
+      "PROCESSOR_SETTLEMENT": ["family", "processor", "source_record_id"],
+      "LEDGER_JOURNAL": ["family", "ledger_system", "journal_id"],
+      "BANK_ENTRY": ["family", "bank_account_id", "bank_record_id"]
+    },
+    "identical_replay": "SAME_SOURCE_IDENTITY_AND_SAME_BUSINESS_DIGEST",
+    "identity_conflict": "SAME_SOURCE_IDENTITY_AND_DIFFERENT_BUSINESS_DIGEST"
+  },
+  "transaction": {
+    "grain": [
+      "processor",
+      "merchant_id",
+      "payment_id",
+      "event_class",
+      "currency"
+    ],
+    "key_prefix": "txn:",
+    "processor_sign": {
+      "CAPTURE": 1,
+      "REFUND": -1,
+      "CHARGEBACK": -1,
+      "REVERSAL": -1
+    },
+    "ledger_role": "PROCESSOR_CLEARING",
+    "ledger_side_sign": {
+      "DEBIT": 1,
+      "CREDIT": -1
+    },
+    "reference_rule": {
+      "CAPTURE": "NO_REFERENCE",
+      "REFUND": "EXACT_CAPTURE_REFERENCE",
+      "CHARGEBACK": "EXACT_CAPTURE_REFERENCE",
+      "REVERSAL": "EXACT_CAPTURE_REFERENCE",
+      "negative_reference_chain_forbidden": true,
+      "cumulative_negative_must_not_exceed_capture": true
+    },
+    "journal_validity": {
+      "minimum_postings": 2,
+      "unique_line_ids": true,
+      "positive_line_amounts": true,
+      "total_debits_equal_total_credits": true,
+      "positive_balanced_total": true,
+      "one_currency_per_journal": true,
+      "entry_type_required": true,
+      "processor_required": true,
+      "exactly_one_applicable_business_key": true,
+      "balanced_wrong_role_is_exception": true
+    },
+    "delta": "processor_minor-ledger_minor",
+    "difference": "abs(processor_ledger_delta_minor)"
+  },
+  "settlement": {
+    "grain": [
+      "processor",
+      "merchant_id",
+      "settlement_id",
+      "settlement_cycle",
+      "currency"
+    ],
+    "key_prefix": "stl:",
+    "settlement_id_uniqueness_domain": ["merchant_id", "currency"],
+    "expected_net_formula": "gross_minor-fee_minor-refund_minor-chargeback_minor-reserve_minor",
+    "reported_net_must_equal_recomputed_net": true,
+    "expected_net_may_be_negative": true,
+    "ledger_role": "PROCESSOR_CLEARING",
+    "ledger_side_sign": {
+      "DEBIT": -1,
+      "CREDIT": 1
+    },
+    "bank_side_sign": {
+      "CREDIT": 1,
+      "DEBIT": -1
+    },
+    "bank_allocation": {
+      "strategy": "EXACT_SETTLEMENT_REFERENCE",
+      "normalization": ["UNICODE_NFC", "TRIM_OUTER_WHITESPACE"],
+      "case_sensitive": true,
+      "punctuation_preserved": true,
+      "amount_date_heuristic_forbidden": true,
+      "ambiguous_reference": "FAIL_ADMISSION",
+      "one_bank_identity_one_allocation": true,
+      "split_entries_allowed": true,
+      "permitted_bank_account_policy_required": true,
+      "unknown_reference": "UNALLOCATED_BANK_MOVEMENT"
+    },
+    "deltas": {
+      "processor_ledger_delta_minor": "processor_net_minor-ledger_clearing_minor",
+      "processor_bank_delta_minor": "processor_net_minor-bank_minor",
+      "ledger_bank_delta_minor": "ledger_clearing_minor-bank_minor"
+    },
+    "difference": "max(abs(processor_ledger_delta_minor),abs(processor_bank_delta_minor),abs(ledger_bank_delta_minor))",
+    "zero_net_without_clearing_or_bank_records": "VALID_IF_NO_SEMANTIC_ERROR"
+  },
+  "status": {
+    "MATCHED": "difference_minor=0_and_no_reason_codes",
+    "WITHIN_TOLERANCE": "0<difference_minor<=tolerance_minor_and_only_tolerated_difference_reason",
+    "EXCEPTION": "semantic_reason_present_or_difference_minor>tolerance_minor",
+    "tolerance_reason": "TOLERATED_DIFFERENCE",
+    "tolerance_minor_must_be_non_negative": true,
+    "admission_failure_outcome": "REJECT_WITHOUT_AUTHORITATIVE_PROOF",
+    "tolerance_cannot_hide": [
+      "ADMISSION_FAILURE",
+      "IDENTITY_CONFLICT",
+      "MISSING_EVIDENCE",
+      "REFERENCE_FAILURE",
+      "POLICY_FAILURE",
+      "SETTLEMENT_FORMULA_MISMATCH"
+    ],
+    "source_counts_required_to_distinguish_missing_from_zero": true
+  },
+  "proof": {
+    "identity_components": [
+      "grain",
+      "reconciliation_key",
+      "revision",
+      "source_manifest_sha256",
+      "policy_sha256"
+    ],
+    "creation_time_excluded_from_identity": true,
+    "transaction_totals": [
+      "processor_minor",
+      "ledger_minor",
+      "processor_ledger_delta_minor",
+      "difference_minor",
+      "processor_record_count",
+      "ledger_journal_count"
+    ],
+    "settlement_totals": [
+      "processor_net_minor",
+      "ledger_clearing_minor",
+      "bank_minor",
+      "processor_ledger_delta_minor",
+      "processor_bank_delta_minor",
+      "ledger_bank_delta_minor",
+      "difference_minor",
+      "processor_settlement_count",
+      "ledger_journal_count",
+      "allocated_bank_entry_count"
+    ],
+    "historical_revision_mutation": "FORBIDDEN"
+  },
+  "case": {
+    "identity_components": [
+      "grain",
+      "reconciliation_key",
+      "initial_exception_proof_id"
+    ],
+    "history": "APPEND_ONLY",
+    "system_transitions": [
+      "OPEN",
+      "RESOLVED_BY_LATE_DATA",
+      "RESOLVED_BY_CORRECTION"
+    ],
+    "operator_only_transitions": ["ACCEPTED_VARIANCE", "WRITTEN_OFF"],
+    "sequential_revision_required": true,
+    "predecessor_required_after_revision_one": true
+  },
+  "failure_ownership": {
+    "ADMISSION": [
+      "SCHEMA_VIOLATION",
+      "IDENTITY_CONFLICT",
+      "UNBALANCED_JOURNAL",
+      "CURRENCY_DOMAIN_VIOLATION",
+      "POLICY_MISMATCH",
+      "SOURCE_IDENTITY_MISMATCH",
+      "AMBIGUOUS_BANK_ALLOCATION"
+    ],
+    "FINANCIAL_EXCEPTION": [
+      "INVALID_ACCOUNT_ROLE",
+      "UNRESOLVED_REFERENCE",
+      "OVER_APPLIED_REFERENCE",
+      "MISSING_LEDGER_MOVEMENT",
+      "MISSING_PROCESSOR_ACTIVITY",
+      "MISSING_BANK_SETTLEMENT",
+      "UNALLOCATED_BANK_MOVEMENT",
+      "INVALID_BANK_ACCOUNT",
+      "DUPLICATE_BANK_MOVEMENT",
+      "SETTLEMENT_FORMULA_MISMATCH",
+      "PROCESSOR_LEDGER_MISMATCH",
+      "PROCESSOR_BANK_MISMATCH",
+      "LEDGER_BANK_MISMATCH"
+    ],
+    "EXECUTION": ["EXECUTION_FAILURE"],
+    "admission_failure_authoritative_proof": "FORBIDDEN",
+    "execution_failure_authoritative_partial_proof": "FORBIDDEN"
+  },
+  "decisions": [
+    {"id": "SEM-001", "topic": "financial_truth_independence", "state": "FROZEN"},
+    {"id": "SEM-002", "topic": "integer_minor_unit_money", "state": "FROZEN"},
+    {"id": "SEM-003", "topic": "currency_isolation", "state": "FROZEN"},
+    {"id": "SEM-004", "topic": "canonical_business_digest", "state": "FROZEN"},
+    {"id": "SEM-005", "topic": "source_identity_and_replay", "state": "FROZEN"},
+    {"id": "SEM-006", "topic": "transaction_grain", "state": "FROZEN"},
+    {"id": "SEM-007", "topic": "transaction_event_signs", "state": "FROZEN"},
+    {"id": "SEM-008", "topic": "negative_event_references", "state": "FROZEN"},
+    {"id": "SEM-009", "topic": "journal_validity", "state": "FROZEN"},
+    {"id": "SEM-010", "topic": "transaction_ledger_orientation", "state": "FROZEN"},
+    {"id": "SEM-011", "topic": "settlement_grain", "state": "FROZEN"},
+    {"id": "SEM-012", "topic": "settlement_formula", "state": "FROZEN"},
+    {"id": "SEM-013", "topic": "settlement_ledger_orientation", "state": "FROZEN"},
+    {"id": "SEM-014", "topic": "exact_bank_allocation", "state": "FROZEN"},
+    {"id": "SEM-015", "topic": "tolerance_and_status", "state": "FROZEN"},
+    {"id": "SEM-016", "topic": "grain_specific_proofs", "state": "FROZEN"},
+    {"id": "SEM-017", "topic": "immutable_case_revisions", "state": "FROZEN"},
+    {"id": "SEM-018", "topic": "failure_ownership_and_atomicity", "state": "FROZEN"}
+  ],
+  "unresolved_decisions": []
+}

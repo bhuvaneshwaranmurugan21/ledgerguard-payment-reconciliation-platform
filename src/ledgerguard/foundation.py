@@ -12,6 +12,7 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import SchemaError
 
 from .stage0 import validate_stage0
+from .stage1 import validate_stage1
 
 PROJECT = "ledgerguard-payment-reconciliation-platform"
 EXPECTED_TARGET = {
@@ -51,6 +52,17 @@ REQUIRED_DOCS = {
     "docs/adr/0000-corrective-baseline.md",
     "contracts/part1-stage0-completion-v1.json",
     "evidence/part1-stage0-local.json",
+    "docs/adr/0004-canonical-source-identity.md",
+    "docs/adr/0005-exact-bank-allocation.md",
+    "docs/adr/0006-failure-ownership-and-finalization.md",
+    "docs/financial-examples.md",
+    "docs/part1-requirements.md",
+    "docs/semantic-decisions.md",
+    "docs/stage1-gap-audit.md",
+    "evidence/part1-stage1-local.json",
+    "contracts/part1-stage1-completion-v1.json",
+    "spec/financial-examples-v1.json",
+    "spec/financial-semantics-v1.json",
 }
 FORBIDDEN_PATHS = {"docs/" + "".join(("INTER", "VIEW.md"))}
 FORBIDDEN_TEXT = (
@@ -193,16 +205,18 @@ def validate_foundation(root: Path | None = None) -> dict[str, Any]:
     target = _validate_target(repository)
     completion = _validate_completion(repository, target)
     stage0 = validate_stage0(repository)
+    stage1 = validate_stage1(repository)
     _validate_repository_surface(repository)
 
     payload: dict[str, Any] = {
         "project": PROJECT,
         "part": 1,
-        "stage": 0,
-        "stage_state": "PART1_STAGE0_BASELINE_AUDIT_COMPLETE",
         "state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+        "stage": 1,
+        "stage_state": "PART1_FINANCIAL_SEMANTICS_FROZEN",
         "aws_execution": False,
         "stage0_sha256": stage0["stage0_sha256"],
+        "stage1_sha256": stage1["stage1_sha256"],
         "schema_digests": schema_digests,
         "target": {
             "repository": target["repository"],

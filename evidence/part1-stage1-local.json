@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 1,
+  "stage_state": "PART1_FINANCIAL_SEMANTICS_FROZEN",
+  "overall_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "baseline": {
+    "main_sha": "9a920a300b50fe46bb534e7fc9f32ad5eda1224c",
+    "main_tree_sha": "738221ba63364837f12c2ce3279b0514db08f2e5",
+    "stage0_state": "PART1_STAGE0_BASELINE_AUDIT_COMPLETE",
+    "stage0_foundation_sha256": "4d7bf84f88b7cd0826a637aa9da74cb5e5ffc5d4dc0f390c82340ef083a7dc60",
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b"
+  },
+  "completion_contract_sha256": "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece",
+  "semantic_specification": {
+    "path": "spec/financial-semantics-v1.json",
+    "sha256": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9",
+    "decision_count": 18,
+    "unresolved_decision_count": 0
+  },
+  "acceptance_examples": {
+    "path": "spec/financial-examples-v1.json",
+    "sha256": "241863761f97abc49e69f19a2f22f4c034c89e99acffe3fc021203f8e979bc78",
+    "transaction_case_count": 5,
+    "settlement_case_count": 6,
+    "identity_rule_count": 3,
+    "additional_adversarial_case_count": 10
+  },
+  "local_validation": {
+    "test_count": 59,
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_mypy": "PASS",
+    "pytest": "PASS",
+    "diff_check": "PASS",
+    "determinism": "PASS",
+    "stage0_validator_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b",
+    "stage1_validator_sha256": "4234ac61999de769b87b2329512a8741761023b6c258dfd2207beb66f7dbc191",
+    "foundation_candidate_sha256": "e3094b8c7c7c1083fb8c1a33ceeb8c909fa88ee1c4c959c5b351dbd68a0a19f1"
+  },
+  "schema_boundary": {
+    "schemas_changed": false,
+    "contract_corrections_recorded": true
+  },
+  "implementation_boundary": {
+    "reconciliation_engine_added": false,
+    "semantic_acceptance_helpers_public": false
+  },
+  "claim_boundary": {
+    "semantic_design": "DESIGNED/MODELED",
+    "semantic_acceptance_examples": "LOCAL_VERIFIED",
+    "stage0_baseline_governance": "LOCAL_VERIFIED",
+    "reconciliation_execution": "UNCLAIMED",
+    "aws_execution": false,
+    "aws_infrastructure_mutated": false
+  }
+}

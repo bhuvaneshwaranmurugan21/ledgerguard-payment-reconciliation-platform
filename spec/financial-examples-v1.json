@@ -1,0 +1,387 @@
+{
+  "schema_version": "1.0",
+  "semantic_version": "1.0",
+  "transaction_cases": [
+    {
+      "name": "matched-capture",
+      "input": {
+        "event_type": "CAPTURE",
+        "processor_amount_minor": 10000,
+        "processor_currency": "INR",
+        "ledger_side": "DEBIT",
+        "ledger_amount_minor": 10000,
+        "ledger_currency": "INR",
+        "account_role_valid": true,
+        "reference_resolved": true,
+        "processor_record_count": 1,
+        "ledger_journal_count": 1,
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_minor": 10000,
+        "ledger_minor": 10000,
+        "processor_ledger_delta_minor": 0,
+        "difference_minor": 0,
+        "status": "MATCHED",
+        "reason_codes": []
+      }
+    },
+    {
+      "name": "matched-partial-refund",
+      "input": {
+        "event_type": "REFUND",
+        "processor_amount_minor": 2500,
+        "processor_currency": "INR",
+        "ledger_side": "CREDIT",
+        "ledger_amount_minor": 2500,
+        "ledger_currency": "INR",
+        "account_role_valid": true,
+        "reference_resolved": true,
+        "processor_record_count": 1,
+        "ledger_journal_count": 1,
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_minor": -2500,
+        "ledger_minor": -2500,
+        "processor_ledger_delta_minor": 0,
+        "difference_minor": 0,
+        "status": "MATCHED",
+        "reason_codes": []
+      }
+    },
+    {
+      "name": "balanced-wrong-account-role",
+      "input": {
+        "event_type": "CAPTURE",
+        "processor_amount_minor": 10000,
+        "processor_currency": "INR",
+        "ledger_side": "DEBIT",
+        "ledger_amount_minor": 10000,
+        "ledger_currency": "INR",
+        "account_role_valid": false,
+        "reference_resolved": true,
+        "processor_record_count": 1,
+        "ledger_journal_count": 1,
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_minor": 10000,
+        "ledger_minor": 10000,
+        "processor_ledger_delta_minor": 0,
+        "difference_minor": 0,
+        "status": "EXCEPTION",
+        "reason_codes": ["INVALID_ACCOUNT_ROLE"]
+      }
+    },
+    {
+      "name": "out-of-order-refund",
+      "input": {
+        "event_type": "REFUND",
+        "processor_amount_minor": 2500,
+        "processor_currency": "INR",
+        "ledger_side": "CREDIT",
+        "ledger_amount_minor": 2500,
+        "ledger_currency": "INR",
+        "account_role_valid": true,
+        "reference_resolved": false,
+        "processor_record_count": 1,
+        "ledger_journal_count": 1,
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_minor": -2500,
+        "ledger_minor": -2500,
+        "processor_ledger_delta_minor": 0,
+        "difference_minor": 0,
+        "status": "EXCEPTION",
+        "reason_codes": ["UNRESOLVED_REFERENCE"]
+      }
+    },
+    {
+      "name": "cross-currency-contamination",
+      "input": {
+        "event_type": "CAPTURE",
+        "processor_amount_minor": 10000,
+        "processor_currency": "INR",
+        "ledger_side": "DEBIT",
+        "ledger_amount_minor": 10000,
+        "ledger_currency": "USD",
+        "account_role_valid": true,
+        "reference_resolved": true,
+        "processor_record_count": 1,
+        "ledger_journal_count": 1,
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "outcome": "ADMISSION_REJECTED",
+        "authoritative_proof": false,
+        "reason_codes": ["CURRENCY_DOMAIN_VIOLATION"]
+      }
+    }
+  ],
+  "settlement_cases": [
+    {
+      "name": "matched-split-bank-settlement",
+      "input": {
+        "gross_minor": 100000,
+        "fee_minor": 3000,
+        "refund_minor": 10000,
+        "chargeback_minor": 5000,
+        "reserve_minor": 2000,
+        "reported_net_minor": 80000,
+        "processor_settlement_count": 1,
+        "ledger_journal_count": 1,
+        "ledger_side": "CREDIT",
+        "ledger_amount_minor": 80000,
+        "settlement_reference": "settlement-1",
+        "permitted_bank_account_ids": ["bank-account-1"],
+        "bank_entries": [
+          {
+            "bank_record_id": "bank-1",
+            "bank_account_id": "bank-account-1",
+            "settlement_reference": "settlement-1",
+            "direction": "CREDIT",
+            "amount_minor": 50000
+          },
+          {
+            "bank_record_id": "bank-2",
+            "bank_account_id": "bank-account-1",
+            "settlement_reference": "settlement-1",
+            "direction": "CREDIT",
+            "amount_minor": 30000
+          }
+        ],
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_net_minor": 80000,
+        "ledger_clearing_minor": 80000,
+        "bank_minor": 80000,
+        "processor_ledger_delta_minor": 0,
+        "processor_bank_delta_minor": 0,
+        "ledger_bank_delta_minor": 0,
+        "difference_minor": 0,
+        "allocated_bank_count": 2,
+        "unallocated_bank_count": 0,
+        "status": "MATCHED",
+        "reason_codes": []
+      }
+    },
+    {
+      "name": "matched-zero-net-settlement",
+      "input": {
+        "gross_minor": 10000,
+        "fee_minor": 1000,
+        "refund_minor": 9000,
+        "chargeback_minor": 0,
+        "reserve_minor": 0,
+        "reported_net_minor": 0,
+        "processor_settlement_count": 1,
+        "ledger_journal_count": 0,
+        "ledger_side": null,
+        "ledger_amount_minor": 0,
+        "settlement_reference": "settlement-zero",
+        "permitted_bank_account_ids": ["bank-account-1"],
+        "bank_entries": [],
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_net_minor": 0,
+        "ledger_clearing_minor": 0,
+        "bank_minor": 0,
+        "processor_ledger_delta_minor": 0,
+        "processor_bank_delta_minor": 0,
+        "ledger_bank_delta_minor": 0,
+        "difference_minor": 0,
+        "allocated_bank_count": 0,
+        "unallocated_bank_count": 0,
+        "status": "MATCHED",
+        "reason_codes": []
+      }
+    },
+    {
+      "name": "matched-negative-net-settlement",
+      "input": {
+        "gross_minor": 5000,
+        "fee_minor": 1000,
+        "refund_minor": 7000,
+        "chargeback_minor": 0,
+        "reserve_minor": 0,
+        "reported_net_minor": -3000,
+        "processor_settlement_count": 1,
+        "ledger_journal_count": 1,
+        "ledger_side": "DEBIT",
+        "ledger_amount_minor": 3000,
+        "settlement_reference": "settlement-negative",
+        "permitted_bank_account_ids": ["bank-account-1"],
+        "bank_entries": [
+          {
+            "bank_record_id": "bank-negative",
+            "bank_account_id": "bank-account-1",
+            "settlement_reference": "settlement-negative",
+            "direction": "DEBIT",
+            "amount_minor": 3000
+          }
+        ],
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_net_minor": -3000,
+        "ledger_clearing_minor": -3000,
+        "bank_minor": -3000,
+        "processor_ledger_delta_minor": 0,
+        "processor_bank_delta_minor": 0,
+        "ledger_bank_delta_minor": 0,
+        "difference_minor": 0,
+        "allocated_bank_count": 1,
+        "unallocated_bank_count": 0,
+        "status": "MATCHED",
+        "reason_codes": []
+      }
+    },
+    {
+      "name": "within-tolerance-settlement",
+      "input": {
+        "gross_minor": 10000,
+        "fee_minor": 0,
+        "refund_minor": 0,
+        "chargeback_minor": 0,
+        "reserve_minor": 0,
+        "reported_net_minor": 10000,
+        "processor_settlement_count": 1,
+        "ledger_journal_count": 1,
+        "ledger_side": "CREDIT",
+        "ledger_amount_minor": 9999,
+        "settlement_reference": "settlement-tolerance",
+        "permitted_bank_account_ids": ["bank-account-1"],
+        "bank_entries": [
+          {
+            "bank_record_id": "bank-tolerance",
+            "bank_account_id": "bank-account-1",
+            "settlement_reference": "settlement-tolerance",
+            "direction": "CREDIT",
+            "amount_minor": 10000
+          }
+        ],
+        "tolerance_minor": 1
+      },
+      "expected": {
+        "processor_net_minor": 10000,
+        "ledger_clearing_minor": 9999,
+        "bank_minor": 10000,
+        "processor_ledger_delta_minor": 1,
+        "processor_bank_delta_minor": 0,
+        "ledger_bank_delta_minor": -1,
+        "difference_minor": 1,
+        "allocated_bank_count": 1,
+        "unallocated_bank_count": 0,
+        "status": "WITHIN_TOLERANCE",
+        "reason_codes": ["TOLERATED_DIFFERENCE"]
+      }
+    },
+    {
+      "name": "settlement-formula-mismatch",
+      "input": {
+        "gross_minor": 100000,
+        "fee_minor": 3000,
+        "refund_minor": 10000,
+        "chargeback_minor": 5000,
+        "reserve_minor": 2000,
+        "reported_net_minor": 81000,
+        "processor_settlement_count": 1,
+        "ledger_journal_count": 1,
+        "ledger_side": "CREDIT",
+        "ledger_amount_minor": 80000,
+        "settlement_reference": "settlement-formula",
+        "permitted_bank_account_ids": ["bank-account-1"],
+        "bank_entries": [
+          {
+            "bank_record_id": "bank-formula",
+            "bank_account_id": "bank-account-1",
+            "settlement_reference": "settlement-formula",
+            "direction": "CREDIT",
+            "amount_minor": 80000
+          }
+        ],
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_net_minor": 80000,
+        "ledger_clearing_minor": 80000,
+        "bank_minor": 80000,
+        "processor_ledger_delta_minor": 0,
+        "processor_bank_delta_minor": 0,
+        "ledger_bank_delta_minor": 0,
+        "difference_minor": 0,
+        "allocated_bank_count": 1,
+        "unallocated_bank_count": 0,
+        "status": "EXCEPTION",
+        "reason_codes": ["SETTLEMENT_FORMULA_MISMATCH"]
+      }
+    },
+    {
+      "name": "unallocated-bank-movement",
+      "input": {
+        "gross_minor": 80000,
+        "fee_minor": 0,
+        "refund_minor": 0,
+        "chargeback_minor": 0,
+        "reserve_minor": 0,
+        "reported_net_minor": 80000,
+        "processor_settlement_count": 1,
+        "ledger_journal_count": 1,
+        "ledger_side": "CREDIT",
+        "ledger_amount_minor": 80000,
+        "settlement_reference": "settlement-expected",
+        "permitted_bank_account_ids": ["bank-account-1"],
+        "bank_entries": [
+          {
+            "bank_record_id": "bank-unknown",
+            "bank_account_id": "bank-account-1",
+            "settlement_reference": "settlement-unknown",
+            "direction": "CREDIT",
+            "amount_minor": 80000
+          }
+        ],
+        "tolerance_minor": 0
+      },
+      "expected": {
+        "processor_net_minor": 80000,
+        "ledger_clearing_minor": 80000,
+        "bank_minor": 0,
+        "processor_ledger_delta_minor": 0,
+        "processor_bank_delta_minor": 80000,
+        "ledger_bank_delta_minor": 80000,
+        "difference_minor": 80000,
+        "allocated_bank_count": 0,
+        "unallocated_bank_count": 1,
+        "status": "EXCEPTION",
+        "reason_codes": [
+          "MISSING_BANK_SETTLEMENT",
+          "UNALLOCATED_BANK_MOVEMENT"
+        ]
+      }
+    }
+  ],
+  "identity_cases": {
+    "transport_metadata_change_is_replay": true,
+    "economic_payload_change_is_conflict": true,
+    "unicode_equivalence_is_stable": true
+  },
+  "capture_capacity_case": {
+    "captured_minor": 10000,
+    "negative_applied_minor": 11000,
+    "expected": {
+      "remaining_capacity_minor": -1000,
+      "status": "EXCEPTION",
+      "reason_codes": ["OVER_APPLIED_REFERENCE"]
+    }
+  },
+  "ambiguous_bank_allocation_case": {
+    "bank_reference": " settlement-shared ",
+    "candidate_settlement_references": ["settlement-shared", "settlement-shared"],
+    "expected_outcome": "ADMISSION_REJECTED",
+    "expected_reason": "AMBIGUOUS_BANK_ALLOCATION"
+  }
+}
