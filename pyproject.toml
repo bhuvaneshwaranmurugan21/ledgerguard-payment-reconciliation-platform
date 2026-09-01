@@ -17,7 +17,7 @@ dev = [
 ]
 
 [project.scripts]
-ledgerguard-foundation = "ledgerguard.foundation:main"
+ledgerguard-foundation = "ledgerguard.part1:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

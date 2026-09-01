@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 4,
+  "stage_state": "PART1_COMPLETION_GOVERNANCE_FROZEN",
+  "part1_state": "PART1_FOUNDATION_COMPLETE",
+  "project_state": "PROJECT_IN_PROGRESS",
+  "baseline": {
+    "main_sha": "e83ff73ea725fd930dc3bdd85442506da4248efa",
+    "main_tree_sha": "4607f15c133972f168b4fdab9257c4fdbffce6bb",
+    "accepted_stage3_head_sha": "0d42a71af0295728ad5745f130ddf7710c317ad7",
+    "stage3_pr_number": 6,
+    "stage3_pr_ci_run_id": 33520421011,
+    "stage3_post_merge_ci_run_id": 33521251470
+  },
+  "stage_authorities": [
+    {"stage": 0, "completion_sha256": "81fb7b9863b255cdc19768e80972e2174f940e0d0be97c31cf6ab0cecd4b66c5", "evidence_sha256": "1e17b6034731ccf59a44d6f28dc3fd9a87840e08794b72b339ac8ddc20bdc4e7", "validator_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b"},
+    {"stage": 1, "completion_sha256": "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece", "evidence_sha256": "f7a3b39edbdc952942c760820a562ad67b1a810b33732f26f948df9ae047e1f2", "validator_sha256": "4234ac61999de769b87b2329512a8741761023b6c258dfd2207beb66f7dbc191"},
+    {"stage": 2, "completion_sha256": "8464ce66ddc8dcf153f8a09915d0676778caf140e28533a864ab14e40adb7fe9", "evidence_sha256": "2c2ba56ffa26158edc152ecef3077c618f3532ece2a5681e71da5806058923db", "validator_sha256": "3e8a3cdb753d94d013f592429bd8691f5ad100221496eb17e61864dc8d3b270c"},
+    {"stage": 3, "completion_sha256": "91135fd72ef6ebd8275cac6172d27a44cf9751c213d79dd2abf407478854fc98", "evidence_sha256": "bc1e11be4995d8748e50f687ade5ed139758952d49232f29b5680a42c423bcc8", "validator_sha256": "7df73e3b2cbcd5a000c3a6238ff5801eed05d51024c90a6a861d390ac2c750cf"}
+  ],
+  "resolved_project_gates": [
+    {"gate": "draft_disposition_audited", "owner": "STAGE0", "evidence": ["contracts/part1-stage0-completion-v1.json", "evidence/part1-stage0-local.json"]},
+    {"gate": "two_grain_model_frozen", "owner": "STAGE1", "evidence": ["contracts/part1-stage1-completion-v1.json", "spec/financial-semantics-v1.json"]},
+    {"gate": "contracts_valid", "owner": "STAGE2_AND_STAGE3", "evidence": ["contracts/part1-stage2-completion-v1.json", "contracts/part1-stage3-completion-v1.json"]},
+    {"gate": "scorecard_frozen", "owner": "STAGE0_AND_STAGE4", "evidence": ["contracts/project-completion-v1.json", "docs/scorecard.md"]},
+    {"gate": "aws_target_correct", "owner": "STAGE0_AND_STAGE4", "evidence": [".github/ledgerguard-target.json", "contracts/project-completion-v1.json"]},
+    {"gate": "foundation_ci_success", "owner": "STAGE4_EXTERNAL", "evidence": ["EXACT_HEAD_CI", "POST_MERGE_MAIN_CI"]}
+  ],
+  "scorecard_interpretation": {
+    "numeric_values": "PROJECT_TARGETS_NOT_ACHIEVED_SCORES",
+    "designed_or_modeled_cap_when_execution_required": 7,
+    "real_aws_execution_max_without_aws": 3,
+    "final_achievement_audit_owner": "PART5"
+  },
+  "claim_boundary": {
+    "financial_semantics": "DESIGNED/MODELED",
+    "semantic_examples": "LOCAL_VERIFIED",
+    "contract_structure": "LOCAL_VERIFIED",
+    "contract_coherence": "LOCAL_VERIFIED",
+    "part1_completion_governance": "LOCAL_VERIFIED_AFTER_CI",
+    "reconciliation_execution": "UNCLAIMED",
+    "spark_parity": "UNCLAIMED",
+    "aws_execution": false,
+    "performance_and_scale": "UNCLAIMED",
+    "measured_cost": "UNCLAIMED",
+    "production_operation": "UNCLAIMED"
+  },
+  "part2_handoff": "contracts/part1-part2-handoff-v1.json",
+  "unresolved_completion_decisions": [],
+  "remaining_part1_work": [],
+  "execution_boundary": {
+    "reconciliation_engine_added": false,
+    "spark_workload_added": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false,
+    "managed_evidence_claimed": false,
+    "project_completion_claimed": false
+  }
+}

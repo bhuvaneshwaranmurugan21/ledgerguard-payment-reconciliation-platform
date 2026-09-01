@@ -9,8 +9,7 @@ from typing import Any
 
 import pytest
 
-from ledgerguard.foundation import FoundationError
-from ledgerguard.part1 import reproduce_stage3, stage3_artifact_path
+from ledgerguard.foundation import FoundationError, validate_contract_coherence
 
 ROOT = Path(__file__).resolve().parents[1]
 Mutation = Callable[[dict[str, Any]], None]
@@ -124,12 +123,12 @@ def test_coh_t014_stage3_mutations_fail_closed(
     if relative.startswith("spec/"):
         _rebind_stage3_artifact(repository, relative)
     with pytest.raises(FoundationError, match=match):
-        reproduce_stage3(repository, verify_preserved_authorities=False)
+        validate_contract_coherence(repository)
 
 
 def test_coh_t015_stage3_foundation_is_deterministic() -> None:
-    first = reproduce_stage3(ROOT)
-    second = reproduce_stage3(ROOT)
+    first = validate_contract_coherence(ROOT)
+    second = validate_contract_coherence(ROOT)
     assert first == second
     assert first["stage"] == 3
     assert len(first["stage3_sha256"]) == 64
@@ -137,7 +136,7 @@ def test_coh_t015_stage3_foundation_is_deterministic() -> None:
 
 
 def test_coh_t016_prior_stages_and_all_schema_bytes_are_preserved(tmp_path: Path) -> None:
-    result = reproduce_stage3(ROOT)
+    result = validate_contract_coherence(ROOT)
     assert (
         result["stage0_sha256"]
         == "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b"
@@ -155,13 +154,13 @@ def test_coh_t016_prior_stages_and_all_schema_bytes_are_preserved(tmp_path: Path
     v1 = repository / "contracts/processor-event-v1.schema.json"
     v1.write_text(v1.read_text(encoding="utf-8") + "\n", encoding="utf-8")
     with pytest.raises(FoundationError, match="preserved stage validation failed"):
-        reproduce_stage3(repository)
+        validate_contract_coherence(repository)
 
     repository = _copy_repository(tmp_path / "active")
     v2 = repository / "contracts/v2/processor-event-v2.schema.json"
     v2.write_text(v2.read_text(encoding="utf-8") + "\n", encoding="utf-8")
     with pytest.raises(FoundationError, match="active contract digest differs"):
-        reproduce_stage3(repository)
+        validate_contract_coherence(repository)
 
 
 def test_coh_t017_completion_evidence_and_scope_are_digest_bound(tmp_path: Path) -> None:
@@ -169,10 +168,7 @@ def test_coh_t017_completion_evidence_and_scope_are_digest_bound(tmp_path: Path)
     completion = json.loads(completion_path.read_text())
     evidence = json.loads((ROOT / "evidence/part1-stage3-local.json").read_text())
     for artifact in completion["coherence_artifacts"].values():
-        assert (
-            sha256(stage3_artifact_path(ROOT, artifact["path"]).read_bytes()).hexdigest()
-            == artifact["sha256"]
-        )
+        assert sha256((ROOT / artifact["path"]).read_bytes()).hexdigest() == artifact["sha256"]
     assert (
         evidence["completion_contract_sha256"] == sha256(completion_path.read_bytes()).hexdigest()
     )
@@ -182,4 +178,4 @@ def test_coh_t017_completion_evidence_and_scope_are_digest_bound(tmp_path: Path)
     runtime = repository / "src/ledgerguard/engine.py"
     runtime.write_text("# runtime is outside Part 1 Stage 3\n", encoding="utf-8")
     with pytest.raises(FoundationError, match="preserved stage validation failed"):
-        reproduce_stage3(repository)
+        validate_contract_coherence(repository)

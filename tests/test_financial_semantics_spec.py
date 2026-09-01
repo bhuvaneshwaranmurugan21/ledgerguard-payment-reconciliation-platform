@@ -415,7 +415,13 @@ def test_bank_reference_is_unicode_normalized_trimmed_and_case_sensitive() -> No
 
 def test_stage_one_does_not_add_reconciliation_implementation() -> None:
     package_files = {path.name for path in (ROOT / "src" / "ledgerguard").glob("*.py")}
-    assert package_files == {"__init__.py", "foundation.py", "stage0.py", "stage1.py"}
+    assert package_files == {
+        "__init__.py",
+        "foundation.py",
+        "part1.py",
+        "stage0.py",
+        "stage1.py",
+    }
 
 
 def test_stage_one_evidence_binds_exact_specification_bytes() -> None:

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "from_part": 1,
+  "to_part": 2,
+  "state": "PART2_ENTRY_AUTHORITY_FROZEN",
+  "inherited_authorities": {
+    "financial_semantics": {"path": "spec/financial-semantics-v1.json", "sha256": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9"},
+    "financial_examples": {"path": "spec/financial-examples-v1.json", "sha256": "241863761f97abc49e69f19a2f22f4c034c89e99acffe3fc021203f8e979bc78"},
+    "active_contract_registry": {"path": "contracts/active-contract-set-v1.json", "sha256": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288"},
+    "contract_invariants": {"path": "spec/contract-invariants-v1.json", "sha256": "50ee82f8126661ca1acba3d91f8bb9d7c47b2267357e31fdbf200c0385b6e212"},
+    "contract_traceability": {"path": "spec/contract-traceability-v1.json", "sha256": "e43f50ac64bb3f41d042be2c37f055dc883c0c1ce1a6a5d5ad2745f094d53477"},
+    "coherence_profile": {"path": "spec/contract-coherence-v1.json", "sha256": "381a364e4f64dd6371ff6760b25d116ad9d6affebc2cd2ba56cc8fe303967e04"},
+    "coherence_vectors": {"path": "spec/contract-coherence-vectors-v1.json", "sha256": "5dfd2f79ca6204df84fbcafb0405cd663f2e4fe49daf5bfd08c0fe7a7332d5f1"},
+    "coherence_traceability": {"path": "spec/contract-coherence-traceability-v1.json", "sha256": "42b0b01c0ca20aab839a1b4be89ed2e7460e313d84f9c03933b2f98cd6b35bc5"}
+  },
+  "required_runtime_responsibilities": [
+    "BUILD_INDEPENDENT_REFERENCE_ORACLE",
+    "IMPLEMENT_TRANSACTION_GRAIN_RECONCILIATION",
+    "IMPLEMENT_SETTLEMENT_GRAIN_RECONCILIATION",
+    "ENFORCE_CHECKED_SIGNED_64_BIT_ARITHMETIC",
+    "ENFORCE_CANONICAL_IDENTITY_REPLAY_AND_CONFLICT",
+    "VALIDATE_REFERENCES_AND_CUMULATIVE_APPLICATION",
+    "ENFORCE_EXACT_BANK_ALLOCATION_WITH_NO_DOUBLE_USE",
+    "EMIT_ATOMIC_GRAIN_SPECIFIC_PROOFS",
+    "PRESERVE_APPEND_ONLY_PROOF_AND_CASE_REVISIONS",
+    "VERIFY_LOCAL_AND_SPARK_PARITY",
+    "EXERCISE_FAILURE_MATRIX_AND_DETERMINISTIC_RECOVERY"
+  ],
+  "forbidden_redefinitions": [
+    "COLLAPSE_TRANSACTION_AND_SETTLEMENT_GRAINS",
+    "KEY_BANK_TRUTH_BY_PAYMENT",
+    "USE_NON_INTEGER_OR_CROSS_CURRENCY_MONEY",
+    "REPLACE_EXACT_ALLOCATION_WITH_HEURISTIC_MATCHING",
+    "REWRITE_HISTORICAL_PROOFS_OR_CASE_REVISIONS",
+    "CHANGE_FROZEN_IDENTITY_OR_DIGEST_SCOPES",
+    "MUTATE_HISTORICAL_V1_OR_ACCEPTED_V2_SCHEMAS",
+    "CLAIM_AWS_OR_MANAGED_EXECUTION"
+  ],
+  "entry_gates": [
+    "PART1_FOUNDATION_COMPLETE",
+    "PART1_AUTHORITIES_DIGEST_BOUND",
+    "PART1_REMAINING_WORK_ZERO",
+    "PART2_RUNTIME_RESPONSIBILITIES_OWNED",
+    "NO_AWS_AUTHORITY_INHERITED"
+  ],
+  "claim_boundary": {
+    "part1_semantic_design": "DESIGNED/MODELED",
+    "part1_contract_governance": "LOCAL_VERIFIED",
+    "part2_reconciliation_execution": "UNCLAIMED",
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  }
+}
