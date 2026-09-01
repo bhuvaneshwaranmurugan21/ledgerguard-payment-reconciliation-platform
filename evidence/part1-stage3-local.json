@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 3,
+  "stage_state": "PART1_CONTRACT_COHERENCE_VALIDATED",
+  "overall_state": "PART1_FOUNDATION_CORRECTION_IN_PROGRESS",
+  "baseline": {
+    "main_sha": "583fbd13a129ac067a23f6348d05077d8b9250eb",
+    "main_tree_sha": "40283451e9b73217c598ccea2d6eaea3a75797da",
+    "accepted_stage2_head_sha": "a6bbcbc24d9acda5d2a04a54cce890eaf90fab00",
+    "stage2_pr_ci_run_id": 33511658292,
+    "stage2_post_merge_ci_run_id": 33511951023,
+    "stage0_sha256": "3da80eb91b0948f50c5080c7198e78a0a1716a36c7ca7267ec205099b981282b",
+    "stage1_sha256": "4234ac61999de769b87b2329512a8741761023b6c258dfd2207beb66f7dbc191",
+    "stage2_sha256": "3e8a3cdb753d94d013f592429bd8691f5ad100221496eb17e61864dc8d3b270c",
+    "stage2_completion_contract_sha256": "8464ce66ddc8dcf153f8a09915d0676778caf140e28533a864ab14e40adb7fe9"
+  },
+  "completion_contract_sha256": "91135fd72ef6ebd8275cac6172d27a44cf9751c213d79dd2abf407478854fc98",
+  "coherence_artifact_digests": {
+    "coherence_profile": "381a364e4f64dd6371ff6760b25d116ad9d6affebc2cd2ba56cc8fe303967e04",
+    "golden_vectors": "5dfd2f79ca6204df84fbcafb0405cd663f2e4fe49daf5bfd08c0fe7a7332d5f1",
+    "traceability": "42b0b01c0ca20aab839a1b4be89ed2e7460e313d84f9c03933b2f98cd6b35bc5",
+    "requirements": "040ce631ff8df22ca7f1920409927265c3bbf26d7597f333c7a40363d53cad01",
+    "gap_audit": "86342d10dbf34a4ce49f59ba06acfdde2a4b7f547e537fe453cf7f461ac96169",
+    "coherence_model": "62569af8bfedabe49637aa2340883b0db985a8273174478054d3473118072720",
+    "canonicalization_adr": "a01262e884fb5b6dee09c5e781b6f7467f889c8ef928c30b322716674b4be533",
+    "coherence_validator": "9dfef400c294017d0ac5eeac32cd7ed6602f6c45cf19403e3dbe3419814d181b",
+    "coherence_tests": "16202874220a81e1add901dfb637397b6408ced46cc84ba2324b6f86c9c32772",
+    "governance_tests": "7f3542ba781f6213fdc2545ab578dfe44f4e649acaaea20b18b6239da68a0f7f",
+    "readme": "3950b52c0f68b127ea602eca9eb3d38bfb6c6739e7886024220eaf35f3614687",
+    "project_status": "74d3a2250d872dcf32fec050a2e9e7cf8d146875ec5831330b3e3a8875d30c4f"
+  },
+  "preserved_authorities": {
+    "ci_workflow": {"path": ".github/workflows/ci.yml", "sha256": "fa33b7e798875f32f06629fb2b958df40a527989c2b04a7c8f2d0649bf65b521"},
+    "aws_target": {"path": ".github/ledgerguard-target.json", "sha256": "d9dccdc0dbae17638f02ac6596be1b1f0a8c24dddc57974f97024ed1cc415058"},
+    "project_completion": {"path": "contracts/project-completion-v1.json", "sha256": "9a323c8b7800c90fc3ad1697ec407f6756ceebba8df266ab88deba97fe6017b6"},
+    "stage0_completion": {"path": "contracts/part1-stage0-completion-v1.json", "sha256": "81fb7b9863b255cdc19768e80972e2174f940e0d0be97c31cf6ab0cecd4b66c5"},
+    "stage1_completion": {"path": "contracts/part1-stage1-completion-v1.json", "sha256": "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece"},
+    "stage2_completion": {"path": "contracts/part1-stage2-completion-v1.json", "sha256": "8464ce66ddc8dcf153f8a09915d0676778caf140e28533a864ab14e40adb7fe9"}
+  },
+  "local_validation": {
+    "test_count": 119,
+    "coherence_test_count": 13,
+    "governance_test_count": 11,
+    "reference_fragment_count": 131,
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_mypy": "PASS",
+    "pytest": "PASS",
+    "fresh_install": "PASS",
+    "strict_json_adversarial": "PASS",
+    "golden_vector_replay": "PASS",
+    "offline_reference_resolution": "PASS",
+    "bidirectional_traceability": "PASS",
+    "preservation_diff": "PASS",
+    "determinism": "PASS",
+    "stage3_validator_sha256": "7df73e3b2cbcd5a000c3a6238ff5801eed05d51024c90a6a861d390ac2c750cf",
+    "foundation_candidate_sha256": "10754ed611ef0bca50c741821de2aa9a699826e03da2e3a436866c2028d2b6ab"
+  },
+  "claim_boundary": {
+    "semantic_design": "DESIGNED/MODELED",
+    "semantic_acceptance_examples": "LOCAL_VERIFIED",
+    "contract_structure": "LOCAL_VERIFIED",
+    "contract_coherence": "LOCAL_VERIFIED",
+    "reconciliation_execution": "UNCLAIMED",
+    "aws_execution": false,
+    "aws_infrastructure_mutated": false
+  }
+}
