@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 5,
+  "purpose": "Freeze the accepted Stage 5 entry checkpoint before Stage 6 hardening.",
+  "source": {
+    "pull_request_number": 8,
+    "accepted_remote_head_sha": "8d1d50ae62499ace6585160e2bb4326e7ec40594",
+    "accepted_local_commit_sha": "3a8a8d463663c6365221fa1d039e4ce1aaee4f51",
+    "tree_sha": "0df6f1a593b0d59a4214ed979e14fe261715daef",
+    "exact_head_ci_run_id": 33599528118,
+    "stage5_sha256": "927803c3f1e5945ad931669ea7a5b28866c5f67276c9c4ceee62407ace3dc1fa",
+    "test_count": 190
+  },
+  "protected_authorities": {
+    "historical_v1_schema_bytes": "PRESERVE_ALL",
+    "accepted_v2_schema_bytes": "PRESERVE_ALL",
+    "phase8_requirement_verdict_sha256": "51bc3b84a0d6e05eced99789b157bce5c5b5a60139f55069010a9283ec9b1561",
+    "stage5_contract_sha256": "e75011ad149a9af31e575774a3ae0160bba0002f6e6debd11a00c3c0fb7e367b"
+  },
+  "configuration_snapshots": [
+    {"logical_path": "Makefile", "snapshot_path": "history/part1/stage5/snapshots/Makefile"},
+    {"logical_path": "pyproject.toml", "snapshot_path": "history/part1/stage5/snapshots/pyproject.toml"},
+    {"logical_path": ".github/workflows/ci.yml", "snapshot_path": "history/part1/stage5/snapshots/ci.yml"}
+  ],
+  "execution_boundary": {
+    "aws_execution": false,
+    "infrastructure_mutation": false,
+    "merge": false
+  }
+}

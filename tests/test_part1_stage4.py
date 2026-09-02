@@ -16,10 +16,14 @@ from ledgerguard.part1 import (
     validate_part1_completion,
 )
 from ledgerguard_correction import materialize_stage4_view
+from ledgerguard_correction_c4 import materialize_stage5_view
 
 ACTIVE_ROOT = Path(__file__).resolve().parents[1]
 _STAGE4_TEMPORARY_DIRECTORY = tempfile.TemporaryDirectory(prefix="ledgerguard-stage4-tests-")
-ROOT = materialize_stage4_view(ACTIVE_ROOT, Path(_STAGE4_TEMPORARY_DIRECTORY.name) / "repository")
+_STAGE5_ROOT = materialize_stage5_view(
+    ACTIVE_ROOT, Path(_STAGE4_TEMPORARY_DIRECTORY.name) / "stage5"
+)
+ROOT = materialize_stage4_view(_STAGE5_ROOT, Path(_STAGE4_TEMPORARY_DIRECTORY.name) / "repository")
 Mutation = Callable[[dict[str, Any]], None]
 
 

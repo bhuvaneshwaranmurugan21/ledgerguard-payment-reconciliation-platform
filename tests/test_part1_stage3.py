@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import tempfile
 from collections.abc import Callable
 from hashlib import sha256
 from pathlib import Path
@@ -11,8 +12,11 @@ import pytest
 
 from ledgerguard.foundation import FoundationError
 from ledgerguard.part1 import reproduce_stage3, stage3_artifact_path
+from ledgerguard_correction_c4 import materialize_stage5_view
 
-ROOT = Path(__file__).resolve().parents[1]
+ACTIVE_ROOT = Path(__file__).resolve().parents[1]
+_STAGE5_TEMPORARY = tempfile.TemporaryDirectory(prefix="ledgerguard-stage3-tests-")
+ROOT = materialize_stage5_view(ACTIVE_ROOT, Path(_STAGE5_TEMPORARY.name) / "repository")
 Mutation = Callable[[dict[str, Any]], None]
 
 

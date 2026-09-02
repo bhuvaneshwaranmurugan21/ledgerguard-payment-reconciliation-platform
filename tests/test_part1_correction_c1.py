@@ -22,10 +22,12 @@ from ledgerguard_correction_c1 import (
     validate_c1,
 )
 from ledgerguard_correction_c2 import materialize_c1_view
+from ledgerguard_correction_c4 import materialize_stage5_view
 
 ACTIVE_ROOT = Path(__file__).resolve().parents[1]
 _C1_TEMPORARY = tempfile.TemporaryDirectory(prefix="ledgerguard-c1-tests-")
-ROOT = materialize_c1_view(ACTIVE_ROOT, Path(_C1_TEMPORARY.name) / "repository")
+_STAGE5_ROOT = materialize_stage5_view(ACTIVE_ROOT, Path(_C1_TEMPORARY.name) / "stage5")
+ROOT = materialize_c1_view(_STAGE5_ROOT, Path(_C1_TEMPORARY.name) / "repository")
 
 
 def _load(relative: str) -> dict[str, Any]:

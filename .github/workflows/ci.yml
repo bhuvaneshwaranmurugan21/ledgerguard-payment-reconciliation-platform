@@ -7,24 +7,54 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   foundation:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+      - name: Check out the raw event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          python-version: "3.11"
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
           cache: pip
-      - run: python -m pip install -e '.[dev]'
-      - run: ruff format --check .
-      - run: ruff check .
-      - run: mypy src
-      - run: pytest
-      - run: ledgerguard-foundation
+          cache-dependency-path: |
+            requirements/part1-stage6-bootstrap.lock
+            requirements/part1-stage6-py311.lock
+      - name: Prove raw exact-head checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual_sha="$(git rev-parse HEAD)"
+          test "$actual_sha" = "$EXPECTED_SHA"
+      - name: Run complete Stage 6 validation twice
+        run: >-
+          python tools/run_part1_stage6.py
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-stage6"
+      - name: Build trusted CI evidence envelope
+        if: github.event_name == 'pull_request'
+        run: >-
+          python tools/build_part1_stage6_ci_evidence.py
+          --local-evidence "$RUNNER_TEMP/ledgerguard-stage6/part1-stage6-local-evidence.json"
+          --output-directory "$RUNNER_TEMP/ledgerguard-stage6-artifact"
+      - name: Upload immutable Stage 6 evidence
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part1-stage6-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/ledgerguard-stage6-artifact
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 6,
+  "state": "STAGE6_REPRODUCIBLE_CANDIDATE",
+  "part1_state": "PART1_CORRECTION_IN_PROGRESS",
+  "part2_entry": "BLOCKED",
+  "pull_request": {"number": 8, "required_state": "DRAFT"},
+  "stage5_dependency": {
+    "remote_head_sha": "8d1d50ae62499ace6585160e2bb4326e7ec40594",
+    "tree_sha": "0df6f1a593b0d59a4214ed979e14fe261715daef",
+    "exact_head_ci_run_id": 33599528118,
+    "stage5_digest": "927803c3f1e5945ad931669ea7a5b28866c5f67276c9c4ceee62407ace3dc1fa"
+  },
+  "local_completion": {
+    "clean_environment_runs": 2,
+    "deterministic_equality_required": true,
+    "all_12_actions_required": true,
+    "line_coverage_minimum_percent": 95.0,
+    "critical_branch_coverage_percent": 100.0,
+    "mutation_survivors_allowed": 0,
+    "required_test_skips_allowed": 0,
+    "required_test_xfails_allowed": 0
+  },
+  "external_completion": {
+    "raw_pr_head_checkout_required": true,
+    "exact_head_ci_required": true,
+    "ci_evidence_artifact_required": true,
+    "clean_diff_required": true,
+    "unrelated_files_allowed": 0,
+    "unresolved_review_findings_allowed": 0,
+    "merge_in_stage6": "PROHIBITED",
+    "post_merge_main_ci": "DEFERRED_TO_STAGE7"
+  },
+  "gate_results": [
+    {"gate_id": "OP-GATE-R001", "state": "HELD_DRAFT"},
+    {"gate_id": "OP-GATE-R002", "state": "PRESERVED_PASS"},
+    {"gate_id": "OP-GATE-R003", "state": "PRESERVED_PASS"},
+    {"gate_id": "OP-GATE-R004", "state": "PRESERVED_PASS"},
+    {"gate_id": "OP-GATE-R005", "state": "CANDIDATE_PENDING_C7"},
+    {"gate_id": "OP-GATE-R006", "state": "PRESERVED_PASS"},
+    {"gate_id": "OP-GATE-R007", "state": "CANDIDATE_PENDING_C7"},
+    {"gate_id": "OP-GATE-R008", "state": "CANDIDATE_PENDING_C7"},
+    {"gate_id": "OP-GATE-R009", "state": "CANDIDATE_PENDING_C7"},
+    {"gate_id": "OP-GATE-R010", "state": "FORMALLY_AMENDED_PENDING_C7"},
+    {"gate_id": "OP-GATE-R011", "state": "CANDIDATE_PENDING_C7"},
+    {"gate_id": "OP-GATE-R012", "state": "STAGE6_LOCAL_CANDIDATE"},
+    {"gate_id": "OP-GATE-R013", "state": "REQUIRES_EXACT_HEAD_CI"},
+    {"gate_id": "OP-GATE-R014", "state": "PENDING_STAGE7_POST_MERGE"}
+  ],
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "merge_authorized": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false
+  }
+}

@@ -19,10 +19,12 @@ from ledgerguard_correction import (
     validate_c0,
 )
 from ledgerguard_correction_c1 import materialize_c0_view
+from ledgerguard_correction_c4 import materialize_stage5_view
 
 ACTIVE_ROOT = Path(__file__).resolve().parents[1]
 _C0_TEMPORARY = tempfile.TemporaryDirectory(prefix="ledgerguard-c0-tests-")
-ROOT = materialize_c0_view(ACTIVE_ROOT, Path(_C0_TEMPORARY.name) / "repository")
+_STAGE5_ROOT = materialize_stage5_view(ACTIVE_ROOT, Path(_C0_TEMPORARY.name) / "stage5")
+ROOT = materialize_c0_view(_STAGE5_ROOT, Path(_C0_TEMPORARY.name) / "repository")
 
 
 def _copy_repository(tmp_path: Path) -> Path:
