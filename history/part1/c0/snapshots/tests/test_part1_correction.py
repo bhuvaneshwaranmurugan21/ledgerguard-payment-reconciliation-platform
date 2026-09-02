@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import shutil
-import tempfile
 from collections.abc import Callable
 from hashlib import sha1, sha256
 from pathlib import Path
@@ -18,11 +17,8 @@ from ledgerguard_correction import (
     reproduce_stage4,
     validate_c0,
 )
-from ledgerguard_correction_c1 import materialize_c0_view
 
-ACTIVE_ROOT = Path(__file__).resolve().parents[1]
-_C0_TEMPORARY = tempfile.TemporaryDirectory(prefix="ledgerguard-c0-tests-")
-ROOT = materialize_c0_view(ACTIVE_ROOT, Path(_C0_TEMPORARY.name) / "repository")
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _copy_repository(tmp_path: Path) -> Path:

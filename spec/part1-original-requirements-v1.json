@@ -1,0 +1,6470 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "scope": "PART1_ORIGINAL_STAGE0_TO_STAGE7_ATOMIC_REQUIREMENTS",
+  "authority_sha256": "eb7d31c3fb7c3dc057789c3903ce14be9dacaa28d98e45cee2272f12ed7498ef",
+  "normalization_rules": {
+    "unrelated_clauses_split": true,
+    "independently_falsifiable_clauses_split": true,
+    "closed_exact_sets_are_single_invariants": true,
+    "risk_controls_do_not_count_as_completion_requirements": true,
+    "implementation_does_not_create_requirements": true
+  },
+  "requirement_count": 331,
+  "counts_by_group": {
+    "DONE": 30,
+    "GATE": 14,
+    "S0": 21,
+    "S1": 56,
+    "S2": 52,
+    "S3": 28,
+    "S4": 46,
+    "S5": 23,
+    "S6": 35,
+    "S7": 26
+  },
+  "risk_count": 12,
+  "requirements": [
+    {
+      "id": "OP-S0-R001",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        5
+      ],
+      "source_excerpt": "Remove the incorrect assumption that green CI means Part 1 is complete.",
+      "requirement": "Green CI must not be treated as proof that Part 1 is complete."
+    },
+    {
+      "id": "OP-S0-R002",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "REPOSITORY_PROVENANCE",
+      "source_lines": [
+        9,
+        10
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - Main SHA.",
+      "requirement": "The exact baseline must record the main commit SHA."
+    },
+    {
+      "id": "OP-S0-R003",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "REPOSITORY_PROVENANCE",
+      "source_lines": [
+        9,
+        11
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - Schema inventory and digests.",
+      "requirement": "The exact baseline must record the complete schema inventory and digests."
+    },
+    {
+      "id": "OP-S0-R004",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        9,
+        12
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - Current foundation digest.",
+      "requirement": "The exact baseline must record the current foundation digest."
+    },
+    {
+      "id": "OP-S0-R005",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        9,
+        13
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - Existing test count.",
+      "requirement": "The exact baseline must record the existing test count."
+    },
+    {
+      "id": "OP-S0-R006",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        9,
+        14
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - CI run ID and conclusion.",
+      "requirement": "The exact baseline must record the CI run ID and conclusion."
+    },
+    {
+      "id": "OP-S0-R007",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        9,
+        15
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - Draft PR #1 disposition.",
+      "requirement": "The exact baseline must record Draft PR #1 disposition."
+    },
+    {
+      "id": "OP-S0-R008",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        9,
+        16
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - Replacement PR #2 disposition.",
+      "requirement": "The exact baseline must record replacement PR #2 disposition."
+    },
+    {
+      "id": "OP-S0-R009",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        9,
+        17
+      ],
+      "source_excerpt": "1. Record the exact baseline:\n   - No-AWS-execution statement.",
+      "requirement": "The exact baseline must record that AWS was not executed."
+    },
+    {
+      "id": "OP-S0-R010",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        18
+      ],
+      "source_excerpt": "2. Expand `docs/gap-audit.md` with every newly discovered gap.",
+      "requirement": "The exact gap audit must include every newly discovered gap."
+    },
+    {
+      "id": "OP-S0-R011",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        19
+      ],
+      "source_excerpt": "3. Create the requirements ledger.",
+      "requirement": "A requirements ledger must exist."
+    },
+    {
+      "id": "OP-S0-R012",
+      "group": "S0",
+      "stage": 0,
+      "category": "BASELINE",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "source_excerpt": "4. Map every current file to one disposition:\n   - Preserve.\n   - Correct.\n   - Replace.\n   - Add.\n   - Exclude.",
+      "requirement": "Every current file must have exactly one disposition from preserve, correct, replace, add, or exclude."
+    },
+    {
+      "id": "OP-S0-R013",
+      "group": "S0",
+      "stage": 0,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "source_excerpt": "5. Define the Part 1 completion state machine:\n\nPART1\\_FOUNDATION\\_CANDIDATE\n        ↓\nPART1\\_VALIDATION\\_PASSED\n        ↓\nPART1\\_FOUNDATION\\_COMPLETE",
+      "requirement": "The exact Part 1 state machine must be candidate to validation-passed to foundation-complete."
+    },
+    {
+      "id": "OP-S0-R014",
+      "group": "S0",
+      "stage": 0,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        34
+      ],
+      "source_excerpt": "6. Ensure the branch and draft PR use the candidate state until all checks pass.",
+      "requirement": "The branch and draft PR must remain in candidate state until all checks pass."
+    },
+    {
+      "id": "OP-S0-R015",
+      "group": "S0",
+      "stage": 0,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        38
+      ],
+      "source_excerpt": "- Every known gap has an owner and correction.",
+      "requirement": "Every known gap must have an owner."
+    },
+    {
+      "id": "OP-S0-R016",
+      "group": "S0",
+      "stage": 0,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        38
+      ],
+      "source_excerpt": "- Every known gap has an owner and correction.",
+      "requirement": "Every known gap must have a correction."
+    },
+    {
+      "id": "OP-S0-R017",
+      "group": "S0",
+      "stage": 0,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        39
+      ],
+      "source_excerpt": "- Every requirement has planned contract, documentation and test evidence.",
+      "requirement": "Every requirement must have planned contract, documentation, and test evidence."
+    },
+    {
+      "id": "OP-S0-R018",
+      "group": "S0",
+      "stage": 0,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        40
+      ],
+      "source_excerpt": "- No file or current claim is unaudited.",
+      "requirement": "No file may remain unaudited."
+    },
+    {
+      "id": "OP-S0-R019",
+      "group": "S0",
+      "stage": 0,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        40
+      ],
+      "source_excerpt": "- No file or current claim is unaudited.",
+      "requirement": "No current claim may remain unaudited."
+    },
+    {
+      "id": "OP-S0-R020",
+      "group": "S0",
+      "stage": 0,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        41
+      ],
+      "source_excerpt": "- Current green CI is described as candidate evidence, not final completion evidence.",
+      "requirement": "Green CI must be labelled candidate evidence rather than final completion evidence."
+    },
+    {
+      "id": "OP-S0-R021",
+      "group": "S0",
+      "stage": 0,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        45
+      ],
+      "source_excerpt": "Do not modify schemas until every ambiguity is written into the gap audit. Otherwise, contract corrections may solve only the already-visible examples.",
+      "requirement": "Schema modification must not begin until every ambiguity is recorded in the gap audit."
+    },
+    {
+      "id": "OP-S1-R001",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        53
+      ],
+      "source_excerpt": "Decide the financial meaning first, before encoding JSON Schema.",
+      "requirement": "Financial meaning must be decided before it is encoded in JSON Schema."
+    },
+    {
+      "id": "OP-S1-R002",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "source_excerpt": "Freeze the key components:\nprocessor\nmerchant\\_id\npayment\\_id\nevent\\_class\ncurrency",
+      "requirement": "The transaction grain key must exactly comprise processor, merchant_id, payment_id, event_class, and currency."
+    },
+    {
+      "id": "OP-S1-R003",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        67
+      ],
+      "source_excerpt": "| Capture    | Positive                                    |",
+      "requirement": "Capture has positive processor economic sign."
+    },
+    {
+      "id": "OP-S1-R004",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        68
+      ],
+      "source_excerpt": "| Refund     | Negative                                    |",
+      "requirement": "Refund has negative processor economic sign."
+    },
+    {
+      "id": "OP-S1-R005",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        69
+      ],
+      "source_excerpt": "| Chargeback | Negative                                    |",
+      "requirement": "Chargeback has negative processor economic sign."
+    },
+    {
+      "id": "OP-S1-R006",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        70
+      ],
+      "source_excerpt": "| Reversal   | Negative according to referenced event rule |",
+      "requirement": "Reversal is negative according to the referenced-event rule."
+    },
+    {
+      "id": "OP-S1-R007",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        74
+      ],
+      "source_excerpt": "- Reconciliation uses policy-selected account roles.",
+      "requirement": "Reconciliation uses policy-selected account roles."
+    },
+    {
+      "id": "OP-S1-R008",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        75
+      ],
+      "source_excerpt": "- Total journal debits are never treated as transaction movement.",
+      "requirement": "Total journal debits must never be interpreted as transaction movement."
+    },
+    {
+      "id": "OP-S1-R009",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        76
+      ],
+      "source_excerpt": "- Capture and negative-event mappings specify expected account role and posting side.",
+      "requirement": "Capture and negative-event mappings must specify expected account role and posting side."
+    },
+    {
+      "id": "OP-S1-R010",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        77
+      ],
+      "source_excerpt": "- A balanced journal with the wrong accounts remains financially incorrect.",
+      "requirement": "A balanced journal with incorrect accounts remains financially incorrect."
+    },
+    {
+      "id": "OP-S1-R011",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        78
+      ],
+      "source_excerpt": "- Multiple events within the same grain aggregate once.",
+      "requirement": "Multiple events in one grain aggregate exactly once."
+    },
+    {
+      "id": "OP-S1-R012",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        79
+      ],
+      "source_excerpt": "- A negative event without a resolvable original remains an unresolved exception.",
+      "requirement": "A negative event without a resolvable original remains an unresolved exception."
+    },
+    {
+      "id": "OP-S1-R013",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "source_excerpt": "Freeze the key components:\nprocessor\nmerchant\\_id\nsettlement\\_id\nsettlement\\_cycle\ncurrency",
+      "requirement": "The settlement grain key must exactly comprise processor, merchant_id, settlement_id, settlement_cycle, and currency."
+    },
+    {
+      "id": "OP-S1-R014",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95
+      ],
+      "source_excerpt": "Freeze the formula:\nexpected\\_net\\_minor =\n    gross\\_minor\n  - fee\\_minor\n  - refund\\_minor\n  - chargeback\\_minor\n  - reserve\\_minor",
+      "requirement": "Expected settlement net equals gross minus fee, refund, chargeback, and reserve minor units."
+    },
+    {
+      "id": "OP-S1-R015",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "source_excerpt": "Freeze three-way comparison:\n\n1. Processor expected net.\n2. Relevant clearing-account movement.\n3. Aggregate bank movement.",
+      "requirement": "Settlement must compare exactly processor expected net, relevant clearing-account movement, and aggregate bank movement."
+    },
+    {
+      "id": "OP-S1-R016",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        102,
+        103,
+        104,
+        105
+      ],
+      "source_excerpt": "Store three pairwise differences:\nprocessor\\_ledger\\_delta\\_minor\nprocessor\\_bank\\_delta\\_minor\nledger\\_bank\\_delta\\_minor",
+      "requirement": "Settlement must store processor-ledger, processor-bank, and ledger-bank signed pairwise deltas."
+    },
+    {
+      "id": "OP-S1-R017",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "source_excerpt": "Define the settlement headline difference as:\nmax(\n    abs(processor\\_ledger\\_delta\\_minor),\n    abs(processor\\_bank\\_delta\\_minor),\n    abs(ledger\\_bank\\_delta\\_minor)\n)",
+      "requirement": "Settlement headline difference is the maximum absolute value of the three pairwise deltas."
+    },
+    {
+      "id": "OP-S1-R018",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        117
+      ],
+      "source_excerpt": "- Exact normalized settlement reference only.",
+      "requirement": "Bank allocation may use exact normalized settlement reference only."
+    },
+    {
+      "id": "OP-S1-R019",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        118
+      ],
+      "source_excerpt": "- No payment-level bank matching.",
+      "requirement": "Payment-level bank matching is prohibited."
+    },
+    {
+      "id": "OP-S1-R020",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        119
+      ],
+      "source_excerpt": "- No amount-only matching.",
+      "requirement": "Amount-only bank matching is prohibited."
+    },
+    {
+      "id": "OP-S1-R021",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        120
+      ],
+      "source_excerpt": "- No date-and-amount heuristic.",
+      "requirement": "Date-and-amount heuristic bank matching is prohibited."
+    },
+    {
+      "id": "OP-S1-R022",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        121
+      ],
+      "source_excerpt": "- Multiple bank entries may aggregate to one settlement.",
+      "requirement": "Multiple bank entries may aggregate to one settlement."
+    },
+    {
+      "id": "OP-S1-R023",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        122
+      ],
+      "source_excerpt": "- One bank record cannot be assigned to multiple settlements.",
+      "requirement": "One bank record cannot be allocated to multiple settlements."
+    },
+    {
+      "id": "OP-S1-R024",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        123
+      ],
+      "source_excerpt": "- Missing reference remains `UNALLOCATED_BANK_MOVEMENT`.",
+      "requirement": "A missing settlement reference remains UNALLOCATED_BANK_MOVEMENT."
+    },
+    {
+      "id": "OP-S1-R025",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        124
+      ],
+      "source_excerpt": "- Unknown reference remains visible.",
+      "requirement": "An unknown settlement reference remains visible."
+    },
+    {
+      "id": "OP-S1-R026",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        125
+      ],
+      "source_excerpt": "- Credit normalizes positive; debit normalizes negative.",
+      "requirement": "Bank credit normalizes positive and bank debit normalizes negative."
+    },
+    {
+      "id": "OP-S1-R027",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        131
+      ],
+      "source_excerpt": "- `MATCHED`: processor equals ledger.",
+      "requirement": "Transaction MATCHED means processor equals ledger."
+    },
+    {
+      "id": "OP-S1-R028",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        132
+      ],
+      "source_excerpt": "- `WITHIN_TOLERANCE`: nonzero absolute difference does not exceed policy tolerance.",
+      "requirement": "Transaction WITHIN_TOLERANCE requires a nonzero absolute difference not exceeding policy tolerance."
+    },
+    {
+      "id": "OP-S1-R029",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        133
+      ],
+      "source_excerpt": "- `EXCEPTION`: missing evidence, invalid reference, policy failure or difference outside tolerance.",
+      "requirement": "Transaction EXCEPTION covers missing evidence, invalid reference, policy failure, or difference outside tolerance."
+    },
+    {
+      "id": "OP-S1-R030",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        137
+      ],
+      "source_excerpt": "- `MATCHED`: all three values agree exactly.",
+      "requirement": "Settlement MATCHED requires exact agreement among all three values."
+    },
+    {
+      "id": "OP-S1-R031",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        138
+      ],
+      "source_excerpt": "- `WITHIN_TOLERANCE`: all absolute pairwise differences are within tolerance and at least one is nonzero.",
+      "requirement": "Settlement WITHIN_TOLERANCE requires every pairwise difference within tolerance and at least one nonzero difference."
+    },
+    {
+      "id": "OP-S1-R032",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        139
+      ],
+      "source_excerpt": "- `EXCEPTION`: any pair exceeds tolerance or required evidence is missing.",
+      "requirement": "Settlement EXCEPTION applies when any pair exceeds tolerance or required evidence is missing."
+    },
+    {
+      "id": "OP-S1-R033",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        141
+      ],
+      "source_excerpt": "A tolerated amount must remain visible in the proof.",
+      "requirement": "A tolerated nonzero amount must remain visible in the proof."
+    },
+    {
+      "id": "OP-S1-R034",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        147
+      ],
+      "source_excerpt": "- Canonical UTF-8 JSON.",
+      "requirement": "Canonical payload representation uses UTF-8 JSON."
+    },
+    {
+      "id": "OP-S1-R035",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        148
+      ],
+      "source_excerpt": "- Unicode normalization.",
+      "requirement": "Canonical identity applies Unicode normalization."
+    },
+    {
+      "id": "OP-S1-R036",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        149
+      ],
+      "source_excerpt": "- Stable sorted keys.",
+      "requirement": "Canonical identity uses stable sorted keys."
+    },
+    {
+      "id": "OP-S1-R037",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        150
+      ],
+      "source_excerpt": "- Stable timestamp representation in UTC.",
+      "requirement": "Canonical identity uses a stable UTC timestamp representation."
+    },
+    {
+      "id": "OP-S1-R038",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        151
+      ],
+      "source_excerpt": "- No floating-point money.",
+      "requirement": "Floating-point money is prohibited."
+    },
+    {
+      "id": "OP-S1-R039",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        152
+      ],
+      "source_excerpt": "- Digest field excluded from its own digest calculation.",
+      "requirement": "A digest field is excluded from its own digest calculation."
+    },
+    {
+      "id": "OP-S1-R040",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        153
+      ],
+      "source_excerpt": "- File name, row number, arrival order and retry attempt excluded from business identity.",
+      "requirement": "File name, row number, arrival order, and retry attempt are excluded from business identity."
+    },
+    {
+      "id": "OP-S1-R041",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        155,
+        156,
+        157
+      ],
+      "source_excerpt": "Prefer structured key components plus a namespaced digest:\ntxn:\\<sha256-of-key-components>\nstl:\\<sha256-of-key-components>",
+      "requirement": "Structured key components use namespaced transaction and settlement SHA-256 identifiers."
+    },
+    {
+      "id": "OP-S1-R042",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        161
+      ],
+      "source_excerpt": "- Existing proof is immutable.",
+      "requirement": "Existing proofs are immutable."
+    },
+    {
+      "id": "OP-S1-R043",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        162
+      ],
+      "source_excerpt": "- New source evidence creates a new proof revision.",
+      "requirement": "New source evidence creates a new proof revision."
+    },
+    {
+      "id": "OP-S1-R044",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        163
+      ],
+      "source_excerpt": "- Changed policy creates a new proof revision.",
+      "requirement": "Changed policy creates a new proof revision."
+    },
+    {
+      "id": "OP-S1-R045",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        164
+      ],
+      "source_excerpt": "- Every revision names its predecessor.",
+      "requirement": "Every revision identifies its predecessor."
+    },
+    {
+      "id": "OP-S1-R046",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        165
+      ],
+      "source_excerpt": "- Exception history is append-only.",
+      "requirement": "Exception history is append-only."
+    },
+    {
+      "id": "OP-S1-R047",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        166
+      ],
+      "source_excerpt": "- Automatic execution may open and resolve cases.",
+      "requirement": "Automatic execution may open and resolve cases."
+    },
+    {
+      "id": "OP-S1-R048",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        167
+      ],
+      "source_excerpt": "- Accepted variance and write-off require a separate authorized operator boundary.",
+      "requirement": "Accepted variance and write-off require a separate authorized operator boundary."
+    },
+    {
+      "id": "OP-S1-R049",
+      "group": "S1",
+      "stage": 1,
+      "category": "SEMANTIC",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        168
+      ],
+      "source_excerpt": "- Automatic/system actors cannot create write-off states.",
+      "requirement": "Automatic and system actors cannot create write-off states."
+    },
+    {
+      "id": "OP-S1-R050",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        172
+      ],
+      "source_excerpt": "- Every sign, key, formula, tolerance, reference and revision rule has exactly one interpretation.",
+      "requirement": "Every sign, key, formula, tolerance, reference, and revision rule must have exactly one interpretation."
+    },
+    {
+      "id": "OP-S1-R051",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        173
+      ],
+      "source_excerpt": "- Worked examples independently prove transaction and settlement calculations.",
+      "requirement": "Independent worked examples must prove transaction calculations."
+    },
+    {
+      "id": "OP-S1-R052",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        173
+      ],
+      "source_excerpt": "- Worked examples independently prove transaction and settlement calculations.",
+      "requirement": "Independent worked examples must prove settlement calculations."
+    },
+    {
+      "id": "OP-S1-R053",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        174
+      ],
+      "source_excerpt": "- Missing and duplicate evidence behaviour is explicit.",
+      "requirement": "Missing-evidence behavior must be explicit."
+    },
+    {
+      "id": "OP-S1-R054",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        174
+      ],
+      "source_excerpt": "- Missing and duplicate evidence behaviour is explicit.",
+      "requirement": "Duplicate-evidence behavior must be explicit."
+    },
+    {
+      "id": "OP-S1-R055",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        175
+      ],
+      "source_excerpt": "- No rule depends on implementation convenience.",
+      "requirement": "No financial rule may depend on implementation convenience."
+    },
+    {
+      "id": "OP-S1-R056",
+      "group": "S1",
+      "stage": 1,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        176
+      ],
+      "source_excerpt": "- Architecture, correctness and failure-model reviewers could implement the same result independently.",
+      "requirement": "Architecture, correctness, and failure-model reviewers must be able to derive the same implementation independently."
+    },
+    {
+      "id": "OP-S2-R001",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        184,
+        185,
+        186
+      ],
+      "source_excerpt": "The existing schemas have not been released, tagged or consumed externally, and Part 1 is being reclassified as incomplete. Therefore:\n\n- Correct the current v1 schemas in place.",
+      "requirement": "Because existing schemas were unreleased and Part 1 incomplete, current v1 schemas must be corrected in place."
+    },
+    {
+      "id": "OP-S2-R002",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "REPOSITORY_PROVENANCE",
+      "source_lines": [
+        187
+      ],
+      "source_excerpt": "- Preserve the old versions through Git history and recorded candidate digests.",
+      "requirement": "Pre-correction schema bytes must remain preserved through Git history and candidate digests."
+    },
+    {
+      "id": "OP-S2-R003",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        188
+      ],
+      "source_excerpt": "- Record every incompatible correction in the gap audit.",
+      "requirement": "Every incompatible correction must be recorded in the gap audit."
+    },
+    {
+      "id": "OP-S2-R004",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        189
+      ],
+      "source_excerpt": "- After final Part 1 completion, incompatible changes require a new contract version.",
+      "requirement": "After final Part 1 completion, incompatible contract changes require a new version."
+    },
+    {
+      "id": "OP-S2-R005",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        197
+      ],
+      "source_excerpt": "| Common definitions   | Central currency, digest, timestamp, grain, evidence and reason definitions                        |",
+      "requirement": "Common definitions must centralize currency, digest, timestamp, grain, evidence, and reason domains."
+    },
+    {
+      "id": "OP-S2-R006",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        198
+      ],
+      "source_excerpt": "| Processor event      | Require non-null references for refund, chargeback and reversal; forbid invalid capture references |",
+      "requirement": "Refund, chargeback, and reversal processor events require non-null references."
+    },
+    {
+      "id": "OP-S2-R007",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        198
+      ],
+      "source_excerpt": "| Processor event      | Require non-null references for refund, chargeback and reversal; forbid invalid capture references |",
+      "requirement": "Capture processor events must forbid invalid references."
+    },
+    {
+      "id": "OP-S2-R008",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        199
+      ],
+      "source_excerpt": "| Processor settlement | Validate field domains and semantically recompute expected net                                     |",
+      "requirement": "Processor-settlement field domains must be validated."
+    },
+    {
+      "id": "OP-S2-R009",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        199
+      ],
+      "source_excerpt": "| Processor settlement | Validate field domains and semantically recompute expected net                                     |",
+      "requirement": "Processor expected net must be semantically recomputed."
+    },
+    {
+      "id": "OP-S2-R010",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        200
+      ],
+      "source_excerpt": "| Journal              | Require `entry_type`, processor context and exactly one applicable business key                    |",
+      "requirement": "Journal contracts require entry_type."
+    },
+    {
+      "id": "OP-S2-R011",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        200
+      ],
+      "source_excerpt": "| Journal              | Require `entry_type`, processor context and exactly one applicable business key                    |",
+      "requirement": "Journal contracts require processor context."
+    },
+    {
+      "id": "OP-S2-R012",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        200
+      ],
+      "source_excerpt": "| Journal              | Require `entry_type`, processor context and exactly one applicable business key                    |",
+      "requirement": "Journal contracts require exactly one applicable business key."
+    },
+    {
+      "id": "OP-S2-R013",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        201
+      ],
+      "source_excerpt": "| Journal postings     | Enforce unique line identities and semantic debit/credit balance                                   |",
+      "requirement": "Journal-posting line identities must be unique."
+    },
+    {
+      "id": "OP-S2-R014",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        201
+      ],
+      "source_excerpt": "| Journal postings     | Enforce unique line identities and semantic debit/credit balance                                   |",
+      "requirement": "Journal postings must satisfy semantic debit-credit balance."
+    },
+    {
+      "id": "OP-S2-R015",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        202
+      ],
+      "source_excerpt": "| Bank entry           | Preserve optional reference while explicitly supporting unallocated movements                      |",
+      "requirement": "Bank-entry reference remains optional while unallocated movement is explicitly supported."
+    },
+    {
+      "id": "OP-S2-R016",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        203
+      ],
+      "source_excerpt": "| Policy               | Add event signs, ledger-role mappings, tolerance, bank matching and reference rules                |",
+      "requirement": "Policy must encode event signs, ledger-role mappings, tolerance, bank matching, and reference rules."
+    },
+    {
+      "id": "OP-S2-R017",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        204
+      ],
+      "source_excerpt": "| Proof                | Use grain-specific totals and explicit pairwise settlement deltas                                  |",
+      "requirement": "Proof contracts must use grain-specific totals and explicit pairwise settlement deltas."
+    },
+    {
+      "id": "OP-S2-R018",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        205
+      ],
+      "source_excerpt": "| Case revision        | Add grain, run attribution, predecessor consistency and actor/status rules                         |",
+      "requirement": "Case revisions must encode grain, run attribution, predecessor consistency, and actor-status rules."
+    },
+    {
+      "id": "OP-S2-R019",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        206
+      ],
+      "source_excerpt": "| Run manifest         | Support honest local and S3 object identities without fabricated versions                          |",
+      "requirement": "Run manifests must support honest local and S3 object identities without fabricated versions."
+    },
+    {
+      "id": "OP-S2-R020",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        207
+      ],
+      "source_excerpt": "| AWS target           | Add an explicit schema for repository/account/role/region/runtime                                  |",
+      "requirement": "AWS target must have an explicit repository, account, role, region, and runtime schema."
+    },
+    {
+      "id": "OP-S2-R021",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        208
+      ],
+      "source_excerpt": "| Completion contract  | Add a schema and exact Part 1 completion invariants                                                |",
+      "requirement": "Completion contract must have an explicit schema and exact Part 1 completion invariants."
+    },
+    {
+      "id": "OP-S2-R022",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        214
+      ],
+      "source_excerpt": "- Capture, refund, chargeback and reversal journals require a payment key.",
+      "requirement": "Capture, refund, chargeback, and reversal journals require a payment key."
+    },
+    {
+      "id": "OP-S2-R023",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        215
+      ],
+      "source_excerpt": "- Settlement, fee and reserve journals require a settlement key.",
+      "requirement": "Settlement, fee, and reserve journals require a settlement key."
+    },
+    {
+      "id": "OP-S2-R024",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        216
+      ],
+      "source_excerpt": "- A journal cannot silently belong to both grains.",
+      "requirement": "One journal cannot silently belong to both reconciliation grains."
+    },
+    {
+      "id": "OP-S2-R025",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        217
+      ],
+      "source_excerpt": "- Nullable properties must not satisfy a required business-key condition.",
+      "requirement": "Nullable properties cannot satisfy a required business-key condition."
+    },
+    {
+      "id": "OP-S2-R026",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        221
+      ],
+      "source_excerpt": "- Required source families must be present.",
+      "requirement": "Required manifest source families must be present."
+    },
+    {
+      "id": "OP-S2-R027",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        222
+      ],
+      "source_excerpt": "- Family uniqueness or permitted multiplicity must be explicit.",
+      "requirement": "Manifest family uniqueness or permitted multiplicity must be explicit."
+    },
+    {
+      "id": "OP-S2-R028",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        223
+      ],
+      "source_excerpt": "- Every object has size, record count, digest and honest location identity.",
+      "requirement": "Every manifest object must include size, record count, digest, and honest location identity."
+    },
+    {
+      "id": "OP-S2-R029",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        224
+      ],
+      "source_excerpt": "- Local files do not claim S3 version IDs.",
+      "requirement": "Local manifest objects must not claim S3 version IDs."
+    },
+    {
+      "id": "OP-S2-R030",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        225
+      ],
+      "source_excerpt": "- Empty files are allowed only where explicitly modeled.",
+      "requirement": "Empty manifest files are allowed only when explicitly modeled."
+    },
+    {
+      "id": "OP-S2-R031",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        229
+      ],
+      "source_excerpt": "Transaction proof contains transaction totals only.",
+      "requirement": "Transaction proof contains transaction totals only."
+    },
+    {
+      "id": "OP-S2-R032",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236
+      ],
+      "source_excerpt": "Settlement proof contains:\n\n- Processor expected net.\n- Ledger clearing movement.\n- Bank movement.\n- Three signed pairwise deltas.\n- Maximum absolute difference.",
+      "requirement": "Settlement proof contains processor expected net, clearing movement, bank movement, three signed pairwise deltas, and maximum absolute difference."
+    },
+    {
+      "id": "OP-S2-R033",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        347,
+        348
+      ],
+      "source_excerpt": "At minimum, freeze:\n\n-\n\n```\nIDENTITY_CONFLICT\n```\n\n1.\n\n```\nSCHEMA_VIOLATION\n```\n\n1.\n\n```\nUNBALANCED_JOURNAL\n```\n\n1.\n\n```\nINVALID_ACCOUNT_ROLE\n```\n\n1.\n\n```\nUNRESOLVED_REFERENCE\n```\n\n1.\n\n```\nMISSING_LEDGER_MOVEMENT\n```\n\n1.\n\n```\nMISSING_PROCESSOR_ACTIVITY\n```\n\n1.\n\n```\nMISSING_BANK_SETTLEMENT\n```\n\n1.\n\n```\nUNALLOCATED_BANK_MOVEMENT\n```\n\n1.\n\n```\nDUPLICATE_BANK_MOVEMENT\n```\n\n1.\n\n```\nSETTLEMENT_FORMULA_MISMATCH\n```\n\n1.\n\n```\nPROCESSOR_LEDGER_MISMATCH\n```\n\n1.\n\n```\nPROCESSOR_BANK_MISMATCH\n```\n\n1.\n\n```\nLEDGER_BANK_MISMATCH\n```\n\n1.\n\n```\nCURRENCY_DOMAIN_VIOLATION\n```\n\n1.\n\n```\nPOLICY_MISMATCH\n```\n\n1.\n\n```\nSOURCE_IDENTITY_MISMATCH\n```\n\n1.\n\n```\nEXECUTION_FAILURE\n```",
+      "requirement": "Reason-code taxonomy must include exactly the eighteen named minimum codes in the source authority."
+    },
+    {
+      "id": "OP-S2-R034",
+      "group": "S2",
+      "stage": 2,
+      "category": "CONTRACT",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        350
+      ],
+      "source_excerpt": "Unknown strings must not silently become valid reason codes.",
+      "requirement": "Unknown strings must not become valid reason codes."
+    },
+    {
+      "id": "OP-S2-R035",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        355,
+        356
+      ],
+      "source_excerpt": "Every schema requires:\n\n- Minimum valid instance.",
+      "requirement": "Every schema requires a minimum valid fixture."
+    },
+    {
+      "id": "OP-S2-R036",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        357
+      ],
+      "source_excerpt": "Every schema requires:\n- Complete valid instance.",
+      "requirement": "Every schema requires a complete valid fixture."
+    },
+    {
+      "id": "OP-S2-R037",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        358
+      ],
+      "source_excerpt": "Every schema requires:\n- Missing required property.",
+      "requirement": "Every schema requires a missing-required-property fixture."
+    },
+    {
+      "id": "OP-S2-R038",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        359
+      ],
+      "source_excerpt": "Every schema requires:\n- Unknown property.",
+      "requirement": "Every schema requires an unknown-property fixture."
+    },
+    {
+      "id": "OP-S2-R039",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        360
+      ],
+      "source_excerpt": "Every schema requires:\n- Wrong type.",
+      "requirement": "Every schema requires a wrong-type fixture."
+    },
+    {
+      "id": "OP-S2-R040",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        361
+      ],
+      "source_excerpt": "Every schema requires:\n- Invalid enum.",
+      "requirement": "Every schema requires an invalid-enum fixture."
+    },
+    {
+      "id": "OP-S2-R041",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        362
+      ],
+      "source_excerpt": "Every schema requires:\n- Invalid timestamp.",
+      "requirement": "Every schema requires an invalid-timestamp fixture."
+    },
+    {
+      "id": "OP-S2-R042",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        363
+      ],
+      "source_excerpt": "Every schema requires:\n- Invalid digest.",
+      "requirement": "Every schema requires an invalid-digest fixture."
+    },
+    {
+      "id": "OP-S2-R043",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        364
+      ],
+      "source_excerpt": "Every schema requires:\n- Nullability boundary.",
+      "requirement": "Every schema requires a nullability-boundary fixture."
+    },
+    {
+      "id": "OP-S2-R044",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        365
+      ],
+      "source_excerpt": "Every schema requires:\n- Conditional-rule violation.",
+      "requirement": "Every schema requires a conditional-rule-violation fixture."
+    },
+    {
+      "id": "OP-S2-R045",
+      "group": "S2",
+      "stage": 2,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        354,
+        366
+      ],
+      "source_excerpt": "Every schema requires:\n- Cross-field semantic violation where applicable.",
+      "requirement": "Every applicable schema requires a cross-field-semantic-violation fixture."
+    },
+    {
+      "id": "OP-S2-R046",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        370
+      ],
+      "source_excerpt": "- All schemas pass JSON Schema Draft 2020-12 validation.",
+      "requirement": "All schemas must pass JSON Schema Draft 2020-12 validation."
+    },
+    {
+      "id": "OP-S2-R047",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        371
+      ],
+      "source_excerpt": "- All schemas have unique stable `$id` values.",
+      "requirement": "All schemas must have unique stable $id values."
+    },
+    {
+      "id": "OP-S2-R048",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        372
+      ],
+      "source_excerpt": "- All shared references resolve through a controlled schema registry.",
+      "requirement": "All shared references must resolve through a controlled schema registry."
+    },
+    {
+      "id": "OP-S2-R049",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        373
+      ],
+      "source_excerpt": "- Positive fixtures pass.",
+      "requirement": "Every positive fixture must pass."
+    },
+    {
+      "id": "OP-S2-R050",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        374
+      ],
+      "source_excerpt": "- Every negative fixture fails for the intended reason.",
+      "requirement": "Every negative fixture must fail for its intended reason."
+    },
+    {
+      "id": "OP-S2-R051",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        375
+      ],
+      "source_excerpt": "- Semantic checks cover rules JSON Schema cannot express.",
+      "requirement": "Semantic checks must cover rules JSON Schema cannot express."
+    },
+    {
+      "id": "OP-S2-R052",
+      "group": "S2",
+      "stage": 2,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        376
+      ],
+      "source_excerpt": "- No contract relies on narrative documentation to resolve a machine-critical ambiguity.",
+      "requirement": "No machine-critical contract ambiguity may depend on narrative documentation."
+    },
+    {
+      "id": "OP-S3-R001",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        384,
+        385,
+        386,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408
+      ],
+      "source_excerpt": "Only these levels are permitted:\n\n-\n\n```\nDESIGNED/MODELED\n```\n\n1.\n\n```\nLOCAL_VERIFIED\n```\n\n1.\n\n```\nAWS_VERIFIED\n```\n\n1.\n\n```\nUNCLAIMED\n```",
+      "requirement": "The evidence vocabulary is the closed set DESIGNED/MODELED, LOCAL_VERIFIED, AWS_VERIFIED, and UNCLAIMED."
+    },
+    {
+      "id": "OP-S3-R002",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416
+      ],
+      "source_excerpt": "Part 1 may claim local verification only for:\n\n- Schema validity.\n- Contract semantics.\n- Repository foundation validation.\n- Documentation consistency.\n- CI execution.",
+      "requirement": "Part 1 LOCAL_VERIFIED claims are limited to schema validity, contract semantics, repository foundation validation, documentation consistency, and CI execution."
+    },
+    {
+      "id": "OP-S3-R003",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        418
+      ],
+      "source_excerpt": "It may not claim local verification of a reconciliation engine that does not exist.",
+      "requirement": "Part 1 must not claim local verification of a reconciliation engine that does not exist."
+    },
+    {
+      "id": "OP-S3-R004",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        422,
+        424
+      ],
+      "source_excerpt": "For every scorecard dimension, store:\n- Target score.",
+      "requirement": "Every scorecard dimension stores a target score."
+    },
+    {
+      "id": "OP-S3-R005",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        422,
+        425
+      ],
+      "source_excerpt": "For every scorecard dimension, store:\n- Current evidence level.",
+      "requirement": "Every scorecard dimension stores its current evidence level."
+    },
+    {
+      "id": "OP-S3-R006",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        422,
+        426
+      ],
+      "source_excerpt": "For every scorecard dimension, store:\n- Evidence required to achieve the target.",
+      "requirement": "Every scorecard dimension stores evidence required to achieve its target."
+    },
+    {
+      "id": "OP-S3-R007",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        422,
+        427
+      ],
+      "source_excerpt": "For every scorecard dimension, store:\n- Whether Part 1 contributes evidence.",
+      "requirement": "Every scorecard dimension states whether Part 1 contributes evidence."
+    },
+    {
+      "id": "OP-S3-R008",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        422,
+        428
+      ],
+      "source_excerpt": "For every scorecard dimension, store:\n- Explicit remaining evidence.",
+      "requirement": "Every scorecard dimension stores explicit remaining evidence."
+    },
+    {
+      "id": "OP-S3-R009",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        432
+      ],
+      "source_excerpt": "- Target is not achieved score.",
+      "requirement": "A target score must not be represented as achieved."
+    },
+    {
+      "id": "OP-S3-R010",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        433
+      ],
+      "source_excerpt": "- Documentation does not prove runtime execution.",
+      "requirement": "Documentation must not be treated as runtime-execution proof."
+    },
+    {
+      "id": "OP-S3-R011",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        434
+      ],
+      "source_excerpt": "- Local validation does not prove AWS execution.",
+      "requirement": "Local validation must not be treated as AWS-execution proof."
+    },
+    {
+      "id": "OP-S3-R012",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        435
+      ],
+      "source_excerpt": "- Synthetic-scale intention does not prove performance.",
+      "requirement": "Synthetic-scale intention must not be treated as performance proof."
+    },
+    {
+      "id": "OP-S3-R013",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        436
+      ],
+      "source_excerpt": "- Lifecycle ownership cannot be claimed from architecture alone.",
+      "requirement": "Architecture alone must not be treated as lifecycle-ownership proof."
+    },
+    {
+      "id": "OP-S3-R014",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449
+      ],
+      "source_excerpt": "Freeze and validate:\nRepository: bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform\nDefault branch: main\nAccount: 857229544428\nRegion: ap-southeast-2\nOIDC role: LedgerGuardGitHubOidcRole\nGlue: 5.1\nSpark: 3.5.6\nPython: 3.11\nGross project ceiling: $10",
+      "requirement": "AWS target must exactly bind repository, main branch, account 857229544428, ap-southeast-2, LedgerGuardGitHubOidcRole, Glue 5.1, Spark 3.5.6, Python 3.11, and a $10 gross ceiling."
+    },
+    {
+      "id": "OP-S3-R015",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        453
+      ],
+      "source_excerpt": "- OIDC identity workflow remains manual-only.",
+      "requirement": "The OIDC identity workflow must remain manual-only."
+    },
+    {
+      "id": "OP-S3-R016",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        454
+      ],
+      "source_excerpt": "- No push, pull-request or schedule event may assume AWS credentials.",
+      "requirement": "No push, pull-request, or schedule event may assume AWS credentials."
+    },
+    {
+      "id": "OP-S3-R017",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        455
+      ],
+      "source_excerpt": "- CI has read-only repository permission.",
+      "requirement": "CI must have read-only repository permission."
+    },
+    {
+      "id": "OP-S3-R018",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        456
+      ],
+      "source_excerpt": "- OIDC workflow has only the permissions required for identity verification.",
+      "requirement": "The OIDC workflow may have only permissions required for identity verification."
+    },
+    {
+      "id": "OP-S3-R019",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        457
+      ],
+      "source_excerpt": "- Part 1 does not dispatch the OIDC workflow.",
+      "requirement": "Part 1 must not dispatch the OIDC workflow."
+    },
+    {
+      "id": "OP-S3-R020",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "REPOSITORY_PROVENANCE",
+      "source_lines": [
+        458
+      ],
+      "source_excerpt": "- No infrastructure or workload workflow is introduced.",
+      "requirement": "Part 1 must not introduce an infrastructure or workload workflow."
+    },
+    {
+      "id": "OP-S3-R021",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        459
+      ],
+      "source_excerpt": "- No AWS credential is stored in the repository.",
+      "requirement": "No AWS credential may be stored in the repository."
+    },
+    {
+      "id": "OP-S3-R022",
+      "group": "S3",
+      "stage": 3,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        460
+      ],
+      "source_excerpt": "- Blocked-region text remains rejected.",
+      "requirement": "Blocked-region text must remain rejected."
+    },
+    {
+      "id": "OP-S3-R023",
+      "group": "S3",
+      "stage": 3,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        464
+      ],
+      "source_excerpt": "- Target file, completion contract, workflow and documentation agree exactly.",
+      "requirement": "Target file, completion contract, workflow, and documentation must agree exactly."
+    },
+    {
+      "id": "OP-S3-R024",
+      "group": "S3",
+      "stage": 3,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        465
+      ],
+      "source_excerpt": "- Automated tests detect target drift.",
+      "requirement": "Automated tests must detect AWS-target drift."
+    },
+    {
+      "id": "OP-S3-R025",
+      "group": "S3",
+      "stage": 3,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        466
+      ],
+      "source_excerpt": "- Automated tests detect an accidental AWS-trigger event.",
+      "requirement": "Automated tests must detect an accidental AWS-trigger event."
+    },
+    {
+      "id": "OP-S3-R026",
+      "group": "S3",
+      "stage": 3,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        467
+      ],
+      "source_excerpt": "- Automated tests detect expanded workflow permissions.",
+      "requirement": "Automated tests must detect expanded workflow permissions."
+    },
+    {
+      "id": "OP-S3-R027",
+      "group": "S3",
+      "stage": 3,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        468
+      ],
+      "source_excerpt": "- Scorecard targets remain above seven and are visibly targets.",
+      "requirement": "Every scorecard target must exceed seven and be visibly labelled as a target."
+    },
+    {
+      "id": "OP-S3-R028",
+      "group": "S3",
+      "stage": 3,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        469
+      ],
+      "source_excerpt": "- Part 1 completion output contains `aws_execution: false`.",
+      "requirement": "Part 1 completion output must contain aws_execution false."
+    },
+    {
+      "id": "OP-S4-R001",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        491
+      ],
+      "source_excerpt": "- Required files.",
+      "requirement": "Repository validation must require every required file."
+    },
+    {
+      "id": "OP-S4-R002",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        492
+      ],
+      "source_excerpt": "- Unexpected schema files.",
+      "requirement": "Repository validation must reject unexpected schema files."
+    },
+    {
+      "id": "OP-S4-R003",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        493
+      ],
+      "source_excerpt": "- Unique schema IDs.",
+      "requirement": "Repository validation must enforce unique schema IDs."
+    },
+    {
+      "id": "OP-S4-R004",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        494
+      ],
+      "source_excerpt": "- Valid JSON and YAML.",
+      "requirement": "Repository validation must require valid JSON and YAML."
+    },
+    {
+      "id": "OP-S4-R005",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        495
+      ],
+      "source_excerpt": "- No forbidden paths or language.",
+      "requirement": "Repository validation must reject forbidden paths and language."
+    },
+    {
+      "id": "OP-S4-R006",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        496
+      ],
+      "source_excerpt": "- No blocked region.",
+      "requirement": "Repository validation must reject the blocked region."
+    },
+    {
+      "id": "OP-S4-R007",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        497
+      ],
+      "source_excerpt": "- No broken internal links.",
+      "requirement": "Repository validation must reject broken internal links."
+    },
+    {
+      "id": "OP-S4-R008",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        501
+      ],
+      "source_excerpt": "- Schema registry resolves.",
+      "requirement": "Contract validation must resolve the schema registry."
+    },
+    {
+      "id": "OP-S4-R009",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        502
+      ],
+      "source_excerpt": "- Positive and negative fixtures behave correctly.",
+      "requirement": "Contract validation must prove correct positive and negative fixture behavior."
+    },
+    {
+      "id": "OP-S4-R010",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        503
+      ],
+      "source_excerpt": "- Conditional nullability is correct.",
+      "requirement": "Contract validation must enforce conditional nullability."
+    },
+    {
+      "id": "OP-S4-R011",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        504
+      ],
+      "source_excerpt": "- Shared definitions remain consistent.",
+      "requirement": "Contract validation must enforce consistent shared definitions."
+    },
+    {
+      "id": "OP-S4-R012",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        505
+      ],
+      "source_excerpt": "- Reason codes are closed enums.",
+      "requirement": "Contract validation must enforce closed reason-code enums."
+    },
+    {
+      "id": "OP-S4-R013",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        509
+      ],
+      "source_excerpt": "- Settlement formula recomputes.",
+      "requirement": "Financial validation must recompute the settlement formula."
+    },
+    {
+      "id": "OP-S4-R014",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        510
+      ],
+      "source_excerpt": "- Journal debit and credit totals balance.",
+      "requirement": "Financial validation must enforce balanced journal debit and credit totals."
+    },
+    {
+      "id": "OP-S4-R015",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        511
+      ],
+      "source_excerpt": "- Account-role and side rules are complete.",
+      "requirement": "Financial validation must enforce complete account-role and posting-side rules."
+    },
+    {
+      "id": "OP-S4-R016",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        512
+      ],
+      "source_excerpt": "- Cross-currency combinations are rejected.",
+      "requirement": "Financial validation must reject cross-currency combinations."
+    },
+    {
+      "id": "OP-S4-R017",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        513
+      ],
+      "source_excerpt": "- Grain-specific proof totals are correct.",
+      "requirement": "Financial validation must enforce grain-specific proof totals."
+    },
+    {
+      "id": "OP-S4-R018",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        514
+      ],
+      "source_excerpt": "- Status, tolerance and difference combinations are consistent.",
+      "requirement": "Financial validation must enforce consistent status, tolerance, and difference combinations."
+    },
+    {
+      "id": "OP-S4-R019",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        515
+      ],
+      "source_excerpt": "- System actors cannot write off cases.",
+      "requirement": "Financial validation must prevent system actors from writing off cases."
+    },
+    {
+      "id": "OP-S4-R020",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        519
+      ],
+      "source_excerpt": "- Canonicalization is deterministic.",
+      "requirement": "Identity validation must prove deterministic canonicalization."
+    },
+    {
+      "id": "OP-S4-R021",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        520
+      ],
+      "source_excerpt": "- Digest fields are excluded from their own hash.",
+      "requirement": "Identity validation must exclude digest fields from their own hash."
+    },
+    {
+      "id": "OP-S4-R022",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        521
+      ],
+      "source_excerpt": "- Equivalent canonical payloads hash equally.",
+      "requirement": "Equivalent canonical payloads must hash equally."
+    },
+    {
+      "id": "OP-S4-R023",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        522
+      ],
+      "source_excerpt": "- Changed economic payload hashes differently.",
+      "requirement": "Changed economic payloads must hash differently."
+    },
+    {
+      "id": "OP-S4-R024",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        523
+      ],
+      "source_excerpt": "- Key delimiters and Unicode cannot cause collisions.",
+      "requirement": "Key delimiters and Unicode must not cause identity collisions."
+    },
+    {
+      "id": "OP-S4-R025",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        527
+      ],
+      "source_excerpt": "- Evidence vocabulary exact.",
+      "requirement": "Governance validation must enforce the exact evidence vocabulary."
+    },
+    {
+      "id": "OP-S4-R026",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        528
+      ],
+      "source_excerpt": "- Scorecard dimensions exact.",
+      "requirement": "Governance validation must enforce exact scorecard dimensions."
+    },
+    {
+      "id": "OP-S4-R027",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        529
+      ],
+      "source_excerpt": "- Part 1 gates nonempty and machine-checked.",
+      "requirement": "Part 1 gates must be nonempty and machine-checked."
+    },
+    {
+      "id": "OP-S4-R028",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        530
+      ],
+      "source_excerpt": "- AWS workload prohibited.",
+      "requirement": "Governance validation must prohibit AWS workloads in Part 1."
+    },
+    {
+      "id": "OP-S4-R029",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        531
+      ],
+      "source_excerpt": "- Workflow triggers and permissions conform.",
+      "requirement": "Governance validation must enforce workflow triggers and permissions."
+    },
+    {
+      "id": "OP-S4-R030",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        532
+      ],
+      "source_excerpt": "- Project status and completion contract agree.",
+      "requirement": "Project status and completion contract must agree."
+    },
+    {
+      "id": "OP-S4-R031",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        536,
+        538,
+        539,
+        540,
+        541,
+        542,
+        543,
+        544,
+        545,
+        546,
+        547,
+        548,
+        549,
+        550,
+        551,
+        552,
+        553,
+        554,
+        555,
+        556,
+        557
+      ],
+      "source_excerpt": "Tests must deliberately mutate:\n- Region.\n- AWS account.\n- Role name.\n- Runtime.\n- Workflow trigger.\n- Workflow permissions.\n- Scorecard target.\n- Evidence level.\n- Settlement formula.\n- Journal posting side.\n- Journal event type.\n- Reference nullability.\n- Proof grain.\n- Currency.\n- Reason code.\n- Case actor/status.\n- Manifest family.\n- Digest.\n- Required document.\n- Completion state.",
+      "requirement": "Adversarial tests must mutate each exact target in the source list: region, account, role, runtime, workflow trigger and permissions, scorecard target, evidence level, settlement formula, journal side and type, reference nullability, proof grain, currency, reason code, case actor/status, manifest family, digest, required document, and completion state."
+    },
+    {
+      "id": "OP-S4-R032",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        559
+      ],
+      "source_excerpt": "Every mutation must fail closed with a precise error.",
+      "requirement": "Every required mutation must fail closed."
+    },
+    {
+      "id": "OP-S4-R033",
+      "group": "S4",
+      "stage": 4,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        559
+      ],
+      "source_excerpt": "Every mutation must fail closed with a precise error.",
+      "requirement": "Every required mutation failure must identify a precise error."
+    },
+    {
+      "id": "OP-S4-R034",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        563
+      ],
+      "source_excerpt": "- All tests pass.",
+      "requirement": "All tests must pass."
+    },
+    {
+      "id": "OP-S4-R035",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        564
+      ],
+      "source_excerpt": "- No skipped or expected-failure test counts toward completion.",
+      "requirement": "Skipped tests must not count toward completion."
+    },
+    {
+      "id": "OP-S4-R036",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        564
+      ],
+      "source_excerpt": "- No skipped or expected-failure test counts toward completion.",
+      "requirement": "Expected-failure tests must not count toward completion."
+    },
+    {
+      "id": "OP-S4-R037",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        565
+      ],
+      "source_excerpt": "- Strict type checking passes.",
+      "requirement": "Strict type checking must pass."
+    },
+    {
+      "id": "OP-S4-R038",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        566
+      ],
+      "source_excerpt": "- Formatting and linting pass.",
+      "requirement": "Formatting must pass."
+    },
+    {
+      "id": "OP-S4-R039",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        566
+      ],
+      "source_excerpt": "- Formatting and linting pass.",
+      "requirement": "Linting must pass."
+    },
+    {
+      "id": "OP-S4-R040",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        567
+      ],
+      "source_excerpt": "- Critical validator branches have complete branch coverage.",
+      "requirement": "Critical validator branches must have complete branch coverage."
+    },
+    {
+      "id": "OP-S4-R041",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        568
+      ],
+      "source_excerpt": "- Overall foundation-test coverage is at least 95%.",
+      "requirement": "Overall foundation-test coverage must be at least 95 percent."
+    },
+    {
+      "id": "OP-S4-R042",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        569
+      ],
+      "source_excerpt": "- Targeted mutations against critical financial and governance rules do not survive.",
+      "requirement": "No targeted mutation against a critical financial or governance rule may survive."
+    },
+    {
+      "id": "OP-S4-R043",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        570
+      ],
+      "source_excerpt": "- Validator output is deterministic across repeated runs.",
+      "requirement": "Validator output must be deterministic across repeated runs."
+    },
+    {
+      "id": "OP-S4-R044",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        571
+      ],
+      "source_excerpt": "- Errors identify the violated requirement, not merely “validation failed.”",
+      "requirement": "Validation errors must identify the violated requirement rather than a generic failure."
+    },
+    {
+      "id": "OP-S4-R045",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        575
+      ],
+      "source_excerpt": "The validator must reject every known invalid foundation mutation and generate a deterministic completion-candidate report for the valid repository.",
+      "requirement": "The validator must reject every known invalid foundation mutation."
+    },
+    {
+      "id": "OP-S4-R046",
+      "group": "S4",
+      "stage": 4,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        575
+      ],
+      "source_excerpt": "The validator must reject every known invalid foundation mutation and generate a deterministic completion-candidate report for the valid repository.",
+      "requirement": "The valid repository must produce a deterministic completion-candidate report."
+    },
+    {
+      "id": "OP-S5-R001",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        581,
+        582,
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        593
+      ],
+      "source_excerpt": "## Required documents\n\n- README.\n- Project status.\n- Exact gap audit.\n- Requirements ledger.\n- Architecture.\n- Correctness model.\n- Failure model.\n- Scorecard.\n- ADRs.\n- Contract reference.\n- Evidence and claim-boundary documentation.",
+      "requirement": "The required-document inventory must exactly cover README, project status, exact gap audit, requirements ledger, architecture, correctness, failure model, scorecard, ADRs, contract reference, and evidence/claim-boundary documentation."
+    },
+    {
+      "id": "OP-S5-R002",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        597
+      ],
+      "source_excerpt": "1. Update architecture diagrams to use the exact active contract names.",
+      "requirement": "Architecture diagrams must use exact active contract names."
+    },
+    {
+      "id": "OP-S5-R003",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        598
+      ],
+      "source_excerpt": "2. Document structured reconciliation keys.",
+      "requirement": "Structured reconciliation keys must be documented."
+    },
+    {
+      "id": "OP-S5-R004",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        599
+      ],
+      "source_excerpt": "3. Document transaction and settlement sign conventions.",
+      "requirement": "Transaction and settlement sign conventions must be documented."
+    },
+    {
+      "id": "OP-S5-R005",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        600
+      ],
+      "source_excerpt": "4. Include worked financial examples.",
+      "requirement": "Documentation must contain worked financial examples."
+    },
+    {
+      "id": "OP-S5-R006",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        601
+      ],
+      "source_excerpt": "5. Explain exact bank-allocation limitations.",
+      "requirement": "Exact bank-allocation limitations must be documented."
+    },
+    {
+      "id": "OP-S5-R007",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        602
+      ],
+      "source_excerpt": "6. Document canonical hashing.",
+      "requirement": "Canonical hashing must be documented."
+    },
+    {
+      "id": "OP-S5-R008",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        603
+      ],
+      "source_excerpt": "7. Document proof and case state transitions.",
+      "requirement": "Proof and case state transitions must be documented."
+    },
+    {
+      "id": "OP-S5-R009",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        604
+      ],
+      "source_excerpt": "8. Map every failure scenario to a reason code.",
+      "requirement": "Every failure scenario must map to a reason code."
+    },
+    {
+      "id": "OP-S5-R010",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        605
+      ],
+      "source_excerpt": "9. Map every Part 1 requirement to tests.",
+      "requirement": "Every Part 1 requirement must map to tests."
+    },
+    {
+      "id": "OP-S5-R011",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        606
+      ],
+      "source_excerpt": "10. Distinguish modelled behaviour from locally validated foundation behaviour.",
+      "requirement": "Modeled behavior must be distinguished from locally validated foundation behavior."
+    },
+    {
+      "id": "OP-S5-R012",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        607
+      ],
+      "source_excerpt": "11. Remove obsolete statements from the initial foundation candidate.",
+      "requirement": "Obsolete statements from the initial foundation candidate must be removed."
+    },
+    {
+      "id": "OP-S5-R013",
+      "group": "S5",
+      "stage": 5,
+      "category": "DOCUMENTATION",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        608
+      ],
+      "source_excerpt": "12. Ensure no presentation-coaching document is present.",
+      "requirement": "No presentation-coaching document may be present."
+    },
+    {
+      "id": "OP-S5-R014",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        614
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- Contract names and versions exist.",
+      "requirement": "Automated documentation checks must verify that contract names and versions exist."
+    },
+    {
+      "id": "OP-S5-R015",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        615
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- Reason codes match schemas.",
+      "requirement": "Automated documentation checks must verify that reason codes match schemas."
+    },
+    {
+      "id": "OP-S5-R016",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        616
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- AWS target matches the target JSON.",
+      "requirement": "Automated documentation checks must verify that AWS target claims match target JSON."
+    },
+    {
+      "id": "OP-S5-R017",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        617
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- Scorecard values match the completion contract.",
+      "requirement": "Automated documentation checks must verify that scorecard values match the completion contract."
+    },
+    {
+      "id": "OP-S5-R018",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        618
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- Status matches the completion state.",
+      "requirement": "Automated documentation checks must verify that status matches completion state."
+    },
+    {
+      "id": "OP-S5-R019",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        619
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- Internal Markdown links resolve.",
+      "requirement": "Automated documentation checks must verify that internal Markdown links resolve."
+    },
+    {
+      "id": "OP-S5-R020",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        620
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- No managed execution claim appears.",
+      "requirement": "Automated documentation checks must reject managed-execution claims."
+    },
+    {
+      "id": "OP-S5-R021",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        621
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- No implementation claim appears.",
+      "requirement": "Automated documentation checks must reject implementation claims."
+    },
+    {
+      "id": "OP-S5-R022",
+      "group": "S5",
+      "stage": 5,
+      "category": "VALIDATION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        612,
+        622
+      ],
+      "source_excerpt": "Automated documentation checks must verify:\n- No forbidden project language appears.",
+      "requirement": "Automated documentation checks must reject forbidden project language."
+    },
+    {
+      "id": "OP-S5-R023",
+      "group": "S5",
+      "stage": 5,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        626
+      ],
+      "source_excerpt": "A reviewer must be able to move from requirement → financial rule → schema → test → evidence without contradiction.",
+      "requirement": "A reviewer must trace requirement to financial rule to schema to test to evidence without contradiction."
+    },
+    {
+      "id": "OP-S6-R001",
+      "group": "S6",
+      "stage": 6,
+      "category": "REPRODUCIBILITY",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        634,
+        635,
+        636,
+        637,
+        638,
+        639,
+        640,
+        641,
+        642,
+        643,
+        644,
+        645,
+        646,
+        647
+      ],
+      "source_excerpt": "The candidate must pass one complete command that performs:\n\n1. Dependency installation from exact pins.\n2. Format verification.\n3. Lint.\n4. Strict typing.\n5. JSON Schema validation.\n6. Contract fixture suite.\n7. Semantic invariant suite.\n8. Governance and AWS-boundary tests.\n9. Documentation consistency checks.\n10. Coverage threshold.\n11. Targeted mutation verification.\n12. Deterministic foundation validation.",
+      "requirement": "One complete command must perform every exact local-validation action listed in the source authority."
+    },
+    {
+      "id": "OP-S6-R002",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        636
+      ],
+      "source_excerpt": "1. Dependency installation from exact pins.",
+      "requirement": "The complete command must install dependencies from exact pins."
+    },
+    {
+      "id": "OP-S6-R003",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        637
+      ],
+      "source_excerpt": "2. Format verification.",
+      "requirement": "The complete command must verify formatting."
+    },
+    {
+      "id": "OP-S6-R004",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        638
+      ],
+      "source_excerpt": "3. Lint.",
+      "requirement": "The complete command must run linting."
+    },
+    {
+      "id": "OP-S6-R005",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        639
+      ],
+      "source_excerpt": "4. Strict typing.",
+      "requirement": "The complete command must run strict typing."
+    },
+    {
+      "id": "OP-S6-R006",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        640
+      ],
+      "source_excerpt": "5. JSON Schema validation.",
+      "requirement": "The complete command must run JSON Schema validation."
+    },
+    {
+      "id": "OP-S6-R007",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        641
+      ],
+      "source_excerpt": "6. Contract fixture suite.",
+      "requirement": "The complete command must run the contract fixture suite."
+    },
+    {
+      "id": "OP-S6-R008",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        642
+      ],
+      "source_excerpt": "7. Semantic invariant suite.",
+      "requirement": "The complete command must run the semantic invariant suite."
+    },
+    {
+      "id": "OP-S6-R009",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        643
+      ],
+      "source_excerpt": "8. Governance and AWS-boundary tests.",
+      "requirement": "The complete command must run governance and AWS-boundary tests."
+    },
+    {
+      "id": "OP-S6-R010",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        644
+      ],
+      "source_excerpt": "9. Documentation consistency checks.",
+      "requirement": "The complete command must run documentation consistency checks."
+    },
+    {
+      "id": "OP-S6-R011",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        645
+      ],
+      "source_excerpt": "10. Coverage threshold.",
+      "requirement": "The complete command must enforce the coverage threshold."
+    },
+    {
+      "id": "OP-S6-R012",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        646
+      ],
+      "source_excerpt": "11. Targeted mutation verification.",
+      "requirement": "The complete command must run targeted mutation verification."
+    },
+    {
+      "id": "OP-S6-R013",
+      "group": "S6",
+      "stage": 6,
+      "category": "VALIDATION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        647
+      ],
+      "source_excerpt": "12. Deterministic foundation validation.",
+      "requirement": "The complete command must run deterministic foundation validation."
+    },
+    {
+      "id": "OP-S6-R014",
+      "group": "S6",
+      "stage": 6,
+      "category": "REPRODUCIBILITY",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        651
+      ],
+      "source_excerpt": "Run the complete validator at least twice from clean environments.",
+      "requirement": "The complete validator must run at least twice from clean environments."
+    },
+    {
+      "id": "OP-S6-R015",
+      "group": "S6",
+      "stage": 6,
+      "category": "REPRODUCIBILITY",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        652,
+        653,
+        654,
+        655,
+        656,
+        657,
+        658,
+        659,
+        660,
+        661
+      ],
+      "source_excerpt": "Required equality:\n\n- Schema inventory.\n- Schema digests.\n- Requirements inventory.\n- Target.\n- Scorecard targets.\n- Evidence levels.\n- Part 1 gate results.\n- Foundation digest.",
+      "requirement": "Both clean runs must produce identical schema inventory, schema digests, requirements inventory, target, scorecard targets, evidence levels, Part 1 gate results, and foundation digest."
+    },
+    {
+      "id": "OP-S6-R016",
+      "group": "S6",
+      "stage": 6,
+      "category": "REPRODUCIBILITY",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        663
+      ],
+      "source_excerpt": "The report may include run timestamps separately, but timestamps cannot affect the deterministic foundation digest.",
+      "requirement": "Run timestamps may be recorded separately but must not affect the deterministic foundation digest."
+    },
+    {
+      "id": "OP-S6-R017",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        669
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Repository.",
+      "requirement": "The CI evidence bundle must record the repository."
+    },
+    {
+      "id": "OP-S6-R018",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        670
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Commit SHA.",
+      "requirement": "The CI evidence bundle must record the commit SHA."
+    },
+    {
+      "id": "OP-S6-R019",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        671
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Workflow run and attempt.",
+      "requirement": "The CI evidence bundle must record workflow run and attempt."
+    },
+    {
+      "id": "OP-S6-R020",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        672
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Python version.",
+      "requirement": "The CI evidence bundle must record Python version."
+    },
+    {
+      "id": "OP-S6-R021",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        673
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Dependency versions.",
+      "requirement": "The CI evidence bundle must record dependency versions."
+    },
+    {
+      "id": "OP-S6-R022",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        674
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Test counts.",
+      "requirement": "The CI evidence bundle must record test counts."
+    },
+    {
+      "id": "OP-S6-R023",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        675
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Coverage result.",
+      "requirement": "The CI evidence bundle must record the coverage result."
+    },
+    {
+      "id": "OP-S6-R024",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        676
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Mutation result.",
+      "requirement": "The CI evidence bundle must record the mutation result."
+    },
+    {
+      "id": "OP-S6-R025",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        677
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Schema digests.",
+      "requirement": "The CI evidence bundle must record schema digests."
+    },
+    {
+      "id": "OP-S6-R026",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        678
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- Foundation digest.",
+      "requirement": "The CI evidence bundle must record the foundation digest."
+    },
+    {
+      "id": "OP-S6-R027",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        679
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- AWS execution: false.",
+      "requirement": "The CI evidence bundle must record AWS execution false."
+    },
+    {
+      "id": "OP-S6-R028",
+      "group": "S6",
+      "stage": 6,
+      "category": "GOVERNANCE",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        667,
+        680
+      ],
+      "source_excerpt": "The CI evidence bundle records:\n- All Part 1 gate outcomes.",
+      "requirement": "The CI evidence bundle must record every Part 1 gate outcome."
+    },
+    {
+      "id": "OP-S6-R029",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        686
+      ],
+      "source_excerpt": "The PR remains draft until:\n- All known gaps are closed.",
+      "requirement": "The PR must remain draft until all known gaps are closed."
+    },
+    {
+      "id": "OP-S6-R030",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        687
+      ],
+      "source_excerpt": "The PR remains draft until:\n- All requirement mappings are complete.",
+      "requirement": "The PR must remain draft until all requirement mappings are complete."
+    },
+    {
+      "id": "OP-S6-R031",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        688
+      ],
+      "source_excerpt": "The PR remains draft until:\n- All CI jobs pass on the exact head.",
+      "requirement": "The PR must remain draft until all CI jobs pass on the exact head."
+    },
+    {
+      "id": "OP-S6-R032",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        689
+      ],
+      "source_excerpt": "The PR remains draft until:\n- Diff check is clean.",
+      "requirement": "The PR must remain draft until diff check is clean."
+    },
+    {
+      "id": "OP-S6-R033",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        690
+      ],
+      "source_excerpt": "The PR remains draft until:\n- No unrelated files are present.",
+      "requirement": "The PR must remain draft until no unrelated files are present."
+    },
+    {
+      "id": "OP-S6-R034",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        691
+      ],
+      "source_excerpt": "The PR remains draft until:\n- No unresolved review finding exists.",
+      "requirement": "The PR must remain draft until no unresolved review finding exists."
+    },
+    {
+      "id": "OP-S6-R035",
+      "group": "S6",
+      "stage": 6,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        684,
+        692
+      ],
+      "source_excerpt": "The PR remains draft until:\n- The completion-candidate validator passes.",
+      "requirement": "The PR must remain draft until the completion-candidate validator passes."
+    },
+    {
+      "id": "OP-S7-R001",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        702
+      ],
+      "source_excerpt": "1. Resolve the exact PR head SHA.",
+      "requirement": "Immediately before merge, resolve the exact PR head SHA."
+    },
+    {
+      "id": "OP-S7-R002",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        703
+      ],
+      "source_excerpt": "2. Confirm the PR is based on current `main`.",
+      "requirement": "Immediately before merge, confirm the PR is based on current main."
+    },
+    {
+      "id": "OP-S7-R003",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        704
+      ],
+      "source_excerpt": "3. Confirm no merge conflict.",
+      "requirement": "Immediately before merge, confirm there is no merge conflict."
+    },
+    {
+      "id": "OP-S7-R004",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        705
+      ],
+      "source_excerpt": "4. Confirm all required checks belong to the exact head.",
+      "requirement": "Immediately before merge, confirm all required checks belong to the exact head."
+    },
+    {
+      "id": "OP-S7-R005",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        706
+      ],
+      "source_excerpt": "5. Confirm no check is skipped, neutral or stale.",
+      "requirement": "Immediately before merge, confirm no check is skipped, neutral, or stale."
+    },
+    {
+      "id": "OP-S7-R006",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        707
+      ],
+      "source_excerpt": "6. Confirm the diff contains only Part 1 foundation work.",
+      "requirement": "Immediately before merge, confirm the diff contains only Part 1 foundation work."
+    },
+    {
+      "id": "OP-S7-R007",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        708
+      ],
+      "source_excerpt": "7. Confirm AWS workflows were not dispatched.",
+      "requirement": "Immediately before merge, confirm no AWS workflow was dispatched."
+    },
+    {
+      "id": "OP-S7-R008",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        709
+      ],
+      "source_excerpt": "8. Confirm no AWS resource was mutated.",
+      "requirement": "Immediately before merge, confirm no AWS resource was mutated."
+    },
+    {
+      "id": "OP-S7-R009",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        710
+      ],
+      "source_excerpt": "9. Change the checked-in state from candidate to complete.",
+      "requirement": "Change checked-in state from candidate to complete before merge."
+    },
+    {
+      "id": "OP-S7-R010",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        711
+      ],
+      "source_excerpt": "10. Re-run all PR checks after the state change.",
+      "requirement": "Re-run every PR check after the checked-in state change."
+    },
+    {
+      "id": "OP-S7-R011",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        715
+      ],
+      "source_excerpt": "- Merge only the validated immutable head.",
+      "requirement": "Merge only the validated immutable head."
+    },
+    {
+      "id": "OP-S7-R012",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        716
+      ],
+      "source_excerpt": "- Prefer a clean squash commit for the corrective foundation.",
+      "requirement": "Prefer a clean squash commit for the corrective foundation."
+    },
+    {
+      "id": "OP-S7-R013",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        717
+      ],
+      "source_excerpt": "- Do not override or bypass branch protection.",
+      "requirement": "Do not override or bypass branch protection."
+    },
+    {
+      "id": "OP-S7-R014",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        718
+      ],
+      "source_excerpt": "- Do not merge based only on local success.",
+      "requirement": "Do not merge based only on local success."
+    },
+    {
+      "id": "OP-S7-R015",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        724
+      ],
+      "source_excerpt": "1. Resolve `main` SHA.",
+      "requirement": "After merge, resolve the main SHA."
+    },
+    {
+      "id": "OP-S7-R016",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        725
+      ],
+      "source_excerpt": "2. Confirm the Part 1 files on `main`.",
+      "requirement": "After merge, confirm the Part 1 files on main."
+    },
+    {
+      "id": "OP-S7-R017",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        726
+      ],
+      "source_excerpt": "3. Wait for the independent main-push CI run.",
+      "requirement": "After merge, wait for an independent main-push CI run."
+    },
+    {
+      "id": "OP-S7-R018",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        727
+      ],
+      "source_excerpt": "4. Confirm every main CI job succeeds.",
+      "requirement": "After merge, every main CI job must succeed."
+    },
+    {
+      "id": "OP-S7-R019",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        728
+      ],
+      "source_excerpt": "5. Confirm the deterministic foundation digest.",
+      "requirement": "After merge, confirm the deterministic foundation digest."
+    },
+    {
+      "id": "OP-S7-R020",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        729
+      ],
+      "source_excerpt": "6. Confirm no AWS workflow ran.",
+      "requirement": "After merge, confirm no AWS workflow ran."
+    },
+    {
+      "id": "OP-S7-R021",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        730
+      ],
+      "source_excerpt": "7. Confirm no AWS infrastructure or workload mutation.",
+      "requirement": "After merge, confirm no AWS infrastructure or workload mutation."
+    },
+    {
+      "id": "OP-S7-R022",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        731
+      ],
+      "source_excerpt": "8. Confirm no open corrective PR remains.",
+      "requirement": "After merge, confirm no open corrective PR remains."
+    },
+    {
+      "id": "OP-S7-R023",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        732,
+        733,
+        734,
+        735,
+        736,
+        737,
+        738
+      ],
+      "source_excerpt": "9. Confirm repository status says:\n\nPart: 1 — Foundation and completion contract\nState: PART1\\_FOUNDATION\\_COMPLETE\nHighest claim: LOCAL\\_VERIFIED for foundation validation\nAWS execution: false\nAWS infrastructure mutated: false",
+      "requirement": "After merge, repository status must exactly state Part 1 foundation complete, LOCAL_VERIFIED foundation validation, AWS execution false, and AWS infrastructure mutation false."
+    },
+    {
+      "id": "OP-S7-R024",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        739
+      ],
+      "source_excerpt": "If main CI fails, Part 1 remains incomplete. Fix the root cause through another PR; never relabel or disable the failed requirement.",
+      "requirement": "If main CI fails, Part 1 remains incomplete."
+    },
+    {
+      "id": "OP-S7-R025",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        739
+      ],
+      "source_excerpt": "If main CI fails, Part 1 remains incomplete. Fix the root cause through another PR; never relabel or disable the failed requirement.",
+      "requirement": "A failed main CI must be corrected through another PR."
+    },
+    {
+      "id": "OP-S7-R026",
+      "group": "S7",
+      "stage": 7,
+      "category": "PROMOTION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        739
+      ],
+      "source_excerpt": "If main CI fails, Part 1 remains incomplete. Fix the root cause through another PR; never relabel or disable the failed requirement.",
+      "requirement": "A failed requirement must never be relabelled or disabled."
+    },
+    {
+      "id": "OP-GATE-R001",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        745,
+        749,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Draft disposition audited                 | Every original and current surface has an exact disposition     |\nAll gates are mandatory.",
+      "requirement": "Draft disposition audited: every original and current surface has an exact disposition."
+    },
+    {
+      "id": "OP-GATE-R002",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        745,
+        750,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Two-grain model frozen                    | Keys, signs, totals, deltas and bank allocation are unambiguous |\nAll gates are mandatory.",
+      "requirement": "Two-grain model frozen: keys, signs, totals, deltas, and bank allocation are unambiguous."
+    },
+    {
+      "id": "OP-GATE-R003",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        745,
+        751,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Contracts valid                           | Structural and semantic validation both pass                    |\nAll gates are mandatory.",
+      "requirement": "Contracts valid: structural and semantic validation both pass."
+    },
+    {
+      "id": "OP-GATE-R004",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        745,
+        752,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Identity model frozen                     | Canonicalization, hashing and idempotency rules are exact       |\nAll gates are mandatory.",
+      "requirement": "Identity model frozen: canonicalization, hashing, and idempotency rules are exact."
+    },
+    {
+      "id": "OP-GATE-R005",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        745,
+        753,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Failure model frozen                      | Every required failure maps to one ownership and reason class   |\nAll gates are mandatory.",
+      "requirement": "Failure model frozen: every required failure maps to one ownership and reason class."
+    },
+    {
+      "id": "OP-GATE-R006",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        745,
+        754,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Revision model frozen                     | Proof and case histories are immutable and attributable         |\nAll gates are mandatory.",
+      "requirement": "Revision model frozen: proof and case histories are immutable and attributable."
+    },
+    {
+      "id": "OP-GATE-R007",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        745,
+        755,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Evidence boundary frozen                  | Claims use only approved evidence levels                        |\nAll gates are mandatory.",
+      "requirement": "Evidence boundary frozen: claims use only approved evidence levels."
+    },
+    {
+      "id": "OP-GATE-R008",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        745,
+        756,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Scorecard frozen                          | All targets exceed seven and are not misrepresented as achieved |\nAll gates are mandatory.",
+      "requirement": "Scorecard frozen: every target exceeds seven and none is misrepresented as achieved."
+    },
+    {
+      "id": "OP-GATE-R009",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        745,
+        757,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| AWS target correct                        | Repository, account, region, role and runtime match everywhere  |\nAll gates are mandatory.",
+      "requirement": "AWS target correct: repository, account, region, role, and runtime match everywhere."
+    },
+    {
+      "id": "OP-GATE-R010",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "ACTIONS_AUDIT",
+      "source_lines": [
+        745,
+        758,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| AWS execution prohibited                  | No automatic credential or workload path exists                 |\nAll gates are mandatory.",
+      "requirement": "AWS execution prohibited: no automatic credential or workload path exists."
+    },
+    {
+      "id": "OP-GATE-R011",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        745,
+        759,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Documentation consistent                  | Requirements, schemas, tests and docs have no contradiction     |\nAll gates are mandatory.",
+      "requirement": "Documentation consistent: requirements, schemas, tests, and documentation have no contradiction."
+    },
+    {
+      "id": "OP-GATE-R012",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        745,
+        760,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Foundation validator adversarially proven | Known invalid mutations fail closed                             |\nAll gates are mandatory.",
+      "requirement": "Foundation validator adversarially proven: known invalid mutations fail closed."
+    },
+    {
+      "id": "OP-GATE-R013",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        745,
+        761,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| PR CI successful                          | Exact corrective head passes all required checks                |\nAll gates are mandatory.",
+      "requirement": "PR CI successful: the exact corrective head passes every required check."
+    },
+    {
+      "id": "OP-GATE-R014",
+      "group": "GATE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        745,
+        762,
+        764
+      ],
+      "source_excerpt": "The original gates remain necessary but are expanded into enforceable sub-gates.\n| Main CI successful                        | Merged main commit passes independently                         |\nAll gates are mandatory.",
+      "requirement": "Main CI successful: the merged main commit passes independently."
+    },
+    {
+      "id": "OP-DONE-R001",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        789,
+        791
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- The current contract gaps are corrected.",
+      "requirement": "All current contract gaps are corrected."
+    },
+    {
+      "id": "OP-DONE-R002",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "SPECIFICATION",
+      "source_lines": [
+        789,
+        792
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Financial semantics have one implementation-independent interpretation.",
+      "requirement": "Financial semantics have one implementation-independent interpretation."
+    },
+    {
+      "id": "OP-DONE-R003",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        789,
+        793
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Every requirement is traceable to documentation, contract and tests.",
+      "requirement": "Every requirement is traceable to documentation, contract, and tests."
+    },
+    {
+      "id": "OP-DONE-R004",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        794
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- All schemas pass structural and semantic validation.",
+      "requirement": "Every schema passes structural validation."
+    },
+    {
+      "id": "OP-DONE-R005",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        794
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- All schemas pass structural and semantic validation.",
+      "requirement": "Every schema passes semantic validation."
+    },
+    {
+      "id": "OP-DONE-R006",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        795
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Canonical identities and digests are deterministic.",
+      "requirement": "Canonical identities are deterministic."
+    },
+    {
+      "id": "OP-DONE-R007",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        795
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Canonical identities and digests are deterministic.",
+      "requirement": "Canonical digests are deterministic."
+    },
+    {
+      "id": "OP-DONE-R008",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        796
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Transaction and settlement proofs are grain-correct.",
+      "requirement": "Transaction proofs are grain-correct."
+    },
+    {
+      "id": "OP-DONE-R009",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        796
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Transaction and settlement proofs are grain-correct.",
+      "requirement": "Settlement proofs are grain-correct."
+    },
+    {
+      "id": "OP-DONE-R010",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        789,
+        797
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Bank allocation cannot silently invent a match.",
+      "requirement": "Bank allocation cannot silently invent a match."
+    },
+    {
+      "id": "OP-DONE-R011",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        789,
+        798
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Late-data and case revisions are immutable.",
+      "requirement": "Late-data revisions are immutable."
+    },
+    {
+      "id": "OP-DONE-R012",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        789,
+        798
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Late-data and case revisions are immutable.",
+      "requirement": "Case revisions are immutable."
+    },
+    {
+      "id": "OP-DONE-R013",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        789,
+        799
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Reason codes and status transitions are closed and consistent.",
+      "requirement": "Reason codes are closed and consistent."
+    },
+    {
+      "id": "OP-DONE-R014",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        789,
+        799
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Reason codes and status transitions are closed and consistent.",
+      "requirement": "Status transitions are closed and consistent."
+    },
+    {
+      "id": "OP-DONE-R015",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        800
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Scorecard targets remain above seven and honestly labelled.",
+      "requirement": "Every scorecard target remains above seven."
+    },
+    {
+      "id": "OP-DONE-R016",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        800
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Scorecard targets remain above seven and honestly labelled.",
+      "requirement": "Every scorecard target remains honestly labelled."
+    },
+    {
+      "id": "OP-DONE-R017",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "MULTI_ARTIFACT",
+      "source_lines": [
+        789,
+        801
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- AWS target is exact.",
+      "requirement": "The AWS target is exact."
+    },
+    {
+      "id": "OP-DONE-R018",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        789,
+        802
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- AWS execution remains false.",
+      "requirement": "AWS execution remains false."
+    },
+    {
+      "id": "OP-DONE-R019",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "NEGATIVE_ASSERTION",
+      "source_lines": [
+        789,
+        803
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- No AWS infrastructure is mutated.",
+      "requirement": "No AWS infrastructure is mutated."
+    },
+    {
+      "id": "OP-DONE-R020",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        789,
+        804
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- The validator fails closed under adversarial mutation.",
+      "requirement": "The validator fails closed under adversarial mutation."
+    },
+    {
+      "id": "OP-DONE-R021",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "TEST",
+      "source_lines": [
+        789,
+        805
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Critical validation paths are comprehensively tested.",
+      "requirement": "Critical validation paths are comprehensively tested."
+    },
+    {
+      "id": "OP-DONE-R022",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        789,
+        806
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Documentation contains no contradictions or false execution claims.",
+      "requirement": "Documentation contains no contradictions."
+    },
+    {
+      "id": "OP-DONE-R023",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        789,
+        806
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Documentation contains no contradictions or false execution claims.",
+      "requirement": "Documentation contains no false execution claims."
+    },
+    {
+      "id": "OP-DONE-R024",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        789,
+        807
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Corrective PR CI passes on the exact head.",
+      "requirement": "Corrective PR CI passes on the exact head."
+    },
+    {
+      "id": "OP-DONE-R025",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "GITHUB",
+      "source_lines": [
+        789,
+        808
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- The corrected foundation is merged into `main`.",
+      "requirement": "The corrected foundation is merged into main."
+    },
+    {
+      "id": "OP-DONE-R026",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CI",
+      "source_lines": [
+        789,
+        809
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Independent main CI passes.",
+      "requirement": "Independent main CI passes."
+    },
+    {
+      "id": "OP-DONE-R027",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "VALIDATOR",
+      "source_lines": [
+        789,
+        810
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- The final deterministic foundation digest is recorded.",
+      "requirement": "The final deterministic foundation digest is recorded."
+    },
+    {
+      "id": "OP-DONE-R028",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        789,
+        811
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- No known critical or major Part 1 gap remains.",
+      "requirement": "No known critical Part 1 gap remains."
+    },
+    {
+      "id": "OP-DONE-R029",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "DOCUMENTATION",
+      "source_lines": [
+        789,
+        811
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- No known critical or major Part 1 gap remains.",
+      "requirement": "No known major Part 1 gap remains."
+    },
+    {
+      "id": "OP-DONE-R030",
+      "group": "DONE",
+      "stage": null,
+      "category": "COMPLETION",
+      "required_evidence_kind": "CONTRACT",
+      "source_lines": [
+        789,
+        812
+      ],
+      "source_excerpt": "Part 1 is fully complete only when all of the following are true:\n- Remaining Part 1 work is exactly zero.",
+      "requirement": "Remaining Part 1 work is exactly zero."
+    }
+  ],
+  "risks": [
+    {
+      "id": "OP-RISK-R001",
+      "source_line": 772,
+      "source_excerpt": "| Oracle-like business logic leaks into Part 1 | Keep scope limited to semantics and validation   | Repository-surface audit           | Remove implementation code     |",
+      "risk": "Oracle-like business logic leaks into Part 1",
+      "prevention": "Keep scope limited to semantics and validation",
+      "detection": "Repository-surface audit",
+      "failure_response": "Remove implementation code"
+    },
+    {
+      "id": "OP-RISK-R002",
+      "source_line": 773,
+      "source_excerpt": "| Ambiguous account signs                      | Explicit per-grain policy tables                 | Worked examples and semantic tests | Stop contract freeze           |",
+      "risk": "Ambiguous account signs",
+      "prevention": "Explicit per-grain policy tables",
+      "detection": "Worked examples and semantic tests",
+      "failure_response": "Stop contract freeze"
+    },
+    {
+      "id": "OP-RISK-R003",
+      "source_line": 774,
+      "source_excerpt": "| Bank false matching                          | Exact reference policy only                      | Unknown-reference fixtures         | Preserve unallocated exception |",
+      "risk": "Bank false matching",
+      "prevention": "Exact reference policy only",
+      "detection": "Unknown-reference fixtures",
+      "failure_response": "Preserve unallocated exception"
+    },
+    {
+      "id": "OP-RISK-R004",
+      "source_line": 775,
+      "source_excerpt": "| Schema passes but semantics fail             | Separate semantic validator                      | Adversarial cross-field tests      | Correct contract or validator  |",
+      "risk": "Schema passes but semantics fail",
+      "prevention": "Separate semantic validator",
+      "detection": "Adversarial cross-field tests",
+      "failure_response": "Correct contract or validator"
+    },
+    {
+      "id": "OP-RISK-R005",
+      "source_line": 776,
+      "source_excerpt": "| Nullable field bypasses `required`           | Conditional non-null schemas                     | Null-boundary fixtures             | Reject the contract            |",
+      "risk": "Nullable field bypasses required",
+      "prevention": "Conditional non-null schemas",
+      "detection": "Null-boundary fixtures",
+      "failure_response": "Reject the contract"
+    },
+    {
+      "id": "OP-RISK-R006",
+      "source_line": 777,
+      "source_excerpt": "| Circular digest definition                   | Exclude digest field explicitly                  | Canonicalization tests             | Block identity freeze          |",
+      "risk": "Circular digest definition",
+      "prevention": "Exclude digest field explicitly",
+      "detection": "Canonicalization tests",
+      "failure_response": "Block identity freeze"
+    },
+    {
+      "id": "OP-RISK-R007",
+      "source_line": 778,
+      "source_excerpt": "| Validator validates only itself              | Independent negative fixtures and mutation tests | Mutant survival                    | Strengthen tests               |",
+      "risk": "Validator validates only itself",
+      "prevention": "Independent negative fixtures and mutation tests",
+      "detection": "Mutant survival",
+      "failure_response": "Strengthen tests"
+    },
+    {
+      "id": "OP-RISK-R008",
+      "source_line": 779,
+      "source_excerpt": "| Documentation drifts                         | Machine-check shared constants and links         | CI consistency job                 | Block merge                    |",
+      "risk": "Documentation drifts",
+      "prevention": "Machine-check shared constants and links",
+      "detection": "CI consistency job",
+      "failure_response": "Block merge"
+    },
+    {
+      "id": "OP-RISK-R009",
+      "source_line": 780,
+      "source_excerpt": "| Target score presented as achieved           | Separate target and evidence fields              | Completion validator               | Reject scorecard               |",
+      "risk": "Target score presented as achieved",
+      "prevention": "Separate target and evidence fields",
+      "detection": "Completion validator",
+      "failure_response": "Reject scorecard"
+    },
+    {
+      "id": "OP-RISK-R010",
+      "source_line": 781,
+      "source_excerpt": "| Accidental AWS execution                     | Manual-only OIDC and workflow trigger tests      | Actions-run audit                  | Stop and investigate           |",
+      "risk": "Accidental AWS execution",
+      "prevention": "Manual-only OIDC and workflow trigger tests",
+      "detection": "Actions-run audit",
+      "failure_response": "Stop and investigate"
+    },
+    {
+      "id": "OP-RISK-R011",
+      "source_line": 782,
+      "source_excerpt": "| Partial correction enters main               | One atomic corrective PR                         | Diff and branch checks             | Keep PR draft                  |",
+      "risk": "Partial correction enters main",
+      "prevention": "One atomic corrective PR",
+      "detection": "Diff and branch checks",
+      "failure_response": "Keep PR draft"
+    },
+    {
+      "id": "OP-RISK-R012",
+      "source_line": 783,
+      "source_excerpt": "| Green PR but failed main                     | Independent main CI required                     | Post-merge workflow                | Part 1 remains incomplete      |",
+      "risk": "Green PR but failed main",
+      "prevention": "Independent main CI required",
+      "detection": "Post-merge workflow",
+      "failure_response": "Part 1 remains incomplete"
+    }
+  ],
+  "source_coverage": {
+    "covered_source_line_count": 574,
+    "covered_lines": {
+      "5": [
+        "OP-S0-R001"
+      ],
+      "9": [
+        "OP-S0-R002",
+        "OP-S0-R003",
+        "OP-S0-R004",
+        "OP-S0-R005",
+        "OP-S0-R006",
+        "OP-S0-R007",
+        "OP-S0-R008",
+        "OP-S0-R009"
+      ],
+      "10": [
+        "OP-S0-R002"
+      ],
+      "11": [
+        "OP-S0-R003"
+      ],
+      "12": [
+        "OP-S0-R004"
+      ],
+      "13": [
+        "OP-S0-R005"
+      ],
+      "14": [
+        "OP-S0-R006"
+      ],
+      "15": [
+        "OP-S0-R007"
+      ],
+      "16": [
+        "OP-S0-R008"
+      ],
+      "17": [
+        "OP-S0-R009"
+      ],
+      "18": [
+        "OP-S0-R010"
+      ],
+      "19": [
+        "OP-S0-R011"
+      ],
+      "20": [
+        "OP-S0-R012"
+      ],
+      "21": [
+        "OP-S0-R012"
+      ],
+      "22": [
+        "OP-S0-R012"
+      ],
+      "23": [
+        "OP-S0-R012"
+      ],
+      "24": [
+        "OP-S0-R012"
+      ],
+      "25": [
+        "OP-S0-R012"
+      ],
+      "26": [
+        "OP-S0-R013"
+      ],
+      "27": [
+        "OP-S0-R013"
+      ],
+      "28": [
+        "OP-S0-R013"
+      ],
+      "29": [
+        "OP-S0-R013"
+      ],
+      "30": [
+        "OP-S0-R013"
+      ],
+      "31": [
+        "OP-S0-R013"
+      ],
+      "32": [
+        "OP-S0-R013"
+      ],
+      "34": [
+        "OP-S0-R014"
+      ],
+      "38": [
+        "OP-S0-R015",
+        "OP-S0-R016"
+      ],
+      "39": [
+        "OP-S0-R017"
+      ],
+      "40": [
+        "OP-S0-R018",
+        "OP-S0-R019"
+      ],
+      "41": [
+        "OP-S0-R020"
+      ],
+      "45": [
+        "OP-S0-R021"
+      ],
+      "53": [
+        "OP-S1-R001"
+      ],
+      "57": [
+        "OP-S1-R002"
+      ],
+      "58": [
+        "OP-S1-R002"
+      ],
+      "59": [
+        "OP-S1-R002"
+      ],
+      "60": [
+        "OP-S1-R002"
+      ],
+      "61": [
+        "OP-S1-R002"
+      ],
+      "62": [
+        "OP-S1-R002"
+      ],
+      "67": [
+        "OP-S1-R003"
+      ],
+      "68": [
+        "OP-S1-R004"
+      ],
+      "69": [
+        "OP-S1-R005"
+      ],
+      "70": [
+        "OP-S1-R006"
+      ],
+      "74": [
+        "OP-S1-R007"
+      ],
+      "75": [
+        "OP-S1-R008"
+      ],
+      "76": [
+        "OP-S1-R009"
+      ],
+      "77": [
+        "OP-S1-R010"
+      ],
+      "78": [
+        "OP-S1-R011"
+      ],
+      "79": [
+        "OP-S1-R012"
+      ],
+      "83": [
+        "OP-S1-R013"
+      ],
+      "84": [
+        "OP-S1-R013"
+      ],
+      "85": [
+        "OP-S1-R013"
+      ],
+      "86": [
+        "OP-S1-R013"
+      ],
+      "87": [
+        "OP-S1-R013"
+      ],
+      "88": [
+        "OP-S1-R013"
+      ],
+      "89": [
+        "OP-S1-R014"
+      ],
+      "90": [
+        "OP-S1-R014"
+      ],
+      "91": [
+        "OP-S1-R014"
+      ],
+      "92": [
+        "OP-S1-R014"
+      ],
+      "93": [
+        "OP-S1-R014"
+      ],
+      "94": [
+        "OP-S1-R014"
+      ],
+      "95": [
+        "OP-S1-R014"
+      ],
+      "96": [
+        "OP-S1-R015"
+      ],
+      "97": [
+        "OP-S1-R015"
+      ],
+      "98": [
+        "OP-S1-R015"
+      ],
+      "99": [
+        "OP-S1-R015"
+      ],
+      "100": [
+        "OP-S1-R015"
+      ],
+      "102": [
+        "OP-S1-R016"
+      ],
+      "103": [
+        "OP-S1-R016"
+      ],
+      "104": [
+        "OP-S1-R016"
+      ],
+      "105": [
+        "OP-S1-R016"
+      ],
+      "106": [
+        "OP-S1-R017"
+      ],
+      "107": [
+        "OP-S1-R017"
+      ],
+      "108": [
+        "OP-S1-R017"
+      ],
+      "109": [
+        "OP-S1-R017"
+      ],
+      "110": [
+        "OP-S1-R017"
+      ],
+      "111": [
+        "OP-S1-R017"
+      ],
+      "117": [
+        "OP-S1-R018"
+      ],
+      "118": [
+        "OP-S1-R019"
+      ],
+      "119": [
+        "OP-S1-R020"
+      ],
+      "120": [
+        "OP-S1-R021"
+      ],
+      "121": [
+        "OP-S1-R022"
+      ],
+      "122": [
+        "OP-S1-R023"
+      ],
+      "123": [
+        "OP-S1-R024"
+      ],
+      "124": [
+        "OP-S1-R025"
+      ],
+      "125": [
+        "OP-S1-R026"
+      ],
+      "131": [
+        "OP-S1-R027"
+      ],
+      "132": [
+        "OP-S1-R028"
+      ],
+      "133": [
+        "OP-S1-R029"
+      ],
+      "137": [
+        "OP-S1-R030"
+      ],
+      "138": [
+        "OP-S1-R031"
+      ],
+      "139": [
+        "OP-S1-R032"
+      ],
+      "141": [
+        "OP-S1-R033"
+      ],
+      "147": [
+        "OP-S1-R034"
+      ],
+      "148": [
+        "OP-S1-R035"
+      ],
+      "149": [
+        "OP-S1-R036"
+      ],
+      "150": [
+        "OP-S1-R037"
+      ],
+      "151": [
+        "OP-S1-R038"
+      ],
+      "152": [
+        "OP-S1-R039"
+      ],
+      "153": [
+        "OP-S1-R040"
+      ],
+      "155": [
+        "OP-S1-R041"
+      ],
+      "156": [
+        "OP-S1-R041"
+      ],
+      "157": [
+        "OP-S1-R041"
+      ],
+      "161": [
+        "OP-S1-R042"
+      ],
+      "162": [
+        "OP-S1-R043"
+      ],
+      "163": [
+        "OP-S1-R044"
+      ],
+      "164": [
+        "OP-S1-R045"
+      ],
+      "165": [
+        "OP-S1-R046"
+      ],
+      "166": [
+        "OP-S1-R047"
+      ],
+      "167": [
+        "OP-S1-R048"
+      ],
+      "168": [
+        "OP-S1-R049"
+      ],
+      "172": [
+        "OP-S1-R050"
+      ],
+      "173": [
+        "OP-S1-R051",
+        "OP-S1-R052"
+      ],
+      "174": [
+        "OP-S1-R053",
+        "OP-S1-R054"
+      ],
+      "175": [
+        "OP-S1-R055"
+      ],
+      "176": [
+        "OP-S1-R056"
+      ],
+      "184": [
+        "OP-S2-R001"
+      ],
+      "185": [
+        "OP-S2-R001"
+      ],
+      "186": [
+        "OP-S2-R001"
+      ],
+      "187": [
+        "OP-S2-R002"
+      ],
+      "188": [
+        "OP-S2-R003"
+      ],
+      "189": [
+        "OP-S2-R004"
+      ],
+      "197": [
+        "OP-S2-R005"
+      ],
+      "198": [
+        "OP-S2-R006",
+        "OP-S2-R007"
+      ],
+      "199": [
+        "OP-S2-R008",
+        "OP-S2-R009"
+      ],
+      "200": [
+        "OP-S2-R010",
+        "OP-S2-R011",
+        "OP-S2-R012"
+      ],
+      "201": [
+        "OP-S2-R013",
+        "OP-S2-R014"
+      ],
+      "202": [
+        "OP-S2-R015"
+      ],
+      "203": [
+        "OP-S2-R016"
+      ],
+      "204": [
+        "OP-S2-R017"
+      ],
+      "205": [
+        "OP-S2-R018"
+      ],
+      "206": [
+        "OP-S2-R019"
+      ],
+      "207": [
+        "OP-S2-R020"
+      ],
+      "208": [
+        "OP-S2-R021"
+      ],
+      "214": [
+        "OP-S2-R022"
+      ],
+      "215": [
+        "OP-S2-R023"
+      ],
+      "216": [
+        "OP-S2-R024"
+      ],
+      "217": [
+        "OP-S2-R025"
+      ],
+      "221": [
+        "OP-S2-R026"
+      ],
+      "222": [
+        "OP-S2-R027"
+      ],
+      "223": [
+        "OP-S2-R028"
+      ],
+      "224": [
+        "OP-S2-R029"
+      ],
+      "225": [
+        "OP-S2-R030"
+      ],
+      "229": [
+        "OP-S2-R031"
+      ],
+      "230": [
+        "OP-S2-R032"
+      ],
+      "231": [
+        "OP-S2-R032"
+      ],
+      "232": [
+        "OP-S2-R032"
+      ],
+      "233": [
+        "OP-S2-R032"
+      ],
+      "234": [
+        "OP-S2-R032"
+      ],
+      "235": [
+        "OP-S2-R032"
+      ],
+      "236": [
+        "OP-S2-R032"
+      ],
+      "240": [
+        "OP-S2-R033"
+      ],
+      "241": [
+        "OP-S2-R033"
+      ],
+      "242": [
+        "OP-S2-R033"
+      ],
+      "243": [
+        "OP-S2-R033"
+      ],
+      "244": [
+        "OP-S2-R033"
+      ],
+      "245": [
+        "OP-S2-R033"
+      ],
+      "246": [
+        "OP-S2-R033"
+      ],
+      "247": [
+        "OP-S2-R033"
+      ],
+      "248": [
+        "OP-S2-R033"
+      ],
+      "249": [
+        "OP-S2-R033"
+      ],
+      "250": [
+        "OP-S2-R033"
+      ],
+      "251": [
+        "OP-S2-R033"
+      ],
+      "252": [
+        "OP-S2-R033"
+      ],
+      "253": [
+        "OP-S2-R033"
+      ],
+      "254": [
+        "OP-S2-R033"
+      ],
+      "255": [
+        "OP-S2-R033"
+      ],
+      "256": [
+        "OP-S2-R033"
+      ],
+      "257": [
+        "OP-S2-R033"
+      ],
+      "258": [
+        "OP-S2-R033"
+      ],
+      "259": [
+        "OP-S2-R033"
+      ],
+      "260": [
+        "OP-S2-R033"
+      ],
+      "261": [
+        "OP-S2-R033"
+      ],
+      "262": [
+        "OP-S2-R033"
+      ],
+      "263": [
+        "OP-S2-R033"
+      ],
+      "264": [
+        "OP-S2-R033"
+      ],
+      "265": [
+        "OP-S2-R033"
+      ],
+      "266": [
+        "OP-S2-R033"
+      ],
+      "267": [
+        "OP-S2-R033"
+      ],
+      "268": [
+        "OP-S2-R033"
+      ],
+      "269": [
+        "OP-S2-R033"
+      ],
+      "270": [
+        "OP-S2-R033"
+      ],
+      "271": [
+        "OP-S2-R033"
+      ],
+      "272": [
+        "OP-S2-R033"
+      ],
+      "273": [
+        "OP-S2-R033"
+      ],
+      "274": [
+        "OP-S2-R033"
+      ],
+      "275": [
+        "OP-S2-R033"
+      ],
+      "276": [
+        "OP-S2-R033"
+      ],
+      "277": [
+        "OP-S2-R033"
+      ],
+      "278": [
+        "OP-S2-R033"
+      ],
+      "279": [
+        "OP-S2-R033"
+      ],
+      "280": [
+        "OP-S2-R033"
+      ],
+      "281": [
+        "OP-S2-R033"
+      ],
+      "282": [
+        "OP-S2-R033"
+      ],
+      "283": [
+        "OP-S2-R033"
+      ],
+      "284": [
+        "OP-S2-R033"
+      ],
+      "285": [
+        "OP-S2-R033"
+      ],
+      "286": [
+        "OP-S2-R033"
+      ],
+      "287": [
+        "OP-S2-R033"
+      ],
+      "288": [
+        "OP-S2-R033"
+      ],
+      "289": [
+        "OP-S2-R033"
+      ],
+      "290": [
+        "OP-S2-R033"
+      ],
+      "291": [
+        "OP-S2-R033"
+      ],
+      "292": [
+        "OP-S2-R033"
+      ],
+      "293": [
+        "OP-S2-R033"
+      ],
+      "294": [
+        "OP-S2-R033"
+      ],
+      "295": [
+        "OP-S2-R033"
+      ],
+      "296": [
+        "OP-S2-R033"
+      ],
+      "297": [
+        "OP-S2-R033"
+      ],
+      "298": [
+        "OP-S2-R033"
+      ],
+      "299": [
+        "OP-S2-R033"
+      ],
+      "300": [
+        "OP-S2-R033"
+      ],
+      "301": [
+        "OP-S2-R033"
+      ],
+      "302": [
+        "OP-S2-R033"
+      ],
+      "303": [
+        "OP-S2-R033"
+      ],
+      "304": [
+        "OP-S2-R033"
+      ],
+      "305": [
+        "OP-S2-R033"
+      ],
+      "306": [
+        "OP-S2-R033"
+      ],
+      "307": [
+        "OP-S2-R033"
+      ],
+      "308": [
+        "OP-S2-R033"
+      ],
+      "309": [
+        "OP-S2-R033"
+      ],
+      "310": [
+        "OP-S2-R033"
+      ],
+      "311": [
+        "OP-S2-R033"
+      ],
+      "312": [
+        "OP-S2-R033"
+      ],
+      "313": [
+        "OP-S2-R033"
+      ],
+      "314": [
+        "OP-S2-R033"
+      ],
+      "315": [
+        "OP-S2-R033"
+      ],
+      "316": [
+        "OP-S2-R033"
+      ],
+      "317": [
+        "OP-S2-R033"
+      ],
+      "318": [
+        "OP-S2-R033"
+      ],
+      "319": [
+        "OP-S2-R033"
+      ],
+      "320": [
+        "OP-S2-R033"
+      ],
+      "321": [
+        "OP-S2-R033"
+      ],
+      "322": [
+        "OP-S2-R033"
+      ],
+      "323": [
+        "OP-S2-R033"
+      ],
+      "324": [
+        "OP-S2-R033"
+      ],
+      "325": [
+        "OP-S2-R033"
+      ],
+      "326": [
+        "OP-S2-R033"
+      ],
+      "327": [
+        "OP-S2-R033"
+      ],
+      "328": [
+        "OP-S2-R033"
+      ],
+      "329": [
+        "OP-S2-R033"
+      ],
+      "330": [
+        "OP-S2-R033"
+      ],
+      "331": [
+        "OP-S2-R033"
+      ],
+      "332": [
+        "OP-S2-R033"
+      ],
+      "333": [
+        "OP-S2-R033"
+      ],
+      "334": [
+        "OP-S2-R033"
+      ],
+      "335": [
+        "OP-S2-R033"
+      ],
+      "336": [
+        "OP-S2-R033"
+      ],
+      "337": [
+        "OP-S2-R033"
+      ],
+      "338": [
+        "OP-S2-R033"
+      ],
+      "339": [
+        "OP-S2-R033"
+      ],
+      "340": [
+        "OP-S2-R033"
+      ],
+      "341": [
+        "OP-S2-R033"
+      ],
+      "342": [
+        "OP-S2-R033"
+      ],
+      "343": [
+        "OP-S2-R033"
+      ],
+      "344": [
+        "OP-S2-R033"
+      ],
+      "345": [
+        "OP-S2-R033"
+      ],
+      "346": [
+        "OP-S2-R033"
+      ],
+      "347": [
+        "OP-S2-R033"
+      ],
+      "348": [
+        "OP-S2-R033"
+      ],
+      "350": [
+        "OP-S2-R034"
+      ],
+      "354": [
+        "OP-S2-R035",
+        "OP-S2-R036",
+        "OP-S2-R037",
+        "OP-S2-R038",
+        "OP-S2-R039",
+        "OP-S2-R040",
+        "OP-S2-R041",
+        "OP-S2-R042",
+        "OP-S2-R043",
+        "OP-S2-R044",
+        "OP-S2-R045"
+      ],
+      "355": [
+        "OP-S2-R035"
+      ],
+      "356": [
+        "OP-S2-R035"
+      ],
+      "357": [
+        "OP-S2-R036"
+      ],
+      "358": [
+        "OP-S2-R037"
+      ],
+      "359": [
+        "OP-S2-R038"
+      ],
+      "360": [
+        "OP-S2-R039"
+      ],
+      "361": [
+        "OP-S2-R040"
+      ],
+      "362": [
+        "OP-S2-R041"
+      ],
+      "363": [
+        "OP-S2-R042"
+      ],
+      "364": [
+        "OP-S2-R043"
+      ],
+      "365": [
+        "OP-S2-R044"
+      ],
+      "366": [
+        "OP-S2-R045"
+      ],
+      "370": [
+        "OP-S2-R046"
+      ],
+      "371": [
+        "OP-S2-R047"
+      ],
+      "372": [
+        "OP-S2-R048"
+      ],
+      "373": [
+        "OP-S2-R049"
+      ],
+      "374": [
+        "OP-S2-R050"
+      ],
+      "375": [
+        "OP-S2-R051"
+      ],
+      "376": [
+        "OP-S2-R052"
+      ],
+      "384": [
+        "OP-S3-R001"
+      ],
+      "385": [
+        "OP-S3-R001"
+      ],
+      "386": [
+        "OP-S3-R001"
+      ],
+      "387": [
+        "OP-S3-R001"
+      ],
+      "388": [
+        "OP-S3-R001"
+      ],
+      "389": [
+        "OP-S3-R001"
+      ],
+      "390": [
+        "OP-S3-R001"
+      ],
+      "391": [
+        "OP-S3-R001"
+      ],
+      "392": [
+        "OP-S3-R001"
+      ],
+      "393": [
+        "OP-S3-R001"
+      ],
+      "394": [
+        "OP-S3-R001"
+      ],
+      "395": [
+        "OP-S3-R001"
+      ],
+      "396": [
+        "OP-S3-R001"
+      ],
+      "397": [
+        "OP-S3-R001"
+      ],
+      "398": [
+        "OP-S3-R001"
+      ],
+      "399": [
+        "OP-S3-R001"
+      ],
+      "400": [
+        "OP-S3-R001"
+      ],
+      "401": [
+        "OP-S3-R001"
+      ],
+      "402": [
+        "OP-S3-R001"
+      ],
+      "403": [
+        "OP-S3-R001"
+      ],
+      "404": [
+        "OP-S3-R001"
+      ],
+      "405": [
+        "OP-S3-R001"
+      ],
+      "406": [
+        "OP-S3-R001"
+      ],
+      "407": [
+        "OP-S3-R001"
+      ],
+      "408": [
+        "OP-S3-R001"
+      ],
+      "410": [
+        "OP-S3-R002"
+      ],
+      "411": [
+        "OP-S3-R002"
+      ],
+      "412": [
+        "OP-S3-R002"
+      ],
+      "413": [
+        "OP-S3-R002"
+      ],
+      "414": [
+        "OP-S3-R002"
+      ],
+      "415": [
+        "OP-S3-R002"
+      ],
+      "416": [
+        "OP-S3-R002"
+      ],
+      "418": [
+        "OP-S3-R003"
+      ],
+      "422": [
+        "OP-S3-R004",
+        "OP-S3-R005",
+        "OP-S3-R006",
+        "OP-S3-R007",
+        "OP-S3-R008"
+      ],
+      "424": [
+        "OP-S3-R004"
+      ],
+      "425": [
+        "OP-S3-R005"
+      ],
+      "426": [
+        "OP-S3-R006"
+      ],
+      "427": [
+        "OP-S3-R007"
+      ],
+      "428": [
+        "OP-S3-R008"
+      ],
+      "432": [
+        "OP-S3-R009"
+      ],
+      "433": [
+        "OP-S3-R010"
+      ],
+      "434": [
+        "OP-S3-R011"
+      ],
+      "435": [
+        "OP-S3-R012"
+      ],
+      "436": [
+        "OP-S3-R013"
+      ],
+      "440": [
+        "OP-S3-R014"
+      ],
+      "441": [
+        "OP-S3-R014"
+      ],
+      "442": [
+        "OP-S3-R014"
+      ],
+      "443": [
+        "OP-S3-R014"
+      ],
+      "444": [
+        "OP-S3-R014"
+      ],
+      "445": [
+        "OP-S3-R014"
+      ],
+      "446": [
+        "OP-S3-R014"
+      ],
+      "447": [
+        "OP-S3-R014"
+      ],
+      "448": [
+        "OP-S3-R014"
+      ],
+      "449": [
+        "OP-S3-R014"
+      ],
+      "453": [
+        "OP-S3-R015"
+      ],
+      "454": [
+        "OP-S3-R016"
+      ],
+      "455": [
+        "OP-S3-R017"
+      ],
+      "456": [
+        "OP-S3-R018"
+      ],
+      "457": [
+        "OP-S3-R019"
+      ],
+      "458": [
+        "OP-S3-R020"
+      ],
+      "459": [
+        "OP-S3-R021"
+      ],
+      "460": [
+        "OP-S3-R022"
+      ],
+      "464": [
+        "OP-S3-R023"
+      ],
+      "465": [
+        "OP-S3-R024"
+      ],
+      "466": [
+        "OP-S3-R025"
+      ],
+      "467": [
+        "OP-S3-R026"
+      ],
+      "468": [
+        "OP-S3-R027"
+      ],
+      "469": [
+        "OP-S3-R028"
+      ],
+      "491": [
+        "OP-S4-R001"
+      ],
+      "492": [
+        "OP-S4-R002"
+      ],
+      "493": [
+        "OP-S4-R003"
+      ],
+      "494": [
+        "OP-S4-R004"
+      ],
+      "495": [
+        "OP-S4-R005"
+      ],
+      "496": [
+        "OP-S4-R006"
+      ],
+      "497": [
+        "OP-S4-R007"
+      ],
+      "501": [
+        "OP-S4-R008"
+      ],
+      "502": [
+        "OP-S4-R009"
+      ],
+      "503": [
+        "OP-S4-R010"
+      ],
+      "504": [
+        "OP-S4-R011"
+      ],
+      "505": [
+        "OP-S4-R012"
+      ],
+      "509": [
+        "OP-S4-R013"
+      ],
+      "510": [
+        "OP-S4-R014"
+      ],
+      "511": [
+        "OP-S4-R015"
+      ],
+      "512": [
+        "OP-S4-R016"
+      ],
+      "513": [
+        "OP-S4-R017"
+      ],
+      "514": [
+        "OP-S4-R018"
+      ],
+      "515": [
+        "OP-S4-R019"
+      ],
+      "519": [
+        "OP-S4-R020"
+      ],
+      "520": [
+        "OP-S4-R021"
+      ],
+      "521": [
+        "OP-S4-R022"
+      ],
+      "522": [
+        "OP-S4-R023"
+      ],
+      "523": [
+        "OP-S4-R024"
+      ],
+      "527": [
+        "OP-S4-R025"
+      ],
+      "528": [
+        "OP-S4-R026"
+      ],
+      "529": [
+        "OP-S4-R027"
+      ],
+      "530": [
+        "OP-S4-R028"
+      ],
+      "531": [
+        "OP-S4-R029"
+      ],
+      "532": [
+        "OP-S4-R030"
+      ],
+      "536": [
+        "OP-S4-R031"
+      ],
+      "538": [
+        "OP-S4-R031"
+      ],
+      "539": [
+        "OP-S4-R031"
+      ],
+      "540": [
+        "OP-S4-R031"
+      ],
+      "541": [
+        "OP-S4-R031"
+      ],
+      "542": [
+        "OP-S4-R031"
+      ],
+      "543": [
+        "OP-S4-R031"
+      ],
+      "544": [
+        "OP-S4-R031"
+      ],
+      "545": [
+        "OP-S4-R031"
+      ],
+      "546": [
+        "OP-S4-R031"
+      ],
+      "547": [
+        "OP-S4-R031"
+      ],
+      "548": [
+        "OP-S4-R031"
+      ],
+      "549": [
+        "OP-S4-R031"
+      ],
+      "550": [
+        "OP-S4-R031"
+      ],
+      "551": [
+        "OP-S4-R031"
+      ],
+      "552": [
+        "OP-S4-R031"
+      ],
+      "553": [
+        "OP-S4-R031"
+      ],
+      "554": [
+        "OP-S4-R031"
+      ],
+      "555": [
+        "OP-S4-R031"
+      ],
+      "556": [
+        "OP-S4-R031"
+      ],
+      "557": [
+        "OP-S4-R031"
+      ],
+      "559": [
+        "OP-S4-R032",
+        "OP-S4-R033"
+      ],
+      "563": [
+        "OP-S4-R034"
+      ],
+      "564": [
+        "OP-S4-R035",
+        "OP-S4-R036"
+      ],
+      "565": [
+        "OP-S4-R037"
+      ],
+      "566": [
+        "OP-S4-R038",
+        "OP-S4-R039"
+      ],
+      "567": [
+        "OP-S4-R040"
+      ],
+      "568": [
+        "OP-S4-R041"
+      ],
+      "569": [
+        "OP-S4-R042"
+      ],
+      "570": [
+        "OP-S4-R043"
+      ],
+      "571": [
+        "OP-S4-R044"
+      ],
+      "575": [
+        "OP-S4-R045",
+        "OP-S4-R046"
+      ],
+      "581": [
+        "OP-S5-R001"
+      ],
+      "582": [
+        "OP-S5-R001"
+      ],
+      "583": [
+        "OP-S5-R001"
+      ],
+      "584": [
+        "OP-S5-R001"
+      ],
+      "585": [
+        "OP-S5-R001"
+      ],
+      "586": [
+        "OP-S5-R001"
+      ],
+      "587": [
+        "OP-S5-R001"
+      ],
+      "588": [
+        "OP-S5-R001"
+      ],
+      "589": [
+        "OP-S5-R001"
+      ],
+      "590": [
+        "OP-S5-R001"
+      ],
+      "591": [
+        "OP-S5-R001"
+      ],
+      "592": [
+        "OP-S5-R001"
+      ],
+      "593": [
+        "OP-S5-R001"
+      ],
+      "597": [
+        "OP-S5-R002"
+      ],
+      "598": [
+        "OP-S5-R003"
+      ],
+      "599": [
+        "OP-S5-R004"
+      ],
+      "600": [
+        "OP-S5-R005"
+      ],
+      "601": [
+        "OP-S5-R006"
+      ],
+      "602": [
+        "OP-S5-R007"
+      ],
+      "603": [
+        "OP-S5-R008"
+      ],
+      "604": [
+        "OP-S5-R009"
+      ],
+      "605": [
+        "OP-S5-R010"
+      ],
+      "606": [
+        "OP-S5-R011"
+      ],
+      "607": [
+        "OP-S5-R012"
+      ],
+      "608": [
+        "OP-S5-R013"
+      ],
+      "612": [
+        "OP-S5-R014",
+        "OP-S5-R015",
+        "OP-S5-R016",
+        "OP-S5-R017",
+        "OP-S5-R018",
+        "OP-S5-R019",
+        "OP-S5-R020",
+        "OP-S5-R021",
+        "OP-S5-R022"
+      ],
+      "614": [
+        "OP-S5-R014"
+      ],
+      "615": [
+        "OP-S5-R015"
+      ],
+      "616": [
+        "OP-S5-R016"
+      ],
+      "617": [
+        "OP-S5-R017"
+      ],
+      "618": [
+        "OP-S5-R018"
+      ],
+      "619": [
+        "OP-S5-R019"
+      ],
+      "620": [
+        "OP-S5-R020"
+      ],
+      "621": [
+        "OP-S5-R021"
+      ],
+      "622": [
+        "OP-S5-R022"
+      ],
+      "626": [
+        "OP-S5-R023"
+      ],
+      "634": [
+        "OP-S6-R001"
+      ],
+      "635": [
+        "OP-S6-R001"
+      ],
+      "636": [
+        "OP-S6-R001",
+        "OP-S6-R002"
+      ],
+      "637": [
+        "OP-S6-R001",
+        "OP-S6-R003"
+      ],
+      "638": [
+        "OP-S6-R001",
+        "OP-S6-R004"
+      ],
+      "639": [
+        "OP-S6-R001",
+        "OP-S6-R005"
+      ],
+      "640": [
+        "OP-S6-R001",
+        "OP-S6-R006"
+      ],
+      "641": [
+        "OP-S6-R001",
+        "OP-S6-R007"
+      ],
+      "642": [
+        "OP-S6-R001",
+        "OP-S6-R008"
+      ],
+      "643": [
+        "OP-S6-R001",
+        "OP-S6-R009"
+      ],
+      "644": [
+        "OP-S6-R001",
+        "OP-S6-R010"
+      ],
+      "645": [
+        "OP-S6-R001",
+        "OP-S6-R011"
+      ],
+      "646": [
+        "OP-S6-R001",
+        "OP-S6-R012"
+      ],
+      "647": [
+        "OP-S6-R001",
+        "OP-S6-R013"
+      ],
+      "651": [
+        "OP-S6-R014"
+      ],
+      "652": [
+        "OP-S6-R015"
+      ],
+      "653": [
+        "OP-S6-R015"
+      ],
+      "654": [
+        "OP-S6-R015"
+      ],
+      "655": [
+        "OP-S6-R015"
+      ],
+      "656": [
+        "OP-S6-R015"
+      ],
+      "657": [
+        "OP-S6-R015"
+      ],
+      "658": [
+        "OP-S6-R015"
+      ],
+      "659": [
+        "OP-S6-R015"
+      ],
+      "660": [
+        "OP-S6-R015"
+      ],
+      "661": [
+        "OP-S6-R015"
+      ],
+      "663": [
+        "OP-S6-R016"
+      ],
+      "667": [
+        "OP-S6-R017",
+        "OP-S6-R018",
+        "OP-S6-R019",
+        "OP-S6-R020",
+        "OP-S6-R021",
+        "OP-S6-R022",
+        "OP-S6-R023",
+        "OP-S6-R024",
+        "OP-S6-R025",
+        "OP-S6-R026",
+        "OP-S6-R027",
+        "OP-S6-R028"
+      ],
+      "669": [
+        "OP-S6-R017"
+      ],
+      "670": [
+        "OP-S6-R018"
+      ],
+      "671": [
+        "OP-S6-R019"
+      ],
+      "672": [
+        "OP-S6-R020"
+      ],
+      "673": [
+        "OP-S6-R021"
+      ],
+      "674": [
+        "OP-S6-R022"
+      ],
+      "675": [
+        "OP-S6-R023"
+      ],
+      "676": [
+        "OP-S6-R024"
+      ],
+      "677": [
+        "OP-S6-R025"
+      ],
+      "678": [
+        "OP-S6-R026"
+      ],
+      "679": [
+        "OP-S6-R027"
+      ],
+      "680": [
+        "OP-S6-R028"
+      ],
+      "684": [
+        "OP-S6-R029",
+        "OP-S6-R030",
+        "OP-S6-R031",
+        "OP-S6-R032",
+        "OP-S6-R033",
+        "OP-S6-R034",
+        "OP-S6-R035"
+      ],
+      "686": [
+        "OP-S6-R029"
+      ],
+      "687": [
+        "OP-S6-R030"
+      ],
+      "688": [
+        "OP-S6-R031"
+      ],
+      "689": [
+        "OP-S6-R032"
+      ],
+      "690": [
+        "OP-S6-R033"
+      ],
+      "691": [
+        "OP-S6-R034"
+      ],
+      "692": [
+        "OP-S6-R035"
+      ],
+      "702": [
+        "OP-S7-R001"
+      ],
+      "703": [
+        "OP-S7-R002"
+      ],
+      "704": [
+        "OP-S7-R003"
+      ],
+      "705": [
+        "OP-S7-R004"
+      ],
+      "706": [
+        "OP-S7-R005"
+      ],
+      "707": [
+        "OP-S7-R006"
+      ],
+      "708": [
+        "OP-S7-R007"
+      ],
+      "709": [
+        "OP-S7-R008"
+      ],
+      "710": [
+        "OP-S7-R009"
+      ],
+      "711": [
+        "OP-S7-R010"
+      ],
+      "715": [
+        "OP-S7-R011"
+      ],
+      "716": [
+        "OP-S7-R012"
+      ],
+      "717": [
+        "OP-S7-R013"
+      ],
+      "718": [
+        "OP-S7-R014"
+      ],
+      "724": [
+        "OP-S7-R015"
+      ],
+      "725": [
+        "OP-S7-R016"
+      ],
+      "726": [
+        "OP-S7-R017"
+      ],
+      "727": [
+        "OP-S7-R018"
+      ],
+      "728": [
+        "OP-S7-R019"
+      ],
+      "729": [
+        "OP-S7-R020"
+      ],
+      "730": [
+        "OP-S7-R021"
+      ],
+      "731": [
+        "OP-S7-R022"
+      ],
+      "732": [
+        "OP-S7-R023"
+      ],
+      "733": [
+        "OP-S7-R023"
+      ],
+      "734": [
+        "OP-S7-R023"
+      ],
+      "735": [
+        "OP-S7-R023"
+      ],
+      "736": [
+        "OP-S7-R023"
+      ],
+      "737": [
+        "OP-S7-R023"
+      ],
+      "738": [
+        "OP-S7-R023"
+      ],
+      "739": [
+        "OP-S7-R024",
+        "OP-S7-R025",
+        "OP-S7-R026"
+      ],
+      "745": [
+        "OP-GATE-R001",
+        "OP-GATE-R002",
+        "OP-GATE-R003",
+        "OP-GATE-R004",
+        "OP-GATE-R005",
+        "OP-GATE-R006",
+        "OP-GATE-R007",
+        "OP-GATE-R008",
+        "OP-GATE-R009",
+        "OP-GATE-R010",
+        "OP-GATE-R011",
+        "OP-GATE-R012",
+        "OP-GATE-R013",
+        "OP-GATE-R014"
+      ],
+      "749": [
+        "OP-GATE-R001"
+      ],
+      "750": [
+        "OP-GATE-R002"
+      ],
+      "751": [
+        "OP-GATE-R003"
+      ],
+      "752": [
+        "OP-GATE-R004"
+      ],
+      "753": [
+        "OP-GATE-R005"
+      ],
+      "754": [
+        "OP-GATE-R006"
+      ],
+      "755": [
+        "OP-GATE-R007"
+      ],
+      "756": [
+        "OP-GATE-R008"
+      ],
+      "757": [
+        "OP-GATE-R009"
+      ],
+      "758": [
+        "OP-GATE-R010"
+      ],
+      "759": [
+        "OP-GATE-R011"
+      ],
+      "760": [
+        "OP-GATE-R012"
+      ],
+      "761": [
+        "OP-GATE-R013"
+      ],
+      "762": [
+        "OP-GATE-R014"
+      ],
+      "764": [
+        "OP-GATE-R001",
+        "OP-GATE-R002",
+        "OP-GATE-R003",
+        "OP-GATE-R004",
+        "OP-GATE-R005",
+        "OP-GATE-R006",
+        "OP-GATE-R007",
+        "OP-GATE-R008",
+        "OP-GATE-R009",
+        "OP-GATE-R010",
+        "OP-GATE-R011",
+        "OP-GATE-R012",
+        "OP-GATE-R013",
+        "OP-GATE-R014"
+      ],
+      "772": [
+        "OP-RISK-R001"
+      ],
+      "773": [
+        "OP-RISK-R002"
+      ],
+      "774": [
+        "OP-RISK-R003"
+      ],
+      "775": [
+        "OP-RISK-R004"
+      ],
+      "776": [
+        "OP-RISK-R005"
+      ],
+      "777": [
+        "OP-RISK-R006"
+      ],
+      "778": [
+        "OP-RISK-R007"
+      ],
+      "779": [
+        "OP-RISK-R008"
+      ],
+      "780": [
+        "OP-RISK-R009"
+      ],
+      "781": [
+        "OP-RISK-R010"
+      ],
+      "782": [
+        "OP-RISK-R011"
+      ],
+      "783": [
+        "OP-RISK-R012"
+      ],
+      "789": [
+        "OP-DONE-R001",
+        "OP-DONE-R002",
+        "OP-DONE-R003",
+        "OP-DONE-R004",
+        "OP-DONE-R005",
+        "OP-DONE-R006",
+        "OP-DONE-R007",
+        "OP-DONE-R008",
+        "OP-DONE-R009",
+        "OP-DONE-R010",
+        "OP-DONE-R011",
+        "OP-DONE-R012",
+        "OP-DONE-R013",
+        "OP-DONE-R014",
+        "OP-DONE-R015",
+        "OP-DONE-R016",
+        "OP-DONE-R017",
+        "OP-DONE-R018",
+        "OP-DONE-R019",
+        "OP-DONE-R020",
+        "OP-DONE-R021",
+        "OP-DONE-R022",
+        "OP-DONE-R023",
+        "OP-DONE-R024",
+        "OP-DONE-R025",
+        "OP-DONE-R026",
+        "OP-DONE-R027",
+        "OP-DONE-R028",
+        "OP-DONE-R029",
+        "OP-DONE-R030"
+      ],
+      "791": [
+        "OP-DONE-R001"
+      ],
+      "792": [
+        "OP-DONE-R002"
+      ],
+      "793": [
+        "OP-DONE-R003"
+      ],
+      "794": [
+        "OP-DONE-R004",
+        "OP-DONE-R005"
+      ],
+      "795": [
+        "OP-DONE-R006",
+        "OP-DONE-R007"
+      ],
+      "796": [
+        "OP-DONE-R008",
+        "OP-DONE-R009"
+      ],
+      "797": [
+        "OP-DONE-R010"
+      ],
+      "798": [
+        "OP-DONE-R011",
+        "OP-DONE-R012"
+      ],
+      "799": [
+        "OP-DONE-R013",
+        "OP-DONE-R014"
+      ],
+      "800": [
+        "OP-DONE-R015",
+        "OP-DONE-R016"
+      ],
+      "801": [
+        "OP-DONE-R017"
+      ],
+      "802": [
+        "OP-DONE-R018"
+      ],
+      "803": [
+        "OP-DONE-R019"
+      ],
+      "804": [
+        "OP-DONE-R020"
+      ],
+      "805": [
+        "OP-DONE-R021"
+      ],
+      "806": [
+        "OP-DONE-R022",
+        "OP-DONE-R023"
+      ],
+      "807": [
+        "OP-DONE-R024"
+      ],
+      "808": [
+        "OP-DONE-R025"
+      ],
+      "809": [
+        "OP-DONE-R026"
+      ],
+      "810": [
+        "OP-DONE-R027"
+      ],
+      "811": [
+        "OP-DONE-R028",
+        "OP-DONE-R029"
+      ],
+      "812": [
+        "OP-DONE-R030"
+      ]
+    }
+  },
+  "source_reverse_review": {
+    "method": "Every nonblank authority line is requirement/risk-bound or explicitly disposed.",
+    "authority_nonblank_line_count": 613,
+    "requirement_or_risk_bound_nonblank_line_count": 520,
+    "explicit_non_requirement_disposition_count": 93,
+    "mandatory_control_lines": [
+      745,
+      764,
+      789
+    ],
+    "dispositions": {
+      "MARKDOWN_HEADING": [
+        1,
+        3,
+        7,
+        36,
+        43,
+        49,
+        51,
+        55,
+        81,
+        113,
+        127,
+        129,
+        135,
+        143,
+        159,
+        170,
+        180,
+        182,
+        193,
+        210,
+        212,
+        219,
+        227,
+        238,
+        352,
+        368,
+        380,
+        382,
+        420,
+        438,
+        451,
+        462,
+        473,
+        475,
+        487,
+        489,
+        499,
+        507,
+        517,
+        525,
+        534,
+        561,
+        573,
+        579,
+        595,
+        610,
+        624,
+        630,
+        632,
+        649,
+        665,
+        682,
+        696,
+        698,
+        713,
+        720,
+        743,
+        768,
+        787
+      ],
+      "MARKDOWN_SEPARATOR": [
+        47,
+        66,
+        178,
+        196,
+        378,
+        471,
+        577,
+        628,
+        694,
+        741,
+        748,
+        766,
+        771,
+        785
+      ],
+      "TABLE_HEADER": [
+        65,
+        195,
+        747,
+        770
+      ],
+      "STRUCTURAL_INTRODUCER": [
+        63,
+        72,
+        115,
+        145,
+        430,
+        700,
+        722
+      ],
+      "CONTEXT_NOT_REQUIREMENT": [
+        191,
+        477,
+        479,
+        480,
+        481,
+        482,
+        483,
+        485
+      ],
+      "RESPONSE_SCOPED_BOUNDARY": [
+        814
+      ]
+    },
+    "unclassified_nonblank_lines": [],
+    "result": "PASS"
+  },
+  "gate_a2": {
+    "stable_ids": true,
+    "source_lines_bound": true,
+    "all_stage_groups_nonempty": true,
+    "global_gate_count_exact": true,
+    "risk_controls_separate": true,
+    "unclassified_normative_lines": [],
+    "result": "PASS"
+  }
+}

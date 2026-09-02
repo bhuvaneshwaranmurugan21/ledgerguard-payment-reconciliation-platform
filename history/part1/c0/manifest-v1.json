@@ -1,0 +1,567 @@
+{
+  "accepted_file_count": 108,
+  "files": [
+    {
+      "git_blob_sha": "db8301b6af1e78324c2c6bca7296149da80f56b1",
+      "logical_path": ".github/ledgerguard-target.json",
+      "sha256": "d9dccdc0dbae17638f02ac6596be1b1f0a8c24dddc57974f97024ed1cc415058"
+    },
+    {
+      "git_blob_sha": "8dfcad0494769a396746924c9ccd4542e58c1915",
+      "logical_path": ".github/workflows/aws-oidc-identity.yml",
+      "sha256": "01ff2fb29d71dc7ed8727b17ee5bb30c0cf0242b40a44b31d66db65fe97702b3"
+    },
+    {
+      "git_blob_sha": "dd213e8ba5c1b249343e282832342312a421a7a4",
+      "logical_path": ".github/workflows/ci.yml",
+      "sha256": "fa33b7e798875f32f06629fb2b958df40a527989c2b04a7c8f2d0649bf65b521"
+    },
+    {
+      "git_blob_sha": "c3ccf3cf55a8c44d34a6d90f81cdbddbf36ca41e",
+      "logical_path": ".gitignore",
+      "sha256": "4073c2428c89a008ebec65c1ae49339286d4a1bb3776d1fbf97dc04260f4e064"
+    },
+    {
+      "git_blob_sha": "bbb4abf7f93df2065041a5e704b1c9b488d4e6f5",
+      "logical_path": "LICENSE",
+      "sha256": "fea41b7927f134e4ce1f46d7bc76253e63461da3e79661b2688bd066cf318f82"
+    },
+    {
+      "git_blob_sha": "b06d4a2830ca65d7fd28f7d35b9c5cc6b5205309",
+      "logical_path": "Makefile",
+      "sha256": "cd1135ef1fd854e7dc7593875f6754ededab9f906233fd5956dc8a02a1ade9e6"
+    },
+    {
+      "git_blob_sha": "5c4a5bf12603fc535094427f91ce8ccb62c57b31",
+      "logical_path": "PROJECT_STATUS.md",
+      "sha256": "5360498d9ba5b0f72217ef8de9a3ccd3d12630983721fd04976b79e7096f080a",
+      "snapshot_path": "history/part1/c0/snapshots/PROJECT_STATUS.md"
+    },
+    {
+      "git_blob_sha": "6caed412e3ec4a92d43e709f24046dd79a0e7bd7",
+      "logical_path": "README.md",
+      "sha256": "cb5c8f52512cbb8304e86439a2ca8a7086b7271dda81f4c52e675ebe5cdcdbd0",
+      "snapshot_path": "history/part1/c0/snapshots/README.md"
+    },
+    {
+      "git_blob_sha": "8747c3314ca03a3232d9ab7569bcf7a87d96c8d4",
+      "logical_path": "contracts/active-contract-set-v1.json",
+      "sha256": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288"
+    },
+    {
+      "git_blob_sha": "f6d70b2ad80a8b3589c13d5a13d060fb8a8be950",
+      "logical_path": "contracts/bank-entry-v1.schema.json",
+      "sha256": "2e166412e617bbd4456eeb69b6804861c6f0e40d433f9376253f4a9f13f996b5"
+    },
+    {
+      "git_blob_sha": "5ad49bc26ee4c44a7c00a32fd260c05c2dca41ee",
+      "logical_path": "contracts/case-revision-v1.schema.json",
+      "sha256": "b754befa40ab11f0d1ef6cc310e4b5df00378f779693a4c2c47bae2f8f5989a9"
+    },
+    {
+      "git_blob_sha": "aecbbc7810f88e955f3ab15b52c5eec13eda68b4",
+      "logical_path": "contracts/journal-v1.schema.json",
+      "sha256": "0a663eab588c7389a9a01566e05965a390ed19c469933ae265e5e1ac8c67556d"
+    },
+    {
+      "git_blob_sha": "bb46567eccc9d1aeeb466d978c73fbb4005fc2c6",
+      "logical_path": "contracts/part1-c0-correction-v1.json",
+      "sha256": "5902cf1b41aaa075cf7650cf25246cba9fc5fa040f964e4f537d32b304e8236e"
+    },
+    {
+      "git_blob_sha": "9c773c3e47d086d18850b8cbae33e01fc0201452",
+      "logical_path": "contracts/part1-part2-handoff-v1.json",
+      "sha256": "0133a977743d45e1af733c4d09e3bc7489608112f0b40829fc5f55efe1cdb5ac"
+    },
+    {
+      "git_blob_sha": "6261877acfc935e6329a5a49c91d35aab70f2b70",
+      "logical_path": "contracts/part1-stage0-completion-v1.json",
+      "sha256": "81fb7b9863b255cdc19768e80972e2174f940e0d0be97c31cf6ab0cecd4b66c5"
+    },
+    {
+      "git_blob_sha": "6fae18e823f0a56a211a6bf6bac3875204a16270",
+      "logical_path": "contracts/part1-stage1-completion-v1.json",
+      "sha256": "d766641ccd150f3a188b1d156b912cde7473752c7af911b13876ad2c50a61ece"
+    },
+    {
+      "git_blob_sha": "735f911b2fa305b445f223d0f30f7e356c8c15cd",
+      "logical_path": "contracts/part1-stage2-completion-v1.json",
+      "sha256": "8464ce66ddc8dcf153f8a09915d0676778caf140e28533a864ab14e40adb7fe9"
+    },
+    {
+      "git_blob_sha": "219d6e3ccb01eba9ea0e916ee8a4a11d06b6e9bd",
+      "logical_path": "contracts/part1-stage3-completion-v1.json",
+      "sha256": "91135fd72ef6ebd8275cac6172d27a44cf9751c213d79dd2abf407478854fc98"
+    },
+    {
+      "git_blob_sha": "bd6066fb3fe46748b555252d44bc51c514030b99",
+      "logical_path": "contracts/part1-stage4-completion-v1.json",
+      "sha256": "16d91e7169cc68ba83484648c21230fce60a5d3e71cc52a40d2e74ce9e07ee04"
+    },
+    {
+      "git_blob_sha": "2e14485577e932829671140acf002333c6e5ab53",
+      "logical_path": "contracts/processor-event-v1.schema.json",
+      "sha256": "abdb7c1a29042d5a1c8a092ca3b0dfbf61d67f6a9449fbcb6cbd5bbfd2e00420"
+    },
+    {
+      "git_blob_sha": "2966b30040683b1e154e17e39348402c774d65c0",
+      "logical_path": "contracts/processor-settlement-v1.schema.json",
+      "sha256": "9fdef0259b580f799fc93878231ddeb9af8d663ff8bb32ac26e8ecb471a4e53f"
+    },
+    {
+      "git_blob_sha": "cdfb9885cf6d4add4801271fa1dd75af656736da",
+      "logical_path": "contracts/project-completion-v1.json",
+      "sha256": "9a323c8b7800c90fc3ad1697ec407f6756ceebba8df266ab88deba97fe6017b6"
+    },
+    {
+      "git_blob_sha": "68922eea68b6ca9d206bb3d448611cad2c731c2d",
+      "logical_path": "contracts/reconciliation-policy-v1.schema.json",
+      "sha256": "6d460f9336a8c546097813ff8888dc89243f7fa8c89114c48f7d48549d75fa19"
+    },
+    {
+      "git_blob_sha": "14c41e912c059239e0442176c23f77155ba20548",
+      "logical_path": "contracts/reconciliation-proof-v1.schema.json",
+      "sha256": "9b3705bd4bb79b19804bee530c44e705755a04c6904fc7beaed4a8e9233c0e4f"
+    },
+    {
+      "git_blob_sha": "e125991c5720e13a61b5509f0759961fd2c829bb",
+      "logical_path": "contracts/run-manifest-v1.schema.json",
+      "sha256": "409aaf6e889e18cca1b7c040df65b5df7f095c8bba6cad3d5d4ea9c893449dd6"
+    },
+    {
+      "git_blob_sha": "daa5e3e85b589b787974f7112760110d4773bcd4",
+      "logical_path": "contracts/v2/bank-entry-v2.schema.json",
+      "sha256": "3e1a69488ceb91bc8d8e894b58c782aa28dd6e721e78f3ceb5ab51270f1e0470"
+    },
+    {
+      "git_blob_sha": "bf7442b1a5b56a184f4cd8facd5144ae4807ecab",
+      "logical_path": "contracts/v2/case-revision-v2.schema.json",
+      "sha256": "029463cad2665db74ae247640d6a6fcc044fcef900a6c19c2dbfb312b90dc3e1"
+    },
+    {
+      "git_blob_sha": "3fcd5f8d8030d5b2e132f21961d729c79096d767",
+      "logical_path": "contracts/v2/common-v2.schema.json",
+      "sha256": "1d7f57a165e52b1c3ca3a4c8d9321ae18dd364928ce181570fb2377c51bf5ddd"
+    },
+    {
+      "git_blob_sha": "ed1e28a40c5fc682db89dbabbdba05aed18059ed",
+      "logical_path": "contracts/v2/journal-v2.schema.json",
+      "sha256": "8fe2a989f13263fded0b0a645de64c299283c3698c3de821326950d2578e123f"
+    },
+    {
+      "git_blob_sha": "72680d6a51475bbe0fdbd1b3fbe8530931e29f9a",
+      "logical_path": "contracts/v2/processor-event-v2.schema.json",
+      "sha256": "648cdb70cd5693f505d650440913e2ab95f419c0be384122fb0ed0e7d537b91f"
+    },
+    {
+      "git_blob_sha": "9dc13f88ae902e6028d6a07bc71ab3246a1dd18c",
+      "logical_path": "contracts/v2/processor-settlement-v2.schema.json",
+      "sha256": "aeb2fb8828eddf95118700fd9b55072b68da54a60652064214dfba0a7bad35ca"
+    },
+    {
+      "git_blob_sha": "ce161c9d7b49ebcf8e157a92802cc849eb1a9d00",
+      "logical_path": "contracts/v2/reconciliation-policy-v2.schema.json",
+      "sha256": "f908528f2a727f4c50f23791d3e1df4cb0ba73ec4babd80d559947e211813b70"
+    },
+    {
+      "git_blob_sha": "6ce73c43578b9b9c3b9f23c95116e39e06a4e764",
+      "logical_path": "contracts/v2/reconciliation-proof-v2.schema.json",
+      "sha256": "6abe1e8caf86781cc68ee8c60e90c1ad3bb3a63ad820bdcc179d321ac0005f41"
+    },
+    {
+      "git_blob_sha": "ee911cad2330ae9952c8656eac6bdce82291605f",
+      "logical_path": "contracts/v2/run-manifest-v2.schema.json",
+      "sha256": "f795ba6241b24ff0d2c8338abbd8c043a7312e881b6480154ca69a9beef31e64"
+    },
+    {
+      "git_blob_sha": "d7cc060c8664439bae265baa592febd63c118251",
+      "logical_path": "docs/adr/0000-corrective-baseline.md",
+      "sha256": "a1243e7097f36d3aa0fae4c0af3b99ddbb3f88131ff9e76ec73d571d0e4c9c0b"
+    },
+    {
+      "git_blob_sha": "f520c914f599ea59b65968129b992a3d8be1559f",
+      "logical_path": "docs/adr/0001-two-grain-reconciliation.md",
+      "sha256": "b84f5a7d76e9162406e58192f416e6e37850333aa31d597fb1bb5d291f766ed6"
+    },
+    {
+      "git_blob_sha": "a5688bd2cb1f0915f8fb6bb8b566a35c13aae25d",
+      "logical_path": "docs/adr/0002-parquet-proof-storage.md",
+      "sha256": "3b5932029db565a3a6e755d55752661c41408f8057a50b3165060efd60a5a197"
+    },
+    {
+      "git_blob_sha": "313f4979b1d8de8466e0e30c9e1241e7812de068",
+      "logical_path": "docs/adr/0003-late-data-revisions.md",
+      "sha256": "06bd889f3a74c7dd8aff67f54802deb28fb3a7e002d8a83e8a424a98e33b8a70"
+    },
+    {
+      "git_blob_sha": "4fe93bc2168b569e51e62453284b8aaecaf8dae2",
+      "logical_path": "docs/adr/0004-canonical-source-identity.md",
+      "sha256": "c072b63fe49b5cd0654ce93d21f03a09883cd9beba7229d635189cf167cb0c29"
+    },
+    {
+      "git_blob_sha": "954309187e9e7002d8d8618f57e389d79f6a8e69",
+      "logical_path": "docs/adr/0005-exact-bank-allocation.md",
+      "sha256": "a87ed8e538b74f11146809894f4be13b6d0aa373abb0942b769d88364b178e13"
+    },
+    {
+      "git_blob_sha": "2a82dab3e46ced3d256ac8d35a60e65312b69189",
+      "logical_path": "docs/adr/0006-failure-ownership-and-finalization.md",
+      "sha256": "856931574bf51ed111caeb5bc4300c928ad6f6bcb5d9adadebea1043b6f8fdae"
+    },
+    {
+      "git_blob_sha": "60a6b0a4c436e041797d28a265ff1b3198c54ec4",
+      "logical_path": "docs/adr/0007-versioned-contract-set-and-enforcement-layers.md",
+      "sha256": "90e9a01b44b9e5fdb4a8479362232eed8121de7a11f0502f92a0ec85fd36af86"
+    },
+    {
+      "git_blob_sha": "0564569ac1d505cbc13c2ede221b739a05b5dfbe",
+      "logical_path": "docs/adr/0008-canonical-contract-coherence.md",
+      "sha256": "a01262e884fb5b6dee09c5e781b6f7467f889c8ef928c30b322716674b4be533"
+    },
+    {
+      "git_blob_sha": "cb2044c702cbd2b458c74d601f8f6cd437fde28a",
+      "logical_path": "docs/adr/0009-append-only-completion-governance.md",
+      "sha256": "d1b3c05570d83314a59c68916a73b2bf7abe2b3dcf816419837e36b6bd8f6c43"
+    },
+    {
+      "git_blob_sha": "f3115ee732b035bb0b1671f3c078511952045f5c",
+      "logical_path": "docs/adr/0010-truthful-part1-correction.md",
+      "sha256": "9835942957e52adc64340d0ec45be6ef967c23afc3451b492d656a1a96425e04"
+    },
+    {
+      "git_blob_sha": "35084011164b1a8519227384f48a7eebb4049f25",
+      "logical_path": "docs/architecture.md",
+      "sha256": "3431cadc4f1e42b7aa63221a8bca45372bbea230e7f286f42a08b8c062c13483"
+    },
+    {
+      "git_blob_sha": "97cc4a5a1adc04cfe8278b4b8fe6483922f2e8fc",
+      "logical_path": "docs/contract-coherence.md",
+      "sha256": "62569af8bfedabe49637aa2340883b0db985a8273174478054d3473118072720"
+    },
+    {
+      "git_blob_sha": "338183b0953aa02be3a80f839270646975e5c716",
+      "logical_path": "docs/contract-model.md",
+      "sha256": "1ee33cdd3513b7562928b3b9c4627006def828119df11c8f7a36dd146bc629ab"
+    },
+    {
+      "git_blob_sha": "f1a0b65b08871da6d45776bda3c70da41767cbfe",
+      "logical_path": "docs/correctness.md",
+      "sha256": "00e11f75167ae2dbc4e04c8b9158795df1ff76d8e9daf273f33e5623d684725d"
+    },
+    {
+      "git_blob_sha": "10303fc2e1f2ebdf0e272a4f5b1594aa3d4a31ce",
+      "logical_path": "docs/failure-model.md",
+      "sha256": "c6b591ae090b3749d5629dbb90d6147b4284d01a80bdb83920e8b8f87423a78f"
+    },
+    {
+      "git_blob_sha": "9b16976c041deb247e11119eefb91278b5dc9edc",
+      "logical_path": "docs/financial-examples.md",
+      "sha256": "749640accba133005f56bd45c2a076ed8e3a4f0fefb3bdac6ab5402e9a9860d9"
+    },
+    {
+      "git_blob_sha": "67cf3a6928dffe89391e364c996cb10c3d9185a1",
+      "logical_path": "docs/gap-audit.md",
+      "sha256": "59540fe2e9e5cea0ce608f5527571939686be399ada0c6c4f6abf4a5c2559ff2"
+    },
+    {
+      "git_blob_sha": "2dca5d513bbb2d75d89f8dcd9ab0500b5bb23d72",
+      "logical_path": "docs/part1-completion.md",
+      "sha256": "eea35c42a6b32a719d6e2eedcc8a2e584a3274fe12b89f71812f33e54b3a6733"
+    },
+    {
+      "git_blob_sha": "b28d4c61860fa38e9955a3f87f1603190fb3efc9",
+      "logical_path": "docs/part1-correction.md",
+      "sha256": "8a23b12a7296911fad78f07581c6f2062802c951e9b7b114b599eb008f7192e4"
+    },
+    {
+      "git_blob_sha": "0accaecb4990e1653d8e669ab2fc3a6ffc823e26",
+      "logical_path": "docs/part1-requirements.md",
+      "sha256": "967227fe821f2e2bdc2e6722b68c6a1cddc919dd1d47d6c0441933409b1a2e4d"
+    },
+    {
+      "git_blob_sha": "c2556e4bc9b13fcd25b775a2941672ee903fcfc7",
+      "logical_path": "docs/part1-stage2-requirements.md",
+      "sha256": "272f29db1726810a01f55e38fcc20a5601f1a9af22afd3b9e5ed07be369f307e"
+    },
+    {
+      "git_blob_sha": "c1549c57fbf01a9bc46b099c0de02214212e97dc",
+      "logical_path": "docs/part1-stage3-requirements.md",
+      "sha256": "040ce631ff8df22ca7f1920409927265c3bbf26d7597f333c7a40363d53cad01"
+    },
+    {
+      "git_blob_sha": "26f3de954cb3c335bb7d866e4d1441697772407f",
+      "logical_path": "docs/part1-stage4-requirements.md",
+      "sha256": "e3ea7d73d0782bd662eb4158afa5303b5608957f42f6a11cd51bcec62f56b5cc"
+    },
+    {
+      "git_blob_sha": "51a12577e1a4b3c993f85b5c0515bdcdd2d1656e",
+      "logical_path": "docs/scorecard.md",
+      "sha256": "86f9f4c460c304deef44a1bd282a7e62964ff4b7c58003f1c819b106eeeecff9"
+    },
+    {
+      "git_blob_sha": "bd735a0e19c541c38a20cae204dc697fb76d890d",
+      "logical_path": "docs/semantic-decisions.md",
+      "sha256": "1addecd2a40be211d07d00a6d48e5c3c8f1b7b7477b3c021ec5a2439c9e5d8e4"
+    },
+    {
+      "git_blob_sha": "7833223563ca5165867b8f975d0def2cc31e13d7",
+      "logical_path": "docs/stage1-gap-audit.md",
+      "sha256": "9907138b20ea2d0af5ad1e0ce8228c74aa99e94f4265486429e33b1cb1d64470"
+    },
+    {
+      "git_blob_sha": "104917af647ca4125ca364034f869626dd7d9819",
+      "logical_path": "docs/stage2-gap-audit.md",
+      "sha256": "254c9012db0b90eb219ccb793768d1c10e93abce940cac33d34ee85906aa1cb0"
+    },
+    {
+      "git_blob_sha": "5ccd3173858d0108a4a206c7390a12a5ca9b8d69",
+      "logical_path": "docs/stage3-gap-audit.md",
+      "sha256": "86342d10dbf34a4ce49f59ba06acfdde2a4b7f547e537fe453cf7f461ac96169"
+    },
+    {
+      "git_blob_sha": "2dbc860fb80d4d2a110a762162a0412720a85fb4",
+      "logical_path": "docs/stage4-gap-audit.md",
+      "sha256": "1269c71b23cab91c0b0439a2027c8ff769a3fe2a9046832c3f78e0015eff9df2"
+    },
+    {
+      "git_blob_sha": "d391d4978bf5331696d2e853c379658698d9204a",
+      "logical_path": "evidence/part1-c0-local.json",
+      "sha256": "f50bda47848269f6b858fc9e0a181b2f219e03a93c52b61062bb301f00e1a2d5"
+    },
+    {
+      "git_blob_sha": "997756da6aa3727df9b641e00829a472a1ac9208",
+      "logical_path": "evidence/part1-stage0-local.json",
+      "sha256": "1e17b6034731ccf59a44d6f28dc3fd9a87840e08794b72b339ac8ddc20bdc4e7"
+    },
+    {
+      "git_blob_sha": "8bdf5bedf246aa7c493cbfcf16077d87d6837466",
+      "logical_path": "evidence/part1-stage1-local.json",
+      "sha256": "f7a3b39edbdc952942c760820a562ad67b1a810b33732f26f948df9ae047e1f2"
+    },
+    {
+      "git_blob_sha": "0496925c34e288307700944591c10688b7360c70",
+      "logical_path": "evidence/part1-stage2-local.json",
+      "sha256": "2c2ba56ffa26158edc152ecef3077c618f3532ece2a5681e71da5806058923db"
+    },
+    {
+      "git_blob_sha": "2d3d26c7c4f04b63d5a39a1fe4ae3d64adffbc1e",
+      "logical_path": "evidence/part1-stage3-local.json",
+      "sha256": "bc1e11be4995d8748e50f687ade5ed139758952d49232f29b5680a42c423bcc8"
+    },
+    {
+      "git_blob_sha": "cae4f70c167854c9cf0392dac2f7be00a6836744",
+      "logical_path": "evidence/part1-stage4-local.json",
+      "sha256": "964ca551ffba0914047b7ecd761d384cb2ed2f6f53271c4a39ee4682901e4771"
+    },
+    {
+      "git_blob_sha": "0c5dc0b8c9b2ee6e6652e2e651bd8a03efb4a9a1",
+      "logical_path": "history/part1/stage3/PROJECT_STATUS.md",
+      "sha256": "74d3a2250d872dcf32fec050a2e9e7cf8d146875ec5831330b3e3a8875d30c4f"
+    },
+    {
+      "git_blob_sha": "8e2c874dab58ce16826892c907c46a4030448032",
+      "logical_path": "history/part1/stage3/README.md",
+      "sha256": "3950b52c0f68b127ea602eca9eb3d38bfb6c6739e7886024220eaf35f3614687"
+    },
+    {
+      "git_blob_sha": "e7c5ce445eb40681eb254a2fe18c69fdd19bbe64",
+      "logical_path": "history/part1/stage3/manifest-v1.json",
+      "sha256": "e65586f99903f9067fdb698846b3a08fe2e599652cebbd8c1a6f482521f23ef0"
+    },
+    {
+      "git_blob_sha": "bd13e273047992bb6f3b8b19c3a3de69b9efc2b3",
+      "logical_path": "history/part1/stage3/tests/test_contract_coherence.py",
+      "sha256": "16202874220a81e1add901dfb637397b6408ced46cc84ba2324b6f86c9c32772"
+    },
+    {
+      "git_blob_sha": "d91538315e371973a0949a3a340a548ae6daff9a",
+      "logical_path": "history/part1/stage3/tests/test_part1_stage3.py",
+      "sha256": "7f3542ba781f6213fdc2545ab578dfe44f4e649acaaea20b18b6239da68a0f7f"
+    },
+    {
+      "git_blob_sha": "2f81134885f0ae6973dcff932c00a48923e4ed0b",
+      "logical_path": "history/part1/stage4/manifest-v1.json",
+      "sha256": "fa1bebf5af7b8f1d6d4f4e4e5fe07866c9ee3dbd590e6562bcf1adc15ef206af"
+    },
+    {
+      "git_blob_sha": "a802ddef79e3e4ca56fb7509684d3ec668bff8de",
+      "logical_path": "history/part1/stage4/snapshots/PROJECT_STATUS.md",
+      "sha256": "13c05637b492b25ed37488ead5831e79deaf85a2580632fd6b5eb3f8b20e9732"
+    },
+    {
+      "git_blob_sha": "c5a94fadfa47478b90e6b7bcc28c5742428be8e0",
+      "logical_path": "history/part1/stage4/snapshots/README.md",
+      "sha256": "2ad030fdce349d5d7f878ae4e9f229d8fbfd16a1caaea08c89f714d13082f093"
+    },
+    {
+      "git_blob_sha": "58699f545420cb7c20127cb0af73fda7c72cbeee",
+      "logical_path": "history/part1/stage4/snapshots/pyproject.toml",
+      "sha256": "0b7423f0fad1d4210d4352481d54823160f34dd0169e66e16ccce30f099b2b8c"
+    },
+    {
+      "git_blob_sha": "1b2f89447c8a76b3927befc922a5140bbcdd5f5d",
+      "logical_path": "history/part1/stage4/snapshots/src/ledgerguard/foundation.py",
+      "sha256": "9dfef400c294017d0ac5eeac32cd7ed6602f6c45cf19403e3dbe3419814d181b"
+    },
+    {
+      "git_blob_sha": "728ca7a1907f95d9a6eff212c6c1ab50a1f533b4",
+      "logical_path": "history/part1/stage4/snapshots/tests/test_part1_stage4.py",
+      "sha256": "b8e55e92357f9c5c4889f73bd71eff2e282929b60ecb916c460822ea5395d317"
+    },
+    {
+      "git_blob_sha": "1fcc4c0ebae41e3c065fc4b230b369c3a206a0b6",
+      "logical_path": "pyproject.toml",
+      "sha256": "fd804aa15dac6882489168f19c8ff0e29b8b018ed6b24e22d420a78e0f0d28a0",
+      "snapshot_path": "history/part1/c0/snapshots/pyproject.toml"
+    },
+    {
+      "git_blob_sha": "7d67b25b9975827dfe49dd03f1ce56a2ea76c130",
+      "logical_path": "spec/contract-coherence-traceability-v1.json",
+      "sha256": "42b0b01c0ca20aab839a1b4be89ed2e7460e313d84f9c03933b2f98cd6b35bc5"
+    },
+    {
+      "git_blob_sha": "98a599cd3797b0240997ec3cc5dcc0d7a6cd467a",
+      "logical_path": "spec/contract-coherence-v1.json",
+      "sha256": "381a364e4f64dd6371ff6760b25d116ad9d6affebc2cd2ba56cc8fe303967e04"
+    },
+    {
+      "git_blob_sha": "c6356a822b5405d1cdf382bfb62fd889f4680627",
+      "logical_path": "spec/contract-coherence-vectors-v1.json",
+      "sha256": "5dfd2f79ca6204df84fbcafb0405cd663f2e4fe49daf5bfd08c0fe7a7332d5f1"
+    },
+    {
+      "git_blob_sha": "34da251939ccb8cac5cfa43c02c0191591c9d6f8",
+      "logical_path": "spec/contract-invariants-v1.json",
+      "sha256": "50ee82f8126661ca1acba3d91f8bb9d7c47b2267357e31fdbf200c0385b6e212"
+    },
+    {
+      "git_blob_sha": "b361e20ebde8d9d01ce6a476a4cb3e4b5b56455f",
+      "logical_path": "spec/contract-traceability-v1.json",
+      "sha256": "e43f50ac64bb3f41d042be2c37f055dc883c0c1ce1a6a5d5ad2745f094d53477"
+    },
+    {
+      "git_blob_sha": "4fce8f35c49fed4e712f40baf1469acc7d36ca67",
+      "logical_path": "spec/financial-examples-v1.json",
+      "sha256": "241863761f97abc49e69f19a2f22f4c034c89e99acffe3fc021203f8e979bc78"
+    },
+    {
+      "git_blob_sha": "9e062d89d752db69a0c0f7a2e82f36b6544a0a86",
+      "logical_path": "spec/financial-semantics-v1.json",
+      "sha256": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9"
+    },
+    {
+      "git_blob_sha": "8512e6b8372879563f28d231f2ef368c880eeabd",
+      "logical_path": "spec/part1-authority-amendments-v1.json",
+      "sha256": "960e4ef58c88cd9296ace0f0a9d1aae1ce970af8f99d6de1521aed6c71ab4b86"
+    },
+    {
+      "git_blob_sha": "c5475de6604fbc1e45cb16d529d72b39a6403051",
+      "logical_path": "spec/part1-completion-traceability-v1.json",
+      "sha256": "ca7b5b2f9b629b1f7887084b23fd0f41a783f40410fe53ef1ed01a32113e0766"
+    },
+    {
+      "git_blob_sha": "df432449d279617be0a72ff92e12a5d9745b69ba",
+      "logical_path": "spec/part1-foundation-freeze-v1.json",
+      "sha256": "fdf8d390abc5161f83475c71d74eea76e6f7b531fad57aa22feb01bbbb64e764"
+    },
+    {
+      "git_blob_sha": "e45d6916dfae62a20578f8112aacd5618a95fa69",
+      "logical_path": "src/ledgerguard/__init__.py",
+      "sha256": "b2f9721ba85f06064ff87bb2929184a8d1cbe78b7ed81317aa312fd394c27046"
+    },
+    {
+      "git_blob_sha": "1b2f89447c8a76b3927befc922a5140bbcdd5f5d",
+      "logical_path": "src/ledgerguard/foundation.py",
+      "sha256": "9dfef400c294017d0ac5eeac32cd7ed6602f6c45cf19403e3dbe3419814d181b"
+    },
+    {
+      "git_blob_sha": "cfbcee85ff4f8d69b8c4843c72086715abd6bf91",
+      "logical_path": "src/ledgerguard/part1.py",
+      "sha256": "bd3c9df458b1f3bc4b141d8c128c96f86053cf032e4c878f9571fda93d175231"
+    },
+    {
+      "git_blob_sha": "b4333b0dd388a30b70e1c50cf0f797757483204e",
+      "logical_path": "src/ledgerguard/stage0.py",
+      "sha256": "d0e0debac53fddb882291330779b60a2e308e0762328c409489bc94cfa245527"
+    },
+    {
+      "git_blob_sha": "6cbadc5bb51e66fdba144e94082f3eee6fc08cb2",
+      "logical_path": "src/ledgerguard/stage1.py",
+      "sha256": "bc078a9246e4e3600330b1a80ac6ea926b129fdd7d193fb5c5dfb57bd8997ff7"
+    },
+    {
+      "git_blob_sha": "250d21df66c09e39ca85bdae2487751a991a025f",
+      "logical_path": "src/ledgerguard_correction.py",
+      "sha256": "5fe593d0d97ead98ed898cfe7fdb001b95331b73a04003bc023356855a6ad033"
+    },
+    {
+      "git_blob_sha": "07940bb14358c10d2dbb62c052dd4ec101398d6f",
+      "logical_path": "tests/test_contract_coherence.py",
+      "sha256": "1c530a14cb53e3e462847dd57c13060eeb14b195a9c501ff6efd4093cf4ff6bb"
+    },
+    {
+      "git_blob_sha": "281672ae3dd3fc6da8e8f0690b19113a56e0e96f",
+      "logical_path": "tests/test_financial_contracts_v2.py",
+      "sha256": "ab8738a3f9493bad64fbd8d849194a8134a42591e44618aa6400764837518ff8"
+    },
+    {
+      "git_blob_sha": "8cda63b7b6443595889d370b317b0b63bfd7853b",
+      "logical_path": "tests/test_financial_semantics_spec.py",
+      "sha256": "c347af08483c51e936103982a7197ce93da01e1d4687f3eefd0feb657f410103"
+    },
+    {
+      "git_blob_sha": "4638b53b1c1f8f292c715e9dc27fefd5ed79b728",
+      "logical_path": "tests/test_foundation.py",
+      "sha256": "0d7028f4ae77d066c578fb9b31de9ffd6c7e5e0219878c4256a2cd57bccbc0d2"
+    },
+    {
+      "git_blob_sha": "a979986fd2dc67b3e51f144e354b1822029c548a",
+      "logical_path": "tests/test_part1_correction.py",
+      "sha256": "cbd4488608a1082791e8ac6bf440e5fbdf8b08afe823b45343dac4a2b23c55ad",
+      "snapshot_path": "history/part1/c0/snapshots/tests/test_part1_correction.py"
+    },
+    {
+      "git_blob_sha": "9f573a3871afc4562de9da4d4ef560ca1983356b",
+      "logical_path": "tests/test_part1_stage0.py",
+      "sha256": "177d4f32a6400846917f779c1e79dc00c26639073dc04e1dce094e678b57ba97"
+    },
+    {
+      "git_blob_sha": "1f89aea1737d001475a530a7ae3685b4f39ddf12",
+      "logical_path": "tests/test_part1_stage1.py",
+      "sha256": "95dd49687ba96fb5d47379217d947e49cc8f22eb58af203428337d0ae67991c1"
+    },
+    {
+      "git_blob_sha": "8cca91e8cc4c02a8373e371232e79fab56f36f78",
+      "logical_path": "tests/test_part1_stage2.py",
+      "sha256": "3d27aeffda1bab7865d496ed9c6348ac91c545a3704bffb7b79ba2995fe06a81"
+    },
+    {
+      "git_blob_sha": "f6c76b3bb6fb97295d46bf0744054520c18c038c",
+      "logical_path": "tests/test_part1_stage3.py",
+      "sha256": "5e3ac46944c7d7627bf6c3a42cb30dfdb357a1d428e69268003a29fb434dab78"
+    },
+    {
+      "git_blob_sha": "62ac643c66969f26322d8836566634ea307822d5",
+      "logical_path": "tests/test_part1_stage4.py",
+      "sha256": "4f12ebfcd7cf280b551cca8847a74a8ba59a7b97af83aeb936e8e19160153e1a"
+    }
+  ],
+  "mutable_snapshot_count": 4,
+  "part": 1,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "schema_version": "1.0",
+  "source": {
+    "base_main_sha": "2842550d24559a636ff5f15cbd6ea4be1c2ab1c1",
+    "branch": "part1-c0-truthful-correction",
+    "c0_contract_sha256": "5902cf1b41aaa075cf7650cf25246cba9fc5fa040f964e4f537d32b304e8236e",
+    "c0_sha256": "c6d6476cfb1e1b3a62d9e3fca4d488db3f98fa96f22282d44a154fda727a6877",
+    "exact_head_ci_conclusion": "success",
+    "exact_head_ci_run_id": 33589011816,
+    "exact_head_sha": "6efe71b9ec54482527793b31ad990f980e2442ca",
+    "pr_number": 8,
+    "pr_state": "DRAFT",
+    "tree_sha": "27b8e3fe5759243411b546641b4219dbc63457fb"
+  },
+  "state": "C0_EXACT_HEAD_TREE_PRESERVED",
+  "workstream": "C0"
+}

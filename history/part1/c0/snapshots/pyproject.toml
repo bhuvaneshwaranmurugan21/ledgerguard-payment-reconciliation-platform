@@ -17,8 +17,7 @@ dev = [
 ]
 
 [project.scripts]
-ledgerguard-foundation = "ledgerguard_correction_c1:main"
-ledgerguard-c0 = "ledgerguard_correction_c1:main_c0"
+ledgerguard-foundation = "ledgerguard_correction:main"
 ledgerguard-stage4 = "ledgerguard.part1:main"
 
 [tool.setuptools.packages.find]

@@ -1,0 +1,125 @@
+{
+  "acceptance_gates": {
+    "c0_exact_checkpoint_reproduces": "REQUIRED",
+    "checked_in_generation_is_deterministic": "REQUIRED",
+    "exact_14_gate_inventory": "REQUIRED",
+    "exact_331_forward_mapping": "REQUIRED",
+    "exact_head_ci": "REQUIRED_BEFORE_C1_ACCEPTANCE",
+    "full_regression_suite": "REQUIRED",
+    "mechanical_remaining_work": "REQUIRED",
+    "no_aws_or_infrastructure_mutation": "REQUIRED",
+    "phase8_verdict_immutability": "REQUIRED",
+    "reverse_mapping_and_evidence_disposition": "REQUIRED",
+    "source_digest_binding": "REQUIRED",
+    "zero_effective_orphans": "REQUIRED"
+  },
+  "artifacts": {
+    "active_project_status": {
+      "path": "PROJECT_STATUS.md",
+      "sha256": "f82ca2da7e728aad2449b649644d8a3c436f61db8581bf7c302c7e56d3ead498"
+    },
+    "active_readme": {
+      "path": "README.md",
+      "sha256": "b8453e4f89689bdf18d395663310a01bd8bd2a4b6e8c26da0bebdc9719171603"
+    },
+    "adr": {
+      "path": "docs/adr/0011-original-requirement-and-gate-authority.md",
+      "sha256": "2137d4a13dde63cb84880a5a3c0d5192f266b843f00346743db49cfc8e94c5e9"
+    },
+    "c0_compatibility_tests": {
+      "path": "tests/test_part1_correction.py",
+      "sha256": "156a61591c497803283378cd2668910632c5b8e80da28aee5d5f62724b36f8d2"
+    },
+    "c0_history_manifest": {
+      "path": "history/part1/c0/manifest-v1.json",
+      "sha256": "6933360fe19fe292d4faa9245ece10b0dab71d85ff268608345f00be2ce956f7"
+    },
+    "c1_tests": {
+      "path": "tests/test_part1_correction_c1.py",
+      "sha256": "1544d3b8e43aecba87b006f4bd2cfac77bde8592dd710c795e1b07fe7766fb9f"
+    },
+    "c1_validator": {
+      "path": "src/ledgerguard_correction_c1.py",
+      "sha256": "64145f9d33ae689f20743725cb7f360b47b3ee11f454796f680204e99d9e59f9"
+    },
+    "gate_registry": {
+      "path": "spec/part1-gate-registry-v1.json",
+      "sha256": "015b48e75e77b3b2194d2cf6dafa03cb76bc928a0b2ebd28f83de1effe3237a9"
+    },
+    "generation_tool": {
+      "path": "tools/build_part1_requirement_ledger.py",
+      "sha256": "f37a51111a188cbbb6e8e3257d1bff3c0ed43a50724c0aa19340a82c806cdb92"
+    },
+    "package_configuration": {
+      "path": "pyproject.toml",
+      "sha256": "79023b5d4d8b85cc27babd6b754da79495afc5026abfe565a0fb41501248696e"
+    },
+    "phase4_mapping": {
+      "path": "evidence/part1-phase4-bidirectional-mapping-v1.json",
+      "sha256": "cef0a8214bb254fc1dfe820af4f3ed12096f5efc2a5eb47b603b84aea5763808"
+    },
+    "phase8_verdict": {
+      "path": "evidence/part1-phase8-requirement-verdict-v1.json",
+      "sha256": "51bc3b84a0d6e05eced99789b157bce5c5b5a60139f55069010a9283ec9b1561"
+    },
+    "requirement_authority_document": {
+      "path": "docs/part1-requirement-authority.md",
+      "sha256": "0a6ff21220edd86a97d367976729574f82b33d91e45061f391e143e550532d25"
+    },
+    "requirement_catalog": {
+      "path": "spec/part1-original-requirements-v1.json",
+      "sha256": "72052fb97451a4966d592bd49ad2a25faf83fc8a5a9b29631905acab9e3263af"
+    },
+    "requirement_ledger": {
+      "path": "spec/part1-requirement-ledger-v1.json",
+      "sha256": "1a866e7f1dfdb8a9e4e172fd9c308589f6d000268acd8f1336be868d2461b296"
+    },
+    "requirement_reverse_index": {
+      "path": "spec/part1-requirement-reverse-index-v1.json",
+      "sha256": "ebe5d5d6f4904893fb07718d9eb1709068e29a04fdeaab6d3986270db1ff2802"
+    }
+  },
+  "c0_dependency": {
+    "c0_sha256": "c6d6476cfb1e1b3a62d9e3fca4d488db3f98fa96f22282d44a154fda727a6877",
+    "manifest_sha256": "6933360fe19fe292d4faa9245ece10b0dab71d85ff268608345f00be2ce956f7"
+  },
+  "execution_boundary": {
+    "accepted_v2_mutated": false,
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "c0_history_rewritten": false,
+    "historical_v1_mutated": false,
+    "infrastructure_mutated": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false,
+    "phase8_verdict_relabelled": false,
+    "reconciliation_runtime_added": false,
+    "stage0_to_stage4_history_rewritten": false
+  },
+  "gate_count": 14,
+  "part": 1,
+  "part1_state": "PART1_CORRECTION_IN_PROGRESS",
+  "part2_entry": "BLOCKED",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "promotion_boundary": {
+    "exact_head_ci": "REQUIRED",
+    "merge_in_c1": "PROHIBITED",
+    "post_merge_main_ci": "DEFERRED_TO_C6_C7",
+    "pull_request_number": 8,
+    "pull_request_state": "DRAFT_REQUIRED"
+  },
+  "remaining_gate_count": 9,
+  "remaining_requirement_count": 84,
+  "remaining_workstreams": [
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7"
+  ],
+  "requirement_count": 331,
+  "schema_version": "1.0.0",
+  "state": "ORIGINAL_REQUIREMENT_AUTHORITY_ESTABLISHED",
+  "workstream": "C1"
+}

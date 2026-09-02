@@ -1,0 +1,465 @@
+{
+  "final_c7_gate_audit_required": true,
+  "gate_count": 14,
+  "gates": [
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "The exact original/current disposition inventory and draft chronology are incomplete.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Make documentation, contracts, reason domains, target claims, and links one checked system.",
+      "correction_owner": "C3",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R001",
+      "implementation_remaining": true,
+      "requirement": "Draft disposition audited: every original and current surface has an exact disposition.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        749,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Keys, signs, totals, pairwise deltas, and exact bank allocation have one frozen interpretation.",
+      "baseline_verdict": "PASS",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E025",
+        "REPO-E035",
+        "REPO-E039",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "NO_CORRECTION_REQUIRED_PRESERVE_ACCEPTED_EVIDENCE",
+      "correction_owner": "PRESERVED_STAGE0_TO_STAGE4_AUTHORITY",
+      "effective_gate_state": "PRESERVED_PASS",
+      "final_c7_audit_required": false,
+      "gate_id": "OP-GATE-R002",
+      "implementation_remaining": false,
+      "requirement": "Two-grain model frozen: keys, signs, totals, deltas, and bank allocation are unambiguous.",
+      "resolution_state": "PRESERVED_PHASE8_PASS",
+      "source_lines": [
+        745,
+        750,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "The active v2 schemas pass structural, offline-reference, fixture, and semantic validation; the versioning-authority deviation is tracked separately.",
+      "baseline_verdict": "PASS",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "NO_CORRECTION_REQUIRED_PRESERVE_ACCEPTED_EVIDENCE",
+      "correction_owner": "PRESERVED_STAGE0_TO_STAGE4_AUTHORITY",
+      "effective_gate_state": "PRESERVED_PASS",
+      "final_c7_audit_required": false,
+      "gate_id": "OP-GATE-R003",
+      "implementation_remaining": false,
+      "requirement": "Contracts valid: structural and semantic validation both pass.",
+      "resolution_state": "PRESERVED_PHASE8_PASS",
+      "source_lines": [
+        745,
+        751,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Canonicalization, source identity, replay/conflict, and hashing rules are deterministic and tested.",
+      "baseline_verdict": "PASS",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E038",
+        "REPO-E042",
+        "REPO-E066",
+        "REPO-E074",
+        "REPO-E075",
+        "REPO-E080"
+      ],
+      "correction_action": "NO_CORRECTION_REQUIRED_PRESERVE_ACCEPTED_EVIDENCE",
+      "correction_owner": "PRESERVED_STAGE0_TO_STAGE4_AUTHORITY",
+      "effective_gate_state": "PRESERVED_PASS",
+      "final_c7_audit_required": false,
+      "gate_id": "OP-GATE-R004",
+      "implementation_remaining": false,
+      "requirement": "Identity model frozen: canonicalization, hashing, and idempotency rules are exact.",
+      "resolution_state": "PRESERVED_PHASE8_PASS",
+      "source_lines": [
+        745,
+        752,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Failure ownership is strong, but every documented behavioral scenario is not mapped to an exact reason code.",
+      "baseline_verdict": "PARTIAL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E048",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Make documentation, contracts, reason domains, target claims, and links one checked system.",
+      "correction_owner": "C3",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R005",
+      "implementation_remaining": true,
+      "requirement": "Failure model frozen: every required failure maps to one ownership and reason class.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        753,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Proof and case histories are immutable and predecessor-linked in the frozen model.",
+      "baseline_verdict": "PASS",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E026",
+        "REPO-E032",
+        "REPO-E037",
+        "REPO-E040",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "NO_CORRECTION_REQUIRED_PRESERVE_ACCEPTED_EVIDENCE",
+      "correction_owner": "PRESERVED_STAGE0_TO_STAGE4_AUTHORITY",
+      "effective_gate_state": "PRESERVED_PASS",
+      "final_c7_audit_required": false,
+      "gate_id": "OP-GATE-R006",
+      "implementation_remaining": false,
+      "requirement": "Revision model frozen: proof and case histories are immutable and attributable.",
+      "resolution_state": "PRESERVED_PHASE8_PASS",
+      "source_lines": [
+        745,
+        754,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Unqualified AWS false claims violate the truthful evidence boundary.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Make documentation, contracts, reason domains, target claims, and links one checked system.",
+      "correction_owner": "C3",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R007",
+      "implementation_remaining": true,
+      "requirement": "Evidence boundary frozen: claims use only approved evidence levels.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        755,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Targets exceed seven and are labelled as targets, but required per-dimension evidence fields are absent.",
+      "baseline_verdict": "PARTIAL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E021",
+        "REPO-E056",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Correct completion-contract and scorecard machine authority without changing accepted schema bytes.",
+      "correction_owner": "C2",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R008",
+      "implementation_remaining": true,
+      "requirement": "Scorecard frozen: every target exceeds seven and none is misrepresented as achieved.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        756,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "The current target is statically coherent, but the only historical OIDC proof used a different account and region and live frozen-target identity is unclaimed.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "AUDIT-PHASE3-GITHUB",
+        "AUDIT-PHASE3-NEGATIVE",
+        "GH-JOB-94533258511",
+        "GH-JOB-94682310414",
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-31722045599",
+        "GH-RUN-31772907306",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "NEG-E001",
+        "NEG-E002",
+        "NEG-E003",
+        "NEG-E004",
+        "NEG-E005",
+        "NEG-E006",
+        "NEG-E007",
+        "NEG-E008",
+        "NEG-E009",
+        "NEG-E010",
+        "NEG-E011",
+        "REPO-E001",
+        "REPO-E002",
+        "REPO-E018",
+        "REPO-E021",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Make documentation, contracts, reason domains, target claims, and links one checked system.",
+      "correction_owner": "C3",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R009",
+      "implementation_remaining": true,
+      "requirement": "AWS target correct: repository, account, region, role, and runtime match everywhere.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        757,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [
+        "P1-AWS-001"
+      ],
+      "baseline_rationale": "A historical push-triggered automatic credential path executed.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "AUDIT-PHASE3-GITHUB",
+        "AUDIT-PHASE3-NEGATIVE",
+        "GH-JOB-94533258511",
+        "GH-JOB-94682310414",
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-31722045599",
+        "GH-RUN-31772907306",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "NEG-E001",
+        "NEG-E002",
+        "NEG-E003",
+        "NEG-E004",
+        "NEG-E005",
+        "NEG-E006",
+        "NEG-E007",
+        "NEG-E008",
+        "NEG-E009",
+        "NEG-E010",
+        "NEG-E011",
+        "REPO-E001",
+        "REPO-E002",
+        "REPO-E018",
+        "REPO-E021",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Apply the owner-approved append-only authority amendment and preserve the historical fact.",
+      "correction_owner": "C0",
+      "effective_gate_state": "FORMALLY_AMENDED",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R010",
+      "implementation_remaining": false,
+      "requirement": "AWS execution prohibited: no automatic credential or workload path exists.",
+      "resolution_state": "FORMALLY_AMENDED_C0_PENDING_FINAL_AUDIT",
+      "source_lines": [
+        745,
+        758,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Original traceability, exact contract names, link checking, and AWS claim consistency fail.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080",
+        "REPO-E090",
+        "REPO-E095"
+      ],
+      "correction_action": "Make documentation, contracts, reason domains, target claims, and links one checked system.",
+      "correction_owner": "C3",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R011",
+      "implementation_remaining": true,
+      "requirement": "Documentation consistent: requirements, schemas, tests, and documentation have no contradiction.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        759,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Required branch coverage, complete-command enforcement, and documentation mutants are incomplete.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080",
+        "REPO-E095"
+      ],
+      "correction_action": "Harden the complete local validator, coverage, dependency, and mutation gates.",
+      "correction_owner": "C4",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R012",
+      "implementation_remaining": true,
+      "requirement": "Foundation validator adversarially proven: known invalid mutations fail closed.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        760,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "The exact head passed the configured CI, but configured CI omitted mandatory coverage, mutation, complete documentation, and evidence-bundle checks.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Satisfy prospective draft, exact-head, premerge, merge, and post-merge controls without bypass.",
+      "correction_owner": "C6",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R013",
+      "implementation_remaining": true,
+      "requirement": "PR CI successful: the exact corrective head passes every required check.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        761,
+        764
+      ]
+    },
+    {
+      "amendment_ids": [],
+      "baseline_rationale": "Main CI passed independently but executed the same incomplete required-check set.",
+      "baseline_verdict": "FAIL",
+      "candidate_evidence_ids": [
+        "GH-MAIN-REF",
+        "GH-PR-007",
+        "GH-RUN-33528424730",
+        "GH-RUN-33528779642",
+        "REPO-E018",
+        "REPO-E066",
+        "REPO-E080"
+      ],
+      "correction_action": "Satisfy prospective draft, exact-head, premerge, merge, and post-merge controls without bypass.",
+      "correction_owner": "C6",
+      "effective_gate_state": "OPEN",
+      "final_c7_audit_required": true,
+      "gate_id": "OP-GATE-R014",
+      "implementation_remaining": true,
+      "requirement": "Main CI successful: the merged main commit passes independently.",
+      "resolution_state": "CORRECTION_REQUIRED",
+      "source_lines": [
+        745,
+        762,
+        764
+      ]
+    }
+  ],
+  "part": 1,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "remaining_gate_ids": [
+    "OP-GATE-R001",
+    "OP-GATE-R005",
+    "OP-GATE-R007",
+    "OP-GATE-R008",
+    "OP-GATE-R009",
+    "OP-GATE-R011",
+    "OP-GATE-R012",
+    "OP-GATE-R013",
+    "OP-GATE-R014"
+  ],
+  "schema_version": "1.0",
+  "state": "EXACT_ORIGINAL_14_GATE_AUTHORITY_ESTABLISHED",
+  "summary": {
+    "FORMALLY_AMENDED": 1,
+    "OPEN": 9,
+    "PRESERVED_PASS": 4,
+    "total": 14
+  },
+  "workstream": "C1"
+}

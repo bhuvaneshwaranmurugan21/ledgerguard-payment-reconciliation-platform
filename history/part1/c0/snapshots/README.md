@@ -38,9 +38,7 @@ corrective completion authority.
 | Corrected active `v2` contracts | `LOCAL_VERIFIED` after CI |
 | Canonical contract coherence | `LOCAL_VERIFIED` after CI |
 | Historical Stage 4 governance | `LOCAL_VERIFIED` and byte-preserved |
-| C0 truthful correction checkpoint | `EXACT_HEAD_CI_VERIFIED` and byte-preserved |
-| C1 requirement and gate authority | `LOCAL_VERIFIED` — 331/331 owned, 14/14 inventoried, zero effective orphans |
-| Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — immutable baseline is 235/331 pass; 84 implementation corrections remain |
+| Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — 235/331 requirements and 4/14 gates pass |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
@@ -59,10 +57,7 @@ defined by the [coherence model](docs/contract-coherence.md) and
 [Stage 3 gap audit](docs/stage3-gap-audit.md). Active Part 1 authority is the
 [corrective completion document](docs/part1-correction.md), the
 [C0 correction contract](contracts/part1-c0-correction-v1.json), and the
-[owner-approved amendments](spec/part1-authority-amendments-v1.json). C1 adds the
-[requirement and gate authority](docs/part1-requirement-authority.md), its deterministic
-[331-requirement ledger](spec/part1-requirement-ledger-v1.json), and the exact
-[14-gate registry](spec/part1-gate-registry-v1.json). The prior
+[owner-approved amendments](spec/part1-authority-amendments-v1.json). The prior
 [Stage 4 completion document](docs/part1-completion.md) and
 [Part 2 handoff](contracts/part1-part2-handoff-v1.json) are preserved historical authorities, not
 permission to begin Part 2. Historical stage authorities and every v1/v2 schema remain immutable.
@@ -72,7 +67,6 @@ permission to begin Part 2. Historical stage authorities and every v1/v2 schema 
 ```bash
 python -m pip install -e '.[dev]'
 ledgerguard-foundation
-ledgerguard-c0
 ruff format --check .
 ruff check .
 mypy src
