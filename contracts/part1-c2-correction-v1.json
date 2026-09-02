@@ -1,0 +1,116 @@
+{
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "workstream": "C2",
+  "state": "COMPLETION_AND_SCORECARD_AUTHORITY_ESTABLISHED",
+  "part1_state": "PART1_CORRECTION_IN_PROGRESS",
+  "part2_entry": "BLOCKED",
+  "c1_dependency": {
+    "manifest_sha256": "0c5469bd6de0ec9be71f4e4c3e74fb7659261751836c0f4a7263b357768bf7c4",
+    "c1_sha256": "d22707d2583873a1ebbda3d1562fe10a345084ab9c7a8511888ce9449d3ac222",
+    "exact_head_ci_run_id": 33594729489
+  },
+  "correction_requirement_ids": [
+    "OP-S2-R021",
+    "OP-S3-R005",
+    "OP-S3-R006",
+    "OP-S3-R007",
+    "OP-S3-R008",
+    "OP-GATE-R008"
+  ],
+  "locally_addressed_count": 6,
+  "implementation_remaining_count": 78,
+  "remaining_workstreams": ["C3", "C4", "C5", "C6", "C7"],
+  "scorecard_dimension_count": 12,
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "stage0_to_stage4_history_rewritten": false,
+    "c0_history_rewritten": false,
+    "c1_history_rewritten": false,
+    "historical_v1_mutated": false,
+    "accepted_v2_mutated": false,
+    "phase8_verdict_relabelled": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false
+  },
+  "promotion_boundary": {
+    "pull_request_number": 8,
+    "pull_request_state": "DRAFT_REQUIRED",
+    "exact_head_ci": "REQUIRED",
+    "merge_in_c2": "PROHIBITED",
+    "post_merge_main_ci": "DEFERRED_TO_C6_C7"
+  },
+  "artifacts": {
+    "c1_history_manifest": {
+      "path": "history/part1/c1/manifest-v1.json",
+      "sha256": "0c5469bd6de0ec9be71f4e4c3e74fb7659261751836c0f4a7263b357768bf7c4"
+    },
+    "completion_schema": {
+      "path": "spec/part1-completion-authority-v2.schema.json",
+      "sha256": "c02245115efc53195a0d4fc3424ad5e27920fe05dc4fb6efa1e90b89bf6e5ef6"
+    },
+    "completion_authority": {
+      "path": "contracts/part1-completion-authority-v2.json",
+      "sha256": "51ab3b72a41687457c69a8abfce711b55b393dc2830e635d94bb514445bc093b"
+    },
+    "historical_completion_contract": {
+      "path": "contracts/project-completion-v1.json",
+      "sha256": "9a323c8b7800c90fc3ad1697ec407f6756ceebba8df266ab88deba97fe6017b6"
+    },
+    "authority_amendments": {
+      "path": "spec/part1-authority-amendments-v1.json",
+      "sha256": "960e4ef58c88cd9296ace0f0a9d1aae1ce970af8f99d6de1521aed6c71ab4b86"
+    },
+    "requirement_ledger": {
+      "path": "spec/part1-requirement-ledger-v1.json",
+      "sha256": "1a866e7f1dfdb8a9e4e172fd9c308589f6d000268acd8f1336be868d2461b296"
+    },
+    "gate_registry": {
+      "path": "spec/part1-gate-registry-v1.json",
+      "sha256": "015b48e75e77b3b2194d2cf6dafa03cb76bc928a0b2ebd28f83de1effe3237a9"
+    },
+    "aws_target": {
+      "path": ".github/ledgerguard-target.json",
+      "sha256": "d9dccdc0dbae17638f02ac6596be1b1f0a8c24dddc57974f97024ed1cc415058"
+    },
+    "completion_authority_doc": {
+      "path": "docs/part1-completion-authority.md",
+      "sha256": "9af99b575c3ca323861293b82ffb9374e1746c0061dc68d1a7ed87341777b831"
+    },
+    "completion_authority_adr": {
+      "path": "docs/adr/0012-schema-backed-completion-and-scorecard-authority.md",
+      "sha256": "cac612184486dca8e1bddc46503faebc5eaf00b49adb2fb54d502e69922eb001"
+    },
+    "scorecard_doc": {
+      "path": "docs/scorecard-v2.md",
+      "sha256": "c218fc06d2217fc58c7fefac01fe8a69272795b6b664d285f73e3c0594571100"
+    },
+    "readme": {
+      "path": "README.md",
+      "sha256": "6fc635b52933c41ce9a7d90c3ae5d0f99e8ffa27662b18c620cbb88ea4fe6328"
+    },
+    "project_status": {
+      "path": "PROJECT_STATUS.md",
+      "sha256": "f7f1681b3633b574fb3845f654f1e79566136bae0c88a83f2e514ea07db54cb3"
+    },
+    "c2_validator": {
+      "path": "src/ledgerguard_correction_c2.py",
+      "sha256": "cbdefa94520d5475712463c5ad60deddc79823cb7c216be69bc9e60a2f5b5561"
+    },
+    "c2_tests": {
+      "path": "tests/test_part1_correction_c2.py",
+      "sha256": "2ea5bd2ec363f251fa8fc7e370089374c2a641b8276707e55a418b2bc86cb3d3"
+    },
+    "c1_compatibility_tests": {
+      "path": "tests/test_part1_correction_c1.py",
+      "sha256": "a743de521ef08866251df4aad7c7681edb56bf99aade028778c404ab6833a16e"
+    },
+    "entrypoint_configuration": {
+      "path": "pyproject.toml",
+      "sha256": "f95bb0be897997fa94b613706dae8ff9a120d0255d01074fcdc67553822f159f"
+    }
+  }
+}

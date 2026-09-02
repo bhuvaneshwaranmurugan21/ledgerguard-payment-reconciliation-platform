@@ -1,0 +1,210 @@
+{
+  "schema_version": "2.0.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "state": "PART1_CORRECTION_IN_PROGRESS",
+  "project_state": "PROJECT_IN_PROGRESS",
+  "part2_entry": "BLOCKED",
+  "authority_supersession": {
+    "historical_contract_path": "contracts/project-completion-v1.json",
+    "historical_contract_sha256": "9a323c8b7800c90fc3ad1697ec407f6756ceebba8df266ab88deba97fe6017b6",
+    "historical_status": "PRESERVED_HISTORICAL_AUTHORITY",
+    "active_contract_path": "contracts/part1-completion-authority-v2.json",
+    "domain_schema_change_control_amendment": "P1-CONTRACT-001"
+  },
+  "correction_scope": [
+    "OP-S2-R021",
+    "OP-S3-R005",
+    "OP-S3-R006",
+    "OP-S3-R007",
+    "OP-S3-R008",
+    "OP-GATE-R008"
+  ],
+  "completion_invariants": {
+    "current": {
+      "requirement_count": 331,
+      "phase8_pass_count": 235,
+      "phase8_nonpass_count": 96,
+      "implementation_remaining_count": 84,
+      "mandatory_gate_count": 14,
+      "open_gate_count": 9,
+      "final_c7_audit_required": true
+    },
+    "required_final": {
+      "part1_state": "PART1_FOUNDATION_COMPLETE",
+      "part2_entry": "UNLOCKED",
+      "effective_requirements_pass": 331,
+      "mandatory_gates_pass": 14,
+      "remaining_part1_work": 0,
+      "critical_findings": 0,
+      "major_findings": 0,
+      "exact_head_ci": "PASS",
+      "postmerge_main_ci": "PASS"
+    },
+    "completion_formula": "FORMAL_AMENDMENTS_APPROVED_AND_331_REQUIREMENTS_RESOLVED_AND_14_GATES_PASS_AND_EXACT_HEAD_CI_PASS_AND_POSTMERGE_MAIN_CI_PASS_AND_NO_CRITICAL_OR_MAJOR_FINDINGS_AND_REMAINING_WORK_ZERO"
+  },
+  "scorecard_interpretation": {
+    "numeric_values": "TARGETS_NOT_ACHIEVED_SCORES",
+    "current_evidence": "SCOPED_PER_DIMENSION",
+    "achieved_scores_recorded": false
+  },
+  "scorecard": {
+    "problem_clarity": {
+      "target": 8.5,
+      "score_type": "TARGET",
+      "current_evidence_level": "LOCAL_VERIFIED",
+      "evidence_scope": "Two-grain problem, equations, non-goals, and original requirement authority.",
+      "evidence_required_to_achieve_target": [
+        "Final contradiction-free documentation audit",
+        "Final C7 conformance pass"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Stage 5 documentation consistency", "Final C7 adjudication"]
+    },
+    "architecture_quality": {
+      "target": 8.0,
+      "score_type": "TARGET",
+      "current_evidence_level": "DESIGNED/MODELED",
+      "evidence_scope": "Requirement-led managed design and recorded Part 1 trade-offs only.",
+      "evidence_required_to_achieve_target": [
+        "Executable local architecture parity",
+        "Bounded managed architecture evidence"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Local implementation parity", "Managed deployment evidence"]
+    },
+    "financial_correctness": {
+      "target": 9.0,
+      "score_type": "TARGET",
+      "current_evidence_level": "LOCAL_VERIFIED",
+      "evidence_scope": "Financial semantics, contract fixtures, and specification examples; no runtime claim.",
+      "evidence_required_to_achieve_target": [
+        "Independent local oracle parity",
+        "Managed three-way reconciliation totals"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Part 2 engine parity", "Managed reconciliation proof"]
+    },
+    "failure_and_recovery": {
+      "target": 8.5,
+      "score_type": "TARGET",
+      "current_evidence_level": "DESIGNED/MODELED",
+      "evidence_scope": "Failure ownership, atomicity, and revision rules are modeled and locally specified.",
+      "evidence_required_to_achieve_target": [
+        "Executable failure matrix",
+        "Managed recovery and teardown evidence"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Local failure execution", "Managed recovery execution"]
+    },
+    "repository_structure": {
+      "target": 8.0,
+      "score_type": "TARGET",
+      "current_evidence_level": "LOCAL_VERIFIED",
+      "evidence_scope": "Contracts, specifications, validators, tests, evidence, history, and documentation boundaries.",
+      "evidence_required_to_achieve_target": [
+        "Complete implementation and infrastructure surfaces",
+        "Final repository-surface audit"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Parts 2-4 repository surfaces", "Final release audit"]
+    },
+    "automated_testing": {
+      "target": 8.5,
+      "score_type": "TARGET",
+      "current_evidence_level": "LOCAL_VERIFIED",
+      "evidence_scope": "Part 1 schema, semantic, coherence, governance, traceability, and mutation tests.",
+      "evidence_required_to_achieve_target": [
+        "Part 2 property and parity tests",
+        "Managed integration and recovery tests"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Coverage and mutation hardening", "Runtime and managed test suites"]
+    },
+    "documentation_and_adrs": {
+      "target": 8.0,
+      "score_type": "TARGET",
+      "current_evidence_level": "LOCAL_VERIFIED",
+      "evidence_scope": "Part 1 architecture, correctness, failure, contract, scorecard, and decision documentation.",
+      "evidence_required_to_achieve_target": [
+        "Machine-checked documentation consistency",
+        "Operations, cost, and release documentation"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Stage 5 consistency gate", "Parts 2-5 operational documentation"]
+    },
+    "evidence_integrity": {
+      "target": 8.5,
+      "score_type": "TARGET",
+      "current_evidence_level": "LOCAL_VERIFIED",
+      "evidence_scope": "Digest-bound Part 1 local evidence and exact historical checkpoint reproduction.",
+      "evidence_required_to_achieve_target": [
+        "Two independent clean-environment bundles",
+        "Immutable complete CI evidence bundle"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["C5 reproducibility bundle", "C6-C7 promotion evidence"]
+    },
+    "real_aws_execution": {
+      "target": 8.0,
+      "score_type": "TARGET",
+      "current_evidence_level": "UNCLAIMED",
+      "evidence_scope": "Historical wrong-target identity-plane execution is not managed reconciliation evidence.",
+      "evidence_required_to_achieve_target": [
+        "Frozen-target managed reconciliation",
+        "Independent AWS totals and teardown evidence"
+      ],
+      "part1_contributes": false,
+      "remaining_evidence": ["Part 3 deployment", "Part 4 managed workload and teardown"]
+    },
+    "performance_and_scale": {
+      "target": 7.5,
+      "score_type": "TARGET",
+      "current_evidence_level": "UNCLAIMED",
+      "evidence_scope": "No performance or scale execution is claimed by Part 1.",
+      "evidence_required_to_achieve_target": [
+        "Comparable 100K and 1M workload runs",
+        "Runtime, skew, throughput, and cost measurements"
+      ],
+      "part1_contributes": false,
+      "remaining_evidence": ["Part 4 bounded scale measurements"]
+    },
+    "security_and_cost_controls": {
+      "target": 8.0,
+      "score_type": "TARGET",
+      "current_evidence_level": "DESIGNED/MODELED",
+      "evidence_scope": "Frozen OIDC target, manual workflow boundary, non-goals, and cost ceiling.",
+      "evidence_required_to_achieve_target": [
+        "Live IAM parity before mutation",
+        "Measured budget and post-run security evidence"
+      ],
+      "part1_contributes": true,
+      "remaining_evidence": ["Managed IAM verification", "Measured cost-control evidence"]
+    },
+    "lifecycle_ownership": {
+      "target": 8.5,
+      "score_type": "TARGET",
+      "current_evidence_level": "DESIGNED/MODELED",
+      "evidence_scope": "Lifecycle requirements and boundaries are designed; operation is unclaimed.",
+      "evidence_required_to_achieve_target": [
+        "Deploy, operate, recover, and destroy execution",
+        "Independent clean-inventory proof"
+      ],
+      "part1_contributes": false,
+      "remaining_evidence": ["Parts 3-4 lifecycle execution", "Final release audit"]
+    }
+  },
+  "aws_boundary": {
+    "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+    "default_branch": "main",
+    "account_id": "857229544428",
+    "region": "ap-southeast-2",
+    "oidc_role_name": "LedgerGuardGitHubOidcRole",
+    "glue_version": "5.1",
+    "spark_version": "3.5.6",
+    "python_version": "3.11",
+    "gross_project_cost_ceiling_usd": 10,
+    "c2_aws_execution": false,
+    "c2_infrastructure_mutation": false
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part1-completion-authority:v2",
+  "title": "LedgerGuard Part 1 completion and scorecard authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "part",
+    "state",
+    "project_state",
+    "part2_entry",
+    "authority_supersession",
+    "correction_scope",
+    "completion_invariants",
+    "scorecard_interpretation",
+    "scorecard",
+    "aws_boundary"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0.0"},
+    "project": {"const": "ledgerguard-payment-reconciliation-platform"},
+    "part": {"const": 1},
+    "state": {"const": "PART1_CORRECTION_IN_PROGRESS"},
+    "project_state": {"const": "PROJECT_IN_PROGRESS"},
+    "part2_entry": {"const": "BLOCKED"},
+    "authority_supersession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historical_contract_path",
+        "historical_contract_sha256",
+        "historical_status",
+        "active_contract_path",
+        "domain_schema_change_control_amendment"
+      ],
+      "properties": {
+        "historical_contract_path": {"const": "contracts/project-completion-v1.json"},
+        "historical_contract_sha256": {
+          "const": "9a323c8b7800c90fc3ad1697ec407f6756ceebba8df266ab88deba97fe6017b6"
+        },
+        "historical_status": {"const": "PRESERVED_HISTORICAL_AUTHORITY"},
+        "active_contract_path": {
+          "const": "contracts/part1-completion-authority-v2.json"
+        },
+        "domain_schema_change_control_amendment": {"const": "P1-CONTRACT-001"}
+      }
+    },
+    "correction_scope": {
+      "const": [
+        "OP-S2-R021",
+        "OP-S3-R005",
+        "OP-S3-R006",
+        "OP-S3-R007",
+        "OP-S3-R008",
+        "OP-GATE-R008"
+      ]
+    },
+    "completion_invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current", "required_final", "completion_formula"],
+      "properties": {
+        "current": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requirement_count",
+            "phase8_pass_count",
+            "phase8_nonpass_count",
+            "implementation_remaining_count",
+            "mandatory_gate_count",
+            "open_gate_count",
+            "final_c7_audit_required"
+          ],
+          "properties": {
+            "requirement_count": {"const": 331},
+            "phase8_pass_count": {"const": 235},
+            "phase8_nonpass_count": {"const": 96},
+            "implementation_remaining_count": {"const": 84},
+            "mandatory_gate_count": {"const": 14},
+            "open_gate_count": {"const": 9},
+            "final_c7_audit_required": {"const": true}
+          }
+        },
+        "required_final": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "part1_state",
+            "part2_entry",
+            "effective_requirements_pass",
+            "mandatory_gates_pass",
+            "remaining_part1_work",
+            "critical_findings",
+            "major_findings",
+            "exact_head_ci",
+            "postmerge_main_ci"
+          ],
+          "properties": {
+            "part1_state": {"const": "PART1_FOUNDATION_COMPLETE"},
+            "part2_entry": {"const": "UNLOCKED"},
+            "effective_requirements_pass": {"const": 331},
+            "mandatory_gates_pass": {"const": 14},
+            "remaining_part1_work": {"const": 0},
+            "critical_findings": {"const": 0},
+            "major_findings": {"const": 0},
+            "exact_head_ci": {"const": "PASS"},
+            "postmerge_main_ci": {"const": "PASS"}
+          }
+        },
+        "completion_formula": {
+          "const": "FORMAL_AMENDMENTS_APPROVED_AND_331_REQUIREMENTS_RESOLVED_AND_14_GATES_PASS_AND_EXACT_HEAD_CI_PASS_AND_POSTMERGE_MAIN_CI_PASS_AND_NO_CRITICAL_OR_MAJOR_FINDINGS_AND_REMAINING_WORK_ZERO"
+        }
+      }
+    },
+    "scorecard_interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numeric_values", "current_evidence", "achieved_scores_recorded"],
+      "properties": {
+        "numeric_values": {"const": "TARGETS_NOT_ACHIEVED_SCORES"},
+        "current_evidence": {"const": "SCOPED_PER_DIMENSION"},
+        "achieved_scores_recorded": {"const": false}
+      }
+    },
+    "scorecard": {"$ref": "#/$defs/scorecard"},
+    "aws_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "default_branch",
+        "account_id",
+        "region",
+        "oidc_role_name",
+        "glue_version",
+        "spark_version",
+        "python_version",
+        "gross_project_cost_ceiling_usd",
+        "c2_aws_execution",
+        "c2_infrastructure_mutation"
+      ],
+      "properties": {
+        "repository": {
+          "const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+        },
+        "default_branch": {"const": "main"},
+        "account_id": {"const": "857229544428"},
+        "region": {"const": "ap-southeast-2"},
+        "oidc_role_name": {"const": "LedgerGuardGitHubOidcRole"},
+        "glue_version": {"const": "5.1"},
+        "spark_version": {"const": "3.5.6"},
+        "python_version": {"const": "3.11"},
+        "gross_project_cost_ceiling_usd": {"const": 10},
+        "c2_aws_execution": {"const": false},
+        "c2_infrastructure_mutation": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "evidenceLevel": {
+      "enum": ["DESIGNED/MODELED", "LOCAL_VERIFIED", "AWS_VERIFIED", "UNCLAIMED"]
+    },
+    "nonEmptyUniqueStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target",
+        "score_type",
+        "current_evidence_level",
+        "evidence_scope",
+        "evidence_required_to_achieve_target",
+        "part1_contributes",
+        "remaining_evidence"
+      ],
+      "properties": {
+        "target": {
+          "type": "number",
+          "exclusiveMinimum": 7,
+          "maximum": 10,
+          "multipleOf": 0.5
+        },
+        "score_type": {"const": "TARGET"},
+        "current_evidence_level": {"$ref": "#/$defs/evidenceLevel"},
+        "evidence_scope": {"type": "string", "minLength": 1},
+        "evidence_required_to_achieve_target": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+        "part1_contributes": {"type": "boolean"},
+        "remaining_evidence": {"$ref": "#/$defs/nonEmptyUniqueStrings"}
+      }
+    },
+    "scorecard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problem_clarity",
+        "architecture_quality",
+        "financial_correctness",
+        "failure_and_recovery",
+        "repository_structure",
+        "automated_testing",
+        "documentation_and_adrs",
+        "evidence_integrity",
+        "real_aws_execution",
+        "performance_and_scale",
+        "security_and_cost_controls",
+        "lifecycle_ownership"
+      ],
+      "properties": {
+        "problem_clarity": {"$ref": "#/$defs/dimension"},
+        "architecture_quality": {"$ref": "#/$defs/dimension"},
+        "financial_correctness": {"$ref": "#/$defs/dimension"},
+        "failure_and_recovery": {"$ref": "#/$defs/dimension"},
+        "repository_structure": {"$ref": "#/$defs/dimension"},
+        "automated_testing": {"$ref": "#/$defs/dimension"},
+        "documentation_and_adrs": {"$ref": "#/$defs/dimension"},
+        "evidence_integrity": {"$ref": "#/$defs/dimension"},
+        "real_aws_execution": {"$ref": "#/$defs/dimension"},
+        "performance_and_scale": {"$ref": "#/$defs/dimension"},
+        "security_and_cost_controls": {"$ref": "#/$defs/dimension"},
+        "lifecycle_ownership": {"$ref": "#/$defs/dimension"}
+      }
+    }
+  }
+}

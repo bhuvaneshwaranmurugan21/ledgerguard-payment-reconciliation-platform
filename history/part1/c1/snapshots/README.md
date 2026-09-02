@@ -40,7 +40,6 @@ corrective completion authority.
 | Historical Stage 4 governance | `LOCAL_VERIFIED` and byte-preserved |
 | C0 truthful correction checkpoint | `EXACT_HEAD_CI_VERIFIED` and byte-preserved |
 | C1 requirement and gate authority | `LOCAL_VERIFIED` — 331/331 owned, 14/14 inventoried, zero effective orphans |
-| C2 completion and scorecard authority | `LOCAL_VERIFIED` candidate — schema-backed invariants and scoped evidence for 12 dimensions |
 | Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — immutable baseline is 235/331 pass; 84 implementation corrections remain |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
@@ -51,7 +50,7 @@ corrective completion authority.
 | Production custody or compliance | `UNCLAIMED` |
 
 See the [architecture](docs/architecture.md), [correctness model](docs/correctness.md),
-[failure model](docs/failure-model.md), [active scorecard authority](docs/scorecard-v2.md), and
+[failure model](docs/failure-model.md), [scorecard](docs/scorecard.md), and
 [project completion contract](contracts/project-completion-v1.json). The active contract authority
 is the [version registry](contracts/active-contract-set-v1.json), supported by the
 [contract model](docs/contract-model.md), [Stage 2 requirements](docs/part1-stage2-requirements.md),
@@ -63,8 +62,7 @@ defined by the [coherence model](docs/contract-coherence.md) and
 [owner-approved amendments](spec/part1-authority-amendments-v1.json). C1 adds the
 [requirement and gate authority](docs/part1-requirement-authority.md), its deterministic
 [331-requirement ledger](spec/part1-requirement-ledger-v1.json), and the exact
-[14-gate registry](spec/part1-gate-registry-v1.json). C2 adds the schema-backed
-[completion and scorecard authority](docs/part1-completion-authority.md). The prior
+[14-gate registry](spec/part1-gate-registry-v1.json). The prior
 [Stage 4 completion document](docs/part1-completion.md) and
 [Part 2 handoff](contracts/part1-part2-handoff-v1.json) are preserved historical authorities, not
 permission to begin Part 2. Historical stage authorities and every v1/v2 schema remain immutable.
