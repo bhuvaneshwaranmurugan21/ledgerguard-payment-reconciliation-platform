@@ -7,7 +7,9 @@
 - Stage: 7 — Promotion and closure
 - State: `PART1_FOUNDATION_COMPLETE`
 - Overall project state: `PROJECT_IN_PROGRESS`
-- Part 2 entry: `UNLOCKED_AFTER_POSTMERGE_MAIN_CI_PASS`
+- Part 2 entry: `UNLOCKED_ONLY_AFTER_RECOVERY_SQUASH_AND_POSTMERGE_MAIN_CI_PASS`
+- Promotion attempt 1: `FAILED_CLOSED_NON_SQUASH_MERGE`
+- Active promotion: `PR_9_SQUASH_RECOVERY`
 - Historical Stage 4 state: `PART1_FOUNDATION_COMPLETE` (preserved, not active)
 - Highest claim: `LOCAL_VERIFIED` for foundation validation
 - AWS execution: false
@@ -44,6 +46,8 @@ all 14 mandatory gates against the corrected repository. There are zero implemen
 zero critical findings, and zero major findings remaining in the Part 1 candidate.
 
 The checked-in state is complete as required before merge. Operational completion and Part 2 entry
-remain conditional on the final immutable PR head passing all checks, squash merge without bypass,
-and an independent successful `main` push CI run. Managed reconciliation, performance, scale, cost,
-and production operation remain `UNCLAIMED` and belong to later parts.
+remain conditional on the replacement immutable PR head passing all checks, squash merge without
+bypass, and an independent successful `main` push CI run. PR #8 passed exact-head and `main` CI, but
+its two-parent merge commit failed the separate squash-only gate. That attempt remains failed and
+Part 2 remains blocked. Managed reconciliation, performance, scale, cost, and production operation
+remain `UNCLAIMED` and belong to later parts.

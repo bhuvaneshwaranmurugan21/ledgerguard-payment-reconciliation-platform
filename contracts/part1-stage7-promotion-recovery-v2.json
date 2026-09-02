@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 7,
+  "foundation_state": "PART1_FOUNDATION_COMPLETE",
+  "operational_closure": "PENDING_REPLACEMENT_PROMOTION",
+  "project_state": "PROJECT_IN_PROGRESS",
+  "part2_entry": "UNLOCKED_ONLY_AFTER_RECOVERY_SQUASH_AND_POSTMERGE_MAIN_CI_PASS",
+  "supersedes_for_active_promotion": "contracts/part1-stage7-promotion-v1.json",
+  "supersession_reason": "PROMOTION_ATTEMPT_1_FAILED_REQUIRED_SQUASH_GATE",
+  "immutable_attempt_1": {
+    "evidence_path": "evidence/part1-stage7-postmerge-attempt-1-v1.json",
+    "promotion": "FAILED_CLOSED",
+    "failed_gate": "SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD",
+    "requirements_relabelled": false,
+    "requirements_weakened": false
+  },
+  "replacement_pull_request": {
+    "number": 9,
+    "base_branch": "main",
+    "branch": "part1-stage7-merge-recovery",
+    "merge_strategy": "SQUASH",
+    "draft_until_exact_head_ci_passes": true,
+    "content_scope": "PART1_STAGE7_FAILURE_EVIDENCE_AND_PROMOTION_RECOVERY_ONLY"
+  },
+  "trusted_ci_evidence_profile": {
+    "schema_version": "2.0",
+    "schema_path": "spec/part1-stage7-recovery-ci-evidence-v2.schema.json",
+    "pull_request_number": 9,
+    "pull_request_draft": true,
+    "stage6_v1_schema_mutated": false
+  },
+  "preserved_acceptance_criteria": [
+    "EXACT_HEAD_PR_CI_PASS_AFTER_FINAL_STATE_COMMIT",
+    "PR_READY_ONLY_AFTER_EXACT_HEAD_CI_PASS",
+    "NO_MERGE_CONFLICT_IMMEDIATELY_BEFORE_MERGE",
+    "SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD",
+    "INDEPENDENT_MAIN_PUSH_CI_PASS",
+    "POSTMERGE_FOUNDATION_DIGEST_MATCH",
+    "POSTMERGE_NO_AWS_EXECUTION_OR_MUTATION",
+    "NO_OPEN_CORRECTIVE_PR"
+  ],
+  "replacement_premerge_controls": [
+    "ATTEMPT_1_FAILURE_IS_IMMUTABLY_RECORDED",
+    "ATTEMPT_1_V1_AUTHORITY_IS_BYTE_PRESERVED",
+    "EXACT_REPLACEMENT_PR_HEAD_RESOLVED",
+    "BASE_IS_CURRENT_MAIN",
+    "NO_MERGE_CONFLICT",
+    "ALL_CHECKS_BIND_EXACT_HEAD",
+    "NO_SKIPPED_NEUTRAL_OR_STALE_REQUIRED_CHECK",
+    "DIFF_IS_STAGE7_RECOVERY_ONLY",
+    "NO_AWS_WORKFLOW_DISPATCHED",
+    "NO_AWS_RESOURCE_MUTATED",
+    "ALL_CHECKS_RERUN_AFTER_STATE_CHANGE",
+    "NO_UNRESOLVED_REVIEW_FINDING"
+  ],
+  "replacement_postmerge_controls": [
+    "MAIN_SHA_RESOLVED",
+    "SINGLE_PARENT_SQUASH_COMMIT_OBSERVED",
+    "MAIN_TREE_EQUALS_VALIDATED_REPLACEMENT_HEAD_TREE",
+    "PART1_FILES_PRESENT_ON_MAIN",
+    "INDEPENDENT_MAIN_PUSH_CI_COMPLETED",
+    "EVERY_MAIN_CI_JOB_SUCCEEDED",
+    "FOUNDATION_DIGEST_RECONFIRMED",
+    "NO_AWS_WORKFLOW_RAN",
+    "NO_AWS_INFRASTRUCTURE_OR_WORKLOAD_MUTATION",
+    "NO_OPEN_CORRECTIVE_PR_REMAINS",
+    "REPOSITORY_STATUS_MATCHES_RECOVERY_CONTRACT"
+  ],
+  "failure_policy": {
+    "main_ci_failure_keeps_part1_incomplete": true,
+    "non_squash_merge_keeps_part1_incomplete": true,
+    "repair_requires_new_pull_request": true,
+    "failed_attempt_must_remain_recorded": true,
+    "failed_requirement_relabelling_prohibited": true,
+    "branch_protection_bypass_prohibited": true,
+    "local_success_alone_is_insufficient": true
+  },
+  "claim_boundary": {
+    "highest_part1_claim": "LOCAL_VERIFIED",
+    "aws_execution": false,
+    "aws_infrastructure_mutated": false,
+    "managed_reconciliation": "UNCLAIMED",
+    "performance_and_scale": "UNCLAIMED",
+    "production_operation": "UNCLAIMED"
+  }
+}

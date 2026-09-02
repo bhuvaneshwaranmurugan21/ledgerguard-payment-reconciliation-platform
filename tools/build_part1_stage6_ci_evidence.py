@@ -38,6 +38,14 @@ def main() -> None:
     pull_request = event.get("pull_request")
     if not isinstance(pull_request, dict):
         raise SystemExit("Stage 6 CI evidence requires a pull_request event")
+    pull_request_number = int(pull_request["number"])
+    evidence_profiles = {
+        8: ("1.0", "part1-stage6-ci-evidence-v1.schema.json"),
+        9: ("2.0", "part1-stage7-recovery-ci-evidence-v2.schema.json"),
+    }
+    if pull_request_number not in evidence_profiles:
+        raise SystemExit(f"No trusted CI evidence profile for PR #{pull_request_number}")
+    schema_version, schema_name = evidence_profiles[pull_request_number]
     commit_sha = str(pull_request["head"]["sha"])
     checked_out_sha = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
@@ -45,7 +53,7 @@ def main() -> None:
     payload = local["deterministic_payload"]
     foundation = payload["foundation"]
     envelope: dict[str, Any] = {
-        "schema_version": "1.0",
+        "schema_version": schema_version,
         "repository": required_environment("GITHUB_REPOSITORY"),
         "commit_sha": commit_sha,
         "checked_out_sha": checked_out_sha,
@@ -62,15 +70,13 @@ def main() -> None:
         "deterministic_payload_sha256": local["deterministic_payload_sha256"],
         "aws_execution": False,
         "infrastructure_mutation": False,
-        "pull_request_number": pull_request["number"],
+        "pull_request_number": pull_request_number,
         "pull_request_draft": pull_request["draft"],
         "part1_gate_results": foundation["part1_gate_results"],
     }
     gate_ids = [f"OP-GATE-R{number:03d}" for number in range(1, 15)]
     validate_ci_envelope(envelope, gate_ids)
-    schema = json.loads(
-        (ROOT / "spec/part1-stage6-ci-evidence-v1.schema.json").read_text(encoding="utf-8")
-    )
+    schema = json.loads((ROOT / "spec" / schema_name).read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
     validation_errors = sorted(
         Draft202012Validator(schema).iter_errors(envelope), key=lambda error: list(error.path)

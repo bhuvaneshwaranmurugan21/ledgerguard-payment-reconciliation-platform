@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 7,
+  "promotion_attempt": 1,
+  "pull_request": {
+    "number": 8,
+    "url": "https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/pull/8",
+    "validated_head_sha": "4ce2e15a07da10fe1f2aeac94bb252aee3dc8ae3",
+    "validated_head_tree_sha": "772b506ce1a196bd593c7e277e384ca06d3adb35",
+    "exact_head_ci_run_id": 33621295863,
+    "exact_head_ci_conclusion": "success",
+    "merged_at_utc": "2026-09-02T10:55:52Z"
+  },
+  "merge": {
+    "required_strategy": "SQUASH",
+    "observed_strategy": "MERGE_COMMIT",
+    "main_sha": "7151eead60e269fa5650e67d65fc8f687ddc281c",
+    "main_tree_sha": "772b506ce1a196bd593c7e277e384ca06d3adb35",
+    "parent_shas": [
+      "2842550d24559a636ff5f15cbd6ea4be1c2ab1c1",
+      "4ce2e15a07da10fe1f2aeac94bb252aee3dc8ae3"
+    ],
+    "parent_count": 2,
+    "validated_tree_matches_main": true,
+    "squash_requirement_satisfied": false
+  },
+  "independent_main_ci": {
+    "run_id": 33621986030,
+    "event": "push",
+    "head_branch": "main",
+    "head_sha": "7151eead60e269fa5650e67d65fc8f687ddc281c",
+    "conclusion": "success",
+    "required_job_count": 1,
+    "required_jobs_succeeded": 1,
+    "foundation_job_id": 100220860991,
+    "python_version": "3.11.13",
+    "tests": 235,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "line_coverage_percent": 95.737964,
+    "critical_branch_coverage_percent": 100.0,
+    "mutation_checks": 20,
+    "mutation_survivors": 0,
+    "foundation_digest": "3f315ecf51a89d95c77d1b22db4c5cd039a32c752cbd70715097987300031f59",
+    "deterministic_payload_sha256": "236af37b8235c016370a2a510af3c8aef7a84cb7a4ba4e124f9ce44205cbf0ec",
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  },
+  "gate_result": {
+    "gate": "SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD",
+    "result": "FAIL",
+    "severity": "BLOCKING",
+    "reason": "The main commit has two parents; the frozen promotion contract requires a squash commit.",
+    "tree_identity_is_not_strategy_equivalence": true
+  },
+  "outcome": {
+    "promotion": "FAILED_CLOSED",
+    "part1_operational_completion": false,
+    "part2_entry": "BLOCKED",
+    "repair_requires_new_pull_request": true,
+    "history_rewrite_authorized": false,
+    "requirements_relabelled": false,
+    "requirements_weakened": false
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ledgerguard.example/spec/part1-stage7-recovery-ci-evidence-v2.schema.json",
+  "title": "LedgerGuard Part 1 Stage 7 recovery CI evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "repository",
+    "commit_sha",
+    "checked_out_sha",
+    "base_sha",
+    "workflow_run_id",
+    "workflow_run_attempt",
+    "python_version",
+    "dependency_versions",
+    "test_counts",
+    "coverage",
+    "mutation",
+    "schema_digests",
+    "foundation_digest",
+    "deterministic_payload_sha256",
+    "aws_execution",
+    "infrastructure_mutation",
+    "pull_request_number",
+    "pull_request_draft",
+    "part1_gate_results"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "repository": {
+      "const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+    },
+    "commit_sha": {"$ref": "#/$defs/gitSha"},
+    "checked_out_sha": {"$ref": "#/$defs/gitSha"},
+    "base_sha": {"$ref": "#/$defs/gitSha"},
+    "workflow_run_id": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+    "workflow_run_attempt": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+    "python_version": {"const": "3.11.13"},
+    "dependency_versions": {
+      "type": "array",
+      "minItems": 21,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+==[^=\\s]+$"}
+    },
+    "test_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tests", "failures", "errors", "skipped"],
+      "properties": {
+        "tests": {"type": "integer", "minimum": 1},
+        "failures": {"const": 0},
+        "errors": {"const": 0},
+        "skipped": {"const": 0}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "line_percent",
+        "minimum_line_percent",
+        "critical_branch_percent",
+        "required_critical_branch_percent"
+      ],
+      "properties": {
+        "line_percent": {"type": "number", "minimum": 95, "maximum": 100},
+        "minimum_line_percent": {"const": 95.0},
+        "critical_branch_percent": {"const": 100.0},
+        "required_critical_branch_percent": {"const": 100.0}
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalog_entries", "executed_tests", "survivors", "skipped"],
+      "properties": {
+        "catalog_entries": {"const": 20},
+        "executed_tests": {"const": 20},
+        "survivors": {"const": 0},
+        "skipped": {"const": 0}
+      }
+    },
+    "schema_digests": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "foundation_digest": {"$ref": "#/$defs/sha256"},
+    "deterministic_payload_sha256": {"$ref": "#/$defs/sha256"},
+    "aws_execution": {"const": false},
+    "infrastructure_mutation": {"const": false},
+    "pull_request_number": {"const": 9},
+    "pull_request_draft": {"const": true},
+    "part1_gate_results": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["gate_id", "state"],
+        "properties": {
+          "gate_id": {"type": "string", "pattern": "^OP-GATE-R0(0[1-9]|1[0-4])$"},
+          "state": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gitSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
