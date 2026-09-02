@@ -4,7 +4,7 @@
 
 - Project: LedgerGuard
 - Part: 1 — Foundation correction
-- Workstream: C3 — Stage 5 checked documentation system
+- Workstream: C2 — Contract and scorecard authority correction
 - Overall Part 1 state: `PART1_CORRECTION_IN_PROGRESS`
 - Overall project state: `PROJECT_IN_PROGRESS`
 - Part 2 entry: `BLOCKED`
@@ -12,8 +12,8 @@
 - Managed reconciliation execution: `UNCLAIMED`
 - Frozen-target live identity: `UNCLAIMED`
 - AWS account-wide nonmutation: `NOT_PROVEN`
-- Stage 5 AWS execution: no
-- Stage 5 infrastructure mutation: no
+- C1 AWS execution: no
+- C1 infrastructure mutation: no
 
 ## Established and preserved
 
@@ -27,8 +27,6 @@
 - A deterministic 331-requirement forward ledger, reverse index, and exact 14-gate registry.
 - A schema-backed active completion authority with exact invariants and scoped evidence metadata
   for all 12 scorecard dimensions.
-- An exact Stage 5 document inventory, active-contract diagram, reason/outcome map, target table,
-  scorecard comparison, link resolver, and negative claim controls.
 
 ## Audit result and remaining work
 
@@ -36,10 +34,10 @@ The Stage 0–7 audit allows only `PART1_CORRECTION_REQUIRED`; its frozen verdic
 `FAIL_PART1_NOT_CONFORMANT_PREMATURE_COMPLETION_CLAIM`: 235 of 331 requirements pass and 96 are
 non-passing. C1 preserves that baseline while establishing complete bidirectional ownership:
 8 requirements are formally amended pending final audit, 4 are addressed by C1 pending final
-audit, 6 are addressed by C2 pending final audit, and 10 direct Stage 5 requirements are locally
-addressed pending final audit. All 23 original Stage 5 requirements revalidate as a local candidate.
-Sixty-eight implementation corrections remain across C3–C7. The frozen gate baseline remains 4
-preserved passes, 1 formally amended gate and 9 open gates; no Phase 8 verdict is relabelled. C3–C7
-remain required, and all 96 historical non-pass requirements require C7 adjudication.
+audit, and 6 are addressed by C2 pending final audit. Seventy-eight implementation corrections
+remain across C3–C7. The frozen gate baseline remains 4 preserved passes, 1 formally amended gate
+and 9 open gates; C2 supplies the correction for one open gate without relabelling the Phase 8
+verdict. C3–C7 remain required, and all 96 historical non-pass requirements require C7
+adjudication.
 Part 1 completion, Part 2 entry, managed workload execution, performance, cost, and production
-operation remain unclaimed. No AWS action or merge is authorized by Stage 5.
+operation remain unclaimed. No AWS action is authorized by C2.

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import shutil
-import tempfile
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -23,11 +22,8 @@ from ledgerguard_correction_c2 import (
     reproduce_c1,
     validate_c2,
 )
-from ledgerguard_correction_c3 import materialize_c2_view
 
-ACTIVE_ROOT = Path(__file__).resolve().parents[1]
-_C2_TEMPORARY = tempfile.TemporaryDirectory(prefix="ledgerguard-c2-tests-")
-ROOT = materialize_c2_view(ACTIVE_ROOT, Path(_C2_TEMPORARY.name) / "repository")
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _load(root: Path, relative: str) -> dict[str, Any]:

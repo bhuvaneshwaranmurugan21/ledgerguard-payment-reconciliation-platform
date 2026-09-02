@@ -41,7 +41,7 @@ corrective completion authority.
 | C0 truthful correction checkpoint | `EXACT_HEAD_CI_VERIFIED` and byte-preserved |
 | C1 requirement and gate authority | `LOCAL_VERIFIED` — 331/331 owned, 14/14 inventoried, zero effective orphans |
 | C2 completion and scorecard authority | `LOCAL_VERIFIED` candidate — schema-backed invariants and scoped evidence for 12 dimensions |
-| Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — immutable baseline is 235/331 pass; 68 implementation corrections remain after C1, C2, and Stage 5 local corrections |
+| Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — immutable baseline is 235/331 pass; 84 implementation corrections remain |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
@@ -50,9 +50,8 @@ corrective completion authority.
 | Performance and cost | `UNCLAIMED` |
 | Production custody or compliance | `UNCLAIMED` |
 
-See the [active architecture](docs/architecture-v2.md), [correctness model](docs/correctness.md),
-[active failure model](docs/failure-model-v2.md), [active scorecard authority](docs/scorecard-v2.md),
-[Stage 5 gap audit](docs/stage5-gap-audit.md), and
+See the [architecture](docs/architecture.md), [correctness model](docs/correctness.md),
+[failure model](docs/failure-model.md), [active scorecard authority](docs/scorecard-v2.md), and
 [project completion contract](contracts/project-completion-v1.json). The active contract authority
 is the [version registry](contracts/active-contract-set-v1.json), supported by the
 [contract model](docs/contract-model.md), [Stage 2 requirements](docs/part1-stage2-requirements.md),
@@ -86,9 +85,6 @@ pytest
 
 The planned managed validation uses synthetic data in one AWS region. It will not establish
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
-
-Stage 5 treats documentation and contracts as one checked system. Its all-23 requirement result is
-a local candidate pending C7, not a relabelling of Phase 8 or a Part 1 completion claim.
 
 ## License
 

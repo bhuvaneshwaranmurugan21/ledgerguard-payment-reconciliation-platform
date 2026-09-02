@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 5,
+  "state": "STAGE5_LOCAL_CANDIDATE_REVALIDATED",
+  "phase8_baseline_immutable": true,
+  "final_c7_audit_required": true,
+  "summary": {
+    "requirement_count": 23,
+    "phase8_pass_preserved": 11,
+    "c1_locally_addressed_revalidated": 2,
+    "stage5_locally_addressed": 10,
+    "candidate_pass": 23,
+    "candidate_nonpass": 0
+  },
+  "requirement_results": [
+    {"requirement_id": "OP-S5-R001", "baseline_verdict": "PARTIAL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["DOCUMENT_INVENTORY", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R002", "baseline_verdict": "FAIL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["ACTIVE_CONTRACT_REGISTRY", "ARCHITECTURE_DIAGRAM_CHECK"]},
+    {"requirement_id": "OP-S5-R003", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["CORRECTNESS_DOCUMENT", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R004", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["CORRECTNESS_DOCUMENT", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R005", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["FINANCIAL_EXAMPLES", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R006", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["CORRECTNESS_DOCUMENT", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R007", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["CORRECTNESS_DOCUMENT", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R008", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["CORRECTNESS_DOCUMENT", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R009", "baseline_verdict": "PARTIAL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["FAILURE_SCENARIO_AUTHORITY", "REASON_DOMAIN_CHECK"]},
+    {"requirement_id": "OP-S5-R010", "baseline_verdict": "FAIL", "disposition": "C1_LOCALLY_ADDRESSED_REVALIDATED_PENDING_C7", "candidate_result": "PASS", "controls": ["ORIGINAL_REQUIREMENT_LEDGER", "TEST_TRACEABILITY_CHECK"]},
+    {"requirement_id": "OP-S5-R011", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["EVIDENCE_LEVEL_CHECK", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R012", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["ACTIVE_STATUS_CHECK", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R013", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["FORBIDDEN_PATH_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R014", "baseline_verdict": "FAIL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["CONTRACT_REFERENCE_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R015", "baseline_verdict": "FAIL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["REASON_DOMAIN_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R016", "baseline_verdict": "PARTIAL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["AWS_TARGET_DOCUMENT_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R017", "baseline_verdict": "FAIL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["SCORECARD_DOCUMENT_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R018", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["ACTIVE_STATUS_CHECK", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R019", "baseline_verdict": "FAIL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["MARKDOWN_LINK_AND_FRAGMENT_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R020", "baseline_verdict": "PARTIAL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["MANAGED_CLAIM_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R021", "baseline_verdict": "PARTIAL", "disposition": "STAGE5_LOCALLY_ADDRESSED_PENDING_C7", "candidate_result": "PASS", "controls": ["IMPLEMENTATION_CLAIM_CHECK", "ADVERSARIAL_TEST"]},
+    {"requirement_id": "OP-S5-R022", "baseline_verdict": "PASS", "disposition": "PRESERVED_PHASE8_PASS_REVALIDATED", "candidate_result": "PASS", "controls": ["FORBIDDEN_LANGUAGE_CHECK", "C2_REPRODUCTION"]},
+    {"requirement_id": "OP-S5-R023", "baseline_verdict": "FAIL", "disposition": "C1_LOCALLY_ADDRESSED_REVALIDATED_PENDING_C7", "candidate_result": "PASS", "controls": ["ORIGINAL_REQUIREMENT_LEDGER", "BIDIRECTIONAL_TRACEABILITY_CHECK"]}
+  ],
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "phase8_verdict_relabelled": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false,
+    "merge_authorized": false
+  }
+}
