@@ -122,6 +122,7 @@ def _workflow_controls(root: Path) -> None:
         "github.event.pull_request.head.sha",
         "git rev-parse HEAD",
         "tools/run_part1_stage6.py",
+        '"$RUNNER_TEMP/ledgerguard-stage6/run-1/venv/bin/python"',
         "tools/build_part1_stage6_ci_evidence.py",
         "actions/upload-artifact@",
     ):

@@ -47,7 +47,8 @@ jobs:
       - name: Build trusted CI evidence envelope
         if: github.event_name == 'pull_request'
         run: >-
-          python tools/build_part1_stage6_ci_evidence.py
+          "$RUNNER_TEMP/ledgerguard-stage6/run-1/venv/bin/python"
+          tools/build_part1_stage6_ci_evidence.py
           --local-evidence "$RUNNER_TEMP/ledgerguard-stage6/part1-stage6-local-evidence.json"
           --output-directory "$RUNNER_TEMP/ledgerguard-stage6-artifact"
       - name: Upload immutable Stage 6 evidence

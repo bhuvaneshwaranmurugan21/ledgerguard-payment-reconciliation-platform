@@ -124,3 +124,16 @@ def test_c4_t009_oidc_permission_fails_closed(tmp_path: Path) -> None:
     path.write_text(path.read_text(encoding="utf-8") + "\n# id-token: write\n", encoding="utf-8")
     with pytest.raises(C4Error, match="OIDC token"):
         validate_stage6(repository)
+
+
+def test_c4_t010_ci_evidence_must_use_the_exact_validation_environment(tmp_path: Path) -> None:
+    repository = _copy(tmp_path)
+    path = repository / ".github/workflows/ci.yml"
+    path.write_text(
+        path.read_text(encoding="utf-8").replace(
+            '"$RUNNER_TEMP/ledgerguard-stage6/run-1/venv/bin/python"', "python"
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(C4Error, match="run-1/venv/bin/python"):
+        validate_stage6(repository)
