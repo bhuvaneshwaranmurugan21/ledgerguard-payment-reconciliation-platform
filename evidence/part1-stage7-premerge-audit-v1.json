@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 7,
+  "audit_state": "PREMERGE_PROMOTION_CANDIDATE",
+  "historical_phase8_verdict_mutated": false,
+  "requirement_reaudit": {
+    "requirements_total": 331,
+    "historical_pass_preserved": 235,
+    "historical_nonpass_reaudited": 96,
+    "owner_counts": {
+      "C0": 8,
+      "C1": 4,
+      "C2": 6,
+      "C3": 24,
+      "C4": 9,
+      "C5": 15,
+      "C6": 20,
+      "C7": 10
+    },
+    "evidence_by_owner": {
+      "C0": ["contracts/part1-c0-correction-v1.json", "evidence/part1-c0-local.json"],
+      "C1": ["contracts/part1-c1-correction-v1.json", "evidence/part1-c1-local.json"],
+      "C2": ["contracts/part1-c2-correction-v1.json", "evidence/part1-c2-local.json"],
+      "C3": ["contracts/part1-stage5-correction-v1.json", "evidence/part1-stage5-local.json"],
+      "C4": ["contracts/part1-stage6-candidate-v1.json", "spec/part1-stage6-validation-profile-v1.json"],
+      "C5": ["evidence/part1-stage6-ci-evidence-manifest-v1.json", "spec/part1-stage6-ci-evidence-v1.schema.json"],
+      "C6": ["contracts/part1-stage7-promotion-v1.json", ".github/workflows/ci.yml"],
+      "C7": ["evidence/part1-stage7-premerge-audit-v1.json", "tests/test_part1_stage7.py"]
+    }
+  },
+  "gate_reaudit": {
+    "mandatory_gates_total": 14,
+    "premerge_candidate_pass": 13,
+    "postmerge_external_pending": ["OP-GATE-R014"]
+  },
+  "external_closure_required": [
+    "EXACT_HEAD_PR_CI_PASS_AFTER_FINAL_STATE_COMMIT",
+    "PR_READY_ONLY_AFTER_EXACT_HEAD_CI_PASS",
+    "NO_MERGE_CONFLICT_IMMEDIATELY_BEFORE_MERGE",
+    "SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD",
+    "INDEPENDENT_MAIN_PUSH_CI_PASS",
+    "POSTMERGE_FOUNDATION_DIGEST_MATCH",
+    "POSTMERGE_NO_AWS_EXECUTION_OR_MUTATION",
+    "NO_OPEN_CORRECTIVE_PR"
+  ],
+  "findings": {
+    "critical": 0,
+    "major": 0
+  },
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false
+  }
+}

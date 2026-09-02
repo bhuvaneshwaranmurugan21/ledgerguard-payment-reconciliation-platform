@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+requires = ["setuptools>=80.9.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -14,31 +14,14 @@ dev = [
   "mypy==2.3.1",
   "pytest==9.1.1",
   "ruff==0.16.5",
-  "coverage==7.10.6",
 ]
 
 [project.scripts]
-ledgerguard-foundation = "ledgerguard_correction_c3:main"
-ledgerguard-stage6 = "ledgerguard_correction_c4:main"
-ledgerguard-stage7 = "ledgerguard_correction_c5:main"
-ledgerguard-c0 = "ledgerguard_correction_c1:main_c0"
-ledgerguard-c1 = "ledgerguard_correction_c2:main_c1"
-ledgerguard-c2 = "ledgerguard_correction_c3:main_c2"
+ledgerguard-foundation = "ledgerguard_correction:main"
 ledgerguard-stage4 = "ledgerguard.part1:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
-[tool.setuptools]
-py-modules = [
-  "ledgerguard_correction",
-  "ledgerguard_correction_c1",
-  "ledgerguard_correction_c2",
-  "ledgerguard_correction_c3",
-  "ledgerguard_correction_c4",
-  "ledgerguard_correction_c5",
-  "ledgerguard_stage6_evidence",
-]
 
 [tool.pytest.ini_options]
 addopts = "-q"
@@ -56,13 +39,6 @@ select = ["E", "F", "I", "B", "UP", "RUF"]
 python_version = "3.11"
 strict = true
 packages = ["ledgerguard"]
-
-[tool.coverage.run]
-branch = true
-source = ["src/ledgerguard"]
-
-[tool.coverage.report]
-show_missing = true
 
 [[tool.mypy.overrides]]
 module = ["jsonschema", "jsonschema.exceptions"]

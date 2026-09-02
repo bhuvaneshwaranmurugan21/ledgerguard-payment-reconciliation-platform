@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "state": "PART1_FOUNDATION_FROZEN",
+  "quality_principle": "Correctness, attributable evidence, and lifecycle ownership take priority over feature count or premature completion.",
+  "evidence_levels": ["DESIGNED/MODELED", "LOCAL_VERIFIED", "AWS_VERIFIED", "UNCLAIMED"],
+  "parts": [
+    {
+      "part": 1,
+      "name": "Foundation and completion contract",
+      "required_state": "PART1_FOUNDATION_COMPLETE",
+      "aws_workload_allowed": false,
+      "gates": [
+        "draft_disposition_audited",
+        "two_grain_model_frozen",
+        "contracts_valid",
+        "scorecard_frozen",
+        "aws_target_correct",
+        "foundation_ci_success"
+      ]
+    },
+    {
+      "part": 2,
+      "name": "Executable reconciliation system",
+      "required_state": "LOCAL_RECONCILIATION_VERIFIED",
+      "aws_workload_allowed": false,
+      "gates": [
+        "independent_oracle_verified",
+        "spark_parity_verified",
+        "financial_invariants_verified",
+        "failure_matrix_verified",
+        "deterministic_replay_verified",
+        "critical_paths_tested"
+      ]
+    },
+    {
+      "part": 3,
+      "name": "Managed AWS platform",
+      "required_state": "AWS_DEPLOYMENT_VERIFIED",
+      "aws_workload_allowed": false,
+      "gates": [
+        "environment_qualified",
+        "live_iam_parity_verified",
+        "glue_definition_probe_verified",
+        "plan_only_verified",
+        "zero_workload_canary_verified",
+        "teardown_verified"
+      ]
+    },
+    {
+      "part": 4,
+      "name": "AWS workload recovery and scale proof",
+      "required_state": "AWS_RECONCILIATION_VERIFIED",
+      "aws_workload_allowed": true,
+      "gates": [
+        "managed_correctness_verified",
+        "managed_failure_matrix_verified",
+        "managed_recovery_verified",
+        "scale_measurement_verified",
+        "cost_measurement_recorded",
+        "independent_totals_match",
+        "post_run_inventory_clean"
+      ]
+    },
+    {
+      "part": 5,
+      "name": "Final audit documentation and release",
+      "required_state": "PROJECT_COMPLETE",
+      "aws_workload_allowed": false,
+      "gates": [
+        "critical_defects_closed",
+        "documentation_consistent",
+        "all_scorecard_dimensions_above_seven",
+        "final_main_ci_success",
+        "aws_inventory_clean",
+        "annotated_v1_release_published",
+        "remaining_work_zero"
+      ]
+    }
+  ],
+  "scorecard": {
+    "problem_clarity": 8.5,
+    "architecture_quality": 8.0,
+    "financial_correctness": 9.0,
+    "failure_and_recovery": 8.5,
+    "repository_structure": 8.0,
+    "automated_testing": 8.5,
+    "documentation_and_adrs": 8.0,
+    "evidence_integrity": 8.5,
+    "real_aws_execution": 8.0,
+    "performance_and_scale": 7.5,
+    "security_and_cost_controls": 8.0,
+    "lifecycle_ownership": 8.5
+  },
+  "aws_boundary": {
+    "account_id": "857229544428",
+    "region": "ap-southeast-2",
+    "oidc_role_name": "LedgerGuardGitHubOidcRole",
+    "gross_project_cost_ceiling_usd": 10,
+    "managed_runtime": "AWS Glue 5.1 / Spark 3.5.6 / Python 3.11"
+  },
+  "non_goals": [
+    "PCI certification",
+    "production financial custody",
+    "foreign exchange conversion",
+    "manual write-off authorization",
+    "multi-region disaster recovery",
+    "sustained production operation"
+  ]
+}

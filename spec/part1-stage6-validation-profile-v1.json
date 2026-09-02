@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 6,
+  "workstream": "C4-C6",
+  "python": {
+    "implementation": "CPython",
+    "exact_ci_version": "3.11.13",
+    "platform": "ubuntu-24.04-x86_64"
+  },
+  "entry_checkpoint": {
+    "stage5_remote_head_sha": "8d1d50ae62499ace6585160e2bb4326e7ec40594",
+    "stage5_tree_sha": "0df6f1a593b0d59a4214ed979e14fe261715daef",
+    "stage5_exact_head_ci_run_id": 33599528118,
+    "main_sha": "2842550d24559a636ff5f15cbd6ea4be1c2ab1c1"
+  },
+  "requirement_ids": [
+    "OP-S6-R001", "OP-S6-R002", "OP-S6-R003", "OP-S6-R004", "OP-S6-R005",
+    "OP-S6-R006", "OP-S6-R007", "OP-S6-R008", "OP-S6-R009", "OP-S6-R010",
+    "OP-S6-R011", "OP-S6-R012", "OP-S6-R013", "OP-S6-R014", "OP-S6-R015",
+    "OP-S6-R016", "OP-S6-R017", "OP-S6-R018", "OP-S6-R019", "OP-S6-R020",
+    "OP-S6-R021", "OP-S6-R022", "OP-S6-R023", "OP-S6-R024", "OP-S6-R025",
+    "OP-S6-R026", "OP-S6-R027", "OP-S6-R028", "OP-S6-R029", "OP-S6-R030",
+    "OP-S6-R031", "OP-S6-R032", "OP-S6-R033", "OP-S6-R034", "OP-S6-R035"
+  ],
+  "phase8_baseline": {"PASS": 9, "PARTIAL": 1, "FAIL": 18, "NOT_PROVEN": 7},
+  "complete_command_actions": [
+    "exact_dependency_installation",
+    "format_verification",
+    "lint",
+    "strict_typing",
+    "json_schema_validation",
+    "contract_fixture_suite",
+    "semantic_invariant_suite",
+    "governance_and_aws_boundary",
+    "documentation_consistency",
+    "coverage_threshold",
+    "targeted_mutation_verification",
+    "deterministic_foundation_validation"
+  ],
+  "coverage": {
+    "source": ["src/ledgerguard"],
+    "line_threshold_percent": 95.0,
+    "critical_validator": "src/ledgerguard_stage6_evidence.py",
+    "critical_branch_threshold_percent": 100.0,
+    "required_skips": 0,
+    "required_xfails": 0
+  },
+  "mutation_tests": [
+    "tests/test_contract_coherence.py::test_binding_chain_mutation_changes_the_bound_digest",
+    "tests/test_part1_correction.py::test_c0_t007_stage4_manifest_mutation_fails_closed",
+    "tests/test_part1_correction.py::test_c0_t008_stage4_snapshot_mutation_fails_closed",
+    "tests/test_part1_correction_c1.py::test_c1_t009_ledger_mutation_fails_closed",
+    "tests/test_part1_correction_c1.py::test_c1_t010_reverse_index_mutation_fails_closed",
+    "tests/test_part1_correction_c1.py::test_c1_t011_gate_inventory_mutation_fails_closed",
+    "tests/test_part1_correction_c1.py::test_c1_t012_phase8_verdict_mutation_fails_closed",
+    "tests/test_part1_correction_c2.py::test_c2_t010_missing_scorecard_field_fails_schema",
+    "tests/test_part1_correction_c2.py::test_c2_t011_target_or_evidence_inflation_fails_closed",
+    "tests/test_part1_correction_c2.py::test_c2_t012_completion_count_bypass_fails_closed",
+    "tests/test_part1_correction_c2.py::test_c2_t013_c1_snapshot_mutation_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t005_unknown_architecture_contract_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t006_unknown_reason_code_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t007_wrong_documented_aws_region_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t008_scorecard_target_drift_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t009_broken_internal_link_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t010_managed_execution_claim_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t011_implementation_claim_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t012_missing_original_test_trace_fails_closed",
+    "tests/test_part1_correction_c3.py::test_c3_t013_candidate_verdict_baseline_rewrite_fails_closed"
+  ],
+  "deterministic_fields": [
+    "schema_inventory", "schema_digests", "requirement_inventory", "target",
+    "scorecard_targets", "evidence_levels", "part1_gate_results", "foundation_digest"
+  ],
+  "contextual_fields": [
+    "repository", "commit_sha", "workflow_run_id", "workflow_run_attempt",
+    "python_version", "dependency_versions", "timestamps"
+  ],
+  "boundaries": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "merge_authorized": false,
+    "part2_unlocked": false,
+    "phase8_verdict_relabelled": false
+  }
+}

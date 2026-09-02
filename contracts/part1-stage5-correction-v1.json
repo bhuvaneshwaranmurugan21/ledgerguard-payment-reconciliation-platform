@@ -1,0 +1,76 @@
+{
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 5,
+  "workstream": "C3",
+  "state": "STAGE5_DOCUMENTATION_SYSTEM_VALIDATED",
+  "part1_state": "PART1_CORRECTION_IN_PROGRESS",
+  "part2_entry": "BLOCKED",
+  "c2_dependency": {
+    "manifest_sha256": "6f5d1f0a15a035e6e527de778d7fad12b1f3229dae2765bdc487955f67d5f34c",
+    "c2_sha256": "977f3af4ebaa4759b4ece41160299fd17a751333392e73c8df355b7ff24b33f0",
+    "exact_head_ci_run_id": 33596879824
+  },
+  "direct_requirement_ids": [
+    "OP-S5-R001",
+    "OP-S5-R002",
+    "OP-S5-R009",
+    "OP-S5-R014",
+    "OP-S5-R015",
+    "OP-S5-R016",
+    "OP-S5-R017",
+    "OP-S5-R019",
+    "OP-S5-R020",
+    "OP-S5-R021"
+  ],
+  "all_stage5_requirement_ids": [
+    "OP-S5-R001", "OP-S5-R002", "OP-S5-R003", "OP-S5-R004", "OP-S5-R005",
+    "OP-S5-R006", "OP-S5-R007", "OP-S5-R008", "OP-S5-R009", "OP-S5-R010",
+    "OP-S5-R011", "OP-S5-R012", "OP-S5-R013", "OP-S5-R014", "OP-S5-R015",
+    "OP-S5-R016", "OP-S5-R017", "OP-S5-R018", "OP-S5-R019", "OP-S5-R020",
+    "OP-S5-R021", "OP-S5-R022", "OP-S5-R023"
+  ],
+  "locally_addressed_count": 10,
+  "implementation_remaining_count": 68,
+  "remaining_workstreams": ["C3", "C4", "C5", "C6", "C7"],
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "phase8_verdict_relabelled": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false,
+    "merge_authorized": false
+  },
+  "promotion_boundary": {
+    "pull_request_number": 8,
+    "pull_request_state": "DRAFT_REQUIRED",
+    "exact_head_ci": "REQUIRED",
+    "merge_in_stage5": "PROHIBITED",
+    "post_merge_main_ci": "DEFERRED_TO_C6_C7"
+  },
+  "artifacts": {
+    "c2_history_manifest": {"path": "history/part1/c2/manifest-v1.json", "sha256": "6f5d1f0a15a035e6e527de778d7fad12b1f3229dae2765bdc487955f67d5f34c"},
+    "stage5_documentation_authority": {"path": "spec/part1-stage5-documentation-authority-v1.json", "sha256": "76fcbf3d5aea47ac7e8093cabca7d60b7a9f1ac695ba96d99f2e87f6ddcead7b"},
+    "original_requirements": {"path": "spec/part1-original-requirements-v1.json", "sha256": "72052fb97451a4966d592bd49ad2a25faf83fc8a5a9b29631905acab9e3263af"},
+    "requirement_ledger": {"path": "spec/part1-requirement-ledger-v1.json", "sha256": "1a866e7f1dfdb8a9e4e172fd9c308589f6d000268acd8f1336be868d2461b296"},
+    "requirement_reverse_index": {"path": "spec/part1-requirement-reverse-index-v1.json", "sha256": "ebe5d5d6f4904893fb07718d9eb1709068e29a04fdeaab6d3986270db1ff2802"},
+    "active_contract_registry": {"path": "contracts/active-contract-set-v1.json", "sha256": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288"},
+    "financial_semantics": {"path": "spec/financial-semantics-v1.json", "sha256": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9"},
+    "completion_authority": {"path": "contracts/part1-completion-authority-v2.json", "sha256": "51ab3b72a41687457c69a8abfce711b55b393dc2830e635d94bb514445bc093b"},
+    "aws_target": {"path": ".github/ledgerguard-target.json", "sha256": "d9dccdc0dbae17638f02ac6596be1b1f0a8c24dddc57974f97024ed1cc415058"},
+    "architecture": {"path": "docs/architecture-v2.md", "sha256": "ca66f142aa9367697414c10463795bc91a8007062d4606e34c6b85b8d664eef3"},
+    "failure_model": {"path": "docs/failure-model-v2.md", "sha256": "c5ecce04ad5186bdb14128d0c928b3838d697d69b3534e60aa5de29446603e8e"},
+    "scorecard": {"path": "docs/scorecard-v2.md", "sha256": "c218fc06d2217fc58c7fefac01fe8a69272795b6b664d285f73e3c0594571100"},
+    "stage5_gap_audit": {"path": "docs/stage5-gap-audit.md", "sha256": "a54650c64df6a67a52af7dfbcc4156d34ab8edf638e875c2a2c752861fc31bd8"},
+    "stage5_adr": {"path": "docs/adr/0013-checked-documentation-system.md", "sha256": "aa9e2f5d2ad01639c6068c8ec90919daf7293b19a27ef06d64487510e64153e8"},
+    "stage5_candidate_verdict": {"path": "evidence/part1-stage5-candidate-verdict-v1.json", "sha256": "fe63bc6d6de5238e33f586277e546e33dd557791c8462507ef772eb78e741365"},
+    "readme": {"path": "README.md", "sha256": "eebbf5b19b5c0ef33d590263d92fc39a317b0df321f7ef3d5605fc699f776970"},
+    "project_status": {"path": "PROJECT_STATUS.md", "sha256": "b1ccedaaee3c8e9c7905c63e16ac837d30f5d66052c141061fd044359a9fcd7d"},
+    "stage5_validator": {"path": "src/ledgerguard_correction_c3.py", "sha256": "145c9c6c93b06b28d1e920a2aa43f8733d3af949a15995916ba961f6f6f9559a"},
+    "stage5_tests": {"path": "tests/test_part1_correction_c3.py", "sha256": "be0d5b70ecadebe21f1f14e2d7cce2f2db85d61d590f8e78bd41bccca6b54411"},
+    "c2_compatibility_tests": {"path": "tests/test_part1_correction_c2.py", "sha256": "6613d5f4f944ce2e75c0331fc2ee2ef5a2b3abe15c75577eb940e6d9d7da843d"},
+    "entrypoint_configuration": {"path": "pyproject.toml", "sha256": "d643b9dc68c57f5fa7db1b4c74288978a365687665189ef573f3da9851f8e83e"}
+  }
+}

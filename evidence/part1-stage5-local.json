@@ -1,0 +1,46 @@
+{
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 5,
+  "workstream": "C3",
+  "state": "LOCAL_CANDIDATE_VALIDATED",
+  "contract_sha256": "e75011ad149a9af31e575774a3ae0160bba0002f6e6debd11a00c3c0fb7e367b",
+  "stage5_sha256": "927803c3f1e5945ad931669ea7a5b28866c5f67276c9c4ceee62407ace3dc1fa",
+  "local_validation": {
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_mypy": "PASS",
+    "pytest": "PASS",
+    "stage5_focused_pytest": "PASS",
+    "c2_reproduction": "PASS",
+    "document_inventory": "PASS",
+    "contract_names_and_versions": "PASS",
+    "reason_code_schema_parity": "PASS",
+    "aws_target_document_parity": "PASS",
+    "scorecard_document_parity": "PASS",
+    "status_parity": "PASS",
+    "markdown_links_and_fragments": "PASS",
+    "managed_claim_rejection": "PASS",
+    "implementation_claim_rejection": "PASS",
+    "forbidden_language_rejection": "PASS",
+    "all_331_test_traceability": "PASS",
+    "all_23_stage5_revalidation": "PASS",
+    "adversarial_mutations": "PASS",
+    "determinism": "PASS",
+    "test_count": 190
+  },
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "phase8_verdict_relabelled": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false,
+    "merge_authorized": false
+  },
+  "external_ci": {
+    "exact_head_ci": "REQUIRED_EXTERNAL",
+    "merge": "PROHIBITED_IN_STAGE5"
+  }
+}

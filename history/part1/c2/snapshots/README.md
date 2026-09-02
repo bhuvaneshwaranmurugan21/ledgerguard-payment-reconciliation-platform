@@ -25,9 +25,10 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 is `PART1_FOUNDATION_COMPLETE`; Part 2 entry becomes unlocked after successful independent
-post-merge `main` CI. The overall project remains `PROJECT_IN_PROGRESS`. The immutable historical
-audit is preserved, while Stage 7 re-audits its 96 non-passes against the corrected foundation.
+Part 1 is `PART1_CORRECTION_IN_PROGRESS`; Part 2 entry is `BLOCKED`. The overall project remains
+`PROJECT_IN_PROGRESS`. Stages 0–4 and their accepted bytes remain preserved, but Stage 4 is a
+historical completion claim superseded by the full Stage 0–7 conformance audit and the active
+corrective completion authority.
 
 | Area | Status |
 |---|---|
@@ -39,9 +40,8 @@ audit is preserved, while Stage 7 re-audits its 96 non-passes against the correc
 | Historical Stage 4 governance | `LOCAL_VERIFIED` and byte-preserved |
 | C0 truthful correction checkpoint | `EXACT_HEAD_CI_VERIFIED` and byte-preserved |
 | C1 requirement and gate authority | `LOCAL_VERIFIED` — 331/331 owned, 14/14 inventoried, zero effective orphans |
-| C2 completion and scorecard authority | `LOCAL_VERIFIED` — schema-backed invariants and scoped evidence for 12 dimensions |
-| Stage 6 reproducibility | `EXACT_HEAD_CI_VERIFIED` — 224 tests, 95.737964% coverage, 20/20 mutation checks, two equal clean runs |
-| Full Stage 0–7 conformance | `LOCAL_VERIFIED` candidate — 331/331 re-audited, 14/14 gates required, zero critical or major findings |
+| C2 completion and scorecard authority | `LOCAL_VERIFIED` candidate — schema-backed invariants and scoped evidence for 12 dimensions |
+| Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — immutable baseline is 235/331 pass; 84 implementation corrections remain |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
@@ -50,9 +50,8 @@ audit is preserved, while Stage 7 re-audits its 96 non-passes against the correc
 | Performance and cost | `UNCLAIMED` |
 | Production custody or compliance | `UNCLAIMED` |
 
-See the [active architecture](docs/architecture-v2.md), [correctness model](docs/correctness.md),
-[active failure model](docs/failure-model-v2.md), [active scorecard authority](docs/scorecard-v2.md),
-[Stage 5 gap audit](docs/stage5-gap-audit.md), and
+See the [architecture](docs/architecture.md), [correctness model](docs/correctness.md),
+[failure model](docs/failure-model.md), [active scorecard authority](docs/scorecard-v2.md), and
 [project completion contract](contracts/project-completion-v1.json). The active contract authority
 is the [version registry](contracts/active-contract-set-v1.json), supported by the
 [contract model](docs/contract-model.md), [Stage 2 requirements](docs/part1-stage2-requirements.md),
@@ -67,10 +66,8 @@ defined by the [coherence model](docs/contract-coherence.md) and
 [14-gate registry](spec/part1-gate-registry-v1.json). C2 adds the schema-backed
 [completion and scorecard authority](docs/part1-completion-authority.md). The prior
 [Stage 4 completion document](docs/part1-completion.md) and
-[Part 2 handoff](contracts/part1-part2-handoff-v1.json) are preserved historical authorities. Stage
-7 closure is defined by the [promotion contract](contracts/part1-stage7-promotion-v1.json) and
-[promotion audit](docs/stage7-gap-audit.md). Historical stage authorities and every v1/v2 schema
-remain immutable.
+[Part 2 handoff](contracts/part1-part2-handoff-v1.json) are preserved historical authorities, not
+permission to begin Part 2. Historical stage authorities and every v1/v2 schema remain immutable.
 
 ## Foundation validation
 
@@ -78,7 +75,6 @@ remain immutable.
 python -m pip install -e '.[dev]'
 ledgerguard-foundation
 ledgerguard-c0
-ledgerguard-stage7
 ruff format --check .
 ruff check .
 mypy src
@@ -89,10 +85,6 @@ pytest
 
 The planned managed validation uses synthetic data in one AWS region. It will not establish
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
-
-Part 1 performs no AWS execution and mutates no AWS infrastructure. Its highest completion claim is
-`LOCAL_VERIFIED`; managed reconciliation, performance, scale, and production operation remain
-unclaimed.
 
 ## License
 

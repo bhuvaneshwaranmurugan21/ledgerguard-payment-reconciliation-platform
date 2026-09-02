@@ -1,0 +1,41 @@
+{
+  "c1_sha256": "d22707d2583873a1ebbda3d1562fe10a345084ab9c7a8511888ce9449d3ac222",
+  "contract_sha256": "25e8947c0d87ebb2aa3f39eaaeaba1b704b89e1e58a405b8d788440e1f722d8f",
+  "execution_boundary": {
+    "accepted_v2_mutated": false,
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "c0_history_rewritten": false,
+    "historical_v1_mutated": false,
+    "infrastructure_mutated": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false,
+    "phase8_verdict_relabelled": false,
+    "reconciliation_runtime_added": false,
+    "stage0_to_stage4_history_rewritten": false
+  },
+  "external_ci": {
+    "exact_head_ci": "REQUIRED_EXTERNAL",
+    "merge": "PROHIBITED_IN_C1"
+  },
+  "local_validation": {
+    "14_gate_inventory": "PASS",
+    "331_forward_mapping": "PASS",
+    "adversarial_mutations": "PASS",
+    "c0_reproduction": "PASS",
+    "c1_focused_pytest": "PASS",
+    "determinism": "PASS",
+    "ledger_builder_check": "PASS",
+    "mechanical_remaining_work": "PASS",
+    "pytest": "PASS",
+    "reverse_mapping": "PASS",
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "source_digest_check": "PASS",
+    "strict_mypy": "PASS",
+    "test_count": 162
+  },
+  "part": 1,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "workstream": "C1"
+}

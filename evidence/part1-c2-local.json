@@ -1,0 +1,43 @@
+{
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "workstream": "C2",
+  "state": "LOCAL_CANDIDATE_VALIDATED",
+  "contract_sha256": "b6a39db21dae7c4a98338cfc6fb9dcb3f897ef582906d57da5f50900fa7d50bf",
+  "c2_sha256": "977f3af4ebaa4759b4ece41160299fd17a751333392e73c8df355b7ff24b33f0",
+  "local_validation": {
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_mypy": "PASS",
+    "pytest": "PASS",
+    "c2_focused_pytest": "PASS",
+    "c1_reproduction": "PASS",
+    "schema_meta_validation": "PASS",
+    "completion_schema_validation": "PASS",
+    "exact_completion_invariants": "PASS",
+    "scorecard_field_completeness": "PASS",
+    "scorecard_target_integrity": "PASS",
+    "aws_target_consistency": "PASS",
+    "adversarial_mutations": "PASS",
+    "determinism": "PASS",
+    "test_count": 176
+  },
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "stage0_to_stage4_history_rewritten": false,
+    "c0_history_rewritten": false,
+    "c1_history_rewritten": false,
+    "historical_v1_mutated": false,
+    "accepted_v2_mutated": false,
+    "phase8_verdict_relabelled": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false
+  },
+  "external_ci": {
+    "exact_head_ci": "REQUIRED_EXTERNAL",
+    "merge": "PROHIBITED_IN_C2"
+  }
+}

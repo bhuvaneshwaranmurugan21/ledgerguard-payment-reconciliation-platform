@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import tempfile
 from copy import deepcopy
 from hashlib import sha256
 from pathlib import Path
@@ -17,8 +18,11 @@ from ledgerguard.foundation import (
     parse_contract_json,
 )
 from ledgerguard.part1 import reproduce_stage3
+from ledgerguard_correction_c4 import materialize_stage5_view
 
-ROOT = Path(__file__).resolve().parents[1]
+ACTIVE_ROOT = Path(__file__).resolve().parents[1]
+_STAGE5_TEMPORARY = tempfile.TemporaryDirectory(prefix="ledgerguard-coherence-tests-")
+ROOT = materialize_stage5_view(ACTIVE_ROOT, Path(_STAGE5_TEMPORARY.name) / "repository")
 PROFILE: dict[str, Any] = json.loads(
     (ROOT / "spec/contract-coherence-v1.json").read_text(encoding="utf-8")
 )

@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 5,
+  "state": "STAGE5_DOCUMENTATION_AUTHORITY_ACTIVE",
+  "required_document_inventory": [
+    {"category": "README", "paths": ["README.md"]},
+    {"category": "PROJECT_STATUS", "paths": ["PROJECT_STATUS.md"]},
+    {"category": "EXACT_GAP_AUDIT", "paths": ["docs/stage5-gap-audit.md"]},
+    {"category": "REQUIREMENTS_LEDGER", "paths": ["spec/part1-requirement-ledger-v1.json", "docs/part1-requirement-authority.md"]},
+    {"category": "ARCHITECTURE", "paths": ["docs/architecture-v2.md"]},
+    {"category": "CORRECTNESS_MODEL", "paths": ["docs/correctness.md"]},
+    {"category": "FAILURE_MODEL", "paths": ["docs/failure-model-v2.md"]},
+    {"category": "SCORECARD", "paths": ["docs/scorecard-v2.md", "contracts/part1-completion-authority-v2.json"]},
+    {"category": "ADRS", "paths": ["docs/adr/0000-corrective-baseline.md", "docs/adr/0001-two-grain-reconciliation.md", "docs/adr/0002-parquet-proof-storage.md", "docs/adr/0003-late-data-revisions.md", "docs/adr/0004-canonical-source-identity.md", "docs/adr/0005-exact-bank-allocation.md", "docs/adr/0006-failure-ownership-and-finalization.md", "docs/adr/0007-versioned-contract-set-and-enforcement-layers.md", "docs/adr/0008-canonical-contract-coherence.md", "docs/adr/0009-append-only-completion-governance.md", "docs/adr/0010-truthful-part1-correction.md", "docs/adr/0011-original-requirement-and-gate-authority.md", "docs/adr/0012-schema-backed-completion-and-scorecard-authority.md", "docs/adr/0013-checked-documentation-system.md"]},
+    {"category": "CONTRACT_REFERENCE", "paths": ["docs/contract-model.md", "contracts/active-contract-set-v1.json"]},
+    {"category": "EVIDENCE_AND_CLAIM_BOUNDARY", "paths": ["docs/part1-completion-authority.md", "docs/part1-correction.md", "evidence/part1-stage5-candidate-verdict-v1.json"]}
+  ],
+  "active_contracts": [
+    {"family": "COMMON", "filename": "common-v2.schema.json", "path": "contracts/v2/common-v2.schema.json", "id": "urn:ledgerguard:common:v2", "version": "2.0"},
+    {"family": "BANK_ENTRY", "filename": "bank-entry-v2.schema.json", "path": "contracts/v2/bank-entry-v2.schema.json", "id": "urn:ledgerguard:bank-entry:v2", "version": "2.0"},
+    {"family": "CASE_REVISION", "filename": "case-revision-v2.schema.json", "path": "contracts/v2/case-revision-v2.schema.json", "id": "urn:ledgerguard:case-revision:v2", "version": "2.0"},
+    {"family": "LEDGER_JOURNAL", "filename": "journal-v2.schema.json", "path": "contracts/v2/journal-v2.schema.json", "id": "urn:ledgerguard:journal:v2", "version": "2.0"},
+    {"family": "PROCESSOR_EVENT", "filename": "processor-event-v2.schema.json", "path": "contracts/v2/processor-event-v2.schema.json", "id": "urn:ledgerguard:processor-event:v2", "version": "2.0"},
+    {"family": "PROCESSOR_SETTLEMENT", "filename": "processor-settlement-v2.schema.json", "path": "contracts/v2/processor-settlement-v2.schema.json", "id": "urn:ledgerguard:processor-settlement:v2", "version": "2.0"},
+    {"family": "RECONCILIATION_POLICY", "filename": "reconciliation-policy-v2.schema.json", "path": "contracts/v2/reconciliation-policy-v2.schema.json", "id": "urn:ledgerguard:reconciliation-policy:v2", "version": "2.0"},
+    {"family": "RECONCILIATION_PROOF", "filename": "reconciliation-proof-v2.schema.json", "path": "contracts/v2/reconciliation-proof-v2.schema.json", "id": "urn:ledgerguard:reconciliation-proof:v2", "version": "2.0"},
+    {"family": "RUN_MANIFEST", "filename": "run-manifest-v2.schema.json", "path": "contracts/v2/run-manifest-v2.schema.json", "id": "urn:ledgerguard:run-manifest:v2", "version": "2.0"}
+  ],
+  "reason_domains": {
+    "ADMISSION": ["AMBIGUOUS_BANK_ALLOCATION", "CURRENCY_DOMAIN_VIOLATION", "IDENTITY_CONFLICT", "POLICY_MISMATCH", "SCHEMA_VIOLATION", "SOURCE_IDENTITY_MISMATCH", "UNBALANCED_JOURNAL"],
+    "FINANCIAL": ["DUPLICATE_BANK_MOVEMENT", "INVALID_ACCOUNT_ROLE", "INVALID_BANK_ACCOUNT", "LEDGER_BANK_MISMATCH", "MISSING_BANK_SETTLEMENT", "MISSING_LEDGER_MOVEMENT", "MISSING_PROCESSOR_ACTIVITY", "OVER_APPLIED_REFERENCE", "PROCESSOR_BANK_MISMATCH", "PROCESSOR_LEDGER_MISMATCH", "SETTLEMENT_FORMULA_MISMATCH", "UNALLOCATED_BANK_MOVEMENT", "UNRESOLVED_REFERENCE"],
+    "EXECUTION": ["EXECUTION_FAILURE"]
+  },
+  "failure_scenarios": [
+    {"scenario": "Identical record replay", "ownership": "ADMISSION", "reason_codes": [], "outcome": "IDEMPOTENT_NO_SECOND_BUSINESS_EFFECT"},
+    {"scenario": "Identity reused with changed payload", "ownership": "ADMISSION", "reason_codes": ["IDENTITY_CONFLICT"], "outcome": "RUN_REJECTED_NO_PROOF"},
+    {"scenario": "Unbalanced journal", "ownership": "ADMISSION", "reason_codes": ["UNBALANCED_JOURNAL"], "outcome": "RUN_REJECTED_NO_PROOF"},
+    {"scenario": "Cross-currency source combination", "ownership": "ADMISSION", "reason_codes": ["CURRENCY_DOMAIN_VIOLATION"], "outcome": "RUN_REJECTED_NO_PROOF"},
+    {"scenario": "Policy version reused with changed digest", "ownership": "ADMISSION", "reason_codes": ["POLICY_MISMATCH"], "outcome": "RUN_REJECTED_NO_PROOF"},
+    {"scenario": "Ambiguous bank allocation", "ownership": "ADMISSION", "reason_codes": ["AMBIGUOUS_BANK_ALLOCATION"], "outcome": "RUN_REJECTED_NO_PROOF"},
+    {"scenario": "Balanced journal with wrong role", "ownership": "FINANCIAL", "reason_codes": ["INVALID_ACCOUNT_ROLE"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Missing processor event", "ownership": "FINANCIAL", "reason_codes": ["MISSING_PROCESSOR_ACTIVITY"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Missing ledger movement", "ownership": "FINANCIAL", "reason_codes": ["MISSING_LEDGER_MOVEMENT"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Missing bank deposit for nonzero net", "ownership": "FINANCIAL", "reason_codes": ["MISSING_BANK_SETTLEMENT"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Zero-net settlement without bank record", "ownership": "FINANCIAL", "reason_codes": [], "outcome": "MATCHED_PROOF_FINALIZED"},
+    {"scenario": "Split bank deposit", "ownership": "FINANCIAL", "reason_codes": [], "outcome": "MATCHED_PROOF_FINALIZED"},
+    {"scenario": "Duplicate bank movement", "ownership": "FINANCIAL", "reason_codes": ["DUPLICATE_BANK_MOVEMENT"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Disallowed bank account", "ownership": "FINANCIAL", "reason_codes": ["INVALID_BANK_ACCOUNT"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Unknown bank reference", "ownership": "FINANCIAL", "reason_codes": ["UNALLOCATED_BANK_MOVEMENT", "MISSING_BANK_SETTLEMENT"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Out-of-order negative event", "ownership": "FINANCIAL", "reason_codes": ["UNRESOLVED_REFERENCE"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Original capture arrives later", "ownership": "FINANCIAL", "reason_codes": [], "outcome": "NEW_PROOF_AND_CASE_REVISION"},
+    {"scenario": "Negative application exceeds capture", "ownership": "FINANCIAL", "reason_codes": ["OVER_APPLIED_REFERENCE"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Processor net formula mismatch", "ownership": "FINANCIAL", "reason_codes": ["SETTLEMENT_FORMULA_MISMATCH"], "outcome": "EXCEPTION_PROOF_FINALIZED"},
+    {"scenario": "Changed reconciliation policy", "ownership": "FINANCIAL", "reason_codes": [], "outcome": "NEW_POLICY_BOUND_PROOF_REVISION"},
+    {"scenario": "Worker fails before finalization", "ownership": "EXECUTION", "reason_codes": ["EXECUTION_FAILURE"], "outcome": "NO_AUTHORITATIVE_PARTIAL_PROOF"}
+  ],
+  "aws_target_fields": ["repository", "default_branch", "account_id", "region", "oidc_role_name", "glue_version", "spark_version", "python_version"],
+  "scorecard_path": "docs/scorecard-v2.md",
+  "completion_authority_path": "contracts/part1-completion-authority-v2.json",
+  "status_paths": ["README.md", "PROJECT_STATUS.md"],
+  "claim_policy": {
+    "allowed_evidence_levels": ["DESIGNED/MODELED", "LOCAL_VERIFIED", "AWS_VERIFIED", "UNCLAIMED"],
+    "managed_execution_claims_allowed": false,
+    "reconciliation_implementation_claims_allowed": false,
+    "historical_wrong_target_identity_claim_required": true,
+    "forbidden_managed_claim_phrases": ["managed reconciliation is deployed", "managed reconciliation was executed", "aws reconciliation passed", "aws workload is operational", "deployed to the frozen aws target"],
+    "forbidden_implementation_claim_phrases": ["reconciliation engine is implemented", "reconciliation runtime is implemented", "end-to-end reconciliation is implemented", "spark reconciliation job is implemented", "production implementation is complete"]
+  },
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false,
+    "merge_authorized": false
+  }
+}
