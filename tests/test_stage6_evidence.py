@@ -80,6 +80,19 @@ def test_ci_evidence_schema_accepts_complete_envelope_and_rejects_unknown_fields
     assert list(validator.iter_errors(changed))
 
 
+def test_stage7_recovery_ci_schema_accepts_only_draft_pr9() -> None:
+    schema = json.loads(
+        (ROOT / "spec/part1-stage7-recovery-ci-evidence-v2.schema.json").read_text(encoding="utf-8")
+    )
+    Draft202012Validator.check_schema(schema)
+    validator = Draft202012Validator(schema)
+    recovery = _valid_envelope()
+    recovery.update({"schema_version": "2.0", "pull_request_number": 9})
+    assert list(validator.iter_errors(recovery)) == []
+    recovery["pull_request_number"] = 8
+    assert list(validator.iter_errors(recovery))
+
+
 @pytest.mark.parametrize(
     "mutation,match",
     [

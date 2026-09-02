@@ -214,3 +214,14 @@ def test_s7_t016_attempt1_ci_metrics_cannot_be_inflated(tmp_path: Path) -> None:
     )
     with pytest.raises(C5Error, match="main CI evidence differs"):
         validate_stage7(root)
+
+
+def test_s7_t017_recovery_ci_profile_cannot_target_another_pr(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    _mutate_json(
+        root,
+        "spec/part1-stage7-recovery-ci-evidence-v2.schema.json",
+        lambda value: value["properties"]["pull_request_number"].update({"const": 10}),
+    )
+    with pytest.raises(C5Error, match="recovery CI profile differs"):
+        validate_stage7(root)

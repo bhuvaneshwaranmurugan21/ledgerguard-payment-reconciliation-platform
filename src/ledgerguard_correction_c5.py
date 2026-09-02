@@ -272,6 +272,17 @@ def _validate_attempt1_and_recovery(root: Path) -> tuple[dict[str, Any], dict[st
         recovery.get("preserved_acceptance_criteria") == EXPECTED_EXTERNAL_CLOSURE,
         "recovery acceptance criteria differ",
     )
+    _require(
+        recovery.get("trusted_ci_evidence_profile")
+        == {
+            "schema_version": "2.0",
+            "schema_path": "spec/part1-stage7-recovery-ci-evidence-v2.schema.json",
+            "pull_request_number": 9,
+            "pull_request_draft": True,
+            "stage6_v1_schema_mutated": False,
+        },
+        "recovery CI evidence authority differs",
+    )
     failure = recovery.get("failure_policy")
     _require(
         isinstance(failure, Mapping) and all(bool(value) for value in failure.values()),
@@ -293,6 +304,30 @@ def _validate_workflow(root: Path) -> None:
     _require("github.event.pull_request.head.sha" in workflow, "raw PR head control missing")
     _require("aws-actions/" not in workflow, "Stage 7 CI includes an AWS action")
     _require("id-token: write" not in workflow, "Stage 7 CI requests an OIDC token")
+
+
+def _validate_recovery_ci_profile(root: Path) -> None:
+    schema = _load(root / "spec/part1-stage7-recovery-ci-evidence-v2.schema.json")
+    properties = schema.get("properties")
+    if not isinstance(properties, Mapping):
+        raise C5Error("Stage 7 recovery CI schema properties are missing")
+    version = properties.get("schema_version")
+    pull_request = properties.get("pull_request_number")
+    draft = properties.get("pull_request_draft")
+    _require(
+        isinstance(version, Mapping)
+        and version.get("const") == "2.0"
+        and isinstance(pull_request, Mapping)
+        and pull_request.get("const") == 9
+        and isinstance(draft, Mapping)
+        and draft.get("const") is True,
+        "Stage 7 recovery CI profile differs",
+    )
+    builder = (root / "tools/build_part1_stage6_ci_evidence.py").read_text(encoding="utf-8")
+    _require(
+        '9: ("2.0", "part1-stage7-recovery-ci-evidence-v2.schema.json")' in builder,
+        "Stage 7 recovery CI builder profile is missing",
+    )
 
 
 def validate_stage7(root: Path | None = None) -> dict[str, Any]:
@@ -371,6 +406,7 @@ def validate_stage7(root: Path | None = None) -> dict[str, Any]:
     gate_ids = _validate_gate_reaudit(repository, audit)
     _validate_status(repository)
     _validate_workflow(repository)
+    _validate_recovery_ci_profile(repository)
     payload: dict[str, Any] = {
         "project": PROJECT,
         "part": 1,
@@ -405,6 +441,8 @@ def validate_stage7(root: Path | None = None) -> dict[str, Any]:
                 "contracts/part1-stage7-promotion-recovery-v2.json",
                 "evidence/part1-stage7-postmerge-attempt-1-v1.json",
                 "docs/adr/0016-stage7-non-squash-merge-recovery.md",
+                "spec/part1-stage7-recovery-ci-evidence-v2.schema.json",
+                "tools/build_part1_stage6_ci_evidence.py",
             )
         },
     }

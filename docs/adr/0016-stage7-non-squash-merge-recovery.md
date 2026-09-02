@@ -21,6 +21,10 @@ The replacement promotion retains every original external closure requirement. I
 head must be squash-merged, the resulting `main` tree must equal that exact head tree, and a new
 independent `main` push CI run must succeed before Part 2 entry is unlocked.
 
+The accepted Stage 6 CI evidence schema remains immutable and bound to PR #8. Replacement PR #9
+uses a separate v2 schema with the same metric, digest, draft, and non-AWS constraints; only its
+schema version and exact PR identity differ.
+
 ## Consequences
 
 The successful PR and `main` checks from attempt 1 remain valid evidence but cannot satisfy the

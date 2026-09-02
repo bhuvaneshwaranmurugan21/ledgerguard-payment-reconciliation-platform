@@ -24,6 +24,13 @@
     "draft_until_exact_head_ci_passes": true,
     "content_scope": "PART1_STAGE7_FAILURE_EVIDENCE_AND_PROMOTION_RECOVERY_ONLY"
   },
+  "trusted_ci_evidence_profile": {
+    "schema_version": "2.0",
+    "schema_path": "spec/part1-stage7-recovery-ci-evidence-v2.schema.json",
+    "pull_request_number": 9,
+    "pull_request_draft": true,
+    "stage6_v1_schema_mutated": false
+  },
   "preserved_acceptance_criteria": [
     "EXACT_HEAD_PR_CI_PASS_AFTER_FINAL_STATE_COMMIT",
     "PR_READY_ONLY_AFTER_EXACT_HEAD_CI_PASS",
