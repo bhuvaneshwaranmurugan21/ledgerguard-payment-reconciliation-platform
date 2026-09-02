@@ -25,9 +25,10 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 is `PART1_FOUNDATION_COMPLETE`; Part 2 entry becomes unlocked after successful independent
-post-merge `main` CI. The overall project remains `PROJECT_IN_PROGRESS`. The immutable historical
-audit is preserved, while Stage 7 re-audits its 96 non-passes against the corrected foundation.
+Part 1 foundation is `PART1_FOUNDATION_COMPLETE`, but operational promotion attempt 1 failed closed
+because PR #8 used a merge commit instead of the required squash. Part 2 remains blocked until
+replacement PR #9 is squash-merged and its independent post-merge `main` CI succeeds. The overall
+project remains `PROJECT_IN_PROGRESS`.
 
 | Area | Status |
 |---|---|
@@ -41,7 +42,7 @@ audit is preserved, while Stage 7 re-audits its 96 non-passes against the correc
 | C1 requirement and gate authority | `LOCAL_VERIFIED` — 331/331 owned, 14/14 inventoried, zero effective orphans |
 | C2 completion and scorecard authority | `LOCAL_VERIFIED` — schema-backed invariants and scoped evidence for 12 dimensions |
 | Stage 6 reproducibility | `EXACT_HEAD_CI_VERIFIED` — 224 tests, 95.737964% coverage, 20/20 mutation checks, two equal clean runs |
-| Full Stage 0–7 conformance | `LOCAL_VERIFIED` candidate — 331/331 re-audited, 14/14 gates required, zero critical or major findings |
+| Full Stage 0–7 conformance | `LOCAL_VERIFIED` candidate — 331/331 re-audited, 13/14 gates passed; squash promotion recovery active |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
@@ -68,7 +69,8 @@ defined by the [coherence model](docs/contract-coherence.md) and
 [completion and scorecard authority](docs/part1-completion-authority.md). The prior
 [Stage 4 completion document](docs/part1-completion.md) and
 [Part 2 handoff](contracts/part1-part2-handoff-v1.json) are preserved historical authorities. Stage
-7 closure is defined by the [promotion contract](contracts/part1-stage7-promotion-v1.json) and
+7 closure is defined by the preserved [v1 promotion contract](contracts/part1-stage7-promotion-v1.json),
+the active [v2 recovery contract](contracts/part1-stage7-promotion-recovery-v2.json), and the
 [promotion audit](docs/stage7-gap-audit.md). Historical stage authorities and every v1/v2 schema
 remain immutable.
 

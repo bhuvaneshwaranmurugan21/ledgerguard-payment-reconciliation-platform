@@ -41,6 +41,19 @@ critical finding, major finding, or non-zero remaining requirement blocks comple
 post-merge `main` CI keeps Part 1 incomplete and must be repaired through another PR; no requirement
 or gate may be disabled or relabelled.
 
+## Promotion attempt 1 and recovery
+
+PR #8 passed exact-head CI and its independent `main` push CI passed at
+`7151eead60e269fa5650e67d65fc8f687ddc281c`. The resulting tree
+`772b506ce1a196bd593c7e277e384ca06d3adb35` exactly matches the validated PR head tree. GitHub
+records two commit parents, however, so the merge is not the required squash. The
+`SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD` gate therefore failed independently of content and CI.
+
+The v1 promotion authority is preserved. Attempt 1 evidence is recorded in
+`evidence/part1-stage7-postmerge-attempt-1-v1.json`, and the active recovery contract is
+`contracts/part1-stage7-promotion-recovery-v2.json`. Part 2 remains blocked until replacement PR #9
+passes exact-head CI, is squash-merged, and receives a successful independent `main` push CI run.
+
 ## Claim boundary
 
 Part 1 proves the foundation only at `LOCAL_VERIFIED`. It performs no AWS call, dispatches no AWS

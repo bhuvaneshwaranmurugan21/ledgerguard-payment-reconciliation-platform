@@ -34,6 +34,12 @@ def test_s7_t001_final_candidate_is_complete_and_deterministic() -> None:
     second = validate_stage7(ROOT)
     assert first == second
     assert first["state"] == "PART1_FOUNDATION_COMPLETE"
+    assert first["promotion_attempt_1"] == {
+        "outcome": "FAILED_CLOSED",
+        "failed_gate": "SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD",
+        "main_sha": "7151eead60e269fa5650e67d65fc8f687ddc281c",
+    }
+    assert first["active_promotion"] == {"pull_request": 9, "merge_strategy": "SQUASH"}
     assert first["requirements"] == {"total": 331, "reaudited_nonpass": 96}
     assert first["gates"] == {"total": 14, "premerge_candidate_pass": 13, "postmerge_pending": 1}
     assert first["aws_execution"] is False
@@ -150,4 +156,61 @@ def test_s7_t011_stage7_ci_cannot_use_ambient_python(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     with pytest.raises(C5Error, match="locked clean environment"):
+        validate_stage7(root)
+
+
+def test_s7_t012_attempt1_tree_match_cannot_hide_wrong_merge_topology(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    _mutate_json(
+        root,
+        "evidence/part1-stage7-postmerge-attempt-1-v1.json",
+        lambda value: value["merge"].update(
+            {"observed_strategy": "SQUASH", "squash_requirement_satisfied": True}
+        ),
+    )
+    with pytest.raises(C5Error, match="merge topology evidence differs"):
+        validate_stage7(root)
+
+
+def test_s7_t013_failed_attempt_cannot_be_relabelled_pass(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    _mutate_json(
+        root,
+        "evidence/part1-stage7-postmerge-attempt-1-v1.json",
+        lambda value: value["gate_result"].update({"result": "PASS"}),
+    )
+    with pytest.raises(C5Error, match="failure was weakened"):
+        validate_stage7(root)
+
+
+def test_s7_t014_recovery_cannot_allow_non_squash_merge(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    _mutate_json(
+        root,
+        "contracts/part1-stage7-promotion-recovery-v2.json",
+        lambda value: value["replacement_pull_request"].update({"merge_strategy": "MERGE_COMMIT"}),
+    )
+    with pytest.raises(C5Error, match="replacement PR contract differs"):
+        validate_stage7(root)
+
+
+def test_s7_t015_v1_promotion_authority_must_remain_immutable(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    _mutate_json(
+        root,
+        "contracts/part1-stage7-promotion-v1.json",
+        lambda value: value.update({"tamper": True}),
+    )
+    with pytest.raises(C5Error, match="v1 authority was mutated"):
+        validate_stage7(root)
+
+
+def test_s7_t016_attempt1_ci_metrics_cannot_be_inflated(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    _mutate_json(
+        root,
+        "evidence/part1-stage7-postmerge-attempt-1-v1.json",
+        lambda value: value["independent_main_ci"].update({"line_coverage_percent": 100.0}),
+    )
+    with pytest.raises(C5Error, match="main CI evidence differs"):
         validate_stage7(root)

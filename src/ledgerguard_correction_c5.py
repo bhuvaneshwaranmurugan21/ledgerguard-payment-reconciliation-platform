@@ -38,6 +38,22 @@ EXPECTED_STAGE6 = {
     ),
     "foundation_digest": "3f315ecf51a89d95c77d1b22db4c5cd039a32c752cbd70715097987300031f59",
 }
+EXPECTED_STAGE7_V1_SHA256 = "32320a9d51729d6989259a7366022ad4b3938d408a79f520d35f639ea5606fa3"
+EXPECTED_ATTEMPT1 = {
+    "pull_request": 8,
+    "validated_head_sha": "4ce2e15a07da10fe1f2aeac94bb252aee3dc8ae3",
+    "validated_head_tree_sha": "772b506ce1a196bd593c7e277e384ca06d3adb35",
+    "exact_head_ci_run_id": 33621295863,
+    "main_sha": "7151eead60e269fa5650e67d65fc8f687ddc281c",
+    "main_tree_sha": "772b506ce1a196bd593c7e277e384ca06d3adb35",
+    "parent_shas": [
+        "2842550d24559a636ff5f15cbd6ea4be1c2ab1c1",
+        "4ce2e15a07da10fe1f2aeac94bb252aee3dc8ae3",
+    ],
+    "main_ci_run_id": 33621986030,
+    "main_ci_job_id": 100220860991,
+    "main_ci_payload_sha256": "236af37b8235c016370a2a510af3c8aef7a84cb7a4ba4e124f9ce44205cbf0ec",
+}
 EXPECTED_EXTERNAL_CLOSURE = [
     "EXACT_HEAD_PR_CI_PASS_AFTER_FINAL_STATE_COMMIT",
     "PR_READY_ONLY_AFTER_EXACT_HEAD_CI_PASS",
@@ -145,10 +161,123 @@ def _validate_status(root: Path) -> None:
         "Highest claim: `LOCAL_VERIFIED` for foundation validation",
         "AWS execution: false",
         "AWS infrastructure mutated: false",
-        "Part 2 entry: `UNLOCKED_AFTER_POSTMERGE_MAIN_CI_PASS`",
+        "Part 2 entry: `UNLOCKED_ONLY_AFTER_RECOVERY_SQUASH_AND_POSTMERGE_MAIN_CI_PASS`",
+        "Promotion attempt 1: `FAILED_CLOSED_NON_SQUASH_MERGE`",
+        "Active promotion: `PR_9_SQUASH_RECOVERY`",
     ):
         _require(required in status, f"Stage 7 status line missing: {required}")
     _require("PART1_CORRECTION_IN_PROGRESS" not in status, "active status remains corrective")
+
+
+def _validate_attempt1_and_recovery(root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    attempt = _load(root / "evidence/part1-stage7-postmerge-attempt-1-v1.json")
+    recovery = _load(root / "contracts/part1-stage7-promotion-recovery-v2.json")
+
+    pull_request = attempt.get("pull_request")
+    merge = attempt.get("merge")
+    main_ci = attempt.get("independent_main_ci")
+    result = attempt.get("gate_result")
+    outcome = attempt.get("outcome")
+    if not all(
+        isinstance(value, Mapping) for value in (pull_request, merge, main_ci, result, outcome)
+    ):
+        raise C5Error("promotion attempt 1 evidence is incomplete")
+    assert isinstance(pull_request, Mapping)
+    assert isinstance(merge, Mapping)
+    assert isinstance(main_ci, Mapping)
+    assert isinstance(result, Mapping)
+    assert isinstance(outcome, Mapping)
+
+    _require(
+        pull_request.get("number") == EXPECTED_ATTEMPT1["pull_request"]
+        and pull_request.get("validated_head_sha") == EXPECTED_ATTEMPT1["validated_head_sha"]
+        and pull_request.get("validated_head_tree_sha")
+        == EXPECTED_ATTEMPT1["validated_head_tree_sha"]
+        and pull_request.get("exact_head_ci_run_id") == EXPECTED_ATTEMPT1["exact_head_ci_run_id"]
+        and pull_request.get("exact_head_ci_conclusion") == "success",
+        "attempt 1 PR evidence differs",
+    )
+    _require(
+        merge.get("required_strategy") == "SQUASH"
+        and merge.get("observed_strategy") == "MERGE_COMMIT"
+        and merge.get("main_sha") == EXPECTED_ATTEMPT1["main_sha"]
+        and merge.get("main_tree_sha") == EXPECTED_ATTEMPT1["main_tree_sha"]
+        and merge.get("parent_shas") == EXPECTED_ATTEMPT1["parent_shas"]
+        and merge.get("parent_count") == 2
+        and merge.get("validated_tree_matches_main") is True
+        and merge.get("squash_requirement_satisfied") is False,
+        "attempt 1 merge topology evidence differs",
+    )
+    _require(
+        main_ci.get("run_id") == EXPECTED_ATTEMPT1["main_ci_run_id"]
+        and main_ci.get("foundation_job_id") == EXPECTED_ATTEMPT1["main_ci_job_id"]
+        and main_ci.get("head_sha") == EXPECTED_ATTEMPT1["main_sha"]
+        and main_ci.get("event") == "push"
+        and main_ci.get("conclusion") == "success"
+        and main_ci.get("required_job_count") == 1
+        and main_ci.get("required_jobs_succeeded") == 1
+        and main_ci.get("python_version") == "3.11.13"
+        and main_ci.get("foundation_digest") == EXPECTED_STAGE6["foundation_digest"]
+        and main_ci.get("deterministic_payload_sha256")
+        == EXPECTED_ATTEMPT1["main_ci_payload_sha256"]
+        and main_ci.get("tests") == 235
+        and main_ci.get("failures") == 0
+        and main_ci.get("errors") == 0
+        and main_ci.get("skips") == 0
+        and main_ci.get("line_coverage_percent") == 95.737964
+        and main_ci.get("critical_branch_coverage_percent") == 100.0
+        and main_ci.get("mutation_checks") == 20
+        and main_ci.get("mutation_survivors") == 0
+        and main_ci.get("aws_execution") is False
+        and main_ci.get("infrastructure_mutation") is False,
+        "attempt 1 main CI evidence differs",
+    )
+    _require(
+        result.get("gate") == "SQUASH_ONLY_VALIDATED_IMMUTABLE_HEAD"
+        and result.get("result") == "FAIL"
+        and result.get("severity") == "BLOCKING"
+        and result.get("tree_identity_is_not_strategy_equivalence") is True,
+        "attempt 1 failure was weakened",
+    )
+    _require(
+        outcome.get("promotion") == "FAILED_CLOSED"
+        and outcome.get("part1_operational_completion") is False
+        and outcome.get("part2_entry") == "BLOCKED"
+        and outcome.get("repair_requires_new_pull_request") is True
+        and outcome.get("history_rewrite_authorized") is False
+        and outcome.get("requirements_relabelled") is False
+        and outcome.get("requirements_weakened") is False,
+        "attempt 1 outcome was weakened",
+    )
+
+    replacement = recovery.get("replacement_pull_request")
+    _require(recovery.get("schema_version") == "2.0", "recovery contract version differs")
+    _require(
+        recovery.get("foundation_state") == "PART1_FOUNDATION_COMPLETE"
+        and recovery.get("operational_closure") == "PENDING_REPLACEMENT_PROMOTION"
+        and recovery.get("part2_entry")
+        == "UNLOCKED_ONLY_AFTER_RECOVERY_SQUASH_AND_POSTMERGE_MAIN_CI_PASS",
+        "recovery state differs",
+    )
+    _require(
+        isinstance(replacement, Mapping)
+        and replacement.get("number") == 9
+        and replacement.get("base_branch") == "main"
+        and replacement.get("branch") == "part1-stage7-merge-recovery"
+        and replacement.get("merge_strategy") == "SQUASH"
+        and replacement.get("draft_until_exact_head_ci_passes") is True,
+        "replacement PR contract differs",
+    )
+    _require(
+        recovery.get("preserved_acceptance_criteria") == EXPECTED_EXTERNAL_CLOSURE,
+        "recovery acceptance criteria differ",
+    )
+    failure = recovery.get("failure_policy")
+    _require(
+        isinstance(failure, Mapping) and all(bool(value) for value in failure.values()),
+        "recovery failure policy is weakened",
+    )
+    return attempt, recovery
 
 
 def _validate_workflow(root: Path) -> None:
@@ -182,10 +311,17 @@ def validate_stage7(root: Path | None = None) -> dict[str, Any]:
     _require(contract.get("state") == "PART1_FOUNDATION_COMPLETE", "completion state differs")
     _require(
         contract.get("part2_entry") == "UNLOCKED_AFTER_POSTMERGE_MAIN_CI_PASS",
-        "Part 2 entry condition differs",
+        "Stage 7 v1 Part 2 entry condition differs",
     )
     _require(
         contract.get("stage6_entry_checkpoint") == EXPECTED_STAGE6, "Stage 6 checkpoint differs"
+    )
+    pull_request = contract.get("pull_request")
+    _require(
+        isinstance(pull_request, Mapping)
+        and pull_request.get("number") == 8
+        and pull_request.get("merge_strategy") == "SQUASH",
+        "Stage 7 v1 promotion strategy differs",
     )
     _require(
         manifest.get("artifact_id") == EXPECTED_STAGE6["artifact_id"]
@@ -223,6 +359,12 @@ def validate_stage7(root: Path | None = None) -> dict[str, Any]:
     _require(claims.get("highest_part1_claim") == "LOCAL_VERIFIED", "claim is inflated")
     _require(claims.get("aws_execution") is False, "AWS execution was claimed")
     _require(claims.get("aws_infrastructure_mutated") is False, "AWS mutation was claimed")
+    _require(
+        _digest(repository / "contracts/part1-stage7-promotion-v1.json")
+        == EXPECTED_STAGE7_V1_SHA256,
+        "Stage 7 v1 authority was mutated",
+    )
+    attempt1, recovery = _validate_attempt1_and_recovery(repository)
 
     _require(_stage7_source_ids(repository) == STAGE7_IDS, "Stage 7 source inventory differs")
     requirement_ids = _validate_requirement_reaudit(repository, audit)
@@ -234,7 +376,16 @@ def validate_stage7(root: Path | None = None) -> dict[str, Any]:
         "part": 1,
         "stage": 7,
         "state": "PART1_FOUNDATION_COMPLETE",
-        "part2_entry": "UNLOCKED_AFTER_POSTMERGE_MAIN_CI_PASS",
+        "part2_entry": "UNLOCKED_ONLY_AFTER_RECOVERY_SQUASH_AND_POSTMERGE_MAIN_CI_PASS",
+        "promotion_attempt_1": {
+            "outcome": attempt1["outcome"]["promotion"],
+            "failed_gate": attempt1["gate_result"]["gate"],
+            "main_sha": attempt1["merge"]["main_sha"],
+        },
+        "active_promotion": {
+            "pull_request": recovery["replacement_pull_request"]["number"],
+            "merge_strategy": recovery["replacement_pull_request"]["merge_strategy"],
+        },
         "requirements": {"total": len(requirement_ids), "reaudited_nonpass": 96},
         "gates": {"total": len(gate_ids), "premerge_candidate_pass": 13, "postmerge_pending": 1},
         "stage6_foundation_digest": stage6["foundation_digest"],
@@ -251,6 +402,9 @@ def validate_stage7(root: Path | None = None) -> dict[str, Any]:
                 "evidence/part1-stage7-premerge-audit-v1.json",
                 "docs/stage7-gap-audit.md",
                 "docs/adr/0015-fail-closed-stage7-promotion.md",
+                "contracts/part1-stage7-promotion-recovery-v2.json",
+                "evidence/part1-stage7-postmerge-attempt-1-v1.json",
+                "docs/adr/0016-stage7-non-squash-merge-recovery.md",
             )
         },
     }
