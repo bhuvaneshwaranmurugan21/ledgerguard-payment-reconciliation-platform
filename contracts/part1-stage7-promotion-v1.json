@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 7,
+  "state": "PART1_FOUNDATION_COMPLETE",
+  "project_state": "PROJECT_IN_PROGRESS",
+  "part2_entry": "UNLOCKED_AFTER_POSTMERGE_MAIN_CI_PASS",
+  "pull_request": {
+    "number": 8,
+    "base_branch": "main",
+    "branch": "part1-c0-truthful-correction",
+    "merge_strategy": "SQUASH",
+    "draft_until_exact_head_ci_passes": true
+  },
+  "stage6_entry_checkpoint": {
+    "commit_sha": "6e9a6f315c1e3bfc309494f22c331621a3bc64f5",
+    "tree_sha": "52ee74d4a5216141948e49abccc45d8ff6caf65e",
+    "workflow_run_id": 33609507209,
+    "workflow_run_attempt": 1,
+    "workflow_conclusion": "success",
+    "artifact_id": 9838502686,
+    "artifact_zip_sha256": "12622a5fdfc62d5a8fb5ba1f75883f765a0a217696878c468c27e3cc4a3501dd",
+    "evidence_json_sha256": "9df86e50311891308c4356533a03a929a3686d121559650fe2283bf0750a1afb",
+    "deterministic_payload_sha256": "53c12723ef35508ee607e990453c2941959f93a017e657b968ec08ee44821c5c",
+    "foundation_digest": "3f315ecf51a89d95c77d1b22db4c5cd039a32c752cbd70715097987300031f59"
+  },
+  "final_conformance": {
+    "requirements_total": 331,
+    "historical_pass_preserved": 235,
+    "historical_nonpass_reaudited": 96,
+    "effective_requirements_required": 331,
+    "mandatory_gates_total": 14,
+    "critical_findings_allowed": 0,
+    "major_findings_allowed": 0,
+    "remaining_part1_work_after_external_closure": 0
+  },
+  "premerge_controls": [
+    "EXACT_PR_HEAD_RESOLVED",
+    "BASE_IS_CURRENT_MAIN",
+    "NO_MERGE_CONFLICT",
+    "ALL_CHECKS_BIND_EXACT_HEAD",
+    "NO_SKIPPED_NEUTRAL_OR_STALE_CHECK",
+    "DIFF_IS_PART1_ONLY",
+    "NO_AWS_WORKFLOW_DISPATCHED",
+    "NO_AWS_RESOURCE_MUTATED",
+    "CHECKED_IN_STATE_IS_COMPLETE",
+    "ALL_CHECKS_RERUN_AFTER_STATE_CHANGE",
+    "NO_UNRESOLVED_REVIEW_FINDING"
+  ],
+  "postmerge_controls": [
+    "MAIN_SHA_RESOLVED",
+    "PART1_FILES_PRESENT_ON_MAIN",
+    "INDEPENDENT_MAIN_PUSH_CI_COMPLETED",
+    "EVERY_MAIN_CI_JOB_SUCCEEDED",
+    "FOUNDATION_DIGEST_RECONFIRMED",
+    "NO_AWS_WORKFLOW_RAN",
+    "NO_AWS_INFRASTRUCTURE_OR_WORKLOAD_MUTATION",
+    "NO_OPEN_CORRECTIVE_PR_REMAINS",
+    "REPOSITORY_STATUS_MATCHES_COMPLETION_CONTRACT"
+  ],
+  "failure_policy": {
+    "main_ci_failure_keeps_part1_incomplete": true,
+    "repair_requires_new_pull_request": true,
+    "failed_requirement_relabelling_prohibited": true,
+    "branch_protection_bypass_prohibited": true,
+    "local_success_alone_is_insufficient": true
+  },
+  "claim_boundary": {
+    "highest_part1_claim": "LOCAL_VERIFIED",
+    "aws_execution": false,
+    "aws_infrastructure_mutated": false,
+    "managed_reconciliation": "UNCLAIMED",
+    "performance_and_scale": "UNCLAIMED",
+    "production_operation": "UNCLAIMED"
+  }
+}

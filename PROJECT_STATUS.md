@@ -3,17 +3,18 @@
 ## Current boundary
 
 - Project: LedgerGuard
-- Part: 1 — Foundation correction
-- Workstream: C3 — Stage 5 checked documentation system
-- Overall Part 1 state: `PART1_CORRECTION_IN_PROGRESS`
+- Part: 1 — Foundation and completion contract
+- Stage: 7 — Promotion and closure
+- State: `PART1_FOUNDATION_COMPLETE`
 - Overall project state: `PROJECT_IN_PROGRESS`
-- Part 2 entry: `BLOCKED`
+- Part 2 entry: `UNLOCKED_AFTER_POSTMERGE_MAIN_CI_PASS`
 - Historical Stage 4 state: `PART1_FOUNDATION_COMPLETE` (preserved, not active)
+- Highest claim: `LOCAL_VERIFIED` for foundation validation
+- AWS execution: false
+- AWS infrastructure mutated: false
 - Managed reconciliation execution: `UNCLAIMED`
 - Frozen-target live identity: `UNCLAIMED`
 - AWS account-wide nonmutation: `NOT_PROVEN`
-- Stage 5 AWS execution: no
-- Stage 5 infrastructure mutation: no
 
 ## Established and preserved
 
@@ -29,17 +30,20 @@
   for all 12 scorecard dimensions.
 - An exact Stage 5 document inventory, active-contract diagram, reason/outcome map, target table,
   scorecard comparison, link resolver, and negative claim controls.
+- Two clean deterministic Stage 6 runs, 224 tests with zero skips, 95.737964% line coverage,
+  100% critical-validator branch coverage, and 20 mutation checks with zero survivors.
+- Exact-head Stage 6 CI run `33609507209` and immutable artifact `9838502686`, independently
+  revalidated by ZIP and evidence digests.
+- A Stage 7 fail-closed promotion contract and complete re-audit of all 96 historical non-passes.
 
-## Audit result and remaining work
+## Completion and external closure
 
-The Stage 0–7 audit allows only `PART1_CORRECTION_REQUIRED`; its frozen verdict is
-`FAIL_PART1_NOT_CONFORMANT_PREMATURE_COMPLETION_CLAIM`: 235 of 331 requirements pass and 96 are
-non-passing. C1 preserves that baseline while establishing complete bidirectional ownership:
-8 requirements are formally amended pending final audit, 4 are addressed by C1 pending final
-audit, 6 are addressed by C2 pending final audit, and 10 direct Stage 5 requirements are locally
-addressed pending final audit. All 23 original Stage 5 requirements revalidate as a local candidate.
-Sixty-eight implementation corrections remain across C3–C7. The frozen gate baseline remains 4
-preserved passes, 1 formally amended gate and 9 open gates; no Phase 8 verdict is relabelled. C3–C7
-remain required, and all 96 historical non-pass requirements require C7 adjudication.
-Part 1 completion, Part 2 entry, managed workload execution, performance, cost, and production
-operation remain unclaimed. No AWS action or merge is authorized by Stage 5.
+The immutable historical audit remains 235 passes and 96 non-passes. It has not been edited or
+relabelled. The Stage 7 audit re-evaluates all 331 requirements, all 96 historical non-passes, and
+all 14 mandatory gates against the corrected repository. There are zero implementation corrections,
+zero critical findings, and zero major findings remaining in the Part 1 candidate.
+
+The checked-in state is complete as required before merge. Operational completion and Part 2 entry
+remain conditional on the final immutable PR head passing all checks, squash merge without bypass,
+and an independent successful `main` push CI run. Managed reconciliation, performance, scale, cost,
+and production operation remain `UNCLAIMED` and belong to later parts.

@@ -1,0 +1,9 @@
+{
+  "artifact": "part1-stage6-ci-evidence.json",
+  "artifact_id": 9838502686,
+  "artifact_zip_sha256": "12622a5fdfc62d5a8fb5ba1f75883f765a0a217696878c468c27e3cc4a3501dd",
+  "commit_sha": "6e9a6f315c1e3bfc309494f22c331621a3bc64f5",
+  "evidence_sha256": "9df86e50311891308c4356533a03a929a3686d121559650fe2283bf0750a1afb",
+  "workflow_run_attempt": "1",
+  "workflow_run_id": "33609507209"
+}

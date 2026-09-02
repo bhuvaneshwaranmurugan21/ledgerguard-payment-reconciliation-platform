@@ -44,6 +44,8 @@ jobs:
           python tools/run_part1_stage6.py
           --clean-runs 2
           --output "$RUNNER_TEMP/ledgerguard-stage6"
+      - name: Validate Stage 7 promotion candidate
+        run: python -m ledgerguard_correction_c5
       - name: Build trusted CI evidence envelope
         if: github.event_name == 'pull_request'
         run: >-

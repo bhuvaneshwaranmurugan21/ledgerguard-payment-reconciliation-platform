@@ -151,6 +151,14 @@ def materialize_stage5_view(root: Path, view: Path) -> Path:
             ".coverage",
         ),
     )
+    stage6_snapshots = {
+        "README.md": "eebbf5b19b5c0ef33d590263d92fc39a317b0df321f7ef3d5605fc699f776970",
+        "PROJECT_STATUS.md": "b1ccedaaee3c8e9c7905c63e16ac837d30f5d66052c141061fd044359a9fcd7d",
+    }
+    for logical_path, expected_digest in stage6_snapshots.items():
+        source = root / "history/part1/stage6/snapshots" / logical_path
+        _require(_digest(source) == expected_digest, f"Stage 6 snapshot differs: {logical_path}")
+        shutil.copyfile(source, view / logical_path)
     for raw in manifest["configuration_snapshots"]:
         _require(isinstance(raw, Mapping), "Stage 5 configuration snapshot invalid")
         source = root / str(raw["snapshot_path"])
