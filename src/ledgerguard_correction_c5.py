@@ -153,7 +153,14 @@ def _validate_status(root: Path) -> None:
 
 def _validate_workflow(root: Path) -> None:
     workflow = (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-    _require("python -m ledgerguard_correction_c5" in workflow, "Stage 7 CI gate missing")
+    _require("-m ledgerguard_correction_c5" in workflow, "Stage 7 CI gate missing")
+    stage7_block = workflow.split("- name: Validate Stage 7 promotion candidate", 1)[-1].split(
+        "- name: Build trusted CI evidence envelope", 1
+    )[0]
+    _require(
+        '"$RUNNER_TEMP/ledgerguard-stage6/run-1/venv/bin/python"' in stage7_block,
+        "Stage 7 CI must use the locked clean environment",
+    )
     _require("github.event.pull_request.head.sha" in workflow, "raw PR head control missing")
     _require("aws-actions/" not in workflow, "Stage 7 CI includes an AWS action")
     _require("id-token: write" not in workflow, "Stage 7 CI requests an OIDC token")

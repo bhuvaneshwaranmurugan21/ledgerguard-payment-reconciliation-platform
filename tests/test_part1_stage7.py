@@ -138,3 +138,16 @@ def test_s7_t010_external_closure_cannot_be_removed(tmp_path: Path) -> None:
     )
     with pytest.raises(C5Error, match="closure differs"):
         validate_stage7(root)
+
+
+def test_s7_t011_stage7_ci_cannot_use_ambient_python(tmp_path: Path) -> None:
+    root = _copy(tmp_path)
+    workflow = root / ".github/workflows/ci.yml"
+    workflow.write_text(
+        workflow.read_text(encoding="utf-8").replace(
+            '"$RUNNER_TEMP/ledgerguard-stage6/run-1/venv/bin/python"', "python", 1
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(C5Error, match="locked clean environment"):
+        validate_stage7(root)
