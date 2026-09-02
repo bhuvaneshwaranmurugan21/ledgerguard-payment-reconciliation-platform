@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "stage": 7,
+  "closure_state": "PART1_OPERATIONALLY_COMPLETE",
+  "replacement_pull_request": {
+    "number": 9,
+    "url": "https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/pull/9",
+    "base_sha": "7151eead60e269fa5650e67d65fc8f687ddc281c",
+    "validated_head_sha": "7332018c1e7ace25d3ab2cea761fb70c513ba4f2",
+    "validated_head_tree_sha": "ffe875164eebe0d818545f3580a2085c2700d94a",
+    "exact_head_ci": {
+      "run_id": 33626639395,
+      "job_id": 100235833645,
+      "event": "pull_request",
+      "conclusion": "success",
+      "artifact_id": 9845159857,
+      "artifact_name": "ledgerguard-part1-stage6-7332018c1e7ace25d3ab2cea761fb70c513ba4f2",
+      "artifact_zip_sha256": "f01bcfd7f0c7e9534a3ebd281aec0ebb0efc210c4cb18e038178e3eab85c21ba",
+      "evidence_json_sha256": "18c2f24e97e6f0cfa19bed4836b9e6ca6f423f9b1872e284c228ef723a1860e8"
+    }
+  },
+  "merge": {
+    "required_strategy": "SQUASH",
+    "observed_strategy": "SQUASH",
+    "main_sha": "3ef17666e3fe3bc655ba1c8733beb3cb00acdbec",
+    "main_tree_sha": "ffe875164eebe0d818545f3580a2085c2700d94a",
+    "parent_shas": [
+      "7151eead60e269fa5650e67d65fc8f687ddc281c"
+    ],
+    "parent_count": 1,
+    "validated_tree_matches_main": true,
+    "merged_at": "2026-09-02T11:59:08Z"
+  },
+  "independent_main_ci": {
+    "run_id": 33627452565,
+    "job_id": 100238462488,
+    "event": "push",
+    "head_sha": "3ef17666e3fe3bc655ba1c8733beb3cb00acdbec",
+    "conclusion": "success",
+    "python_version": "3.11.13",
+    "tests": 242,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "line_coverage_percent": 95.737964,
+    "critical_branch_coverage_percent": 100.0,
+    "mutation_checks": 20,
+    "mutation_survivors": 0,
+    "deterministic_payload_sha256": "d68609b5c353b2966c9806478925c466fd058dd079e3bf51f64edd6a435e98ea",
+    "foundation_digest": "3f315ecf51a89d95c77d1b22db4c5cd039a32c752cbd70715097987300031f59",
+    "stage7_candidate_digest": "604e8e3b75c4050674897f6cd357be71c6eaff999cce2da6305064d9cb77842e"
+  },
+  "external_closure": {
+    "exact_head_ci_passed": true,
+    "squash_only_validated_head": true,
+    "independent_main_ci_passed": true,
+    "postmerge_foundation_digest_matched": true,
+    "open_corrective_pull_requests": [],
+    "aws_workflow_ran_in_closure_window": false,
+    "aws_api_called": false,
+    "infrastructure_mutated": false
+  },
+  "outcome": {
+    "part1_state": "PART1_FOUNDATION_COMPLETE",
+    "part1_operational_completion": true,
+    "part1_remaining_work": 0,
+    "part2_entry": "UNLOCKED",
+    "project_state": "PROJECT_IN_PROGRESS",
+    "highest_claim": "LOCAL_VERIFIED"
+  }
+}

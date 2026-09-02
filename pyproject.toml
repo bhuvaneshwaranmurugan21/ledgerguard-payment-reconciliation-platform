@@ -16,11 +16,15 @@ dev = [
   "ruff==0.16.5",
   "coverage==7.10.6",
 ]
+spark = [
+  "pyspark==3.5.6",
+]
 
 [project.scripts]
 ledgerguard-foundation = "ledgerguard_correction_c3:main"
 ledgerguard-stage6 = "ledgerguard_correction_c4:main"
 ledgerguard-stage7 = "ledgerguard_correction_c5:main"
+ledgerguard-part2-stage1 = "ledgerguard_part2_stage1:main"
 ledgerguard-c0 = "ledgerguard_correction_c1:main_c0"
 ledgerguard-c1 = "ledgerguard_correction_c2:main_c1"
 ledgerguard-c2 = "ledgerguard_correction_c3:main_c2"
@@ -38,6 +42,8 @@ py-modules = [
   "ledgerguard_correction_c4",
   "ledgerguard_correction_c5",
   "ledgerguard_stage6_evidence",
+  "ledgerguard_part2_stage1",
+  "ledgerguard_part2_stage1_evidence",
 ]
 
 [tool.pytest.ini_options]

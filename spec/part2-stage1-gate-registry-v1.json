@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 1,
+  "gates": [
+    {
+      "gate_id": "P2-S1-G001",
+      "name": "PART1_CLOSURE_PROVEN",
+      "acceptance": "The exact squash-merged closure commit and independent main CI are recorded, and the frozen tree reproduces Part 1 validation."
+    },
+    {
+      "gate_id": "P2-S1-G002",
+      "name": "HANDOFF_AUTHORITIES_BOUND",
+      "acceptance": "Every inherited Part 1 authority exists at its frozen digest and no protected authority is modified."
+    },
+    {
+      "gate_id": "P2-S1-G003",
+      "name": "RUNTIME_SCOPE_OWNED",
+      "acceptance": "Every required runtime responsibility and master Part 2 gate has one future-stage owner without implementation inflation."
+    },
+    {
+      "gate_id": "P2-S1-G004",
+      "name": "TOOLCHAIN_COMPATIBILITY_PROVEN",
+      "acceptance": "Two clean exact Python 3.11.13, Java 17, Spark 3.5.6 runs produce equal checked-arithmetic and Parquet results."
+    },
+    {
+      "gate_id": "P2-S1-G005",
+      "name": "FAIL_CLOSED_VALIDATION_PROVEN",
+      "acceptance": "Requirements and traceability are complete, and negative mutations of every critical authority class are rejected."
+    },
+    {
+      "gate_id": "P2-S1-G006",
+      "name": "NON_AWS_TRANSITION_PROVEN",
+      "acceptance": "Automatic CI remains read-only and cannot assume AWS credentials, invoke AWS APIs, or mutate infrastructure."
+    }
+  ]
+}
