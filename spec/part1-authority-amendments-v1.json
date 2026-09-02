@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "state": "OWNER_APPROVED_APPEND_ONLY_AMENDMENTS",
+  "approved_at_utc": "2026-09-02T00:00:00Z",
+  "approval": "OWNER_APPROVED",
+  "authority": "Explicit owner approval recorded before C0 implementation",
+  "amendments": [
+    {
+      "id": "P1-AWS-001",
+      "supersedes_claim": "Unqualified statements that no AWS execution occurred",
+      "reason": "Historical evidence proves identity-plane execution, while managed workload execution and frozen-target identity remain unproved.",
+      "historical_observation": {
+        "workflow_run_id": 31722045599,
+        "workflow_attempt": 2,
+        "job_id": 94533258511,
+        "event": "push",
+        "head_sha": "ae36abc157c3cfb018880314d5732e3d91d403bf",
+        "account_id": "887720497919",
+        "region_components": [
+          "ap",
+          "south",
+          "1"
+        ],
+        "role_name": "LedgerGuardGitHubOidcRole",
+        "operations": [
+          "OIDC_ROLE_ASSUMPTION",
+          "STS_GET_CALLER_IDENTITY"
+        ],
+        "identity_plane_execution": "AWS_VERIFIED_WRONG_TARGET",
+        "managed_workload_observed": false,
+        "infrastructure_mutation_step_observed": false
+      },
+      "active_frozen_target": {
+        "account_id": "857229544428",
+        "region": "ap-southeast-2",
+        "role_name": "LedgerGuardGitHubOidcRole",
+        "live_identity": "UNCLAIMED"
+      },
+      "replacement_claim_boundary": {
+        "historical_identity_plane_aws_execution": "AWS_VERIFIED_WRONG_TARGET",
+        "managed_reconciliation_execution": "UNCLAIMED",
+        "frozen_target_live_identity": "UNCLAIMED",
+        "aws_account_wide_nonmutation": "NOT_PROVEN",
+        "accepted_oidc_workflow_trigger": "MANUAL_ONLY",
+        "c0_aws_execution": false,
+        "c0_infrastructure_mutation": false
+      },
+      "future_rule": "No AWS call, workflow dispatch, or infrastructure mutation is authorized without separate explicit approval."
+    },
+    {
+      "id": "P1-CONTRACT-001",
+      "supersedes_requirement_id": "OP-S2-R001",
+      "original_requirement": "Correct the unreleased v1 schemas in place.",
+      "reason": "Merged history already preserves v1 and activates v2; rewriting accepted history would destroy evidence. The versioned correction is formally accepted.",
+      "replacement_authority": {
+        "historical_v1_status": "SUPERSEDED_BEFORE_RUNTIME_USE",
+        "historical_v1_bytes": "IMMUTABLE_AND_DIGEST_BOUND",
+        "active_contract_registry": "contracts/active-contract-set-v1.json",
+        "active_schema_version": "2.0",
+        "accepted_v2_bytes": "IMMUTABLE_AND_DIGEST_BOUND",
+        "future_incompatible_changes": "REQUIRE_NEW_VERSION"
+      },
+      "deviation_record": "The original correct-v1-in-place instruction was not followed; this amendment accepts the preserved-v1/active-v2 design prospectively and does not rewrite that deviation."
+    }
+  ],
+  "history_policy": {
+    "rewrite_history": false,
+    "delete_historical_runs": false,
+    "mutate_historical_v1": false,
+    "mutate_accepted_v2": false
+  }
+}

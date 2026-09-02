@@ -25,10 +25,10 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 is `PART1_CORRECTION_IN_PROGRESS`; Part 2 entry is `BLOCKED`. The overall project remains
-`PROJECT_IN_PROGRESS`. Stages 0–4 and their accepted bytes remain preserved, but Stage 4 is a
-historical completion claim superseded by the full Stage 0–7 conformance audit and the active
-corrective completion authority.
+Part 1 is `PART1_FOUNDATION_COMPLETE`. Stage 0 establishes the corrective baseline, Stage 1
+freezes financial semantics, Stage 2 encodes the versioned active contract set, Stage 3 validates
+canonical bytes and contract coherence, and Stage 4 freezes final completion governance. The
+overall project remains `PROJECT_IN_PROGRESS`.
 
 | Area | Status |
 |---|---|
@@ -37,13 +37,10 @@ corrective completion authority.
 | Semantic acceptance examples | `LOCAL_VERIFIED` after CI |
 | Corrected active `v2` contracts | `LOCAL_VERIFIED` after CI |
 | Canonical contract coherence | `LOCAL_VERIFIED` after CI |
-| Historical Stage 4 governance | `LOCAL_VERIFIED` and byte-preserved |
-| Full Stage 0–7 conformance | `CORRECTION_REQUIRED` — 235/331 requirements and 4/14 gates pass |
+| Part 1 completion governance | `LOCAL_VERIFIED` after CI |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
-| Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
-| Frozen-target identity and managed AWS reconciliation | `UNCLAIMED` |
-| AWS account-wide nonmutation | `NOT_PROVEN` |
+| Managed AWS reconciliation | `UNCLAIMED` |
 | Performance and cost | `UNCLAIMED` |
 | Production custody or compliance | `UNCLAIMED` |
 
@@ -54,13 +51,10 @@ is the [version registry](contracts/active-contract-set-v1.json), supported by t
 [contract model](docs/contract-model.md), [Stage 2 requirements](docs/part1-stage2-requirements.md),
 and [Stage 2 gap audit](docs/stage2-gap-audit.md). Canonical byte and linked-artifact authority is
 defined by the [coherence model](docs/contract-coherence.md) and
-[Stage 3 gap audit](docs/stage3-gap-audit.md). Active Part 1 authority is the
-[corrective completion document](docs/part1-correction.md), the
-[C0 correction contract](contracts/part1-c0-correction-v1.json), and the
-[owner-approved amendments](spec/part1-authority-amendments-v1.json). The prior
-[Stage 4 completion document](docs/part1-completion.md) and
-[Part 2 handoff](contracts/part1-part2-handoff-v1.json) are preserved historical authorities, not
-permission to begin Part 2. Historical stage authorities and every v1/v2 schema remain immutable.
+[Stage 3 gap audit](docs/stage3-gap-audit.md). Final Part 1 authority is defined by the
+[completion document](docs/part1-completion.md), [Stage 4 gap audit](docs/stage4-gap-audit.md), and
+[Part 2 handoff](contracts/part1-part2-handoff-v1.json). Historical stage authorities and every
+v1/v2 schema remain immutable.
 
 ## Foundation validation
 

@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "workstream": "C0",
+  "name": "Truthful authority and state reset",
+  "state": "PART1_CORRECTION_IN_PROGRESS",
+  "project_state": "PROJECT_IN_PROGRESS",
+  "part2_entry": "BLOCKED",
+  "accepted_stage4_baseline": {
+    "main_sha": "2842550d24559a636ff5f15cbd6ea4be1c2ab1c1",
+    "tree_sha": "c66d5fc61352ab29c34c8b34b3e949e88ed350c1",
+    "manifest_path": "history/part1/stage4/manifest-v1.json",
+    "manifest_sha256": "fa1bebf5af7b8f1d6d4f4e4e5fe07866c9ee3dbd590e6562bcf1adc15ef206af",
+    "accepted_file_count": 95
+  },
+  "phase8_authorities": {
+    "authority_sha256": "eb7d31c3fb7c3dc057789c3903ce14be9dacaa28d98e45cee2272f12ed7498ef",
+    "requirement_catalog_sha256": "72052fb97451a4966d592bd49ad2a25faf83fc8a5a9b29631905acab9e3263af",
+    "requirement_verdict_sha256": "51bc3b84a0d6e05eced99789b157bce5c5b5a60139f55069010a9283ec9b1561",
+    "corrective_contract_sha256": "d78aed4f0eae2a052ec4ca83a6da49117de25ba775fbc295c4e10c858d71cf19",
+    "final_verdict_sha256": "b8102d0674e55d9364480a94ce8808b8d60e09b40ddd626c65a85f53035673ce",
+    "acceptance_sha256": "25aae95a8f04f1ed83fbb55ce0caab64eb177f2100cf2b48d8c4716aa0ae0e6b"
+  },
+  "audit_counts": {
+    "requirements_total": 331,
+    "requirements_pass": 235,
+    "requirements_nonpass": 96,
+    "mandatory_gates_total": 14,
+    "mandatory_gates_pass": 4
+  },
+  "approved_amendments": {
+    "approval": "OWNER_APPROVED",
+    "approved_at_utc": "2026-09-02T00:00:00Z",
+    "path": "spec/part1-authority-amendments-v1.json",
+    "sha256": "960e4ef58c88cd9296ace0f0a9d1aae1ce970af8f99d6de1521aed6c71ab4b86",
+    "ids": [
+      "P1-AWS-001",
+      "P1-CONTRACT-001"
+    ]
+  },
+  "acceptance_gates": [
+    "ACTIVE_PART1_STATE_IS_CORRECTION_IN_PROGRESS",
+    "PART2_ENTRY_IS_BLOCKED",
+    "ACCEPTED_STAGE4_TREE_EXACTLY_REPRODUCES",
+    "STAGE0_TO_STAGE4_HISTORY_IS_APPEND_ONLY",
+    "HISTORICAL_AWS_CLAIM_IS_TRUTHFUL_AND_SCOPED",
+    "PRESERVED_V1_ACTIVE_V2_AMENDMENT_IS_OWNER_APPROVED",
+    "C0_EXECUTION_BOUNDARY_IS_NON_AWS",
+    "C0_VALIDATOR_IS_DETERMINISTIC",
+    "FULL_LOCAL_REGRESSION_PASSES",
+    "DRAFT_PR_EXACT_HEAD_CI_PASSES"
+  ],
+  "artifacts": {
+    "authority_amendments": {
+      "path": "spec/part1-authority-amendments-v1.json",
+      "sha256": "960e4ef58c88cd9296ace0f0a9d1aae1ce970af8f99d6de1521aed6c71ab4b86"
+    },
+    "decision_record": {
+      "path": "docs/adr/0010-truthful-part1-correction.md",
+      "sha256": "9835942957e52adc64340d0ec45be6ef967c23afc3451b492d656a1a96425e04"
+    },
+    "correction_document": {
+      "path": "docs/part1-correction.md",
+      "sha256": "8a23b12a7296911fad78f07581c6f2062802c951e9b7b114b599eb008f7192e4"
+    },
+    "stage4_history_manifest": {
+      "path": "history/part1/stage4/manifest-v1.json",
+      "sha256": "fa1bebf5af7b8f1d6d4f4e4e5fe07866c9ee3dbd590e6562bcf1adc15ef206af"
+    },
+    "active_readme": {
+      "path": "README.md",
+      "sha256": "cb5c8f52512cbb8304e86439a2ca8a7086b7271dda81f4c52e675ebe5cdcdbd0"
+    },
+    "active_project_status": {
+      "path": "PROJECT_STATUS.md",
+      "sha256": "5360498d9ba5b0f72217ef8de9a3ccd3d12630983721fd04976b79e7096f080a"
+    },
+    "package_configuration": {
+      "path": "pyproject.toml",
+      "sha256": "fd804aa15dac6882489168f19c8ff0e29b8b018ed6b24e22d420a78e0f0d28a0"
+    },
+    "c0_validator": {
+      "path": "src/ledgerguard_correction.py",
+      "sha256": "5fe593d0d97ead98ed898cfe7fdb001b95331b73a04003bc023356855a6ad033"
+    },
+    "historical_disclosure_guard": {
+      "path": "src/ledgerguard/foundation.py",
+      "sha256": "9dfef400c294017d0ac5eeac32cd7ed6602f6c45cf19403e3dbe3419814d181b"
+    },
+    "c0_tests": {
+      "path": "tests/test_part1_correction.py",
+      "sha256": "cbd4488608a1082791e8ac6bf440e5fbdf8b08afe823b45343dac4a2b23c55ad"
+    },
+    "stage4_compatibility_tests": {
+      "path": "tests/test_part1_stage4.py",
+      "sha256": "4f12ebfcd7cf280b551cca8847a74a8ba59a7b97af83aeb936e8e19160153e1a"
+    }
+  },
+  "remaining_workstreams": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7"
+  ],
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "stage0_to_stage4_history_rewritten": false,
+    "historical_v1_mutated": false,
+    "accepted_v2_mutated": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false
+  },
+  "promotion_boundary": {
+    "pull_request_state": "DRAFT_REQUIRED",
+    "exact_head_ci": "REQUIRED",
+    "merge_in_c0": "PROHIBITED",
+    "post_merge_main_ci": "DEFERRED_TO_C6_C7"
+  }
+}

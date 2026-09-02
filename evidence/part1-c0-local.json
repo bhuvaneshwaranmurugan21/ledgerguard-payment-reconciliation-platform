@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 1,
+  "workstream": "C0",
+  "state": "PART1_CORRECTION_IN_PROGRESS",
+  "recorded_at_utc": "2026-09-02T00:00:00Z",
+  "accepted_stage4_main_sha": "2842550d24559a636ff5f15cbd6ea4be1c2ab1c1",
+  "accepted_stage4_tree_sha": "c66d5fc61352ab29c34c8b34b3e949e88ed350c1",
+  "historical_stage4_part1_sha256": "ad75490932be8427b2d4ba772dbefa731c91bf11c3e6be8ce42d74df2805efc0",
+  "contract_sha256": "5902cf1b41aaa075cf7650cf25246cba9fc5fa040f964e4f537d32b304e8236e",
+  "c0_sha256": "c6d6476cfb1e1b3a62d9e3fca4d488db3f98fa96f22282d44a154fda727a6877",
+  "local_validation": {
+    "test_count": 150,
+    "ruff_format": "PASS",
+    "ruff_lint": "PASS",
+    "strict_mypy": "PASS",
+    "pytest": "PASS",
+    "c0_focused_pytest": "PASS",
+    "historical_stage4_reproduction": "PASS",
+    "accepted_tree_preservation": "PASS",
+    "authority_amendments": "PASS",
+    "determinism": "PASS"
+  },
+  "external_ci": {
+    "pull_request": "DRAFT_REQUIRED",
+    "exact_head_ci": "REQUIRED_EXTERNAL",
+    "merge": "PROHIBITED_IN_C0",
+    "post_merge_main_ci": "DEFERRED_TO_C6_C7"
+  },
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "reconciliation_runtime_added": false,
+    "stage0_to_stage4_history_rewritten": false,
+    "historical_v1_mutated": false,
+    "accepted_v2_mutated": false,
+    "part1_completion_claimed": false,
+    "part2_unlocked": false
+  }
+}

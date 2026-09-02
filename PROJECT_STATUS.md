@@ -3,35 +3,31 @@
 ## Current boundary
 
 - Project: LedgerGuard
-- Part: 1 — Foundation and completion contract
-- Stage: 4 — Part 1 completion governance
-- Stage state: `PART1_COMPLETION_GOVERNANCE_FROZEN`
-- Overall Part 1 state: `PART1_FOUNDATION_COMPLETE`
+- Part: 1 — Foundation correction
+- Workstream: C0 — Truthful authority and state reset
+- Overall Part 1 state: `PART1_CORRECTION_IN_PROGRESS`
 - Overall project state: `PROJECT_IN_PROGRESS`
-- Managed workload executed: no
-- AWS infrastructure mutated: no
-- Highest claim: `LOCAL_VERIFIED` for Part 1 governance after successful CI
+- Part 2 entry: `BLOCKED`
+- Historical Stage 4 state: `PART1_FOUNDATION_COMPLETE` (preserved, not active)
+- Managed reconciliation execution: `UNCLAIMED`
+- Frozen-target live identity: `UNCLAIMED`
+- AWS account-wide nonmutation: `NOT_PROVEN`
+- C0 AWS execution: no
+- C0 infrastructure mutation: no
 
-## Completed
+## Established and preserved
 
-- Immutable Stage 0 history, exact rejected-draft disposition, and corrective baseline evidence.
-- Authoritative repository, account, region, role, default branch, and claim boundary.
-- Complete semantic decision register with zero unresolved decisions.
-- Executable transaction, settlement, identity, admission, allocation, and failure-ownership
-  acceptance examples.
-- Digest-bound Stage 1 completion contract, local evidence, and fail-closed validator.
-- Preserved historical `v1` schemas and a digest-bound active `v2` contract set.
-- Complete requirements-to-contract and enforcement-layer traceability.
-- Adversarial contract specimens for source, policy, manifest, proof, and case structures.
-- Strict JSON admission, canonical timestamps, golden digest/identity vectors and complete
-  policy → manifest → proof → case bindings.
-- Offline resolution of every active JSON-reference fragment and bidirectional Stage 3
-  traceability.
-- Append-only Stage 3 historical reproduction and final Part 1 cross-stage traceability.
-- Exact resolution of all six Part 1 project gates and the frozen Part 2 entry contract.
+- Immutable Stage 0–4 contracts, evidence, schemas, and validator outputs.
+- Frozen two-grain financial semantics and locally verified examples.
+- Historical v1 schemas and the accepted active v2 contract registry, all digest-bound.
+- Canonical JSON, identity, replay/conflict, allocation, proof, and revision semantics.
+- A 95-file accepted Stage 4 inventory with exact snapshots of every C0-mutated file.
+- Owner-approved amendments for the historical AWS claim and v1-to-v2 change control.
 
-## Remaining project work
+## Audit result and remaining work
 
-Part 1 has zero remaining work after the Stage 4 external CI gates close. Reconciliation execution,
-Spark parity, managed AWS execution, scale, measured cost and release remain `UNCLAIMED` and are
-owned by Parts 2–5. Stage 4 does not authorize a reconciliation engine or managed AWS workload.
+The Stage 0–7 audit allows only `PART1_CORRECTION_REQUIRED`; its verdict is
+`FAIL_PART1_NOT_CONFORMANT_PREMATURE_COMPLETION_CLAIM`: 235 of 331 requirements pass, 96 are
+non-passing, and 4 of 14 mandatory gates pass. C1–C7 remain required.
+Part 1 completion, Part 2 entry, managed workload execution, performance, cost, and production
+operation remain unclaimed. No AWS action is authorized by C0.
