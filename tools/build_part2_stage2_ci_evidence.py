@@ -44,6 +44,7 @@ def main() -> None:
     deterministic = local["deterministic_payload"]
     authority = deterministic["authority"]
     mutations = deterministic["mutations"]
+    execution_boundary = local["execution_boundary"]
     envelope: dict[str, Any] = {
         "schema_version": "1.0",
         "repository": required_environment("GITHUB_REPOSITORY"),
@@ -64,8 +65,15 @@ def main() -> None:
         "coverage_percent": deterministic["coverage"]["percent"],
         "mutation_checks": mutations["checks"],
         "mutation_survivors": mutations["survivors"],
-        "aws_execution": False,
-        "infrastructure_mutation": False,
+        "aws_execution": authority["aws_execution"],
+        "aws_api_called": execution_boundary["aws_api_called"],
+        "aws_workflow_dispatched": execution_boundary["aws_workflow_dispatched"],
+        "infrastructure_mutation": execution_boundary["infrastructure_mutated"],
+        "production_reconciliation_executed": execution_boundary[
+            "production_reconciliation_executed"
+        ],
+        "authoritative_proof_persisted": execution_boundary["authoritative_proof_persisted"],
+        "merge_authorized": execution_boundary["merge_authorized"],
     }
     schema = json.loads((ROOT / "spec/part2-stage2-ci-evidence-v1.schema.json").read_text())
     Draft202012Validator.check_schema(schema)

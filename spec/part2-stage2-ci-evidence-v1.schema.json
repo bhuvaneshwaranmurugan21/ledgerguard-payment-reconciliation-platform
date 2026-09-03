@@ -10,7 +10,9 @@
     "python_version", "clean_run_count", "deterministic_equal",
     "deterministic_payload_sha256", "stage2_candidate_digest", "wheel_sha256",
     "test_counts", "coverage_percent", "mutation_checks", "mutation_survivors",
-    "aws_execution", "infrastructure_mutation"
+    "aws_execution", "aws_api_called", "aws_workflow_dispatched",
+    "infrastructure_mutation", "production_reconciliation_executed",
+    "authoritative_proof_persisted", "merge_authorized"
   ],
   "properties": {
     "schema_version": {"const": "1.0"},
@@ -43,6 +45,11 @@
     "mutation_checks": {"const": 12},
     "mutation_survivors": {"const": 0},
     "aws_execution": {"const": false},
-    "infrastructure_mutation": {"const": false}
+    "aws_api_called": {"const": false},
+    "aws_workflow_dispatched": {"const": false},
+    "infrastructure_mutation": {"const": false},
+    "production_reconciliation_executed": {"const": false},
+    "authoritative_proof_persisted": {"const": false},
+    "merge_authorized": {"const": false}
   }
 }

@@ -597,10 +597,30 @@ def test_p2s2_t031_ci_evidence_schema_is_closed() -> None:
         "mutation_checks": 12,
         "mutation_survivors": 0,
         "aws_execution": False,
+        "aws_api_called": False,
+        "aws_workflow_dispatched": False,
         "infrastructure_mutation": False,
+        "production_reconciliation_executed": False,
+        "authoritative_proof_persisted": False,
+        "merge_authorized": False,
     }
     validator = Draft202012Validator(schema)
     assert list(validator.iter_errors(valid)) == []
+    for field in (
+        "aws_execution",
+        "aws_api_called",
+        "aws_workflow_dispatched",
+        "infrastructure_mutation",
+        "production_reconciliation_executed",
+        "authoritative_proof_persisted",
+        "merge_authorized",
+    ):
+        missing = dict(valid)
+        missing.pop(field)
+        assert list(validator.iter_errors(missing))
+        contradicted = dict(valid)
+        contradicted[field] = True
+        assert list(validator.iter_errors(contradicted))
     valid["unknown"] = True
     assert list(validator.iter_errors(valid))
 
