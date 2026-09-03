@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 5,
+  "gates": [
+    {"gate_id": "P2-S5-G001", "name": "verified_stage4_entry"},
+    {"gate_id": "P2-S5-G002", "name": "lossless_replay_and_duplicate_handoff"},
+    {"gate_id": "P2-S5-G003", "name": "exact_settlement_grain_and_formula"},
+    {"gate_id": "P2-S5-G004", "name": "checked_settlement_clearing_movement"},
+    {"gate_id": "P2-S5-G005", "name": "exact_bank_allocation"},
+    {"gate_id": "P2-S5-G006", "name": "bank_integrity_and_unallocated_visibility"},
+    {"gate_id": "P2-S5-G007", "name": "three_way_status_and_reason_precedence"},
+    {"gate_id": "P2-S5-G008", "name": "immutable_deterministic_candidate_state"},
+    {"gate_id": "P2-S5-G009", "name": "scope_and_oracle_independence"},
+    {"gate_id": "P2-S5-G010", "name": "reproducible_external_evidence"}
+  ]
+}

@@ -53,6 +53,7 @@ class AdmittedRecord:
     journal_balanced_total_minor: int | None
     journal_clearing_role_valid: bool | None
     identical_replay: bool = False
+    prior_state_replay: bool = False
 
     def value(self) -> dict[str, Any]:
         decoded = json.loads(self.canonical_bytes)
@@ -74,6 +75,7 @@ class AdmittedBatch:
     state: AdmissionState
     authoritative_proof: bool = False
     observed_records: tuple[AdmittedRecord, ...] = ()
+    observed_occurrences: tuple[AdmittedRecord, ...] = ()
 
     def semantic_digest(self) -> str:
         payload = {
@@ -412,6 +414,7 @@ def admit_bundle(
 
     admitted_by_identity: dict[tuple[str, ...], AdmittedRecord] = {}
     observed_by_identity: dict[tuple[str, ...], AdmittedRecord] = {}
+    observed_occurrences: list[AdmittedRecord] = []
     candidate_sources = dict(source_prior)
     replay_count = 0
     for locator in sorted(declared):
@@ -449,8 +452,10 @@ def admit_bundle(
                 journal_balanced_total_minor=balanced_total,
                 journal_clearing_role_valid=role_valid,
                 identical_replay=previous == digest,
+                prior_state_replay=source_prior.get(identity) == digest,
             )
             observed_by_identity[identity] = admitted
+            observed_occurrences.append(admitted)
             if previous == digest:
                 replay_count += 1
                 continue
@@ -458,6 +463,17 @@ def admit_bundle(
             admitted_by_identity[identity] = admitted
     records = tuple(admitted_by_identity[key] for key in sorted(admitted_by_identity))
     observed_records = tuple(observed_by_identity[key] for key in sorted(observed_by_identity))
+    occurrences = tuple(
+        sorted(
+            observed_occurrences,
+            key=lambda record: (
+                record.source_identity,
+                record.business_sha256,
+                record.canonical_bytes,
+                record.prior_state_replay,
+            ),
+        )
+    )
     _verify_cross_record_invariants(observed_records)
     state = AdmissionState(
         policy_versions=tuple(sorted(policy_candidate.items())),
@@ -478,6 +494,7 @@ def admit_bundle(
         replay_count=replay_count,
         state=state,
         observed_records=observed_records,
+        observed_occurrences=occurrences,
     )
 
 

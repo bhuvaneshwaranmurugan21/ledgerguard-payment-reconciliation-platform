@@ -239,6 +239,8 @@ def test_p2s3_t001_happy_bundle_is_immutable_deterministic_and_proof_free() -> N
     first = admit_bundle(ROOT, policy_bytes, manifest_bytes, supplied)
     second = admit_bundle(ROOT, policy_bytes, manifest_bytes, dict(reversed(supplied.items())))
     assert len(first.records) == 4
+    assert len(first.observed_occurrences) == 4
+    assert all(not row.prior_state_replay for row in first.observed_occurrences)
     assert first.replay_count == 0
     assert first.authoritative_proof is False
     assert first.semantic_digest() == second.semantic_digest()
@@ -679,9 +681,16 @@ def test_p2s3_t012_replay_conflict_and_prior_state_atomicity() -> None:
     policy_bytes, manifest_bytes, supplied, _ = build_bundle(families)
     first = admit_bundle(ROOT, policy_bytes, manifest_bytes, supplied)
     assert first.replay_count == 1
+    event_occurrences = [
+        row for row in first.observed_occurrences if row.family == "PROCESSOR_EVENT"
+    ]
+    assert len(event_occurrences) == 2
+    assert all(not row.prior_state_replay for row in event_occurrences)
     second = admit_bundle(ROOT, policy_bytes, manifest_bytes, supplied, first.state)
     assert second.replay_count == 5
     assert len(second.records) == 0
+    assert len(second.observed_occurrences) == 5
+    assert all(row.prior_state_replay for row in second.observed_occurrences)
     prior = first.state
     conflict = processor_event(amount_minor=101)
     families["PROCESSOR_EVENTS"] = [conflict]

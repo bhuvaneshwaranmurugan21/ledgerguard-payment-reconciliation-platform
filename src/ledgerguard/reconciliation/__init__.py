@@ -23,6 +23,14 @@ from .identity import (
     source_identity,
     transaction_key,
 )
+from .settlement import (
+    BankAllocation,
+    SettlementCandidate,
+    SettlementKey,
+    SettlementReconciliationBatch,
+    SettlementState,
+    reconcile_settlements,
+)
 from .transaction import (
     TransactionCandidate,
     TransactionKey,
@@ -36,7 +44,12 @@ __all__ = [
     "AdmissionState",
     "AdmittedBatch",
     "AdmittedRecord",
+    "BankAllocation",
     "ContractRegistry",
+    "SettlementCandidate",
+    "SettlementKey",
+    "SettlementReconciliationBatch",
+    "SettlementState",
     "TransactionCandidate",
     "TransactionKey",
     "TransactionReconciliationBatch",
@@ -53,6 +66,7 @@ __all__ = [
     "load_local_object_bytes",
     "normalize_bank_reference",
     "parse_strict_json",
+    "reconcile_settlements",
     "reconcile_transactions",
     "settlement_key",
     "source_identity",

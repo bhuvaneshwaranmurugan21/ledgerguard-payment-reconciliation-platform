@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 5,
+  "state": "PART2_IN_PROGRESS",
+  "stage_state": "PART2_STAGE5_SETTLEMENT_RECONCILIATION_VERIFIED_CANDIDATE",
+  "entry_baseline": {
+    "stage4_pull_request": 13,
+    "stage4_pull_request_head": "f83285c2e8e6f70b597f1fc38ff1e77a2d277c03",
+    "stage4_main_commit": "c423ae7e6e92d37ffa8a796b4efacbf9ba6692f1",
+    "stage4_main_tree": "f7c8bfc82ebd895f60d9ad26f35e9922b35c5de9",
+    "stage4_main_parent": "47e96d3f4846d55568c0b137fb3e4d41ead0eef1",
+    "stage4_exact_head_ci_run": 33737068906,
+    "stage4_postmerge_main_ci_run": 33741521494,
+    "stage4_ci_artifact_id": 9886556226
+  },
+  "stage_gates": [
+    "P2-S5-G001",
+    "P2-S5-G002",
+    "P2-S5-G003",
+    "P2-S5-G004",
+    "P2-S5-G005",
+    "P2-S5-G006",
+    "P2-S5-G007",
+    "P2-S5-G008",
+    "P2-S5-G009",
+    "P2-S5-G010"
+  ],
+  "master_part2_completion_gates": {
+    "independent_oracle_verified": "EXTERNALLY_VERIFIED",
+    "spark_parity_verified": "UNCLAIMED",
+    "financial_invariants_verified": "VERIFIED_CANDIDATE",
+    "failure_matrix_verified": "UNCLAIMED",
+    "deterministic_replay_verified": "UNCLAIMED",
+    "critical_paths_tested": "UNCLAIMED"
+  },
+  "settlement_contract": {
+    "grain": [
+      "processor",
+      "merchant_id",
+      "settlement_id",
+      "settlement_cycle",
+      "currency"
+    ],
+    "grain_join": "FULL_OUTER_PROCESSOR_AND_LEDGER_UNION",
+    "processor_net": "PER_RECORD_RECOMPUTE_THEN_CHECKED_AGGREGATE",
+    "formula_mismatch_scope": "PER_SOURCE_RECORD",
+    "ledger_movement": "PROCESSOR_CLEARING_CREDITS_MINUS_DEBITS",
+    "bank_movement": "CREDITS_MINUS_DEBITS",
+    "bank_allocation": "EXACT_NORMALIZED_SETTLEMENT_REFERENCE",
+    "allocation_domain": ["merchant_id", "currency", "normalized_settlement_id"],
+    "amount_or_date_heuristic": false,
+    "one_bank_identity_one_disposition": true,
+    "split_bank_entries_allowed": true,
+    "missing_or_unknown_reference": "UNALLOCATED_BANK_MOVEMENT",
+    "ambiguous_reference": "ADMISSION_REJECTED_NO_CANDIDATES",
+    "arithmetic": "CHECKED_SIGNED_64_BIT",
+    "result": "IMMUTABLE_NON_AUTHORITATIVE_CANDIDATE_AND_ALLOCATION_LEDGER"
+  },
+  "implementation_boundary": {
+    "production_admission_implemented": true,
+    "transaction_engine_implemented": true,
+    "settlement_engine_implemented": true,
+    "bank_allocation_implemented": true,
+    "authoritative_proof_store_implemented": false,
+    "revision_store_implemented": false,
+    "spark_reconciliation_implemented": false,
+    "aws_workload_allowed": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  },
+  "external_completion": {
+    "exact_head_pull_request_ci_required": true,
+    "immutable_ci_evidence_required": true,
+    "squash_merge_required": true,
+    "independent_main_ci_required": true,
+    "local_success_alone_is_insufficient": true,
+    "aws_execution_required": false
+  },
+  "next_stage_entry": {
+    "owner": "PART2_STAGE6",
+    "required_stage5_state": "PART2_STAGE5_SETTLEMENT_RECONCILIATION_VERIFIED",
+    "must_freeze_stage5_external_closure": true,
+    "may_redefine_contracts": false
+  }
+}

@@ -30,6 +30,8 @@ ledgerguard-part2-stage3 = "ledgerguard_part2_stage3_validation:main"
 ledgerguard-part2-stage3-admit = "ledgerguard_part2_stage3:main"
 ledgerguard-part2-stage4 = "ledgerguard_part2_stage4_validation:main"
 ledgerguard-part2-stage4-reconcile = "ledgerguard_part2_stage4:main"
+ledgerguard-part2-stage5 = "ledgerguard_part2_stage5_validation:main"
+ledgerguard-part2-stage5-reconcile = "ledgerguard_part2_stage5:main"
 ledgerguard-c0 = "ledgerguard_correction_c1:main_c0"
 ledgerguard-c1 = "ledgerguard_correction_c2:main_c1"
 ledgerguard-c2 = "ledgerguard_correction_c3:main_c2"
@@ -57,6 +59,9 @@ py-modules = [
   "ledgerguard_part2_stage4",
   "ledgerguard_part2_stage4_evidence",
   "ledgerguard_part2_stage4_validation",
+  "ledgerguard_part2_stage5",
+  "ledgerguard_part2_stage5_evidence",
+  "ledgerguard_part2_stage5_validation",
 ]
 
 [tool.pytest.ini_options]

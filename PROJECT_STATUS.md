@@ -4,14 +4,14 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 4 — Transaction-grain reconciliation
+- Stage: 5 — Settlement-grain three-way reconciliation and exact bank allocation
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE4_TRANSACTION_RECONCILIATION_VERIFIED_CANDIDATE`
-- Highest new claim: `LOCAL_VERIFIED` transaction candidate pending external closure
+- Stage state: `PART2_STAGE5_SETTLEMENT_RECONCILIATION_VERIFIED_CANDIDATE`
+- Highest new claim: `LOCAL_VERIFIED` settlement candidate pending external closure
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
-- Transaction reconciliation: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
-- Settlement reconciliation: `UNCLAIMED`
+- Transaction reconciliation: `EXTERNALLY_VERIFIED`
+- Settlement reconciliation: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
 - Spark reconciliation parity: `UNCLAIMED`
 - AWS execution: false
 - AWS infrastructure mutated: false
@@ -105,10 +105,20 @@ PR #12 passed exact-head CI, was squash-merged as
 `47e96d3f4846d55568c0b137fb3e4d41ead0eef1`, and passed independent `main` CI run
 `33729063294`; admission is therefore externally verified.
 
-Stage 4 adds transaction-grain reconciliation over the immutable Stage 3 handoff. It implements
+Stage 4 added transaction-grain reconciliation over the immutable Stage 3 handoff. It implements
 the full outer grain union, policy signs, clearing-account movement, checked arithmetic, exact
 capture references, cumulative cross-class negative-event capacity, deterministic status and
 reason precedence, and replay-safe immutable candidate state. It does not add settlement
 reconciliation, bank allocation, durable persistence, proof/case/revision finalization, Spark,
-AWS execution, or infrastructure mutation. Stage 4 remains a local candidate until exact-head
-draft-PR CI and immutable evidence inspection complete.
+AWS execution, or infrastructure mutation. PR #13 passed exact-head CI, was squash-merged as
+`c423ae7e6e92d37ffa8a796b4efacbf9ba6692f1`, and passed independent post-merge `main` CI run
+`33741521494`; transaction reconciliation is therefore externally verified.
+
+Stage 5 adds settlement-grain three-way reconciliation and a deterministic allocation ledger over
+the immutable Stage 3 handoff. It recomputes every processor net before aggregation, isolates
+settlement clearing movement, preserves all three pairwise deltas, and allocates bank identities
+only by exact normalized settlement reference. Missing, unknown, ambiguous, duplicate, or
+disallowed bank evidence fails visibly. The result is immutable and non-authoritative. Stage 5 does
+not persist or finalize proofs, create revisions, execute Spark, access AWS, or mutate
+infrastructure. It remains a local candidate until exact-head draft-PR CI and immutable evidence
+inspection complete.

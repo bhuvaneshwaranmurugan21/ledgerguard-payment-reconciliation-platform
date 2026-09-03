@@ -122,3 +122,25 @@ access, AWS execution, or infrastructure mutation. Promotion requires 100% state
 coverage of the owned production surface, all registered semantic mutations killed, two equal
 clean CPython 3.11.13 runs, exact-head draft-PR CI, and inspection of the immutable evidence
 artifact. Local success alone does not promote Stage 4.
+
+## Stage 5 settlement boundary
+
+PR #13 completed the Stage 4 external closure. Stage 5 consumes admitted processor settlements,
+settlement journals, and bank entries at the exact `(processor, merchant_id, settlement_id,
+settlement_cycle, currency)` grain. Processor and ledger inputs form a full outer union. Processor
+net is recomputed and checked per record before aggregation; clearing movement uses only
+`PROCESSOR_CLEARING` credits minus debits.
+
+Bank allocation uses only merchant, currency, and the exact NFC-normalized, outer-trimmed
+settlement identifier. Case and punctuation remain significant. Every bank source identity has one
+allocated or unallocated disposition, multiple distinct identities may form a split settlement,
+ambiguous targets reject admission, and missing or unknown references remain visible without an
+amount/date fallback. Same-manifest bank duplication is a financial exception and contributes
+once; prior-state replay remains idempotent.
+
+Candidates preserve processor-ledger, processor-bank, and ledger-bank deltas and their maximum
+absolute difference. Semantic reasons precede tolerance. The output remains immutable,
+deterministic, and non-authoritative. Stage 5 does not persist or finalize proofs, create revisions,
+execute Spark, access AWS, or mutate infrastructure. Promotion uses the same exact Python 3.11.13,
+hash-locked, 100% statement-and-branch coverage, zero-survivor mutation, two-clean-run, exact-head
+draft-PR, immutable-artifact, squash-merge, and post-merge-main evidence standard.
