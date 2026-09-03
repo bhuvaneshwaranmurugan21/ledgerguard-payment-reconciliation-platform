@@ -522,10 +522,15 @@ def _validate_surfaces(root: Path) -> None:
         CLOSURE_SHA,
         "git worktree add --detach",
         "$RUNNER_TEMP/ledgerguard-part1-closure",
-        "python tools/run_part2_stage1.py",
         "--clean-runs 2",
     ):
         _require(required in workflow, f"automatic CI control missing: {required}")
+    _require(
+        "python tools/run_part2_stage1.py" in workflow
+        or 'python "$RUNNER_TEMP/ledgerguard-part2-stage1-closure/tools/run_part2_stage1.py"'
+        in workflow,
+        "automatic CI Stage 1 execution control missing",
+    )
     _require(
         "contents: read" in workflow and "pull-requests: read" in workflow, "CI permissions differ"
     )

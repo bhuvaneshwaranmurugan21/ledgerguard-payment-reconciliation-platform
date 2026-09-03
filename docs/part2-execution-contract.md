@@ -68,3 +68,17 @@ non-deterministic clean runs, automatic AWS capability, or claim inflation fails
 No failed check may be disabled, skipped, weakened, or renamed to obtain completion. Local success
 alone is insufficient: exact-head pull-request CI, squash merge, and independent `main` CI are
 external closure requirements.
+
+## Stage 2 reference-oracle boundary
+
+Stage 2 implements only the independent expected-result path in
+`ledgerguard_reference_oracle`. It reproduces the frozen canonical identities and both financial
+grains without importing production calculations. Admission or execution failure never yields an
+authoritative proof. The oracle performs no persistence, Spark reconciliation, network access, AWS
+execution, or infrastructure mutation.
+
+The Stage 2 candidate covers every frozen example, coherence vector, runtime invariant, behavioral
+scenario, and reason code with boundary, permutation, metamorphic, and targeted mutation checks.
+Only `independent_oracle_verified` may advance, and it remains pending external closure until
+exact-head draft-PR CI, immutable artifact inspection, squash merge, and independent `main` CI all
+pass.

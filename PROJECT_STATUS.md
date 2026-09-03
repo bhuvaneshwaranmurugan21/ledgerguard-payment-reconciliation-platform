@@ -4,15 +4,27 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 1 — Execution contract and local toolchain
+- Stage: 2 — Independent reference oracle
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE1_EXECUTION_CONTRACT_ESTABLISHED`
-- Highest new claim: `LOCAL_VERIFIED` Stage 1 authority and toolchain candidate
-- Reference oracle: `UNCLAIMED`
+- Stage state: `PART2_STAGE2_REFERENCE_ORACLE_VERIFIED_CANDIDATE`
+- Highest new claim: `LOCAL_VERIFIED` reference-oracle candidate pending external closure
+- Reference oracle: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
 - Reconciliation implementation: `UNCLAIMED`
 - Spark reconciliation parity: `UNCLAIMED`
 - AWS execution: false
 - AWS infrastructure mutated: false
+
+## Accepted Stage 1 snapshot
+
+The following lines preserve the exact status surface validated at the immutable Stage 1 tree; they
+are historical entry evidence, not the current Stage 2 state.
+
+- Stage: 1 — Execution contract and local toolchain
+- State: `PART2_IN_PROGRESS`
+- Stage state: `PART2_STAGE1_EXECUTION_CONTRACT_ESTABLISHED`
+- Reference oracle: `UNCLAIMED`
+- Reconciliation implementation: `UNCLAIMED`
+- Spark reconciliation parity: `UNCLAIMED`
 
 ## Frozen Part 1 closure boundary
 
@@ -66,7 +78,12 @@ CI, was squash-merged as one-parent commit `3ef17666e3fe3bc655ba1c8733beb3cb00ac
 `main` CI run `33627452565` passed. Part 1 is therefore operationally complete and Part 2 entry is
 unlocked.
 
-Stage 1 establishes the Part 2 execution authority, responsibility ownership, exact local
-Spark/Parquet toolchain, traceability, and non-AWS CI boundary. It adds no reconciliation oracle or
-engine. Managed reconciliation, performance, scale, cost, and production operation remain
-`UNCLAIMED` and belong to later stages and parts.
+Stage 1 established the Part 2 execution authority, responsibility ownership, exact local
+Spark/Parquet toolchain, traceability, and non-AWS CI boundary. PR #10 was squash-merged as
+`95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91`, and independent main CI run `33710867915` passed.
+
+Stage 2 adds an independent reference oracle for canonical identity, checked arithmetic,
+transaction and settlement expectations, exact references and allocation, status and reasons, and
+proof/case identity expectations. It does not add the production engine, authoritative storage,
+Spark reconciliation, AWS execution, or infrastructure mutation. The oracle gate remains a local
+candidate until exact-head pull-request CI, squash merge, and independent main CI complete.

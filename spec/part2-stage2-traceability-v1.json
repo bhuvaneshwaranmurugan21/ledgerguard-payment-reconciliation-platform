@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 2,
+  "traceability": [
+    {"requirement_id": "P2-S2-R001", "authorities": ["contracts/part2-stage2-reference-oracle-v1.json"], "validation": "P2S2-T001", "evidence": ["entry commit, tree, parent, and CI runs"]},
+    {"requirement_id": "P2-S2-R002", "authorities": ["spec/part2-stage1-authority-v1.json"], "validation": "P2S2-T002", "evidence": ["eight inherited SHA-256 comparisons"]},
+    {"requirement_id": "P2-S2-R003", "authorities": ["docs/adr/0018-independent-reference-oracle.md"], "validation": "P2S2-T003", "evidence": ["AST import boundary"]},
+    {"requirement_id": "P2-S2-R004", "authorities": ["contracts/part2-stage2-reference-oracle-v1.json"], "validation": "P2S2-T004", "evidence": ["reverse import and side-effect scan"]},
+    {"requirement_id": "P2-S2-R005", "authorities": ["spec/financial-semantics-v1.json", "spec/contract-coherence-vectors-v1.json"], "validation": "P2S2-T005", "evidence": ["canonical golden vectors"]},
+    {"requirement_id": "P2-S2-R006", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S2-T006", "evidence": ["signed 64-bit boundary matrix"]},
+    {"requirement_id": "P2-S2-R007", "authorities": ["spec/financial-semantics-v1.json", "spec/financial-examples-v1.json"], "validation": "P2S2-T007", "evidence": ["transaction oracle cases"]},
+    {"requirement_id": "P2-S2-R008", "authorities": ["spec/financial-semantics-v1.json", "spec/financial-examples-v1.json"], "validation": "P2S2-T008", "evidence": ["settlement oracle cases"]},
+    {"requirement_id": "P2-S2-R009", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S2-T009", "evidence": ["missing-zero and tolerance metamorphics"]},
+    {"requirement_id": "P2-S2-R010", "authorities": ["spec/contract-coherence-v1.json", "spec/contract-coherence-vectors-v1.json"], "validation": "P2S2-T010", "evidence": ["proof and case identity goldens"]},
+    {"requirement_id": "P2-S2-R011", "authorities": ["spec/part1-stage5-documentation-authority-v1.json"], "validation": "P2S2-T011", "evidence": ["no-proof failure decisions"]},
+    {"requirement_id": "P2-S2-R012", "authorities": ["spec/contract-invariants-v1.json", "spec/part1-stage5-documentation-authority-v1.json"], "validation": "P2S2-T012", "evidence": ["complete authority coverage matrix"]},
+    {"requirement_id": "P2-S2-R013", "authorities": ["spec/part2-stage2-oracle-vectors-v1.json", "tests/test_part2_stage2_oracle.py"], "validation": "P2S2-T013", "evidence": ["mutation and metamorphic results"]},
+    {"requirement_id": "P2-S2-R014", "authorities": ["tools/run_part2_stage2.py"], "validation": "P2S2-T014", "evidence": ["two clean deterministic payloads"]},
+    {"requirement_id": "P2-S2-R015", "authorities": [".github/workflows/ci.yml"], "validation": "P2S2-T015", "evidence": ["exact-head evidence and squash-only closure"]}
+  ]
+}

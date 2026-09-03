@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 2,
+  "state": "PART2_IN_PROGRESS",
+  "stage_state": "PART2_STAGE2_REFERENCE_ORACLE_VERIFIED_CANDIDATE",
+  "entry_baseline": {
+    "stage1_pull_request": 10,
+    "stage1_main_commit": "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91",
+    "stage1_main_tree": "668e2e89473b026d9857d162fb9e45a3c8f465a1",
+    "stage1_main_parent": "3ef17666e3fe3bc655ba1c8733beb3cb00acdbec",
+    "stage1_exact_head_ci_run": 33657002427,
+    "stage1_postmerge_main_ci_run": 33710867915
+  },
+  "stage_gates": [
+    "P2-S2-G001",
+    "P2-S2-G002",
+    "P2-S2-G003",
+    "P2-S2-G004",
+    "P2-S2-G005",
+    "P2-S2-G006",
+    "P2-S2-G007"
+  ],
+  "master_part2_completion_gates": {
+    "independent_oracle_verified": "LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE",
+    "spark_parity_verified": "UNCLAIMED",
+    "financial_invariants_verified": "UNCLAIMED",
+    "failure_matrix_verified": "UNCLAIMED",
+    "deterministic_replay_verified": "UNCLAIMED",
+    "critical_paths_tested": "UNCLAIMED"
+  },
+  "implementation_boundary": {
+    "independent_reference_oracle_implemented": true,
+    "production_admission_implemented": false,
+    "transaction_engine_implemented": false,
+    "settlement_engine_implemented": false,
+    "authoritative_proof_store_implemented": false,
+    "revision_store_implemented": false,
+    "spark_reconciliation_implemented": false,
+    "aws_workload_allowed": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  },
+  "oracle_contract": {
+    "namespace": "ledgerguard_reference_oracle",
+    "side_effect_free": true,
+    "production_imports_forbidden": true,
+    "authoritative_output_emission": false,
+    "inputs": "FROZEN_V2_CONTRACT_SHAPES_AND_EXPLICIT_EXPECTATION_SNAPSHOTS",
+    "outputs": "ADMISSION_DECISIONS_AND_EXPECTED_GRAIN_RESULTS"
+  },
+  "external_completion": {
+    "exact_head_pull_request_ci_required": true,
+    "immutable_ci_evidence_required": true,
+    "squash_merge_required": true,
+    "independent_main_ci_required": true,
+    "local_success_alone_is_insufficient": true,
+    "aws_execution_required": false
+  },
+  "next_stage_entry": {
+    "owner": "PART2_STAGE3",
+    "required_stage2_state": "PART2_STAGE2_REFERENCE_ORACLE_VERIFIED",
+    "must_freeze_stage2_external_closure": true,
+    "may_import_oracle_from_production": false,
+    "may_redefine_part1_authority": false
+  }
+}
