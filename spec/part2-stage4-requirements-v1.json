@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 4,
+  "requirements": [
+    {"id": "P2-S4-R001", "gate_id": "P2-S4-G001", "statement": "Bind entry to PR 12 head, squash commit, tree, parent, exact-head CI, immutable artifact, artifact digests, and post-merge main CI."},
+    {"id": "P2-S4-R002", "gate_id": "P2-S4-G001", "statement": "Byte-verify protected Stage 3 authorities and preserve every accepted v1 and v2 schema."},
+    {"id": "P2-S4-R003", "gate_id": "P2-S4-G002", "statement": "Expose immutable current-bundle observations including identical replays while retaining the existing new-business-effect record view."},
+    {"id": "P2-S4-R004", "gate_id": "P2-S4-G002", "statement": "Reconcile replay observations and immutable prior transaction state without applying any source identity twice."},
+    {"id": "P2-S4-R005", "gate_id": "P2-S4-G003", "statement": "Use exactly processor, merchant_id, payment_id, event_class, and currency as the transaction grain."},
+    {"id": "P2-S4-R006", "gate_id": "P2-S4-G003", "statement": "Evaluate the full outer union of processor-event and transaction-journal keys and keep missing sources explicit."},
+    {"id": "P2-S4-R007", "gate_id": "P2-S4-G004", "statement": "Apply policy event signs and aggregate every unique processor event exactly once with checked signed 64-bit arithmetic."},
+    {"id": "P2-S4-R008", "gate_id": "P2-S4-G004", "statement": "Calculate ledger movement from PROCESSOR_CLEARING debits minus credits and never substitute total journal debits."},
+    {"id": "P2-S4-R009", "gate_id": "P2-S4-G004", "statement": "Treat invalid clearing count, posting side, or policy-disallowed counterpart role as INVALID_ACCOUNT_ROLE."},
+    {"id": "P2-S4-R010", "gate_id": "P2-S4-G004", "statement": "Reject processor, ledger, delta, difference, count, and reference-capacity overflow before publishing candidates."},
+    {"id": "P2-S4-R011", "gate_id": "P2-S4-G005", "statement": "Resolve every negative event to an exact capture source identity in the same processor, merchant, payment, and currency scope."},
+    {"id": "P2-S4-R012", "gate_id": "P2-S4-G005", "statement": "Forbid negative reference chains and preserve unresolved references as UNRESOLVED_REFERENCE."},
+    {"id": "P2-S4-R013", "gate_id": "P2-S4-G005", "statement": "Aggregate refund, chargeback, and reversal application against one exact capture before evaluating capacity."},
+    {"id": "P2-S4-R014", "gate_id": "P2-S4-G005", "statement": "Keep multiple captures for one payment as distinct capacity pools and make capacity independent of input order."},
+    {"id": "P2-S4-R015", "gate_id": "P2-S4-G006", "statement": "Emit deterministic financial reasons for missing evidence, invalid roles, unresolved references, over-application, and processor-ledger mismatch."},
+    {"id": "P2-S4-R016", "gate_id": "P2-S4-G006", "statement": "Apply tolerance only after complete semantically valid evidence; semantic reasons always force EXCEPTION."},
+    {"id": "P2-S4-R017", "gate_id": "P2-S4-G006", "statement": "Produce exact transaction totals, counts, signed delta, absolute difference, status, and ordered reason codes."},
+    {"id": "P2-S4-R018", "gate_id": "P2-S4-G007", "statement": "Return immutable transaction candidates and state with canonical deterministic digests and no partial transition after rejection."},
+    {"id": "P2-S4-R019", "gate_id": "P2-S4-G007", "statement": "Bind transaction batch identity to run, policy, manifest, source state, and candidate values while excluding time and arrival order."},
+    {"id": "P2-S4-R020", "gate_id": "P2-S4-G008", "statement": "Keep production independent from the reference oracle, settlement calculation, bank allocation, persistence, proof finalization, Spark, network, and AWS."},
+    {"id": "P2-S4-R021", "gate_id": "P2-S4-G008", "statement": "Expose a read-only local command whose success and rejection outputs never claim an authoritative proof."},
+    {"id": "P2-S4-R022", "gate_id": "P2-S4-G009", "statement": "Pass the full suite, 100 percent Stage 4 statement and branch coverage, semantic mutations, wheel installation, and two clean Python 3.11.13 runs."},
+    {"id": "P2-S4-R023", "gate_id": "P2-S4-G009", "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before Stage 4 promotion."}
+  ]
+}

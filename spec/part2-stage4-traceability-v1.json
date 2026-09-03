@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 4,
+  "traceability": [
+    {"requirement_id": "P2-S4-R001", "authorities": ["spec/part2-stage3-closure-freeze-v1.json"], "validation": "P2S4-T001", "evidence": ["exact Stage 3 external closure identifiers"]},
+    {"requirement_id": "P2-S4-R002", "authorities": ["spec/part2-stage3-closure-freeze-v1.json", "contracts/active-contract-set-v1.json"], "validation": "P2S4-T002", "evidence": ["protected authority and frozen schema digests"]},
+    {"requirement_id": "P2-S4-R003", "authorities": ["docs/adr/0020-transaction-reconciliation-and-reference-capacity.md"], "validation": "P2S4-T003", "evidence": ["mixed replay and new bundle"]},
+    {"requirement_id": "P2-S4-R004", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S4-T004", "evidence": ["state replay and conflict cases"]},
+    {"requirement_id": "P2-S4-R005", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S4-T005", "evidence": ["complete transaction-key assertions"]},
+    {"requirement_id": "P2-S4-R006", "authorities": ["docs/correctness.md"], "validation": "P2S4-T006", "evidence": ["processor-only and ledger-only grains"]},
+    {"requirement_id": "P2-S4-R007", "authorities": ["contracts/v2/reconciliation-policy-v2.schema.json"], "validation": "P2S4-T007", "evidence": ["four event signs and multi-record aggregation"]},
+    {"requirement_id": "P2-S4-R008", "authorities": ["spec/contract-invariants-v1.json"], "validation": "P2S4-T008", "evidence": ["clearing-only movement cases"]},
+    {"requirement_id": "P2-S4-R009", "authorities": ["docs/failure-model-v2.md"], "validation": "P2S4-T009", "evidence": ["role, side and counterpart failures"]},
+    {"requirement_id": "P2-S4-R010", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S4-T010", "evidence": ["aggregate and absolute overflow cases"]},
+    {"requirement_id": "P2-S4-R011", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S4-T011", "evidence": ["exact capture and scope cases"]},
+    {"requirement_id": "P2-S4-R012", "authorities": ["contracts/v2/processor-event-v2.schema.json"], "validation": "P2S4-T012", "evidence": ["missing and negative-target references"]},
+    {"requirement_id": "P2-S4-R013", "authorities": ["spec/part2-stage2-oracle-vectors-v1.json"], "validation": "P2S4-T013", "evidence": ["shared cross-class capacity"]},
+    {"requirement_id": "P2-S4-R014", "authorities": ["docs/correctness.md"], "validation": "P2S4-T014", "evidence": ["multiple-capture and permutation cases"]},
+    {"requirement_id": "P2-S4-R015", "authorities": ["docs/failure-model-v2.md"], "validation": "P2S4-T015", "evidence": ["closed reason matrix"]},
+    {"requirement_id": "P2-S4-R016", "authorities": ["spec/financial-semantics-v1.json"], "validation": "P2S4-T016", "evidence": ["tolerance boundary and semantic precedence"]},
+    {"requirement_id": "P2-S4-R017", "authorities": ["contracts/v2/reconciliation-proof-v2.schema.json"], "validation": "P2S4-T017", "evidence": ["candidate totals and independent oracle differential"]},
+    {"requirement_id": "P2-S4-R018", "authorities": ["docs/adr/0020-transaction-reconciliation-and-reference-capacity.md"], "validation": "P2S4-T018", "evidence": ["frozen dataclasses and fail-closed transition"]},
+    {"requirement_id": "P2-S4-R019", "authorities": ["docs/architecture-v2.md"], "validation": "P2S4-T019", "evidence": ["state and manifest-bound digests"]},
+    {"requirement_id": "P2-S4-R020", "authorities": ["contracts/part2-stage4-transaction-reconciliation-v1.json"], "validation": "P2S4-T020", "evidence": ["AST imports and forbidden capability scan"]},
+    {"requirement_id": "P2-S4-R021", "authorities": ["docs/part2-stage4-transaction-reconciliation.md"], "validation": "P2S4-T021", "evidence": ["installed local CLI success and owned failure"]},
+    {"requirement_id": "P2-S4-R022", "authorities": ["spec/part2-stage4-coverage-v1.json", "tools/run_part2_stage4.py"], "validation": "P2S4-T022", "evidence": ["full JUnit, branch coverage, mutations, wheel and clean runs"]},
+    {"requirement_id": "P2-S4-R023", "authorities": [".github/workflows/ci.yml", "spec/part2-stage4-ci-evidence-v1.schema.json"], "validation": "P2S4-T023", "evidence": ["raw exact-head CI envelope and squash-only closure"]}
+  ]
+}

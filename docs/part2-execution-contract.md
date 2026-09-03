@@ -101,3 +101,24 @@ All accepted v1 and v2 schema bytes remain frozen. The source wire protocol deci
 those schemas are recorded in ADR 0019. Stage 3 uses the same exact Python 3.11.13, hash-locked,
 two-clean-run evidence standard as Stage 2, with 100% statement and branch coverage of production
 admission and zero survivors across the registered semantic mutations.
+
+## Stage 4 transaction boundary
+
+PR #12 completed the Stage 3 external closure. Stage 4 consumes admitted processor events and
+transaction journals at the exact `(processor, merchant_id, payment_id, event_class, currency)`
+grain. It evaluates the full outer union, derives processor amounts from policy event signs, and
+derives ledger movement only from signed `PROCESSOR_CLEARING` postings. Missing evidence remains
+explicit and semantic failures take precedence over tolerance.
+
+Every refund, chargeback, and reversal must reference one exact capture source identity in the
+same processor, merchant, payment, and currency scope. All negative applications share that
+capture's capacity, regardless of class or arrival order. Multiple captures remain independent.
+Replay observations merge with immutable prior transaction state by source identity, so identical
+delivery is applied once and changed-content identity reuse fails closed.
+
+The output is an immutable, deterministic, non-authoritative candidate. Stage 4 does not perform
+settlement calculation, bank allocation, persistence, proof finalization, Spark execution, network
+access, AWS execution, or infrastructure mutation. Promotion requires 100% statement and branch
+coverage of the owned production surface, all registered semantic mutations killed, two equal
+clean CPython 3.11.13 runs, exact-head draft-PR CI, and inspection of the immutable evidence
+artifact. Local success alone does not promote Stage 4.

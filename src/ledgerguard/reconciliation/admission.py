@@ -52,6 +52,7 @@ class AdmittedRecord:
     normalized_settlement_reference: str | None
     journal_balanced_total_minor: int | None
     journal_clearing_role_valid: bool | None
+    identical_replay: bool = False
 
     def value(self) -> dict[str, Any]:
         decoded = json.loads(self.canonical_bytes)
@@ -72,6 +73,7 @@ class AdmittedBatch:
     replay_count: int
     state: AdmissionState
     authoritative_proof: bool = False
+    observed_records: tuple[AdmittedRecord, ...] = ()
 
     def semantic_digest(self) -> str:
         payload = {
@@ -409,6 +411,7 @@ def admit_bundle(
         raise AdmissionRejected("SOURCE_IDENTITY_MISMATCH", "supplied object set mismatch")
 
     admitted_by_identity: dict[tuple[str, ...], AdmittedRecord] = {}
+    observed_by_identity: dict[tuple[str, ...], AdmittedRecord] = {}
     candidate_sources = dict(source_prior)
     replay_count = 0
     for locator in sorted(declared):
@@ -428,15 +431,11 @@ def admit_bundle(
             previous = candidate_sources.get(identity)
             if previous is not None and previous != digest:
                 raise AdmissionRejected("IDENTITY_CONFLICT", "source identity reused")
-            if previous == digest:
-                replay_count += 1
-                continue
             balanced_total: int | None = None
             role_valid: bool | None = None
             if contract_family == "LEDGER_JOURNAL":
                 balanced_total, role_valid = _journal_admission(value)
-            candidate_sources[identity] = digest
-            admitted_by_identity[identity] = AdmittedRecord(
+            admitted = AdmittedRecord(
                 family=contract_family,
                 source_identity=identity,
                 business_sha256=digest,
@@ -449,9 +448,17 @@ def admit_bundle(
                 ),
                 journal_balanced_total_minor=balanced_total,
                 journal_clearing_role_valid=role_valid,
+                identical_replay=previous == digest,
             )
+            observed_by_identity[identity] = admitted
+            if previous == digest:
+                replay_count += 1
+                continue
+            candidate_sources[identity] = digest
+            admitted_by_identity[identity] = admitted
     records = tuple(admitted_by_identity[key] for key in sorted(admitted_by_identity))
-    _verify_cross_record_invariants(records)
+    observed_records = tuple(observed_by_identity[key] for key in sorted(observed_by_identity))
+    _verify_cross_record_invariants(observed_records)
     state = AdmissionState(
         policy_versions=tuple(sorted(policy_candidate.items())),
         run_manifests=tuple(sorted(manifest_candidate.items())),
@@ -470,6 +477,7 @@ def admit_bundle(
         records=records,
         replay_count=replay_count,
         state=state,
+        observed_records=observed_records,
     )
 
 
