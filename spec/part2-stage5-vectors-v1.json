@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 5,
+  "frozen_settlement_examples": "spec/financial-examples-v1.json#/settlement_cases",
+  "frozen_ambiguity_example": "spec/financial-examples-v1.json#/ambiguous_bank_allocation_case",
+  "required_properties": [
+    "FULL_OUTER_PROCESSOR_LEDGER_UNION",
+    "PER_RECORD_FORMULA_VALIDATION",
+    "CHECKED_THREE_SOURCE_AGGREGATION",
+    "EXACT_REFERENCE_ONLY_ALLOCATION",
+    "ONE_BANK_IDENTITY_ONE_DISPOSITION",
+    "SPLIT_BANK_ENTRY_AGGREGATION",
+    "SAME_MANIFEST_DUPLICATE_DISTINCT_FROM_PRIOR_REPLAY",
+    "UNALLOCATED_BANK_MOVEMENT_VISIBLE_ONCE",
+    "THREE_PAIRWISE_DELTAS_PRESERVED",
+    "SEMANTIC_REASON_PRECEDES_TOLERANCE",
+    "NON_AUTHORITATIVE_OUTPUT"
+  ],
+  "allocation_dispositions": [
+    "ALLOCATED",
+    "UNALLOCATED_MISSING_REFERENCE",
+    "UNALLOCATED_UNKNOWN_REFERENCE"
+  ],
+  "signed_64_bit_boundaries": {
+    "minimum": -9223372036854775808,
+    "maximum": 9223372036854775807,
+    "overflow_outcome": "ADMISSION_REJECTED_NO_CANDIDATES"
+  }
+}

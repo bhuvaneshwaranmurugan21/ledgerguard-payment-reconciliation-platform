@@ -1,0 +1,573 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 5,
+  "traceability": [
+    {
+      "requirement_id": "P2-S5-R001",
+      "gate_id": "P2-S5-G001",
+      "authorities": [
+        "spec/part2-stage4-closure-freeze-v1.json",
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R002",
+      "gate_id": "P2-S5-G001",
+      "authorities": [
+        "spec/part2-stage4-closure-freeze-v1.json",
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R003",
+      "gate_id": "P2-S5-G001",
+      "authorities": [
+        "spec/part2-stage4-closure-freeze-v1.json",
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R004",
+      "gate_id": "P2-S5-G002",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R005",
+      "gate_id": "P2-S5-G002",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R006",
+      "gate_id": "P2-S5-G002",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R007",
+      "gate_id": "P2-S5-G002",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R008",
+      "gate_id": "P2-S5-G003",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R009",
+      "gate_id": "P2-S5-G003",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R010",
+      "gate_id": "P2-S5-G003",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R011",
+      "gate_id": "P2-S5-G003",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R012",
+      "gate_id": "P2-S5-G003",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R013",
+      "gate_id": "P2-S5-G004",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/journal-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R014",
+      "gate_id": "P2-S5-G004",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/journal-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R015",
+      "gate_id": "P2-S5-G004",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/journal-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R016",
+      "gate_id": "P2-S5-G005",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R017",
+      "gate_id": "P2-S5-G005",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R018",
+      "gate_id": "P2-S5-G005",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R019",
+      "gate_id": "P2-S5-G005",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R020",
+      "gate_id": "P2-S5-G005",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R021",
+      "gate_id": "P2-S5-G006",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R022",
+      "gate_id": "P2-S5-G006",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R023",
+      "gate_id": "P2-S5-G006",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R024",
+      "gate_id": "P2-S5-G006",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R025",
+      "gate_id": "P2-S5-G007",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R026",
+      "gate_id": "P2-S5-G007",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R027",
+      "gate_id": "P2-S5-G007",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R028",
+      "gate_id": "P2-S5-G007",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R029",
+      "gate_id": "P2-S5-G007",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R030",
+      "gate_id": "P2-S5-G008",
+      "authorities": [
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R031",
+      "gate_id": "P2-S5-G008",
+      "authorities": [
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R032",
+      "gate_id": "P2-S5-G009",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part1-part2-handoff-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R033",
+      "gate_id": "P2-S5-G009",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part1-part2-handoff-v1.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R034",
+      "gate_id": "P2-S5-G010",
+      "authorities": [
+        "spec/part2-stage5-coverage-v1.json",
+        "spec/part2-stage5-ci-evidence-v1.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    },
+    {
+      "requirement_id": "P2-S5-R035",
+      "gate_id": "P2-S5-G010",
+      "authorities": [
+        "spec/part2-stage5-coverage-v1.json",
+        "spec/part2-stage5-ci-evidence-v1.schema.json"
+      ],
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ]
+    }
+  ]
+}
