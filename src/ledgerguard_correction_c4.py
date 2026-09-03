@@ -118,14 +118,20 @@ def _schema_digests(root: Path) -> dict[str, str]:
 
 def _workflow_controls(root: Path) -> None:
     text = (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-    for required in (
+    status = (root / "PROJECT_STATUS.md").read_text(encoding="utf-8")
+    common = (
         "github.event.pull_request.head.sha",
         "git rev-parse HEAD",
         "tools/run_part1_stage6.py",
         '"$RUNNER_TEMP/ledgerguard-stage6/run-1/venv/bin/python"',
-        "tools/build_part1_stage6_ci_evidence.py",
         "actions/upload-artifact@",
-    ):
+    )
+    stage_specific = (
+        ("git worktree add --detach", "tools/build_part2_stage1_ci_evidence.py")
+        if "State: `PART2_IN_PROGRESS`" in status
+        else ("tools/build_part1_stage6_ci_evidence.py",)
+    )
+    for required in (*common, *stage_specific):
         _require(required in text, f"Stage 6 CI control missing: {required}")
     _require("id-token: write" not in text, "Stage 6 CI requests an OIDC token")
     _require("aws-actions/" not in text, "Stage 6 CI contains an AWS action")

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 1,
+  "state": "PART2_LOCAL_TOOLCHAIN_FROZEN",
+  "managed_target": {
+    "aws_glue": "5.1",
+    "apache_spark": "3.5.6",
+    "python": "3.11",
+    "java_major": 17
+  },
+  "local_validation": {
+    "python": "3.11.13",
+    "apache_spark": "3.5.6",
+    "py4j": "0.10.9.7",
+    "java_distribution": "temurin",
+    "java_major": 17,
+    "spark_master": "local[1]",
+    "spark_sql_ansi_enabled": true,
+    "spark_sql_session_timezone": "UTC",
+    "storage_format": "parquet",
+    "clean_run_count": 2,
+    "driver_worker_python_must_match": true,
+    "output_must_be_outside_repository": true
+  },
+  "dependency_surface": {
+    "bootstrap_lock": "requirements/part2-stage1-bootstrap.lock",
+    "runtime_lock": "requirements/part2-stage1-py311.lock",
+    "require_hashes": true,
+    "pandas_required": false,
+    "pyarrow_required": false,
+    "reason": "The Stage 1 Parquet probe uses Spark's JVM Parquet implementation and introduces no pandas or Arrow execution path."
+  },
+  "ci_actions": {
+    "setup_python_sha": "42375524e23c412d93fb67b49958b491fce71c38",
+    "setup_java_sha": "dd06d9cba3e5552c54d9f8ea23572deb30010f7c"
+  },
+  "claim_boundary": {
+    "toolchain_compatibility": "LOCAL_VERIFIED_AFTER_CI",
+    "reconciliation_runtime": "UNCLAIMED",
+    "spark_reconciliation_parity": "UNCLAIMED",
+    "aws_execution": false
+  }
+}

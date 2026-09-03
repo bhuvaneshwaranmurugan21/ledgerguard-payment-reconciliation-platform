@@ -1,0 +1,129 @@
+{
+  "clean_run_count": 2,
+  "deterministic_equal": true,
+  "deterministic_payload": {
+    "actions": [
+      "ruff-format",
+      "ruff-check",
+      "mypy",
+      "pytest",
+      "spark-parquet-probe"
+    ],
+    "authority": {
+      "authority_digests": {
+        "contracts/part2-stage1-execution-contract-v1.json": "62db2d6b3232634a4d7ba096adae54b284d329216d4e75dc6bfe2f07dc17f3b6",
+        "docs/adr/0017-part2-execution-authority-and-local-toolchain.md": "baff93bf88f8e8bf27b3aefa1ffab09640d8c6fd971ffa386537e9ac4e08d8e3",
+        "docs/part2-execution-contract.md": "75f5b74f3574565146e259276dc143e2c9789f93523a115136d14a0463e4aef0",
+        "docs/part2-stage1-gap-audit.md": "b58c3fa58165fa3817eaeffcfa8ccdc0b84a83d8be724a151c0f32d6deb099bb",
+        "evidence/part1-stage7-postmerge-closure-v1.json": "ed6ed12d66afaac4e300388f0a880d2ca3a624fce344c31aa6fe4ea3adcde12f",
+        "spec/part1-stage7-closure-freeze-v1.json": "29991475277e4b969c8c46b121c406866e209345b69a31f38b5ab6668bcc60bd",
+        "spec/part2-stage1-authority-v1.json": "c9ce44b21aca86d37dabb9d2834ff516a124bcb160330743a9d24af780f5c5c7",
+        "spec/part2-stage1-gate-registry-v1.json": "f9e718b505e55f3c91c881764f7efbc4a37b15f228b505d474794f7521d8549b",
+        "spec/part2-stage1-requirements-v1.json": "a076d363c337e51f87fe000813cc538d48aae5e0432f14473f7f8f93e69aa594",
+        "spec/part2-stage1-toolchain-v1.json": "01ee58e572c61acc060d4592ca7cbb6b8b2daa20dcdf78762b706932243e5dee",
+        "spec/part2-stage1-traceability-v1.json": "ad93e7b1deffad0b9fddbe305b3a9b0c1129fc2f1265141431e29f9e762b5777"
+      },
+      "aws_execution": false,
+      "infrastructure_mutation": false,
+      "inventories": {
+        "behavioral_scenarios": 21,
+        "closed_reason_codes": 21,
+        "forbidden_redefinitions": 8,
+        "inherited_authorities": 8,
+        "master_completion_gates": 6,
+        "runtime_invariants": 18,
+        "runtime_responsibilities": 11,
+        "stage1_gates": 6,
+        "stage1_requirements": 26
+      },
+      "master_part2_gates": {
+        "critical_paths_tested": "UNCLAIMED",
+        "deterministic_replay_verified": "UNCLAIMED",
+        "failure_matrix_verified": "UNCLAIMED",
+        "financial_invariants_verified": "UNCLAIMED",
+        "independent_oracle_verified": "UNCLAIMED",
+        "spark_parity_verified": "UNCLAIMED"
+      },
+      "part": 2,
+      "part1_closure": {
+        "commit": "3ef17666e3fe3bc655ba1c8733beb3cb00acdbec",
+        "foundation_digest": "3f315ecf51a89d95c77d1b22db4c5cd039a32c752cbd70715097987300031f59",
+        "stage7_candidate_digest": "604e8e3b75c4050674897f6cd357be71c6eaff999cce2da6305064d9cb77842e",
+        "tree": "ffe875164eebe0d818545f3580a2085c2700d94a"
+      },
+      "project": "ledgerguard-payment-reconciliation-platform",
+      "stage": 1,
+      "stage1_candidate_digest": "d7b71029797354e72a90060f94c68a84ceaaf0e8e3498ab0a2af5f82d63da28d",
+      "stage_state": "PART2_STAGE1_EXECUTION_CONTRACT_ESTABLISHED",
+      "state": "PART2_IN_PROGRESS",
+      "toolchain": {
+        "java_major": 17,
+        "parquet": true,
+        "py4j": "0.10.9.7",
+        "python": "3.11.13",
+        "spark": "3.5.6"
+      }
+    },
+    "dependency_versions": [
+      "Pygments==2.21.0",
+      "ast_serialize==0.8.0",
+      "attrs==26.1.0",
+      "coverage==7.10.6",
+      "iniconfig==2.3.0",
+      "jsonschema-specifications==2025.9.1",
+      "jsonschema==4.26.0",
+      "librt==0.15.0",
+      "mypy==2.3.1",
+      "mypy_extensions==1.1.0",
+      "packaging==26.3",
+      "pathspec==1.1.1",
+      "pip==25.2",
+      "pluggy==1.6.0",
+      "py4j==0.10.9.7",
+      "pyspark==3.5.6",
+      "pytest==9.1.1",
+      "referencing==0.37.0",
+      "rpds-py==2026.6.3",
+      "ruff==0.16.5",
+      "setuptools==80.9.0",
+      "typing_extensions==4.16.0",
+      "wheel==0.45.1"
+    ],
+    "spark_probe": {
+      "exact_long_and_decimal_assertions": "passed",
+      "logical_digest": "92d67b02ea59fd08325ea3c0d00e1ceb3eb3ae9d00168924a3f7d1d49c0939f7",
+      "row_count": 2,
+      "storage_format": "parquet"
+    },
+    "test_counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 262
+    },
+    "toolchain": {
+      "ansi": true,
+      "driver_worker_python_equal": true,
+      "java_major": 17,
+      "py4j": "0.10.9.7",
+      "python": "3.11.13",
+      "spark": "3.5.6",
+      "spark_master": "local[1]",
+      "timezone": "UTC"
+    }
+  },
+  "deterministic_payload_sha256": "af9f389cfab70eeda3b9680f9d7376ed46659009a51c2357f0ba81724e4ef5d9",
+  "execution_boundary": {
+    "aws_api_called": false,
+    "aws_workflow_dispatched": false,
+    "infrastructure_mutated": false,
+    "merge_authorized": false,
+    "reconciliation_engine_added": false,
+    "reconciliation_oracle_added": false,
+    "spark_reconciliation_claimed": false
+  },
+  "part": 2,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "schema_version": "1.0",
+  "stage": 1
+}

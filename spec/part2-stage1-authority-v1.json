@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 1,
+  "state": "PART2_EXECUTION_AUTHORITY_ACTIVE",
+  "source_authorities": {
+    "master_plan": "contracts/project-completion-v1.json",
+    "handoff": "contracts/part1-part2-handoff-v1.json",
+    "runtime_invariants": "spec/contract-invariants-v1.json",
+    "failure_authority": "spec/part1-stage5-documentation-authority-v1.json",
+    "frozen_target": ".github/ledgerguard-target.json"
+  },
+  "master_completion_gates": [
+    {
+      "gate": "independent_oracle_verified",
+      "owner": "PART2_STAGE2",
+      "state": "UNCLAIMED"
+    },
+    {
+      "gate": "spark_parity_verified",
+      "owner": "PART2_STAGE7",
+      "state": "UNCLAIMED"
+    },
+    {
+      "gate": "financial_invariants_verified",
+      "owner": "PART2_STAGES3_TO_5",
+      "state": "UNCLAIMED"
+    },
+    {
+      "gate": "failure_matrix_verified",
+      "owner": "PART2_STAGE6",
+      "state": "UNCLAIMED"
+    },
+    {
+      "gate": "deterministic_replay_verified",
+      "owner": "PART2_STAGE6",
+      "state": "UNCLAIMED"
+    },
+    {
+      "gate": "critical_paths_tested",
+      "owner": "PART2_STAGE7",
+      "state": "UNCLAIMED"
+    }
+  ],
+  "inherited_authorities": {
+    "financial_semantics": {
+      "path": "spec/financial-semantics-v1.json",
+      "sha256": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9"
+    },
+    "financial_examples": {
+      "path": "spec/financial-examples-v1.json",
+      "sha256": "241863761f97abc49e69f19a2f22f4c034c89e99acffe3fc021203f8e979bc78"
+    },
+    "active_contract_registry": {
+      "path": "contracts/active-contract-set-v1.json",
+      "sha256": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288"
+    },
+    "contract_invariants": {
+      "path": "spec/contract-invariants-v1.json",
+      "sha256": "50ee82f8126661ca1acba3d91f8bb9d7c47b2267357e31fdbf200c0385b6e212"
+    },
+    "contract_traceability": {
+      "path": "spec/contract-traceability-v1.json",
+      "sha256": "e43f50ac64bb3f41d042be2c37f055dc883c0c1ce1a6a5d5ad2745f094d53477"
+    },
+    "coherence_profile": {
+      "path": "spec/contract-coherence-v1.json",
+      "sha256": "381a364e4f64dd6371ff6760b25d116ad9d6affebc2cd2ba56cc8fe303967e04"
+    },
+    "coherence_vectors": {
+      "path": "spec/contract-coherence-vectors-v1.json",
+      "sha256": "5dfd2f79ca6204df84fbcafb0405cd663f2e4fe49daf5bfd08c0fe7a7332d5f1"
+    },
+    "coherence_traceability": {
+      "path": "spec/contract-coherence-traceability-v1.json",
+      "sha256": "42b0b01c0ca20aab839a1b4be89ed2e7460e313d84f9c03933b2f98cd6b35bc5"
+    }
+  },
+  "runtime_responsibility_ownership": [
+    {
+      "responsibility": "BUILD_INDEPENDENT_REFERENCE_ORACLE",
+      "owner": "PART2_STAGE2"
+    },
+    {
+      "responsibility": "IMPLEMENT_TRANSACTION_GRAIN_RECONCILIATION",
+      "owner": "PART2_STAGE4"
+    },
+    {
+      "responsibility": "IMPLEMENT_SETTLEMENT_GRAIN_RECONCILIATION",
+      "owner": "PART2_STAGE5"
+    },
+    {
+      "responsibility": "ENFORCE_CHECKED_SIGNED_64_BIT_ARITHMETIC",
+      "owner": "PART2_STAGE3"
+    },
+    {
+      "responsibility": "ENFORCE_CANONICAL_IDENTITY_REPLAY_AND_CONFLICT",
+      "owner": "PART2_STAGE3"
+    },
+    {
+      "responsibility": "VALIDATE_REFERENCES_AND_CUMULATIVE_APPLICATION",
+      "owner": "PART2_STAGE4"
+    },
+    {
+      "responsibility": "ENFORCE_EXACT_BANK_ALLOCATION_WITH_NO_DOUBLE_USE",
+      "owner": "PART2_STAGE5"
+    },
+    {
+      "responsibility": "EMIT_ATOMIC_GRAIN_SPECIFIC_PROOFS",
+      "owner": "PART2_STAGE6"
+    },
+    {
+      "responsibility": "PRESERVE_APPEND_ONLY_PROOF_AND_CASE_REVISIONS",
+      "owner": "PART2_STAGE6"
+    },
+    {
+      "responsibility": "VERIFY_LOCAL_AND_SPARK_PARITY",
+      "owner": "PART2_STAGE7"
+    },
+    {
+      "responsibility": "EXERCISE_FAILURE_MATRIX_AND_DETERMINISTIC_RECOVERY",
+      "owner": "PART2_STAGE6"
+    }
+  ],
+  "forbidden_redefinitions": [
+    "COLLAPSE_TRANSACTION_AND_SETTLEMENT_GRAINS",
+    "KEY_BANK_TRUTH_BY_PAYMENT",
+    "USE_NON_INTEGER_OR_CROSS_CURRENCY_MONEY",
+    "REPLACE_EXACT_ALLOCATION_WITH_HEURISTIC_MATCHING",
+    "REWRITE_HISTORICAL_PROOFS_OR_CASE_REVISIONS",
+    "CHANGE_FROZEN_IDENTITY_OR_DIGEST_SCOPES",
+    "MUTATE_HISTORICAL_V1_OR_ACCEPTED_V2_SCHEMAS",
+    "CLAIM_AWS_OR_MANAGED_EXECUTION"
+  ],
+  "runtime_invariant_ids": [
+    "CTR-001",
+    "CTR-002",
+    "CTR-003",
+    "CTR-004",
+    "CTR-005",
+    "CTR-006",
+    "CTR-007",
+    "CTR-008",
+    "CTR-009",
+    "CTR-010",
+    "CTR-011",
+    "CTR-012",
+    "CTR-013",
+    "CTR-014",
+    "CTR-015",
+    "CTR-016",
+    "CTR-017",
+    "CTR-018"
+  ],
+  "reason_domains": {
+    "ADMISSION": [
+      "AMBIGUOUS_BANK_ALLOCATION",
+      "CURRENCY_DOMAIN_VIOLATION",
+      "IDENTITY_CONFLICT",
+      "POLICY_MISMATCH",
+      "SCHEMA_VIOLATION",
+      "SOURCE_IDENTITY_MISMATCH",
+      "UNBALANCED_JOURNAL"
+    ],
+    "FINANCIAL": [
+      "DUPLICATE_BANK_MOVEMENT",
+      "INVALID_ACCOUNT_ROLE",
+      "INVALID_BANK_ACCOUNT",
+      "LEDGER_BANK_MISMATCH",
+      "MISSING_BANK_SETTLEMENT",
+      "MISSING_LEDGER_MOVEMENT",
+      "MISSING_PROCESSOR_ACTIVITY",
+      "OVER_APPLIED_REFERENCE",
+      "PROCESSOR_BANK_MISMATCH",
+      "PROCESSOR_LEDGER_MISMATCH",
+      "SETTLEMENT_FORMULA_MISMATCH",
+      "UNALLOCATED_BANK_MOVEMENT",
+      "UNRESOLVED_REFERENCE"
+    ],
+    "EXECUTION": [
+      "EXECUTION_FAILURE"
+    ]
+  },
+  "required_behavioral_scenarios": [
+    "Identical record replay",
+    "Identity reused with changed payload",
+    "Unbalanced journal",
+    "Cross-currency source combination",
+    "Policy version reused with changed digest",
+    "Ambiguous bank allocation",
+    "Balanced journal with wrong role",
+    "Missing processor event",
+    "Missing ledger movement",
+    "Missing bank deposit for nonzero net",
+    "Zero-net settlement without bank record",
+    "Split bank deposit",
+    "Duplicate bank movement",
+    "Disallowed bank account",
+    "Unknown bank reference",
+    "Out-of-order negative event",
+    "Original capture arrives later",
+    "Negative application exceeds capture",
+    "Processor net formula mismatch",
+    "Changed reconciliation policy",
+    "Worker fails before finalization"
+  ],
+  "stage_sequence": [
+    "PART2_STAGE1_EXECUTION_CONTRACT",
+    "PART2_STAGE2_REFERENCE_ORACLE",
+    "PART2_STAGE3_ADMISSION_AND_NORMALIZATION",
+    "PART2_STAGE4_TRANSACTION_RECONCILIATION",
+    "PART2_STAGE5_SETTLEMENT_RECONCILIATION",
+    "PART2_STAGE6_ATOMIC_REVISIONS_AND_FAILURE_RECOVERY",
+    "PART2_STAGE7_SPARK_PARITY_AND_CRITICAL_PATHS",
+    "PART2_STAGE8_PROMOTION_AND_CLOSURE"
+  ],
+  "claim_boundary": {
+    "stage1_authority": "LOCAL_VERIFIED_AFTER_CI",
+    "reference_oracle": "UNCLAIMED",
+    "reconciliation_engine": "UNCLAIMED",
+    "spark_reconciliation": "UNCLAIMED",
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  }
+}

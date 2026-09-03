@@ -1,6 +1,20 @@
 # Project status
 
-## Current boundary
+## Active boundary
+
+- Project: LedgerGuard
+- Part: 2 — Executable reconciliation system
+- Stage: 1 — Execution contract and local toolchain
+- State: `PART2_IN_PROGRESS`
+- Stage state: `PART2_STAGE1_EXECUTION_CONTRACT_ESTABLISHED`
+- Highest new claim: `LOCAL_VERIFIED` Stage 1 authority and toolchain candidate
+- Reference oracle: `UNCLAIMED`
+- Reconciliation implementation: `UNCLAIMED`
+- Spark reconciliation parity: `UNCLAIMED`
+- AWS execution: false
+- AWS infrastructure mutated: false
+
+## Frozen Part 1 closure boundary
 
 - Project: LedgerGuard
 - Part: 1 — Foundation and completion contract
@@ -10,6 +24,7 @@
 - Part 2 entry: `UNLOCKED_ONLY_AFTER_RECOVERY_SQUASH_AND_POSTMERGE_MAIN_CI_PASS`
 - Promotion attempt 1: `FAILED_CLOSED_NON_SQUASH_MERGE`
 - Active promotion: `PR_9_SQUASH_RECOVERY`
+- Promotion recovery outcome: `PART1_OPERATIONALLY_COMPLETE`
 - Historical Stage 4 state: `PART1_FOUNDATION_COMPLETE` (preserved, not active)
 - Highest claim: `LOCAL_VERIFIED` for foundation validation
 - AWS execution: false
@@ -38,16 +53,20 @@
   revalidated by ZIP and evidence digests.
 - A Stage 7 fail-closed promotion contract and complete re-audit of all 96 historical non-passes.
 
-## Completion and external closure
+## Part 1 completion and Part 2 entry
 
 The immutable historical audit remains 235 passes and 96 non-passes. It has not been edited or
 relabelled. The Stage 7 audit re-evaluates all 331 requirements, all 96 historical non-passes, and
 all 14 mandatory gates against the corrected repository. There are zero implementation corrections,
 zero critical findings, and zero major findings remaining in the Part 1 candidate.
 
-The checked-in state is complete as required before merge. Operational completion and Part 2 entry
-remain conditional on the replacement immutable PR head passing all checks, squash merge without
-bypass, and an independent successful `main` push CI run. PR #8 passed exact-head and `main` CI, but
-its two-parent merge commit failed the separate squash-only gate. That attempt remains failed and
-Part 2 remains blocked. Managed reconciliation, performance, scale, cost, and production operation
-remain `UNCLAIMED` and belong to later parts.
+PR #8 passed exact-head and `main` CI, but its two-parent merge commit failed the separate
+squash-only gate. That attempt remains failed and immutable. Replacement PR #9 passed exact-head
+CI, was squash-merged as one-parent commit `3ef17666e3fe3bc655ba1c8733beb3cb00acdbec`, and independent
+`main` CI run `33627452565` passed. Part 1 is therefore operationally complete and Part 2 entry is
+unlocked.
+
+Stage 1 establishes the Part 2 execution authority, responsibility ownership, exact local
+Spark/Parquet toolchain, traceability, and non-AWS CI boundary. It adds no reconciliation oracle or
+engine. Managed reconciliation, performance, scale, cost, and production operation remain
+`UNCLAIMED` and belong to later stages and parts.

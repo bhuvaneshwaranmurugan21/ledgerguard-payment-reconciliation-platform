@@ -25,10 +25,11 @@ of rewriting historical evidence.
 
 ## Current status
 
-Part 1 foundation is `PART1_FOUNDATION_COMPLETE`, but operational promotion attempt 1 failed closed
-because PR #8 used a merge commit instead of the required squash. Part 2 remains blocked until
-replacement PR #9 is squash-merged and its independent post-merge `main` CI succeeds. The overall
-project remains `PROJECT_IN_PROGRESS`.
+Part 1 is operationally complete. The failed non-squash PR #8 attempt remains recorded; replacement
+PR #9 passed exact-head CI, was squash-merged, and passed independent post-merge `main` CI. Part 2
+is now `PART2_IN_PROGRESS` at Stage 1, which establishes execution authority, responsibility
+ownership, exact local Spark/Parquet compatibility, and a non-AWS CI boundary. No reconciliation
+oracle or engine is claimed by Stage 1. The overall project remains `PROJECT_IN_PROGRESS`.
 
 | Area | Status |
 |---|---|
@@ -42,9 +43,13 @@ project remains `PROJECT_IN_PROGRESS`.
 | C1 requirement and gate authority | `LOCAL_VERIFIED` — 331/331 owned, 14/14 inventoried, zero effective orphans |
 | C2 completion and scorecard authority | `LOCAL_VERIFIED` — schema-backed invariants and scoped evidence for 12 dimensions |
 | Stage 6 reproducibility | `EXACT_HEAD_CI_VERIFIED` — 224 tests, 95.737964% coverage, 20/20 mutation checks, two equal clean runs |
-| Full Stage 0–7 conformance | `LOCAL_VERIFIED` candidate — 331/331 re-audited, 13/14 gates passed; squash promotion recovery active |
+| Full Stage 0–7 conformance | `LOCAL_VERIFIED` — 331/331 re-audited, all 14 gates closed after PR #9 squash and independent `main` CI |
+| Part 2 Stage 1 execution authority | `LOCAL_VERIFIED` candidate — exact-head and post-merge CI required |
+| Local Spark/Parquet toolchain | `LOCAL_VERIFIED` candidate — Python 3.11.13, Java 17, Spark 3.5.6 |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Reconciliation implementation | `UNCLAIMED` |
+| Independent reference oracle | `UNCLAIMED` |
+| Spark reconciliation parity | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity and managed AWS reconciliation | `UNCLAIMED` |
 | AWS account-wide nonmutation | `NOT_PROVEN` |
@@ -72,7 +77,9 @@ defined by the [coherence model](docs/contract-coherence.md) and
 7 closure is defined by the preserved [v1 promotion contract](contracts/part1-stage7-promotion-v1.json),
 the active [v2 recovery contract](contracts/part1-stage7-promotion-recovery-v2.json), and the
 [promotion audit](docs/stage7-gap-audit.md). Historical stage authorities and every v1/v2 schema
-remain immutable.
+remain immutable. Part 2 begins with the [Stage 1 gap audit](docs/part2-stage1-gap-audit.md),
+[execution contract](docs/part2-execution-contract.md), and
+[machine-readable authority](spec/part2-stage1-authority-v1.json).
 
 ## Foundation validation
 
@@ -81,6 +88,7 @@ python -m pip install -e '.[dev]'
 ledgerguard-foundation
 ledgerguard-c0
 ledgerguard-stage7
+ledgerguard-part2-stage1
 ruff format --check .
 ruff check .
 mypy src
@@ -92,9 +100,9 @@ pytest
 The planned managed validation uses synthetic data in one AWS region. It will not establish
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
 
-Part 1 performs no AWS execution and mutates no AWS infrastructure. Its highest completion claim is
-`LOCAL_VERIFIED`; managed reconciliation, performance, scale, and production operation remain
-unclaimed.
+Parts 1 and 2 perform no AWS execution and mutate no AWS infrastructure. Part 1's highest claim is
+`LOCAL_VERIFIED`; Part 2 Stage 1 proves only authority and local toolchain compatibility. Managed
+reconciliation, performance, scale, and production operation remain unclaimed.
 
 ## License
 

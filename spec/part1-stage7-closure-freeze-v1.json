@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "state": "PART1_STAGE7_CLOSURE_FROZEN",
+  "closure_commit": "3ef17666e3fe3bc655ba1c8733beb3cb00acdbec",
+  "closure_tree": "ffe875164eebe0d818545f3580a2085c2700d94a",
+  "closure_parent": "7151eead60e269fa5650e67d65fc8f687ddc281c",
+  "closure_evidence": "evidence/part1-stage7-postmerge-closure-v1.json",
+  "validation": {
+    "requires_separate_checkout": true,
+    "active_part2_tree_is_not_closure_tree": true,
+    "stage6_clean_runs": 2,
+    "stage7_validator": "ledgerguard_correction_c5",
+    "output_must_be_outside_repository": true
+  },
+  "protected_authorities": {
+    ".github/ledgerguard-target.json": "d9dccdc0dbae17638f02ac6596be1b1f0a8c24dddc57974f97024ed1cc415058",
+    "contracts/active-contract-set-v1.json": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288",
+    "contracts/part1-part2-handoff-v1.json": "0133a977743d45e1af733c4d09e3bc7489608112f0b40829fc5f55efe1cdb5ac",
+    "contracts/part1-stage7-promotion-recovery-v2.json": "7202ade11147f9ef8bdd423e4a9a7aa8bc6e1f52ceedb53afae32ec1923446d4",
+    "contracts/part1-stage7-promotion-v1.json": "32320a9d51729d6989259a7366022ad4b3938d408a79f520d35f639ea5606fa3",
+    "contracts/project-completion-v1.json": "9a323c8b7800c90fc3ad1697ec407f6756ceebba8df266ab88deba97fe6017b6",
+    "evidence/part1-stage7-postmerge-attempt-1-v1.json": "785fc06f19ecef9200623a167f00383327788f1e534bcc4a2ce48920492e0e12",
+    "evidence/part1-stage7-premerge-audit-v1.json": "9c5264423d7985799c7d0448d60c8a3593016e3a22671ff5420fe9efa99f412a",
+    "spec/contract-coherence-traceability-v1.json": "42b0b01c0ca20aab839a1b4be89ed2e7460e313d84f9c03933b2f98cd6b35bc5",
+    "spec/contract-coherence-v1.json": "381a364e4f64dd6371ff6760b25d116ad9d6affebc2cd2ba56cc8fe303967e04",
+    "spec/contract-coherence-vectors-v1.json": "5dfd2f79ca6204df84fbcafb0405cd663f2e4fe49daf5bfd08c0fe7a7332d5f1",
+    "spec/contract-invariants-v1.json": "50ee82f8126661ca1acba3d91f8bb9d7c47b2267357e31fdbf200c0385b6e212",
+    "spec/contract-traceability-v1.json": "e43f50ac64bb3f41d042be2c37f055dc883c0c1ce1a6a5d5ad2745f094d53477",
+    "spec/financial-examples-v1.json": "241863761f97abc49e69f19a2f22f4c034c89e99acffe3fc021203f8e979bc78",
+    "spec/financial-semantics-v1.json": "45ce07a3458a149d92d294e3265372eedddeaaa747b7a696b9a3da4f76e999c9",
+    "spec/part1-stage5-documentation-authority-v1.json": "76fcbf3d5aea47ac7e8093cabca7d60b7a9f1ac695ba96d99f2e87f6ddcead7b"
+  }
+}
