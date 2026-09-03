@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 4,
+  "state": "PART2_IN_PROGRESS",
+  "stage_state": "PART2_STAGE4_TRANSACTION_RECONCILIATION_VERIFIED_CANDIDATE",
+  "entry_baseline": {
+    "stage3_pull_request": 12,
+    "stage3_pull_request_head": "0c29259539b468bfe13831d6e0a7687b113dbfa4",
+    "stage3_main_commit": "47e96d3f4846d55568c0b137fb3e4d41ead0eef1",
+    "stage3_main_tree": "a415cfc7eebafc0f512afe27cd9d3aa3418b545f",
+    "stage3_main_parent": "55e78f76e76bff7562d43a3d001dbb74fd66d8fd",
+    "stage3_exact_head_ci_run": 33727426463,
+    "stage3_postmerge_main_ci_run": 33729063294,
+    "stage3_ci_artifact_id": 9882860664
+  },
+  "stage_gates": [
+    "P2-S4-G001",
+    "P2-S4-G002",
+    "P2-S4-G003",
+    "P2-S4-G004",
+    "P2-S4-G005",
+    "P2-S4-G006",
+    "P2-S4-G007",
+    "P2-S4-G008",
+    "P2-S4-G009"
+  ],
+  "master_part2_completion_gates": {
+    "independent_oracle_verified": "EXTERNALLY_VERIFIED",
+    "spark_parity_verified": "UNCLAIMED",
+    "financial_invariants_verified": "UNCLAIMED",
+    "failure_matrix_verified": "UNCLAIMED",
+    "deterministic_replay_verified": "UNCLAIMED",
+    "critical_paths_tested": "UNCLAIMED"
+  },
+  "transaction_contract": {
+    "grain": ["processor", "merchant_id", "payment_id", "event_class", "currency"],
+    "processor_signs": {"CAPTURE": 1, "REFUND": -1, "CHARGEBACK": -1, "REVERSAL": -1},
+    "ledger_movement": "PROCESSOR_CLEARING_DEBITS_MINUS_CREDITS",
+    "grain_join": "FULL_OUTER_UNION",
+    "missing_evidence_is_zero": false,
+    "reference_target": "EXACT_CAPTURE_SOURCE_IDENTITY",
+    "reference_scope": ["processor", "merchant_id", "payment_id", "currency"],
+    "negative_reference_chain_allowed": false,
+    "capacity": "ORDER_INDEPENDENT_CUMULATIVE_PER_EXACT_CAPTURE",
+    "arithmetic": "CHECKED_SIGNED_64_BIT",
+    "result": "IMMUTABLE_NON_AUTHORITATIVE_CANDIDATE"
+  },
+  "implementation_boundary": {
+    "production_admission_implemented": true,
+    "transaction_engine_implemented": true,
+    "settlement_engine_implemented": false,
+    "bank_allocation_implemented": false,
+    "authoritative_proof_store_implemented": false,
+    "revision_store_implemented": false,
+    "spark_reconciliation_implemented": false,
+    "aws_workload_allowed": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  },
+  "external_completion": {
+    "exact_head_pull_request_ci_required": true,
+    "immutable_ci_evidence_required": true,
+    "squash_merge_required": true,
+    "independent_main_ci_required": true,
+    "local_success_alone_is_insufficient": true,
+    "aws_execution_required": false
+  },
+  "next_stage_entry": {
+    "owner": "PART2_STAGE5",
+    "required_stage4_state": "PART2_STAGE4_TRANSACTION_RECONCILIATION_VERIFIED",
+    "must_freeze_stage4_external_closure": true,
+    "may_redefine_contracts": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 4,
+  "frozen_transaction_examples": "spec/financial-examples-v1.json#/transaction_cases",
+  "frozen_capture_capacity": "spec/financial-examples-v1.json#/capture_capacity_case",
+  "required_properties": [
+    "FULL_OUTER_GRAIN_UNION",
+    "EXACTLY_ONCE_SOURCE_CONTRIBUTION",
+    "ORDER_INDEPENDENT_REFERENCE_CAPACITY",
+    "MULTIPLE_CAPTURE_ISOLATION",
+    "SEMANTIC_REASON_PRECEDES_TOLERANCE",
+    "MANIFEST_PROVENANCE_PRESERVED",
+    "NON_AUTHORITATIVE_OUTPUT"
+  ],
+  "signed_64_bit_boundaries": {
+    "minimum": -9223372036854775808,
+    "maximum": 9223372036854775807,
+    "overflow_outcome": "ADMISSION_REJECTED_NO_CANDIDATES"
+  }
+}

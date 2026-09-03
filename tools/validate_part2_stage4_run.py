@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate one clean Part 2 Stage 3 admission environment."""
+"""Validate one clean Part 2 Stage 4 transaction environment."""
 
 from __future__ import annotations
 
@@ -10,8 +10,8 @@ import sys
 from importlib.metadata import version
 from pathlib import Path
 
-from ledgerguard_part2_stage3_evidence import parse_junit_counts, run_mutation_checks
-from ledgerguard_part2_stage3_validation import validate_stage3
+from ledgerguard_part2_stage4_evidence import parse_junit_counts, run_mutation_checks
+from ledgerguard_part2_stage4_validation import validate_stage4
 
 
 def execute(command: list[str], cwd: Path) -> None:
@@ -27,9 +27,9 @@ def main() -> None:
     root = arguments.root.resolve()
     output = arguments.output.resolve()
     if root == output.parent or root in output.parents:
-        raise SystemExit("Stage 3 output must be outside the source repository")
+        raise SystemExit("Stage 4 output must be outside the source repository")
     if sys.version_info[:3] != (3, 11, 13):
-        raise SystemExit("Stage 3 requires exact CPython 3.11.13")
+        raise SystemExit("Stage 4 requires exact CPython 3.11.13")
 
     junit = output.parent / "pytest.xml"
     coverage_json = output.parent / "coverage.json"
@@ -46,10 +46,10 @@ def main() -> None:
             "run",
             "--branch",
             "--source=ledgerguard.reconciliation",
-            "--omit=*/transaction.py",
             "-m",
             "pytest",
             str(root / "tests/test_part2_stage3_admission.py"),
+            str(root / "tests/test_part2_stage4_transaction.py"),
         ],
         root,
     )
@@ -58,9 +58,9 @@ def main() -> None:
     coverage = json.loads(coverage_json.read_text())
     totals = coverage["totals"]
     if totals["percent_covered"] != 100.0:
-        raise SystemExit("Stage 3 production coverage is not 100 percent")
+        raise SystemExit("Stage 4 production coverage is not 100 percent")
 
-    authority = validate_stage3(root)
+    authority = validate_stage4(root)
     mutations = run_mutation_checks(root)
     dependencies = sorted(
         line
@@ -75,7 +75,7 @@ def main() -> None:
             "ruff-check",
             "mypy-strict",
             "full-pytest",
-            "admission-branch-coverage",
+            "transaction-branch-coverage",
             "semantic-mutations",
             "wheel-install-smoke",
         ],
@@ -101,7 +101,7 @@ def main() -> None:
             "aws_api_called": False,
             "aws_workflow_dispatched": False,
             "infrastructure_mutated": False,
-            "production_reconciliation_executed": False,
+            "production_reconciliation_executed": True,
             "authoritative_proof_persisted": False,
         },
     }

@@ -4,13 +4,14 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 3 — Production admission and normalization
+- Stage: 4 — Transaction-grain reconciliation
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE3_ADMISSION_NORMALIZATION_VERIFIED_CANDIDATE`
-- Highest new claim: `LOCAL_VERIFIED` admission candidate pending external closure
+- Stage state: `PART2_STAGE4_TRANSACTION_RECONCILIATION_VERIFIED_CANDIDATE`
+- Highest new claim: `LOCAL_VERIFIED` transaction candidate pending external closure
 - Reference oracle: `EXTERNALLY_VERIFIED`
-- Production admission: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
-- Reconciliation calculation: `UNCLAIMED`
+- Production admission: `EXTERNALLY_VERIFIED`
+- Transaction reconciliation: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
+- Settlement reconciliation: `UNCLAIMED`
 - Spark reconciliation parity: `UNCLAIMED`
 - AWS execution: false
 - AWS infrastructure mutated: false
@@ -97,10 +98,17 @@ proof/case identity expectations. PR #11 passed exact-head CI, was squash-merged
 `55e78f76e76bff7562d43a3d001dbb74fd66d8fd`, and passed independent `main` CI; its oracle gate is
 therefore externally verified.
 
-Stage 3 adds only the production admission and normalization boundary: digest-bound v2 schema
+Stage 3 added only the production admission and normalization boundary: digest-bound v2 schema
 loading, strict bytes and canonical values, policy/manifest binding, atomic source replay state,
 checked journal admission, exact keys, currency domains, and bank-reference ambiguity rejection.
-It does not add transaction or settlement calculation, durable persistence, proof/case/revision
-finalization, Spark reconciliation, AWS execution, or infrastructure mutation. The Stage 3 result
-remains a local candidate until exact-head pull-request CI, squash merge, and independent main CI
-complete.
+PR #12 passed exact-head CI, was squash-merged as
+`47e96d3f4846d55568c0b137fb3e4d41ead0eef1`, and passed independent `main` CI run
+`33729063294`; admission is therefore externally verified.
+
+Stage 4 adds transaction-grain reconciliation over the immutable Stage 3 handoff. It implements
+the full outer grain union, policy signs, clearing-account movement, checked arithmetic, exact
+capture references, cumulative cross-class negative-event capacity, deterministic status and
+reason precedence, and replay-safe immutable candidate state. It does not add settlement
+reconciliation, bank allocation, durable persistence, proof/case/revision finalization, Spark,
+AWS execution, or infrastructure mutation. Stage 4 remains a local candidate until exact-head
+draft-PR CI and immutable evidence inspection complete.

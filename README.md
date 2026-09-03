@@ -30,7 +30,10 @@ PR #9 passed exact-head CI, was squash-merged, and passed independent post-merge
 Stage 1 was then closed by PR #10. PR #11 closed Stage 2, externally verifying the separately
 packaged, side-effect-free reference oracle. Stage 3 is now a `LOCAL_VERIFIED` candidate: it adds
 production admission and normalization while leaving reconciliation calculation, persistence,
-Spark parity, and AWS execution unclaimed. The overall project remains `PROJECT_IN_PROGRESS`.
+Spark parity, and AWS execution unclaimed. PR #12 subsequently passed exact-head CI, was
+squash-merged, and passed independent post-merge `main` CI. Stage 4 is now the local verified
+transaction-reconciliation candidate; external closure is still pending. The overall project
+remains `PROJECT_IN_PROGRESS`.
 
 The immutable Stage 1 status statement was: Part 2
 is now `PART2_IN_PROGRESS`. No reconciliation
@@ -53,8 +56,9 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Part 2 Stage 1 execution authority | `LOCAL_VERIFIED` after PR #10 squash and independent main CI |
 | Local Spark/Parquet toolchain | `LOCAL_VERIFIED` — Python 3.11.13, Java 17, Spark 3.5.6 |
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
-| Production admission and normalization | `LOCAL_VERIFIED` candidate pending exact-head and post-merge closure |
-| Reconciliation calculation | `UNCLAIMED` |
+| Production admission and normalization | `EXTERNALLY_VERIFIED` after PR #12 squash and independent main CI |
+| Transaction-grain reconciliation | `LOCAL_VERIFIED` candidate pending exact-head and post-merge closure |
+| Settlement-grain reconciliation | `UNCLAIMED` |
 | Independent reference oracle | `EXTERNALLY_VERIFIED` after PR #11 squash and independent main CI |
 | Spark reconciliation parity | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
@@ -92,7 +96,10 @@ remain immutable. Part 2 begins with the [Stage 1 gap audit](docs/part2-stage1-g
 [independence decision](docs/adr/0018-independent-reference-oracle.md). Stage 3 adds the
 [admission gap audit](docs/part2-stage3-gap-audit.md),
 [admission contract](docs/part2-stage3-admission-normalization.md), and
-[production admission decision](docs/adr/0019-production-admission-and-normalization.md).
+[production admission decision](docs/adr/0019-production-admission-and-normalization.md). Stage 4
+adds the [transaction gap audit](docs/part2-stage4-gap-audit.md),
+[transaction contract](docs/part2-stage4-transaction-reconciliation.md), and
+[transaction decision](docs/adr/0020-transaction-reconciliation-and-reference-capacity.md).
 
 ## Foundation validation
 
@@ -104,6 +111,7 @@ ledgerguard-stage7
 ledgerguard-part2-stage1
 ledgerguard-part2-stage2
 ledgerguard-part2-stage3
+ledgerguard-part2-stage4
 ruff format --check .
 ruff check .
 mypy src
@@ -116,9 +124,9 @@ The planned managed validation uses synthetic data in one AWS region. It will no
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
 
 Parts 1 and 2 perform no AWS execution and mutate no AWS infrastructure. Part 1's highest claim is
-`LOCAL_VERIFIED`; Part 2 Stage 3 adds only local production admission and normalization.
-Reconciliation calculation and managed reconciliation, performance, scale, and production
-operation remain unclaimed.
+`LOCAL_VERIFIED`; Part 2 Stage 4 adds only local transaction-grain candidate calculation.
+Settlement reconciliation, proof finalization, managed reconciliation, performance, scale, and
+production operation remain unclaimed.
 
 ## License
 
