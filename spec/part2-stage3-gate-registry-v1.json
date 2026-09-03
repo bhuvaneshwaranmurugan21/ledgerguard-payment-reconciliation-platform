@@ -1,0 +1,17 @@
+{
+  "schema_version":"1.0",
+  "project":"ledgerguard-payment-reconciliation-platform",
+  "part":2,
+  "stage":3,
+  "gates":[
+    {"gate_id":"P2-S3-G001","name":"STAGE2_ENTRY_PROVEN","acceptance":"The exact Stage 2 external closure and protected authorities are independently reproduced."},
+    {"gate_id":"P2-S3-G002","name":"ACTIVE_CONTRACT_SET_PROVEN","acceptance":"Only the unchanged digest-bound active v2 registry is accepted with complete offline schema resolution."},
+    {"gate_id":"P2-S3-G003","name":"CANONICAL_INPUT_PROVEN","acceptance":"Strict parsing, normalization, canonical bytes, framing, counts, sizes, and digests fail closed."},
+    {"gate_id":"P2-S3-G004","name":"BUNDLE_BINDING_PROVEN","acceptance":"Policy, manifest, locators, and source bytes form one complete confined admission bundle."},
+    {"gate_id":"P2-S3-G005","name":"IDENTITY_REPLAY_ATOMICITY_PROVEN","acceptance":"Source identity, replay, conflicts, and all-or-nothing candidate state match frozen semantics."},
+    {"gate_id":"P2-S3-G006","name":"FINANCIAL_ADMISSION_PROVEN","acceptance":"Checked money and journal balance checks reject invalid financial input before reconciliation."},
+    {"gate_id":"P2-S3-G007","name":"NORMALIZATION_AND_ROUTING_PROVEN","acceptance":"Keys, currencies, bank references, and ambiguity controls produce deterministic reconciliation-ready records."},
+    {"gate_id":"P2-S3-G008","name":"CLAIM_BOUNDARY_PROVEN","acceptance":"Admission is deterministic and side-effect-free and emits no proof, case, revision, Spark, persistence, network, or AWS result."},
+    {"gate_id":"P2-S3-G009","name":"REPRODUCIBLE_CANDIDATE_PROVEN","acceptance":"Two clean exact-toolchain runs agree, all coverage and mutation gates pass, and external closure remains fail-closed."}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 3,
+  "requirements": [
+    {"id":"P2-S3-R001","gate_id":"P2-S3-G001","statement":"Bind entry to PR 11 head, squash commit, tree, parent, exact-head CI, immutable artifact, and post-merge main CI."},
+    {"id":"P2-S3-R002","gate_id":"P2-S3-G001","statement":"Byte-verify the frozen Stage 2 authorities and preserve all accepted v1 and v2 schemas."},
+    {"id":"P2-S3-R003","gate_id":"P2-S3-G002","statement":"Load only the digest-bound active v2 registry, validate its exact family set, schema identifiers, dialect, and offline references."},
+    {"id":"P2-S3-R004","gate_id":"P2-S3-G003","statement":"Reject malformed UTF-8, BOM, duplicate or NFC-colliding keys, floats, exponent numbers, non-finite values, surrogates, and out-of-range integers."},
+    {"id":"P2-S3-R005","gate_id":"P2-S3-G003","statement":"Canonicalize strings to NFC, timestamps to RFC 3339 UTC, objects by sorted keys, and digests over the frozen exclusion fields."},
+    {"id":"P2-S3-R006","gate_id":"P2-S3-G003","statement":"Require byte-size, SHA-256, record count, LF-only JSON Lines framing, and one LF byte for an explicitly declared zero-record object."},
+    {"id":"P2-S3-R007","gate_id":"P2-S3-G004","statement":"Validate and digest-bind reconciliation policy before processing any source record."},
+    {"id":"P2-S3-R008","gate_id":"P2-S3-G004","statement":"Validate manifest-to-policy binding, exact four-family inventory, run identity, and exact supplied-object set."},
+    {"id":"P2-S3-R009","gate_id":"P2-S3-G004","statement":"Confine local reads beneath a resolved root, reject traversal and symlinks, and treat stable read failure as admission failure."},
+    {"id":"P2-S3-R010","gate_id":"P2-S3-G005","statement":"Derive the frozen source identity and business digest for every admitted source record."},
+    {"id":"P2-S3-R011","gate_id":"P2-S3-G005","statement":"Treat identical redelivery as replay and reject identity reuse with changed business content."},
+    {"id":"P2-S3-R012","gate_id":"P2-S3-G005","statement":"Commit policy, manifest, and source replay state only after the complete bundle passes every admission check."},
+    {"id":"P2-S3-R013","gate_id":"P2-S3-G006","statement":"Use checked signed 64-bit integer operations for every admission-time amount and aggregate."},
+    {"id":"P2-S3-R014","gate_id":"P2-S3-G006","statement":"Reject unbalanced journals and preserve the one-clearing-line semantic annotation for later reconciliation."},
+    {"id":"P2-S3-R015","gate_id":"P2-S3-G007","statement":"Derive exact transaction and settlement reconciliation keys from the frozen component sets."},
+    {"id":"P2-S3-R016","gate_id":"P2-S3-G007","statement":"Reject cross-source currency-domain conflicts before reconciliation."},
+    {"id":"P2-S3-R017","gate_id":"P2-S3-G007","statement":"Normalize bank settlement references with NFC and outer trimming only; preserve case and punctuation."},
+    {"id":"P2-S3-R018","gate_id":"P2-S3-G007","statement":"Reject settlement-identity and bank-allocation ambiguity while retaining unknown references for Stage 5 classification."},
+    {"id":"P2-S3-R019","gate_id":"P2-S3-G008","statement":"Keep production admission independent from the reference oracle, Spark, AWS, network, persistence, proof, case, and revision execution."},
+    {"id":"P2-S3-R020","gate_id":"P2-S3-G008","statement":"Return deterministic immutable admitted values or an owned admission reason and never emit an authoritative proof."},
+    {"id":"P2-S3-R021","gate_id":"P2-S3-G009","statement":"Pass full-suite tests, exact Stage 3 statement and branch coverage, targeted semantic mutations, and two clean Python 3.11.13 runs."},
+    {"id":"P2-S3-R022","gate_id":"P2-S3-G009","statement":"Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before Stage 3 promotion."}
+  ]
+}

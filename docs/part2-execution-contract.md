@@ -82,3 +82,22 @@ scenario, and reason code with boundary, permutation, metamorphic, and targeted 
 Only `independent_oracle_verified` may advance, and it remains pending external closure until
 exact-head draft-PR CI, immutable artifact inspection, squash merge, and independent `main` CI all
 pass.
+
+## Stage 3 admission boundary
+
+PR #11 completed that external closure, so `independent_oracle_verified` is now
+`EXTERNALLY_VERIFIED`. Stage 3 implements the production path only through complete input
+admission and normalization. It verifies the frozen active v2 registry, strict canonical bytes,
+policy and manifest bindings, object metadata and framing, source identity, replay/conflict,
+checked journal balance, derived keys, currency domains, and bank-reference ambiguity.
+
+Stage 3 never imports the reference oracle from production. The test path compares their owned
+overlap. Admission creates only immutable in-memory candidate state and reconciliation-ready
+records. It does not calculate transaction or settlement outcomes, persist state, allocate bank
+movements, apply tolerance, finalize a proof, create a case revision, execute Spark, use AWS, or
+mutate infrastructure.
+
+All accepted v1 and v2 schema bytes remain frozen. The source wire protocol decisions needed above
+those schemas are recorded in ADR 0019. Stage 3 uses the same exact Python 3.11.13, hash-locked,
+two-clean-run evidence standard as Stage 2, with 100% statement and branch coverage of production
+admission and zero survivors across the registered semantic mutations.

@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 3,
+  "state": "PART2_IN_PROGRESS",
+  "stage_state": "PART2_STAGE3_ADMISSION_NORMALIZATION_VERIFIED_CANDIDATE",
+  "entry_baseline": {
+    "stage2_pull_request": 11,
+    "stage2_pull_request_head": "e9813d86ae6b1848a982051b9a2f0a8a1c80acd4",
+    "stage2_main_commit": "55e78f76e76bff7562d43a3d001dbb74fd66d8fd",
+    "stage2_main_tree": "417245f6369c3d2b08ede20c35502b612b5eb3a4",
+    "stage2_main_parent": "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91",
+    "stage2_exact_head_ci_run": 33717504782,
+    "stage2_postmerge_main_ci_run": 33718490292,
+    "stage2_ci_artifact_id": 9879187613
+  },
+  "stage_gates": [
+    "P2-S3-G001", "P2-S3-G002", "P2-S3-G003", "P2-S3-G004", "P2-S3-G005",
+    "P2-S3-G006", "P2-S3-G007", "P2-S3-G008", "P2-S3-G009"
+  ],
+  "master_part2_completion_gates": {
+    "independent_oracle_verified": "EXTERNALLY_VERIFIED",
+    "spark_parity_verified": "UNCLAIMED",
+    "financial_invariants_verified": "UNCLAIMED",
+    "failure_matrix_verified": "UNCLAIMED",
+    "deterministic_replay_verified": "UNCLAIMED",
+    "critical_paths_tested": "UNCLAIMED"
+  },
+  "implementation_boundary": {
+    "independent_reference_oracle_implemented": true,
+    "production_admission_implemented": true,
+    "transaction_engine_implemented": false,
+    "settlement_engine_implemented": false,
+    "authoritative_proof_store_implemented": false,
+    "revision_store_implemented": false,
+    "spark_reconciliation_implemented": false,
+    "aws_workload_allowed": false,
+    "aws_execution": false,
+    "infrastructure_mutation": false
+  },
+  "admission_contract": {
+    "active_registry_sha256": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288",
+    "input_framing": "UTF8_NFC_STRICT_JSON_LINES_LF",
+    "zero_record_representation": "SINGLE_LF_BYTE",
+    "money_representation": "CHECKED_SIGNED_64_BIT_MINOR_UNITS",
+    "atomicity": "WHOLE_BUNDLE_OR_REJECTION_WITH_UNCHANGED_PRIOR_STATE",
+    "replay": "SAME_IDENTITY_AND_BUSINESS_DIGEST_IS_IDEMPOTENT",
+    "identity_conflict": "SAME_IDENTITY_AND_DIFFERENT_BUSINESS_DIGEST_REJECTED",
+    "bank_reference_normalization": "NFC_AND_OUTER_WHITESPACE_ONLY",
+    "authoritative_output_emission": false
+  },
+  "external_completion": {
+    "exact_head_pull_request_ci_required": true,
+    "immutable_ci_evidence_required": true,
+    "squash_merge_required": true,
+    "independent_main_ci_required": true,
+    "local_success_alone_is_insufficient": true,
+    "aws_execution_required": false
+  },
+  "next_stage_entry": {
+    "owner": "PART2_STAGE4",
+    "required_stage3_state": "PART2_STAGE3_ADMISSION_NORMALIZATION_VERIFIED",
+    "must_freeze_stage3_external_closure": true,
+    "may_redefine_contracts": false,
+    "may_import_oracle_from_production": false
+  }
+}
