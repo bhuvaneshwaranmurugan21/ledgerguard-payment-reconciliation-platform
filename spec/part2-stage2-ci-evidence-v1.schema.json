@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part2-stage2-ci-evidence:v1",
+  "title": "LedgerGuard Part 2 Stage 2 exact-head CI evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "repository", "commit_sha", "checked_out_sha", "base_sha",
+    "workflow_run_id", "workflow_run_attempt", "pull_request_number", "pull_request_draft",
+    "python_version", "clean_run_count", "deterministic_equal",
+    "deterministic_payload_sha256", "stage2_candidate_digest", "wheel_sha256",
+    "test_counts", "coverage_percent", "mutation_checks", "mutation_survivors",
+    "aws_execution", "infrastructure_mutation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "repository": {"const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"},
+    "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "checked_out_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "base_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "workflow_run_id": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+    "workflow_run_attempt": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+    "pull_request_number": {"type": "integer", "minimum": 1},
+    "pull_request_draft": {"const": true},
+    "python_version": {"const": "3.11.13"},
+    "clean_run_count": {"type": "integer", "minimum": 2},
+    "deterministic_equal": {"const": true},
+    "deterministic_payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stage2_candidate_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "wheel_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "test_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tests", "failures", "errors", "skipped"],
+      "properties": {
+        "tests": {"type": "integer", "minimum": 263},
+        "failures": {"const": 0},
+        "errors": {"const": 0},
+        "skipped": {"const": 0}
+      }
+    },
+    "coverage_percent": {"const": 100.0},
+    "mutation_checks": {"const": 12},
+    "mutation_survivors": {"const": 0},
+    "aws_execution": {"const": false},
+    "infrastructure_mutation": {"const": false}
+  }
+}

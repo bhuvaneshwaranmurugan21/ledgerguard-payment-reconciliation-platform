@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 2,
+  "requirements": [
+    {"id": "P2-S2-R001", "gate_id": "P2-S2-G001", "statement": "Bind Stage 2 to the exact PR 10 squash commit, tree, parent, exact-head CI, and post-merge main CI."},
+    {"id": "P2-S2-R002", "gate_id": "P2-S2-G001", "statement": "Verify every inherited Part 1 authority at its Stage 1 SHA-256 digest."},
+    {"id": "P2-S2-R003", "gate_id": "P2-S2-G002", "statement": "Implement the oracle in a separate package with no production reconciliation, Spark, AWS, persistence, or network import."},
+    {"id": "P2-S2-R004", "gate_id": "P2-S2-G002", "statement": "Forbid production modules from importing the reference oracle and forbid authoritative output emission."},
+    {"id": "P2-S2-R005", "gate_id": "P2-S2-G003", "statement": "Independently implement strict JSON, NFC, timestamp, digest, source identity, replay, conflict, and derived identity rules."},
+    {"id": "P2-S2-R006", "gate_id": "P2-S2-G003", "statement": "Independently implement checked signed 64-bit arithmetic with fail-admission overflow behavior."},
+    {"id": "P2-S2-R007", "gate_id": "P2-S2-G004", "statement": "Calculate transaction-grain signs, references, capacity, journal meaning, counts, totals, deltas, status, and reasons."},
+    {"id": "P2-S2-R008", "gate_id": "P2-S2-G004", "statement": "Calculate settlement formula, exact allocation, no-double-use, account policy, counts, three deltas, status, and reasons."},
+    {"id": "P2-S2-R009", "gate_id": "P2-S2-G004", "statement": "Preserve missing evidence independently from zero value and prevent tolerance from hiding semantic failure."},
+    {"id": "P2-S2-R010", "gate_id": "P2-S2-G005", "statement": "Calculate comparison-ready proof, case, and revision identities without persisting or finalizing authoritative output."},
+    {"id": "P2-S2-R011", "gate_id": "P2-S2-G005", "statement": "Return no authoritative proof expectation for admission or execution failure."},
+    {"id": "P2-S2-R012", "gate_id": "P2-S2-G006", "statement": "Cover all frozen examples, eighteen invariants, twenty-one behavioral scenarios, coherence vectors, and the complete reason taxonomy."},
+    {"id": "P2-S2-R013", "gate_id": "P2-S2-G006", "statement": "Reject targeted semantic mutants and pass deterministic boundary, permutation, and metamorphic tests."},
+    {"id": "P2-S2-R014", "gate_id": "P2-S2-G007", "statement": "Produce equal candidate evidence from at least two exact Python 3.11.13 clean runs with hash-locked dependencies."},
+    {"id": "P2-S2-R015", "gate_id": "P2-S2-G007", "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before gate promotion."}
+  ]
+}

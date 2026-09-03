@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 2,
+  "gates": [
+    {"gate_id": "P2-S2-G001", "name": "STAGE1_ENTRY_PROVEN", "acceptance": "The exact Stage 1 squash commit and all inherited authority digests are verified."},
+    {"gate_id": "P2-S2-G002", "name": "ORACLE_INDEPENDENCE_PROVEN", "acceptance": "The oracle is side-effect-free, separately packaged, and structurally isolated from production runtime code."},
+    {"gate_id": "P2-S2-G003", "name": "CANONICAL_PRIMITIVES_PROVEN", "acceptance": "Strict parsing, checked arithmetic, timestamps, digests, identities, replay, and conflict match frozen vectors."},
+    {"gate_id": "P2-S2-G004", "name": "FINANCIAL_EXPECTATIONS_PROVEN", "acceptance": "Transaction and settlement expected results match frozen examples and adversarial semantic cases."},
+    {"gate_id": "P2-S2-G005", "name": "ATOMIC_OUTPUT_BOUNDARY_PROVEN", "acceptance": "Identity and revision expectations are modeled without authoritative persistence and failures emit no proof."},
+    {"gate_id": "P2-S2-G006", "name": "ADVERSARIAL_COVERAGE_PROVEN", "acceptance": "Invariant, scenario, boundary, metamorphic, and mutation coverage is complete with zero mandatory survivors."},
+    {"gate_id": "P2-S2-G007", "name": "REPRODUCIBLE_CANDIDATE_PROVEN", "acceptance": "Two clean exact-toolchain runs agree and external closure requirements are fail-closed."}
+  ]
+}

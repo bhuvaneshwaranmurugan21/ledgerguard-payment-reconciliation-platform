@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 2,
+  "invariant_ids": [
+    "CTR-001", "CTR-002", "CTR-003", "CTR-004", "CTR-005", "CTR-006",
+    "CTR-007", "CTR-008", "CTR-009", "CTR-010", "CTR-011", "CTR-012",
+    "CTR-013", "CTR-014", "CTR-015", "CTR-016", "CTR-017", "CTR-018"
+  ],
+  "behavioral_scenarios": [
+    "Identical record replay",
+    "Identity reused with changed payload",
+    "Unbalanced journal",
+    "Cross-currency source combination",
+    "Policy version reused with changed digest",
+    "Ambiguous bank allocation",
+    "Balanced journal with wrong role",
+    "Missing processor event",
+    "Missing ledger movement",
+    "Missing bank deposit for nonzero net",
+    "Zero-net settlement without bank record",
+    "Split bank deposit",
+    "Duplicate bank movement",
+    "Disallowed bank account",
+    "Unknown bank reference",
+    "Out-of-order negative event",
+    "Original capture arrives later",
+    "Negative application exceeds capture",
+    "Processor net formula mismatch",
+    "Changed reconciliation policy",
+    "Worker fails before finalization"
+  ],
+  "reason_codes": {
+    "ADMISSION": [
+      "SCHEMA_VIOLATION", "IDENTITY_CONFLICT", "UNBALANCED_JOURNAL",
+      "CURRENCY_DOMAIN_VIOLATION", "POLICY_MISMATCH", "SOURCE_IDENTITY_MISMATCH",
+      "AMBIGUOUS_BANK_ALLOCATION"
+    ],
+    "FINANCIAL": [
+      "INVALID_ACCOUNT_ROLE", "UNRESOLVED_REFERENCE", "OVER_APPLIED_REFERENCE",
+      "MISSING_LEDGER_MOVEMENT", "MISSING_PROCESSOR_ACTIVITY", "MISSING_BANK_SETTLEMENT",
+      "UNALLOCATED_BANK_MOVEMENT", "INVALID_BANK_ACCOUNT", "DUPLICATE_BANK_MOVEMENT",
+      "SETTLEMENT_FORMULA_MISMATCH", "PROCESSOR_LEDGER_MISMATCH",
+      "PROCESSOR_BANK_MISMATCH", "LEDGER_BANK_MISMATCH"
+    ],
+    "EXECUTION": ["EXECUTION_FAILURE"],
+    "NON_FAILURE": ["TOLERATED_DIFFERENCE"]
+  },
+  "coverage_groups": {
+    "canonical_identity": ["CTR-002", "CTR-003", "CTR-004", "CTR-005", "CTR-006", "CTR-011"],
+    "transaction_oracle": ["CTR-001", "CTR-007", "CTR-008", "CTR-009", "CTR-010"],
+    "settlement_oracle": ["CTR-001", "CTR-012", "CTR-013", "CTR-014"],
+    "status_and_proof_expectation": ["CTR-015", "CTR-016", "CTR-017", "CTR-018"]
+  },
+  "claim_boundary": {
+    "coverage_is_oracle_expectation_coverage": true,
+    "production_runtime_enforcement_claimed": false,
+    "failure_recovery_execution_claimed": false,
+    "spark_parity_claimed": false
+  }
+}

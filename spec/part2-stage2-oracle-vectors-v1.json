@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 2,
+  "frozen_example_source": "spec/financial-examples-v1.json",
+  "coherence_vector_source": "spec/contract-coherence-vectors-v1.json",
+  "boundary_vectors": [
+    {"id": "P2S2-V001", "operation": "checked_add", "inputs": [9223372036854775807, 0], "expected": 9223372036854775807},
+    {"id": "P2S2-V002", "operation": "checked_add", "inputs": [9223372036854775807, 1], "expected_rejection": "SCHEMA_VIOLATION"},
+    {"id": "P2S2-V003", "operation": "checked_subtract", "inputs": [-9223372036854775808, 1], "expected_rejection": "SCHEMA_VIOLATION"},
+    {"id": "P2S2-V004", "operation": "checked_abs", "inputs": [-9223372036854775808], "expected_rejection": "SCHEMA_VIOLATION"},
+    {"id": "P2S2-V005", "operation": "checked_i64", "inputs": [true], "expected_rejection": "SCHEMA_VIOLATION"},
+    {"id": "P2S2-V006", "operation": "settlement_reference", "inputs": [" settlement-shared ", "settlement-shared", "settlement-shared"], "expected_rejection": "AMBIGUOUS_BANK_ALLOCATION"},
+    {"id": "P2S2-V007", "operation": "capture_capacity", "inputs": [10000, 11000], "expected_status": "EXCEPTION", "expected_reason": "OVER_APPLIED_REFERENCE"},
+    {"id": "P2S2-V008", "operation": "tolerance_with_formula_failure", "expected_status": "EXCEPTION", "tolerance_must_not_hide": true}
+  ],
+  "mutation_classes": [
+    "TRANSACTION_SIGN_REVERSAL",
+    "TRUST_REPORTED_SETTLEMENT_NET",
+    "DROP_TRANSACTION_EVENT_CLASS",
+    "INCLUDE_TRANSPORT_DIGEST_FIELDS",
+    "ALLOW_NEGATIVE_REFERENCE_CHAIN",
+    "DISABLE_CAPTURE_CAPACITY",
+    "HEURISTIC_BANK_ALLOCATION",
+    "ALLOW_BANK_DOUBLE_USE",
+    "COLLAPSE_MISSING_TO_ZERO",
+    "TOLERATE_SEMANTIC_FAILURE",
+    "UNCHECKED_INTEGER_AGGREGATION",
+    "FINALIZE_PROOF_AFTER_FAILURE"
+  ]
+}
