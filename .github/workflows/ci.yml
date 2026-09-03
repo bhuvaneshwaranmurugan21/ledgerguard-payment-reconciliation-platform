@@ -234,6 +234,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Run Part 2 Stage 4 validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part2-stage4-closure
         run: >-
           python tools/run_part2_stage4.py
           --clean-runs 2
