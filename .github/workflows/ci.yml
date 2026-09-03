@@ -21,6 +21,7 @@ jobs:
       EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       PART1_CLOSURE_SHA: 3ef17666e3fe3bc655ba1c8733beb3cb00acdbec
       PART2_STAGE1_CLOSURE_SHA: 95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91
+      PART2_STAGE2_CLOSURE_SHA: 55e78f76e76bff7562d43a3d001dbb74fd66d8fd
     steps:
       - name: Check out the raw event head
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -39,6 +40,8 @@ jobs:
             requirements/part2-stage1-py311.lock
             requirements/part2-stage2-bootstrap.lock
             requirements/part2-stage2-py311.lock
+            requirements/part2-stage3-bootstrap.lock
+            requirements/part2-stage3-py311.lock
       - name: Install exact Java
         uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c
         with:
@@ -80,6 +83,30 @@ jobs:
           test "$(git show -s --format=%T "$PART2_STAGE1_CLOSURE_SHA")" = "668e2e89473b026d9857d162fb9e45a3c8f465a1"
           test "$(git show -s --format=%P "$PART2_STAGE1_CLOSURE_SHA")" = "3ef17666e3fe3bc655ba1c8733beb3cb00acdbec"
           git worktree add --detach "$RUNNER_TEMP/ledgerguard-part2-stage1-closure" "$PART2_STAGE1_CLOSURE_SHA"
+      - name: Prove and materialize immutable Part 2 Stage 2 closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git show -s --format=%T "$PART2_STAGE2_CLOSURE_SHA")" = "417245f6369c3d2b08ede20c35502b612b5eb3a4"
+          test "$(git show -s --format=%P "$PART2_STAGE2_CLOSURE_SHA")" = "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91"
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          root = Path.cwd()
+          closure = os.environ["PART2_STAGE2_CLOSURE_SHA"]
+          freeze = json.loads((root / "spec/part2-stage2-closure-freeze-v1.json").read_text())
+          assert freeze["squash_merge_commit"] == closure
+          for relative, expected in freeze["protected_authorities"].items():
+              frozen = subprocess.check_output(["git", "show", f"{closure}:{relative}"])
+              current = (root / relative).read_bytes()
+              assert hashlib.sha256(frozen).hexdigest() == expected
+              assert current == frozen
+          PY
+          git worktree add --detach "$RUNNER_TEMP/ledgerguard-part2-stage2-closure" "$PART2_STAGE2_CLOSURE_SHA"
       - name: Run complete Stage 6 validation twice
         run: >-
           python "$RUNNER_TEMP/ledgerguard-part1-closure/tools/run_part1_stage6.py"
@@ -111,22 +138,43 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Run Part 2 Stage 2 validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part2-stage2-closure
         run: >-
           python tools/run_part2_stage2.py
           --clean-runs 2
           --output "$RUNNER_TEMP/ledgerguard-part2-stage2"
       - name: Build trusted Stage 2 CI evidence envelope
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage2-reference-oracle'
         run: >-
           "$RUNNER_TEMP/ledgerguard-part2-stage2/run-1/venv/bin/python"
-          tools/build_part2_stage2_ci_evidence.py
+          "$RUNNER_TEMP/ledgerguard-part2-stage2-closure/tools/build_part2_stage2_ci_evidence.py"
           --local-evidence "$RUNNER_TEMP/ledgerguard-part2-stage2/part2-stage2-local-evidence.json"
           --output-directory "$RUNNER_TEMP/ledgerguard-part2-stage2-artifact"
       - name: Upload immutable Stage 2 evidence
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage2-reference-oracle'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: ledgerguard-part2-stage2-${{ github.event.pull_request.head.sha }}
           path: ${{ runner.temp }}/ledgerguard-part2-stage2-artifact
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run Part 2 Stage 3 validation twice
+        run: >-
+          python tools/run_part2_stage3.py
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-part2-stage3"
+      - name: Build trusted Stage 3 CI evidence envelope
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage3-admission-normalization'
+        run: >-
+          "$RUNNER_TEMP/ledgerguard-part2-stage3/run-1/venv/bin/python"
+          tools/build_part2_stage3_ci_evidence.py
+          --local-evidence "$RUNNER_TEMP/ledgerguard-part2-stage3/part2-stage3-local-evidence.json"
+          --output-directory "$RUNNER_TEMP/ledgerguard-part2-stage3-artifact"
+      - name: Upload immutable Stage 3 evidence
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage3-admission-normalization'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part2-stage3-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part2-stage3-artifact
           if-no-files-found: error
           retention-days: 90

@@ -4,15 +4,24 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 2 — Independent reference oracle
+- Stage: 3 — Production admission and normalization
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE2_REFERENCE_ORACLE_VERIFIED_CANDIDATE`
-- Highest new claim: `LOCAL_VERIFIED` reference-oracle candidate pending external closure
-- Reference oracle: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
-- Reconciliation implementation: `UNCLAIMED`
+- Stage state: `PART2_STAGE3_ADMISSION_NORMALIZATION_VERIFIED_CANDIDATE`
+- Highest new claim: `LOCAL_VERIFIED` admission candidate pending external closure
+- Reference oracle: `EXTERNALLY_VERIFIED`
+- Production admission: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
+- Reconciliation calculation: `UNCLAIMED`
 - Spark reconciliation parity: `UNCLAIMED`
 - AWS execution: false
 - AWS infrastructure mutated: false
+
+## Accepted Stage 2 snapshot
+
+The following line preserves the exact status token validated at the immutable Stage 2 tree. It is
+historical entry evidence; PR #11's squash and post-merge CI promoted the oracle beyond this local
+candidate state.
+
+- Stage state: `PART2_STAGE2_REFERENCE_ORACLE_VERIFIED_CANDIDATE`
 
 ## Accepted Stage 1 snapshot
 
@@ -84,6 +93,14 @@ Spark/Parquet toolchain, traceability, and non-AWS CI boundary. PR #10 was squas
 
 Stage 2 adds an independent reference oracle for canonical identity, checked arithmetic,
 transaction and settlement expectations, exact references and allocation, status and reasons, and
-proof/case identity expectations. It does not add the production engine, authoritative storage,
-Spark reconciliation, AWS execution, or infrastructure mutation. The oracle gate remains a local
-candidate until exact-head pull-request CI, squash merge, and independent main CI complete.
+proof/case identity expectations. PR #11 passed exact-head CI, was squash-merged as
+`55e78f76e76bff7562d43a3d001dbb74fd66d8fd`, and passed independent `main` CI; its oracle gate is
+therefore externally verified.
+
+Stage 3 adds only the production admission and normalization boundary: digest-bound v2 schema
+loading, strict bytes and canonical values, policy/manifest binding, atomic source replay state,
+checked journal admission, exact keys, currency domains, and bank-reference ambiguity rejection.
+It does not add transaction or settlement calculation, durable persistence, proof/case/revision
+finalization, Spark reconciliation, AWS execution, or infrastructure mutation. The Stage 3 result
+remains a local candidate until exact-head pull-request CI, squash merge, and independent main CI
+complete.
