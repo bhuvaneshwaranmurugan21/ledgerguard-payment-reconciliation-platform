@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "state": "LOCAL_RECONCILIATION_VERIFIED",
+  "stage7_closure_sha256": "ae0182fc306355be27417457393a8f4fe96624b4ce6e0359a233563b676eb3b1",
+  "promotion": {
+    "pull_request": 17,
+    "validated_head": "2b1147dac823d59a8891b5f7852e7c6977f20aa6",
+    "validated_tree": "406f40dfb1e94e38031505e23a6d77b50198840f",
+    "squash_merge_commit": "71b42d6622558093a2bfaced58724f2ab71e793e",
+    "squash_merge_parent": "8fac3795ed0dac5284dd3b1595bd8fc9f6dc7344",
+    "parent_count": 1,
+    "exact_head_ci_run": 33871740027,
+    "exact_head_ci_job": 101019086101,
+    "postmerge_main_ci_run": 33874130476,
+    "postmerge_main_ci_job": 101026900537,
+    "artifact_id": 9936995094,
+    "artifact_name": "ledgerguard-part2-stage8-2b1147dac823d59a8891b5f7852e7c6977f20aa6",
+    "artifact_zip_sha256": "082f66b53ec08cc877f04b815911da4c35dd79ff3ac9fd45c8e7df9e7bf307e6",
+    "manifest_sha256": "8a35c734a32282ca287b0b458e2014d68ba626c055959194951414c652a7e0c7",
+    "evidence_sha256": "c4a0fe47dcbd2deaf0c39c2d6d54060eded7198476fda3e5c46a1556ecc7b961",
+    "deterministic_payload_sha256": "91ef0aba167bae19f2e8d493aa7840375ef721879e7f8260571cd6da0ac767c7",
+    "wheel_sha256": "fedf664616e99b66e4a42aa4efc5427fa92442ea5781b04209e57128005e28c9",
+    "conclusion": "SUCCESS"
+  },
+  "closure_attestation": {
+    "method": "SEPARATE_CLOSURE_ATTESTATION_PULL_REQUEST",
+    "promotion_base_required": true,
+    "repository_record": "spec/part2-completion-authority-v1.json",
+    "exact_head_ci_required": true,
+    "squash_merge_required": true,
+    "independent_main_ci_required": true
+  },
+  "master_part2_completion_gates": {
+    "independent_oracle_verified": "EXTERNALLY_VERIFIED",
+    "spark_parity_verified": "EXTERNALLY_VERIFIED",
+    "financial_invariants_verified": "EXTERNALLY_VERIFIED",
+    "failure_matrix_verified": "EXTERNALLY_VERIFIED",
+    "deterministic_replay_verified": "EXTERNALLY_VERIFIED",
+    "critical_paths_tested": "EXTERNALLY_VERIFIED"
+  },
+  "claim_boundary": {
+    "aws_execution": false,
+    "aws_workflow_dispatched": false,
+    "managed_persistence": false,
+    "managed_reconciliation": false,
+    "infrastructure_mutation": false,
+    "performance_verified": false,
+    "scale_verified": false,
+    "production_operation": false,
+    "project_complete": false
+  },
+  "outcome": {
+    "requirements_pass": 203,
+    "stage_gates_pass": 69,
+    "master_gates_pass": 6,
+    "critical_findings": 0,
+    "major_findings": 0,
+    "remaining_part2_work": 0
+  }
+}
