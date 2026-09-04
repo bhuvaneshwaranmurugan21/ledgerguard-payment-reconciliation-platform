@@ -4,16 +4,17 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 7 — Spark parity, failure matrix, and critical paths
+- Stage: 8 — Promotion and closure
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE7_SPARK_PARITY_VERIFIED_CANDIDATE`
-- Highest new claim: genuine local Spark parity candidate pending external closure
+- Stage state: `PART2_STAGE8_PROMOTION_VERIFIED_CANDIDATE`
+- Highest new claim: complete Part 2 promotion candidate pending its own external closure
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
 - Settlement reconciliation: `EXTERNALLY_VERIFIED`
 - Atomic proof finalization: `EXTERNALLY_VERIFIED`
-- Spark reconciliation parity: `VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
+- Spark reconciliation parity: `EXTERNALLY_VERIFIED`
+- Stage 7 external closure: `EXTERNALLY_VERIFIED`
 - AWS execution: false
 - AWS infrastructure mutated: false
 
@@ -141,3 +142,15 @@ PR #15 passed exact-head CI, was squash-merged as
 Spark 3.5.6 recomputation and Parquet logical readback for both financial grains, binds the complete
 failure taxonomy to executable evidence, and exercises the accepted critical paths. It does not
 call AWS, transfer authority to Spark, claim managed persistence, or close Part 2.
+
+PR #16 passed exact-head CI run `33857511781`, was squash-merged as
+`8fac3795ed0dac5284dd3b1595bd8fc9f6dc7344`, and passed independent post-merge `main` CI run
+`33863399041`. The validated PR head and squash merge share tree
+`6ae471cd73a1255df99edd953b8d0e0850790362`; genuine Spark parity, the complete failure matrix,
+deterministic replay, and all eight critical paths are therefore externally verified.
+
+Stage 8 freezes that closure, normalizes and re-audits all 203 Part 2 requirements and 69 stage
+gates, and adjudicates the six master Part 2 gates. This tree remains a promotion candidate. Part 2
+cannot enter the terminal local reconciliation state until the promotion PR and the separate repository
+closure-attestation PR each pass exact-head CI, squash-only merge validation, and independent
+post-merge `main` CI.

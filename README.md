@@ -31,9 +31,11 @@ Stage 1 was then closed by PR #10. PR #11 closed Stage 2, externally verifying t
 packaged, side-effect-free reference oracle. Stage 3 added production admission and normalization;
 PR #12 passed exact-head CI, was squash-merged, and passed independent post-merge `main` CI. PR #13
 then closed Stage 4 transaction reconciliation with exact-head CI, a squash merge, and independent
-post-merge `main` CI. PR #14 closed Stage 5 settlement reconciliation. Stage 6 is now the local
-verified proof-finalization candidate; external closure is still pending. The overall project
-remains `PROJECT_IN_PROGRESS`.
+post-merge `main` CI. PR #14 closed Stage 5 settlement reconciliation, PR #15 closed atomic proof
+finalization, and PR #16 closed genuine Spark parity, the complete failure matrix, deterministic
+replay, and the eight critical paths. Part 2 Stage 8 promotion candidate now performs the final
+requirement, gate, evidence, and claim-integrity audit. Part 2 and the overall project remain in
+progress until the Stage 8 promotion and closure-attestation transactions both complete.
 
 The immutable Stage 1 status statement was: Part 2
 is now `PART2_IN_PROGRESS`. No reconciliation
@@ -59,9 +61,10 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Production admission and normalization | `EXTERNALLY_VERIFIED` after PR #12 squash and independent main CI |
 | Transaction-grain reconciliation | `EXTERNALLY_VERIFIED` after PR #13 squash and independent main CI |
 | Settlement-grain reconciliation | `EXTERNALLY_VERIFIED` after PR #14 squash and independent main CI |
-| Atomic proof and case finalization | `LOCAL_VERIFIED` candidate pending exact-head and post-merge closure |
+| Atomic proof and case finalization | `EXTERNALLY_VERIFIED` after PR #15 squash and independent main CI |
 | Independent reference oracle | `EXTERNALLY_VERIFIED` after PR #11 squash and independent main CI |
-| Spark reconciliation parity | `UNCLAIMED` |
+| Spark reconciliation parity | `EXTERNALLY_VERIFIED` after PR #16 squash and independent main CI |
+| Part 2 completion | `VERIFIED_CANDIDATE` in Stage 8; external promotion still required |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity and managed AWS reconciliation | `UNCLAIMED` |
 | AWS account-wide nonmutation | `NOT_PROVEN` |
@@ -109,7 +112,9 @@ Stage 6 adds the [proof-finalization gap audit](docs/part2-stage6-gap-audit.md),
 [atomic recovery decision](docs/adr/0022-atomic-proof-finalization-and-recovery.md).
 Stage 7 adds the [Spark parity gap audit](docs/part2-stage7-gap-audit.md),
 [Spark parity contract](docs/part2-stage7-spark-parity.md), and
-[logical Parquet decision](docs/adr/0023-spark-logical-parity-and-parquet.md).
+[logical Parquet decision](docs/adr/0023-spark-logical-parity-and-parquet.md). Stage 8 adds the
+[promotion gap audit](docs/part2-stage8-gap-audit.md), [completion procedure](docs/part2-completion.md),
+and [terminal promotion decision](docs/adr/0024-part2-terminal-promotion-and-closure.md).
 
 ## Foundation validation
 
@@ -125,6 +130,7 @@ ledgerguard-part2-stage4
 ledgerguard-part2-stage5
 ledgerguard-part2-stage6
 ledgerguard-part2-stage7
+ledgerguard-part2-stage8
 ruff format --check .
 ruff check .
 mypy src
@@ -137,9 +143,10 @@ The planned managed validation uses synthetic data in one AWS region. It will no
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
 
 Parts 1 and 2 perform no AWS execution and mutate no AWS infrastructure. Part 1's highest claim is
-`LOCAL_VERIFIED`; Part 2 Stage 7 adds genuine local Spark/Parquet logical parity, the complete failure
-matrix, and critical-path validation. Managed reconciliation, performance, scale, production
-operation, and final Part 2 closure remain unclaimed.
+`LOCAL_VERIFIED`; Part 2 Stage 7 externally verified genuine local Spark/Parquet logical parity, the
+complete failure matrix, and critical-path validation. Stage 8 is the final local promotion
+candidate. Managed reconciliation, AWS execution, performance, scale, production operation, and
+overall project completion remain unclaimed.
 
 ## License
 

@@ -1,0 +1,3556 @@
+{
+  "historical_requirement_count": 175,
+  "part": 2,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "requirements": [
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "evidence/part1-stage7-postmerge-closure-v1.json"
+      ],
+      "evidence": [
+        "exact closure commit and tree"
+      ],
+      "gate_id": "P2-S1-G001",
+      "id": "P2-S1-R001",
+      "stage": 1,
+      "statement": "Bind Part 2 entry to exact merged main commit 3ef17666e3fe3bc655ba1c8733beb3cb00acdbec.",
+      "validation": [
+        "P2S1-T001"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "evidence/part1-stage7-postmerge-closure-v1.json"
+      ],
+      "evidence": [
+        "one parent and equal validated/main trees"
+      ],
+      "gate_id": "P2-S1-G001",
+      "id": "P2-S1-R002",
+      "stage": 1,
+      "statement": "Prove PR 9 used a one-parent squash whose tree equals the validated head tree.",
+      "validation": [
+        "P2S1-T002"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "evidence/part1-stage7-postmerge-closure-v1.json"
+      ],
+      "evidence": [
+        "runs 33626639395 and 33627452565"
+      ],
+      "gate_id": "P2-S1-G001",
+      "id": "P2-S1-R003",
+      "stage": 1,
+      "statement": "Record successful exact-head pull-request CI and independent post-merge main CI.",
+      "validation": [
+        "P2S1-T003"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part1-stage7-closure-freeze-v1.json",
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": [
+        "two-tree CI execution"
+      ],
+      "gate_id": "P2-S1-G001",
+      "id": "P2-S1-R004",
+      "stage": 1,
+      "statement": "Reproduce Part 1 Stage 6 twice and Stage 7 from a separate immutable closure checkout.",
+      "validation": [
+        "P2S1-T004"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "evidence/part1-stage7-postmerge-closure-v1.json"
+      ],
+      "evidence": [
+        "foundation and Stage 7 digests"
+      ],
+      "gate_id": "P2-S1-G001",
+      "id": "P2-S1-R005",
+      "stage": 1,
+      "statement": "Preserve the Part 1 foundation and Stage 7 candidate digests without relabelling failed attempt 1.",
+      "validation": [
+        "P2S1-T005"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part1-part2-handoff-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "eight digest-bound authorities"
+      ],
+      "gate_id": "P2-S1-G002",
+      "id": "P2-S1-R006",
+      "stage": 1,
+      "statement": "Verify all eight inherited authority paths and SHA-256 digests.",
+      "validation": [
+        "P2S1-T006"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part1-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "protected-authority digest comparison"
+      ],
+      "gate_id": "P2-S1-G002",
+      "id": "P2-S1-R007",
+      "stage": 1,
+      "statement": "Reject any mutation of the protected Part 1 authority set.",
+      "validation": [
+        "P2S1-T007"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/project-completion-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "six-gate exact inventory"
+      ],
+      "gate_id": "P2-S1-G003",
+      "id": "P2-S1-R008",
+      "stage": 1,
+      "statement": "Inventory the six Part 2 completion gates from the master completion contract.",
+      "validation": [
+        "P2S1-T008"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part1-part2-handoff-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "eleven unique ownership rows"
+      ],
+      "gate_id": "P2-S1-G003",
+      "id": "P2-S1-R009",
+      "stage": 1,
+      "statement": "Assign exactly one future-stage owner to each of the eleven runtime responsibilities.",
+      "validation": [
+        "P2S1-T009"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part1-part2-handoff-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "eight forbidden redefinitions"
+      ],
+      "gate_id": "P2-S1-G003",
+      "id": "P2-S1-R010",
+      "stage": 1,
+      "statement": "Preserve all eight forbidden redefinitions as fail-closed constraints.",
+      "validation": [
+        "P2S1-T010"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-invariants-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "CTR-001 through CTR-018"
+      ],
+      "gate_id": "P2-S1-G003",
+      "id": "P2-S1-R011",
+      "stage": 1,
+      "statement": "Inventory all eighteen runtime invariants and map them to later implementation stages.",
+      "validation": [
+        "P2S1-T011"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part1-stage5-documentation-authority-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "twenty-one scenarios and reason codes"
+      ],
+      "gate_id": "P2-S1-G003",
+      "id": "P2-S1-R012",
+      "stage": 1,
+      "statement": "Inventory all twenty-one behavioral scenarios and twenty-one closed reason codes.",
+      "validation": [
+        "P2S1-T012"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-toolchain-v1.json"
+      ],
+      "evidence": [
+        "runtime Python version assertion"
+      ],
+      "gate_id": "P2-S1-G004",
+      "id": "P2-S1-R013",
+      "stage": 1,
+      "statement": "Run local validation under exact CPython 3.11.13.",
+      "validation": [
+        "P2S1-T013"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-toolchain-v1.json"
+      ],
+      "evidence": [
+        "java.version major assertion"
+      ],
+      "gate_id": "P2-S1-G004",
+      "id": "P2-S1-R014",
+      "stage": 1,
+      "statement": "Run Spark under Java major version 17.",
+      "validation": [
+        "P2S1-T014"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-toolchain-v1.json",
+        "requirements/part2-stage1-py311.lock"
+      ],
+      "evidence": [
+        "Spark and Py4J version assertions"
+      ],
+      "gate_id": "P2-S1-G004",
+      "id": "P2-S1-R015",
+      "stage": 1,
+      "statement": "Pin and execute Apache Spark 3.5.6 with Py4J 0.10.9.7.",
+      "validation": [
+        "P2S1-T015"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-toolchain-v1.json",
+        "tools/run_part2_stage1.py"
+      ],
+      "evidence": [
+        "driver and worker interpreter equality"
+      ],
+      "gate_id": "P2-S1-G004",
+      "id": "P2-S1-R016",
+      "stage": 1,
+      "statement": "Bind Spark driver and worker processes to the same exact Python interpreter.",
+      "validation": [
+        "P2S1-T016"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-toolchain-v1.json",
+        "tools/validate_part2_stage1_run.py"
+      ],
+      "evidence": [
+        "ANSI UTC arithmetic and Parquet assertions"
+      ],
+      "gate_id": "P2-S1-G004",
+      "id": "P2-S1-R017",
+      "stage": 1,
+      "statement": "Enable ANSI arithmetic and UTC session time, and prove exact long and decimal behavior through Parquet.",
+      "validation": [
+        "P2S1-T017"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-toolchain-v1.json",
+        "tools/run_part2_stage1.py"
+      ],
+      "evidence": [
+        "two equal clean-run payloads"
+      ],
+      "gate_id": "P2-S1-G004",
+      "id": "P2-S1-R018",
+      "stage": 1,
+      "statement": "Produce equal logical results from at least two independent clean toolchain runs.",
+      "validation": [
+        "P2S1-T018"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "requirements/part2-stage1-bootstrap.lock",
+        "requirements/part2-stage1-py311.lock"
+      ],
+      "evidence": [
+        "pip require-hashes installation"
+      ],
+      "gate_id": "P2-S1-G005",
+      "id": "P2-S1-R019",
+      "stage": 1,
+      "statement": "Install every Stage 1 dependency from complete hash-locked Part 2 lock files.",
+      "validation": [
+        "P2S1-T019"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-requirements-v1.json",
+        "spec/part2-stage1-traceability-v1.json"
+      ],
+      "evidence": [
+        "exact bidirectional ID equality"
+      ],
+      "gate_id": "P2-S1-G005",
+      "id": "P2-S1-R020",
+      "stage": 1,
+      "statement": "Maintain complete bidirectional requirement-to-gate, authority, validation, and evidence traceability.",
+      "validation": [
+        "P2S1-T020"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "tests/test_part2_stage1.py"
+      ],
+      "evidence": [
+        "negative mutation suite"
+      ],
+      "gate_id": "P2-S1-G005",
+      "id": "P2-S1-R021",
+      "stage": 1,
+      "statement": "Reject negative mutations across closure, authority, toolchain, status, claim, lock, and traceability classes.",
+      "validation": [
+        "P2S1-T021"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage1-execution-contract-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "six UNCLAIMED master gates"
+      ],
+      "gate_id": "P2-S1-G005",
+      "id": "P2-S1-R022",
+      "stage": 1,
+      "statement": "Keep every master Part 2 completion gate unclaimed until its owning later stage executes it.",
+      "validation": [
+        "P2S1-T022"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": [
+        "read-only permissions and forbidden-token/action scan"
+      ],
+      "gate_id": "P2-S1-G006",
+      "id": "P2-S1-R023",
+      "stage": 1,
+      "statement": "Keep automatic CI read-only with no OIDC token, AWS action, AWS CLI call, workload, or infrastructure mutation.",
+      "validation": [
+        "P2S1-T023"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        ".github/workflows/aws-oidc-identity.yml"
+      ],
+      "evidence": [
+        "workflow_dispatch-only trigger"
+      ],
+      "gate_id": "P2-S1-G006",
+      "id": "P2-S1-R024",
+      "stage": 1,
+      "statement": "Keep the inherited AWS identity workflow manual-dispatch-only.",
+      "validation": [
+        "P2S1-T024"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "PROJECT_STATUS.md",
+        "README.md",
+        "contracts/part2-stage1-execution-contract-v1.json"
+      ],
+      "evidence": [
+        "truthful active claim boundary"
+      ],
+      "gate_id": "P2-S1-G006",
+      "id": "P2-S1-R025",
+      "stage": 1,
+      "statement": "Represent the active state as PART2_IN_PROGRESS without claiming an oracle, engine, Spark parity, or AWS execution.",
+      "validation": [
+        "P2S1-T025"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage1-execution-contract-v1.json",
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": [
+        "external closure requirements and immutable CI artifact"
+      ],
+      "gate_id": "P2-S1-G006",
+      "id": "P2-S1-R026",
+      "stage": 1,
+      "statement": "Require exact-head pull-request CI, squash merge, independent main CI, and canonical evidence for Stage 1 closure.",
+      "validation": [
+        "P2S1-T026"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage2-reference-oracle-v1.json"
+      ],
+      "evidence": [
+        "entry commit, tree, parent, and CI runs"
+      ],
+      "gate_id": "P2-S2-G001",
+      "id": "P2-S2-R001",
+      "stage": 2,
+      "statement": "Bind Stage 2 to the exact PR 10 squash commit, tree, parent, exact-head CI, and post-merge main CI.",
+      "validation": [
+        "P2S2-T001"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "eight inherited SHA-256 comparisons"
+      ],
+      "gate_id": "P2-S2-G001",
+      "id": "P2-S2-R002",
+      "stage": 2,
+      "statement": "Verify every inherited Part 1 authority at its Stage 1 SHA-256 digest.",
+      "validation": [
+        "P2S2-T002"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0018-independent-reference-oracle.md"
+      ],
+      "evidence": [
+        "AST import boundary"
+      ],
+      "gate_id": "P2-S2-G002",
+      "id": "P2-S2-R003",
+      "stage": 2,
+      "statement": "Implement the oracle in a separate package with no production reconciliation, Spark, AWS, persistence, or network import.",
+      "validation": [
+        "P2S2-T003"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage2-reference-oracle-v1.json"
+      ],
+      "evidence": [
+        "reverse import and side-effect scan"
+      ],
+      "gate_id": "P2-S2-G002",
+      "id": "P2-S2-R004",
+      "stage": 2,
+      "statement": "Forbid production modules from importing the reference oracle and forbid authoritative output emission.",
+      "validation": [
+        "P2S2-T004"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "spec/contract-coherence-vectors-v1.json"
+      ],
+      "evidence": [
+        "canonical golden vectors"
+      ],
+      "gate_id": "P2-S2-G003",
+      "id": "P2-S2-R005",
+      "stage": 2,
+      "statement": "Independently implement strict JSON, NFC, timestamp, digest, source identity, replay, conflict, and derived identity rules.",
+      "validation": [
+        "P2S2-T005"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "signed 64-bit boundary matrix"
+      ],
+      "gate_id": "P2-S2-G003",
+      "id": "P2-S2-R006",
+      "stage": 2,
+      "statement": "Independently implement checked signed 64-bit arithmetic with fail-admission overflow behavior.",
+      "validation": [
+        "P2S2-T006"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "spec/financial-examples-v1.json"
+      ],
+      "evidence": [
+        "transaction oracle cases"
+      ],
+      "gate_id": "P2-S2-G004",
+      "id": "P2-S2-R007",
+      "stage": 2,
+      "statement": "Calculate transaction-grain signs, references, capacity, journal meaning, counts, totals, deltas, status, and reasons.",
+      "validation": [
+        "P2S2-T007"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "spec/financial-examples-v1.json"
+      ],
+      "evidence": [
+        "settlement oracle cases"
+      ],
+      "gate_id": "P2-S2-G004",
+      "id": "P2-S2-R008",
+      "stage": 2,
+      "statement": "Calculate settlement formula, exact allocation, no-double-use, account policy, counts, three deltas, status, and reasons.",
+      "validation": [
+        "P2S2-T008"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "missing-zero and tolerance metamorphics"
+      ],
+      "gate_id": "P2-S2-G004",
+      "id": "P2-S2-R009",
+      "stage": 2,
+      "statement": "Preserve missing evidence independently from zero value and prevent tolerance from hiding semantic failure.",
+      "validation": [
+        "P2S2-T009"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-coherence-v1.json",
+        "spec/contract-coherence-vectors-v1.json"
+      ],
+      "evidence": [
+        "proof and case identity goldens"
+      ],
+      "gate_id": "P2-S2-G005",
+      "id": "P2-S2-R010",
+      "stage": 2,
+      "statement": "Calculate comparison-ready proof, case, and revision identities without persisting or finalizing authoritative output.",
+      "validation": [
+        "P2S2-T010"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part1-stage5-documentation-authority-v1.json"
+      ],
+      "evidence": [
+        "no-proof failure decisions"
+      ],
+      "gate_id": "P2-S2-G005",
+      "id": "P2-S2-R011",
+      "stage": 2,
+      "statement": "Return no authoritative proof expectation for admission or execution failure.",
+      "validation": [
+        "P2S2-T011"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-invariants-v1.json",
+        "spec/part1-stage5-documentation-authority-v1.json"
+      ],
+      "evidence": [
+        "complete authority coverage matrix"
+      ],
+      "gate_id": "P2-S2-G006",
+      "id": "P2-S2-R012",
+      "stage": 2,
+      "statement": "Cover all frozen examples, eighteen invariants, twenty-one behavioral scenarios, coherence vectors, and the complete reason taxonomy.",
+      "validation": [
+        "P2S2-T012"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage2-oracle-vectors-v1.json",
+        "tests/test_part2_stage2_oracle.py"
+      ],
+      "evidence": [
+        "mutation and metamorphic results"
+      ],
+      "gate_id": "P2-S2-G006",
+      "id": "P2-S2-R013",
+      "stage": 2,
+      "statement": "Reject targeted semantic mutants and pass deterministic boundary, permutation, and metamorphic tests.",
+      "validation": [
+        "P2S2-T013"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "tools/run_part2_stage2.py"
+      ],
+      "evidence": [
+        "two clean deterministic payloads"
+      ],
+      "gate_id": "P2-S2-G007",
+      "id": "P2-S2-R014",
+      "stage": 2,
+      "statement": "Produce equal candidate evidence from at least two exact Python 3.11.13 clean runs with hash-locked dependencies.",
+      "validation": [
+        "P2S2-T014"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        ".github/workflows/ci.yml"
+      ],
+      "evidence": [
+        "exact-head evidence and squash-only closure"
+      ],
+      "gate_id": "P2-S2-G007",
+      "id": "P2-S2-R015",
+      "stage": 2,
+      "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before gate promotion.",
+      "validation": [
+        "P2S2-T015"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage2-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "exact commit topology and external closure identifiers"
+      ],
+      "gate_id": "P2-S3-G001",
+      "id": "P2-S3-R001",
+      "stage": 3,
+      "statement": "Bind entry to PR 11 head, squash commit, tree, parent, exact-head CI, immutable artifact, and post-merge main CI.",
+      "validation": [
+        "P2S3-T001"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage2-closure-freeze-v1.json",
+        "contracts/active-contract-set-v1.json"
+      ],
+      "evidence": [
+        "frozen byte and SHA-256 comparisons"
+      ],
+      "gate_id": "P2-S3-G001",
+      "id": "P2-S3-R002",
+      "stage": 3,
+      "statement": "Byte-verify the frozen Stage 2 authorities and preserve all accepted v1 and v2 schemas.",
+      "validation": [
+        "P2S3-T002"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/active-contract-set-v1.json",
+        "docs/adr/0019-production-admission-and-normalization.md"
+      ],
+      "evidence": [
+        "registry, family, identifier, dialect, reference and digest mutation matrix"
+      ],
+      "gate_id": "P2-S3-G002",
+      "id": "P2-S3-R003",
+      "stage": 3,
+      "statement": "Load only the digest-bound active v2 registry, validate its exact family set, schema identifiers, dialect, and offline references.",
+      "validation": [
+        "P2S3-T003"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-coherence-v1.json"
+      ],
+      "evidence": [
+        "strict parser adversarial matrix"
+      ],
+      "gate_id": "P2-S3-G003",
+      "id": "P2-S3-R004",
+      "stage": 3,
+      "statement": "Reject malformed UTF-8, BOM, duplicate or NFC-colliding keys, floats, exponent numbers, non-finite values, surrogates, and out-of-range integers.",
+      "validation": [
+        "P2S3-T004"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-coherence-vectors-v1.json"
+      ],
+      "evidence": [
+        "oracle differential and frozen canonical vectors"
+      ],
+      "gate_id": "P2-S3-G003",
+      "id": "P2-S3-R005",
+      "stage": 3,
+      "statement": "Canonicalize strings to NFC, timestamps to RFC 3339 UTC, objects by sorted keys, and digests over the frozen exclusion fields.",
+      "validation": [
+        "P2S3-T005"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md"
+      ],
+      "evidence": [
+        "JSON Lines framing, metadata and zero-record cases"
+      ],
+      "gate_id": "P2-S3-G003",
+      "id": "P2-S3-R006",
+      "stage": 3,
+      "statement": "Require byte-size, SHA-256, record count, LF-only JSON Lines framing, and one LF byte for an explicitly declared zero-record object.",
+      "validation": [
+        "P2S3-T006"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "policy schema, digest, version and account-domain cases"
+      ],
+      "gate_id": "P2-S3-G004",
+      "id": "P2-S3-R007",
+      "stage": 3,
+      "statement": "Validate and digest-bind reconciliation policy before processing any source record.",
+      "validation": [
+        "P2S3-T007"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/v2/run-manifest-v2.schema.json"
+      ],
+      "evidence": [
+        "manifest policy, run, family, locator and supplied-set cases"
+      ],
+      "gate_id": "P2-S3-G004",
+      "id": "P2-S3-R008",
+      "stage": 3,
+      "statement": "Validate manifest-to-policy binding, exact four-family inventory, run identity, and exact supplied-object set.",
+      "validation": [
+        "P2S3-T008"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md"
+      ],
+      "evidence": [
+        "traversal, symlink, escape, non-file, missing and read-failure cases"
+      ],
+      "gate_id": "P2-S3-G004",
+      "id": "P2-S3-R009",
+      "stage": 3,
+      "statement": "Confine local reads beneath a resolved root, reject traversal and symlinks, and treat stable read failure as admission failure.",
+      "validation": [
+        "P2S3-T009"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-coherence-v1.json"
+      ],
+      "evidence": [
+        "four-family source identity and business digest cases"
+      ],
+      "gate_id": "P2-S3-G005",
+      "id": "P2-S3-R010",
+      "stage": 3,
+      "statement": "Derive the frozen source identity and business digest for every admitted source record.",
+      "validation": [
+        "P2S3-T010"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "in-bundle and prior-state replay/conflict cases"
+      ],
+      "gate_id": "P2-S3-G005",
+      "id": "P2-S3-R011",
+      "stage": 3,
+      "statement": "Treat identical redelivery as replay and reject identity reuse with changed business content.",
+      "validation": [
+        "P2S3-T011"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md"
+      ],
+      "evidence": [
+        "unchanged immutable prior state after late rejection"
+      ],
+      "gate_id": "P2-S3-G005",
+      "id": "P2-S3-R012",
+      "stage": 3,
+      "statement": "Commit policy, manifest, and source replay state only after the complete bundle passes every admission check.",
+      "validation": [
+        "P2S3-T012"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "signed 64-bit boundary and aggregate overflow matrix"
+      ],
+      "gate_id": "P2-S3-G006",
+      "id": "P2-S3-R013",
+      "stage": 3,
+      "statement": "Use checked signed 64-bit integer operations for every admission-time amount and aggregate.",
+      "validation": [
+        "P2S3-T013"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/v2/journal-v2.schema.json",
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "posting balance, amount, side, line identity and clearing-role cases"
+      ],
+      "gate_id": "P2-S3-G006",
+      "id": "P2-S3-R014",
+      "stage": 3,
+      "statement": "Reject unbalanced journals and preserve the one-clearing-line semantic annotation for later reconciliation.",
+      "validation": [
+        "P2S3-T014"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-coherence-vectors-v1.json"
+      ],
+      "evidence": [
+        "transaction and settlement key goldens"
+      ],
+      "gate_id": "P2-S3-G007",
+      "id": "P2-S3-R015",
+      "stage": 3,
+      "statement": "Derive exact transaction and settlement reconciliation keys from the frozen component sets.",
+      "validation": [
+        "P2S3-T015"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "transaction and settlement currency-domain conflict cases"
+      ],
+      "gate_id": "P2-S3-G007",
+      "id": "P2-S3-R016",
+      "stage": 3,
+      "statement": "Reject cross-source currency-domain conflicts before reconciliation.",
+      "validation": [
+        "P2S3-T016"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md"
+      ],
+      "evidence": [
+        "NFC, trim, case and punctuation preservation cases"
+      ],
+      "gate_id": "P2-S3-G007",
+      "id": "P2-S3-R017",
+      "stage": 3,
+      "statement": "Normalize bank settlement references with NFC and outer trimming only; preserve case and punctuation.",
+      "validation": [
+        "P2S3-T017"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md"
+      ],
+      "evidence": [
+        "settlement collision, ambiguous match and unknown-reference cases"
+      ],
+      "gate_id": "P2-S3-G007",
+      "id": "P2-S3-R018",
+      "stage": 3,
+      "statement": "Reject settlement-identity and bank-allocation ambiguity while retaining unknown references for Stage 5 classification.",
+      "validation": [
+        "P2S3-T018"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage3-admission-normalization-v1.json"
+      ],
+      "evidence": [
+        "AST imports and forbidden capability scan"
+      ],
+      "gate_id": "P2-S3-G008",
+      "id": "P2-S3-R019",
+      "stage": 3,
+      "statement": "Keep production admission independent from the reference oracle, Spark, AWS, network, persistence, proof, case, and revision execution.",
+      "validation": [
+        "P2S3-T019"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md"
+      ],
+      "evidence": [
+        "immutable output, deterministic digest, owned error and no-proof cases"
+      ],
+      "gate_id": "P2-S3-G008",
+      "id": "P2-S3-R020",
+      "stage": 3,
+      "statement": "Return deterministic immutable admitted values or an owned admission reason and never emit an authoritative proof.",
+      "validation": [
+        "P2S3-T020"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage3-coverage-v1.json",
+        "tools/run_part2_stage3.py"
+      ],
+      "evidence": [
+        "full JUnit, 100 percent branch coverage, mutations, wheel and equal clean runs"
+      ],
+      "gate_id": "P2-S3-G009",
+      "id": "P2-S3-R021",
+      "stage": 3,
+      "statement": "Pass full-suite tests, exact Stage 3 statement and branch coverage, targeted semantic mutations, and two clean Python 3.11.13 runs.",
+      "validation": [
+        "P2S3-T021"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        ".github/workflows/ci.yml",
+        "spec/part2-stage3-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "raw exact-head CI envelope and squash-only external closure"
+      ],
+      "gate_id": "P2-S3-G009",
+      "id": "P2-S3-R022",
+      "stage": 3,
+      "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before Stage 3 promotion.",
+      "validation": [
+        "P2S3-T022"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage3-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "exact Stage 3 external closure identifiers"
+      ],
+      "gate_id": "P2-S4-G001",
+      "id": "P2-S4-R001",
+      "stage": 4,
+      "statement": "Bind entry to PR 12 head, squash commit, tree, parent, exact-head CI, immutable artifact, artifact digests, and post-merge main CI.",
+      "validation": [
+        "P2S4-T001"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage3-closure-freeze-v1.json",
+        "contracts/active-contract-set-v1.json"
+      ],
+      "evidence": [
+        "protected authority and frozen schema digests"
+      ],
+      "gate_id": "P2-S4-G001",
+      "id": "P2-S4-R002",
+      "stage": 4,
+      "statement": "Byte-verify protected Stage 3 authorities and preserve every accepted v1 and v2 schema.",
+      "validation": [
+        "P2S4-T002"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0020-transaction-reconciliation-and-reference-capacity.md"
+      ],
+      "evidence": [
+        "mixed replay and new bundle"
+      ],
+      "gate_id": "P2-S4-G002",
+      "id": "P2-S4-R003",
+      "stage": 4,
+      "statement": "Expose immutable current-bundle observations including identical replays while retaining the existing new-business-effect record view.",
+      "validation": [
+        "P2S4-T003"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "state replay and conflict cases"
+      ],
+      "gate_id": "P2-S4-G002",
+      "id": "P2-S4-R004",
+      "stage": 4,
+      "statement": "Reconcile replay observations and immutable prior transaction state without applying any source identity twice.",
+      "validation": [
+        "P2S4-T004"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "complete transaction-key assertions"
+      ],
+      "gate_id": "P2-S4-G003",
+      "id": "P2-S4-R005",
+      "stage": 4,
+      "statement": "Use exactly processor, merchant_id, payment_id, event_class, and currency as the transaction grain.",
+      "validation": [
+        "P2S4-T005"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md"
+      ],
+      "evidence": [
+        "processor-only and ledger-only grains"
+      ],
+      "gate_id": "P2-S4-G003",
+      "id": "P2-S4-R006",
+      "stage": 4,
+      "statement": "Evaluate the full outer union of processor-event and transaction-journal keys and keep missing sources explicit.",
+      "validation": [
+        "P2S4-T006"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "four event signs and multi-record aggregation"
+      ],
+      "gate_id": "P2-S4-G004",
+      "id": "P2-S4-R007",
+      "stage": 4,
+      "statement": "Apply policy event signs and aggregate every unique processor event exactly once with checked signed 64-bit arithmetic.",
+      "validation": [
+        "P2S4-T007"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/contract-invariants-v1.json"
+      ],
+      "evidence": [
+        "clearing-only movement cases"
+      ],
+      "gate_id": "P2-S4-G004",
+      "id": "P2-S4-R008",
+      "stage": 4,
+      "statement": "Calculate ledger movement from PROCESSOR_CLEARING debits minus credits and never substitute total journal debits.",
+      "validation": [
+        "P2S4-T008"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md"
+      ],
+      "evidence": [
+        "role, side and counterpart failures"
+      ],
+      "gate_id": "P2-S4-G004",
+      "id": "P2-S4-R009",
+      "stage": 4,
+      "statement": "Treat invalid clearing count, posting side, or policy-disallowed counterpart role as INVALID_ACCOUNT_ROLE.",
+      "validation": [
+        "P2S4-T009"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "aggregate and absolute overflow cases"
+      ],
+      "gate_id": "P2-S4-G004",
+      "id": "P2-S4-R010",
+      "stage": 4,
+      "statement": "Reject processor, ledger, delta, difference, count, and reference-capacity overflow before publishing candidates.",
+      "validation": [
+        "P2S4-T010"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "exact capture and scope cases"
+      ],
+      "gate_id": "P2-S4-G005",
+      "id": "P2-S4-R011",
+      "stage": 4,
+      "statement": "Resolve every negative event to an exact capture source identity in the same processor, merchant, payment, and currency scope.",
+      "validation": [
+        "P2S4-T011"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/v2/processor-event-v2.schema.json"
+      ],
+      "evidence": [
+        "missing and negative-target references"
+      ],
+      "gate_id": "P2-S4-G005",
+      "id": "P2-S4-R012",
+      "stage": 4,
+      "statement": "Forbid negative reference chains and preserve unresolved references as UNRESOLVED_REFERENCE.",
+      "validation": [
+        "P2S4-T012"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage2-oracle-vectors-v1.json"
+      ],
+      "evidence": [
+        "shared cross-class capacity"
+      ],
+      "gate_id": "P2-S4-G005",
+      "id": "P2-S4-R013",
+      "stage": 4,
+      "statement": "Aggregate refund, chargeback, and reversal application against one exact capture before evaluating capacity.",
+      "validation": [
+        "P2S4-T013"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md"
+      ],
+      "evidence": [
+        "multiple-capture and permutation cases"
+      ],
+      "gate_id": "P2-S4-G005",
+      "id": "P2-S4-R014",
+      "stage": 4,
+      "statement": "Keep multiple captures for one payment as distinct capacity pools and make capacity independent of input order.",
+      "validation": [
+        "P2S4-T014"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md"
+      ],
+      "evidence": [
+        "closed reason matrix"
+      ],
+      "gate_id": "P2-S4-G006",
+      "id": "P2-S4-R015",
+      "stage": 4,
+      "statement": "Emit deterministic financial reasons for missing evidence, invalid roles, unresolved references, over-application, and processor-ledger mismatch.",
+      "validation": [
+        "P2S4-T015"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json"
+      ],
+      "evidence": [
+        "tolerance boundary and semantic precedence"
+      ],
+      "gate_id": "P2-S4-G006",
+      "id": "P2-S4-R016",
+      "stage": 4,
+      "statement": "Apply tolerance only after complete semantically valid evidence; semantic reasons always force EXCEPTION.",
+      "validation": [
+        "P2S4-T016"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "candidate totals and independent oracle differential"
+      ],
+      "gate_id": "P2-S4-G006",
+      "id": "P2-S4-R017",
+      "stage": 4,
+      "statement": "Produce exact transaction totals, counts, signed delta, absolute difference, status, and ordered reason codes.",
+      "validation": [
+        "P2S4-T017"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0020-transaction-reconciliation-and-reference-capacity.md"
+      ],
+      "evidence": [
+        "frozen dataclasses and fail-closed transition"
+      ],
+      "gate_id": "P2-S4-G007",
+      "id": "P2-S4-R018",
+      "stage": 4,
+      "statement": "Return immutable transaction candidates and state with canonical deterministic digests and no partial transition after rejection.",
+      "validation": [
+        "P2S4-T018"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/architecture-v2.md"
+      ],
+      "evidence": [
+        "state and manifest-bound digests"
+      ],
+      "gate_id": "P2-S4-G007",
+      "id": "P2-S4-R019",
+      "stage": 4,
+      "statement": "Bind transaction batch identity to run, policy, manifest, source state, and candidate values while excluding time and arrival order.",
+      "validation": [
+        "P2S4-T019"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "AST imports and forbidden capability scan"
+      ],
+      "gate_id": "P2-S4-G008",
+      "id": "P2-S4-R020",
+      "stage": 4,
+      "statement": "Keep production independent from the reference oracle, settlement calculation, bank allocation, persistence, proof finalization, Spark, network, and AWS.",
+      "validation": [
+        "P2S4-T020"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage4-transaction-reconciliation.md"
+      ],
+      "evidence": [
+        "installed local CLI success and owned failure"
+      ],
+      "gate_id": "P2-S4-G008",
+      "id": "P2-S4-R021",
+      "stage": 4,
+      "statement": "Expose a read-only local command whose success and rejection outputs never claim an authoritative proof.",
+      "validation": [
+        "P2S4-T021"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage4-coverage-v1.json",
+        "tools/run_part2_stage4.py"
+      ],
+      "evidence": [
+        "full JUnit, branch coverage, mutations, wheel and clean runs"
+      ],
+      "gate_id": "P2-S4-G009",
+      "id": "P2-S4-R022",
+      "stage": 4,
+      "statement": "Pass the full suite, 100 percent Stage 4 statement and branch coverage, semantic mutations, wheel installation, and two clean Python 3.11.13 runs.",
+      "validation": [
+        "P2S4-T022"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        ".github/workflows/ci.yml",
+        "spec/part2-stage4-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "raw exact-head CI envelope and squash-only closure"
+      ],
+      "gate_id": "P2-S4-G009",
+      "id": "P2-S4-R023",
+      "stage": 4,
+      "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before Stage 4 promotion.",
+      "validation": [
+        "P2S4-T023"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage4-closure-freeze-v1.json",
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G001",
+      "id": "P2-S5-R001",
+      "stage": 5,
+      "statement": "Bind entry to PR 13 head, squash commit, tree, parent, exact-head CI, immutable artifact, artifact digests, and post-merge main CI.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage4-closure-freeze-v1.json",
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G001",
+      "id": "P2-S5-R002",
+      "stage": 5,
+      "statement": "Byte-verify protected Stage 4 authorities and preserve every frozen v1 and accepted v2 schema.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage4-closure-freeze-v1.json",
+        "contracts/part2-stage4-transaction-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G001",
+      "id": "P2-S5-R003",
+      "stage": 5,
+      "statement": "Pass the complete Stage 4 validator before and after Stage 5 implementation.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G002",
+      "id": "P2-S5-R004",
+      "stage": 5,
+      "statement": "Preserve every current-bundle admitted occurrence without changing the existing new-effect and unique-observation views.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G002",
+      "id": "P2-S5-R005",
+      "stage": 5,
+      "statement": "Distinguish same-manifest bank duplication from identical prior-state replay.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G002",
+      "id": "P2-S5-R006",
+      "stage": 5,
+      "statement": "Merge immutable prior settlement state by source identity and reject changed-content reuse before returning candidates.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0019-production-admission-and-normalization.md",
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G002",
+      "id": "P2-S5-R007",
+      "stage": 5,
+      "statement": "Make bank-first, settlement-first, and replayed arrival converge without double business effect.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G003",
+      "id": "P2-S5-R008",
+      "stage": 5,
+      "statement": "Use exactly processor, merchant_id, settlement_id, settlement_cycle, and currency as the settlement grain.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G003",
+      "id": "P2-S5-R009",
+      "stage": 5,
+      "statement": "Evaluate the full outer union of processor-settlement and settlement-journal keys while preventing bank-only records from inventing keys.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G003",
+      "id": "P2-S5-R010",
+      "stage": 5,
+      "statement": "Recompute gross minus fee, refund, chargeback, and reserve with checked signed 64-bit subtraction for every processor record.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G003",
+      "id": "P2-S5-R011",
+      "stage": 5,
+      "statement": "Detect reported-net mismatch per processor record before aggregation so offsetting errors cannot cancel.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/processor-settlement-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G003",
+      "id": "P2-S5-R012",
+      "stage": 5,
+      "statement": "Aggregate each unique processor settlement once and preserve processor settlement count.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/journal-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G004",
+      "id": "P2-S5-R013",
+      "stage": 5,
+      "statement": "Calculate settlement ledger movement only from PROCESSOR_CLEARING credits minus debits.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/journal-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G004",
+      "id": "P2-S5-R014",
+      "stage": 5,
+      "statement": "Never substitute total journal debits, credits, or counterpart postings for clearing movement.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/journal-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G004",
+      "id": "P2-S5-R015",
+      "stage": 5,
+      "statement": "Classify an invalid clearing-posting count as INVALID_ACCOUNT_ROLE while retaining diagnostic movement and journal count.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G005",
+      "id": "P2-S5-R016",
+      "stage": 5,
+      "statement": "Index settlement targets by merchant, currency, and the NFC-normalized outer-trimmed settlement identifier.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G005",
+      "id": "P2-S5-R017",
+      "stage": 5,
+      "statement": "Allocate a bank identity only when its exact case- and punctuation-sensitive reference selects one target.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G005",
+      "id": "P2-S5-R018",
+      "stage": 5,
+      "statement": "Reject any current or cross-state reference with multiple settlement targets before returning state or candidates.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G005",
+      "id": "P2-S5-R019",
+      "stage": 5,
+      "statement": "Forbid amount, date, arrival order, or proximity matching and allocate every bank identity at most once.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0005-exact-bank-allocation.md",
+        "contracts/v2/bank-entry-v2.schema.json",
+        "contracts/v2/reconciliation-policy-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G005",
+      "id": "P2-S5-R020",
+      "stage": 5,
+      "statement": "Allow multiple distinct bank identities to aggregate one settlement and apply credit-positive, debit-negative signs.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G006",
+      "id": "P2-S5-R021",
+      "stage": 5,
+      "statement": "Give every unique bank identity exactly one deterministic allocated or unallocated disposition.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G006",
+      "id": "P2-S5-R022",
+      "stage": 5,
+      "statement": "Keep missing and unknown references visible as UNALLOCATED_BANK_MOVEMENT without adding them to candidate bank totals.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G006",
+      "id": "P2-S5-R023",
+      "stage": 5,
+      "statement": "Count a same-manifest duplicate once and emit DUPLICATE_BANK_MOVEMENT, while prior replay remains idempotent.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/financial-examples-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G006",
+      "id": "P2-S5-R024",
+      "stage": 5,
+      "statement": "Associate exact-reference cash from a disallowed account diagnostically and force INVALID_BANK_ACCOUNT.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G007",
+      "id": "P2-S5-R025",
+      "stage": 5,
+      "statement": "Preserve processor-ledger, processor-bank, and ledger-bank signed deltas independently.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G007",
+      "id": "P2-S5-R026",
+      "stage": 5,
+      "statement": "Define difference as the checked maximum absolute value of the three pairwise deltas.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G007",
+      "id": "P2-S5-R027",
+      "stage": 5,
+      "statement": "Preserve processor, journal, and allocated-bank counts so missing evidence cannot collapse into genuine zero.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G007",
+      "id": "P2-S5-R028",
+      "stage": 5,
+      "statement": "Allow absent ledger and bank evidence only for a genuine zero processor net with no semantic error.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/correctness.md",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G007",
+      "id": "P2-S5-R029",
+      "stage": 5,
+      "statement": "Apply tolerance only after semantic validation and emit exact deterministic reason precedence.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G008",
+      "id": "P2-S5-R030",
+      "stage": 5,
+      "statement": "Return immutable candidates, allocations, and settlement state with canonical deterministic digests.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G008",
+      "id": "P2-S5-R031",
+      "stage": 5,
+      "statement": "Publish no partial result after rejection and never claim or persist an authoritative proof.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part1-part2-handoff-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G009",
+      "id": "P2-S5-R032",
+      "stage": 5,
+      "statement": "Keep production independent from the reference oracle, Spark, persistence, network, AWS, and infrastructure clients.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part1-part2-handoff-v1.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G009",
+      "id": "P2-S5-R033",
+      "stage": 5,
+      "statement": "Expose a read-only local command whose success and rejection outputs preserve the Stage 5 claim boundary.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage5-coverage-v1.json",
+        "spec/part2-stage5-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G010",
+      "id": "P2-S5-R034",
+      "stage": 5,
+      "statement": "Pass the full suite, 100 percent Stage 5 statement and branch coverage, all semantic mutations, wheel installation, and two clean Python 3.11.13 runs.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage5-coverage-v1.json",
+        "spec/part2-stage5-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage5-local-evidence.json",
+        "part2-stage5-ci-evidence.json"
+      ],
+      "gate_id": "P2-S5-G010",
+      "id": "P2-S5-R035",
+      "stage": 5,
+      "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before Stage 5 promotion.",
+      "validation": [
+        "tests/test_part2_stage5_settlement.py",
+        "src/ledgerguard_part2_stage5_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage5-closure-freeze-v1.json",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G001",
+      "id": "P2-S6-R001",
+      "stage": 6,
+      "statement": "Bind entry to PR 14 head, squash commit, tree, parent, exact-head CI, immutable artifact digests, and post-merge main CI.",
+      "validation": [
+        "src/ledgerguard_part2_stage6_validation.py",
+        "tests/test_part2_stage6_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage5-closure-freeze-v1.json",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G001",
+      "id": "P2-S6-R002",
+      "stage": 6,
+      "statement": "Byte-verify protected Stage 5 authorities and every frozen v1 and accepted v2 schema.",
+      "validation": [
+        "src/ledgerguard_part2_stage6_validation.py",
+        "tests/test_part2_stage6_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage5-closure-freeze-v1.json",
+        "contracts/part2-stage5-settlement-reconciliation-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G001",
+      "id": "P2-S6-R003",
+      "stage": 6,
+      "statement": "Pass the complete accepted Stage 5 validator without changing its historical claims.",
+      "validation": [
+        "src/ledgerguard_part2_stage6_validation.py",
+        "tests/test_part2_stage6_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage6-proof-finalization-v1.json",
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G002",
+      "id": "P2-S6-R004",
+      "stage": 6,
+      "statement": "Publish one authoritative control-head update for the complete transaction and settlement batch or publish none.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage6-proof-finalization-v1.json",
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G002",
+      "id": "P2-S6-R005",
+      "stage": 6,
+      "statement": "Condition every publication on the exact expected prior head under a cross-process lock.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage6-proof-finalization-v1.json",
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G002",
+      "id": "P2-S6-R006",
+      "stage": 6,
+      "statement": "Durably order request, immutable objects, commit, authoritative head, and outcome publication.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage6-proof-finalization-v1.json",
+        "contracts/v2/reconciliation-proof-v2.schema.json",
+        "contracts/v2/case-revision-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G003",
+      "id": "P2-S6-R007",
+      "stage": 6,
+      "statement": "Persist canonical content-addressed objects and reject non-identical reuse of any immutable path.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage6-proof-finalization-v1.json",
+        "contracts/v2/reconciliation-proof-v2.schema.json",
+        "contracts/v2/case-revision-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G003",
+      "id": "P2-S6-R008",
+      "stage": 6,
+      "statement": "Verify content address, canonical encoding, frozen schema, self-digest, and commit inventory on every authoritative read.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage6-proof-finalization-v1.json",
+        "contracts/v2/reconciliation-proof-v2.schema.json",
+        "contracts/v2/case-revision-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G003",
+      "id": "P2-S6-R009",
+      "stage": 6,
+      "statement": "Reject malformed, missing, noncanonical, or tampered requests, objects, commits, outcomes, and control heads.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G004",
+      "id": "P2-S6-R010",
+      "stage": 6,
+      "statement": "Derive each proof identity from the exact frozen components and start each key at revision one.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G004",
+      "id": "P2-S6-R011",
+      "stage": 6,
+      "statement": "Append exactly one proof revision per updated reconciliation key and bind every successor to its predecessor proof identity.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/reconciliation-proof-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G004",
+      "id": "P2-S6-R012",
+      "stage": 6,
+      "statement": "Never delete, replace, renumber, or detach a historical proof revision.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/case-revision-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G005",
+      "id": "P2-S6-R013",
+      "stage": 6,
+      "statement": "Open a stable exact-identity case at revision one for an exception proof and create no case for an initially matched proof.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/case-revision-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G005",
+      "id": "P2-S6-R014",
+      "stage": 6,
+      "statement": "Append OPEN case revisions for continuing exceptions and RESOLVED_BY_LATE_DATA revisions for later matches.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/financial-semantics-v1.json",
+        "contracts/v2/case-revision-v2.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G005",
+      "id": "P2-S6-R015",
+      "stage": 6,
+      "statement": "Bind every case revision to the current proof and exact predecessor while retaining the initial exception proof identity.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G006",
+      "id": "P2-S6-R016",
+      "stage": 6,
+      "statement": "Classify persistence, conditional-write, integrity, and recovery failures as execution-owned failures.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G006",
+      "id": "P2-S6-R017",
+      "stage": 6,
+      "statement": "Return authoritative_proof false and NO_AUTHORITATIVE_PARTIAL_PROOF for every finalization failure.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G006",
+      "id": "P2-S6-R018",
+      "stage": 6,
+      "statement": "Preserve admission and financial rejection ownership without publishing a finalization head.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G007",
+      "id": "P2-S6-R019",
+      "stage": 6,
+      "statement": "Make exact retries byte-idempotent and recover historical retries after later commits.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py",
+        "src/ledgerguard_part2_stage6_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G007",
+      "id": "P2-S6-R020",
+      "stage": 6,
+      "statement": "Reject attempt identity reuse with different inputs and reject a stale expected head without authority change.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py",
+        "src/ledgerguard_part2_stage6_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G007",
+      "id": "P2-S6-R021",
+      "stage": 6,
+      "statement": "Recover deterministically after real process termination at every boundary before and after head publication.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py",
+        "src/ledgerguard_part2_stage6_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0022-atomic-proof-finalization-and-recovery.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G007",
+      "id": "P2-S6-R022",
+      "stage": 6,
+      "statement": "Allow exactly one winner among concurrent writers sharing an expected head and preserve a verifiable history.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py",
+        "src/ledgerguard_part2_stage6_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage6-proof-finalization.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G008",
+      "id": "P2-S6-R023",
+      "stage": 6,
+      "statement": "Persist the complete admitted transaction and settlement state needed for deterministic later-batch replay.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage6-proof-finalization.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G008",
+      "id": "P2-S6-R024",
+      "stage": 6,
+      "statement": "Reconstruct policy, manifest, source, transaction, settlement, allocation, and replay state only from authoritative history.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage6-proof-finalization.md",
+        "spec/part2-stage6-vectors-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G008",
+      "id": "P2-S6-R025",
+      "stage": 6,
+      "statement": "Reject policy reuse, run reuse, source conflict, grain contamination, or removal of prior reconciliation history.",
+      "validation": [
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part2-stage6-proof-finalization-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G009",
+      "id": "P2-S6-R026",
+      "stage": 6,
+      "statement": "Keep production independent from the reference oracle, Spark, Parquet engines, network, AWS, and infrastructure clients.",
+      "validation": [
+        "src/ledgerguard_part2_stage6_validation.py",
+        "tests/test_part2_stage6_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part2-stage6-proof-finalization-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G009",
+      "id": "P2-S6-R027",
+      "stage": 6,
+      "statement": "Expose a local command that admits, reconciles, finalizes, recovers exact retries, and reports truthful failure ownership.",
+      "validation": [
+        "src/ledgerguard_part2_stage6_validation.py",
+        "tests/test_part2_stage6_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part2-stage6-proof-finalization-v1.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G009",
+      "id": "P2-S6-R028",
+      "stage": 6,
+      "statement": "Perform no Spark execution, AWS call, workflow dispatch, infrastructure mutation, or managed persistence.",
+      "validation": [
+        "src/ledgerguard_part2_stage6_validation.py",
+        "tests/test_part2_stage6_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage6-coverage-v1.json",
+        "spec/part2-stage6-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G010",
+      "id": "P2-S6-R029",
+      "stage": 6,
+      "statement": "Pass full tests, 100 percent owned statement and branch coverage, all semantic mutations, deterministic wheel installation, and two clean Python 3.11.13 runs.",
+      "validation": [
+        "tools/run_part2_stage6.py",
+        "tools/build_part2_stage6_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage6-coverage-v1.json",
+        "spec/part2-stage6-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage6-local-evidence.json",
+        "part2-stage6-ci-evidence.json"
+      ],
+      "gate_id": "P2-S6-G010",
+      "id": "P2-S6-R030",
+      "stage": 6,
+      "statement": "Require exact-head draft-PR CI, immutable evidence inspection, squash merge, and independent main CI before Stage 6 promotion.",
+      "validation": [
+        "tools/run_part2_stage6.py",
+        "tools/build_part2_stage6_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage6-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G001",
+      "id": "P2-S7-R001",
+      "stage": 7,
+      "statement": "Freeze and byte-verify the complete externally accepted Stage 6 closure.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage6-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G001",
+      "id": "P2-S7-R002",
+      "stage": 7,
+      "statement": "Preserve all frozen v1, accepted v2, and Stage 1 through 6 authorities.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage7-spark-parity-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G002",
+      "id": "P2-S7-R003",
+      "stage": 7,
+      "statement": "Execute exact Python 3.11.13, Java 17, Spark 3.5.6, and Py4J 0.10.9.7.",
+      "validation": [
+        "tools/validate_part2_stage7_run.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "contracts/part2-stage7-spark-parity-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G002",
+      "id": "P2-S7-R004",
+      "stage": 7,
+      "statement": "Require equal clean driver and worker interpreters, ANSI mode, UTC, and local two-worker execution.",
+      "validation": [
+        "tools/validate_part2_stage7_run.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage7-spark-parity.md"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G003",
+      "id": "P2-S7-R005",
+      "stage": 7,
+      "statement": "Recompute transaction deltas and absolute differences with decimal(38,0) Spark expressions.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage7-spark-parity.md"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G003",
+      "id": "P2-S7-R006",
+      "stage": 7,
+      "statement": "Recompute all three settlement deltas and their maximum absolute difference in Spark.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-stage7-spark-parity.md"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G003",
+      "id": "P2-S7-R007",
+      "stage": 7,
+      "statement": "Match local ordering, counts, reason precedence, statuses, source identities, and exact logical values.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0023-spark-logical-parity-and-parquet.md"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G004",
+      "id": "P2-S7-R008",
+      "stage": 7,
+      "statement": "Write and independently read typed transaction and settlement Parquet datasets.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0023-spark-logical-parity-and-parquet.md"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G004",
+      "id": "P2-S7-R009",
+      "stage": 7,
+      "statement": "Compare canonical logical projections rather than nondeterministic physical Parquet bytes.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/adr/0023-spark-logical-parity-and-parquet.md"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G004",
+      "id": "P2-S7-R010",
+      "stage": 7,
+      "statement": "Prove deterministic logical digests across independent clean runs and partition order.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/part2-stage7-failure-matrix-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G005",
+      "id": "P2-S7-R011",
+      "stage": 7,
+      "statement": "Execute every one of the twenty-one frozen behavioral scenarios.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py",
+        "tests/test_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/part2-stage7-failure-matrix-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G005",
+      "id": "P2-S7-R012",
+      "stage": 7,
+      "statement": "Exercise every one of the twenty-one closed reason codes with exact ownership and outcome.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py",
+        "tests/test_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/failure-model-v2.md",
+        "spec/part2-stage7-failure-matrix-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G005",
+      "id": "P2-S7-R013",
+      "stage": 7,
+      "statement": "Fail closed on unknown reasons, missing scenarios, or undocumented outcome substitutions.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py",
+        "tests/test_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-critical-paths-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G006",
+      "id": "P2-S7-R014",
+      "stage": 7,
+      "statement": "Test matched, exception, late-data revision, policy revision, replay, conflict, crash, and concurrency critical paths.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py",
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-critical-paths-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G006",
+      "id": "P2-S7-R015",
+      "stage": 7,
+      "statement": "Prove Spark partition and input-order invariance without changing authority semantics.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py",
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-critical-paths-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G006",
+      "id": "P2-S7-R016",
+      "stage": 7,
+      "statement": "Retain deterministic Stage 6 authoritative replay behavior after Spark projection.",
+      "validation": [
+        "tests/test_part2_stage7_spark_parity.py",
+        "tests/test_part2_stage6_finalization.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part2-stage7-spark-parity-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G007",
+      "id": "P2-S7-R017",
+      "stage": 7,
+      "statement": "Do not call AWS, dispatch AWS workflows, mutate infrastructure, or claim managed persistence.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part2-stage7-spark-parity-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G007",
+      "id": "P2-S7-R018",
+      "stage": 7,
+      "statement": "Do not change frozen schemas or reinterpret accepted financial and finalization contracts.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "docs/part2-execution-contract.md",
+        "contracts/part2-stage7-spark-parity-v1.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json"
+      ],
+      "gate_id": "P2-S7-G007",
+      "id": "P2-S7-R019",
+      "stage": 7,
+      "statement": "Keep Spark projection non-authoritative; authority remains exclusively with Stage 6 finalization.",
+      "validation": [
+        "src/ledgerguard_part2_stage7_validation.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-coverage-v1.json",
+        "spec/part2-stage7-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json",
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G008",
+      "id": "P2-S7-R020",
+      "stage": 7,
+      "statement": "Pass formatting, lint, strict typing, complete tests, and owned 100 percent statement and branch coverage.",
+      "validation": [
+        "tools/run_part2_stage7.py",
+        "tools/build_part2_stage7_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-coverage-v1.json",
+        "spec/part2-stage7-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json",
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G008",
+      "id": "P2-S7-R021",
+      "stage": 7,
+      "statement": "Kill every registered Stage 7 semantic mutation with zero survivors.",
+      "validation": [
+        "tools/run_part2_stage7.py",
+        "tools/build_part2_stage7_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-coverage-v1.json",
+        "spec/part2-stage7-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json",
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G008",
+      "id": "P2-S7-R022",
+      "stage": 7,
+      "statement": "Build and install a reproducible wheel in two independent exact clean environments.",
+      "validation": [
+        "tools/run_part2_stage7.py",
+        "tools/build_part2_stage7_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-coverage-v1.json",
+        "spec/part2-stage7-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json",
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G008",
+      "id": "P2-S7-R023",
+      "stage": 7,
+      "statement": "Require exact-head draft pull-request CI and inspect immutable evidence before readiness.",
+      "validation": [
+        "tools/run_part2_stage7.py",
+        "tools/build_part2_stage7_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "EXTERNALLY_VERIFIED",
+      "authorities": [
+        "spec/part2-stage7-coverage-v1.json",
+        "spec/part2-stage7-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage7-local-evidence.json",
+        "part2-stage7-ci-evidence.json"
+      ],
+      "gate_id": "P2-S7-G008",
+      "id": "P2-S7-R024",
+      "stage": 7,
+      "statement": "Require manual squash merge and independent main CI before external Stage 7 promotion.",
+      "validation": [
+        "tools/run_part2_stage7.py",
+        "tools/build_part2_stage7_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json",
+        "part2-stage8-ci-evidence.json"
+      ],
+      "gate_id": "P2-S8-G001",
+      "id": "P2-S8-R001",
+      "stage": 8,
+      "statement": "Bind Stage 8 to the exact PR 16 head, squash commit, sole parent, tree, exact-head CI, immutable artifact, and post-merge main CI.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json",
+        "part2-stage8-ci-evidence.json"
+      ],
+      "gate_id": "P2-S8-G001",
+      "id": "P2-S8-R002",
+      "stage": 8,
+      "statement": "Prove the validated PR 16 head tree equals the Stage 7 squash-merge tree.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json",
+        "part2-stage8-ci-evidence.json"
+      ],
+      "gate_id": "P2-S8-G001",
+      "id": "P2-S8-R003",
+      "stage": 8,
+      "statement": "Byte-freeze Stage 7 authorities and validate the downloaded evidence envelope and checksums.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "contracts/part1-part2-handoff-v1.json",
+        "spec/part2-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G002",
+      "id": "P2-S8-R004",
+      "stage": 8,
+      "statement": "Verify the one-parent Part 1-to-Part 2 Stage 7 closure lineage without gaps or alternate parents.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "contracts/part1-part2-handoff-v1.json",
+        "spec/part2-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G002",
+      "id": "P2-S8-R005",
+      "stage": 8,
+      "statement": "Preserve every frozen v1 schema, accepted v2 schema, inherited authority, and historical closure record.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "contracts/part1-part2-handoff-v1.json",
+        "spec/part2-stage7-closure-freeze-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G002",
+      "id": "P2-S8-R006",
+      "stage": 8,
+      "statement": "Reproduce each accepted Part 2 stage from its exact immutable closure checkout.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-requirement-ledger-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G003",
+      "id": "P2-S8-R007",
+      "stage": 8,
+      "statement": "Normalize all historical Part 2 trace formats without editing their source authorities.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-requirement-ledger-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G003",
+      "id": "P2-S8-R008",
+      "stage": 8,
+      "statement": "Audit all 175 historical and 28 Stage 8 requirements with unique complete forward and reverse traceability.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-requirement-ledger-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G003",
+      "id": "P2-S8-R009",
+      "stage": 8,
+      "statement": "Reject missing, duplicate, unknown, unowned, or non-contiguous requirement identities.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-gate-adjudication-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G004",
+      "id": "P2-S8-R010",
+      "stage": 8,
+      "statement": "Audit all 59 historical and 10 Stage 8 gates with one deterministic adjudication each.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-gate-adjudication-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G004",
+      "id": "P2-S8-R011",
+      "stage": 8,
+      "statement": "Preserve implementation ownership while distinguishing later verification and promotion evidence.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-gate-adjudication-v1.json",
+        "spec/part2-stage1-authority-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G004",
+      "id": "P2-S8-R012",
+      "stage": 8,
+      "statement": "Require zero open, orphaned, duplicated, critical, or major gate findings.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-master-gate-adjudication-v1.json",
+        "contracts/project-completion-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json",
+        "part2-stage8-ci-evidence.json"
+      ],
+      "gate_id": "P2-S8-G005",
+      "id": "P2-S8-R013",
+      "stage": 8,
+      "statement": "Adjudicate exactly the six master Part 2 completion gates from their frozen owners and evidence.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-master-gate-adjudication-v1.json",
+        "contracts/project-completion-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json",
+        "part2-stage8-ci-evidence.json"
+      ],
+      "gate_id": "P2-S8-G005",
+      "id": "P2-S8-R014",
+      "stage": 8,
+      "statement": "Keep Stage 6 as failure-behavior owner while treating Stage 7 as exhaustive failure-matrix verification evidence.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-master-gate-adjudication-v1.json",
+        "contracts/project-completion-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json",
+        "part2-stage8-ci-evidence.json"
+      ],
+      "gate_id": "P2-S8-G005",
+      "id": "P2-S8-R015",
+      "stage": 8,
+      "statement": "Reject any master-gate promotion supported only by documentation, local assertion, or candidate evidence.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "requirements/part2-stage8-bootstrap.lock",
+        "requirements/part2-stage8-py311.lock"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G006",
+      "id": "P2-S8-R016",
+      "stage": 8,
+      "statement": "Run the complete Stage 8 audit twice in independent clean exact CPython 3.11.13 environments.",
+      "validation": [
+        "tools/run_part2_stage8.py",
+        "tools/validate_part2_stage8_run.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "requirements/part2-stage8-bootstrap.lock",
+        "requirements/part2-stage8-py311.lock"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G006",
+      "id": "P2-S8-R017",
+      "stage": 8,
+      "statement": "Re-run genuine Spark 3.5.6 and Py4J 0.10.9.7 validation under Java 17 with ANSI mode, UTC, and equal interpreters.",
+      "validation": [
+        "tools/run_part2_stage8.py",
+        "tools/validate_part2_stage8_run.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "requirements/part2-stage8-bootstrap.lock",
+        "requirements/part2-stage8-py311.lock"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G006",
+      "id": "P2-S8-R018",
+      "stage": 8,
+      "statement": "Build and install reproducible wheels and require equal deterministic audit payloads across clean runs.",
+      "validation": [
+        "tools/run_part2_stage8.py",
+        "tools/validate_part2_stage8_run.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-stage8-coverage-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G007",
+      "id": "P2-S8-R019",
+      "stage": 8,
+      "statement": "Require formatting, lint, strict typing, complete tests, zero skips, and 100 percent Stage 8 statement and branch coverage.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_evidence.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "spec/part2-stage8-coverage-v1.json"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G007",
+      "id": "P2-S8-R020",
+      "stage": 8,
+      "statement": "Kill every registered Stage 8 semantic mutation and preserve all 116 accepted Stage 2-to-Stage 7 mutation results.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_evidence.py",
+        "tests/test_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "README.md",
+        "PROJECT_STATUS.md",
+        "docs/part2-completion.md"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G008",
+      "id": "P2-S8-R021",
+      "stage": 8,
+      "statement": "Synchronize active README, project status, execution contract, and completion documentation without rewriting historical snapshots.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "README.md",
+        "PROJECT_STATUS.md",
+        "docs/part2-completion.md"
+      ],
+      "evidence": [
+        "part2-stage8-local-evidence.json"
+      ],
+      "gate_id": "P2-S8-G008",
+      "id": "P2-S8-R022",
+      "stage": 8,
+      "statement": "Keep AWS, managed reconciliation, performance, scale, production operation, and overall project completion explicitly unclaimed.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        ".github/workflows/ci.yml",
+        "spec/part2-stage8-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage8-ci-evidence.json",
+        "manifest.json"
+      ],
+      "gate_id": "P2-S8-G009",
+      "id": "P2-S8-R023",
+      "stage": 8,
+      "statement": "Keep automatic CI read-only with no OIDC token, AWS action, AWS API, workflow dispatch, or infrastructure mutation capability.",
+      "validation": [
+        "tools/build_part2_stage8_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        ".github/workflows/ci.yml",
+        "spec/part2-stage8-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage8-ci-evidence.json",
+        "manifest.json"
+      ],
+      "gate_id": "P2-S8-G009",
+      "id": "P2-S8-R024",
+      "stage": 8,
+      "statement": "Bind the immutable Stage 8 CI evidence envelope to the raw draft pull-request head and exact Stage 7 base.",
+      "validation": [
+        "tools/build_part2_stage8_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        ".github/workflows/ci.yml",
+        "spec/part2-stage8-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage8-ci-evidence.json",
+        "manifest.json"
+      ],
+      "gate_id": "P2-S8-G009",
+      "id": "P2-S8-R025",
+      "stage": 8,
+      "statement": "Inspect artifact identity, manifest, checksums, counts, versions, boundaries, and exact unsuperseded head before readiness.",
+      "validation": [
+        "tools/build_part2_stage8_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        ".github/workflows/ci.yml",
+        "spec/part2-stage8-ci-evidence-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage8-ci-evidence.json",
+        "manifest.json"
+      ],
+      "gate_id": "P2-S8-G009",
+      "id": "P2-S8-R026",
+      "stage": 8,
+      "statement": "Require manual squash merge, validated tree equality, and independent main CI for promotion.",
+      "validation": [
+        "tools/build_part2_stage8_ci_evidence.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "contracts/part2-stage8-promotion-v1.json",
+        "spec/part2-completion-authority-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage8-postmerge-closure-v1.json"
+      ],
+      "gate_id": "P2-S8-G010",
+      "id": "P2-S8-R027",
+      "stage": 8,
+      "statement": "Publish repository-resident post-merge evidence through a separate closure-attestation pull request.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    },
+    {
+      "adjudication": "VERIFIED_CANDIDATE",
+      "authorities": [
+        "contracts/part2-stage8-promotion-v1.json",
+        "spec/part2-completion-authority-v1.schema.json"
+      ],
+      "evidence": [
+        "part2-stage8-postmerge-closure-v1.json"
+      ],
+      "gate_id": "P2-S8-G010",
+      "id": "P2-S8-R028",
+      "stage": 8,
+      "statement": "Claim LOCAL_RECONCILIATION_VERIFIED only after both promotion and closure-attestation transactions satisfy exact-head, squash, and main-CI requirements.",
+      "validation": [
+        "src/ledgerguard_part2_stage8_validation.py"
+      ]
+    }
+  ],
+  "schema_version": "1.0",
+  "stage_counts": {
+    "1": 26,
+    "2": 15,
+    "3": 22,
+    "4": 23,
+    "5": 35,
+    "6": 30,
+    "7": 24,
+    "8": 28
+  },
+  "total_requirement_count": 203
+}

@@ -1,4 +1,4 @@
-.PHONY: quality foundation stage6 stage7
+.PHONY: quality foundation stage6 stage7 part2-stage8
 
 foundation:
 	ledgerguard-foundation
@@ -10,3 +10,6 @@ stage6: quality
 
 stage7:
 	ledgerguard-stage7
+
+part2-stage8:
+	ledgerguard-part2-stage8

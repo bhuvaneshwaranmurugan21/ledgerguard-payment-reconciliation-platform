@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part2-completion-authority:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","project","part","state","stage7_closure_sha256","promotion","closure_attestation","master_part2_completion_gates","claim_boundary","outcome"],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "project": {"const":"ledgerguard-payment-reconciliation-platform"},
+    "part": {"const":2},
+    "state": {"const":"LOCAL_RECONCILIATION_VERIFIED"},
+    "stage7_closure_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "promotion": {"$ref":"#/$defs/transaction"},
+    "closure_attestation": {"$ref":"#/$defs/publication"},
+    "master_part2_completion_gates": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["independent_oracle_verified","spark_parity_verified","financial_invariants_verified","failure_matrix_verified","deterministic_replay_verified","critical_paths_tested"],
+      "properties": {
+        "independent_oracle_verified":{"const":"EXTERNALLY_VERIFIED"},
+        "spark_parity_verified":{"const":"EXTERNALLY_VERIFIED"},
+        "financial_invariants_verified":{"const":"EXTERNALLY_VERIFIED"},
+        "failure_matrix_verified":{"const":"EXTERNALLY_VERIFIED"},
+        "deterministic_replay_verified":{"const":"EXTERNALLY_VERIFIED"},
+        "critical_paths_tested":{"const":"EXTERNALLY_VERIFIED"}
+      }
+    },
+    "claim_boundary": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["aws_execution","aws_workflow_dispatched","managed_persistence","managed_reconciliation","infrastructure_mutation","performance_verified","scale_verified","production_operation","project_complete"],
+      "properties": {
+        "aws_execution":{"const":false},
+        "aws_workflow_dispatched":{"const":false},
+        "managed_persistence":{"const":false},
+        "managed_reconciliation":{"const":false},
+        "infrastructure_mutation":{"const":false},
+        "performance_verified":{"const":false},
+        "scale_verified":{"const":false},
+        "production_operation":{"const":false},
+        "project_complete":{"const":false}
+      }
+    },
+    "outcome": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["requirements_pass","stage_gates_pass","master_gates_pass","critical_findings","major_findings","remaining_part2_work"],
+      "properties": {
+        "requirements_pass":{"const":203},
+        "stage_gates_pass":{"const":69},
+        "master_gates_pass":{"const":6},
+        "critical_findings":{"const":0},
+        "major_findings":{"const":0},
+        "remaining_part2_work":{"const":0}
+      }
+    }
+  },
+  "$defs": {
+    "transaction": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["pull_request","validated_head","validated_tree","squash_merge_commit","squash_merge_parent","parent_count","exact_head_ci_run","exact_head_ci_job","postmerge_main_ci_run","postmerge_main_ci_job","artifact_id","artifact_name","artifact_zip_sha256","manifest_sha256","evidence_sha256","deterministic_payload_sha256","wheel_sha256","conclusion"],
+      "properties": {
+        "pull_request":{"type":"integer","minimum":1},
+        "validated_head":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+        "validated_tree":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+        "squash_merge_commit":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+        "squash_merge_parent":{"type":"string","pattern":"^[0-9a-f]{40}$"},
+        "parent_count":{"const":1},
+        "exact_head_ci_run":{"type":"integer","minimum":1},
+        "exact_head_ci_job":{"type":"integer","minimum":1},
+        "postmerge_main_ci_run":{"type":"integer","minimum":1},
+        "postmerge_main_ci_job":{"type":"integer","minimum":1},
+        "artifact_id":{"type":"integer","minimum":1},
+        "artifact_name":{"type":"string","minLength":1},
+        "artifact_zip_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "manifest_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "evidence_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "deterministic_payload_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "wheel_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "conclusion":{"const":"SUCCESS"}
+      }
+    },
+    "publication": {
+      "type":"object",
+      "additionalProperties":false,
+      "required":["method","promotion_base_required","repository_record","exact_head_ci_required","squash_merge_required","independent_main_ci_required"],
+      "properties": {
+        "method":{"const":"SEPARATE_CLOSURE_ATTESTATION_PULL_REQUEST"},
+        "promotion_base_required":{"const":true},
+        "repository_record":{"const":"spec/part2-completion-authority-v1.json"},
+        "exact_head_ci_required":{"const":true},
+        "squash_merge_required":{"const":true},
+        "independent_main_ci_required":{"const":true}
+      }
+    }
+  }
+}

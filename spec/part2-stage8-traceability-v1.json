@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 8,
+  "traceability": [
+    {"gate_id":"P2-S8-G001","requirement_ids":["P2-S8-R001","P2-S8-R002","P2-S8-R003"],"authorities":["spec/part2-stage7-closure-freeze-v1.json"],"validation":["src/ledgerguard_part2_stage8_validation.py","tests/test_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json","part2-stage8-ci-evidence.json"]},
+    {"gate_id":"P2-S8-G002","requirement_ids":["P2-S8-R004","P2-S8-R005","P2-S8-R006"],"authorities":["contracts/part1-part2-handoff-v1.json","spec/part2-stage7-closure-freeze-v1.json"],"validation":["src/ledgerguard_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json"]},
+    {"gate_id":"P2-S8-G003","requirement_ids":["P2-S8-R007","P2-S8-R008","P2-S8-R009"],"authorities":["spec/part2-requirement-ledger-v1.json"],"validation":["src/ledgerguard_part2_stage8_validation.py","tests/test_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json"]},
+    {"gate_id":"P2-S8-G004","requirement_ids":["P2-S8-R010","P2-S8-R011","P2-S8-R012"],"authorities":["spec/part2-gate-adjudication-v1.json","spec/part2-stage1-authority-v1.json"],"validation":["src/ledgerguard_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json"]},
+    {"gate_id":"P2-S8-G005","requirement_ids":["P2-S8-R013","P2-S8-R014","P2-S8-R015"],"authorities":["spec/part2-master-gate-adjudication-v1.json","contracts/project-completion-v1.json"],"validation":["src/ledgerguard_part2_stage8_validation.py","tests/test_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json","part2-stage8-ci-evidence.json"]},
+    {"gate_id":"P2-S8-G006","requirement_ids":["P2-S8-R016","P2-S8-R017","P2-S8-R018"],"authorities":["requirements/part2-stage8-bootstrap.lock","requirements/part2-stage8-py311.lock"],"validation":["tools/run_part2_stage8.py","tools/validate_part2_stage8_run.py"],"evidence":["part2-stage8-local-evidence.json"]},
+    {"gate_id":"P2-S8-G007","requirement_ids":["P2-S8-R019","P2-S8-R020"],"authorities":["spec/part2-stage8-coverage-v1.json"],"validation":["src/ledgerguard_part2_stage8_evidence.py","tests/test_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json"]},
+    {"gate_id":"P2-S8-G008","requirement_ids":["P2-S8-R021","P2-S8-R022"],"authorities":["README.md","PROJECT_STATUS.md","docs/part2-completion.md"],"validation":["src/ledgerguard_part2_stage8_validation.py"],"evidence":["part2-stage8-local-evidence.json"]},
+    {"gate_id":"P2-S8-G009","requirement_ids":["P2-S8-R023","P2-S8-R024","P2-S8-R025","P2-S8-R026"],"authorities":[".github/workflows/ci.yml","spec/part2-stage8-ci-evidence-v1.schema.json"],"validation":["tools/build_part2_stage8_ci_evidence.py"],"evidence":["part2-stage8-ci-evidence.json","manifest.json"]},
+    {"gate_id":"P2-S8-G010","requirement_ids":["P2-S8-R027","P2-S8-R028"],"authorities":["contracts/part2-stage8-promotion-v1.json","spec/part2-completion-authority-v1.schema.json"],"validation":["src/ledgerguard_part2_stage8_validation.py"],"evidence":["part2-stage8-postmerge-closure-v1.json"]}
+  ]
+}

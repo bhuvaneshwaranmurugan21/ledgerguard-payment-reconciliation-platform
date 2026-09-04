@@ -180,3 +180,26 @@ failure reason codes, and matched, exception, late-data, policy-change, replay, 
 concurrency critical paths to executable tests. Physical Parquet bytes are not claimed deterministic;
 logical rows and their canonical digest are. Spark output remains non-authoritative until Stage 6
 finalization. Stage 7 performs no AWS or infrastructure operation and does not close Part 2.
+
+## Stage 8 promotion and closure boundary
+
+PR #16 completed Stage 7 external closure. Stage 8 adds no reconciliation behavior. It freezes the
+exact Stage 7 PR head, squash commit, sole parent, tree, exact-head CI, independent main CI, and
+immutable artifact evidence. It then normalizes and re-audits every Stage 1 through 8 requirement
+and gate, preserves the original owner of each master completion gate, and publishes deterministic
+closure evidence.
+
+The promotion candidate remains `PART2_IN_PROGRESS`. It may record the six master gates as
+externally verified because their owning implementation and verification stages have completed,
+but it may not claim the final `LOCAL_RECONCILIATION_VERIFIED` state before its own promotion
+protocol succeeds.
+
+Terminal closure uses two pull requests. The first validates and squash-promotes the audited
+implementation tree. After independent post-merge main CI passes, the second publishes the exact
+repository-resident closure record and active final status. Both transactions require exact-head
+CI, a one-parent squash merge, validated tree equality where applicable, and independent main CI.
+This prevents either a pre-merge claim or an infinite self-attestation cycle.
+
+Stage 8 performs no AWS call, workflow dispatch, infrastructure mutation, managed persistence,
+managed reconciliation, performance or scale execution, or production operation. Those claims
+remain owned by later project parts.
