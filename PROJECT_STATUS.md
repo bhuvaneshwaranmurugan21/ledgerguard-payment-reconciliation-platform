@@ -4,16 +4,16 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 6 — Atomic proof finalization and deterministic recovery
+- Stage: 7 — Spark parity, failure matrix, and critical paths
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE6_PROOF_FINALIZATION_VERIFIED_CANDIDATE`
-- Highest new claim: `LOCAL_VERIFIED` proof-finalization candidate pending external closure
+- Stage state: `PART2_STAGE7_SPARK_PARITY_VERIFIED_CANDIDATE`
+- Highest new claim: genuine local Spark parity candidate pending external closure
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
 - Settlement reconciliation: `EXTERNALLY_VERIFIED`
-- Atomic proof finalization: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
-- Spark reconciliation parity: `UNCLAIMED`
+- Atomic proof finalization: `EXTERNALLY_VERIFIED`
+- Spark reconciliation parity: `VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
 - AWS execution: false
 - AWS infrastructure mutated: false
 
@@ -132,4 +132,12 @@ deterministically across real process termination and concurrent writers. Author
 also preserves the admission and reconciliation states required for later-batch replay. Stage 6
 does not execute Spark, write managed Parquet, access AWS, dispatch workflows, mutate
 infrastructure, or close Part 2. It remains a local candidate until exact-head draft-PR CI and
-immutable evidence inspection complete.
+immutable evidence inspection complete. That historical candidate boundary was subsequently closed
+by PR #15 as recorded below.
+
+PR #15 passed exact-head CI, was squash-merged as
+`376e686813e6271e2d6787467a5500ba0827dfcb`, and passed independent post-merge `main` CI run
+`33850525300`; atomic proof finalization is therefore externally verified. Stage 7 adds genuine
+Spark 3.5.6 recomputation and Parquet logical readback for both financial grains, binds the complete
+failure taxonomy to executable evidence, and exercises the accepted critical paths. It does not
+call AWS, transfer authority to Spark, claim managed persistence, or close Part 2.

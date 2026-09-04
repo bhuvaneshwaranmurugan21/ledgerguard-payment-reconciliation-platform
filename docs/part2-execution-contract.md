@@ -166,3 +166,17 @@ This is a local canonical JSON store only. Stage 6 does not execute Spark, estab
 call AWS, dispatch workflows, mutate infrastructure, or claim managed persistence. Exact-head CI,
 immutable evidence, squash merge, and independent post-merge `main` CI remain required for external
 closure.
+
+## Stage 7 Spark parity and critical-path boundary
+
+PR #15 completed Stage 6 external closure. Stage 7 runs the accepted transaction and settlement
+candidate model through genuine Spark 3.5.6 expressions under Java 17 and CPython 3.11.13. Spark
+recomputes both grains' deltas and differences with `decimal(38,0)`, applies semantic reason
+precedence, writes typed Parquet outside the repository, reads it independently, and compares the
+canonical logical projection with the local engine.
+
+The validation matrix binds all twenty-one frozen behavioral scenarios, all twenty-one closed
+failure reason codes, and matched, exception, late-data, policy-change, replay, conflict, crash, and
+concurrency critical paths to executable tests. Physical Parquet bytes are not claimed deterministic;
+logical rows and their canonical digest are. Spark output remains non-authoritative until Stage 6
+finalization. Stage 7 performs no AWS or infrastructure operation and does not close Part 2.

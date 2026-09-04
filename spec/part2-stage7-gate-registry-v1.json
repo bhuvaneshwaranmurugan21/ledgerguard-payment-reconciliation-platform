@@ -1,0 +1,10 @@
+{"schema_version":"1.0","project":"ledgerguard-payment-reconciliation-platform","part":2,"stage":7,"gates":[
+  {"gate_id":"P2-S7-G001","name":"verified_stage6_entry"},
+  {"gate_id":"P2-S7-G002","name":"exact_spark_runtime"},
+  {"gate_id":"P2-S7-G003","name":"transaction_and_settlement_parity"},
+  {"gate_id":"P2-S7-G004","name":"parquet_logical_projection"},
+  {"gate_id":"P2-S7-G005","name":"complete_failure_matrix"},
+  {"gate_id":"P2-S7-G006","name":"critical_paths_and_replay"},
+  {"gate_id":"P2-S7-G007","name":"scope_and_claim_integrity"},
+  {"gate_id":"P2-S7-G008","name":"reproducible_external_evidence"}
+]}

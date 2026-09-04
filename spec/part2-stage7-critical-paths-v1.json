@@ -1,0 +1,10 @@
+{"schema_version":"1.0","critical_paths":[
+  {"id":"MATCHED","test":"test_p2s6_matched_proof_is_atomic_canonical_and_has_no_case"},
+  {"id":"FINANCIAL_EXCEPTION","test":"test_p2s6_exception_opens_case_and_late_match_appends_resolution"},
+  {"id":"LATE_DATA_REVISION","test":"test_p2s6_exception_opens_case_and_late_match_appends_resolution"},
+  {"id":"POLICY_REVISION","test":"test_p2s6_exception_successor_and_changed_policy_append_revisions"},
+  {"id":"EXACT_REPLAY","test":"test_p2s6_exact_retry_is_idempotent_and_historical_retry_recovers"},
+  {"id":"IDENTITY_CONFLICT","test":"test_p2s6_cross_grain_source_conflict_cannot_become_authoritative"},
+  {"id":"CRASH_RECOVERY","test":"test_p2s6_real_process_crash_recovers_deterministically"},
+  {"id":"CONCURRENT_WRITERS","test":"test_p2s6_competing_processes_produce_exactly_one_winner"}
+]}
