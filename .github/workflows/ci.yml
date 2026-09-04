@@ -25,6 +25,7 @@ jobs:
       PART2_STAGE3_CLOSURE_SHA: 47e96d3f4846d55568c0b137fb3e4d41ead0eef1
       PART2_STAGE4_CLOSURE_SHA: c423ae7e6e92d37ffa8a796b4efacbf9ba6692f1
       PART2_STAGE5_CLOSURE_SHA: 89373adf968ff7071693f8cce5d12901fd9b1e69
+      PART2_STAGE6_CLOSURE_SHA: 376e686813e6271e2d6787467a5500ba0827dfcb
     steps:
       - name: Check out the raw event head
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -51,6 +52,8 @@ jobs:
             requirements/part2-stage5-py311.lock
             requirements/part2-stage6-bootstrap.lock
             requirements/part2-stage6-py311.lock
+            requirements/part2-stage7-bootstrap.lock
+            requirements/part2-stage7-py311.lock
       - name: Install exact Java
         uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c
         with:
@@ -302,7 +305,31 @@ jobs:
           path: ${{ runner.temp }}/ledgerguard-part2-stage5-artifact
           if-no-files-found: error
           retention-days: 90
+      - name: Prove and materialize immutable Part 2 Stage 6 closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git show -s --format=%T "$PART2_STAGE6_CLOSURE_SHA")" = "997bd12abfef144212cb6f774cdfff086d31a0ff"
+          test "$(git show -s --format=%P "$PART2_STAGE6_CLOSURE_SHA")" = "89373adf968ff7071693f8cce5d12901fd9b1e69"
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          root = Path.cwd()
+          closure = os.environ["PART2_STAGE6_CLOSURE_SHA"]
+          freeze = json.loads((root / "spec/part2-stage6-closure-freeze-v1.json").read_text())
+          assert freeze["squash_merge_commit"] == closure
+          for relative, expected in freeze["protected_authorities"].items():
+              frozen = subprocess.check_output(["git", "show", f"{closure}:{relative}"])
+              assert hashlib.sha256(frozen).hexdigest() == expected
+              assert (root / relative).read_bytes() == frozen
+          PY
+          git worktree add --detach "$RUNNER_TEMP/ledgerguard-part2-stage6-closure" "$PART2_STAGE6_CLOSURE_SHA"
       - name: Run Part 2 Stage 6 validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part2-stage6-closure
         run: >-
           python tools/run_part2_stage6.py
           --clean-runs 2
@@ -320,5 +347,25 @@ jobs:
         with:
           name: ledgerguard-part2-stage6-${{ github.event.pull_request.head.sha }}
           path: ${{ runner.temp }}/ledgerguard-part2-stage6-artifact
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run Part 2 Stage 7 validation twice
+        run: >-
+          python tools/run_part2_stage7.py
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-part2-stage7"
+      - name: Build trusted Stage 7 CI evidence envelope
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage7-spark-parity-critical-paths'
+        run: >-
+          "$RUNNER_TEMP/ledgerguard-part2-stage7/run-1/venv/bin/python"
+          tools/build_part2_stage7_ci_evidence.py
+          --local-evidence "$RUNNER_TEMP/ledgerguard-part2-stage7/part2-stage7-local-evidence.json"
+          --output-directory "$RUNNER_TEMP/ledgerguard-part2-stage7-artifact"
+      - name: Upload immutable Stage 7 evidence
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage7-spark-parity-critical-paths'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part2-stage7-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part2-stage7-artifact
           if-no-files-found: error
           retention-days: 90

@@ -107,6 +107,9 @@ adds the [settlement gap audit](docs/part2-stage5-gap-audit.md),
 Stage 6 adds the [proof-finalization gap audit](docs/part2-stage6-gap-audit.md),
 [finalization contract](docs/part2-stage6-proof-finalization.md), and
 [atomic recovery decision](docs/adr/0022-atomic-proof-finalization-and-recovery.md).
+Stage 7 adds the [Spark parity gap audit](docs/part2-stage7-gap-audit.md),
+[Spark parity contract](docs/part2-stage7-spark-parity.md), and
+[logical Parquet decision](docs/adr/0023-spark-logical-parity-and-parquet.md).
 
 ## Foundation validation
 
@@ -121,6 +124,7 @@ ledgerguard-part2-stage3
 ledgerguard-part2-stage4
 ledgerguard-part2-stage5
 ledgerguard-part2-stage6
+ledgerguard-part2-stage7
 ruff format --check .
 ruff check .
 mypy src
@@ -133,9 +137,9 @@ The planned managed validation uses synthetic data in one AWS region. It will no
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
 
 Parts 1 and 2 perform no AWS execution and mutate no AWS infrastructure. Part 1's highest claim is
-`LOCAL_VERIFIED`; Part 2 Stage 6 adds only local atomic proof and case finalization with deterministic
-recovery. Spark parity, managed reconciliation, performance, scale, and production operation remain
-unclaimed.
+`LOCAL_VERIFIED`; Part 2 Stage 7 adds genuine local Spark/Parquet logical parity, the complete failure
+matrix, and critical-path validation. Managed reconciliation, performance, scale, production
+operation, and final Part 2 closure remain unclaimed.
 
 ## License
 

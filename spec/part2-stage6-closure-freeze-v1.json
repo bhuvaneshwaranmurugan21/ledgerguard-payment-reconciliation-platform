@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "state": "PART2_STAGE6_PROOF_FINALIZATION_VERIFIED",
+  "pull_request": 15,
+  "pull_request_head": "012752daf09a1249997f626276bcb9b5bd74d468",
+  "squash_merge_commit": "376e686813e6271e2d6787467a5500ba0827dfcb",
+  "squash_merge_tree": "997bd12abfef144212cb6f774cdfff086d31a0ff",
+  "squash_merge_parent": "89373adf968ff7071693f8cce5d12901fd9b1e69",
+  "exact_head_ci_run": 33848115905,
+  "postmerge_main_ci_run": 33850525300,
+  "ci_artifact_id": 9927915612,
+  "ci_artifact_zip_sha256": "30924b4583641bb5bcdebeecd57746e8a03f5ac1abc60cb03b833d1670e9c7d3",
+  "ci_evidence_sha256": "f9b23350b4459237deb3aa472e53e950539bb7a755bee1e3e110ccc6d48709f2",
+  "ci_test_count": 498,
+  "coverage_statements": 1847,
+  "coverage_branches": 754,
+  "coverage_percent": 100.0,
+  "mutation_checks": 24,
+  "mutation_survivors": 0,
+  "protected_authorities": {
+    "contracts/part2-stage6-proof-finalization-v1.json": "66d10ec262e3b1612f2cadd9c1a7b17302f1900003e4ad841f12d74601eef65c",
+    "docs/adr/0022-atomic-proof-finalization-and-recovery.md": "40c21331204a158a5e6c5a0aaa43f6e3f468f2b59cd1e213f8b6acd4a7b1548f",
+    "docs/part2-stage6-gap-audit.md": "a43947e55c8016cfe5ec071b2996c010b3430acb14f560695a6051cf3996eefb",
+    "docs/part2-stage6-proof-finalization.md": "dea50f4ee6ca006e3a79301e180c0e0a565a875144611061891253e5f0fb4cbd",
+    "spec/part2-stage6-ci-evidence-v1.schema.json": "abd1495ffc27f54067bbf0f502354df3491a27ba520e3fb1bdf13b595fcb1229",
+    "spec/part2-stage6-coverage-v1.json": "78bd724d5102f2fb5532a988912f275b1783bf1e445d4214f3799ca6efb80cd0",
+    "spec/part2-stage6-gate-registry-v1.json": "b881487d7de878bc1271bdcea41cb4583f96a984234ea52fd3f985d2a8578e0d",
+    "spec/part2-stage6-requirements-v1.json": "88d19797c019023c46bc792176ef4b21ccc408a959fb9943351631ed2505ae7d",
+    "spec/part2-stage6-traceability-v1.json": "6c02525740a14ea3cbd6595523d55b8d747da06c6eef647f3ad2de021644f57b",
+    "spec/part2-stage6-vectors-v1.json": "ef9cba97e6ccdc18de359aea25b9e674c1b5b19dbe46845ca5ce9227872df118"
+  }
+}
