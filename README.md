@@ -31,9 +31,9 @@ Stage 1 was then closed by PR #10. PR #11 closed Stage 2, externally verifying t
 packaged, side-effect-free reference oracle. Stage 3 added production admission and normalization;
 PR #12 passed exact-head CI, was squash-merged, and passed independent post-merge `main` CI. PR #13
 then closed Stage 4 transaction reconciliation with exact-head CI, a squash merge, and independent
-post-merge `main` CI. Stage 5 is now the local verified
-settlement-reconciliation candidate; external closure is still pending. The overall project remains
-`PROJECT_IN_PROGRESS`.
+post-merge `main` CI. PR #14 closed Stage 5 settlement reconciliation. Stage 6 is now the local
+verified proof-finalization candidate; external closure is still pending. The overall project
+remains `PROJECT_IN_PROGRESS`.
 
 The immutable Stage 1 status statement was: Part 2
 is now `PART2_IN_PROGRESS`. No reconciliation
@@ -58,7 +58,8 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Historical `v1` contracts | `SUPERSEDED_BEFORE_RUNTIME_USE` and byte-preserved |
 | Production admission and normalization | `EXTERNALLY_VERIFIED` after PR #12 squash and independent main CI |
 | Transaction-grain reconciliation | `EXTERNALLY_VERIFIED` after PR #13 squash and independent main CI |
-| Settlement-grain reconciliation | `LOCAL_VERIFIED` candidate pending exact-head and post-merge closure |
+| Settlement-grain reconciliation | `EXTERNALLY_VERIFIED` after PR #14 squash and independent main CI |
+| Atomic proof and case finalization | `LOCAL_VERIFIED` candidate pending exact-head and post-merge closure |
 | Independent reference oracle | `EXTERNALLY_VERIFIED` after PR #11 squash and independent main CI |
 | Spark reconciliation parity | `UNCLAIMED` |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
@@ -103,6 +104,9 @@ adds the [transaction gap audit](docs/part2-stage4-gap-audit.md),
 adds the [settlement gap audit](docs/part2-stage5-gap-audit.md),
 [settlement contract](docs/part2-stage5-settlement-reconciliation.md), and
 [bank-allocation decision](docs/adr/0021-settlement-reconciliation-and-exact-bank-allocation.md).
+Stage 6 adds the [proof-finalization gap audit](docs/part2-stage6-gap-audit.md),
+[finalization contract](docs/part2-stage6-proof-finalization.md), and
+[atomic recovery decision](docs/adr/0022-atomic-proof-finalization-and-recovery.md).
 
 ## Foundation validation
 
@@ -116,6 +120,7 @@ ledgerguard-part2-stage2
 ledgerguard-part2-stage3
 ledgerguard-part2-stage4
 ledgerguard-part2-stage5
+ledgerguard-part2-stage6
 ruff format --check .
 ruff check .
 mypy src
@@ -128,9 +133,9 @@ The planned managed validation uses synthetic data in one AWS region. It will no
 financial custody, PCI certification, multi-region recovery, or sustained production operation.
 
 Parts 1 and 2 perform no AWS execution and mutate no AWS infrastructure. Part 1's highest claim is
-`LOCAL_VERIFIED`; Part 2 Stage 5 adds only local settlement-grain candidate calculation and exact
-bank allocation. Proof finalization, managed reconciliation, performance, scale, and production
-operation remain unclaimed.
+`LOCAL_VERIFIED`; Part 2 Stage 6 adds only local atomic proof and case finalization with deterministic
+recovery. Spark parity, managed reconciliation, performance, scale, and production operation remain
+unclaimed.
 
 ## License
 

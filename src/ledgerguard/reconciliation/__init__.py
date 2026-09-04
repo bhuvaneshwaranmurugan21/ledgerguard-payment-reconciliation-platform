@@ -17,8 +17,17 @@ from .canonical import (
 )
 from .contracts import ContractRegistry
 from .errors import AdmissionRejected
+from .finalization import (
+    CaseReference,
+    FinalizationReceipt,
+    FinalizationRejected,
+    FinalizationStore,
+    ProofReference,
+)
 from .identity import (
+    case_id,
     normalize_bank_reference,
+    proof_id,
     settlement_key,
     source_identity,
     transaction_key,
@@ -45,7 +54,12 @@ __all__ = [
     "AdmittedBatch",
     "AdmittedRecord",
     "BankAllocation",
+    "CaseReference",
     "ContractRegistry",
+    "FinalizationReceipt",
+    "FinalizationRejected",
+    "FinalizationStore",
+    "ProofReference",
     "SettlementCandidate",
     "SettlementKey",
     "SettlementReconciliationBatch",
@@ -59,6 +73,7 @@ __all__ = [
     "canonical_json_bytes",
     "canonical_sha256",
     "canonical_timestamp",
+    "case_id",
     "checked_abs",
     "checked_add",
     "checked_i64",
@@ -66,6 +81,7 @@ __all__ = [
     "load_local_object_bytes",
     "normalize_bank_reference",
     "parse_strict_json",
+    "proof_id",
     "reconcile_settlements",
     "reconcile_transactions",
     "settlement_key",

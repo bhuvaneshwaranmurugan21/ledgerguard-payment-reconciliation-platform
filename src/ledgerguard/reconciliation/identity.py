@@ -54,6 +54,26 @@ def settlement_key(components: Mapping[str, Any]) -> str:
     return _derived_id("stl:", components)
 
 
+def proof_id(components: Mapping[str, Any]) -> str:
+    expected = {
+        "grain",
+        "reconciliation_key",
+        "revision",
+        "source_manifest_sha256",
+        "policy_sha256",
+    }
+    if set(components) != expected:
+        raise AdmissionRejected("SOURCE_IDENTITY_MISMATCH", "proof identity components")
+    return _derived_id("prf:", components)
+
+
+def case_id(components: Mapping[str, Any]) -> str:
+    expected = {"grain", "reconciliation_key", "initial_exception_proof_id"}
+    if set(components) != expected:
+        raise AdmissionRejected("SOURCE_IDENTITY_MISMATCH", "case identity components")
+    return _derived_id("case:", components)
+
+
 def normalize_bank_reference(value: object) -> str | None:
     if value is None:
         return None

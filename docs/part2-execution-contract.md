@@ -144,3 +144,25 @@ deterministic, and non-authoritative. Stage 5 does not persist or finalize proof
 execute Spark, access AWS, or mutate infrastructure. Promotion uses the same exact Python 3.11.13,
 hash-locked, 100% statement-and-branch coverage, zero-survivor mutation, two-clean-run, exact-head
 draft-PR, immutable-artifact, squash-merge, and post-merge-main evidence standard.
+
+## Stage 6 proof-finalization boundary
+
+PR #14 completed the Stage 5 external closure. Stage 6 promotes complete transaction and settlement
+candidate batches through one local conditional authority pointer. Canonical requests, proofs, case
+revisions, and commits are immutable and content-addressed. Each authoritative read revalidates
+canonical encoding, digests, schemas, inventories, and predecessor chains.
+
+Proof revisions are append-only. Exceptions open or continue a stable case; a later match appends a
+`RESOLVED_BY_LATE_DATA` case revision. Exact and historical retries return the original receipt,
+attempt reuse with changed inputs fails, and concurrent writers sharing one expected head yield one
+winner. Real process termination at each durable boundary must recover without partial authority.
+
+The authoritative request also retains the complete admitted transaction and settlement states
+needed for deterministic cross-batch replay. No state is trusted from unreachable files. Storage,
+integrity, conflict, and recovery failures are execution-owned and cannot issue a partial financial
+proof.
+
+This is a local canonical JSON store only. Stage 6 does not execute Spark, establish Parquet parity,
+call AWS, dispatch workflows, mutate infrastructure, or claim managed persistence. Exact-head CI,
+immutable evidence, squash merge, and independent post-merge `main` CI remain required for external
+closure.
