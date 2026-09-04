@@ -16,7 +16,7 @@ concurrency:
 jobs:
   foundation:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       PART1_CLOSURE_SHA: 3ef17666e3fe3bc655ba1c8733beb3cb00acdbec
@@ -26,6 +26,7 @@ jobs:
       PART2_STAGE4_CLOSURE_SHA: c423ae7e6e92d37ffa8a796b4efacbf9ba6692f1
       PART2_STAGE5_CLOSURE_SHA: 89373adf968ff7071693f8cce5d12901fd9b1e69
       PART2_STAGE6_CLOSURE_SHA: 376e686813e6271e2d6787467a5500ba0827dfcb
+      PART2_STAGE7_CLOSURE_SHA: 8fac3795ed0dac5284dd3b1595bd8fc9f6dc7344
     steps:
       - name: Check out the raw event head
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -54,6 +55,8 @@ jobs:
             requirements/part2-stage6-py311.lock
             requirements/part2-stage7-bootstrap.lock
             requirements/part2-stage7-py311.lock
+            requirements/part2-stage8-bootstrap.lock
+            requirements/part2-stage8-py311.lock
       - name: Install exact Java
         uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c
         with:
@@ -349,7 +352,31 @@ jobs:
           path: ${{ runner.temp }}/ledgerguard-part2-stage6-artifact
           if-no-files-found: error
           retention-days: 90
+      - name: Prove and materialize immutable Part 2 Stage 7 closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git show -s --format=%T "$PART2_STAGE7_CLOSURE_SHA")" = "6ae471cd73a1255df99edd953b8d0e0850790362"
+          test "$(git show -s --format=%P "$PART2_STAGE7_CLOSURE_SHA")" = "376e686813e6271e2d6787467a5500ba0827dfcb"
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          root = Path.cwd()
+          closure = os.environ["PART2_STAGE7_CLOSURE_SHA"]
+          freeze = json.loads((root / "spec/part2-stage7-closure-freeze-v1.json").read_text())
+          assert freeze["squash_merge_commit"] == closure
+          for relative, expected in freeze["protected_authorities"].items():
+              frozen = subprocess.check_output(["git", "show", f"{closure}:{relative}"])
+              assert hashlib.sha256(frozen).hexdigest() == expected
+              assert (root / relative).read_bytes() == frozen
+          PY
+          git worktree add --detach "$RUNNER_TEMP/ledgerguard-part2-stage7-closure" "$PART2_STAGE7_CLOSURE_SHA"
       - name: Run Part 2 Stage 7 validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part2-stage7-closure
         run: >-
           python tools/run_part2_stage7.py
           --clean-runs 2
@@ -367,5 +394,25 @@ jobs:
         with:
           name: ledgerguard-part2-stage7-${{ github.event.pull_request.head.sha }}
           path: ${{ runner.temp }}/ledgerguard-part2-stage7-artifact
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run Part 2 Stage 8 validation twice
+        run: >-
+          python tools/run_part2_stage8.py
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-part2-stage8"
+      - name: Build trusted Stage 8 CI evidence envelope
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage8-promotion-and-closure'
+        run: >-
+          "$RUNNER_TEMP/ledgerguard-part2-stage8/run-1/venv/bin/python"
+          tools/build_part2_stage8_ci_evidence.py
+          --local-evidence "$RUNNER_TEMP/ledgerguard-part2-stage8/part2-stage8-local-evidence.json"
+          --output-directory "$RUNNER_TEMP/ledgerguard-part2-stage8-artifact"
+      - name: Upload immutable Stage 8 evidence
+        if: github.event_name == 'pull_request' && github.head_ref == 'part2-stage8-promotion-and-closure'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part2-stage8-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part2-stage8-artifact
           if-no-files-found: error
           retention-days: 90

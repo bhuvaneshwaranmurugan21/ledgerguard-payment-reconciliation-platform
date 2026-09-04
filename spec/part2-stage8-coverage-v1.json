@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "production_surface": "ledgerguard_part2_stage8_validation",
+  "minimum_statement_percent": 100.0,
+  "minimum_branch_percent": 100.0,
+  "historical_semantic_mutation_checks": 116,
+  "mutation_classes": [
+    "ACCEPT_STAGE7_COMMIT_DRIFT",
+    "ACCEPT_STAGE7_TREE_DRIFT",
+    "ACCEPT_NON_SQUASH_STAGE7",
+    "ACCEPT_STAGE7_ARTIFACT_DRIFT",
+    "ALLOW_MISSING_REQUIREMENT",
+    "ALLOW_DUPLICATE_REQUIREMENT",
+    "ALLOW_MISSING_GATE",
+    "PROMOTE_UNSUPPORTED_MASTER_GATE",
+    "ALLOW_FAILURE_OWNER_REASSIGNMENT",
+    "CLAIM_PART2_COMPLETE_PREMERGE",
+    "CLAIM_AWS_EXECUTION",
+    "ALLOW_STALE_ACTIVE_DOCUMENTATION",
+    "WEAKEN_COVERAGE_THRESHOLD",
+    "DROP_TERMINAL_PUBLICATION"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 8,
+  "state": "PART2_IN_PROGRESS",
+  "stage_state": "PART2_STAGE8_PROMOTION_VERIFIED_CANDIDATE",
+  "required_final_state": "LOCAL_RECONCILIATION_VERIFIED",
+  "entry_baseline": {
+    "stage7_pull_request": 16,
+    "stage7_pull_request_head": "e008f890c895f7fedc782bde3da7c293cfa35cbf",
+    "stage7_main_commit": "8fac3795ed0dac5284dd3b1595bd8fc9f6dc7344",
+    "stage7_main_tree": "6ae471cd73a1255df99edd953b8d0e0850790362",
+    "stage7_main_parent": "376e686813e6271e2d6787467a5500ba0827dfcb",
+    "stage7_exact_head_ci_run": 33857511781,
+    "stage7_postmerge_main_ci_run": 33863399041,
+    "stage7_ci_artifact_id": 9931633631
+  },
+  "stage_gates": [
+    "P2-S8-G001",
+    "P2-S8-G002",
+    "P2-S8-G003",
+    "P2-S8-G004",
+    "P2-S8-G005",
+    "P2-S8-G006",
+    "P2-S8-G007",
+    "P2-S8-G008",
+    "P2-S8-G009",
+    "P2-S8-G010"
+  ],
+  "master_part2_completion_gates": {
+    "independent_oracle_verified": "EXTERNALLY_VERIFIED",
+    "spark_parity_verified": "EXTERNALLY_VERIFIED",
+    "financial_invariants_verified": "EXTERNALLY_VERIFIED",
+    "failure_matrix_verified": "EXTERNALLY_VERIFIED",
+    "deterministic_replay_verified": "EXTERNALLY_VERIFIED",
+    "critical_paths_tested": "EXTERNALLY_VERIFIED"
+  },
+  "completion_inventory": {
+    "historical_requirements": 175,
+    "stage8_requirements": 28,
+    "total_requirements": 203,
+    "historical_stage_gates": 59,
+    "stage8_gates": 10,
+    "total_stage_gates": 69,
+    "runtime_responsibilities": 11,
+    "runtime_invariants": 18,
+    "behavioral_scenarios": 21,
+    "closed_reason_codes": 21,
+    "critical_paths": 8,
+    "historical_semantic_mutations": 116
+  },
+  "promotion_protocol": {
+    "promotion_pull_request": {
+      "exact_head_ci_required": true,
+      "draft_evidence_required": true,
+      "squash_merge_required": true,
+      "validated_tree_equality_required": true,
+      "independent_main_ci_required": true
+    },
+    "closure_attestation_pull_request": {
+      "repository_record_required": true,
+      "exact_head_ci_required": true,
+      "squash_merge_required": true,
+      "independent_main_ci_required": true
+    },
+    "candidate_may_claim_part2_complete": false
+  },
+  "implementation_boundary": {
+    "new_reconciliation_behavior": false,
+    "historical_authority_rewritten": false,
+    "spark_authority_transferred": false,
+    "aws_execution": false,
+    "aws_workflow_dispatched": false,
+    "managed_persistence": false,
+    "managed_reconciliation": false,
+    "infrastructure_mutation": false,
+    "performance_verified": false,
+    "scale_verified": false,
+    "production_operation": false,
+    "project_complete": false,
+    "part2_closed": false
+  }
+}

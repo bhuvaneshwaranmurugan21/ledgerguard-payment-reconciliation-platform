@@ -1,0 +1,505 @@
+{
+  "critical_findings": 0,
+  "gates": [
+    {
+      "closure_authority": "contracts/part2-stage2-reference-oracle-v1.json",
+      "gate_id": "P2-S1-G001",
+      "name": "PART1_CLOSURE_PROVEN",
+      "stage": 1,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "contracts/part2-stage2-reference-oracle-v1.json",
+      "gate_id": "P2-S1-G002",
+      "name": "HANDOFF_AUTHORITIES_BOUND",
+      "stage": 1,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "contracts/part2-stage2-reference-oracle-v1.json",
+      "gate_id": "P2-S1-G003",
+      "name": "RUNTIME_SCOPE_OWNED",
+      "stage": 1,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "contracts/part2-stage2-reference-oracle-v1.json",
+      "gate_id": "P2-S1-G004",
+      "name": "TOOLCHAIN_COMPATIBILITY_PROVEN",
+      "stage": 1,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "contracts/part2-stage2-reference-oracle-v1.json",
+      "gate_id": "P2-S1-G005",
+      "name": "FAIL_CLOSED_VALIDATION_PROVEN",
+      "stage": 1,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "contracts/part2-stage2-reference-oracle-v1.json",
+      "gate_id": "P2-S1-G006",
+      "name": "NON_AWS_TRANSITION_PROVEN",
+      "stage": 1,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G001",
+      "name": "STAGE1_ENTRY_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G002",
+      "name": "ORACLE_INDEPENDENCE_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G003",
+      "name": "CANONICAL_PRIMITIVES_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G004",
+      "name": "FINANCIAL_EXPECTATIONS_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G005",
+      "name": "ATOMIC_OUTPUT_BOUNDARY_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G006",
+      "name": "ADVERSARIAL_COVERAGE_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage2-closure-freeze-v1.json",
+      "gate_id": "P2-S2-G007",
+      "name": "REPRODUCIBLE_CANDIDATE_PROVEN",
+      "stage": 2,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G001",
+      "name": "STAGE2_ENTRY_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G002",
+      "name": "ACTIVE_CONTRACT_SET_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G003",
+      "name": "CANONICAL_INPUT_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G004",
+      "name": "BUNDLE_BINDING_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G005",
+      "name": "IDENTITY_REPLAY_ATOMICITY_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G006",
+      "name": "FINANCIAL_ADMISSION_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G007",
+      "name": "NORMALIZATION_AND_ROUTING_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G008",
+      "name": "CLAIM_BOUNDARY_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage3-closure-freeze-v1.json",
+      "gate_id": "P2-S3-G009",
+      "name": "REPRODUCIBLE_CANDIDATE_PROVEN",
+      "stage": 3,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G001",
+      "name": "verified_stage3_entry",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G002",
+      "name": "replay_safe_handoff",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G003",
+      "name": "exact_transaction_grain",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G004",
+      "name": "checked_source_aggregation",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G005",
+      "name": "exact_reference_capacity",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G006",
+      "name": "financial_reason_and_status_precedence",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G007",
+      "name": "immutable_deterministic_candidate_state",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G008",
+      "name": "scope_and_oracle_independence",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage4-closure-freeze-v1.json",
+      "gate_id": "P2-S4-G009",
+      "name": "reproducible_external_evidence",
+      "stage": 4,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G001",
+      "name": "verified_stage4_entry",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G002",
+      "name": "lossless_replay_and_duplicate_handoff",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G003",
+      "name": "exact_settlement_grain_and_formula",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G004",
+      "name": "checked_settlement_clearing_movement",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G005",
+      "name": "exact_bank_allocation",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G006",
+      "name": "bank_integrity_and_unallocated_visibility",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G007",
+      "name": "three_way_status_and_reason_precedence",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G008",
+      "name": "immutable_deterministic_candidate_state",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G009",
+      "name": "scope_and_oracle_independence",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage5-closure-freeze-v1.json",
+      "gate_id": "P2-S5-G010",
+      "name": "reproducible_external_evidence",
+      "stage": 5,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G001",
+      "name": "verified_stage5_entry",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G002",
+      "name": "atomic_conditional_authority",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G003",
+      "name": "immutable_content_integrity",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G004",
+      "name": "append_only_proof_revisions",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G005",
+      "name": "append_only_case_revisions",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G006",
+      "name": "failure_ownership_and_no_partial_authority",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G007",
+      "name": "idempotent_replay_and_crash_recovery",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G008",
+      "name": "durable_cross_batch_state_handoff",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G009",
+      "name": "local_scope_and_dependency_boundary",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage6-closure-freeze-v1.json",
+      "gate_id": "P2-S6-G010",
+      "name": "reproducible_external_evidence",
+      "stage": 6,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G001",
+      "name": "verified_stage6_entry",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G002",
+      "name": "exact_spark_runtime",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G003",
+      "name": "transaction_and_settlement_parity",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G004",
+      "name": "parquet_logical_projection",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G005",
+      "name": "complete_failure_matrix",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G006",
+      "name": "critical_paths_and_replay",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G007",
+      "name": "scope_and_claim_integrity",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "spec/part2-stage7-closure-freeze-v1.json",
+      "gate_id": "P2-S7-G008",
+      "name": "reproducible_external_evidence",
+      "stage": 7,
+      "state": "EXTERNALLY_VERIFIED"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G001",
+      "name": "verified_stage7_entry",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G002",
+      "name": "immutable_authority_chain",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G003",
+      "name": "complete_requirement_audit",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G004",
+      "name": "complete_gate_and_ownership_audit",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G005",
+      "name": "six_master_gates_adjudicated",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G006",
+      "name": "full_system_reproducibility",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G007",
+      "name": "coverage_and_mutation_quality",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G008",
+      "name": "documentation_and_claim_integrity",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G009",
+      "name": "read_only_exact_head_promotion",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    },
+    {
+      "closure_authority": "part2-stage8-ci-evidence.json",
+      "gate_id": "P2-S8-G010",
+      "name": "terminal_closure_publication",
+      "stage": 8,
+      "state": "VERIFIED_CANDIDATE"
+    }
+  ],
+  "historical_gate_count": 59,
+  "major_findings": 0,
+  "open_findings": 0,
+  "part": 2,
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "schema_version": "1.0",
+  "stage_counts": {
+    "1": 6,
+    "2": 7,
+    "3": 9,
+    "4": 9,
+    "5": 10,
+    "6": 10,
+    "7": 8,
+    "8": 10
+  },
+  "total_gate_count": 69
+}
