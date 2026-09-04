@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 6,
+  "traceability": [
+    {"gate_id":"P2-S6-G001","requirement_ids":["P2-S6-R001","P2-S6-R002","P2-S6-R003"],"authorities":["spec/part2-stage5-closure-freeze-v1.json","contracts/part2-stage5-settlement-reconciliation-v1.json"],"validation":["src/ledgerguard_part2_stage6_validation.py","tests/test_part2_stage6_validation.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G002","requirement_ids":["P2-S6-R004","P2-S6-R005","P2-S6-R006"],"authorities":["contracts/part2-stage6-proof-finalization-v1.json","docs/adr/0022-atomic-proof-finalization-and-recovery.md"],"validation":["tests/test_part2_stage6_finalization.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G003","requirement_ids":["P2-S6-R007","P2-S6-R008","P2-S6-R009"],"authorities":["contracts/part2-stage6-proof-finalization-v1.json","contracts/v2/reconciliation-proof-v2.schema.json","contracts/v2/case-revision-v2.schema.json"],"validation":["tests/test_part2_stage6_finalization.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G004","requirement_ids":["P2-S6-R010","P2-S6-R011","P2-S6-R012"],"authorities":["spec/financial-semantics-v1.json","contracts/v2/reconciliation-proof-v2.schema.json"],"validation":["tests/test_part2_stage6_finalization.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G005","requirement_ids":["P2-S6-R013","P2-S6-R014","P2-S6-R015"],"authorities":["spec/financial-semantics-v1.json","contracts/v2/case-revision-v2.schema.json"],"validation":["tests/test_part2_stage6_finalization.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G006","requirement_ids":["P2-S6-R016","P2-S6-R017","P2-S6-R018"],"authorities":["docs/failure-model-v2.md","docs/adr/0022-atomic-proof-finalization-and-recovery.md"],"validation":["tests/test_part2_stage6_finalization.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G007","requirement_ids":["P2-S6-R019","P2-S6-R020","P2-S6-R021","P2-S6-R022"],"authorities":["docs/adr/0022-atomic-proof-finalization-and-recovery.md","spec/part2-stage6-vectors-v1.json"],"validation":["tests/test_part2_stage6_finalization.py","src/ledgerguard_part2_stage6_evidence.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G008","requirement_ids":["P2-S6-R023","P2-S6-R024","P2-S6-R025"],"authorities":["docs/part2-stage6-proof-finalization.md","spec/part2-stage6-vectors-v1.json"],"validation":["tests/test_part2_stage6_finalization.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G009","requirement_ids":["P2-S6-R026","P2-S6-R027","P2-S6-R028"],"authorities":["docs/part2-execution-contract.md","contracts/part2-stage6-proof-finalization-v1.json"],"validation":["src/ledgerguard_part2_stage6_validation.py","tests/test_part2_stage6_validation.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]},
+    {"gate_id":"P2-S6-G010","requirement_ids":["P2-S6-R029","P2-S6-R030"],"authorities":["spec/part2-stage6-coverage-v1.json","spec/part2-stage6-ci-evidence-v1.schema.json"],"validation":["tools/run_part2_stage6.py","tools/build_part2_stage6_ci_evidence.py"],"evidence":["part2-stage6-local-evidence.json","part2-stage6-ci-evidence.json"]}
+  ]
+}

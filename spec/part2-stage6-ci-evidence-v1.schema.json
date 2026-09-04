@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part2-stage6-ci-evidence:v1",
+  "title": "LedgerGuard Part 2 Stage 6 exact-head CI evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "repository", "commit_sha", "checked_out_sha", "base_sha",
+    "workflow_run_id", "workflow_run_attempt", "pull_request_number", "pull_request_draft",
+    "python_version", "clean_run_count", "deterministic_equal",
+    "deterministic_payload_sha256", "stage6_candidate_digest", "wheel_sha256", "test_counts",
+    "coverage_percent", "coverage_statements", "coverage_branches", "mutation_checks",
+    "mutation_survivors", "stage5_closure_commit", "stage5_external_state",
+    "stage6_recovery_state", "deterministic_replay_state", "aws_execution", "aws_api_called",
+    "aws_workflow_dispatched", "spark_execution", "managed_persistence", "infrastructure_mutation",
+    "authoritative_local_proof_persisted", "merge_authorized"
+  ],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "repository": {"const":"bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"},
+    "commit_sha": {"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "checked_out_sha": {"type":"string","pattern":"^[0-9a-f]{40}$"},
+    "base_sha": {"const":"89373adf968ff7071693f8cce5d12901fd9b1e69"},
+    "workflow_run_id": {"type":"string","pattern":"^[1-9][0-9]*$"},
+    "workflow_run_attempt": {"type":"string","pattern":"^[1-9][0-9]*$"},
+    "pull_request_number": {"type":"integer","minimum":1},
+    "pull_request_draft": {"const":true},
+    "python_version": {"const":"3.11.13"},
+    "clean_run_count": {"type":"integer","minimum":2},
+    "deterministic_equal": {"const":true},
+    "deterministic_payload_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "stage6_candidate_digest": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "wheel_sha256": {"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "test_counts": {
+      "type":"object", "additionalProperties":false,
+      "required":["tests","failures","errors","skipped"],
+      "properties": {
+        "tests":{"type":"integer","minimum":1}, "failures":{"const":0},
+        "errors":{"const":0}, "skipped":{"const":0}
+      }
+    },
+    "coverage_percent": {"const":100.0},
+    "coverage_statements": {"type":"integer","minimum":1},
+    "coverage_branches": {"type":"integer","minimum":1},
+    "mutation_checks": {"const":24},
+    "mutation_survivors": {"const":0},
+    "stage5_closure_commit": {"const":"89373adf968ff7071693f8cce5d12901fd9b1e69"},
+    "stage5_external_state": {"const":"EXTERNALLY_VERIFIED"},
+    "stage6_recovery_state": {"const":"VERIFIED_CANDIDATE"},
+    "deterministic_replay_state": {"const":"VERIFIED_CANDIDATE"},
+    "aws_execution": {"const":false},
+    "aws_api_called": {"const":false},
+    "aws_workflow_dispatched": {"const":false},
+    "spark_execution": {"const":false},
+    "managed_persistence": {"const":false},
+    "infrastructure_mutation": {"const":false},
+    "authoritative_local_proof_persisted": {"const":true},
+    "merge_authorized": {"const":false}
+  }
+}

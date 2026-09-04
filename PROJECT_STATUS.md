@@ -4,14 +4,15 @@
 
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
-- Stage: 5 — Settlement-grain three-way reconciliation and exact bank allocation
+- Stage: 6 — Atomic proof finalization and deterministic recovery
 - State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE5_SETTLEMENT_RECONCILIATION_VERIFIED_CANDIDATE`
-- Highest new claim: `LOCAL_VERIFIED` settlement candidate pending external closure
+- Stage state: `PART2_STAGE6_PROOF_FINALIZATION_VERIFIED_CANDIDATE`
+- Highest new claim: `LOCAL_VERIFIED` proof-finalization candidate pending external closure
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
-- Settlement reconciliation: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
+- Settlement reconciliation: `EXTERNALLY_VERIFIED`
+- Atomic proof finalization: `LOCAL_VERIFIED_CANDIDATE_PENDING_EXTERNAL_CLOSURE`
 - Spark reconciliation parity: `UNCLAIMED`
 - AWS execution: false
 - AWS infrastructure mutated: false
@@ -120,5 +121,15 @@ settlement clearing movement, preserves all three pairwise deltas, and allocates
 only by exact normalized settlement reference. Missing, unknown, ambiguous, duplicate, or
 disallowed bank evidence fails visibly. The result is immutable and non-authoritative. Stage 5 does
 not persist or finalize proofs, create revisions, execute Spark, access AWS, or mutate
-infrastructure. It remains a local candidate until exact-head draft-PR CI and immutable evidence
-inspection complete.
+infrastructure. PR #14 passed exact-head CI, was squash-merged as
+`89373adf968ff7071693f8cce5d12901fd9b1e69`, and passed independent post-merge `main` CI run
+`33777351580`; settlement reconciliation is therefore externally verified.
+
+Stage 6 adds a local content-addressed proof store with one conditional authoritative head. It
+finalizes complete transaction and settlement candidate batches atomically, appends proof and case
+revisions, owns storage and conflict failures as non-authoritative execution failures, and recovers
+deterministically across real process termination and concurrent writers. Authoritative history
+also preserves the admission and reconciliation states required for later-batch replay. Stage 6
+does not execute Spark, write managed Parquet, access AWS, dispatch workflows, mutate
+infrastructure, or close Part 2. It remains a local candidate until exact-head draft-PR CI and
+immutable evidence inspection complete.

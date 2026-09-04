@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "part": 2,
+  "stage": 6,
+  "fault_windows": [
+    {"name":"after_attempt","process_exit":71,"authority_before_retry":"UNCHANGED"},
+    {"name":"after_objects","process_exit":72,"authority_before_retry":"UNCHANGED"},
+    {"name":"after_commit","process_exit":73,"authority_before_retry":"UNCHANGED"},
+    {"name":"after_head","process_exit":74,"authority_before_retry":"COMMITTED_RECOVERABLE"}
+  ],
+  "required_properties": [
+    "WHOLE_BATCH_ATOMIC_AUTHORITY",
+    "EXPECTED_HEAD_COMPARE_AND_SWAP",
+    "CANONICAL_CONTENT_ADDRESSING",
+    "APPEND_ONLY_PROOF_CHAIN",
+    "APPEND_ONLY_CASE_CHAIN",
+    "EXACT_RETRY_IDEMPOTENCY",
+    "HISTORICAL_RETRY_RECOVERY",
+    "ONE_CONCURRENT_WINNER",
+    "AUTHORITATIVE_HISTORY_STATE_RECOVERY",
+    "DETERMINISTIC_BYTES_ACROSS_STORES",
+    "EXECUTION_FAILURE_HAS_NO_FINANCIAL_AUTHORITY"
+  ],
+  "case_transitions": [
+    {"prior":null,"proof":"MATCHED","case":null},
+    {"prior":null,"proof":"EXCEPTION","case":"OPEN"},
+    {"prior":"OPEN","proof":"EXCEPTION","case":"OPEN"},
+    {"prior":"OPEN","proof":"MATCHED","case":"RESOLVED_BY_LATE_DATA"}
+  ],
+  "forbidden_runtime_dependencies": [
+    "boto3", "botocore", "pandas", "pyarrow", "pyspark", "requests", "sqlalchemy"
+  ]
+}
