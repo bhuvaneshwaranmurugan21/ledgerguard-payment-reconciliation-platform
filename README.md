@@ -33,9 +33,10 @@ PR #12 passed exact-head CI, was squash-merged, and passed independent post-merg
 then closed Stage 4 transaction reconciliation with exact-head CI, a squash merge, and independent
 post-merge `main` CI. PR #14 closed Stage 5 settlement reconciliation, PR #15 closed atomic proof
 finalization, and PR #16 closed genuine Spark parity, the complete failure matrix, deterministic
-replay, and the eight critical paths. Part 2 Stage 8 promotion candidate now performs the final
-requirement, gate, evidence, and claim-integrity audit. Part 2 and the overall project remain in
-progress until the Stage 8 promotion and closure-attestation transactions both complete.
+replay, and the eight critical paths. PR #17 completed the Stage 8 promotion audit with exact-head
+and independent post-merge validation. The closure-attestation candidate records Part 2 as
+`LOCAL_RECONCILIATION_VERIFIED`; that state becomes active on `main` only after its own squash merge
+and independent main CI. The overall project remains in progress.
 
 The immutable Stage 1 status statement was: Part 2
 is now `PART2_IN_PROGRESS`. No reconciliation
@@ -64,7 +65,7 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Atomic proof and case finalization | `EXTERNALLY_VERIFIED` after PR #15 squash and independent main CI |
 | Independent reference oracle | `EXTERNALLY_VERIFIED` after PR #11 squash and independent main CI |
 | Spark reconciliation parity | `EXTERNALLY_VERIFIED` after PR #16 squash and independent main CI |
-| Part 2 completion | `VERIFIED_CANDIDATE` in Stage 8; external promotion still required |
+| Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` closure-attestation candidate; effective after merge and main CI |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity and managed AWS reconciliation | `UNCLAIMED` |
 | AWS account-wide nonmutation | `NOT_PROVEN` |
@@ -131,6 +132,7 @@ ledgerguard-part2-stage5
 ledgerguard-part2-stage6
 ledgerguard-part2-stage7
 ledgerguard-part2-stage8
+ledgerguard-part2-stage8-closure
 ruff format --check .
 ruff check .
 mypy src
@@ -144,9 +146,10 @@ financial custody, PCI certification, multi-region recovery, or sustained produc
 
 Parts 1 and 2 perform no AWS execution and mutate no AWS infrastructure. Part 1's highest claim is
 `LOCAL_VERIFIED`; Part 2 Stage 7 externally verified genuine local Spark/Parquet logical parity, the
-complete failure matrix, and critical-path validation. Stage 8 is the final local promotion
-candidate. Managed reconciliation, AWS execution, performance, scale, production operation, and
-overall project completion remain unclaimed.
+complete failure matrix, and critical-path validation. Stage 8 promotion is externally verified;
+its separate closure attestation records the bounded local Part 2 state. Managed reconciliation,
+AWS execution, performance, scale, production operation, and overall project completion remain
+unclaimed.
 
 ## License
 

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "production_surface": "ledgerguard_part2_stage8_closure",
+  "minimum_statement_percent": 100.0,
+  "minimum_branch_percent": 100.0,
+  "mutation_classes": [
+    "ACCEPT_PROMOTION_COMMIT_DRIFT",
+    "ACCEPT_PROMOTION_TREE_DRIFT",
+    "ACCEPT_NON_SQUASH_PROMOTION",
+    "ACCEPT_PROMOTION_ARTIFACT_DRIFT",
+    "ACCEPT_FAILED_POSTMERGE_MAIN",
+    "ACCEPT_PROMOTION_AUTHORITY_DRIFT",
+    "ALLOW_NONTERMINAL_PART2_STATE",
+    "ALLOW_UNVERIFIED_MASTER_GATE",
+    "CLAIM_AWS_EXECUTION",
+    "ALLOW_INCORRECT_COMPLETION_TOTAL",
+    "ALLOW_STALE_FINAL_DOCUMENTATION",
+    "ALLOW_RECURSIVE_SELF_ATTESTATION"
+  ]
+}

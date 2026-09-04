@@ -36,6 +36,7 @@ ledgerguard-part2-stage6 = "ledgerguard_part2_stage6_validation:main"
 ledgerguard-part2-stage6-finalize = "ledgerguard_part2_stage6:main"
 ledgerguard-part2-stage7 = "ledgerguard_part2_stage7_validation:main"
 ledgerguard-part2-stage8 = "ledgerguard_part2_stage8_validation:main"
+ledgerguard-part2-stage8-closure = "ledgerguard_part2_stage8_closure:main"
 ledgerguard-c0 = "ledgerguard_correction_c1:main_c0"
 ledgerguard-c1 = "ledgerguard_correction_c2:main_c1"
 ledgerguard-c2 = "ledgerguard_correction_c3:main_c2"
@@ -75,6 +76,8 @@ py-modules = [
   "ledgerguard_part2_stage8_ledger",
   "ledgerguard_part2_stage8_validation",
   "ledgerguard_part2_stage8_evidence",
+  "ledgerguard_part2_stage8_closure",
+  "ledgerguard_part2_stage8_closure_evidence",
 ]
 
 [tool.pytest.ini_options]

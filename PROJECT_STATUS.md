@@ -5,9 +5,9 @@
 - Project: LedgerGuard
 - Part: 2 — Executable reconciliation system
 - Stage: 8 — Promotion and closure
-- State: `PART2_IN_PROGRESS`
-- Stage state: `PART2_STAGE8_PROMOTION_VERIFIED_CANDIDATE`
-- Highest new claim: complete Part 2 promotion candidate pending its own external closure
+- State: `LOCAL_RECONCILIATION_VERIFIED`
+- Stage state: `PART2_STAGE8_CLOSURE_ATTESTATION_CANDIDATE`
+- Highest new claim: locally verified executable reconciliation system, effective on attestation merge
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
@@ -150,7 +150,16 @@ PR #16 passed exact-head CI run `33857511781`, was squash-merged as
 deterministic replay, and all eight critical paths are therefore externally verified.
 
 Stage 8 freezes that closure, normalizes and re-audits all 203 Part 2 requirements and 69 stage
-gates, and adjudicates the six master Part 2 gates. This tree remains a promotion candidate. Part 2
-cannot enter the terminal local reconciliation state until the promotion PR and the separate repository
-closure-attestation PR each pass exact-head CI, squash-only merge validation, and independent
-post-merge `main` CI.
+gates, and adjudicates the six master Part 2 gates. The promotion transaction is complete; the
+separate repository closure-attestation transaction is now the only remaining Part 2 publication
+boundary.
+
+PR #17 passed exact-head CI run `33871740027`, was squash-merged as
+`71b42d6622558093a2bfaced58724f2ab71e793e`, and passed independent post-merge `main` CI run
+`33874130476`. Its one parent is the Stage 7 closure and its tree
+`406f40dfb1e94e38031505e23a6d77b50198840f` equals the validated PR head tree exactly.
+
+This closure-attestation candidate publishes that immutable promotion evidence and the terminal Part
+2 authority. The final state becomes active on `main` only after this attestation passes exact-head
+CI, is manually squash-merged, and passes independent post-merge `main` CI. No AWS, managed,
+performance, scale, production-operation, or overall-project completion claim is made.

@@ -203,3 +203,11 @@ This prevents either a pre-merge claim or an infinite self-attestation cycle.
 Stage 8 performs no AWS call, workflow dispatch, infrastructure mutation, managed persistence,
 managed reconciliation, performance or scale execution, or production operation. Those claims
 remain owned by later project parts.
+
+PR #17 satisfied the promotion transaction at squash commit
+`71b42d6622558093a2bfaced58724f2ab71e793e` and independent main CI run `33874130476`.
+The separate closure-attestation transaction publishes the schema-valid completion authority and
+changes no reconciliation implementation. Its exact-head evidence, manual squash merge, and
+independent main CI are the remaining publication controls. The completion authority is bounded to
+local reconciliation and leaves AWS, managed execution, performance, scale, production operation,
+and overall project completion unclaimed.

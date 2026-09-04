@@ -1,22 +1,27 @@
-# Part 2 completion procedure
+# Part 2 completion attestation
 
-Part 2 is not yet complete in the Stage 8 promotion candidate. The candidate proves that all six
-master completion gates have externally verified implementation evidence and that the complete
-Part 2 requirement and gate inventories are internally coherent. Final state remains conditional
-on the external promotion protocol.
+PR #17 completed the Stage 8 promotion transaction. Exact-head CI run `33871740027` validated head
+`2b1147dac823d59a8891b5f7852e7c6977f20aa6`; squash commit
+`71b42d6622558093a2bfaced58724f2ab71e793e` has sole parent
+`8fac3795ed0dac5284dd3b1595bd8fc9f6dc7344` and the same tree
+`406f40dfb1e94e38031505e23a6d77b50198840f`. Independent main CI run `33874130476`
+passed.
 
-The protocol intentionally uses two pull requests. The promotion pull request carries the frozen
+The protocol uses two pull requests. The completed promotion pull request carries the frozen
 Stage 7 closure, normalized 203-requirement ledger, 69-gate adjudication, master-gate evidence,
-validator, tests, and reproducible evidence tooling. It must pass exact-head draft-PR CI, artifact
+validator, tests, and reproducible evidence tooling. It passed exact-head draft-PR CI, artifact
 inspection, a manual squash merge, validated tree equality, and independent post-merge main CI.
 
-Only after that success can the closure-attestation pull request record promotion facts that did
+After that success, this closure-attestation pull request records promotion facts that did
 not exist before the first merge: the promotion squash commit, sole parent, tree, exact-head
-evidence, and post-merge main run. The attestation adds the schema-valid completion authority and
-sets the active Part 2 state to `LOCAL_RECONCILIATION_VERIFIED`. It must independently pass
+evidence, and post-merge main run. The attestation adds the schema-valid completion authority that
+sets the active Part 2 state to `LOCAL_RECONCILIATION_VERIFIED` when published. It independently
+requires
 exact-head CI, manual squash merge, and post-merge main CI. The repository record deliberately does
 not claim its own future commit or CI identity; GitHub's immutable exact-head evidence and the
-subsequent merge and main run establish that publication fact without a self-reference.
+subsequent merge and main run establish that publication fact without a self-reference. Until that
+publication completes, `LOCAL_RECONCILIATION_VERIFIED` is a closure-attestation candidate state and
+is not yet active on `main`.
 
 The second transaction does not create a recursive implementation candidate. It records closure
 of the already promoted implementation tree. Its own merge and main CI prove publication integrity,
