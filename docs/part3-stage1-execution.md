@@ -40,7 +40,7 @@ The first clean environment failed import-order lint, which was corrected. The s
 644 current tests with zero failures/errors/skips, then correctly failed coverage reporting:
 subprocess reproduction tests had measured deleted historical source copies. Coverage now attributes
 only those four named immutable reproduction roots to their historical owners; the runner requires
-an exact one-to-one inventory of all 54 current source files and byte-identical installed modules.
+an exact one-to-one inventory of all 53 current source files and byte-identical installed modules.
 Thresholds, current-source inclusion, and all test obligations remain unchanged. The third clean
 run was interrupted before completion and does not count as a successful run.
 
