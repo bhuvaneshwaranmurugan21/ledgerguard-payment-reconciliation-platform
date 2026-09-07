@@ -12,16 +12,17 @@ Stage 7 closure, normalized 203-requirement ledger, 69-gate adjudication, master
 validator, tests, and reproducible evidence tooling. It passed exact-head draft-PR CI, artifact
 inspection, a manual squash merge, validated tree equality, and independent post-merge main CI.
 
-After that success, this closure-attestation pull request records promotion facts that did
-not exist before the first merge: the promotion squash commit, sole parent, tree, exact-head
-evidence, and post-merge main run. The attestation adds the schema-valid completion authority that
-sets the active Part 2 state to `LOCAL_RECONCILIATION_VERIFIED` when published. It independently
-requires
-exact-head CI, manual squash merge, and post-merge main CI. The repository record deliberately does
-not claim its own future commit or CI identity; GitHub's immutable exact-head evidence and the
-subsequent merge and main run establish that publication fact without a self-reference. Until that
-publication completes, `LOCAL_RECONCILIATION_VERIFIED` is a closure-attestation candidate state and
-is not yet active on `main`.
+PR #18 completed the closure-attestation transaction. Its exact head
+`0ff1603ca378479fdd46d09840cc015c8a1f1500` passed CI `33879453002`.
+The manual squash commit `cb81704adcfdfac5d93879cd6c189fc2213bbe79` has sole parent
+`71b42d6622558093a2bfaced58724f2ab71e793e` and the same validated tree
+`89689d7e32cd09e36a8456484a50c23d0192897f`. Independent main CI `33904881790` passed.
+`LOCAL_RECONCILIATION_VERIFIED` is active for the accepted 203-requirement local ledger.
+The immutable closure is frozen in `spec/part2-stage8-external-closure-freeze-v1.json`.
+
+Original-master omissions are preserved in the append-only conformance addendum. That record
+assigns generator, property, correction, DataFrame pipeline, and measurement obligations without
+rewriting the historical authority's `remaining_part2_work` field or claiming universal completion.
 
 The second transaction does not create a recursive implementation candidate. It records closure
 of the already promoted implementation tree. Its own merge and main CI prove publication integrity,

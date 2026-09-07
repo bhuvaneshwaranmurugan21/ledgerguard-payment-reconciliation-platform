@@ -1,0 +1,24 @@
+{
+  "basis": "Hand calculated integer minor units: processor 1000, original clearing 900, balanced journal adjustment 100; settlement bank allocation 1000. Two journals per grain; one processor and one bank record. No production output is used to derive expectations.",
+  "schema_version": "1.0",
+  "settlement_totals": {
+    "allocated_bank_entry_count": 1,
+    "bank_minor": 1000,
+    "difference_minor": 0,
+    "ledger_bank_delta_minor": 0,
+    "ledger_clearing_minor": 1000,
+    "ledger_journal_count": 2,
+    "processor_bank_delta_minor": 0,
+    "processor_ledger_delta_minor": 0,
+    "processor_net_minor": 1000,
+    "processor_settlement_count": 1
+  },
+  "transaction_totals": {
+    "difference_minor": 0,
+    "ledger_journal_count": 2,
+    "ledger_minor": 1000,
+    "processor_ledger_delta_minor": 0,
+    "processor_minor": 1000,
+    "processor_record_count": 1
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "current_required_files": [
+    "tests/test_part3_stage1_correction.py",
+    "tests/test_part3_stage1_entry.py",
+    "tests/test_part2_stage3_admission.py",
+    "tests/test_part2_stage4_transaction.py",
+    "tests/test_part2_stage5_settlement.py",
+    "tests/test_part2_stage6_finalization.py",
+    "tests/test_part2_stage7_spark_parity.py",
+    "tests/test_financial_contracts_v2.py"
+  ],
+  "historical_nodes": [
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91",
+      "node": "tests/test_part2_stage1.py::test_p2s1_t001_candidate_is_complete_and_deterministic",
+      "reason": "Part 2 Stage 1 preimplementation status and toolchain contract"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91",
+      "node": "tests/test_part2_stage1.py::test_p2s1_t011_premature_completion_claim_fails_closed",
+      "reason": "Part 2 Stage 1 preimplementation status and toolchain contract"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91",
+      "node": "tests/test_part2_stage1.py::test_p2s1_t013_worker_python_pin_removal_fails_closed",
+      "reason": "Part 2 Stage 1 preimplementation status and toolchain contract"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "95b7e2a1c6a1dd758a8ce43c73bdea80117b6d91",
+      "node": "tests/test_part2_stage1.py::test_p2s1_t018_automatic_aws_capability_fails_closed",
+      "reason": "Part 2 Stage 1 preimplementation status and toolchain contract"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "55e78f76e76bff7562d43a3d001dbb74fd66d8fd",
+      "node": "tests/test_part2_stage2_oracle.py::test_p2s2_t001_candidate_is_complete_and_deterministic",
+      "reason": "Part 2 Stage 2 candidate status cannot claim later Part 2 completion"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "71b42d6622558093a2bfaced58724f2ab71e793e",
+      "node": "tests/test_part2_stage8_validation.py::test_p2s8_repository_contract_is_complete",
+      "reason": "Part 2 promotion candidate active documentation"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "71b42d6622558093a2bfaced58724f2ab71e793e",
+      "node": "tests/test_part2_stage8_validation.py::test_p2s8_module_entrypoint_emits_candidate",
+      "reason": "Part 2 promotion candidate active documentation"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "71b42d6622558093a2bfaced58724f2ab71e793e",
+      "node": "tests/test_part2_stage8_validation.py::test_p2s8_missing_required_artifact_fails_closed",
+      "reason": "Part 2 promotion candidate active documentation"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "cb81704adcfdfac5d93879cd6c189fc2213bbe79",
+      "node": "tests/test_part2_stage8_closure.py::test_p2s8_closure_authority_is_complete",
+      "reason": "Part 2 closure candidate state precedes its completed publication"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "cb81704adcfdfac5d93879cd6c189fc2213bbe79",
+      "node": "tests/test_part2_stage8_closure.py::test_p2s8_closure_module_entrypoint",
+      "reason": "Part 2 closure candidate state precedes its completed publication"
+    },
+    {
+      "current_equivalent": "tests/test_part3_stage1_entry.py::test_current_publication_and_automatic_execution_boundary",
+      "execution_root": "cb81704adcfdfac5d93879cd6c189fc2213bbe79",
+      "node": "tests/test_part2_stage8_closure.py::test_p2s8_closure_missing_artifact_fails_closed",
+      "reason": "Part 2 closure candidate state precedes its completed publication"
+    }
+  ],
+  "schema_version": "1.0",
+  "selection": "Collect every current test. Partition only the exact historical governance nodes below. Every other collected node must run against the current wheel. Historical nodes remain mandatory in immutable complete worktree jobs."
+}

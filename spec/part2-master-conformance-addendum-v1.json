@@ -1,0 +1,114 @@
+{
+  "claims": {
+    "aws_verified": false,
+    "part2_local": true,
+    "part3_complete": false,
+    "project_complete": false,
+    "scale_verified": false
+  },
+  "gaps": [
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G001",
+      "obligation": "Exact-target AWS identity and IAM qualification",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G002",
+      "obligation": "Correct stale active publication status after PR 18",
+      "owner_part": 3,
+      "owner_stage": 1,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G003",
+      "obligation": "Deterministic generator: small, 10K, 100K, 1M; independent totals",
+      "owner_part": 3,
+      "owner_stage": 3,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G004",
+      "obligation": "Corrected-source resolution for transaction and settlement histories",
+      "owner_part": 3,
+      "owner_stage": 1,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G005",
+      "obligation": "Generator-driven scale and financial property campaign",
+      "owner_part": 3,
+      "owner_stage": 3,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G006",
+      "obligation": "Local and managed measurements: runtime, throughput, partitions, joins, shuffle, skew, output bytes",
+      "owner_part": 4,
+      "owner_stage": 3,
+      "rationale": "Measurements retain both local and managed obligations and follow implementation of the full pipeline and generator",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G007",
+      "obligation": "Controlled 1M benchmark",
+      "owner_part": 4,
+      "owner_stage": 3,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G008",
+      "obligation": "Minimal managed platform with security and cost controls",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G009",
+      "obligation": "Managed correctness and recovery evidence",
+      "owner_part": 4,
+      "owner_stage": 1,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G010",
+      "obligation": "Release and operational handoff",
+      "owner_part": 5,
+      "owner_stage": 1,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    },
+    {
+      "exit_evidence": "Executed owner tests and independently inspected evidence; planned path does not count as passing",
+      "gap_id": "LG-P3-G011",
+      "obligation": "Full source-to-proof Spark DataFrame pipeline before AWS packaging",
+      "owner_part": 3,
+      "owner_stage": 3,
+      "rationale": "Stage follows the accepted dependency order",
+      "state": "OWNED_OPEN"
+    }
+  ],
+  "historical_authority": "spec/part2-completion-authority-v1.json",
+  "historical_authority_sha256": "3383c2c7725e84952cc966f084e67b7dbdd1519ed5648da35e750ea513e703ca",
+  "historical_scope": "203 accepted repository-local requirements; historical remaining_part2_work is preserved, not a universal original-master completion claim",
+  "schema_version": "1.0"
+}

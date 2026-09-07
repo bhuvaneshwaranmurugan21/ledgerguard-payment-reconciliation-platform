@@ -1,0 +1,37 @@
+{
+  "base_commit": "cb81704adcfdfac5d93879cd6c189fc2213bbe79",
+  "base_tree": "89689d7e32cd09e36a8456484a50c23d0192897f",
+  "claim_boundary": {
+    "aws_execution": false,
+    "part2": "LOCAL_RECONCILIATION_VERIFIED",
+    "part3": "IN_PROGRESS",
+    "project_complete": false
+  },
+  "external_closure": "spec/part2-stage8-external-closure-freeze-v1.json",
+  "external_closure_sha256": "82f9b6b3a0ab200cd62698017836ad1c3b00e6eb46130defbcce1ee4f2e0ab6d",
+  "original_master": {
+    "extract_path": "spec/sources/master-part3-extract-v1.txt",
+    "library_file_id": "libfile_4abf3caa1a8c8191af3db1e7780c8820",
+    "original_lines": [
+      221,
+      303
+    ],
+    "sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+    "uploaded_name": "Ledger Guard Master Plan(1).txt"
+  },
+  "project": "ledgerguard-payment-reconciliation-platform",
+  "required_carryovers": [
+    "LG-P3-G003",
+    "LG-P3-G004",
+    "LG-P3-G005",
+    "LG-P3-G006",
+    "LG-P3-G011"
+  ],
+  "schema_version": "1.0",
+  "sources": {
+    "spec/sources/master-part3-extract-v1.txt": "239c8b0e74946542237287f41674abbf7da5933eda3b4007f17cfd6290b2e577",
+    "spec/sources/part3-execution-plan-v1.md": "c05797e39f2659fe28401c1e90ac101093fa852822a9f60b5099974e6567e318",
+    "spec/sources/part3-stage1-execution-plan-v1.md": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab"
+  },
+  "state": "PART3_STAGE1_ENTRY_FROZEN"
+}

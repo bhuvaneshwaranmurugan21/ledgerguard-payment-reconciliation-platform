@@ -5,13 +5,13 @@ from __future__ import annotations
 import fcntl
 import os
 import re
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from hashlib import sha256
 from pathlib import Path
 from typing import Any, Never, cast
 
-from .admission import AdmissionState, AdmittedRecord, SourceStateEntry
+from .admission import AdmissionState, AdmittedRecord, SourceStateEntry, admit_bundle
 from .canonical import (
     business_digest,
     canonical_json_bytes,
@@ -20,10 +20,21 @@ from .canonical import (
     parse_strict_json,
 )
 from .contracts import ContractRegistry
+from .correction import normalize_correction, require, validate_inputs, validate_relationship
 from .errors import AdmissionRejected
 from .identity import case_id, proof_id, source_identity
-from .settlement import SettlementCandidate, SettlementReconciliationBatch, SettlementState
-from .transaction import TransactionCandidate, TransactionReconciliationBatch, TransactionState
+from .settlement import (
+    SettlementCandidate,
+    SettlementReconciliationBatch,
+    SettlementState,
+    reconcile_settlements,
+)
+from .transaction import (
+    TransactionCandidate,
+    TransactionReconciliationBatch,
+    TransactionState,
+    reconcile_transactions,
+)
 
 IDENTIFIER = re.compile(r"^[a-z0-9][a-z0-9-]{7,63}$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
@@ -278,6 +289,7 @@ def _case_revision(
     proof: Mapping[str, Any],
     prior: Mapping[str, Any] | None,
     occurred_at: str,
+    corrected: bool = False,
 ) -> dict[str, Any] | None:
     exception = proof.get("status") == "EXCEPTION"
     if prior is None and not exception:
@@ -304,7 +316,9 @@ def _case_revision(
         "case_id": case_id(identity),
         **identity,
         "revision": revision,
-        "status": "OPEN" if exception else "RESOLVED_BY_LATE_DATA",
+        "status": "OPEN"
+        if exception
+        else ("RESOLVED_BY_CORRECTION" if corrected else "RESOLVED_BY_LATE_DATA"),
         "reason_codes": reasons,
         "proof_id": proof["proof_id"],
         "actor_type": "SYSTEM",
@@ -490,19 +504,24 @@ class FinalizationStore:
         request = self._read_canonical(
             self.root / "attempts" / attempt_id / "request.json", request_sha256
         )
-        if (
-            set(request)
-            != {
-                "schema_version",
-                "attempt_id",
-                "expected_head",
-                "created_at",
-                "transaction_batch",
-                "settlement_batch",
-            }
-            or request.get("schema_version") != "1.0"
-        ):
+        fields = {
+            "schema_version",
+            "attempt_id",
+            "expected_head",
+            "created_at",
+            "transaction_batch",
+            "settlement_batch",
+        }
+        if request.get("schema_version") == "2.0":
+            fields.update({"correction", "correction_inputs"})
+        if set(request) != fields or request.get("schema_version") not in {"1.0", "2.0"}:
             _reject("authoritative request shape differs")
+        if request["schema_version"] == "2.0":
+            try:
+                normalize_correction(self.repository, request["correction"])
+                validate_inputs(request["correction_inputs"], request["correction"])
+            except (AdmissionRejected, TypeError, ValueError) as error:
+                raise FinalizationRejected("persisted correction context differs") from error
         if request.get("attempt_id") != attempt_id:
             _reject("authoritative request identity differs")
         expected_head = request.get("expected_head")
@@ -659,20 +678,30 @@ class FinalizationStore:
     def load_states(self) -> tuple[AdmissionState, TransactionState, SettlementState]:
         """Recover admission and both reconciliation states from authoritative history."""
 
-        head = self.read_head()
+        return self._load_states_at(self.read_head(), validate_corrections=True)
+
+    def _load_states_at(
+        self, head: str | None, *, validate_corrections: bool = False
+    ) -> tuple[AdmissionState, TransactionState, SettlementState]:
         if head is None:
             return AdmissionState(), TransactionState(), SettlementState()
         transaction_state: TransactionState | None = None
         settlement_state: SettlementState | None = None
         policies: dict[str, str] = {}
         manifests: dict[str, str] = {}
-        cursor: str | None = head
-        while cursor is not None:
-            commit = self._read_commit(cursor)
+        corrections_verified = False
+        for _, commit in self._commits(head):
             request = self._read_canonical(
                 self.root / "attempts" / str(commit["attempt_id"]) / "request.json",
                 str(commit["request_sha256"]),
             )
+            if (
+                validate_corrections
+                and not corrections_verified
+                and (request.get("schema_version", "1.0") != "1.0" or "correction" in request)
+            ):
+                self.verify_history()
+                corrections_verified = True
             for name, settlement in (
                 ("transaction_batch", False),
                 ("settlement_batch", True),
@@ -701,7 +730,6 @@ class FinalizationStore:
                     transaction_state = cast(
                         TransactionState, self._state_from_payload(payload, False)
                     )
-            cursor = cast(str | None, commit["parent_sha256"])
         transaction_state = transaction_state or TransactionState()
         settlement_state = settlement_state or SettlementState()
         sources: dict[tuple[str, ...], str] = {}
@@ -798,6 +826,10 @@ class FinalizationStore:
         request = self._read_request(str(commit["attempt_id"]), str(commit["request_sha256"]))
         if request.get("expected_head") != commit.get("parent_sha256"):
             _reject("request expected head differs from commit parent")
+        try:
+            corrected_keys = self._correction_keys(request, parent)
+        except AdmissionRejected as error:
+            raise FinalizationRejected("persisted correction relationship differs") from error
         requested: dict[str, tuple[Mapping[str, Any], Mapping[str, Any]]] = {}
         for name in ("transaction_batch", "settlement_batch"):
             payload = request.get(name)
@@ -863,6 +895,7 @@ class FinalizationStore:
                 proof=proof,
                 prior=prior_case,
                 occurred_at=str(request["created_at"]),
+                corrected=key in corrected_keys,
             )
             if expected_case != current_case:
                 _reject("case differs from authoritative request")
@@ -887,9 +920,8 @@ class FinalizationStore:
             parent = commit
         return commits[0]
 
-    def _find_attempt(
-        self, head: str | None, attempt_id: str, request_sha256: str
-    ) -> tuple[str, dict[str, Any]] | None:
+    def _commits(self, head: str | None) -> Iterator[tuple[str, dict[str, Any]]]:
+        """Read a digest-verified acyclic chain for all history consumers."""
         cursor = head
         seen: set[str] = set()
         while cursor is not None:
@@ -897,12 +929,18 @@ class FinalizationStore:
                 _reject("authoritative commit cycle")
             seen.add(cursor)
             commit = self._read_commit(cursor)
+            yield cursor, commit
+            cursor = cast(str | None, commit["parent_sha256"])
+
+    def _find_attempt(
+        self, head: str | None, attempt_id: str, request_sha256: str
+    ) -> tuple[str, dict[str, Any]] | None:
+        for cursor, commit in self._commits(head):
             if (
                 commit.get("attempt_id") == attempt_id
                 and commit.get("request_sha256") == request_sha256
             ):
                 return cursor, commit
-            cursor = cast(str | None, commit["parent_sha256"])
         return None
 
     def _receipt(self, digest: str, commit: Mapping[str, Any]) -> FinalizationReceipt:
@@ -1005,6 +1043,105 @@ class FinalizationStore:
             _reject("attempt outcome is not in authoritative history")
         return receipt
 
+    def _find_correction(
+        self,
+        head: str | None,
+        correction: Mapping[str, Any],
+        inputs: Mapping[str, Any] | None,
+    ) -> tuple[str, dict[str, Any]] | None:
+        for cursor, commit in self._commits(head):
+            request = self._read_request(str(commit["attempt_id"]), str(commit["request_sha256"]))
+            previous = request.get("correction")
+            if previous is not None and previous["correction_id"] == correction["correction_id"]:
+                if previous != correction or request["correction_inputs"] != inputs:
+                    raise AdmissionRejected("IDENTITY_CONFLICT", "correction identity reused")
+                return cursor, commit
+        return None
+
+    def _correction_keys(
+        self, request: Mapping[str, Any], parent: Mapping[str, Any] | None
+    ) -> set[str]:
+        if request.get("schema_version") == "1.0":
+            return set()
+        correction = normalize_correction(self.repository, request["correction"])
+        inputs = cast(Mapping[str, Any], request["correction_inputs"])
+        require(parent is not None, "correction predecessor is missing")
+        parent_digest = str(request["expected_head"])
+        require(parent_digest == correction["expected_head"], "correction parent differs")
+        require(
+            self._find_correction(parent_digest, correction, inputs) is None,
+            "correction is already authoritative",
+        )
+        admission, transactions, settlements = self._load_states_at(parent_digest)
+        policy_bytes, manifest_bytes, objects = validate_inputs(inputs, correction)
+        admitted = admit_bundle(
+            self.repository, policy_bytes, manifest_bytes, objects, prior_state=admission
+        )
+        transaction_batch = reconcile_transactions(admitted, transactions)
+        settlement_batch = reconcile_settlements(admitted, settlements)
+        require(
+            request["transaction_batch"] == _batch_payload(transaction_batch)
+            and request["settlement_batch"] == _batch_payload(settlement_batch),
+            "correction candidates differ from admitted source truth",
+        )
+        before = transactions.records + settlements.records
+        after = transaction_batch.state.records + settlement_batch.state.records
+        candidates = {
+            row.reconciliation_key: row.value()
+            for row in cast(
+                tuple[Candidate, ...], (*transaction_batch.candidates, *settlement_batch.candidates)
+            )
+        }
+        parent_value = cast(Mapping[str, Any], parent)
+        keys: set[str] = set()
+        for item in correction["items"]:
+            key = item["reconciliation_key"]
+            require(
+                key in candidates
+                and key in parent_value["proof_heads"]
+                and key in parent_value["case_heads"],
+                "correction key has no authoritative exception",
+            )
+            prior_proof = self.read_proof(parent_value["proof_heads"][key])
+            prior_case = self.read_case_revision(parent_value["case_heads"][key])
+            # Re-admit the same immutable source under the actual predecessor policy.
+            prior_policy = item["prior_policy"]
+            prior_manifest = dict(inputs["manifest"])
+            prior_manifest.update(
+                policy_version=prior_policy.get("policy_version"),
+                policy_sha256=prior_policy.get("policy_sha256"),
+            )
+            prior_manifest["manifest_sha256"] = canonical_sha256(
+                prior_manifest, {"manifest_sha256"}
+            )
+            prior_admitted = admit_bundle(
+                self.repository,
+                canonical_json_bytes(prior_policy),
+                canonical_json_bytes(prior_manifest),
+                objects,
+                prior_state=admission,
+            )
+            prior_candidates = (
+                reconcile_transactions(prior_admitted, transactions).candidates
+                if key.startswith("txn:")
+                else reconcile_settlements(prior_admitted, settlements).candidates
+            )
+            prior_candidate = next(
+                row.value() for row in prior_candidates if row.reconciliation_key == key
+            )
+            validate_relationship(
+                self.registry,
+                item,
+                prior_proof,
+                prior_case,
+                before,
+                after,
+                candidates[key],
+                prior_candidate,
+            )
+            keys.add(key)
+        return keys
+
     def recover_attempt(
         self,
         *,
@@ -1015,6 +1152,8 @@ class FinalizationStore:
         policy_version: str,
         policy_sha256: str,
         manifest_sha256: str,
+        correction: Mapping[str, Any] | None = None,
+        correction_inputs: Mapping[str, Any] | None = None,
     ) -> FinalizationReceipt | None:
         """Return an authoritative prior receipt after validating repeated inputs."""
 
@@ -1024,6 +1163,33 @@ class FinalizationStore:
             raise AdmissionRejected("SCHEMA_VIOLATION", "invalid expected control head")
         occurred_at = canonical_timestamp(created_at)
         request_path = self.root / "attempts" / attempt_id / "request.json"
+        if correction is not None:
+            normalized = normalize_correction(self.repository, correction)
+            require(correction_inputs is not None, "correction inputs unavailable")
+            validate_inputs(cast(Mapping[str, Any], correction_inputs), normalized)
+            correction = normalized
+            correction_inputs = cast(
+                Mapping[str, Any], parse_strict_json(canonical_json_bytes(correction_inputs))
+            )
+            self.verify_history()
+            existing = self._find_correction(self.read_head(), normalized, correction_inputs)
+            if existing is not None and not request_path.exists():
+                digest, commit = existing
+                stored = self._read_request(
+                    str(commit["attempt_id"]), str(commit["request_sha256"])
+                )
+                metadata = stored["transaction_batch"]
+                require(
+                    expected_head == normalized["expected_head"]
+                    and run_id == metadata["run_id"]
+                    and policy_version == metadata["policy_version"]
+                    and policy_sha256 == metadata["policy_sha256"]
+                    and manifest_sha256 == metadata["manifest_sha256"],
+                    "correction retry metadata differs",
+                )
+                return self._receipt(digest, commit)
+        elif correction_inputs is not None:
+            raise AdmissionRejected("SCHEMA_VIOLATION", "correction inputs without provenance")
         if not request_path.exists():
             return None
         lock_path = self.root / "locks/finalization.lock"
@@ -1031,6 +1197,11 @@ class FinalizationStore:
             with lock_path.open("a+b") as lock:
                 fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
                 request = self._read_canonical(request_path)
+                if (
+                    request.get("correction") != correction
+                    or request.get("correction_inputs") != correction_inputs
+                ):
+                    _reject("attempt correction context differs")
                 expected_metadata = {
                     "run_id": run_id,
                     "policy_version": policy_version,
@@ -1061,7 +1232,10 @@ class FinalizationStore:
                 digest, commit = recovered
                 outcome_path = request_path.with_name("outcome.json")
                 if outcome_path.exists():
-                    return self._read_outcome(outcome_path)
+                    outcome = self._read_outcome(outcome_path)
+                    if outcome.commit_sha256 != digest or outcome.request_sha256 != request_digest:
+                        _reject("attempt outcome belongs to another request")
+                    return outcome
                 receipt = self._receipt(digest, commit)
                 self._write_immutable(outcome_path, canonical_json_bytes(receipt.value()))
                 return receipt
@@ -1079,6 +1253,8 @@ class FinalizationStore:
         transaction_batch: TransactionReconciliationBatch | None = None,
         settlement_batch: SettlementReconciliationBatch | None = None,
         fault_point: str | None = None,
+        correction: Mapping[str, Any] | None = None,
+        correction_inputs: Mapping[str, Any] | None = None,
     ) -> FinalizationReceipt:
         """Finalize every candidate through one atomic authoritative pointer update."""
 
@@ -1091,6 +1267,21 @@ class FinalizationStore:
             transaction_batch=transaction_batch,
             settlement_batch=settlement_batch,
         )
+        if correction is not None:
+            normalized = normalize_correction(self.repository, correction)
+            require(correction_inputs is not None, "correction inputs unavailable")
+            validate_inputs(cast(Mapping[str, Any], correction_inputs), normalized)
+            correction = normalized
+            correction_inputs = cast(
+                Mapping[str, Any], parse_strict_json(canonical_json_bytes(correction_inputs))
+            )
+            request.update(
+                schema_version="2.0",
+                correction=normalized,
+                correction_inputs=dict(correction_inputs),
+            )
+        elif correction_inputs is not None:
+            raise AdmissionRejected("SCHEMA_VIOLATION", "correction inputs without provenance")
         request_raw = canonical_json_bytes(request)
         request_sha256 = _sha256(request_raw)
         try:
@@ -1110,6 +1301,28 @@ class FinalizationStore:
                         _reject("attempt outcome request differs")
                     return receipt
                 current_head = self.read_head()
+                if correction is not None:
+                    self.verify_history()
+                    prior_correction = self._find_correction(
+                        current_head, request["correction"], correction_inputs
+                    )
+                    if prior_correction is not None:
+                        digest, previous = prior_correction
+                        require(
+                            expected_head == request["correction"]["expected_head"],
+                            "correction retry parent differs",
+                        )
+                        previous_request = self._read_request(
+                            str(previous["attempt_id"]), str(previous["request_sha256"])
+                        )
+                        require(
+                            all(
+                                request[name] == previous_request[name]
+                                for name in ("transaction_batch", "settlement_batch")
+                            ),
+                            "correction retry candidates differ",
+                        )
+                        return self._receipt(digest, previous)
                 recovered = self._find_attempt(current_head, attempt_id, request_sha256)
                 if recovered is not None:
                     digest, commit = recovered
@@ -1124,6 +1337,7 @@ class FinalizationStore:
                 if current_head != expected_head:
                     _reject("stale authoritative control head")
                 parent = self._read_commit(current_head) if current_head is not None else None
+                corrected_keys = self._correction_keys(request, parent)
                 proof_heads = self._heads(parent, "proof_heads")
                 case_heads = self._heads(parent, "case_heads")
                 candidates: list[tuple[Mapping[str, Any], Mapping[str, Any]]] = []
@@ -1165,6 +1379,7 @@ class FinalizationStore:
                         proof=proof,
                         prior=prior_case,
                         occurred_at=str(request["created_at"]),
+                        corrected=key in corrected_keys,
                     )
                     if case is not None:
                         case_raw = canonical_json_bytes(case)

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:correction-provenance:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "correction_id",
+    "expected_head",
+    "manifest_sha256",
+    "policy_sha256",
+    "items",
+    "correction_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "kind": {
+      "const": "BALANCED_JOURNAL_ADJUSTMENT"
+    },
+    "correction_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+    },
+    "expected_head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reconciliation_key",
+          "prior_proof_id",
+          "prior_case_revision_sha256",
+          "initial_exception_proof_id",
+          "prior_policy",
+          "original_sources",
+          "corrective_sources"
+        ],
+        "properties": {
+          "reconciliation_key": {
+            "type": "string",
+            "pattern": "^(txn|stl):[0-9a-f]{64}$"
+          },
+          "prior_proof_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+          },
+          "prior_case_revision_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "initial_exception_proof_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+          },
+          "prior_policy": {
+            "type": "object"
+          },
+          "original_sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "identity",
+                "business_sha256"
+              ],
+              "properties": {
+                "identity": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "const": "LEDGER_JOURNAL"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^(?!\\s)(?:.*\\S)?$"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^(?!\\s)(?:.*\\S)?$"
+                    }
+                  ],
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "business_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "corrective_sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "identity",
+                "business_sha256"
+              ],
+              "properties": {
+                "identity": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "const": "LEDGER_JOURNAL"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^(?!\\s)(?:.*\\S)?$"
+                    },
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "^(?!\\s)(?:.*\\S)?$"
+                    }
+                  ],
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "business_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "correction_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

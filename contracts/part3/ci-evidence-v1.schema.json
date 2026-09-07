@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "aws_execution": {
+      "const": false
+    },
+    "commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "deterministic_payload_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "entry_base": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "event": {
+      "enum": [
+        "push",
+        "pull_request"
+      ]
+    },
+    "event_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "expected_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "input_identities": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minProperties": 6,
+      "type": "object"
+    },
+    "job": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "postmerge_verification_required": {
+      "const": true
+    },
+    "producer_state": {
+      "const": "LOCAL_VALIDATION_FINISHED"
+    },
+    "project_complete": {
+      "const": false
+    },
+    "pull_request_number": {
+      "minimum": 1,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "repository": {
+      "const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+    },
+    "run_success_independently_required": {
+      "const": true
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "toolchain": {
+      "additionalProperties": false,
+      "properties": {
+        "java_major": {
+          "const": 17
+        },
+        "py4j": {
+          "const": "0.10.9.7"
+        },
+        "python": {
+          "const": "3.11.13"
+        },
+        "spark": {
+          "const": "3.5.6"
+        }
+      },
+      "required": [
+        "python",
+        "java_major",
+        "spark",
+        "py4j"
+      ],
+      "type": "object"
+    },
+    "tree": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "wheel_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "workflow_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "workflow_run_attempt": {
+      "pattern": "^[1-9][0-9]*$",
+      "type": "string"
+    },
+    "workflow_run_id": {
+      "pattern": "^[1-9][0-9]*$",
+      "type": "string"
+    },
+    "workflow_sha": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "commit",
+    "tree",
+    "entry_base",
+    "deterministic_payload_sha256",
+    "wheel_sha256",
+    "workflow_run_id",
+    "workflow_run_attempt",
+    "schema_version",
+    "repository",
+    "event",
+    "pull_request_number",
+    "producer_state",
+    "run_success_independently_required",
+    "postmerge_verification_required",
+    "aws_execution",
+    "project_complete",
+    "expected_commit",
+    "event_ref",
+    "workflow_ref",
+    "workflow_sha",
+    "job",
+    "toolchain",
+    "input_identities"
+  ],
+  "type": "object"
+}

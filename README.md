@@ -34,9 +34,17 @@ then closed Stage 4 transaction reconciliation with exact-head CI, a squash merg
 post-merge `main` CI. PR #14 closed Stage 5 settlement reconciliation, PR #15 closed atomic proof
 finalization, and PR #16 closed genuine Spark parity, the complete failure matrix, deterministic
 replay, and the eight critical paths. PR #17 completed the Stage 8 promotion audit with exact-head
-and independent post-merge validation. The closure-attestation candidate records Part 2 as
-`LOCAL_RECONCILIATION_VERIFIED`; that state becomes active on `main` only after its own squash merge
-and independent main CI. The overall project remains in progress.
+and independent post-merge validation. PR #18 completed the closure attestation at squash commit
+`cb81704adcfdfac5d93879cd6c189fc2213bbe79`; exact-head CI `33879453002` and independent main CI
+`33904881790` passed. Part 2's accepted 203-requirement local scope is
+`LOCAL_RECONCILIATION_VERIFIED`. Part 3 Stage 1 is `IN_PROGRESS`: immutable entry ownership and
+append-only source correction are under validation. The overall project remains in progress.
+
+The original master has explicit carryovers beyond the historical Part 2 ledger: generator profiles,
+generator-driven properties, corrected-source behavior, a full source-to-proof DataFrame pipeline,
+and both local and managed measurements. Their owners and evidence boundaries are recorded in
+[the conformance addendum](spec/part2-master-conformance-addendum-v1.json). Open ownership is not
+completion. All six Part 3 AWS master gates remain `NOT_EXECUTED`.
 
 The immutable Stage 1 status statement was: Part 2
 is now `PART2_IN_PROGRESS`. No reconciliation

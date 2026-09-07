@@ -1,0 +1,141 @@
+{
+  "$id": "https://ledgerguard.local/contracts/part3-requirements-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "requirements": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "allowed_claim": {
+            "enum": [
+              "LOCAL_VERIFIED",
+              "AWS_VERIFIED"
+            ]
+          },
+          "dependencies": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "expected_evidence": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "implementation": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "inherited_constraints": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "normative_statement": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "owner_part": {
+            "const": 3
+          },
+          "owner_stage": {
+            "maximum": 8,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "requirement_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "source_fragment": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "source_line": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "source_path": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "source_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "PLANNED",
+              "IMPLEMENTED",
+              "LOCAL_VERIFIED",
+              "EXTERNALLY_VERIFIED",
+              "OWNED_OPEN",
+              "BLOCKED"
+            ]
+          },
+          "tests": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "validation_method": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "requirement_id",
+          "source_path",
+          "source_sha256",
+          "source_line",
+          "source_fragment",
+          "normative_statement",
+          "owner_part",
+          "owner_stage",
+          "dependencies",
+          "inherited_constraints",
+          "validation_method",
+          "expected_evidence",
+          "allowed_claim",
+          "state",
+          "implementation",
+          "tests"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "requirements"
+  ],
+  "type": "object"
+}

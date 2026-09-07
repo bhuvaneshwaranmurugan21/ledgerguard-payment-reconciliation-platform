@@ -1,0 +1,340 @@
+{
+  "adjudications": [
+    {
+      "class": "immutable source replacement, role/currency/reference admission exemptions",
+      "disposition": "Retained inherited admission and domain-schema obligations; the new protocol re-admits actual bytes and compares the entire reconstructed batch. Execute the unchanged inherited financial tests plus current correction rejection tests. No production admission or accepted schema validation is disabled for a correction."
+    }
+  ],
+  "mutations": [
+    {
+      "after": "\"RESOLVED_BY_LATE_DATA\"",
+      "before": "\"RESOLVED_BY_CORRECTION\"",
+      "family": "causal_classification",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M001",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "predecessor_policy_candidate[\"status\"] != \"EXCEPTION\"",
+      "family": "causal_classification",
+      "module": "ledgerguard.reconciliation.correction",
+      "module_path": "ledgerguard/reconciliation/correction.py",
+      "mutation_id": "P3-S1-M002",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_policy_relaxation_cannot_resolve_incomplete_correction"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "item[\"prior_proof_id\"] == prior_proof[\"proof_id\"]",
+      "family": "provenance_binding",
+      "module": "ledgerguard.reconciliation.correction",
+      "module_path": "ledgerguard/reconciliation/correction.py",
+      "mutation_id": "P3-S1-M003",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_wrong_predecessor_is_not_authoritative[prior_proof_id]"
+      ]
+    },
+    {
+      "after": "and True",
+      "before": "and record.business_sha256 == row[\"business_sha256\"]",
+      "family": "provenance_binding",
+      "module": "ledgerguard.reconciliation.correction",
+      "module_path": "ledgerguard/reconciliation/correction.py",
+      "mutation_id": "P3-S1-M004",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_exact_source_targets_are_required[digest-original_sources]"
+      ]
+    },
+    {
+      "after": "0 <= effective <= prior_difference",
+      "before": "0 <= effective < prior_difference",
+      "family": "financial_boundary",
+      "module": "ledgerguard.reconciliation.correction",
+      "module_path": "ledgerguard/reconciliation/correction.py",
+      "mutation_id": "P3-S1-M005",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_nonreducing_or_overshooting_correction_cannot_resolve[200]"
+      ]
+    },
+    {
+      "after": "existing is not None",
+      "before": "existing is not None and not request_path.exists()",
+      "family": "identity_replay",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M006",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_recovery_cannot_hide_attempt_identity_conflict"
+      ]
+    },
+    {
+      "after": "False",
+      "before": "previous is not None and previous[\"correction_id\"] == correction[\"correction_id\"]",
+      "family": "identity_replay",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M007",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_new_attempt_retry_has_no_second_effect"
+      ]
+    },
+    {
+      "after": "True, f\"protected authority changed: {path}\"",
+      "before": "sha(root, path) == expected, f\"protected authority changed: {path}\"",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_validation",
+      "module_path": "ledgerguard_part3_stage1_validation.py",
+      "mutation_id": "P3-S1-M008",
+      "tests": [
+        "tests/test_part3_stage1_entry.py::test_entry_tampering_is_rejected[protected]"
+      ]
+    },
+    {
+      "after": "True, \"atomic source coverage differs\"",
+      "before": "row[\"requirements\"] == expected, \"atomic source coverage differs\"",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_validation",
+      "module_path": "ledgerguard_part3_stage1_validation.py",
+      "mutation_id": "P3-S1-M009",
+      "tests": [
+        "tests/test_part3_stage1_entry.py::test_entry_tampering_is_rejected[atomic-coverage]"
+      ]
+    },
+    {
+      "after": "True, \"requirement owner differs\"",
+      "before": "row[\"owner_stage\"] == owner, \"requirement owner differs\"",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_validation",
+      "module_path": "ledgerguard_part3_stage1_validation.py",
+      "mutation_id": "P3-S1-M010",
+      "tests": [
+        "tests/test_part3_stage1_entry.py::test_master_owner_and_dependencies_cannot_drift[owner_stage-1-owner differs]"
+      ]
+    },
+    {
+      "after": "\"RESOLVED_BY_CORRECTION\"",
+      "before": "\"RESOLVED_BY_CORRECTION\" if corrected else \"RESOLVED_BY_LATE_DATA\"",
+      "family": "causal_classification",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M011",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_policy_only_legacy_revision_is_never_correction"
+      ]
+    },
+    {
+      "after": "    if False:\n",
+      "before": "    if errors:\n",
+      "family": "provenance_binding",
+      "module": "ledgerguard.reconciliation.correction",
+      "module_path": "ledgerguard/reconciliation/correction.py",
+      "mutation_id": "P3-S1-M012",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_companion_shape_and_canonical_identity_fail_closed[extra]"
+      ]
+    },
+    {
+      "after": "declared.isdisjoint(original)",
+      "before": "declared == actual and declared.isdisjoint(original)",
+      "family": "provenance_binding",
+      "module": "ledgerguard.reconciliation.correction",
+      "module_path": "ledgerguard/reconciliation/correction.py",
+      "mutation_id": "P3-S1-M013",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_undeclared_same_key_journal_cannot_supply_correction_causation"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "request[\"transaction_batch\"] == _batch_payload(transaction_batch)\n            and request[\"settlement_batch\"] == _batch_payload(settlement_batch)",
+      "family": "financial_boundary",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M014",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_supplied_candidate_cannot_override_readmitted_financial_truth"
+      ]
+    },
+    {
+      "after": "request_sha256 = canonical_sha256({k: v for k, v in request.items() if k != \"correction\"})",
+      "before": "request_sha256 = _sha256(request_raw)",
+      "family": "provenance_binding",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M015",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "after": "initial_proof = proof[\"proof_id\"]",
+      "before": "initial_proof = prior[\"initial_exception_proof_id\"]",
+      "family": "historical_chain",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M016",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "after": "value[\"prior_proof_id\"] = \"0\" * 64",
+      "before": "value[\"prior_proof_id\"] = prior[\"proof_id\"]",
+      "family": "historical_chain",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M017",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "after": "\"totals\": dict(totals, difference_minor=0),",
+      "before": "\"totals\": dict(totals),",
+      "family": "financial_boundary",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M018",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_partial_correction_remains_open"
+      ]
+    },
+    {
+      "after": "if False:",
+      "before": "if current_head != expected_head:",
+      "family": "publication_recovery",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M019",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_stale_correction_does_not_rebase_itself"
+      ]
+    },
+    {
+      "after": "if fault_point == \"after_objects\":\n                    self._replace_head(\"0\" * 64)\n                    os._exit(72)",
+      "before": "if fault_point == \"after_objects\":\n                    os._exit(72)",
+      "family": "publication_recovery",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M020",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_correction_real_process_crash_and_recovery[after_objects-72]"
+      ]
+    },
+    {
+      "after": "        try:\n            corrected_keys = {row[\"reconciliation_key\"] for row in request.get(\"correction\", {}).get(\"items\", [])}",
+      "before": "        try:\n            corrected_keys = self._correction_keys(request, parent)",
+      "family": "historical_chain",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M021",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_mixed_history_rejects_rehashed_tampering[provenance]"
+      ]
+    },
+    {
+      "after": "\"WRITTEN_OFF\"",
+      "before": "\"RESOLVED_BY_CORRECTION\"",
+      "family": "actor_boundary",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M022",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "actual_commit == expected and environment.get(\"EXPECTED_SHA\") == expected",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_evidence",
+      "module_path": "ledgerguard_part3_stage1_evidence.py",
+      "mutation_id": "P3-S1-M023",
+      "tests": [
+        "tests/test_part3_stage1_evidence.py::test_forged_event_metadata_rejects[EXPECTED_SHA-dddddddddddddddddddddddddddddddddddddddd]"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "local[\"execution_boundary\"][\"aws_execution\"] is False",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_evidence",
+      "module_path": "ledgerguard_part3_stage1_evidence.py",
+      "mutation_id": "P3-S1-M024",
+      "tests": [
+        "tests/test_part3_stage1_evidence.py::test_evidence_cannot_upgrade_invalid_local_or_event_facts[aws]"
+      ]
+    },
+    {
+      "after": "if False:",
+      "before": "if outcome.commit_sha256 != digest or outcome.request_sha256 != request_digest:",
+      "family": "identity_replay",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M025",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_recovery_rejects_another_attempts_valid_committed_outcome"
+      ]
+    },
+    {
+      "after": "        if request.get(\"schema_version\") in {\"2.0\", \"3.0\"}:\n            fields.update({\"correction\", \"correction_inputs\"})\n        if set(request) != fields or request.get(\"schema_version\") not in {\"1.0\", \"2.0\", \"3.0\"}:\n            _reject(\"authoritative request shape differs\")\n        if request[\"schema_version\"] in {\"2.0\", \"3.0\"}:\n            try:\n                normalize_correction(self.repository, request[\"correction\"])\n                validate_inputs(request[\"correction_inputs\"], request[\"correction\"])\n            except (AdmissionRejected, TypeError, ValueError) as error:\n                raise FinalizationRejected(\"persisted correction context differs\") from error\n",
+      "before": "        if request.get(\"schema_version\") == \"2.0\":\n            fields.update({\"correction\", \"correction_inputs\"})\n        if set(request) != fields or request.get(\"schema_version\") not in {\"1.0\", \"2.0\"}:\n            _reject(\"authoritative request shape differs\")\n        if request[\"schema_version\"] == \"2.0\":\n            try:\n                normalize_correction(self.repository, request[\"correction\"])\n                validate_inputs(request[\"correction_inputs\"], request[\"correction\"])\n            except (AdmissionRejected, TypeError, ValueError) as error:\n                raise FinalizationRejected(\"persisted correction context differs\") from error\n",
+      "family": "historical_chain",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M026",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_mixed_history_rejects_rehashed_tampering[request-version]"
+      ]
+    },
+    {
+      "after": "if False:",
+      "before": "if authoritative is None or authoritative[0] != receipt.commit_sha256:",
+      "family": "publication_recovery",
+      "module": "ledgerguard.reconciliation.finalization",
+      "module_path": "ledgerguard/reconciliation/finalization.py",
+      "mutation_id": "P3-S1-M027",
+      "tests": [
+        "tests/test_part2_stage6_finalization.py::test_p2s6_outcome_must_belong_to_request_and_authoritative_history"
+      ]
+    },
+    {
+      "after": "check(True, f\"current active status differs: {marker}\")",
+      "before": "check(marker in active, f\"current active status differs: {marker}\")",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_validation",
+      "module_path": "ledgerguard_part3_stage1_validation.py",
+      "mutation_id": "P3-S1-M028",
+      "tests": [
+        "tests/test_part3_stage1_entry.py::test_current_surfaces_fail_closed[status]"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "[(row[\"owner_part\"], row[\"owner_stage\"]) for row in gaps]\n        == [(3, 2), (3, 1), (3, 3), (3, 1), (3, 3), (4, 3), (4, 3), (3, 4), (4, 1), (5, 1), (3, 3)]",
+      "family": "governance_evidence",
+      "module": "ledgerguard_part3_stage1_validation",
+      "module_path": "ledgerguard_part3_stage1_validation.py",
+      "mutation_id": "P3-S1-M029",
+      "tests": [
+        "tests/test_part3_stage1_entry.py::test_carryover_owner_cannot_move_out_of_its_required_stage"
+      ]
+    }
+  ],
+  "required_families": [
+    "actor_boundary",
+    "causal_classification",
+    "financial_boundary",
+    "governance_evidence",
+    "historical_chain",
+    "identity_replay",
+    "provenance_binding",
+    "publication_recovery"
+  ],
+  "schema_version": "1.0"
+}
