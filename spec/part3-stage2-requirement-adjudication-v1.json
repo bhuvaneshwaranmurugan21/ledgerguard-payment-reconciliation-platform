@@ -1,0 +1,429 @@
+{
+  "authority": "spec/part3-requirements-v1.json",
+  "authority_sha256": "ffad2f173f413eff53000c2fdd7e3840e395e5b9775f4c32bd1df07c776d2cd9",
+  "claim": "NO_STAGE2_LIVE_EVIDENCE_YET",
+  "requirements": [
+    {
+      "control_area": "identity_and_iam",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "normative_statement": "Verify OIDC identity.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L226-01.json",
+      "requirement_id": "P3-M-L226-01",
+      "source_line": 226,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "control_area": "identity_and_iam",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "normative_statement": "Verify exact account",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L227-01.json",
+      "requirement_id": "P3-M-L227-01",
+      "source_line": 227,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "control_area": "identity_and_iam",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "normative_statement": "Verify ap-southeast-2",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L227-02.json",
+      "requirement_id": "P3-M-L227-02",
+      "source_line": 227,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "control_area": "identity_and_iam",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "normative_statement": "Verify repository trust boundary",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L228-01.json",
+      "requirement_id": "P3-M-L228-01",
+      "source_line": 228,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "control_area": "identity_and_iam",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "normative_statement": "Verify main branch trust boundary",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L228-02.json",
+      "requirement_id": "P3-M-L228-02",
+      "source_line": 228,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "control_area": "identity_and_iam",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "normative_statement": "Compare live IAM with checked-in IAM.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L229-01.json",
+      "requirement_id": "P3-M-L229-01",
+      "source_line": 229,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "control_area": "backend",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml"
+      ],
+      "normative_statement": "Verify backend access.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L230-01.json",
+      "requirement_id": "P3-M-L230-01",
+      "source_line": 230,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "lease",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Verify lease behavior.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L231-01.json",
+      "requirement_id": "P3-M-L231-01",
+      "source_line": 231,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "cost",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "normative_statement": "Verify budget headroom.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L232-01.json",
+      "requirement_id": "P3-M-L232-01",
+      "source_line": 232,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "control_area": "s3",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml"
+      ],
+      "normative_statement": "Verify S3 capabilities.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L233-01.json",
+      "requirement_id": "P3-M-L233-01",
+      "source_line": 233,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "glue",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Verify Glue definition create",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L234-01.json",
+      "requirement_id": "P3-M-L234-01",
+      "source_line": 234,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "glue",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Verify Glue definition read",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L234-02.json",
+      "requirement_id": "P3-M-L234-02",
+      "source_line": 234,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "glue",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Verify Glue definition delete",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L234-03.json",
+      "requirement_id": "P3-M-L234-03",
+      "source_line": 234,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "step_functions",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "normative_statement": "Verify Step Functions definition validation.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L235-01.json",
+      "requirement_id": "P3-M-L235-01",
+      "source_line": 235,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py"
+      ]
+    },
+    {
+      "control_area": "athena",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "normative_statement": "Verify Athena workgroup access.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L236-01.json",
+      "requirement_id": "P3-M-L236-01",
+      "source_line": 236,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py"
+      ]
+    },
+    {
+      "control_area": "cloudwatch",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "normative_statement": "Verify CloudWatch evidence access.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L237-01.json",
+      "requirement_id": "P3-M-L237-01",
+      "source_line": 237,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py"
+      ]
+    },
+    {
+      "control_area": "inventory",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "normative_statement": "Prove no active LedgerGuard workload resources exist.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L238-01.json",
+      "requirement_id": "P3-M-L238-01",
+      "source_line": 238,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    {
+      "control_area": "execution_boundary",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "CloudShell will not be a dependency.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L239-01.json",
+      "requirement_id": "P3-M-L239-01",
+      "source_line": 239,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    {
+      "control_area": "execution_boundary",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Restrict managed execution to main",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L266-01.json",
+      "requirement_id": "P3-M-L266-01",
+      "source_line": 266,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    {
+      "control_area": "execution_boundary",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Restrict managed execution to manual dispatch",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L266-02.json",
+      "requirement_id": "P3-M-L266-02",
+      "source_line": 266,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    {
+      "control_area": "execution_boundary",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "normative_statement": "Short-lived OIDC credentials.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L267-01.json",
+      "requirement_id": "P3-M-L267-01",
+      "source_line": 267,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    {
+      "control_area": "cost",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "normative_statement": "Gross run-cost ceiling.",
+      "owner_stage": 2,
+      "planned_live_evidence": "evidence/part3-stage2/P3-M-L276-01.json",
+      "requirement_id": "P3-M-L276-01",
+      "source_line": 276,
+      "state": "IMPLEMENTATION_IN_PROGRESS",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    }
+  ],
+  "schema_version": "1.0",
+  "stage": 2
+}

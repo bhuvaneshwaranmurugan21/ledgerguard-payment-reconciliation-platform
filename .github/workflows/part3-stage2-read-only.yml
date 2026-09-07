@@ -1,0 +1,89 @@
+name: Part 3 Stage 2 Read-only AWS Qualification
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact immutable main commit to qualify
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ledgerguard-part3-stage2-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  qualify-read-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+      CHECKED_OUT_SHA: ${{ inputs.expected_sha }}
+    steps:
+      - name: Check out exact requested commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.expected_sha }}
+          fetch-depth: 0
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements/part2-stage8-bootstrap.lock
+            requirements/part2-stage8-py311.lock
+      - name: Establish dispatch evidence before OIDC
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ledgerguard-part3-stage2-read-only"
+          test "${{ github.event_name }}" = "workflow_dispatch"
+          test "${{ github.repository }}" = "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+          test "${{ github.ref }}" = "refs/heads/main"
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "${{ github.sha }}" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$AWS_REGION" = "ap-southeast-2"
+          test "$AWS_ROLE_ARN" = "arn:aws:iam::857229544428:role/LedgerGuardGitHubOidcRole"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          Path(os.environ["RUNNER_TEMP"], "ledgerguard-part3-stage2-read-only", "dispatch-context.json").write_text(
+              json.dumps({"event":"workflow_dispatch","ref":"refs/heads/main","commit":os.environ["EXPECTED_SHA"]}, sort_keys=True) + "\n"
+          )
+          PY
+      - name: Install locked qualification package
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes -r requirements/part2-stage8-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part2-stage8-py311.lock
+          python -m pip install --no-deps .
+      - name: Assume exact repository OIDC role
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: ledgerguard-stage2-read-${{ github.run_id }}
+          role-duration-seconds: 1800
+          mask-aws-account-id: true
+      - name: Execute fail-closed read-only qualification
+        run: >-
+          python tools/part3_stage2_live.py read-only
+          --expected-sha "$EXPECTED_SHA"
+          --output "$RUNNER_TEMP/ledgerguard-part3-stage2-read-only"
+      - name: Upload complete producer evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part3-stage2-read-only-${{ inputs.expected_sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/ledgerguard-part3-stage2-read-only
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90

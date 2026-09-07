@@ -1,0 +1,42 @@
+{
+  "aws_execution": false,
+  "classification": "EXTERNAL_CLOSURE_IMPORT",
+  "gate_13": "EXTERNALLY_VERIFIED",
+  "gate_14": "EXTERNALLY_VERIFIED",
+  "main_artifact": {
+    "id": 10013159831,
+    "members": 223,
+    "name": "ledgerguard-part3-stage1-5abef1a07899bd8ecd202008f1c397890184a0d2",
+    "zip_sha256": "f1338e2320a1113410c7a0ac6a90b5eebb73abe512fcc5a53ca6f77aafdf641f"
+  },
+  "main_jobs": [
+    {
+      "conclusion": "success",
+      "id": 101689780591,
+      "name": "part3-stage1-current"
+    },
+    {
+      "conclusion": "success",
+      "id": 101689780829,
+      "name": "foundation"
+    }
+  ],
+  "main_run": 34105604941,
+  "next_owner": "PART3_STAGE2",
+  "pr_artifact": {
+    "id": 10011391556,
+    "members": 223,
+    "name": "ledgerguard-part3-stage1-300682f642de5a5b26c6499758e6872eca1ca916",
+    "zip_sha256": "42d79f47f3278b3047678378df8cfd363b50b06fbd0919a45c7afa545f5d8ef6"
+  },
+  "pr_run": 34101912918,
+  "project_complete": false,
+  "pull_request": 19,
+  "schema_version": "1.0",
+  "sole_parent": "cb81704adcfdfac5d93879cd6c189fc2213bbe79",
+  "source_container_sha256": "5d4920aa3affd77c416afaf82fb37a69413a95c0d0ffc762f0947c3e19fe6a84",
+  "squash_commit": "5abef1a07899bd8ecd202008f1c397890184a0d2",
+  "stage_complete": true,
+  "tree": "77f13e8a68c46ccdcdae426b82c37c66d5e3ed81",
+  "validated_pr_head": "300682f642de5a5b26c6499758e6872eca1ca916"
+}

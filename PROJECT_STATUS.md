@@ -4,11 +4,12 @@
 
 - Project: LedgerGuard
 - Part: 3 — Managed AWS platform
-- Stage: 1 — Entry and conformance correction
+- Stage: 2 — Exact-target AWS qualification
 - State: `LOCAL_RECONCILIATION_VERIFIED`
-- Stage state: `PART3_STAGE1_IN_PROGRESS`
+- Stage state: `PART3_STAGE2_IN_PROGRESS`
 - Highest accepted claim: Part 2 repository-local reconciliation; PR #18 closure externally verified
-- Stage 1 correction: implementation in progress; acceptance gates pending
+- Stage 1 external closure: `EXTERNALLY_VERIFIED`
+- Stage 2 qualification: implementation locally validated; live AWS gates remain unexecuted
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
@@ -162,6 +163,7 @@ PR #17 passed exact-head CI run `33871740027`, was squash-merged as
 
 The historical terminal Part 2 authority remains unchanged and active for its accepted local scope.
 The append-only Part 2 master conformance addendum records all original-master carryovers with
-owners. Part 3 Stage 1 is in progress; its correction, quality, reproducibility, CI, and external
-closure gates are not yet complete. All six Part 3 AWS master gates remain `NOT_EXECUTED`. No AWS, managed,
-performance, scale, production-operation, or overall-project completion claim is made.
+owners. Part 3 Stage 1 is externally complete. Part 3 Stage 2 has a locally validated qualification
+implementation and remains open for exact-head CI, publication, and live AWS proof. All six Part 3
+AWS master gates remain `NOT_EXECUTED`. No AWS, managed, performance, scale, production-operation,
+or overall-project completion claim is made.

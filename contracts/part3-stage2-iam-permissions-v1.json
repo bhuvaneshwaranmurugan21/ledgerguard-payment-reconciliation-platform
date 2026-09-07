@@ -1,0 +1,182 @@
+{
+    "approved_global_read_actions": [
+        "budgets:ViewBudget",
+        "ce:GetCostAndUsage",
+        "cloudwatch:ListMetrics",
+        "dynamodb:ListTables",
+        "glue:GetJobs",
+        "logs:DescribeLogGroups",
+        "s3:ListAllMyBuckets",
+        "servicequotas:ListServiceQuotas",
+        "states:ListStateMachines",
+        "states:ValidateStateMachineDefinition",
+        "tag:GetResources"
+    ],
+    "effective_authority": {
+        "permissions_boundary_required_absent": true,
+        "scp_narrowing_detected_by_capability_probes": true
+    },
+    "policy": {
+        "Statement": [
+            {
+                "Action": [
+                    "iam:GetRole",
+                    "iam:ListAttachedRolePolicies",
+                    "iam:ListRolePolicies",
+                    "iam:ListRoleTags"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:iam::857229544428:role/LedgerGuardGlueProbeRole",
+                "Sid": "InspectGlueProbeRole"
+            },
+            {
+                "Action": [
+                    "iam:GetRole",
+                    "iam:GetRolePolicy",
+                    "iam:ListAttachedRolePolicies",
+                    "iam:ListRolePolicies",
+                    "iam:ListRoleTags"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:iam::857229544428:role/LedgerGuardGitHubOidcRole",
+                "Sid": "InspectOwnRole"
+            },
+            {
+                "Action": [
+                    "s3:GetBucketEncryption",
+                    "s3:GetBucketLifecycleConfiguration",
+                    "s3:GetBucketLocation",
+                    "s3:GetBucketOwnershipControls",
+                    "s3:GetBucketPolicy",
+                    "s3:GetBucketPublicAccessBlock",
+                    "s3:GetBucketTagging",
+                    "s3:GetBucketVersioning",
+                    "s3:ListBucketVersions"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:s3:::ledgerguard-tfstate-857229544428-ap-southeast-2",
+                "Sid": "InspectBackend"
+            },
+            {
+                "Action": [
+                    "s3:DeleteObjectVersion",
+                    "s3:GetObjectVersion",
+                    "s3:PutObject"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:s3:::ledgerguard-tfstate-857229544428-ap-southeast-2/qualification/*",
+                "Sid": "ProbeBackendPrefix"
+            },
+            {
+                "Action": [
+                    "dynamodb:DeleteItem",
+                    "dynamodb:DescribeContinuousBackups",
+                    "dynamodb:DescribeTable",
+                    "dynamodb:DescribeTimeToLive",
+                    "dynamodb:GetItem",
+                    "dynamodb:ListTagsOfResource",
+                    "dynamodb:PutItem",
+                    "dynamodb:Scan"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:dynamodb:ap-southeast-2:857229544428:table/ledgerguard-operation-leases",
+                "Sid": "InspectAndProbeLease"
+            },
+            {
+                "Action": [
+                    "glue:CreateJob",
+                    "glue:DeleteJob",
+                    "glue:GetJob",
+                    "glue:GetJobRuns",
+                    "glue:GetTags"
+                ],
+                "Effect": "Allow",
+                "Resource": [
+                    "arn:aws:glue:ap-southeast-2:857229544428:job/ledgerguard-stage2-*"
+                ],
+                "Sid": "GlueDefinitionProbe"
+            },
+            {
+                "Action": "glue:GetJobs",
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "InventoryGlueJobs"
+            },
+            {
+                "Action": "iam:PassRole",
+                "Condition": {
+                    "StringEquals": {
+                        "iam:PassedToService": "glue.amazonaws.com"
+                    }
+                },
+                "Effect": "Allow",
+                "Resource": "arn:aws:iam::857229544428:role/LedgerGuardGlueProbeRole",
+                "Sid": "PassExactGlueProbeRole"
+            },
+            {
+                "Action": [
+                    "states:ListStateMachines",
+                    "states:ValidateStateMachineDefinition"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ValidateStepFunctionsDefinition"
+            },
+            {
+                "Action": [
+                    "athena:GetWorkGroup",
+                    "athena:ListQueryExecutions"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:athena:ap-southeast-2:857229544428:workgroup/primary",
+                "Sid": "InspectAthenaWorkgroup"
+            },
+            {
+                "Action": [
+                    "cloudwatch:ListMetrics",
+                    "logs:DescribeLogGroups"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ReadCloudWatchEvidence"
+            },
+            {
+                "Action": [
+                    "budgets:ViewBudget",
+                    "ce:GetCostAndUsage"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ReadCostAndBudget"
+            },
+            {
+                "Action": [
+                    "dynamodb:ListTables",
+                    "s3:ListAllMyBuckets"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ReadGlobalResourceInventories"
+            },
+            {
+                "Action": [
+                    "servicequotas:ListServiceQuotas",
+                    "tag:GetResources"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ReadInventoryAndQuotas"
+            }
+        ],
+        "Version": "2012-10-17"
+    },
+    "policy_kind": "INLINE",
+    "policy_name": "LedgerGuardStage2QualificationPolicy",
+    "required_role_tags": {
+        "ManagedBy": "LedgerGuardBootstrap",
+        "Project": "LedgerGuard",
+        "Purpose": "GitHubOidc"
+    },
+    "role_name": "LedgerGuardGitHubOidcRole",
+    "schema_version": "1.0"
+}

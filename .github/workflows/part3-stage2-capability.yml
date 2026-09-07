@@ -1,0 +1,150 @@
+name: Part 3 Stage 2 Bounded Capability Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact immutable main commit to qualify
+        required: true
+        type: string
+      preflight_run_id:
+        description: Accepted read-only run ID
+        required: true
+        type: string
+      preflight_artifact_id:
+        description: Accepted read-only artifact ID
+        required: true
+        type: string
+      preflight_run_attempt:
+        description: Accepted read-only workflow run attempt
+        required: true
+        type: string
+      preflight_artifact_sha256:
+        description: Independently computed read-only artifact ZIP SHA-256
+        required: true
+        type: string
+      preflight_inspection_sha256:
+        description: Independent inspection report SHA-256
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ledgerguard-part3-stage2-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  bounded-capability:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+      CHECKED_OUT_SHA: ${{ inputs.expected_sha }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      PREFLIGHT_ARTIFACT_ID: ${{ inputs.preflight_artifact_id }}
+      PREFLIGHT_ARTIFACT_SHA256: ${{ inputs.preflight_artifact_sha256 }}
+      PREFLIGHT_INSPECTION_SHA256: ${{ inputs.preflight_inspection_sha256 }}
+    steps:
+      - name: Check out exact requested commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.expected_sha }}
+          fetch-depth: 0
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements/part2-stage8-bootstrap.lock
+            requirements/part2-stage8-py311.lock
+      - name: Establish admission evidence before OIDC
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ledgerguard-part3-stage2-capability"
+          test "${{ github.event_name }}" = "workflow_dispatch"
+          test "${{ github.repository }}" = "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+          test "${{ github.ref }}" = "refs/heads/main"
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "${{ github.sha }}" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$AWS_REGION" = "ap-southeast-2"
+          test "$AWS_ROLE_ARN" = "arn:aws:iam::857229544428:role/LedgerGuardGitHubOidcRole"
+          [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PREFLIGHT_ARTIFACT_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PREFLIGHT_ARTIFACT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$PREFLIGHT_INSPECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
+      - name: Install locked qualification package
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes -r requirements/part2-stage8-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part2-stage8-py311.lock
+          python -m pip install --no-deps .
+      - name: Independently bind accepted read-only artifact before OIDC
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_dir="$RUNNER_TEMP/ledgerguard-part3-stage2-read-only-source"
+          mkdir -p "$source_dir"
+          gh api "/repos/$GITHUB_REPOSITORY/actions/runs/$PREFLIGHT_RUN_ID" > "$source_dir/run.json"
+          gh api "/repos/$GITHUB_REPOSITORY/actions/artifacts/$PREFLIGHT_ARTIFACT_ID" > "$source_dir/metadata.json"
+          gh api "/repos/$GITHUB_REPOSITORY/actions/artifacts/$PREFLIGHT_ARTIFACT_ID/zip" > "$source_dir/artifact.zip"
+          python tools/part3_stage2_extract_artifact.py \
+            --metadata "$source_dir/metadata.json" \
+            --archive "$source_dir/artifact.zip" \
+            --expected-artifact-id "$PREFLIGHT_ARTIFACT_ID" \
+            --expected-run-id "$PREFLIGHT_RUN_ID" \
+            --expected-name "ledgerguard-part3-stage2-read-only-$EXPECTED_SHA-$PREFLIGHT_RUN_ID" \
+            --expected-archive-sha256 "$PREFLIGHT_ARTIFACT_SHA256" \
+            --output "$source_dir/extracted"
+          python tools/part3_stage2_inspect_artifact.py \
+            --artifact "$source_dir/extracted" \
+            --expected-sha "$EXPECTED_SHA" \
+            --expected-run-id "$PREFLIGHT_RUN_ID" \
+            --expected-run-attempt "$PREFLIGHT_RUN_ATTEMPT" \
+            --expected-classification READ_ONLY_QUALIFICATION \
+            --run-metadata "$source_dir/run.json" \
+            --expected-workflow-path .github/workflows/part3-stage2-read-only.yml \
+            --expected-conclusion-class SUCCESS \
+            --artifact-id "$PREFLIGHT_ARTIFACT_ID" \
+            --artifact-zip-sha256 "$PREFLIGHT_ARTIFACT_SHA256" \
+            --output "$source_dir/inspection.json"
+          test "$(sha256sum "$source_dir/inspection.json" | cut -d ' ' -f 1)" = "$PREFLIGHT_INSPECTION_SHA256"
+      - name: Assume exact repository OIDC role
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: ledgerguard-stage2-probe-${{ github.run_id }}
+          role-duration-seconds: 1800
+          mask-aws-account-id: true
+      - name: Execute bounded probes and real cleanup fault cases
+        run: >-
+          python tools/part3_stage2_live.py capability
+          --expected-sha "$EXPECTED_SHA"
+          --preflight-run-id "$PREFLIGHT_RUN_ID"
+          --preflight-run-attempt "$PREFLIGHT_RUN_ATTEMPT"
+          --preflight-artifact-id "$PREFLIGHT_ARTIFACT_ID"
+          --preflight-artifact-sha256 "$PREFLIGHT_ARTIFACT_SHA256"
+          --preflight-inspection-sha256 "$PREFLIGHT_INSPECTION_SHA256"
+          --output "$RUNNER_TEMP/ledgerguard-part3-stage2-capability"
+      - name: Upload complete mutation and cleanup evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part3-stage2-capability-${{ inputs.expected_sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/ledgerguard-part3-stage2-capability
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90

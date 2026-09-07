@@ -37,8 +37,12 @@ replay, and the eight critical paths. PR #17 completed the Stage 8 promotion aud
 and independent post-merge validation. PR #18 completed the closure attestation at squash commit
 `cb81704adcfdfac5d93879cd6c189fc2213bbe79`; exact-head CI `33879453002` and independent main CI
 `33904881790` passed. Part 2's accepted 203-requirement local scope is
-`LOCAL_RECONCILIATION_VERIFIED`. Part 3 Stage 1 is `IN_PROGRESS`: immutable entry ownership and
-append-only source correction are under validation. The overall project remains in progress.
+`LOCAL_RECONCILIATION_VERIFIED`. Part 3 Stage 1 was closed by PR #19 at squash commit
+`5abef1a07899bd8ecd202008f1c397890184a0d2`; exact-head and independent main CI passed and the
+external closure receipt binds both artifacts. Part 3 Stage 2 is `IN_PROGRESS`: its qualification
+code and exact-main manual workflows are locally validated and await exact-head CI, publication,
+and live AWS evidence. All live AWS gates remain unexecuted. The overall project remains in
+progress.
 
 The original master has explicit carryovers beyond the historical Part 2 ledger: generator profiles,
 generator-driven properties, corrected-source behavior, a full source-to-proof DataFrame pipeline,
@@ -73,7 +77,9 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Atomic proof and case finalization | `EXTERNALLY_VERIFIED` after PR #15 squash and independent main CI |
 | Independent reference oracle | `EXTERNALLY_VERIFIED` after PR #11 squash and independent main CI |
 | Spark reconciliation parity | `EXTERNALLY_VERIFIED` after PR #16 squash and independent main CI |
-| Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` closure-attestation candidate; effective after merge and main CI |
+| Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` after PR #18 squash and independent main CI |
+| Part 3 Stage 1 | `EXTERNALLY_VERIFIED` after PR #19 squash and independent main CI |
+| Part 3 Stage 2 | `IN_PROGRESS` — locally validated implementation; no live Stage 2 AWS evidence yet |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity and managed AWS reconciliation | `UNCLAIMED` |
 | AWS account-wide nonmutation | `NOT_PROVEN` |

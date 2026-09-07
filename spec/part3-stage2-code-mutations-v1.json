@@ -1,0 +1,325 @@
+{
+  "count": 29,
+  "mutations": [
+    {
+      "after": "True",
+      "before": "context.get(\"repository\") == REPOSITORY",
+      "family": "dispatch_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M001",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "context.get(\"event_name\") == \"workflow_dispatch\"",
+      "family": "dispatch_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M002",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "context.get(\"ref\") == MAIN_REF",
+      "family": "dispatch_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M003",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "context.get(\"sha\") == supplied_sha",
+      "family": "dispatch_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M004",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "context.get(\"checkout_sha\") == supplied_sha",
+      "family": "dispatch_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M005",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "account == target[\"account_id\"]",
+      "family": "identity_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M006",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "region == target[\"region\"]",
+      "family": "identity_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M007",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "f\":assumed-role/{role}/\" in arn",
+      "family": "identity_boundary",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M008",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "statement.get(\"Effect\") == \"Allow\"",
+      "family": "iam_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M009",
+      "tests": [
+        "tests/test_part3_stage2_policy.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "all(\"*\" not in action for action in actions)",
+      "family": "iam_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M010",
+      "tests": [
+        "tests/test_part3_stage2_policy.py"
+      ]
+    },
+    {
+      "after": "\"equal\": True",
+      "before": "\"equal\": not (missing or excess or changed)",
+      "family": "iam_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M011",
+      "tests": [
+        "tests/test_part3_stage2_policy.py"
+      ]
+    },
+    {
+      "after": "\"versioning\": \"Suspended\"",
+      "before": "\"versioning\": \"Enabled\"",
+      "family": "backend_security",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M012",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "int(current[\"expires_epoch\"]) <= now_epoch",
+      "before": "int(current[\"expires_epoch\"]) < now_epoch",
+      "family": "lease_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M013",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "or False",
+      "before": "or current.get(\"owner\") == owner",
+      "family": "lease_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M014",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True\n        and current.get(\"commit\") == commit",
+      "before": "current.get(\"owner\") == owner\n        and current.get(\"commit\") == commit",
+      "family": "lease_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M015",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "0 <= now_epoch - updated < contract[\"maximum_age_seconds\"]",
+      "before": "0 <= now_epoch - updated <= contract[\"maximum_age_seconds\"]",
+      "family": "cost_headroom",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M016",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "remaining >= estimate",
+      "before": "remaining > estimate",
+      "family": "cost_headroom",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M017",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "not residue",
+      "family": "cleanup_integrity",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M018",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "observation.get(\"run_count\") <= 1",
+      "before": "observation.get(\"run_count\") == 0",
+      "family": "glue_no_run",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M019",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "observation.get(\"pagination_complete\") is True",
+      "family": "inventory_visibility",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M020",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "observation.get(\"workload_resources\") == []",
+      "family": "inventory_visibility",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M021",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "rows == expected",
+      "family": "evidence_integrity",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M022",
+      "tests": [
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "all(row[\"state\"] == \"PENDING_EXECUTED_EVIDENCE\" for row in gates)",
+      "family": "governance_closure",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M023",
+      "tests": [
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    {
+      "after": "True, \"qualification lifecycle rule missing or duplicated\"",
+      "before": "len(matches) == 1, \"qualification lifecycle rule missing or duplicated\"",
+      "family": "backend_lifecycle",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M024",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True, f\"required resource tags differ: {missing}\"",
+      "before": "not missing, f\"required resource tags differ: {missing}\"",
+      "family": "resource_tags",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M025",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "\"pitr\": \"DISABLED\"",
+      "before": "\"pitr\": \"ENABLED\" if contract[\"pitr_decision\"] == \"ENABLED\" else \"DISABLED\"",
+      "family": "lease_semantics",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M026",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "observation.get(\"probe_residue\") == []",
+      "family": "inventory_visibility",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M027",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "and True",
+      "before": "and principal_all",
+      "family": "backend_security",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M028",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "== {row[\"Sid\"]: set(row[\"Action\"]) for row in policy[\"Statement\"]}",
+      "before": "== EXPECTED_POLICY_ACTIONS",
+      "family": "iam_semantics",
+      "module": "ledgerguard.stage2.validation",
+      "module_path": "ledgerguard/stage2/validation.py",
+      "mutation_id": "P3-S2-M029",
+      "tests": [
+        "tests/test_part3_stage2_policy.py"
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}

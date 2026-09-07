@@ -1,0 +1,13 @@
+{
+  "Comment": "LedgerGuard Stage 2 syntax-only qualification fixture",
+  "StartAt": "Pass",
+  "States": {
+    "Pass": {
+      "End": true,
+      "Result": {
+        "classification": "NON_PRODUCTION_QUALIFICATION"
+      },
+      "Type": "Pass"
+    }
+  }
+}
