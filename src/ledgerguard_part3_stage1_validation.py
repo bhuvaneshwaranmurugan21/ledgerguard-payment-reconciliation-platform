@@ -314,6 +314,11 @@ def validate_surfaces(root: Path) -> dict[str, Any]:
         in workflow,
         "complete PR 18 historical execution root missing",
     )
+    check(
+        "path: ${{ runner.temp }}/ledgerguard-part3-stage1-artifact\n"
+        "          include-hidden-files: true\n" in workflow,
+        "artifact upload omits required workflow evidence",
+    )
     manifest = read(root, "spec/part3-stage1-test-execution-v1.json")
     check(len(manifest["historical_nodes"]) == 11, "historical governance mapping differs")
     check(

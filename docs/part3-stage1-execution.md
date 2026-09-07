@@ -87,3 +87,17 @@ the PR ready. Manual squash merge and exact-main CI remain external closure requ
 No AWS API call, AWS workflow dispatch, infrastructure change, managed reconciliation, performance,
 scale, production, or project-completion claim is made. The generator, property campaign, full
 DataFrame pipeline, and local/managed measurements retain their assigned future owners.
+
+## Independent artifact inspection follow-up
+
+The first successful current-code CI job produced an artifact whose manifest correctly listed the
+workflow evidence, but the pinned upload action's default omitted the member under `authority/.github`.
+Independent ZIP inspection rejected that incomplete inventory. The Stage 1 upload now explicitly
+includes that required file, and current-surface validation has a regression that removes the setting
+and requires rejection. The manifest is unchanged in strictness; no missing member is excused. The
+artifact directory is freshly created from the explicit evidence-source inventory. Final acceptance
+requires a new exact-head upload and independent verification of every member.
+
+The final plan audit also expanded direct source mutations from 26 to 29 for orphan receipts, stale
+active status, and carryover ownership. All 29 were killed in both independent environments before
+publication. Final CI must reproduce the complete registry and the corrected artifact inventory.

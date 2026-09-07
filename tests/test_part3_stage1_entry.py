@@ -183,7 +183,16 @@ def test_current_publication_and_automatic_execution_boundary() -> None:
 
 @pytest.mark.parametrize(
     "field",
-    ["status", "publication", "permissions", "oidc", "action", "toolchain", "historical-root"],
+    [
+        "status",
+        "publication",
+        "permissions",
+        "oidc",
+        "action",
+        "toolchain",
+        "historical-root",
+        "artifact-inventory",
+    ],
 )
 def test_current_surfaces_fail_closed(tmp_path: Path, field: str) -> None:
     from ledgerguard_part3_stage1_validation import validate_surfaces
@@ -208,6 +217,8 @@ def test_current_surfaces_fail_closed(tmp_path: Path, field: str) -> None:
                 "actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38",
                 "actions/setup-python@main",
             )
+        elif field == "artifact-inventory":
+            text = text.replace("          include-hidden-files: true\n", "")
         elif field == "toolchain":
             text = text.replace('python-version: "3.11.13"', 'python-version: "3.12"')
         else:
