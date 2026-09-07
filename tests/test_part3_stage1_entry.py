@@ -218,3 +218,13 @@ def test_current_surfaces_fail_closed(tmp_path: Path, field: str) -> None:
     path.write_text(text)
     with pytest.raises(EntryRejected):
         validate_surfaces(root)
+
+
+def test_carryover_owner_cannot_move_out_of_its_required_stage(tmp_path: Path) -> None:
+    root = copy_entry(tmp_path)
+    path = root / "spec/part2-master-conformance-addendum-v1.json"
+    v = json.loads(path.read_text())
+    v["gaps"][3]["owner_stage"] = 3
+    path.write_text(json.dumps(v))
+    with pytest.raises(EntryRejected, match="conformance ownership differs"):
+        validate_entry(root)

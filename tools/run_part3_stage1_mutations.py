@@ -17,6 +17,22 @@ from typing import Any
 
 def run_mutations(root: Path, output: Path) -> list[dict[str, Any]]:
     registry = json.loads((root / "spec/part3-stage1-code-mutations-v1.json").read_text())
+    if [row["mutation_id"] for row in registry["mutations"]] != [
+        f"P3-S1-M{i:03d}" for i in range(1, 27)
+    ]:
+        raise ValueError("required code mutation inventory differs")
+    families = {
+        "causal_classification",
+        "provenance_binding",
+        "identity_replay",
+        "historical_chain",
+        "financial_boundary",
+        "publication_recovery",
+        "actor_boundary",
+        "governance_evidence",
+    }
+    if {row["family"] for row in registry["mutations"]} != families:
+        raise ValueError("required semantic mutation families differ")
     results: list[dict[str, Any]] = []
     for row in registry["mutations"]:
         directory = output / row["mutation_id"]

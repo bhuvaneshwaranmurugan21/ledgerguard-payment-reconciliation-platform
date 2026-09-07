@@ -2,7 +2,7 @@
 
 Status: implementation in progress; acceptance requires Part 3 Stage 1 gates.
 
-The Part 2 finalizer has no causal source-correction protocol. Its historical non-exception successor label is broad: `RESOLVED_BY_LATE_DATA` also covers policy reprocessing. Historical version 1 request bytes and their interpretation remain fixed. A new internal request version 2 binds the strict correction companion and the actual policy, manifest, and UTF-8 source bytes through the request digest, immutable commit, and atomic HEAD. Proof and case identity equations and the active v1/v2 registry are unchanged.
+The Part 2 finalizer has no causal source-correction protocol. Its historical non-exception successor label is broad: `RESOLVED_BY_LATE_DATA` also covers policy reprocessing. Historical version 1 request bytes and their interpretation remain fixed. A new internal request version 2 binds the strict correction companion and the actual policy, manifest, and exact source bytes encoded as canonical base64 ASCII (`object_encoding: base64`) through the request digest, immutable commit, and atomic HEAD. Proof and case identity equations and the active v1/v2 registry are unchanged.
 
 ## Applicability
 
@@ -35,3 +35,7 @@ Publication uses the existing process lock and one conditional HEAD replacement.
 ## Compatibility and acceptance
 
 Unchanged historical validators run in their complete immutable snapshots. Current financial, recovery, schema, and bounded Spark/Parquet tests also run against the new installed wheel. Stage 1 is not complete until all 32 planned scenarios, critical branch coverage, mutation, two-run reproducibility, exact-head CI artifact inspection, and post-squash main verification pass. No AWS execution or complete source-to-proof DataFrame implementation is claimed here; the latter remains Stage 3's packaging prerequisite.
+
+Opaque source payloads must never undergo Unicode normalization. The request canonicalizer normalizes JSON strings, so raw UTF-8 text is not a safe transport representation. Strict base64 decoding and canonical re-encoding preserve every source byte, including decomposed Unicode and line endings; admission still verifies each original manifest byte length and SHA-256. Unknown encoding, malformed base64, and noncanonical pad bits reject before publication. The decomposed-Unicode regression reproduces the original post-publication readback failure and now requires successful history verification.
+
+Source-reference namespace and journal identifiers retain the exact accepted common-v2 identifier constraints, including Unicode. The new correction control ID uses its own ASCII profile. Companion and input documents are canonicalized before both initial publication and retry comparison, so canonically equivalent references cannot cause a false identity conflict. Opaque base64 payloads remain byte-identical.

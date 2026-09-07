@@ -1167,6 +1167,10 @@ class FinalizationStore:
             normalized = normalize_correction(self.repository, correction)
             require(correction_inputs is not None, "correction inputs unavailable")
             validate_inputs(cast(Mapping[str, Any], correction_inputs), normalized)
+            correction = normalized
+            correction_inputs = cast(
+                Mapping[str, Any], parse_strict_json(canonical_json_bytes(correction_inputs))
+            )
             self.verify_history()
             existing = self._find_correction(self.read_head(), normalized, correction_inputs)
             if existing is not None and not request_path.exists():
@@ -1267,10 +1271,14 @@ class FinalizationStore:
             normalized = normalize_correction(self.repository, correction)
             require(correction_inputs is not None, "correction inputs unavailable")
             validate_inputs(cast(Mapping[str, Any], correction_inputs), normalized)
+            correction = normalized
+            correction_inputs = cast(
+                Mapping[str, Any], parse_strict_json(canonical_json_bytes(correction_inputs))
+            )
             request.update(
                 schema_version="2.0",
                 correction=normalized,
-                correction_inputs=dict(cast(Mapping[str, Any], correction_inputs)),
+                correction_inputs=dict(correction_inputs),
             )
         elif correction_inputs is not None:
             raise AdmissionRejected("SCHEMA_VIOLATION", "correction inputs without provenance")

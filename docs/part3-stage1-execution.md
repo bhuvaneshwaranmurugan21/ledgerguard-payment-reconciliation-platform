@@ -36,10 +36,44 @@ regression reproduced the cross-attempt cached-receipt defect before its repair;
 regression and two adjacent replay tests passed. These are development results and are not a
 substitute for the final exact-source clean runs.
 
-The first clean environment restored the exact pinned runtime and hash-locked dependencies, built
-and installed the wheel, then failed on an import-order lint issue. The issue was corrected. The
-next clean run is underway; its final test, coverage, mutation, reproducibility, and artifact
-results are not yet adjudicated. Any source change after a run requires a new final validation.
+The first clean environment failed import-order lint, which was corrected. The second passed
+644 current tests with zero failures/errors/skips, then correctly failed coverage reporting:
+subprocess reproduction tests had measured deleted historical source copies. Coverage now attributes
+only those four named immutable reproduction roots to their historical owners; the runner requires
+an exact one-to-one inventory of all 54 current source files and byte-identical installed modules.
+Thresholds, current-source inclusion, and all test obligations remain unchanged. The third clean
+run was interrupted before completion and does not count as a successful run.
+
+A new regression demonstrated that storing opaque source bytes as JSON text let NFC normalization
+change decomposed Unicode after publication. Request version 2 now stores strict canonical base64;
+the source manifest still validates exact original bytes. All 83 correction tests passed after
+this repair, including malformed encoding and noncanonical padding rejection. Independent fixed
+financial vectors now assert every total and predecessor identity. Crash and concurrent-publication
+tests retain before/after inventories and real process outputs in the CI artifact. A further compatibility regression found that the new companion had narrowed accepted source
+identifiers to ASCII, then reproduced canonical source-reference retry rejection once that schema
+mismatch was corrected. Source references now mirror common-v2 constraints; publication and recovery
+normalize documents consistently. Both regressions pass. These changes require final clean
+validation of the changed source; earlier partial runs cannot substitute.
+
+## Automatic execution boundary review
+
+The workflow has read-only contents permission, no OIDC grant, and only the four pinned checkout,
+Python, Java, and artifact actions recorded by the current validator. Historical commands execute
+complete immutable worktrees, including their frozen dependencies and documentation. The current
+job invokes the two-run runner and artifact builder. The runner creates virtual environments,
+installs both unchanged SHA-locked requirements, builds/installs the wheel without build isolation,
+and runs the current validator. That validator invokes Java version inspection, Ruff, strict mypy,
+pytest collection, all current tests, subprocess-aware coverage, and isolated source mutations.
+The artifact builder invokes only local Git identity/ancestry commands and file validation.
+
+Production correction calls only local admission/reconciliation/finalization, filesystem storage,
+and contract validation. Tests use real local files/processes and bounded Spark/Parquet; their
+historical reproduction subprocesses are owned by the immutable regression jobs. No runner command
+invokes AWS, Terraform, a cloud SDK, or a workflow dispatch. Dependency installation and GitHub
+checkout/artifact transfer use network access; this review does not claim network isolation or
+account-wide inactivity. Both lock digests, installed dependency versions, workflow bytes, exact
+installed source inventory, and runner outputs are bound in the evidence. Future AWS qualification
+and all six AWS master gates remain unexecuted.
 
 ## Remaining acceptance work
 

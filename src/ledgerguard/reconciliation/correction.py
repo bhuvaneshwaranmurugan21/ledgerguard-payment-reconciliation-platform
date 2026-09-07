@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import base64
+import binascii
 import json
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -62,7 +64,11 @@ def validate_inputs(
 ) -> tuple[bytes, bytes, dict[str, bytes]]:
     """Keep the actual source bytes in the request so readback can re-admit them."""
     require(isinstance(inputs, Mapping), "correction input must be an object")
-    require(set(inputs) == {"policy", "manifest", "objects"}, "correction input inventory differs")
+    require(
+        set(inputs) == {"policy", "manifest", "objects", "object_encoding"},
+        "correction input inventory differs",
+    )
+    require(inputs["object_encoding"] == "base64", "correction object encoding differs")
     policy, manifest, objects = inputs["policy"], inputs["manifest"], inputs["objects"]
     require(
         isinstance(policy, Mapping) and isinstance(manifest, Mapping), "correction documents differ"
@@ -70,17 +76,27 @@ def validate_inputs(
     require(isinstance(objects, Mapping) and bool(objects), "correction objects unavailable")
     require(
         all(isinstance(k, str) and isinstance(v, str) for k, v in objects.items()),
-        "correction object bytes must be UTF-8 strings",
+        "correction object bytes must be base64 strings",
     )
     require(policy.get("policy_sha256") == correction["policy_sha256"], "correction policy differs")
     require(
         manifest.get("manifest_sha256") == correction["manifest_sha256"],
         "correction manifest differs",
     )
+    decoded = {}
+    for key, raw in objects.items():
+        try:
+            value = base64.b64decode(raw, validate=True)
+        except (ValueError, binascii.Error) as error:
+            raise AdmissionRejected(
+                "SOURCE_IDENTITY_MISMATCH", "invalid base64 correction object"
+            ) from error
+        require(base64.b64encode(value).decode("ascii") == raw, "noncanonical base64 object")
+        decoded[key] = value
     return (
         canonical_json_bytes(policy),
         canonical_json_bytes(manifest),
-        {str(key): str(raw).encode("utf-8") for key, raw in objects.items()},
+        decoded,
     )
 
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from base64 import b64encode
 from pathlib import Path
 
 from ledgerguard.reconciliation import (
@@ -38,7 +39,8 @@ def main() -> None:
         inputs = {
             "policy": _object(policy_bytes),
             "manifest": manifest,
-            "objects": {name: raw.decode("utf-8") for name, raw in objects.items()},
+            "object_encoding": "base64",
+            "objects": {name: b64encode(raw).decode("ascii") for name, raw in objects.items()},
         }
         admitted = admit_bundle(
             args.repository, policy_bytes, manifest_bytes, objects, prior_state=admission

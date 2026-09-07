@@ -9,8 +9,10 @@ import json
 import os
 import subprocess
 import sys
+import sysconfig
+import time
 from hashlib import sha256
-from importlib.metadata import version
+from importlib.metadata import distributions, version
 from pathlib import Path
 from typing import Any
 
@@ -30,6 +32,7 @@ def main() -> None:
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    started = time.monotonic()
     root = args.root.resolve()
     output = args.output.resolve()
     if root == output.parent or root in output.parents:
@@ -58,6 +61,11 @@ def main() -> None:
         if not path.is_relative_to(Path(sys.prefix)) or path.is_relative_to(root):
             raise ValueError("current installed-wheel import required: " + name)
         imports[name] = sha256(path.read_bytes()).hexdigest()
+    installed_root = Path(sysconfig.get_paths()["purelib"])
+    for source in (root / "src").rglob("*.py"):
+        installed = installed_root / source.relative_to(root / "src")
+        if installed.read_bytes() != source.read_bytes():
+            raise ValueError("installed source bytes differ: " + str(source.relative_to(root)))
     env = dict(os.environ)
     env.pop("PYTHONPATH", None)
     execute([sys.executable, "-m", "ruff", "format", "--check", "."], root, env)
@@ -71,6 +79,7 @@ def main() -> None:
             "tools/run_part3_stage1.py",
             "tools/validate_part3_stage1_run.py",
             "tools/run_part3_stage1_mutations.py",
+            "tools/build_part3_stage1_ci_evidence.py",
         ],
         root,
         env,
@@ -114,11 +123,19 @@ def main() -> None:
         )
         + "\n"
     )
+    observations = output.parent / "observations"
+    env["STAGE1_OBSERVATIONS"] = str(observations)
     junit = output.parent / "pytest.xml"
     execute([sys.executable, "-m", "pytest", "--junitxml", str(junit), *selected], root, env)
     counts = parse_junit_counts(junit)
     if counts != {"tests": len(selected), "failures": 0, "errors": 0, "skipped": 0}:
         raise ValueError("current tests incomplete")
+    env.pop("STAGE1_OBSERVATIONS")
+    required_observations = {"golden-correction.json", "concurrency.json"} | {
+        f"crash-after_{point}.json" for point in ("attempt", "objects", "commit", "head")
+    }
+    if {p.name for p in observations.iterdir()} != required_observations:
+        raise ValueError("required financial and recovery observations missing")
     cov = output.parent / "coverage"
     cov.mkdir()
     env["COVERAGE_FILE"] = str(cov / "data")
@@ -134,6 +151,24 @@ def main() -> None:
         [sys.executable, "-m", "coverage", "json", "--rcfile", rc, "-o", str(coverage)], root, env
     )
     report = json.loads(coverage.read_text())
+    source_inventory = {
+        path.relative_to(root).as_posix(): sha256(path.read_bytes()).hexdigest()
+        for path in sorted((root / "src").rglob("*.py"))
+    }
+    if set(report["files"]) != set(source_inventory):
+        raise ValueError("coverage must account for every current source file exactly once")
+    (output.parent / "coverage-scope.json").write_text(
+        json.dumps(
+            {
+                "current_source_inventory": source_inventory,
+                "historical_reproductions": ["stage4", "c0", "c1", "c2"],
+                "historical_coverage_owner": "mandatory immutable complete worktree jobs",
+            },
+            sort_keys=True,
+            indent=2,
+        )
+        + "\n"
+    )
     if report["totals"]["percent_covered"] < 90:
         raise ValueError("overall production coverage below 90%")
     owned = {
@@ -159,9 +194,33 @@ def main() -> None:
         "tests": selected,
         "coverage": {k: v["summary"] for k, v in report["files"].items()},
         "mutations": mutations,
+        "golden_correction_sha256": sha256(
+            (observations / "golden-correction.json").read_bytes()
+        ).hexdigest(),
+        "input_identities": {
+            name: sha256((root / name).read_bytes()).hexdigest()
+            for name in (
+                ".github/workflows/ci.yml",
+                "requirements/part2-stage8-bootstrap.lock",
+                "requirements/part2-stage8-py311.lock",
+                "pyproject.toml",
+                "contracts/part3/correction-provenance-v1.schema.json",
+                "spec/part3-stage1-correction-golden-v1.json",
+            )
+        },
+        "dependencies": dict(
+            sorted((str(d.metadata["Name"]).lower(), d.version) for d in distributions())
+        ),
     }
     result = {
         "schema_version": "1.0",
+        "observations": {
+            "elapsed_seconds": time.monotonic() - started,
+            "java_version": java,
+            "reports": {
+                p.name: sha256(p.read_bytes()).hexdigest() for p in sorted(observations.iterdir())
+            },
+        },
         "deterministic": deterministic,
         "toolchain": {"python": "3.11.13", "java_major": 17, "spark": "3.5.6", "py4j": "0.10.9.7"},
         "execution_boundary": {"aws_execution": False, "account_wide_inactivity_proven": False},

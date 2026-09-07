@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import json
+import os
+from base64 import b64decode, b64encode
 from copy import deepcopy
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
@@ -44,7 +48,12 @@ def correction_journal(identifier: str, amount: int, settlement: bool = False) -
 
 
 def scenario(
-    tmp_path: Path, amount: int = 100, policy: dict[str, Any] | None = None, *, late: bool = False
+    tmp_path: Path,
+    amount: int = 100,
+    policy: dict[str, Any] | None = None,
+    *,
+    late: bool = False,
+    source_suffix: str = "",
 ) -> dict[str, Any]:
     families = {
         "PROCESSOR_EVENTS": [processor_event(amount_minor=1000)],
@@ -52,8 +61,8 @@ def scenario(
             processor_settlement(gross_minor=1000, fee_minor=0, reported_net_minor=1000)
         ],
         "LEDGER_JOURNALS": [
-            correction_journal("original-txn", 900),
-            correction_journal("original-stl", 900, True),
+            correction_journal("original-txn" + source_suffix, 900),
+            correction_journal("original-stl" + source_suffix, 900, True),
         ],
         "BANK_ENTRIES": [bank_entry(amount_minor=1000)],
     }
@@ -101,7 +110,8 @@ def scenario(
     inputs = {
         "policy": json.loads(pb),
         "manifest": manifest,
-        "objects": {key: raw.decode() for key, raw in objects.items()},
+        "object_encoding": "base64",
+        "objects": {key: b64encode(raw).decode("ascii") for key, raw in objects.items()},
     }
     items = []
     for proof_ref, case_ref in zip(first.proofs, first.cases, strict=True):
@@ -167,23 +177,67 @@ def scenario(
     }
 
 
+def inventory(store: FinalizationStore) -> dict[str, str]:
+    return {
+        p.relative_to(store.root).as_posix(): sha256(p.read_bytes()).hexdigest()
+        for p in sorted(store.root.rglob("*.json"))
+    }
+
+
+def observation(name: str, value: Any) -> None:
+    destination = os.environ.get("STAGE1_OBSERVATIONS")
+    if destination:
+        path = Path(destination)
+        path.mkdir(parents=True, exist_ok=True)
+        (path / (name + ".json")).write_bytes(canonical_json_bytes(value))
+
+
 def test_two_grains_correction_is_persisted_and_history_verified(tmp_path: Path) -> None:
     case = scenario(tmp_path)
     store = case["store"]
     before = {p.name: p.read_bytes() for p in (store.root / "objects").iterdir()}
     receipt = store.finalize(**case["args"])
+    golden = json.loads((ROOT / "spec/part3-stage1-correction-golden-v1.json").read_bytes())
     assert len(receipt.proofs) == len(receipt.cases) == 2
     for proof_ref, case_ref in zip(receipt.proofs, receipt.cases, strict=True):
         proof = store.read_proof(proof_ref.object_sha256)
         revision = store.read_case_revision(case_ref.object_sha256)
         assert proof["status"] == "MATCHED"
-        assert proof["totals"]["difference_minor"] == 0
+        field = (
+            "transaction_totals"
+            if proof_ref.reconciliation_key.startswith("txn:")
+            else "settlement_totals"
+        )
+        assert proof["totals"] == golden[field]
+        prior_proof = store.read_proof(
+            next(
+                p.object_sha256
+                for p in case["first"].proofs
+                if p.reconciliation_key == proof_ref.reconciliation_key
+            )
+        )
+        prior_case = store.read_case_revision(
+            next(
+                p.object_sha256
+                for p in case["first"].cases
+                if p.reconciliation_key == case_ref.reconciliation_key
+            )
+        )
+        assert proof["prior_proof_id"] == prior_proof["proof_id"]
+        assert revision["case_id"] == prior_case["case_id"]
+        assert revision["prior_case_revision_id"] == prior_case["case_revision_sha256"]
+        assert revision["initial_exception_proof_id"] == prior_proof["proof_id"]
+        assert revision["proof_id"] == proof["proof_id"]
         assert revision["status"] == "RESOLVED_BY_CORRECTION"
         assert revision["revision"] == 2
     assert all((store.root / "objects" / name).read_bytes() == raw for name, raw in before.items())
     assert FinalizationStore(ROOT, store.root).verify_history() is not None
     assert store.load_states()[0].source_records
     assert store.finalize(**case["args"]) == receipt
+    observation(
+        "golden-correction",
+        {"inventory": inventory(store), "receipt": receipt.value(), "expected": golden},
+    )
 
 
 def test_partial_correction_remains_open(tmp_path: Path) -> None:
@@ -422,7 +476,7 @@ def write_inputs(case: dict[str, Any], root: Path) -> list[str]:
     objects.mkdir(exist_ok=True)
     for descriptor in inputs["manifest"]["objects"]:
         relative = descriptor["relative_path"]
-        (objects / relative).write_text(inputs["objects"][f"local:{relative}"])
+        (objects / relative).write_bytes(b64decode(inputs["objects"][f"local:{relative}"]))
     return [
         sys.executable,
         "-m",
@@ -498,6 +552,7 @@ def test_cli_failure_ownership(tmp_path: Path, failure: str) -> None:
 
 WORKER = """
 import json,sys,time
+from base64 import b64encode
 from pathlib import Path
 from ledgerguard.reconciliation import (FinalizationStore,admit_bundle,canonical_json_bytes,
     reconcile_transactions,reconcile_settlements,FinalizationRejected)
@@ -523,7 +578,8 @@ try:
         transaction_batch=tb,settlement_batch=sb,fault_point=None if fault=='NONE' else fault,
         correction=json.loads((root/'correction.json').read_bytes()),
         correction_inputs={'policy':json.loads(policy),'manifest':m,
-                           'objects':{k:v.decode() for k,v in objects.items()}})
+                           'object_encoding':'base64',
+                           'objects':{k:b64encode(v).decode('ascii') for k,v in objects.items()}})
     print(json.dumps(receipt.value(),sort_keys=True))
 except FinalizationRejected as error:
     print(json.dumps(error.as_dict(),sort_keys=True))
@@ -568,6 +624,7 @@ def test_correction_real_process_crash_and_recovery(
     case = scenario(tmp_path)
     root = tmp_path / "worker"
     write_inputs(case, root)
+    before = inventory(case["store"])
     result = subprocess.run(worker_command(case, root, fault), capture_output=True, text=True)
     assert result.returncode == exit_code, result.stderr
     store = FinalizationStore(ROOT, case["store"].root)
@@ -576,10 +633,22 @@ def test_correction_real_process_crash_and_recovery(
     else:
         assert store.read_head() != case["first"].commit_sha256
     store.verify_history()
+    after_crash = inventory(store)
     result = store.finalize(**case["args"])
     assert all(store.read_case_revision(c.object_sha256)["revision"] == 2 for c in result.cases)
     assert store.finalize(**case["args"]) == result
     assert store.recover_attempt(**recovery_args(case, "new-crash-retry")) == result
+    observation(
+        "crash-" + fault,
+        {
+            "fault": fault,
+            "exit_code": exit_code,
+            "before": before,
+            "after_crash": after_crash,
+            "after_recovery": inventory(store),
+            "receipt": result.value(),
+        },
+    )
 
 
 def test_competing_corrections_have_one_conditional_winner(tmp_path: Path) -> None:
@@ -615,6 +684,14 @@ def test_competing_corrections_have_one_conditional_winner(tmp_path: Path) -> No
         go.write_text("publish")
         outputs = [p.communicate(timeout=30) for p in processes]
         assert sorted(p.returncode for p in processes) == [0, 3], outputs
+        observation(
+            "concurrency",
+            {
+                "exit_codes": [p.returncode for p in processes],
+                "outputs": [list(pair) for pair in outputs],
+                "inventory": inventory(case["store"]),
+            },
+        )
         assert "stale authoritative control head" in "".join(o[0] for o in outputs)
         head = case["store"].verify_history()
         assert head is not None and head["parent_sha256"] == case["first"].commit_sha256
@@ -698,7 +775,7 @@ def raw_families(case: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     return {
         d["family"]: [
             json.loads(line)
-            for line in inputs["objects"]["local:" + d["relative_path"]].splitlines()
+            for line in b64decode(inputs["objects"]["local:" + d["relative_path"]]).splitlines()
         ]
         for d in inputs["manifest"]["objects"]
     }
@@ -720,7 +797,8 @@ def rebind_sources(
     args["correction_inputs"] = {
         "policy": json.loads(pb),
         "manifest": manifest,
-        "objects": {k: v.decode() for k, v in objects.items()},
+        "object_encoding": "base64",
+        "objects": {k: b64encode(v).decode("ascii") for k, v in objects.items()},
     }
     args["transaction_batch"] = reconcile_transactions(admitted, case["tx"])
     args["settlement_batch"] = reconcile_settlements(admitted, case["st"])
@@ -913,7 +991,7 @@ def test_after_head_correction_recovers_after_later_authority(tmp_path: Path) ->
         ROOT,
         canonical_json_bytes(inputs["policy"]),
         canonical_json_bytes(inputs["manifest"]),
-        {k: v.encode() for k, v in inputs["objects"].items()},
+        {k: b64decode(v) for k, v in inputs["objects"].items()},
         prior_state=a,
     )
     later = store.finalize(
@@ -985,19 +1063,19 @@ def test_source_file_partitioning_preserves_exact_financial_results(tmp_path: Pa
     inputs = partitioned["args"]["correction_inputs"]
     manifest = inputs["manifest"]
     descriptor = next(d for d in manifest["objects"] if d["family"] == "LEDGER_JOURNALS")
-    raw = inputs["objects"].pop("local:" + descriptor["relative_path"])
+    raw = b64decode(inputs["objects"].pop("local:" + descriptor["relative_path"]))
     manifest["objects"].remove(descriptor)
     for i, line in enumerate(raw.splitlines(), 1):
         relative = f"journal-part-{i}.jsonl"
-        data = line + "\n"
-        inputs["objects"]["local:" + relative] = data
+        data = line + b"\n"
+        inputs["objects"]["local:" + relative] = b64encode(data).decode("ascii")
         manifest["objects"].append(
             {
                 **descriptor,
                 "relative_path": relative,
                 "record_count": 1,
-                "size_bytes": len(data.encode()),
-                "sha256": sha256(data.encode()).hexdigest(),
+                "size_bytes": len(data),
+                "sha256": sha256(data).hexdigest(),
             }
         )
     manifest["manifest_sha256"] = canonical_sha256(manifest, {"manifest_sha256"})
@@ -1005,7 +1083,7 @@ def test_source_file_partitioning_preserves_exact_financial_results(tmp_path: Pa
         ROOT,
         canonical_json_bytes(inputs["policy"]),
         canonical_json_bytes(manifest),
-        {k: v.encode() for k, v in inputs["objects"].items()},
+        {k: b64decode(v) for k, v in inputs["objects"].items()},
         prior_state=partitioned["prior"],
     )
     args = partitioned["args"]
@@ -1084,3 +1162,111 @@ def test_recovery_rejects_another_attempts_valid_committed_outcome(tmp_path: Pat
     with pytest.raises(FinalizationRejected, match="outcome belongs to another request"):
         case["store"].recover_attempt(**recovery_args(case))
     assert case["store"].read_head() == result.commit_sha256
+
+
+def test_supplied_candidate_cannot_override_readmitted_financial_truth(tmp_path: Path) -> None:
+    from dataclasses import replace
+
+    case = scenario(tmp_path, 40)
+    batch = case["args"]["transaction_batch"]
+    candidate = replace(
+        batch.candidates[0],
+        ledger_minor=1000,
+        processor_ledger_delta_minor=0,
+        difference_minor=0,
+        status="MATCHED",
+        reason_codes=(),
+    )
+    case["args"]["transaction_batch"] = replace(batch, candidates=(candidate,))
+    with pytest.raises(AdmissionRejected, match="candidates differ from admitted source truth"):
+        case["store"].finalize(**case["args"])
+    assert case["store"].read_head() == case["first"].commit_sha256
+
+
+def test_undeclared_same_key_journal_cannot_supply_correction_causation(tmp_path: Path) -> None:
+    case = scenario(tmp_path)
+    sources = raw_families(case)
+    sources["LEDGER_JOURNALS"].append(correction_journal("unlinked-adjustment", 60))
+    rebind_sources(case, sources)
+    with pytest.raises(AdmissionRejected, match="correction additions differ"):
+        case["store"].finalize(**case["args"])
+    assert case["store"].read_head() == case["first"].commit_sha256
+
+
+def test_non_normalized_utf8_transport_survives_canonical_request_storage(tmp_path: Path) -> None:
+    from hashlib import sha256
+
+    case = scenario(tmp_path)
+    args = case["args"]
+    inputs = args["correction_inputs"]
+    manifest = inputs["manifest"]
+    descriptor = next(d for d in manifest["objects"] if d["family"] == "LEDGER_JOURNALS")
+    locator = "local:" + descriptor["relative_path"]
+    raw = (
+        b64decode(inputs["objects"][locator]).decode().replace("batch-1", "batch-e\u0301").encode()
+    )
+    inputs["objects"][locator] = b64encode(raw).decode("ascii")
+    descriptor.update(size_bytes=len(raw), sha256=sha256(raw).hexdigest())
+    manifest["manifest_sha256"] = canonical_sha256(manifest, {"manifest_sha256"})
+    args["correction"]["manifest_sha256"] = manifest["manifest_sha256"]
+    args["correction"]["correction_sha256"] = correction_digest(args["correction"])
+    admitted = admit_bundle(
+        ROOT,
+        canonical_json_bytes(inputs["policy"]),
+        canonical_json_bytes(manifest),
+        {k: b64decode(v) for k, v in inputs["objects"].items()},
+        prior_state=case["prior"],
+    )
+    args["transaction_batch"] = reconcile_transactions(admitted, case["tx"])
+    args["settlement_batch"] = reconcile_settlements(admitted, case["st"])
+    result = case["store"].finalize(**args)
+    assert case["store"].read_head() == result.commit_sha256
+    case["store"].verify_history()
+
+
+@pytest.mark.parametrize(
+    "alteration", ["encoding", "missing", "type", "invalid", "unicode", "pad-bits"]
+)
+def test_opaque_source_encoding_fails_closed(tmp_path: Path, alteration: str) -> None:
+    case = scenario(tmp_path)
+    inputs = case["args"]["correction_inputs"]
+    locator = next(iter(inputs["objects"]))
+    if alteration == "encoding":
+        inputs["object_encoding"] = "utf8"
+    elif alteration == "missing":
+        del inputs["object_encoding"]
+    else:
+        inputs["objects"][locator] = {
+            "type": 12,
+            "invalid": "!",
+            "unicode": "é",
+            "pad-bits": "Zh==",
+        }[alteration]
+    with pytest.raises(AdmissionRejected):
+        case["store"].finalize(**case["args"])
+    assert case["store"].read_head() == case["first"].commit_sha256
+
+
+def test_canonically_equivalent_correction_identity_retries(tmp_path: Path) -> None:
+    case = scenario(tmp_path, source_suffix="-é")
+    correction = case["args"]["correction"]
+    for item in correction["items"]:
+        for row in item["original_sources"]:
+            row["identity"][-1] = row["identity"][-1].replace("é", "e\u0301")
+    correction["correction_sha256"] = correction_digest(correction)
+    result = case["store"].finalize(**case["args"])
+    assert case["store"].recover_attempt(**recovery_args(case)) == result
+    assert case["store"].recover_attempt(**recovery_args(case, "equivalent-retry")) == result
+    assert case["store"].finalize(**case["args"]) == result
+
+
+def test_companion_source_identifiers_preserve_the_accepted_domain_contract() -> None:
+    schema = json.loads(
+        (ROOT / "contracts/part3/correction-provenance-v1.schema.json").read_bytes()
+    )
+    common = json.loads((ROOT / "contracts/v2/common-v2.schema.json").read_bytes())
+    for field in ("original_sources", "corrective_sources"):
+        identity = schema["properties"]["items"]["items"]["properties"][field]["items"][
+            "properties"
+        ]["identity"]
+        assert identity["prefixItems"][1:] == [common["$defs"]["identifier"]] * 2

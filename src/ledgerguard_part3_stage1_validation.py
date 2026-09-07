@@ -227,6 +227,11 @@ def validate_entry(root: Path) -> dict[str, Any]:
     )
     check(all(row["state"] == "OWNED_OPEN" for row in gaps), "open conformance gap falsely closed")
     check(
+        [(row["owner_part"], row["owner_stage"]) for row in gaps]
+        == [(3, 2), (3, 1), (3, 3), (3, 1), (3, 3), (4, 3), (4, 3), (3, 4), (4, 1), (5, 1), (3, 3)],
+        "conformance ownership differs",
+    )
+    check(
         addendum["claims"]
         == dict(
             part2_local=True,
