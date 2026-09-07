@@ -7,6 +7,7 @@ import argparse
 import importlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import sysconfig
@@ -15,6 +16,7 @@ from hashlib import sha256
 from importlib.metadata import distributions, version
 from pathlib import Path
 
+from ledgerguard.stage2.control import scan_safe_evidence
 from ledgerguard.stage2.validation import validate_repository
 from ledgerguard_part2_stage1_evidence import parse_junit_counts
 
@@ -234,6 +236,17 @@ def main() -> None:
         },
     }
     output.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
+    publishable = output.parent / "publishable-evidence-safety"
+    publishable.mkdir()
+    for source, name in (
+        (output, "result.json"),
+        (collection, "collection.json"),
+        (junit, "pytest.xml"),
+        (coverage, "coverage.json"),
+        (mutation_dir / "results.json", "mutations.json"),
+    ):
+        shutil.copyfile(source, publishable / name)
+    scan_safe_evidence(publishable)
 
 
 if __name__ == "__main__":

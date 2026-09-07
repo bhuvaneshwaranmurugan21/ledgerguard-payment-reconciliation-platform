@@ -308,7 +308,7 @@
     {
       "case": 39,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[000000000000-ap-southeast-2-arn:aws:sts::857229544428:assumed-role/LedgerGuardGitHubOidcRole/run]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-account]",
       "scenario_id": "P3-S2-T039",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -316,7 +316,7 @@
     {
       "case": 40,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[857229544428-us-east-1-arn:aws:sts::857229544428:assumed-role/LedgerGuardGitHubOidcRole/run]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-region]",
       "scenario_id": "P3-S2-T040",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -324,7 +324,7 @@
     {
       "case": 41,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[857229544428-ap-southeast-2-arn:aws:sts::857229544428:assumed-role/Other/run]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-role]",
       "scenario_id": "P3-S2-T041",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -724,7 +724,7 @@
     {
       "case": 91,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[AKIAABCDEFGHIJKLMNOP]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[long-term-access-key]",
       "scenario_id": "P3-S2-T091",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
@@ -732,7 +732,7 @@
     {
       "case": 92,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[ASIAABCDEFGHIJKLMNOP]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[temporary-access-key]",
       "scenario_id": "P3-S2-T092",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
@@ -740,7 +740,7 @@
     {
       "case": 93,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[-----BEGIN PRIVATE KEY-----]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[private-key-pem]",
       "scenario_id": "P3-S2-T093",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
@@ -748,7 +748,7 @@
     {
       "case": 94,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[account 857229544428]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[raw-account-identifier]",
       "scenario_id": "P3-S2-T094",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"

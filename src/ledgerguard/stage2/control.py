@@ -13,6 +13,7 @@ from urllib.parse import unquote
 
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+HASH_ID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 ACCOUNT = re.compile(r"(?<![0-9])[0-9]{12}(?![0-9])")
 ACCESS_KEY = re.compile(r"(?:AKIA|ASIA)[A-Z0-9]{16}")
 REPOSITORY = "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
@@ -389,19 +390,36 @@ def validate_manifest(directory: Path, manifest: Mapping[str, Any]) -> dict[str,
     return {"integrity_verified": True, "members": len(rows)}
 
 
+def _redact_hash_values(value: Any) -> Any:
+    if isinstance(value, str):
+        return "<HASH>" if HASH_ID.fullmatch(value) else value
+    if isinstance(value, list):
+        return [_redact_hash_values(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _redact_hash_values(item) for key, item in value.items()}
+    return value
+
+
 def scan_safe_evidence(directory: Path) -> dict[str, Any]:
     for path in directory.rglob("*"):
         if not path.is_file():
             continue
         raw = path.read_bytes()
+        text = raw.decode(errors="ignore")
         require(
-            b"-----BEGIN" not in raw and ACCESS_KEY.search(raw.decode(errors="ignore")) is None,
+            b"-----BEGIN" not in raw and ACCESS_KEY.search(text) is None,
             "credential material in evidence",
         )
         if path.suffix in {".json", ".log", ".txt", ".md"}:
-            require(
-                ACCOUNT.search(raw.decode(errors="ignore")) is None, "raw AWS account in evidence"
-            )
+            account_material = text
+            if path.suffix == ".json":
+                try:
+                    document = json.loads(text)
+                except json.JSONDecodeError:
+                    pass
+                else:
+                    account_material = json.dumps(_redact_hash_values(document), sort_keys=True)
+            require(ACCOUNT.search(account_material) is None, "raw AWS account in evidence")
     return {"safe": True}
 
 

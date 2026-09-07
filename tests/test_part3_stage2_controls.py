@@ -73,17 +73,24 @@ def test_dispatch_mismatch_rejects_before_oidc(context: dict[str, str], sha: str
 @pytest.mark.parametrize(
     "account,region,arn",
     [
-        (
+        pytest.param(
             "000000000000",
             "ap-southeast-2",
             "arn:aws:sts::857229544428:assumed-role/LedgerGuardGitHubOidcRole/run",
+            id="wrong-account",
         ),
-        (
+        pytest.param(
             "857229544428",
             "us-east-1",
             "arn:aws:sts::857229544428:assumed-role/LedgerGuardGitHubOidcRole/run",
+            id="wrong-region",
         ),
-        ("857229544428", "ap-southeast-2", "arn:aws:sts::857229544428:assumed-role/Other/run"),
+        pytest.param(
+            "857229544428",
+            "ap-southeast-2",
+            "arn:aws:sts::857229544428:assumed-role/Other/run",
+            id="wrong-role",
+        ),
     ],
 )
 def test_identity_mismatch_rejects(account: str, region: str, arn: str) -> None:

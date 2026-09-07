@@ -22,7 +22,17 @@ def test_manifest_exactness_and_finalization(tmp_path: Path) -> None:
     assert validate_manifest(tmp_path, manifest) == {"integrity_verified": True, "members": 1}
     assert finalize_artifact(tmp_path)["members"] == manifest["members"]
     (tmp_path / "opaque.bin").write_bytes(b"safe")
+    (tmp_path / "safe.log").write_text("safe\n")
     assert scan_safe_evidence(tmp_path) == {"safe": True}
+    manifest_path = tmp_path / "manifest.json"
+    stored = json.loads(manifest_path.read_text())
+    stored["members"][0]["sha256"] = "a" * 10 + "123456789012" + "b" * 42
+    write_json(manifest_path, stored)
+    assert scan_safe_evidence(tmp_path) == {"safe": True}
+    stored["members"][0]["path"] = "reports/123456789012.json"
+    write_json(manifest_path, stored)
+    with pytest.raises(Stage2Rejected, match="raw AWS account"):
+        scan_safe_evidence(tmp_path)
 
 
 @pytest.mark.parametrize(
@@ -58,10 +68,10 @@ def test_manifest_adversaries_are_rejected(tmp_path: Path, kind: str) -> None:
 @pytest.mark.parametrize(
     "secret",
     [
-        "AKIAABCDEFGHIJKLMNOP",
-        "ASIAABCDEFGHIJKLMNOP",
-        "-----BEGIN PRIVATE KEY-----",
-        "account 857229544428",
+        pytest.param("AKIAABCDEFGHIJKLMNOP", id="long-term-access-key"),
+        pytest.param("ASIAABCDEFGHIJKLMNOP", id="temporary-access-key"),
+        pytest.param("-----BEGIN PRIVATE KEY-----", id="private-key-pem"),
+        pytest.param("account 857229544428", id="raw-account-identifier"),
     ],
 )
 def test_sensitive_evidence_is_rejected(tmp_path: Path, secret: str) -> None:
