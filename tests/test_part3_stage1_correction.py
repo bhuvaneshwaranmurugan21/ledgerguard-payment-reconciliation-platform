@@ -180,7 +180,7 @@ def scenario(
 def inventory(store: FinalizationStore) -> dict[str, str]:
     return {
         p.relative_to(store.root).as_posix(): sha256(p.read_bytes()).hexdigest()
-        for p in sorted(store.root.rglob("*.json"))
+        for p in sorted([*store.root.rglob("*.json"), store.root / "control/HEAD"])
     }
 
 
@@ -625,6 +625,7 @@ def test_correction_real_process_crash_and_recovery(
     root = tmp_path / "worker"
     write_inputs(case, root)
     before = inventory(case["store"])
+    head_before = case["store"].read_head()
     result = subprocess.run(worker_command(case, root, fault), capture_output=True, text=True)
     assert result.returncode == exit_code, result.stderr
     store = FinalizationStore(ROOT, case["store"].root)
@@ -634,6 +635,7 @@ def test_correction_real_process_crash_and_recovery(
         assert store.read_head() != case["first"].commit_sha256
     store.verify_history()
     after_crash = inventory(store)
+    head_after_crash = store.read_head()
     result = store.finalize(**case["args"])
     assert all(store.read_case_revision(c.object_sha256)["revision"] == 2 for c in result.cases)
     assert store.finalize(**case["args"]) == result
@@ -645,6 +647,9 @@ def test_correction_real_process_crash_and_recovery(
             "exit_code": exit_code,
             "before": before,
             "after_crash": after_crash,
+            "head_before": head_before,
+            "head_after_crash": head_after_crash,
+            "head_after_recovery": store.read_head(),
             "after_recovery": inventory(store),
             "receipt": result.value(),
         },
@@ -687,6 +692,8 @@ def test_competing_corrections_have_one_conditional_winner(tmp_path: Path) -> No
         observation(
             "concurrency",
             {
+                "head_before": case["args"]["expected_head"],
+                "head_after": case["store"].read_head(),
                 "exit_codes": [p.returncode for p in processes],
                 "outputs": [list(pair) for pair in outputs],
                 "inventory": inventory(case["store"]),
