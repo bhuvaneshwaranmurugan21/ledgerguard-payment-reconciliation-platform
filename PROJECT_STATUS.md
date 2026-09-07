@@ -3,11 +3,12 @@
 ## Active boundary
 
 - Project: LedgerGuard
-- Part: 2 — Executable reconciliation system
-- Stage: 8 — Promotion and closure
+- Part: 3 — Managed AWS platform
+- Stage: 1 — Entry and conformance correction
 - State: `LOCAL_RECONCILIATION_VERIFIED`
-- Stage state: `PART2_STAGE8_CLOSURE_ATTESTATION_CANDIDATE`
-- Highest new claim: locally verified executable reconciliation system, effective on attestation merge
+- Stage state: `PART3_STAGE1_IN_PROGRESS`
+- Highest accepted claim: Part 2 repository-local reconciliation; PR #18 closure externally verified
+- Stage 1 correction: implementation in progress; acceptance gates pending
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
@@ -150,16 +151,17 @@ PR #16 passed exact-head CI run `33857511781`, was squash-merged as
 deterministic replay, and all eight critical paths are therefore externally verified.
 
 Stage 8 freezes that closure, normalizes and re-audits all 203 Part 2 requirements and 69 stage
-gates, and adjudicates the six master Part 2 gates. The promotion transaction is complete; the
-separate repository closure-attestation transaction is now the only remaining Part 2 publication
-boundary.
+gates, and adjudicates the six master Part 2 gates. Both promotion and closure-attestation transactions are complete. PR #18 was squash-merged
+at `cb81704adcfdfac5d93879cd6c189fc2213bbe79`, with exact-head CI `33879453002` and independent
+main CI `33904881790` passing.
 
 PR #17 passed exact-head CI run `33871740027`, was squash-merged as
 `71b42d6622558093a2bfaced58724f2ab71e793e`, and passed independent post-merge `main` CI run
 `33874130476`. Its one parent is the Stage 7 closure and its tree
 `406f40dfb1e94e38031505e23a6d77b50198840f` equals the validated PR head tree exactly.
 
-This closure-attestation candidate publishes that immutable promotion evidence and the terminal Part
-2 authority. The final state becomes active on `main` only after this attestation passes exact-head
-CI, is manually squash-merged, and passes independent post-merge `main` CI. No AWS, managed,
+The historical terminal Part 2 authority remains unchanged and active for its accepted local scope.
+The append-only Part 2 master conformance addendum records all original-master carryovers with
+owners. Part 3 Stage 1 is in progress; its correction, quality, reproducibility, CI, and external
+closure gates are not yet complete. All six Part 3 AWS master gates remain `NOT_EXECUTED`. No AWS, managed,
 performance, scale, production-operation, or overall-project completion claim is made.

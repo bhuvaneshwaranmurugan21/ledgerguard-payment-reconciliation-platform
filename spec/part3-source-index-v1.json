@@ -1,0 +1,679 @@
+{
+  "extract_sha256": "239c8b0e74946542237287f41674abbf7da5933eda3b4007f17cfd6290b2e577",
+  "lines": [
+    {
+      "classification": "CONTEXT",
+      "line": 221,
+      "requirements": [],
+      "source_fragment": "Part 3 \u2014 Managed AWS platform"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 222,
+      "requirements": [],
+      "source_fragment": "Objective"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 223,
+      "requirements": [
+        "P3-M-L223-01",
+        "P3-M-L223-02",
+        "P3-M-L223-03",
+        "P3-M-L223-04",
+        "P3-M-L223-05"
+      ],
+      "source_fragment": "Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs."
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 224,
+      "requirements": [],
+      "source_fragment": "Workstream 1: AWS environment qualification"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 225,
+      "requirements": [],
+      "source_fragment": "Before Terraform apply:"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 226,
+      "requirements": [
+        "P3-M-L226-01"
+      ],
+      "source_fragment": "* Verify OIDC identity."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 227,
+      "requirements": [
+        "P3-M-L227-01",
+        "P3-M-L227-02"
+      ],
+      "source_fragment": "* Verify exact account and ap-southeast-2."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 228,
+      "requirements": [
+        "P3-M-L228-01",
+        "P3-M-L228-02"
+      ],
+      "source_fragment": "* Verify repository and main trust boundary."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 229,
+      "requirements": [
+        "P3-M-L229-01"
+      ],
+      "source_fragment": "* Compare live IAM with checked-in IAM."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 230,
+      "requirements": [
+        "P3-M-L230-01"
+      ],
+      "source_fragment": "* Verify backend access."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 231,
+      "requirements": [
+        "P3-M-L231-01"
+      ],
+      "source_fragment": "* Verify lease behavior."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 232,
+      "requirements": [
+        "P3-M-L232-01"
+      ],
+      "source_fragment": "* Verify budget headroom."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 233,
+      "requirements": [
+        "P3-M-L233-01"
+      ],
+      "source_fragment": "* Verify S3 capabilities."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 234,
+      "requirements": [
+        "P3-M-L234-01",
+        "P3-M-L234-02",
+        "P3-M-L234-03"
+      ],
+      "source_fragment": "* Verify Glue definition create/read/delete."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 235,
+      "requirements": [
+        "P3-M-L235-01"
+      ],
+      "source_fragment": "* Verify Step Functions definition validation."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 236,
+      "requirements": [
+        "P3-M-L236-01"
+      ],
+      "source_fragment": "* Verify Athena workgroup access."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 237,
+      "requirements": [
+        "P3-M-L237-01"
+      ],
+      "source_fragment": "* Verify CloudWatch evidence access."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 238,
+      "requirements": [
+        "P3-M-L238-01"
+      ],
+      "source_fragment": "* Prove no active LedgerGuard workload resources exist."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 239,
+      "requirements": [
+        "P3-M-L239-01"
+      ],
+      "source_fragment": "CloudShell will not be a dependency."
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 240,
+      "requirements": [],
+      "source_fragment": "Workstream 2: Minimal infrastructure implementation"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 241,
+      "requirements": [],
+      "source_fragment": "Expected infrastructure:"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 242,
+      "requirements": [
+        "P3-M-L242-01",
+        "P3-M-L242-02",
+        "P3-M-L242-03",
+        "P3-M-L242-04",
+        "P3-M-L242-05"
+      ],
+      "source_fragment": "* One versioned, encrypted, private workload bucket with isolated prefixes."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 243,
+      "requirements": [
+        "P3-M-L243-01",
+        "P3-M-L243-02"
+      ],
+      "source_fragment": "* Lifecycle and incomplete multipart-upload cleanup."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 244,
+      "requirements": [
+        "P3-M-L244-01",
+        "P3-M-L244-02"
+      ],
+      "source_fragment": "* Glue database and tables where required."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 245,
+      "requirements": [
+        "P3-M-L245-01"
+      ],
+      "source_fragment": "* One Glue 5.1 reconciliation job."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 246,
+      "requirements": [
+        "P3-M-L246-01"
+      ],
+      "source_fragment": "* One real Step Functions workflow."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 247,
+      "requirements": [
+        "P3-M-L247-01"
+      ],
+      "source_fragment": "* One DynamoDB control/case table or two small tables if separation is clearer."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 248,
+      "requirements": [
+        "P3-M-L248-01"
+      ],
+      "source_fragment": "* One bounded Athena workgroup."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 249,
+      "requirements": [
+        "P3-M-L249-01",
+        "P3-M-L249-02"
+      ],
+      "source_fragment": "* CloudWatch log groups and metrics."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 250,
+      "requirements": [
+        "P3-M-L250-01"
+      ],
+      "source_fragment": "* Exact workload roles."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 251,
+      "requirements": [
+        "P3-M-L251-01"
+      ],
+      "source_fragment": "* Repository OIDC policy."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 252,
+      "requirements": [
+        "P3-M-L252-01",
+        "P3-M-L252-02"
+      ],
+      "source_fragment": "* Terraform backend and lease integration."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 253,
+      "requirements": [
+        "P3-M-L253-01"
+      ],
+      "source_fragment": "Every resource must justify a project requirement."
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 254,
+      "requirements": [],
+      "source_fragment": "Workstream 3: Real orchestration"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 255,
+      "requirements": [],
+      "source_fragment": "The state machine will perform:"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 256,
+      "requirements": [
+        "P3-M-L256-01",
+        "P3-M-L256-02"
+      ],
+      "source_fragment": "1. Validate run and manifest identity."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 257,
+      "requirements": [
+        "P3-M-L257-01"
+      ],
+      "source_fragment": "2. Conditionally register the run."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 258,
+      "requirements": [
+        "P3-M-L258-01"
+      ],
+      "source_fragment": "3. Execute Glue through .sync."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 259,
+      "requirements": [
+        "P3-M-L259-01"
+      ],
+      "source_fragment": "4. Independently validate produced results."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 260,
+      "requirements": [
+        "P3-M-L260-01"
+      ],
+      "source_fragment": "5. Run bounded Athena checks."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 261,
+      "requirements": [
+        "P3-M-L261-01",
+        "P3-M-L261-02"
+      ],
+      "source_fragment": "6. Persist the reconciliation summary and case revisions."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 262,
+      "requirements": [
+        "P3-M-L262-01"
+      ],
+      "source_fragment": "7. Finalize only when required evidence exists."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 263,
+      "requirements": [
+        "P3-M-L263-01"
+      ],
+      "source_fragment": "8. Preserve exact failure state when a step fails."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 264,
+      "requirements": [
+        "P3-M-L264-01"
+      ],
+      "source_fragment": "No placeholder states may remain."
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 265,
+      "requirements": [],
+      "source_fragment": "Workstream 4: Security and cost controls"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 266,
+      "requirements": [
+        "P3-M-L266-01",
+        "P3-M-L266-02"
+      ],
+      "source_fragment": "* Main-branch and manual-dispatch restrictions."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 267,
+      "requirements": [
+        "P3-M-L267-01"
+      ],
+      "source_fragment": "* Short-lived OIDC credentials."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 268,
+      "requirements": [
+        "P3-M-L268-01"
+      ],
+      "source_fragment": "* Least-privilege execution roles."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 269,
+      "requirements": [
+        "P3-M-L269-01",
+        "P3-M-L269-02"
+      ],
+      "source_fragment": "* Private S3 and TLS-only access."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 270,
+      "requirements": [
+        "P3-M-L270-01"
+      ],
+      "source_fragment": "* Synthetic data only."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 271,
+      "requirements": [
+        "P3-M-L271-01"
+      ],
+      "source_fragment": "* Structured logs without raw financial records."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 272,
+      "requirements": [
+        "P3-M-L272-01"
+      ],
+      "source_fragment": "* Short log retention."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 273,
+      "requirements": [
+        "P3-M-L273-01",
+        "P3-M-L273-02"
+      ],
+      "source_fragment": "* Glue worker and timeout bounds."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 274,
+      "requirements": [
+        "P3-M-L274-01"
+      ],
+      "source_fragment": "* Athena scan cutoff."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 275,
+      "requirements": [
+        "P3-M-L275-01",
+        "P3-M-L275-02"
+      ],
+      "source_fragment": "* Run and expiry tags."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 276,
+      "requirements": [
+        "P3-M-L276-01"
+      ],
+      "source_fragment": "* Gross run-cost ceiling."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 277,
+      "requirements": [
+        "P3-M-L277-01"
+      ],
+      "source_fragment": "* Always-running teardown."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 278,
+      "requirements": [
+        "P3-M-L278-01"
+      ],
+      "source_fragment": "* Independent post-teardown verification."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 279,
+      "requirements": [
+        "P3-M-L279-01",
+        "P3-M-L279-02",
+        "P3-M-L279-03",
+        "P3-M-L279-04"
+      ],
+      "source_fragment": "Glue observability metrics will be enabled to expose reliability, skew, throughput, and resource utilization rather than merely exporting raw logs. AWS Glue observability"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 280,
+      "requirements": [],
+      "source_fragment": "Workstream 5: Controlled deployment canary"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 281,
+      "requirements": [],
+      "source_fragment": "The canary will:"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 282,
+      "requirements": [
+        "P3-M-L282-01"
+      ],
+      "source_fragment": "* Admit exact current-source prerequisites."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 283,
+      "requirements": [
+        "P3-M-L283-01",
+        "P3-M-L283-02"
+      ],
+      "source_fragment": "* Create and validate a saved plan."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 284,
+      "requirements": [
+        "P3-M-L284-01"
+      ],
+      "source_fragment": "* Apply only the expected resources."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 285,
+      "requirements": [
+        "P3-M-L285-01"
+      ],
+      "source_fragment": "* Verify the control plane."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 286,
+      "requirements": [
+        "P3-M-L286-01"
+      ],
+      "source_fragment": "* Prove zero Glue job runs."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 287,
+      "requirements": [
+        "P3-M-L287-01"
+      ],
+      "source_fragment": "* Prove zero Step Functions executions."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 288,
+      "requirements": [
+        "P3-M-L288-01"
+      ],
+      "source_fragment": "* Prove zero Athena queries."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 289,
+      "requirements": [
+        "P3-M-L289-01"
+      ],
+      "source_fragment": "* Prove empty DynamoDB business state."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 290,
+      "requirements": [
+        "P3-M-L290-01"
+      ],
+      "source_fragment": "* Destroy the exact managed inventory."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 291,
+      "requirements": [
+        "P3-M-L291-01",
+        "P3-M-L291-02"
+      ],
+      "source_fragment": "* Prove empty Terraform state and zero active residue."
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 292,
+      "requirements": [],
+      "source_fragment": "Part 3 exit gate"
+    },
+    {
+      "classification": "CONTEXT",
+      "line": 293,
+      "requirements": [],
+      "source_fragment": "Part 3 is complete only when:"
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 294,
+      "requirements": [
+        "P3-M-L294-01"
+      ],
+      "source_fragment": "* Read-only qualification passes."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 295,
+      "requirements": [
+        "P3-M-L295-01"
+      ],
+      "source_fragment": "* IAM parity passes."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 296,
+      "requirements": [
+        "P3-M-L296-01",
+        "P3-M-L296-02"
+      ],
+      "source_fragment": "* Definition-only Glue probe passes and cleans itself."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 297,
+      "requirements": [
+        "P3-M-L297-01"
+      ],
+      "source_fragment": "* Plan-only proof passes."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 298,
+      "requirements": [
+        "P3-M-L298-01"
+      ],
+      "source_fragment": "* Controlled deployment succeeds."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 299,
+      "requirements": [
+        "P3-M-L299-01"
+      ],
+      "source_fragment": "* No workload starts during the canary."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 300,
+      "requirements": [
+        "P3-M-L300-01"
+      ],
+      "source_fragment": "* Teardown succeeds."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 301,
+      "requirements": [
+        "P3-M-L301-01"
+      ],
+      "source_fragment": "* Independent clean-state verification succeeds."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 302,
+      "requirements": [
+        "P3-M-L302-01",
+        "P3-M-L302-02"
+      ],
+      "source_fragment": "* No orphaned lease or active resources remain."
+    },
+    {
+      "classification": "NORMATIVE",
+      "line": 303,
+      "requirements": [
+        "P3-M-L303-01"
+      ],
+      "source_fragment": "* Actual billing remains honestly classified."
+    }
+  ],
+  "part3_lines": [
+    221,
+    303
+  ],
+  "schema_version": "1.0",
+  "source_path": "spec/sources/master-part3-extract-v1.txt",
+  "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df"
+}

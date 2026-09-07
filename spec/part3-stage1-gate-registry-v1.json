@@ -1,0 +1,118 @@
+{
+  "gates": [
+    {
+      "acceptance": "PR #18/head/tree/parent/main CI and artifact verified; correct resumed base",
+      "evidence": "Git facts, artifact inspection, baseline freeze",
+      "gate_id": "P3-S1-G001",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "exact entry"
+    },
+    {
+      "acceptance": "Every inherited protected authority and accepted v1/v2 schema unchanged",
+      "evidence": "Complete path/digest comparison; unchanged historical validators",
+      "gate_id": "P3-S1-G002",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "immutable inheritance"
+    },
+    {
+      "acceptance": "Every Part 3 master obligation and inherited carryover has a stable row and owner",
+      "evidence": "Source coverage inventory, strict ledger and reverse traceability checks",
+      "gate_id": "P3-S1-G003",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "master coverage"
+    },
+    {
+      "acceptance": "G003\u2013G006 and G011 remain explicit; old closure preserved; no blanket original-master 100% claim",
+      "evidence": "Append-only record, gap statuses, active documentation checks",
+      "gate_id": "P3-S1-G004",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "honest conformance"
+    },
+    {
+      "acceptance": "Applicability, causal attribution, schemas, IDs, request version, and errors settled",
+      "evidence": "ADR, strict contracts, independent golden vectors; no unresolved required mode",
+      "gate_id": "P3-S1-G005",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "correction contract"
+    },
+    {
+      "acceptance": "Both grains support valid source correction with correct monetary results and immutable histories",
+      "evidence": "T01\u2013T18, real CLI, independently expected totals",
+      "gate_id": "P3-S1-G006",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "executable correction"
+    },
+    {
+      "acceptance": "No duplicate correction effect or partial authority; legacy and mixed history remain valid",
+      "evidence": "T07\u2013T14 and T19\u2013T31; actual crash/concurrency and tamper evidence",
+      "gate_id": "P3-S1-G007",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "replay/history/recovery"
+    },
+    {
+      "acceptance": "All inherited current financial behavior and Spark parity remain valid",
+      "evidence": "Current installed-wheel test manifest, raw results, historical/current obligation mapping",
+      "gate_id": "P3-S1-G008",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "current regression"
+    },
+    {
+      "acceptance": "Lint/format/strict typing/schema pass; \u226590% overall coverage; 100% owned statements/branches; zero mutation survivors",
+      "evidence": "Scoped coverage JSON and executed mutation registry",
+      "gate_id": "P3-S1-G009",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "quality"
+    },
+    {
+      "acceptance": "Two independent clean runs agree within declared byte/logical scopes; wheel reproducible",
+      "evidence": "Both run reports, manifest, comparison, dependency/build identities",
+      "gate_id": "P3-S1-G010",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "reproducibility"
+    },
+    {
+      "acceptance": "Stage 1 automatic workflow cannot obtain OIDC; no AWS invocation in executed Stage 1 path",
+      "evidence": "Workflow/permission/action analysis, runner invocation evidence, dependency boundary",
+      "gate_id": "P3-S1-G011",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "no AWS execution"
+    },
+    {
+      "acceptance": "PR #18 completed; Stage 1 candidate/verified status matches actual evidence; all six AWS master gates still unexecuted",
+      "evidence": "Active-status validator and independent GitHub facts",
+      "gate_id": "P3-S1-G012",
+      "owner": "STAGE1_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "truthful status"
+    },
+    {
+      "acceptance": "Final PR head has successful required CI and independently verified immutable artifact",
+      "evidence": "Head/run/job/artifact identities and inspection report",
+      "gate_id": "P3-S1-G013",
+      "owner": "EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "exact-head evidence"
+    },
+    {
+      "acceptance": "Manual squash has expected sole parent and validated tree; exact main CI succeeds",
+      "evidence": "Merge topology and independent main run; closure receipt",
+      "gate_id": "P3-S1-G014",
+      "owner": "MANUAL_MERGE_AND_EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "external closure"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab"
+}

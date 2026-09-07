@@ -1,0 +1,41 @@
+{
+  "gates": [
+    {
+      "evidence": [],
+      "gate_id": "environment_qualified",
+      "owner_stage": 2,
+      "state": "NOT_EXECUTED"
+    },
+    {
+      "evidence": [],
+      "gate_id": "live_iam_parity_verified",
+      "owner_stage": 2,
+      "state": "NOT_EXECUTED"
+    },
+    {
+      "evidence": [],
+      "gate_id": "glue_definition_probe_verified",
+      "owner_stage": 2,
+      "state": "NOT_EXECUTED"
+    },
+    {
+      "evidence": [],
+      "gate_id": "plan_only_verified",
+      "owner_stage": 6,
+      "state": "NOT_EXECUTED"
+    },
+    {
+      "evidence": [],
+      "gate_id": "zero_workload_canary_verified",
+      "owner_stage": 7,
+      "state": "NOT_EXECUTED"
+    },
+    {
+      "evidence": [],
+      "gate_id": "teardown_verified",
+      "owner_stage": 7,
+      "state": "NOT_EXECUTED"
+    }
+  ],
+  "schema_version": "1.0"
+}

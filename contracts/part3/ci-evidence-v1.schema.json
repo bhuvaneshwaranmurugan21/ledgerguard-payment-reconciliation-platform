@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "aws_execution": {
+      "const": false
+    },
+    "commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "deterministic_payload_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "entry_base": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "event": {
+      "enum": [
+        "push",
+        "pull_request"
+      ]
+    },
+    "postmerge_verification_required": {
+      "const": true
+    },
+    "producer_state": {
+      "const": "LOCAL_VALIDATION_FINISHED"
+    },
+    "project_complete": {
+      "const": false
+    },
+    "pull_request_number": {
+      "minimum": 1,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "repository": {
+      "const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+    },
+    "run_success_independently_required": {
+      "const": true
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "tree": {
+      "pattern": "^[a-f0-9]{40}$",
+      "type": "string"
+    },
+    "wheel_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "workflow_run_attempt": {
+      "pattern": "^[1-9][0-9]*$",
+      "type": "string"
+    },
+    "workflow_run_id": {
+      "pattern": "^[1-9][0-9]*$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "commit",
+    "tree",
+    "entry_base",
+    "deterministic_payload_sha256",
+    "wheel_sha256",
+    "workflow_run_id",
+    "workflow_run_attempt",
+    "schema_version",
+    "repository",
+    "event",
+    "pull_request_number",
+    "producer_state",
+    "run_success_independently_required",
+    "postmerge_verification_required",
+    "aws_execution",
+    "project_complete"
+  ],
+  "type": "object"
+}

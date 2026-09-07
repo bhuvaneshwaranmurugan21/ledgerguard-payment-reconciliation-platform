@@ -1,0 +1,78 @@
+{
+  "$id": "https://ledgerguard.local/contracts/part3-source-index-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "extract_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "lines": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "classification": {
+            "enum": [
+              "CONTEXT",
+              "NORMATIVE"
+            ]
+          },
+          "line": {
+            "maximum": 303,
+            "minimum": 221,
+            "type": "integer"
+          },
+          "requirements": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "source_fragment": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "line",
+          "source_fragment",
+          "classification",
+          "requirements"
+        ],
+        "type": "object"
+      },
+      "minItems": 83,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "part3_lines": {
+      "const": [
+        221,
+        303
+      ]
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "source_path": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_path",
+    "source_sha256",
+    "part3_lines",
+    "lines",
+    "extract_sha256"
+  ],
+  "type": "object"
+}

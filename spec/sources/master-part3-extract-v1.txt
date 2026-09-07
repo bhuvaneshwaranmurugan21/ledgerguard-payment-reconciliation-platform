@@ -1,0 +1,83 @@
+Part 3 — Managed AWS platform
+Objective
+Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs.
+Workstream 1: AWS environment qualification
+Before Terraform apply:
+* Verify OIDC identity.
+* Verify exact account and ap-southeast-2.
+* Verify repository and main trust boundary.
+* Compare live IAM with checked-in IAM.
+* Verify backend access.
+* Verify lease behavior.
+* Verify budget headroom.
+* Verify S3 capabilities.
+* Verify Glue definition create/read/delete.
+* Verify Step Functions definition validation.
+* Verify Athena workgroup access.
+* Verify CloudWatch evidence access.
+* Prove no active LedgerGuard workload resources exist.
+CloudShell will not be a dependency.
+Workstream 2: Minimal infrastructure implementation
+Expected infrastructure:
+* One versioned, encrypted, private workload bucket with isolated prefixes.
+* Lifecycle and incomplete multipart-upload cleanup.
+* Glue database and tables where required.
+* One Glue 5.1 reconciliation job.
+* One real Step Functions workflow.
+* One DynamoDB control/case table or two small tables if separation is clearer.
+* One bounded Athena workgroup.
+* CloudWatch log groups and metrics.
+* Exact workload roles.
+* Repository OIDC policy.
+* Terraform backend and lease integration.
+Every resource must justify a project requirement.
+Workstream 3: Real orchestration
+The state machine will perform:
+1. Validate run and manifest identity.
+2. Conditionally register the run.
+3. Execute Glue through .sync.
+4. Independently validate produced results.
+5. Run bounded Athena checks.
+6. Persist the reconciliation summary and case revisions.
+7. Finalize only when required evidence exists.
+8. Preserve exact failure state when a step fails.
+No placeholder states may remain.
+Workstream 4: Security and cost controls
+* Main-branch and manual-dispatch restrictions.
+* Short-lived OIDC credentials.
+* Least-privilege execution roles.
+* Private S3 and TLS-only access.
+* Synthetic data only.
+* Structured logs without raw financial records.
+* Short log retention.
+* Glue worker and timeout bounds.
+* Athena scan cutoff.
+* Run and expiry tags.
+* Gross run-cost ceiling.
+* Always-running teardown.
+* Independent post-teardown verification.
+Glue observability metrics will be enabled to expose reliability, skew, throughput, and resource utilization rather than merely exporting raw logs. AWS Glue observability
+Workstream 5: Controlled deployment canary
+The canary will:
+* Admit exact current-source prerequisites.
+* Create and validate a saved plan.
+* Apply only the expected resources.
+* Verify the control plane.
+* Prove zero Glue job runs.
+* Prove zero Step Functions executions.
+* Prove zero Athena queries.
+* Prove empty DynamoDB business state.
+* Destroy the exact managed inventory.
+* Prove empty Terraform state and zero active residue.
+Part 3 exit gate
+Part 3 is complete only when:
+* Read-only qualification passes.
+* IAM parity passes.
+* Definition-only Glue probe passes and cleans itself.
+* Plan-only proof passes.
+* Controlled deployment succeeds.
+* No workload starts during the canary.
+* Teardown succeeds.
+* Independent clean-state verification succeeds.
+* No orphaned lease or active resources remain.
+* Actual billing remains honestly classified.

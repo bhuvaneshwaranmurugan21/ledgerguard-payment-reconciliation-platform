@@ -1,0 +1,2634 @@
+{
+  "requirements": [
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L223-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Admit exact current source",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L223-01",
+      "source_fragment": "Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs.",
+      "source_line": 223,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L223-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Deploy the minimal platform safely",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L223-02",
+      "source_fragment": "Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs.",
+      "source_line": 223,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L223-03.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Validate the deployed control plane",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L223-03",
+      "source_fragment": "Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs.",
+      "source_line": 223,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L223-04.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Destroy the minimal platform safely",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L223-04",
+      "source_fragment": "Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs.",
+      "source_line": 223,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L223-05.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Run no reconciliation workload in Part 3",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L223-05",
+      "source_fragment": "Prove that the current source can safely deploy, validate, and destroy the minimal LedgerGuard AWS platform before any reconciliation workload runs.",
+      "source_line": 223,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L226-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify OIDC identity.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L226-01",
+      "source_fragment": "* Verify OIDC identity.",
+      "source_line": 226,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L227-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify exact account",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L227-01",
+      "source_fragment": "* Verify exact account and ap-southeast-2.",
+      "source_line": 227,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L227-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify ap-southeast-2",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L227-02",
+      "source_fragment": "* Verify exact account and ap-southeast-2.",
+      "source_line": 227,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L228-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify repository trust boundary",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L228-01",
+      "source_fragment": "* Verify repository and main trust boundary.",
+      "source_line": 228,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L228-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify main branch trust boundary",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L228-02",
+      "source_fragment": "* Verify repository and main trust boundary.",
+      "source_line": 228,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L229-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Compare live IAM with checked-in IAM.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L229-01",
+      "source_fragment": "* Compare live IAM with checked-in IAM.",
+      "source_line": 229,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L230-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify backend access.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L230-01",
+      "source_fragment": "* Verify backend access.",
+      "source_line": 230,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L231-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify lease behavior.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L231-01",
+      "source_fragment": "* Verify lease behavior.",
+      "source_line": 231,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L232-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify budget headroom.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L232-01",
+      "source_fragment": "* Verify budget headroom.",
+      "source_line": 232,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L233-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify S3 capabilities.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L233-01",
+      "source_fragment": "* Verify S3 capabilities.",
+      "source_line": 233,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L234-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify Glue definition create",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L234-01",
+      "source_fragment": "* Verify Glue definition create/read/delete.",
+      "source_line": 234,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L234-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify Glue definition read",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L234-02",
+      "source_fragment": "* Verify Glue definition create/read/delete.",
+      "source_line": 234,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L234-03.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify Glue definition delete",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L234-03",
+      "source_fragment": "* Verify Glue definition create/read/delete.",
+      "source_line": 234,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L235-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify Step Functions definition validation.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L235-01",
+      "source_fragment": "* Verify Step Functions definition validation.",
+      "source_line": 235,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L236-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify Athena workgroup access.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L236-01",
+      "source_fragment": "* Verify Athena workgroup access.",
+      "source_line": 236,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L237-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify CloudWatch evidence access.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L237-01",
+      "source_fragment": "* Verify CloudWatch evidence access.",
+      "source_line": 237,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L238-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove no active LedgerGuard workload resources exist.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L238-01",
+      "source_fragment": "* Prove no active LedgerGuard workload resources exist.",
+      "source_line": 238,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L239-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "CloudShell will not be a dependency.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L239-01",
+      "source_fragment": "CloudShell will not be a dependency.",
+      "source_line": 239,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L242-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Exactly one workload bucket",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L242-01",
+      "source_fragment": "* One versioned, encrypted, private workload bucket with isolated prefixes.",
+      "source_line": 242,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L242-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Enable workload bucket versioning",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L242-02",
+      "source_fragment": "* One versioned, encrypted, private workload bucket with isolated prefixes.",
+      "source_line": 242,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L242-03.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Encrypt workload bucket",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L242-03",
+      "source_fragment": "* One versioned, encrypted, private workload bucket with isolated prefixes.",
+      "source_line": 242,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L242-04.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Make workload bucket private",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L242-04",
+      "source_fragment": "* One versioned, encrypted, private workload bucket with isolated prefixes.",
+      "source_line": 242,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L242-05.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Isolate workload prefixes",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L242-05",
+      "source_fragment": "* One versioned, encrypted, private workload bucket with isolated prefixes.",
+      "source_line": 242,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L243-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Configure lifecycle expiry",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L243-01",
+      "source_fragment": "* Lifecycle and incomplete multipart-upload cleanup.",
+      "source_line": 243,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L243-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Clean incomplete multipart uploads",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L243-02",
+      "source_fragment": "* Lifecycle and incomplete multipart-upload cleanup.",
+      "source_line": 243,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L244-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Justify and implement required Glue database",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L244-01",
+      "source_fragment": "* Glue database and tables where required.",
+      "source_line": 244,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L244-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Justify and implement required Glue tables",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L244-02",
+      "source_fragment": "* Glue database and tables where required.",
+      "source_line": 244,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L245-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "One Glue 5.1 reconciliation job.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L245-01",
+      "source_fragment": "* One Glue 5.1 reconciliation job.",
+      "source_line": 245,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L246-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "One real Step Functions workflow.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L246-01",
+      "source_fragment": "* One real Step Functions workflow.",
+      "source_line": 246,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L247-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "One DynamoDB control/case table or two small tables if separation is clearer.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L247-01",
+      "source_fragment": "* One DynamoDB control/case table or two small tables if separation is clearer.",
+      "source_line": 247,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L248-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "One bounded Athena workgroup.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L248-01",
+      "source_fragment": "* One bounded Athena workgroup.",
+      "source_line": 248,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L249-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Configure CloudWatch log groups",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L249-01",
+      "source_fragment": "* CloudWatch log groups and metrics.",
+      "source_line": 249,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L249-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Configure CloudWatch metrics",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L249-02",
+      "source_fragment": "* CloudWatch log groups and metrics.",
+      "source_line": 249,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L250-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Exact workload roles.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L250-01",
+      "source_fragment": "* Exact workload roles.",
+      "source_line": 250,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L251-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Repository OIDC policy.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L251-01",
+      "source_fragment": "* Repository OIDC policy.",
+      "source_line": 251,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L252-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Integrate Terraform backend",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L252-01",
+      "source_fragment": "* Terraform backend and lease integration.",
+      "source_line": 252,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L252-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Integrate lease",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L252-02",
+      "source_fragment": "* Terraform backend and lease integration.",
+      "source_line": 252,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L253-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Every resource must justify a project requirement.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L253-01",
+      "source_fragment": "Every resource must justify a project requirement.",
+      "source_line": 253,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L256-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Validate run identity",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L256-01",
+      "source_fragment": "1. Validate run and manifest identity.",
+      "source_line": 256,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L256-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Validate manifest identity",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L256-02",
+      "source_fragment": "1. Validate run and manifest identity.",
+      "source_line": 256,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L257-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Conditionally register the run.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L257-01",
+      "source_fragment": "2. Conditionally register the run.",
+      "source_line": 257,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L258-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Execute Glue through .sync.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L258-01",
+      "source_fragment": "3. Execute Glue through .sync.",
+      "source_line": 258,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L259-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Independently validate produced results.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L259-01",
+      "source_fragment": "4. Independently validate produced results.",
+      "source_line": 259,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L260-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Run bounded Athena checks.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L260-01",
+      "source_fragment": "5. Run bounded Athena checks.",
+      "source_line": 260,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L261-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Persist reconciliation summary",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L261-01",
+      "source_fragment": "6. Persist the reconciliation summary and case revisions.",
+      "source_line": 261,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L261-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Persist case revisions",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L261-02",
+      "source_fragment": "6. Persist the reconciliation summary and case revisions.",
+      "source_line": 261,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L262-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Finalize only when required evidence exists.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L262-01",
+      "source_fragment": "7. Finalize only when required evidence exists.",
+      "source_line": 262,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L263-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Preserve exact failure state when a step fails.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L263-01",
+      "source_fragment": "8. Preserve exact failure state when a step fails.",
+      "source_line": 263,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage4"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage5/P3-M-L264-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "No placeholder states may remain.",
+      "owner_part": 3,
+      "owner_stage": 5,
+      "requirement_id": "P3-M-L264-01",
+      "source_fragment": "No placeholder states may remain.",
+      "source_line": 264,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L266-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Restrict managed execution to main",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L266-01",
+      "source_fragment": "* Main-branch and manual-dispatch restrictions.",
+      "source_line": 266,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L266-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Restrict managed execution to manual dispatch",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L266-02",
+      "source_fragment": "* Main-branch and manual-dispatch restrictions.",
+      "source_line": 266,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L267-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Short-lived OIDC credentials.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L267-01",
+      "source_fragment": "* Short-lived OIDC credentials.",
+      "source_line": 267,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L268-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Least-privilege execution roles.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L268-01",
+      "source_fragment": "* Least-privilege execution roles.",
+      "source_line": 268,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L269-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Private S3 access",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L269-01",
+      "source_fragment": "* Private S3 and TLS-only access.",
+      "source_line": 269,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L269-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "TLS-only S3 access",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L269-02",
+      "source_fragment": "* Private S3 and TLS-only access.",
+      "source_line": 269,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L270-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Synthetic data only.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L270-01",
+      "source_fragment": "* Synthetic data only.",
+      "source_line": 270,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L271-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Structured logs without raw financial records.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L271-01",
+      "source_fragment": "* Structured logs without raw financial records.",
+      "source_line": 271,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L272-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Short log retention.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L272-01",
+      "source_fragment": "* Short log retention.",
+      "source_line": 272,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L273-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Bound Glue workers",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L273-01",
+      "source_fragment": "* Glue worker and timeout bounds.",
+      "source_line": 273,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L273-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Bound Glue timeout",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L273-02",
+      "source_fragment": "* Glue worker and timeout bounds.",
+      "source_line": 273,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L274-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Athena scan cutoff.",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L274-01",
+      "source_fragment": "* Athena scan cutoff.",
+      "source_line": 274,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L275-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Attach run tags",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L275-01",
+      "source_fragment": "* Run and expiry tags.",
+      "source_line": 275,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L275-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Attach expiry tags",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L275-02",
+      "source_fragment": "* Run and expiry tags.",
+      "source_line": 275,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [],
+      "expected_evidence": [
+        "evidence/part3-stage2/P3-M-L276-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Gross run-cost ceiling.",
+      "owner_part": 3,
+      "owner_stage": 2,
+      "requirement_id": "P3-M-L276-01",
+      "source_fragment": "* Gross run-cost ceiling.",
+      "source_line": 276,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L277-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Always-running teardown.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L277-01",
+      "source_fragment": "* Always-running teardown.",
+      "source_line": 277,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L278-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Independent post-teardown verification.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L278-01",
+      "source_fragment": "* Independent post-teardown verification.",
+      "source_line": 278,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L279-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Enable Glue reliability metrics",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L279-01",
+      "source_fragment": "Glue observability metrics will be enabled to expose reliability, skew, throughput, and resource utilization rather than merely exporting raw logs. AWS Glue observability",
+      "source_line": 279,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L279-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Enable Glue skew metrics",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L279-02",
+      "source_fragment": "Glue observability metrics will be enabled to expose reliability, skew, throughput, and resource utilization rather than merely exporting raw logs. AWS Glue observability",
+      "source_line": 279,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L279-03.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Enable Glue throughput metrics",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L279-03",
+      "source_fragment": "Glue observability metrics will be enabled to expose reliability, skew, throughput, and resource utilization rather than merely exporting raw logs. AWS Glue observability",
+      "source_line": 279,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage3"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage4/P3-M-L279-04.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Enable Glue resource utilization metrics",
+      "owner_part": 3,
+      "owner_stage": 4,
+      "requirement_id": "P3-M-L279-04",
+      "source_fragment": "Glue observability metrics will be enabled to expose reliability, skew, throughput, and resource utilization rather than merely exporting raw logs. AWS Glue observability",
+      "source_line": 279,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage5"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage6/P3-M-L282-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Admit exact current-source prerequisites.",
+      "owner_part": 3,
+      "owner_stage": 6,
+      "requirement_id": "P3-M-L282-01",
+      "source_fragment": "* Admit exact current-source prerequisites.",
+      "source_line": 282,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage5"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage6/P3-M-L283-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Create saved plan",
+      "owner_part": 3,
+      "owner_stage": 6,
+      "requirement_id": "P3-M-L283-01",
+      "source_fragment": "* Create and validate a saved plan.",
+      "source_line": 283,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage5"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage6/P3-M-L283-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Validate saved plan",
+      "owner_part": 3,
+      "owner_stage": 6,
+      "requirement_id": "P3-M-L283-02",
+      "source_fragment": "* Create and validate a saved plan.",
+      "source_line": 283,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L284-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Apply only the expected resources.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L284-01",
+      "source_fragment": "* Apply only the expected resources.",
+      "source_line": 284,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L285-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Verify the control plane.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L285-01",
+      "source_fragment": "* Verify the control plane.",
+      "source_line": 285,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L286-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove zero Glue job runs.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L286-01",
+      "source_fragment": "* Prove zero Glue job runs.",
+      "source_line": 286,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L287-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove zero Step Functions executions.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L287-01",
+      "source_fragment": "* Prove zero Step Functions executions.",
+      "source_line": 287,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L288-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove zero Athena queries.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L288-01",
+      "source_fragment": "* Prove zero Athena queries.",
+      "source_line": 288,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L289-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove empty DynamoDB business state.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L289-01",
+      "source_fragment": "* Prove empty DynamoDB business state.",
+      "source_line": 289,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L290-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Destroy the exact managed inventory.",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L290-01",
+      "source_fragment": "* Destroy the exact managed inventory.",
+      "source_line": 290,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L291-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove empty Terraform state",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L291-01",
+      "source_fragment": "* Prove empty Terraform state and zero active residue.",
+      "source_line": 291,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage6"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage7/P3-M-L291-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove zero active residue",
+      "owner_part": 3,
+      "owner_stage": 7,
+      "requirement_id": "P3-M-L291-02",
+      "source_fragment": "* Prove empty Terraform state and zero active residue.",
+      "source_line": 291,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L294-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Read-only qualification passes.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L294-01",
+      "source_fragment": "* Read-only qualification passes.",
+      "source_line": 294,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L295-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "IAM parity passes.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L295-01",
+      "source_fragment": "* IAM parity passes.",
+      "source_line": 295,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L296-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Definition-only Glue probe passes",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L296-01",
+      "source_fragment": "* Definition-only Glue probe passes and cleans itself.",
+      "source_line": 296,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L296-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Definition-only Glue probe cleans itself",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L296-02",
+      "source_fragment": "* Definition-only Glue probe passes and cleans itself.",
+      "source_line": 296,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L297-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Plan-only proof passes.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L297-01",
+      "source_fragment": "* Plan-only proof passes.",
+      "source_line": 297,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L298-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Controlled deployment succeeds.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L298-01",
+      "source_fragment": "* Controlled deployment succeeds.",
+      "source_line": 298,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L299-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "No workload starts during the canary.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L299-01",
+      "source_fragment": "* No workload starts during the canary.",
+      "source_line": 299,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L300-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Teardown succeeds.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L300-01",
+      "source_fragment": "* Teardown succeeds.",
+      "source_line": 300,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L301-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Independent clean-state verification succeeds.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L301-01",
+      "source_fragment": "* Independent clean-state verification succeeds.",
+      "source_line": 301,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L302-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove no orphaned lease",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L302-01",
+      "source_fragment": "* No orphaned lease or active resources remain.",
+      "source_line": 302,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L302-02.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Prove no active resources",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L302-02",
+      "source_fragment": "* No orphaned lease or active resources remain.",
+      "source_line": 302,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    },
+    {
+      "allowed_claim": "AWS_VERIFIED",
+      "dependencies": [
+        "part3-stage7"
+      ],
+      "expected_evidence": [
+        "evidence/part3-stage8/P3-M-L303-01.json"
+      ],
+      "implementation": [],
+      "inherited_constraints": [
+        "frozen-v1-v2-authorities",
+        "gross-project-usd-10",
+        "synthetic-only",
+        "no-workload-before-part4"
+      ],
+      "normative_statement": "Actual billing remains honestly classified.",
+      "owner_part": 3,
+      "owner_stage": 8,
+      "requirement_id": "P3-M-L303-01",
+      "source_fragment": "* Actual billing remains honestly classified.",
+      "source_line": 303,
+      "source_path": "spec/sources/master-part3-extract-v1.txt",
+      "source_sha256": "0a7f2541d1ab5ce4d0aadabd871ddfe6f75bfdb6b7261efed7f97315b1e874df",
+      "state": "OWNED_OPEN",
+      "tests": [],
+      "validation_method": "Exact-source managed evidence adjudicated by owning stage; definitions and live observations must agree"
+    }
+  ],
+  "schema_version": "1.0"
+}

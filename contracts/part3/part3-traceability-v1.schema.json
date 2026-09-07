@@ -1,0 +1,54 @@
+{
+  "$id": "https://ledgerguard.local/contracts/part3-traceability-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "requirements": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "state": {
+            "enum": [
+              "PLANNED",
+              "IMPLEMENTED",
+              "LOCAL_VERIFIED",
+              "EXTERNALLY_VERIFIED",
+              "OWNED_OPEN",
+              "BLOCKED"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "requirements",
+          "state"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifacts"
+  ],
+  "type": "object"
+}

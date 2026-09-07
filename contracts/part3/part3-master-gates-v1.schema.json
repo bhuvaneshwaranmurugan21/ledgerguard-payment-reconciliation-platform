@@ -1,0 +1,55 @@
+{
+  "$id": "https://ledgerguard.local/contracts/part3-master-gates-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "gates": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "const": []
+          },
+          "gate_id": {
+            "enum": [
+              "environment_qualified",
+              "live_iam_parity_verified",
+              "glue_definition_probe_verified",
+              "plan_only_verified",
+              "zero_workload_canary_verified",
+              "teardown_verified"
+            ]
+          },
+          "owner_stage": {
+            "enum": [
+              2,
+              6,
+              7
+            ]
+          },
+          "state": {
+            "const": "NOT_EXECUTED"
+          }
+        },
+        "required": [
+          "gate_id",
+          "owner_stage",
+          "state",
+          "evidence"
+        ],
+        "type": "object"
+      },
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "gates"
+  ],
+  "type": "object"
+}

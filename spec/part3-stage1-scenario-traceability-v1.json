@@ -1,0 +1,407 @@
+{
+  "scenarios": [
+    {
+      "acceptance": "Independently exact totals; new proof; correction status; same case ID; predecessor and initial exception retained",
+      "requirement": "Transaction exception \u2192 valid correction",
+      "scenario_id": "T01",
+      "source_line": 312,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "acceptance": "All three deltas correct; exact bank allocation unchanged; same history guarantees",
+      "requirement": "Settlement exception \u2192 valid correction",
+      "scenario_id": "T02",
+      "source_line": 313,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "acceptance": "Existing late status and logical outputs unchanged",
+      "requirement": "Genuine late bank arrival",
+      "scenario_id": "T03",
+      "source_line": 314,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_mixed_late_bank_and_correction_are_classified_per_key"
+      ]
+    },
+    {
+      "acceptance": "Matching proof does not create a fabricated resolved case; invalid correction predecessor rejected",
+      "requirement": "No prior case",
+      "scenario_id": "T04",
+      "source_line": 315,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_correction_requires_real_open_predecessor",
+        "tests/test_part2_stage6_finalization.py::test_p2s6_matched_proof_is_atomic_canonical_and_has_no_case"
+      ]
+    },
+    {
+      "acceptance": "Exact residual amount/reasons and `OPEN`; provenance retained",
+      "requirement": "Partial correction remains unresolved",
+      "scenario_id": "T05",
+      "source_line": 316,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_partial_correction_remains_open"
+      ]
+    },
+    {
+      "acceptance": "Difference remains visible; reason retained; no exact-match or operator-acceptance claim",
+      "requirement": "Correction to tolerance boundary",
+      "scenario_id": "T06",
+      "source_line": 317,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_nonreducing_or_overshooting_correction_cannot_resolve[101]"
+      ]
+    },
+    {
+      "acceptance": "Same authoritative receipt, head, proof and case counts; no duplicate effect",
+      "requirement": "Identical same-attempt correction retry",
+      "scenario_id": "T07",
+      "source_line": 318,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified"
+      ]
+    },
+    {
+      "acceptance": "Already published correction located; no duplicate correction application or correction case revision",
+      "requirement": "New-attempt retry after successful correction",
+      "scenario_id": "T08",
+      "source_line": 319,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_new_attempt_retry_has_no_second_effect"
+      ]
+    },
+    {
+      "acceptance": "Rejection and unchanged authoritative inventory",
+      "requirement": "Changed provenance under same attempt/correction ID",
+      "scenario_id": "T09",
+      "source_line": 320,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_context_changes_change_request_identity",
+        "tests/test_part3_stage1_correction.py::test_reused_correction_id_with_changed_provenance_rejects"
+      ]
+    },
+    {
+      "acceptance": "Existing `IDENTITY_CONFLICT`; no override through provenance",
+      "requirement": "Same source identity, changed business bytes",
+      "scenario_id": "T10",
+      "source_line": 321,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_invalid_or_ambiguous_financial_evidence_is_not_a_correction[identity-conflict]"
+      ]
+    },
+    {
+      "acceptance": "Fail admission; no authoritative mutation",
+      "requirement": "Missing, forged, wrong-digest, unrelated correction target",
+      "scenario_id": "T11",
+      "source_line": 322,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_exact_source_targets_are_required[digest-original_sources]",
+        "tests/test_part3_stage1_correction.py::test_exact_source_targets_are_required[missing-corrective_sources]"
+      ]
+    },
+    {
+      "acceptance": "Exact scope rejection; unrelated keys retain previous heads",
+      "requirement": "Wrong grain, merchant, payment/settlement, source system, or currency",
+      "scenario_id": "T12",
+      "source_line": 323,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_correction_cannot_cross_identity_or_currency_scope[currency]"
+      ]
+    },
+    {
+      "acceptance": "Existing reason ownership preserved; no correction exemption",
+      "requirement": "Invalid journal, role orientation, reference, or bank allocation",
+      "scenario_id": "T13",
+      "source_line": 324,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_invalid_or_ambiguous_financial_evidence_is_not_a_correction[unbalanced]",
+        "tests/test_part3_stage1_correction.py::test_invalid_or_ambiguous_financial_evidence_is_not_a_correction[orientation]",
+        "tests/test_part3_stage1_correction.py::test_invalid_or_ambiguous_financial_evidence_is_not_a_correction[role]"
+      ]
+    },
+    {
+      "acceptance": "Reject rather than apply against the wrong history",
+      "requirement": "Stale predecessor; reused/consumed correction link",
+      "scenario_id": "T14",
+      "source_line": 325,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_stale_correction_does_not_rebase_itself"
+      ]
+    },
+    {
+      "acceptance": "Required new policy proof; never correction; legacy historical behavior explicitly checked",
+      "requirement": "Policy-only revision",
+      "scenario_id": "T15",
+      "source_line": 326,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_policy_only_legacy_revision_is_never_correction"
+      ]
+    },
+    {
+      "acceptance": "Source causation proved under digest-verified predecessor policy or ambiguous request rejected; missing/tampered policy bytes reject; no tolerance-based misclassification",
+      "requirement": "Policy-plus-correction",
+      "scenario_id": "T16",
+      "source_line": 327,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_policy_relaxation_cannot_resolve_incomplete_correction",
+        "tests/test_part3_stage1_correction.py::test_actual_correction_can_accompany_policy_revision",
+        "tests/test_part3_stage1_correction.py::test_predecessor_policy_tampering_rejects"
+      ]
+    },
+    {
+      "acceptance": "Correct per-key classification; no batch-wide correction flag",
+      "requirement": "Mixed late/correction data across keys",
+      "scenario_id": "T17",
+      "source_line": 328,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_mixed_late_bank_and_correction_are_classified_per_key"
+      ]
+    },
+    {
+      "acceptance": "Latest predecessor used; prior corrections counted once; final totals independently correct",
+      "requirement": "Genuine second correction after partial first",
+      "scenario_id": "T18",
+      "source_line": 329,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_genuine_second_correction_uses_latest_predecessor_once"
+      ]
+    },
+    {
+      "acceptance": "Same canonical logical outcomes and promised request/correction identities",
+      "requirement": "Input/reference order and source-file partition variations",
+      "scenario_id": "T19",
+      "source_line": 330,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_source_file_partitioning_preserves_exact_financial_results",
+        "tests/test_part3_stage1_correction.py::test_input_order_and_timestamp_do_not_choose_causal_state"
+      ]
+    },
+    {
+      "acceptance": "Causal status unaffected; distinguish identity invariance from payload timestamp changes",
+      "requirement": "Timestamp/mtime variations",
+      "scenario_id": "T20",
+      "source_line": 331,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_input_order_and_timestamp_do_not_choose_causal_state"
+      ]
+    },
+    {
+      "acceptance": "Exact historical proof/case bytes, receipts, IDs, state, and golden digests preserved",
+      "requirement": "Old v1 request histories under new reader",
+      "scenario_id": "T21",
+      "source_line": 332,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part2_stage6_finalization.py::test_p2s6_production_identity_matches_frozen_golden_vector",
+        "tests/test_part2_stage6_finalization.py::test_p2s6_exact_retry_is_idempotent_and_historical_retry_recovers"
+      ]
+    },
+    {
+      "acceptance": "Full state reconstructs; each request version and provenance checked",
+      "requirement": "Mixed old/new chain; restart and `load_states`",
+      "scenario_id": "T22",
+      "source_line": 333,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_two_grains_correction_is_persisted_and_history_verified",
+        "tests/test_part3_stage1_correction.py::test_genuine_second_correction_uses_latest_predecessor_once"
+      ]
+    },
+    {
+      "acceptance": "Readback rejects, including tampering with recomputed superficial digests that breaks causal/predecessor binding",
+      "requirement": "Tamper with provenance/request/commit/case",
+      "scenario_id": "T23",
+      "source_line": 334,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_mixed_history_rejects_rehashed_tampering[provenance]",
+        "tests/test_part3_stage1_correction.py::test_mixed_history_rejects_rehashed_tampering[case-status]"
+      ]
+    },
+    {
+      "acceptance": "Fail closed before new authority; unsupported readers never silently downgrade",
+      "requirement": "Unknown request/provenance version, duplicate JSON keys, malformed shape",
+      "scenario_id": "T24",
+      "source_line": 335,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_reader_rejects_invalid_companion_even_with_new_request_and_commit_hashes",
+        "tests/test_part3_stage1_correction.py::test_cli_failure_ownership[duplicate-json]"
+      ]
+    },
+    {
+      "acceptance": "No authoritative partial proof/case; orphan content does not become truth",
+      "requirement": "Crash after attempt/object/commit write, before HEAD",
+      "scenario_id": "T25",
+      "source_line": 336,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_correction_real_process_crash_and_recovery[after_attempt-71]",
+        "tests/test_part3_stage1_correction.py::test_correction_real_process_crash_and_recovery[after_objects-72]",
+        "tests/test_part3_stage1_correction.py::test_correction_real_process_crash_and_recovery[after_commit-73]"
+      ]
+    },
+    {
+      "acceptance": "Recovery finds original committed correction; no second business effect",
+      "requirement": "Crash after HEAD, before outcome; later commits exist",
+      "scenario_id": "T26",
+      "source_line": 337,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_after_head_correction_recovers_after_later_authority"
+      ]
+    },
+    {
+      "acceptance": "One conditional publication winner; loser cannot overwrite; valid later retry/rebase follows explicit ownership",
+      "requirement": "Two competing correction processes",
+      "scenario_id": "T27",
+      "source_line": 338,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_competing_corrections_have_one_conditional_winner"
+      ]
+    },
+    {
+      "acceptance": "Execution ownership; no disguised financial exception or successful completion",
+      "requirement": "Real storage failure",
+      "scenario_id": "T28",
+      "source_line": 339,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_current_correction_storage_failure_has_execution_ownership"
+      ]
+    },
+    {
+      "acceptance": "Rejected; actor and authorization boundary unchanged",
+      "requirement": "System requests operator-only lifecycle states",
+      "scenario_id": "T29",
+      "source_line": 340,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_companion_shape_and_canonical_identity_fail_closed[operator-state]"
+      ]
+    },
+    {
+      "acceptance": "Whole authoritative commit remains unchanged; no partially finalized valid subset",
+      "requirement": "Invalid correction in a multi-key batch",
+      "scenario_id": "T30",
+      "source_line": 341,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_wrong_predecessor_is_not_authoritative[prior_proof_id]"
+      ]
+    },
+    {
+      "acceptance": "Real source files \u2192 admission \u2192 reconciliation \u2192 finalization \u2192 independent readback; no direct fabricated candidate substitute",
+      "requirement": "Installed-package CLI correction and retry",
+      "scenario_id": "T31",
+      "source_line": 342,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part3_stage1_correction.py::test_cli_real_source_correction_and_both_retries"
+      ]
+    },
+    {
+      "acceptance": "All inherited financial, schema, replay, crash, concurrency, and Spark logical-parity assertions still pass",
+      "requirement": "Existing critical financial/recovery tests on current code",
+      "scenario_id": "T32",
+      "source_line": 343,
+      "source_path": "spec/sources/part3-stage1-execution-plan-v1.md",
+      "source_sha256": "ae9c8d640565cfe70d2aaf04e1be2fbcafe2ecc3425ac893904fa64b98a646ab",
+      "state": "IMPLEMENTED_PENDING_COMPLETE_VALIDATION",
+      "tests": [
+        "tests/test_part2_stage3_admission.py",
+        "tests/test_part2_stage4_transaction.py",
+        "tests/test_part2_stage5_settlement.py",
+        "tests/test_part2_stage6_finalization.py",
+        "tests/test_part2_stage7_spark_parity.py"
+      ]
+    }
+  ],
+  "schema_version": "1.0"
+}
