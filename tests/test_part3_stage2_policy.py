@@ -135,6 +135,20 @@ def test_checked_in_iam_contract_cannot_broaden(tmp_path: Path, change: str) -> 
         path = root / "contracts/part3-stage2-iam-permissions-v1.json"
         value = json.loads(path.read_text())
         rows = value["policy"]["Statement"]
+        backend_actions = set(next(row for row in rows if row["Sid"] == "InspectBackend")["Action"])
+        # S3 API operation names and IAM authorization action names differ for
+        # these two reads. Keep the independently documented IAM names frozen.
+        assert {
+            "s3:GetEncryptionConfiguration",
+            "s3:GetLifecycleConfiguration",
+        } <= backend_actions
+        assert (
+            not {
+                "s3:GetBucketEncryption",
+                "s3:GetBucketLifecycleConfiguration",
+            }
+            & backend_actions
+        )
         pass_row = next(row for row in rows if row["Sid"] == "PassExactGlueProbeRole")
         if change == "pass-role":
             pass_row["Resource"] = "*"
