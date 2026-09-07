@@ -18,7 +18,7 @@ from typing import Any
 def run_mutations(root: Path, output: Path) -> list[dict[str, Any]]:
     registry = json.loads((root / "spec/part3-stage1-code-mutations-v1.json").read_text())
     if [row["mutation_id"] for row in registry["mutations"]] != [
-        f"P3-S1-M{i:03d}" for i in range(1, 27)
+        f"P3-S1-M{i:03d}" for i in range(1, 30)
     ]:
         raise ValueError("required code mutation inventory differs")
     families = {
