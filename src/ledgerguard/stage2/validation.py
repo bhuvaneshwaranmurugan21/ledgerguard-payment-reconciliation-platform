@@ -94,8 +94,8 @@ EXPECTED_POLICY_ACTIONS = {
     },
     "InspectAthenaWorkgroup": {"athena:GetWorkGroup", "athena:ListQueryExecutions"},
     "InspectBackend": {
-        "s3:GetBucketEncryption",
-        "s3:GetBucketLifecycleConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetLifecycleConfiguration",
         "s3:GetBucketLocation",
         "s3:GetBucketOwnershipControls",
         "s3:GetBucketPolicy",
