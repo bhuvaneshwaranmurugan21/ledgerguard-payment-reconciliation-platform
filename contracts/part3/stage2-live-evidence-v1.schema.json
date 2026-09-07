@@ -1,0 +1,239 @@
+{
+  "$id": "urn:ledgerguard:part3-stage2-live-evidence:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_digests": {
+      "additionalProperties": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "minProperties": 12,
+      "type": "object"
+    },
+    "api_journal": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "finished_epoch_ns": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "operation": {
+            "pattern": "^[A-Z0-9_]+$",
+            "type": "string"
+          },
+          "region": {
+            "pattern": "^[a-z]{2}-[a-z]+-[0-9]$",
+            "type": "string"
+          },
+          "response_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "returncode": {
+            "type": "integer"
+          },
+          "sequence": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "started_epoch_ns": {
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sequence",
+          "operation",
+          "region",
+          "started_epoch_ns",
+          "finished_epoch_ns",
+          "returncode",
+          "response_sha256"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "checks": {
+      "properties": {
+        "state": {
+          "enum": [
+            "PASSED",
+            "FAILED"
+          ]
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "type": "object"
+    },
+    "classification": {
+      "enum": [
+        "READ_ONLY_QUALIFICATION",
+        "CAPABILITY_PROBE",
+        "RECOVERY_CLEANUP"
+      ]
+    },
+    "cleanup": {
+      "additionalProperties": false,
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "required",
+        "complete"
+      ],
+      "type": "object"
+    },
+    "commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "checkout_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "credential_mode": {
+      "const": "GITHUB_OIDC"
+    },
+    "event": {
+      "const": "workflow_dispatch"
+    },
+    "identity": {
+      "additionalProperties": false,
+      "properties": {
+        "account_match": {
+          "type": "boolean"
+        },
+        "identity_fingerprint": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "region_match": {
+          "type": "boolean"
+        },
+        "role_match": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "account_match",
+        "region_match",
+        "role_match",
+        "identity_fingerprint"
+      ],
+      "type": "object"
+    },
+    "managed_reconciliation_started": {
+      "const": false
+    },
+    "mutation_journal": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "finished_epoch_ns": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "operation": {
+            "pattern": "^[A-Z0-9_]+$",
+            "type": "string"
+          },
+          "region": {
+            "pattern": "^[a-z]{2}-[a-z]+-[0-9]$",
+            "type": "string"
+          },
+          "response_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "returncode": {
+            "type": "integer"
+          },
+          "sequence": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "started_epoch_ns": {
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sequence",
+          "operation",
+          "region",
+          "started_epoch_ns",
+          "finished_epoch_ns",
+          "returncode",
+          "response_sha256"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "project_complete": {
+      "const": false
+    },
+    "ref": {
+      "const": "refs/heads/main"
+    },
+    "repository": {
+      "const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+    },
+    "run_attempt": {
+      "pattern": "^[1-9][0-9]*$",
+      "type": "string"
+    },
+    "run_id": {
+      "pattern": "^[1-9][0-9]*$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "workflow_path": {
+      "enum": [
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "classification",
+    "repository",
+    "event",
+    "ref",
+    "commit",
+    "checkout_commit",
+    "workflow_path",
+    "credential_mode",
+    "authority_digests",
+    "run_id",
+    "run_attempt",
+    "identity",
+    "checks",
+    "api_journal",
+    "mutation_journal",
+    "cleanup",
+    "managed_reconciliation_started",
+    "project_complete"
+  ],
+  "type": "object"
+}

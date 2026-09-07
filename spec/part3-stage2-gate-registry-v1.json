@@ -1,0 +1,127 @@
+{
+  "gates": [
+    {
+      "gate_id": "P3-S2-G001",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "exact entry"
+    },
+    {
+      "gate_id": "P3-S2-G002",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "immutable inheritance"
+    },
+    {
+      "gate_id": "P3-S2-G003",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "requirement completeness"
+    },
+    {
+      "gate_id": "P3-S2-G004",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "execution boundary"
+    },
+    {
+      "gate_id": "P3-S2-G005",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "exact identity"
+    },
+    {
+      "gate_id": "P3-S2-G006",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "live IAM parity"
+    },
+    {
+      "gate_id": "P3-S2-G007",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "backend readiness"
+    },
+    {
+      "gate_id": "P3-S2-G008",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "lease correctness"
+    },
+    {
+      "gate_id": "P3-S2-G009",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "cost headroom"
+    },
+    {
+      "gate_id": "P3-S2-G010",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "service visibility"
+    },
+    {
+      "gate_id": "P3-S2-G011",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "Step Functions validation"
+    },
+    {
+      "gate_id": "P3-S2-G012",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "Glue definition probe"
+    },
+    {
+      "gate_id": "P3-S2-G013",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "clean state/no workload"
+    },
+    {
+      "gate_id": "P3-S2-G014",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "evidence integrity"
+    },
+    {
+      "gate_id": "P3-S2-G015",
+      "owner": "STAGE2_VALIDATION",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "local quality"
+    },
+    {
+      "gate_id": "P3-S2-G016",
+      "owner": "EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "implementation PR evidence"
+    },
+    {
+      "gate_id": "P3-S2-G017",
+      "owner": "EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "implementation publication"
+    },
+    {
+      "gate_id": "P3-S2-G018",
+      "owner": "EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "read-only AWS external proof"
+    },
+    {
+      "gate_id": "P3-S2-G019",
+      "owner": "EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "capability AWS external proof"
+    },
+    {
+      "gate_id": "P3-S2-G020",
+      "owner": "EXTERNAL_REVIEW",
+      "state": "PENDING_EXECUTED_EVIDENCE",
+      "title": "external closure"
+    }
+  ],
+  "schema_version": "1.0",
+  "source_plan": "spec/sources/part3-stage2-execution-plan-v1.md",
+  "source_plan_sha256": "97da8fde1fc016ae79b337892423346487b15892cb5652b9df8d346458a46a67"
+}

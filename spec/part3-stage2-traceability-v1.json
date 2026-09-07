@@ -1,0 +1,375 @@
+{
+  "gates": {
+    "P3-S2-G001": {
+      "source_plan_section": "1",
+      "state": "PLANNED"
+    },
+    "P3-S2-G002": {
+      "source_plan_section": "2",
+      "state": "PLANNED"
+    },
+    "P3-S2-G003": {
+      "source_plan_section": "3",
+      "state": "PLANNED"
+    },
+    "P3-S2-G004": {
+      "source_plan_section": "4",
+      "state": "PLANNED"
+    },
+    "P3-S2-G005": {
+      "source_plan_section": "5",
+      "state": "PLANNED"
+    },
+    "P3-S2-G006": {
+      "source_plan_section": "6",
+      "state": "PLANNED"
+    },
+    "P3-S2-G007": {
+      "source_plan_section": "7",
+      "state": "PLANNED"
+    },
+    "P3-S2-G008": {
+      "source_plan_section": "8",
+      "state": "PLANNED"
+    },
+    "P3-S2-G009": {
+      "source_plan_section": "9",
+      "state": "PLANNED"
+    },
+    "P3-S2-G010": {
+      "source_plan_section": "10",
+      "state": "PLANNED"
+    },
+    "P3-S2-G011": {
+      "source_plan_section": "11",
+      "state": "PLANNED"
+    },
+    "P3-S2-G012": {
+      "source_plan_section": "12",
+      "state": "PLANNED"
+    },
+    "P3-S2-G013": {
+      "source_plan_section": "13",
+      "state": "PLANNED"
+    },
+    "P3-S2-G014": {
+      "source_plan_section": "14",
+      "state": "PLANNED"
+    },
+    "P3-S2-G015": {
+      "source_plan_section": "15",
+      "state": "PLANNED"
+    },
+    "P3-S2-G016": {
+      "source_plan_section": "16",
+      "state": "PLANNED"
+    },
+    "P3-S2-G017": {
+      "source_plan_section": "17",
+      "state": "PLANNED"
+    },
+    "P3-S2-G018": {
+      "source_plan_section": "18",
+      "state": "PLANNED"
+    },
+    "P3-S2-G019": {
+      "source_plan_section": "19",
+      "state": "PLANNED"
+    },
+    "P3-S2-G020": {
+      "source_plan_section": "20",
+      "state": "PLANNED"
+    }
+  },
+  "requirements": {
+    "P3-M-L226-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L226-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    "P3-M-L227-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L227-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    "P3-M-L227-02": {
+      "evidence": "evidence/part3-stage2/P3-M-L227-02.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    "P3-M-L228-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L228-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    "P3-M-L228-02": {
+      "evidence": "evidence/part3-stage2/P3-M-L228-02.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    "P3-M-L229-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L229-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/validation.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_policy.py",
+        "tests/test_part3_stage2_authority.py"
+      ]
+    },
+    "P3-M-L230-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L230-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L231-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L231-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L232-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L232-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    "P3-M-L233-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L233-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L234-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L234-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L234-02": {
+      "evidence": "evidence/part3-stage2/P3-M-L234-02.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L234-03": {
+      "evidence": "evidence/part3-stage2/P3-M-L234-03.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L235-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L235-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py"
+      ]
+    },
+    "P3-M-L236-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L236-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py"
+      ]
+    },
+    "P3-M-L237-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L237-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py"
+      ]
+    },
+    "P3-M-L238-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L238-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py",
+        "tests/test_part3_stage2_recovery.py"
+      ]
+    },
+    "P3-M-L239-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L239-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    "P3-M-L266-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L266-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    "P3-M-L266-02": {
+      "evidence": "evidence/part3-stage2/P3-M-L266-02.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    "P3-M-L267-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L267-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/aws_cli.py",
+        "src/ledgerguard/stage2/validation.py",
+        ".github/workflows/part3-stage2-read-only.yml",
+        ".github/workflows/part3-stage2-capability.yml",
+        ".github/workflows/part3-stage2-recovery.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_authority.py",
+        "tests/test_part3_stage2_aws_adapter.py",
+        "tests/test_part3_stage2_evidence.py"
+      ]
+    },
+    "P3-M-L276-01": {
+      "evidence": "evidence/part3-stage2/P3-M-L276-01.json",
+      "implementation": [
+        "src/ledgerguard/stage2/control.py",
+        "tools/part3_stage2_runtime.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    }
+  },
+  "schema_version": "1.0"
+}

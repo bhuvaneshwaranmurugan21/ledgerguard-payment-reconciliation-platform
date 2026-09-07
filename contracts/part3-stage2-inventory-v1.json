@@ -1,0 +1,29 @@
+{
+  "access_denied_is_absence": false,
+  "allowed_shared_control_plane": [
+    "ledgerguard-tfstate-857229544428-ap-southeast-2",
+    "ledgerguard-operation-leases",
+    "LedgerGuardGitHubOidcRole",
+    "LedgerGuardGlueProbeRole",
+    "primary"
+  ],
+  "complete_pagination_required": true,
+  "mandatory_tags": {
+    "Project": "LedgerGuard"
+  },
+  "region": "ap-southeast-2",
+  "schema_version": "1.0",
+  "service_specific_inventory": [
+    "s3",
+    "dynamodb",
+    "glue",
+    "states",
+    "athena",
+    "logs"
+  ],
+  "tagging_api_is_supplementary": true,
+  "workload_name_prefixes": [
+    "ledgerguard-",
+    "LedgerGuard-"
+  ]
+}

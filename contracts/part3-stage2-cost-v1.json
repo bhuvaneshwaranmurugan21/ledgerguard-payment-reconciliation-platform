@@ -1,0 +1,12 @@
+{
+  "conservative_unbilled_reserve_usd": "1.00",
+  "currency": "USD",
+  "gross_project_ceiling_usd": "10.00",
+  "headroom_formula": "ceiling - known_gross_project_spend - conservative_unbilled_reserve > maximum_stage2_probe_cost",
+  "known_activity_start": "2026-08-01",
+  "maximum_age_seconds": 172800,
+  "maximum_stage2_probe_cost_usd": "0.05",
+  "metric": "UnblendedCost",
+  "missing_or_stale": "UNKNOWN_BLOCK_MUTATION",
+  "schema_version": "1.0"
+}

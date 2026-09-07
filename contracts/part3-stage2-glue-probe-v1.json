@@ -1,0 +1,43 @@
+{
+  "compared_fields": [
+    "Name",
+    "Role",
+    "Command",
+    "GlueVersion",
+    "WorkerType",
+    "NumberOfWorkers",
+    "Timeout",
+    "MaxRetries",
+    "ExecutionClass",
+    "Tags"
+  ],
+  "definition": {
+    "Command": {
+      "Name": "glueetl",
+      "PythonVersion": "3",
+      "ScriptLocation": "${DERIVED_SCRIPT_URI}"
+    },
+    "ExecutionClass": "STANDARD",
+    "GlueVersion": "5.1",
+    "MaxRetries": 0,
+    "Name": "${DERIVED_JOB_NAME}",
+    "NumberOfWorkers": 2,
+    "Role": "arn:aws:iam::857229544428:role/LedgerGuardGlueProbeRole",
+    "Tags": {
+      "Project": "LedgerGuard",
+      "Purpose": "DefinitionProbe",
+      "Stage": "Part3-Stage2"
+    },
+    "Timeout": 5,
+    "WorkerType": "G.1X"
+  },
+  "required_sequence": [
+    "CREATE_JOB",
+    "GET_JOB",
+    "GET_JOB_RUNS_ZERO",
+    "DELETE_JOB",
+    "GET_JOB_ABSENT"
+  ],
+  "schema_version": "1.0",
+  "start_allowed": false
+}

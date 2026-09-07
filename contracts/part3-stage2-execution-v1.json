@@ -1,0 +1,80 @@
+{
+  "allowed_live_mutations": [
+    "S3_ISOLATED_PREFIX_OBJECTS",
+    "DYNAMODB_QUALIFICATION_LEASE_ITEMS",
+    "GLUE_INERT_JOB_DEFINITION"
+  ],
+  "cost_ceiling_usd": "10.00",
+  "entry": {
+    "closure": "spec/part3-stage1-external-closure-v1.json",
+    "commit": "5abef1a07899bd8ecd202008f1c397890184a0d2",
+    "parent": "cb81704adcfdfac5d93879cd6c189fc2213bbe79",
+    "tree": "77f13e8a68c46ccdcdae426b82c37c66d5e3ed81"
+  },
+  "forbidden_live_operations": [
+    "glue:StartJobRun",
+    "states:StartExecution",
+    "states:StartSyncExecution",
+    "athena:StartQueryExecution",
+    "terraform apply",
+    "terraform destroy",
+    "BUSINESS_DYNAMODB_WRITE"
+  ],
+  "gates": [
+    "P3-S2-G001",
+    "P3-S2-G002",
+    "P3-S2-G003",
+    "P3-S2-G004",
+    "P3-S2-G005",
+    "P3-S2-G006",
+    "P3-S2-G007",
+    "P3-S2-G008",
+    "P3-S2-G009",
+    "P3-S2-G010",
+    "P3-S2-G011",
+    "P3-S2-G012",
+    "P3-S2-G013",
+    "P3-S2-G014",
+    "P3-S2-G015",
+    "P3-S2-G016",
+    "P3-S2-G017",
+    "P3-S2-G018",
+    "P3-S2-G019",
+    "P3-S2-G020"
+  ],
+  "next_stage": "PART3_STAGE3",
+  "requirements": [
+    "P3-M-L226-01",
+    "P3-M-L227-01",
+    "P3-M-L227-02",
+    "P3-M-L228-01",
+    "P3-M-L228-02",
+    "P3-M-L229-01",
+    "P3-M-L230-01",
+    "P3-M-L231-01",
+    "P3-M-L232-01",
+    "P3-M-L233-01",
+    "P3-M-L234-01",
+    "P3-M-L234-02",
+    "P3-M-L234-03",
+    "P3-M-L235-01",
+    "P3-M-L236-01",
+    "P3-M-L237-01",
+    "P3-M-L238-01",
+    "P3-M-L239-01",
+    "P3-M-L266-01",
+    "P3-M-L266-02",
+    "P3-M-L267-01",
+    "P3-M-L276-01"
+  ],
+  "schema_version": "1.0",
+  "stage": "PART3_STAGE2",
+  "state": "IMPLEMENTATION_IN_PROGRESS",
+  "target": ".github/ledgerguard-target.json",
+  "workflow_boundary": {
+    "event": "workflow_dispatch",
+    "exact_sha_input": true,
+    "ref": "refs/heads/main",
+    "short_lived_oidc": true
+  }
+}

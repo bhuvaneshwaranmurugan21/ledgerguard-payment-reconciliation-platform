@@ -1,0 +1,62 @@
+{
+    "athena": {
+        "workgroup": "primary"
+    },
+    "backend": {
+        "bucket": "ledgerguard-tfstate-857229544428-ap-southeast-2",
+        "dynamodb_backend_locking": false,
+        "encryption": "aws:kms",
+        "ownership": "BucketOwnerEnforced",
+        "public_access_block_required": true,
+        "qualification_prefix": "qualification",
+        "required_lifecycle": {
+            "abort_incomplete_multipart_days": 1,
+            "expiration_days": 7,
+            "id": "LedgerGuardQualificationCleanup",
+            "noncurrent_expiration_days": 7,
+            "prefix": "qualification/",
+            "status": "Enabled"
+        },
+        "required_tags": {
+            "ManagedBy": "LedgerGuardBootstrap",
+            "Project": "LedgerGuard",
+            "Purpose": "TerraformState"
+        },
+        "region": "ap-southeast-2",
+        "state_prefix": "ledgerguard/terraform",
+        "terraform_version": "1.13.1",
+        "tls_only_policy_required": true,
+        "use_lockfile": true,
+        "versioning": "Enabled"
+    },
+    "bootstrap_boundary": "ADMINISTRATOR_SIDE_SEPARATE_REVIEWED_TRANSACTION",
+    "glue_probe": {
+        "glue_version": "5.1",
+        "job_prefix": "ledgerguard-stage2-",
+        "role_arn": "arn:aws:iam::857229544428:role/LedgerGuardGlueProbeRole",
+        "role_required_tags": {
+            "ManagedBy": "LedgerGuardBootstrap",
+            "Project": "LedgerGuard",
+            "Purpose": "GlueDefinitionProbe"
+        },
+        "script_bucket": "ledgerguard-tfstate-857229544428-ap-southeast-2",
+        "script_prefix": "qualification"
+    },
+    "lease": {
+        "billing_mode": "PAY_PER_REQUEST",
+        "encryption_required": true,
+        "key_namespace": "ledgerguard/part3/stage2",
+        "partition_key": "lease_key",
+        "pitr_decision": "ENABLED",
+        "region": "ap-southeast-2",
+        "required_tags": {
+            "ManagedBy": "LedgerGuardBootstrap",
+            "Project": "LedgerGuard",
+            "Purpose": "OperationLease"
+        },
+        "table": "ledgerguard-operation-leases",
+        "ttl_attribute": "expires_epoch"
+    },
+    "schema_version": "1.0",
+    "state": "EXPECTED_EXISTING_OR_BOOTSTRAP_REQUIRED"
+}

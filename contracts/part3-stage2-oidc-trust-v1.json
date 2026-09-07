@@ -1,0 +1,24 @@
+{
+  "maximum_session_duration_seconds": 3600,
+  "policy": {
+    "Statement": [
+      {
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringEquals": {
+            "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+            "token.actions.githubusercontent.com:sub": "repo:bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform:ref:refs/heads/main"
+          }
+        },
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::857229544428:oidc-provider/token.actions.githubusercontent.com"
+        },
+        "Sid": "GitHubMainOnly"
+      }
+    ],
+    "Version": "2012-10-17"
+  },
+  "role_name": "LedgerGuardGitHubOidcRole",
+  "schema_version": "1.0"
+}

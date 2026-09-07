@@ -485,7 +485,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-  part3-stage1-current:
+  part3-stage1-closure:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
@@ -509,28 +509,68 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - name: Verify current event and entry ancestry
+      - name: Materialize immutable Stage 1 closure
         shell: bash
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
-          git merge-base --is-ancestor cb81704adcfdfac5d93879cd6c189fc2213bbe79 HEAD
-      - name: Run current Part 3 Stage 1 validation twice
+          git merge-base --is-ancestor 5abef1a07899bd8ecd202008f1c397890184a0d2 HEAD
+          test "$(git show -s --format=%T 5abef1a07899bd8ecd202008f1c397890184a0d2)" = "77f13e8a68c46ccdcdae426b82c37c66d5e3ed81"
+          test "$(git show -s --format=%P 5abef1a07899bd8ecd202008f1c397890184a0d2)" = "cb81704adcfdfac5d93879cd6c189fc2213bbe79"
+          git worktree add --detach "$RUNNER_TEMP/ledgerguard-part3-stage1-closure" 5abef1a07899bd8ecd202008f1c397890184a0d2
+      - name: Reproduce immutable Part 3 Stage 1 validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part3-stage1-closure
         run: >-
           python tools/run_part3_stage1.py
           --clean-runs 2
           --output "$RUNNER_TEMP/ledgerguard-part3-stage1"
-      - name: Build exact-event Stage 1 evidence
+
+  part3-stage2-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Check out the raw event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements/part2-stage8-bootstrap.lock
+            requirements/part2-stage8-py311.lock
+      - name: Install exact Java
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Verify Stage 2 exact event ancestry
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git merge-base --is-ancestor 5abef1a07899bd8ecd202008f1c397890184a0d2 HEAD
+      - name: Run current Part 3 Stage 2 validation twice
         run: >-
-          "$RUNNER_TEMP/ledgerguard-part3-stage1/run-1/venv/bin/python"
-          tools/build_part3_stage1_ci_evidence.py
-          --local-evidence "$RUNNER_TEMP/ledgerguard-part3-stage1/part3-stage1-local-evidence.json"
-          --output-directory "$RUNNER_TEMP/ledgerguard-part3-stage1-artifact"
-      - name: Upload immutable Part 3 Stage 1 evidence
+          python tools/run_part3_stage2.py
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-part3-stage2"
+      - name: Build exact-event Stage 2 implementation evidence
+        run: >-
+          "$RUNNER_TEMP/ledgerguard-part3-stage2/run-1/venv/bin/python"
+          tools/build_part3_stage2_ci_evidence.py
+          --local-evidence "$RUNNER_TEMP/ledgerguard-part3-stage2/part3-stage2-local-evidence.json"
+          --output-directory "$RUNNER_TEMP/ledgerguard-part3-stage2-artifact"
+      - name: Upload immutable Part 3 Stage 2 implementation evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: ledgerguard-part3-stage1-${{ github.event.pull_request.head.sha || github.sha }}
-          path: ${{ runner.temp }}/ledgerguard-part3-stage1-artifact
+          name: ledgerguard-part3-stage2-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part3-stage2-artifact
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
