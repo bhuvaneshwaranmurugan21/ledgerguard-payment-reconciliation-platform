@@ -13,8 +13,8 @@
 
 The Stage 2 implementation is locally validated and remains in progress pending exact-head PR CI,
 publication on `main`, and live AWS evidence. Two fresh CPython 3.11.13 environments each execute
-all 143 registered Stage 2 scenarios with zero skips, produce 100% statement and branch coverage
-for every Stage 2 source module, kill all 29 registered semantic mutations, and build identical
+all 167 registered Stage 2 scenarios with zero skips, produce 100% statement and branch coverage
+for every Stage 2 source module, kill all 32 registered semantic mutations, and build identical
 wheels and deterministic evidence. Repository-local validation proves only the safety and
 determinism of the qualification implementation; it does not prove an AWS fact. After this exact
 tree passes PR CI and is squash-merged, the user will manually dispatch the read-only workflow on
@@ -40,5 +40,18 @@ read-only run and artifact. An evidence-only closure transaction follows success
   `sts:AssumeRoleWithWebIdentity`. GitHub's repository OIDC settings prove that immutable subject
   claims are automatically enabled; the desired contract is therefore corrected to the exact
   owner-ID/repository-ID/main-ref subject.
+- Immutable-subject correction squash `184e3bab3ae510c559536141525ef5ac49827c62` is on `main`;
+  post-merge CI run `34215625919` passed all three required jobs and its independently inspected
+  artifact ZIP has SHA-256 `a117909649afbb0457da37d64e5c6610c52a10c0331cb036caa1568619c30663`.
+- Read-only run `34222243371` passed OIDC and exact IAM parity, then failed closed on the absent
+  backend bucket. After separate administrator bootstrap, run `34225326864` fully verified the S3
+  backend and DynamoDB lease table, then failed closed because the definition-only Glue probe role
+  was absent. Neither run performed a Stage 2 mutation.
 - Stage 2 remains open. A fresh exact-main implementation, live IAM parity, read-only evidence,
   bounded capability evidence, cleanup proof, and evidence-only closure are still required.
+- Read-only run `34264552202` passed the target, IAM, backend, lease, Glue-role, Step Functions,
+  Athena, CloudWatch, and quota checks, then failed closed because Cost Explorer's ungrouped
+  monthly total was negative after credits. The correction groups `UnblendedCost` by
+  `RECORD_TYPE`, sums only positive period/group amounts as charge-side gross, records excluded
+  negative offsets without netting them into headroom, and preserves the strict nonnegative
+  budget guard. The failed run performed no Stage 2 mutation.

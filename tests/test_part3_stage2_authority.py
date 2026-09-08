@@ -38,14 +38,15 @@ def test_exact_stage2_entry_and_repository_contracts_are_complete() -> None:
         "gates": 20,
         "protected_paths": 420,
         "traceability_links": 22,
-        "scenarios": 143,
+        "scenarios": 167,
     }
     assert result["contracts_verified"] is True
     assert result["workflows"]["workflows"] == 3
 
 
 @pytest.mark.parametrize(
-    "kind", ["closure", "protected", "requirement", "duplicate", "gate", "gate-pass"]
+    "kind",
+    ["closure", "protected", "requirement", "duplicate", "gate", "gate-pass", "scenario-schema"],
 )
 def test_authority_tampering_fails_closed(tmp_path: Path, kind: str) -> None:
     root = copy_repository(tmp_path)
@@ -65,13 +66,18 @@ def test_authority_tampering_fails_closed(tmp_path: Path, kind: str) -> None:
         else:
             value["requirements"][1]["requirement_id"] = value["requirements"][0]["requirement_id"]
         path.write_text(json.dumps(value))
-    else:
+    elif kind in {"gate", "gate-pass"}:
         path = root / "spec/part3-stage2-gate-registry-v1.json"
         value = json.loads(path.read_text())
         if kind == "gate":
             value["gates"].pop()
         else:
             value["gates"][0]["state"] = "AWS_VERIFIED"
+        path.write_text(json.dumps(value))
+    else:
+        path = root / "spec/part3-stage2-scenario-registry-v1.json"
+        value = json.loads(path.read_text())
+        value["schema_version"] = "2.0"
         path.write_text(json.dumps(value))
     with pytest.raises(Stage2Rejected):
         validate_stage2_authority(root)
@@ -90,6 +96,7 @@ def test_authority_tampering_fails_closed(tmp_path: Path, kind: str) -> None:
         "status",
         "backend",
         "cost",
+        "cost-aggregation",
         "glue",
         "artifact-order",
         "shell-input",
@@ -158,6 +165,7 @@ def test_repository_boundaries_reject_weakening(tmp_path: Path, kind: str) -> No
             / {
                 "backend": "contracts/part3-stage2-control-plane-v1.json",
                 "cost": "contracts/part3-stage2-cost-v1.json",
+                "cost-aggregation": "contracts/part3-stage2-cost-v1.json",
                 "glue": "contracts/part3-stage2-glue-probe-v1.json",
             }[kind]
         )
@@ -166,6 +174,8 @@ def test_repository_boundaries_reject_weakening(tmp_path: Path, kind: str) -> No
             value["backend"]["use_lockfile"] = False
         elif kind == "cost":
             value["gross_project_ceiling_usd"] = "100.00"
+        elif kind == "cost-aggregation":
+            value["aggregation"]["negative_amount_treatment"] = "NET_AGAINST_CHARGES"
         else:
             value["start_allowed"] = True
         path.write_text(json.dumps(value))

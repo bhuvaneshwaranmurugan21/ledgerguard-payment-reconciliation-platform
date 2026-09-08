@@ -8,6 +8,7 @@ import pytest
 from ledgerguard.stage2.control import (
     Stage2Rejected,
     acquire_allowed,
+    aggregate_gross_spend,
     budget_headroom,
     canonical_bytes,
     release_allowed,
@@ -347,6 +348,75 @@ def test_budget_headroom_is_conservative_and_exact() -> None:
     assert (
         budget_headroom(cost_observation(updated_epoch=800), COST, 1000)["freshness_seconds"] == 200
     )
+
+
+def cost_period(amounts: list[tuple[str, str, str]]) -> dict[str, object]:
+    return {
+        "Groups": [
+            {
+                "Keys": [record_type],
+                "Metrics": {"UnblendedCost": {"Amount": amount, "Unit": unit}},
+            }
+            for record_type, amount, unit in amounts
+        ]
+    }
+
+
+def test_gross_spend_excludes_negative_offsets_without_netting() -> None:
+    result = aggregate_gross_spend(
+        [
+            cost_period([("Usage", "2.25", "USD"), ("Credit", "-5.00", "USD")]),
+            cost_period([("Tax", "0.25", "USD"), ("Refund", "-0.10", "USD")]),
+        ],
+        "UnblendedCost",
+        "USD",
+    )
+    assert result == {
+        "known_gross_project_spend": "2.50",
+        "currency": "USD",
+        "aggregation_dimension": "RECORD_TYPE",
+        "gross_aggregation": "SUM_POSITIVE_PERIOD_GROUP_AMOUNTS",
+        "negative_amount_treatment": "EXCLUDE_WITHOUT_NETTING",
+        "metric_row_count": 4,
+        "record_types": ["Credit", "Refund", "Tax", "Usage"],
+        "excluded_negative_offsets_usd": "5.10",
+    }
+
+
+def test_gross_spend_accepts_verified_zero_rows() -> None:
+    result = aggregate_gross_spend([cost_period([("Usage", "0", "USD")])], "UnblendedCost", "USD")
+    assert result["known_gross_project_spend"] == "0"
+    assert result["metric_row_count"] == 1
+
+
+@pytest.mark.parametrize(
+    "periods",
+    [
+        [],
+        [None],
+        [{}],
+        [{"Groups": []}],
+        [{"Groups": [{}]}],
+        [{"Groups": [None]}],
+        [{"Groups": [{"Keys": [], "Metrics": {}}]}],
+        [{"Groups": [{"Keys": [1], "Metrics": {}}]}],
+        [{"Groups": [{"Keys": [""], "Metrics": {}}]}],
+        [{"Groups": [{"Keys": ["Usage", "Tax"], "Metrics": {}}]}],
+        [{"Groups": [{"Keys": ["Usage"], "Metrics": None}]}],
+        [{"Groups": [{"Keys": ["Usage"], "Metrics": {}}]}],
+        [cost_period([("Usage", "bad", "USD")])],
+        [cost_period([("Usage", "1", "")])],
+        [cost_period([("Usage", "NaN", "USD")])],
+        [cost_period([("Usage", "Infinity", "USD")])],
+        [cost_period([("Usage", "1", "EUR")])],
+        [cost_period([("Usage", "1", "USD"), ("Tax", "0.1", "EUR")])],
+    ],
+)
+def test_gross_spend_rejects_missing_malformed_or_mixed_data(
+    periods: object,
+) -> None:
+    with pytest.raises(Stage2Rejected):
+        aggregate_gross_spend(periods, "UnblendedCost", "USD")
 
 
 @pytest.mark.parametrize(

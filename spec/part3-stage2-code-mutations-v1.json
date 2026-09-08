@@ -1,5 +1,5 @@
 {
-  "count": 30,
+  "count": 32,
   "mutations": [
     {
       "after": "True",
@@ -329,6 +329,28 @@
       "mutation_id": "P3-S2-M030",
       "tests": [
         "tests/test_part3_stage2_policy.py"
+      ]
+    },
+    {
+      "after": "if amount != 0:",
+      "before": "if amount > 0:",
+      "family": "cost_headroom",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M031",
+      "tests": [
+        "tests/test_part3_stage2_controls.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "scenarios.get(\"schema_version\") == \"1.0\"",
+      "family": "governance_closure",
+      "module": "ledgerguard.stage2.control",
+      "module_path": "ledgerguard/stage2/control.py",
+      "mutation_id": "P3-S2-M032",
+      "tests": [
+        "tests/test_part3_stage2_authority.py"
       ]
     }
   ],

@@ -17,6 +17,7 @@ from ledgerguard.stage2.control import (
     MAIN_REF,
     REPOSITORY,
     Stage2Rejected,
+    aggregate_gross_spend,
     budget_headroom,
     canonical_bytes,
     normalize_policy,
@@ -195,6 +196,65 @@ def _inventory_checks(
         "tagged_resources": len(tagged),
         "probe_residue": len(residue),
     }
+    return result
+
+
+def _cost_headroom_check(
+    cli: AwsCli,
+    cost: dict[str, Any],
+    today: date,
+    retrieved_epoch: int,
+) -> dict[str, Any]:
+    start = cost["known_activity_start"]
+    end = today.isoformat()
+    ce = cli.invoke(
+        "CE_GET_COST",
+        [
+            "--time-period",
+            f"Start={start},End={end}",
+            "--granularity",
+            "MONTHLY",
+            "--metrics",
+            cost["metric"],
+            "--group-by",
+            (
+                f"Type={cost['aggregation']['group_by_type']},"
+                f"Key={cost['aggregation']['group_by_key']}"
+            ),
+        ],
+    )
+    require("NextPageToken" not in ce, "Cost Explorer pagination incomplete")
+    periods = ce.get("ResultsByTime", [])
+    gross = aggregate_gross_spend(periods, cost["metric"], cost["currency"])
+    observed_boundary = datetime.combine(today, datetime.min.time(), tzinfo=UTC)
+    data_through_epoch = int(observed_boundary.timestamp())
+    result = budget_headroom(
+        {
+            "currency": gross["currency"],
+            "updated_epoch": data_through_epoch,
+            "known_gross_project_spend": gross["known_gross_project_spend"],
+        },
+        cost,
+        retrieved_epoch,
+    )
+    result.update(
+        {
+            "query_start": start,
+            "query_end_exclusive": end,
+            "metric": cost["metric"],
+            "retrieved_epoch": retrieved_epoch,
+            "data_through_epoch": data_through_epoch,
+            "freshness_basis": "QUERY_WINDOW_END_EXCLUSIVE_WITH_UNBILLED_RESERVE",
+            "contains_estimated_period": any(row.get("Estimated") is True for row in periods),
+            "pagination_complete": True,
+            "aggregation_dimension": gross["aggregation_dimension"],
+            "gross_aggregation": gross["gross_aggregation"],
+            "negative_amount_treatment": gross["negative_amount_treatment"],
+            "metric_row_count": gross["metric_row_count"],
+            "record_types": gross["record_types"],
+            "excluded_negative_offsets_usd": gross["excluded_negative_offsets_usd"],
+        }
+    )
     return result
 
 
@@ -377,46 +437,7 @@ def _read_only_checks(cli: AwsCli, root: Path, expected_sha: str) -> dict[str, A
     for service_code in ("s3", "dynamodb", "glue", "states", "athena"):
         quotas = cli.invoke("QUOTAS_LIST", ["--service-code", service_code, "--max-results", "100"])
         require(isinstance(quotas.get("Quotas", []), list), "quota visibility incomplete")
-    today = date.today()
-    start = cost["known_activity_start"]
-    end = today.isoformat()
-    ce = cli.invoke(
-        "CE_GET_COST",
-        [
-            "--time-period",
-            f"Start={start},End={end}",
-            "--granularity",
-            "MONTHLY",
-            "--metrics",
-            cost["metric"],
-        ],
-    )
-    periods = ce.get("ResultsByTime", [])
-    totals = [group["Total"][cost["metric"]] for group in periods]
-    currency = {row["Unit"] for row in totals}
-    require(len(currency) == 1, "Cost Explorer currency is absent or mixed")
-    gross = sum((float(row["Amount"]) for row in totals), 0.0)
-    observed_boundary = datetime.combine(today, datetime.min.time(), tzinfo=UTC)
-    cost_result = budget_headroom(
-        {
-            "currency": currency.pop(),
-            "updated_epoch": int(observed_boundary.timestamp()),
-            "known_gross_project_spend": f"{gross:.10f}",
-        },
-        cost,
-        int(time.time()),
-    )
-    cost_result.update(
-        {
-            "query_start": start,
-            "query_end_exclusive": end,
-            "metric": cost["metric"],
-            "retrieved_epoch": int(time.time()),
-            "data_through_epoch": int(observed_boundary.timestamp()),
-            "freshness_basis": "QUERY_WINDOW_END_EXCLUSIVE_WITH_UNBILLED_RESERVE",
-            "contains_estimated_period": any(row.get("Estimated") is True for row in periods),
-        }
-    )
+    cost_result = _cost_headroom_check(cli, cost, date.today(), int(time.time()))
     budgets = cli.invoke(
         "BUDGETS_DESCRIBE", ["--account-id", target["account_id"], "--max-results", "100"]
     )

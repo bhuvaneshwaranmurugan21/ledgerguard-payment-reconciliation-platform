@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -9,6 +10,7 @@ import pytest
 from ledgerguard.stage2.control import Stage2Rejected
 from tools.part3_stage2_runtime import (
     _capability_case,
+    _cost_headroom_check,
     _inventory_checks,
     _prepare_output,
     _root,
@@ -17,6 +19,56 @@ from tools.part3_stage2_runtime import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_runtime_cost_query_uses_record_types_and_preserves_charge_side_gross() -> None:
+    class CostAws:
+        def __init__(self) -> None:
+            self.arguments: list[str] = []
+
+        def invoke(self, operation: str, arguments: list[str] | None = None) -> dict[str, Any]:
+            assert operation == "CE_GET_COST"
+            self.arguments = list(arguments or [])
+            return {
+                "ResultsByTime": [
+                    {
+                        "Estimated": True,
+                        "Groups": [
+                            {
+                                "Keys": ["Usage"],
+                                "Metrics": {"UnblendedCost": {"Amount": "2.25", "Unit": "USD"}},
+                            },
+                            {
+                                "Keys": ["Credit"],
+                                "Metrics": {"UnblendedCost": {"Amount": "-5.00", "Unit": "USD"}},
+                            },
+                        ],
+                    }
+                ]
+            }
+
+    cli = CostAws()
+    today = date(2026, 9, 8)
+    boundary = int(datetime.combine(today, datetime.min.time(), tzinfo=UTC).timestamp())
+    cost = json.loads((ROOT / "contracts/part3-stage2-cost-v1.json").read_text())
+    result = _cost_headroom_check(cli, cost, today, boundary + 60)
+    assert cli.arguments[-2:] == ["--group-by", "Type=DIMENSION,Key=RECORD_TYPE"]
+    assert result["known_gross_project_spend_usd"] == "2.2500"
+    assert result["excluded_negative_offsets_usd"] == "5.00"
+    assert result["contains_estimated_period"] is True
+    assert result["pagination_complete"] is True
+    assert result["freshness_seconds"] == 60
+
+
+def test_runtime_cost_query_rejects_incomplete_pagination() -> None:
+    class PaginatedCostAws:
+        def invoke(self, operation: str, arguments: list[str] | None = None) -> dict[str, Any]:
+            assert operation == "CE_GET_COST"
+            return {"NextPageToken": "more", "ResultsByTime": []}
+
+    cost = json.loads((ROOT / "contracts/part3-stage2-cost-v1.json").read_text())
+    with pytest.raises(Stage2Rejected, match="Cost Explorer pagination incomplete"):
+        _cost_headroom_check(PaginatedCostAws(), cost, date(2026, 9, 8), 1788825660)
 
 
 class StatefulAws:

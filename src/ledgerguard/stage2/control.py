@@ -334,6 +334,64 @@ def budget_headroom(
     }
 
 
+def aggregate_gross_spend(
+    periods: Any,
+    metric: str,
+    expected_currency: str,
+) -> dict[str, Any]:
+    """Derive charge-side gross without allowing credits to create headroom."""
+    require(isinstance(periods, list) and bool(periods), "Cost Explorer periods missing")
+    gross = Decimal("0")
+    excluded_negative = Decimal("0")
+    row_count = 0
+    record_types: set[str] = set()
+    units: set[str] = set()
+    for period in periods:
+        require(isinstance(period, Mapping), "Cost Explorer period malformed")
+        groups = period.get("Groups")
+        require(isinstance(groups, list), "Cost Explorer record-type groups missing")
+        for group in groups:
+            require(isinstance(group, Mapping), "Cost Explorer group malformed")
+            keys = group.get("Keys")
+            require(
+                isinstance(keys, list)
+                and len(keys) == 1
+                and isinstance(keys[0], str)
+                and bool(keys[0]),
+                "Cost Explorer record type malformed",
+            )
+            metrics = group.get("Metrics")
+            require(isinstance(metrics, Mapping), "Cost Explorer metrics missing")
+            metric_row = metrics.get(metric)
+            require(isinstance(metric_row, Mapping), "Cost Explorer metric missing")
+            unit = metric_row.get("Unit")
+            require(isinstance(unit, str) and bool(unit), "Cost Explorer currency missing")
+            try:
+                amount = Decimal(str(metric_row.get("Amount")))
+            except ArithmeticError as exc:
+                raise Stage2Rejected("Cost Explorer amount malformed") from exc
+            require(amount.is_finite(), "Cost Explorer amount must be finite")
+            row_count += 1
+            record_types.add(keys[0])
+            units.add(unit)
+            if amount > 0:
+                gross += amount
+            elif amount < 0:
+                excluded_negative += -amount
+    require(row_count > 0, "Cost Explorer metric rows missing")
+    require(units == {expected_currency}, "Cost Explorer currency is absent or mixed")
+    return {
+        "known_gross_project_spend": format(gross, "f"),
+        "currency": expected_currency,
+        "aggregation_dimension": "RECORD_TYPE",
+        "gross_aggregation": "SUM_POSITIVE_PERIOD_GROUP_AMOUNTS",
+        "negative_amount_treatment": "EXCLUDE_WITHOUT_NETTING",
+        "metric_row_count": row_count,
+        "record_types": sorted(record_types),
+        "excluded_negative_offsets_usd": format(excluded_negative, "f"),
+    }
+
+
 def validate_s3_cleanup(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
     residue = [row for row in rows if row.get("Key")]
     require(not residue, "S3 object version or delete-marker residue")
@@ -487,7 +545,8 @@ def validate_stage2_authority(root: Path) -> dict[str, Any]:
     scenarios = read_object(root / "spec/part3-stage2-scenario-registry-v1.json")
     scenario_rows = scenarios["scenarios"]
     require(
-        scenarios["count"] == len(scenario_rows) >= 100
+        scenarios.get("schema_version") == "1.0"
+        and scenarios["count"] == len(scenario_rows) >= 100
         and [row["scenario_id"] for row in scenario_rows]
         == [f"P3-S2-T{i:03d}" for i in range(1, len(scenario_rows) + 1)],
         "Stage 2 scenario inventory differs",
