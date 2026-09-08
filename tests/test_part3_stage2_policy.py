@@ -123,7 +123,8 @@ def test_checked_in_iam_contract_cannot_broaden(tmp_path: Path, change: str) -> 
             condition["token.actions.githubusercontent.com:aud"] = "other"
         elif change == "subject":
             condition["token.actions.githubusercontent.com:sub"] = (
-                "repo:other/repo:ref:refs/heads/main"
+                "repo:bhuvaneshwaranmurugan21/"
+                "ledgerguard-payment-reconciliation-platform:ref:refs/heads/main"
             )
         elif change == "wildcard":
             condition["token.actions.githubusercontent.com:sub"] = "repo:*"

@@ -16,5 +16,13 @@ The live account may still lack the desired backend bucket, lease table, Glue pr
 policy. That is an expected hard branch: read-only evidence must identify the exact gap before any
 administrator bootstrap or permission change occurs.
 
+Live runs `34200956511` and `34207057507` exposed two administrator-side gaps without executing a
+workload or mutation probe. The first proved that the role lacked its Stage 2 inspection policy.
+After that policy was installed, the next run proved that the repository uses GitHub's immutable
+OIDC subject format, which includes owner ID `276895096` and repository ID `1333030396`; the
+original name-only trust contract could no longer assume the role. The desired trust contract now
+binds those immutable IDs and the exact main ref. A fresh exact-main run remains mandatory after
+repository and AWS parity.
+
 Stage 2 excludes workload Terraform, business DynamoDB state, production Step Functions, managed
 reconciliation, and all Stage 3 work.

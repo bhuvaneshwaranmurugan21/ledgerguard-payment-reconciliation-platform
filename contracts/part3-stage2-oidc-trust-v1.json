@@ -7,7 +7,7 @@
         "Condition": {
           "StringEquals": {
             "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-            "token.actions.githubusercontent.com:sub": "repo:bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub": "repo:bhuvaneshwaranmurugan21@276895096/ledgerguard-payment-reconciliation-platform@1333030396:ref:refs/heads/main"
           }
         },
         "Effect": "Allow",
