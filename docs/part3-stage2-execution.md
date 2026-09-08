@@ -28,3 +28,17 @@ read-only run and artifact. An evidence-only closure transaction follows success
 - Managed reconciliation: not started.
 - Workload infrastructure: not implemented.
 - Part 3 and project completion: false.
+
+## Live correction history
+
+- Implementation squash `b53ed30a38a5cd7f4c25097cb250371f7b5f0e10` and S3 IAM-action
+  correction squash `46eb21434ca45363055acf9ac29b7ddd7e7191b5` are on `main` with green
+  post-merge CI.
+- Read-only run `34200956511` assumed the role and then failed closed at `iam:GetRole`, proving
+  that the role had no qualification identity policy. No Stage 2 mutation occurred.
+- After administrator permission remediation, run `34207057507` failed before qualification at
+  `sts:AssumeRoleWithWebIdentity`. GitHub's repository OIDC settings prove that immutable subject
+  claims are automatically enabled; the desired contract is therefore corrected to the exact
+  owner-ID/repository-ID/main-ref subject.
+- Stage 2 remains open. A fresh exact-main implementation, live IAM parity, read-only evidence,
+  bounded capability evidence, cleanup proof, and evidence-only closure are still required.

@@ -1,5 +1,5 @@
 {
-  "count": 29,
+  "count": 30,
   "mutations": [
     {
       "after": "True",
@@ -316,6 +316,17 @@
       "module": "ledgerguard.stage2.validation",
       "module_path": "ledgerguard/stage2/validation.py",
       "mutation_id": "P3-S2-M029",
+      "tests": [
+        "tests/test_part3_stage2_policy.py"
+      ]
+    },
+    {
+      "after": "True",
+      "before": "condition[\"token.actions.githubusercontent.com:sub\"] == OIDC_SUBJECT",
+      "family": "iam_semantics",
+      "module": "ledgerguard.stage2.validation",
+      "module_path": "ledgerguard/stage2/validation.py",
+      "mutation_id": "P3-S2-M030",
       "tests": [
         "tests/test_part3_stage2_policy.py"
       ]

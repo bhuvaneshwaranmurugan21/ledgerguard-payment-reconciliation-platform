@@ -12,6 +12,7 @@ from ledgerguard.stage2.aws_cli import COMMANDS, FORBIDDEN
 from ledgerguard.stage2.control import (
     ENTRY_COMMIT,
     MAIN_REF,
+    OIDC_SUBJECT,
     REPOSITORY,
     STAGE2_REQUIREMENTS,
     normalize_policy,
@@ -143,7 +144,7 @@ def _validate_policy_contract(root: Path) -> dict[str, Any]:
         "OIDC audience differs",
     )
     require(
-        condition["token.actions.githubusercontent.com:sub"] == f"repo:{REPOSITORY}:ref:{MAIN_REF}",
+        condition["token.actions.githubusercontent.com:sub"] == OIDC_SUBJECT,
         "OIDC subject differs",
     )
     require(

@@ -12,6 +12,12 @@ implemented. Automatic CI has no OIDC permission. Live checks use only manually 
 workflows on `refs/heads/main`, require an exact 40-character commit input equal to the workflow
 and checkout commit, and use short-lived OIDC credentials.
 
+GitHub's immutable default OIDC subject is required. The subject binds both the immutable owner ID
+`276895096` and repository ID `1333030396`, in addition to their human-readable names and the exact
+`refs/heads/main` ref. The legacy name-only subject is rejected. This preserves the original
+repository-and-main-only trust boundary while preventing namespace reuse from transferring the
+role trust to a different owner or repository.
+
 The Terraform backend is an encrypted, versioned S3 bucket with S3 lockfiles (`use_lockfile =
 true`). DynamoDB backend locking is not introduced. A separate DynamoDB table provides the
 account-side operation lease. The desired names and security controls are recorded in

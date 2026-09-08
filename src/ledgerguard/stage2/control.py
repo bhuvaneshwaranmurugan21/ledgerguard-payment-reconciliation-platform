@@ -16,8 +16,16 @@ HEX64 = re.compile(r"^[0-9a-f]{64}$")
 HASH_ID = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 ACCOUNT = re.compile(r"(?<![0-9])[0-9]{12}(?![0-9])")
 ACCESS_KEY = re.compile(r"(?:AKIA|ASIA)[A-Z0-9]{16}")
-REPOSITORY = "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+REPOSITORY_OWNER = "bhuvaneshwaranmurugan21"
+REPOSITORY_OWNER_ID = "276895096"
+REPOSITORY_NAME = "ledgerguard-payment-reconciliation-platform"
+REPOSITORY_ID = "1333030396"
+REPOSITORY = f"{REPOSITORY_OWNER}/{REPOSITORY_NAME}"
 MAIN_REF = "refs/heads/main"
+OIDC_SUBJECT = (
+    f"repo:{REPOSITORY_OWNER}@{REPOSITORY_OWNER_ID}/"
+    f"{REPOSITORY_NAME}@{REPOSITORY_ID}:ref:{MAIN_REF}"
+)
 ENTRY_COMMIT = "5abef1a07899bd8ecd202008f1c397890184a0d2"
 ENTRY_TREE = "77f13e8a68c46ccdcdae426b82c37c66d5e3ed81"
 ENTRY_PARENT = "cb81704adcfdfac5d93879cd6c189fc2213bbe79"
