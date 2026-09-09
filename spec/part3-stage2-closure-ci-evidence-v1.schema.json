@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ledgerguard.example/spec/part3-stage2-closure-ci-evidence-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "repository", "event", "commit", "tree", "qualified_operational_commit",
+    "run_id", "run_attempt", "clean_run_count", "deterministic_equal",
+    "deterministic_payload_sha256", "closure_candidate_digest", "wheel_sha256",
+    "tests", "coverage", "mutations", "requirements_verified", "stage2_gates_verified",
+    "pending_external_gate", "master_gates_verified", "aws_api_called",
+    "managed_reconciliation_started", "part3_complete", "project_complete"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "repository": {"const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"},
+    "event": {"enum": ["pull_request", "push"]},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "qualified_operational_commit": {"const": "aa136331e44dcd181f766b42d76ee2616a22f435"},
+    "run_id": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+    "run_attempt": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+    "clean_run_count": {"type": "integer", "minimum": 2},
+    "deterministic_equal": {"const": true},
+    "deterministic_payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "closure_candidate_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "wheel_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tests", "failures", "errors", "skipped"],
+      "properties": {
+        "tests": {"type": "integer", "minimum": 1},
+        "failures": {"const": 0},
+        "errors": {"const": 0},
+        "skipped": {"const": 0}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["percent", "statements", "branches"],
+      "properties": {
+        "percent": {"const": 100.0},
+        "statements": {"type": "integer", "minimum": 1},
+        "branches": {"type": "integer", "minimum": 1}
+      }
+    },
+    "mutations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checks", "survivors"],
+      "properties": {
+        "checks": {"const": 13},
+        "survivors": {"const": 0}
+      }
+    },
+    "requirements_verified": {"const": 22},
+    "stage2_gates_verified": {"const": 19},
+    "pending_external_gate": {"const": "P3-S2-G020"},
+    "master_gates_verified": {"const": 3},
+    "aws_api_called": {"const": false},
+    "managed_reconciliation_started": {"const": false},
+    "part3_complete": {"const": false},
+    "project_complete": {"const": false}
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "classification": "CAPABILITY_PROBE_EXTERNAL_RECEIPT",
+  "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+  "commit": "aa136331e44dcd181f766b42d76ee2616a22f435",
+  "ref": "refs/heads/main",
+  "workflow": ".github/workflows/part3-stage2-capability.yml",
+  "run": {"id": 34337699794, "attempt": 1, "conclusion": "success"},
+  "artifact": {
+    "id": 10098488870,
+    "members": 3,
+    "zip_sha256": "c1ed64093b70a6929d0d68e1531e60746acb7f21416ece1bd33c10f7f61a4b4d",
+    "manifest_sha256": "dccd31044bca506f6b18ae53e37819aa9d42f58381a421280e031e40adc5aff0",
+    "journal_sha256": "30178f7643e829f288949fb5b540a9a60d9d0c989926f7102ba6520771f5480a",
+    "run_binding_sha256": "e6f6879718ac18c189aa16bbad7e9c43060933e4392a51b69ec4abfdbe7b582c",
+    "inspection_sha256": "446c07507bc4546491f1342f29ecca3695f4058924a11de27d2cb7793fd41169"
+  },
+  "preflight": {
+    "run_id": 34337121587,
+    "run_attempt": 1,
+    "artifact_id": 10098207929,
+    "artifact_zip_sha256": "07a17f02840c3466713c9dbd9842924b917bcc9c46a2d8289e0474943f78a21d",
+    "inspection_sha256": "89a2ab6768c28b9675d1a64fa95ebc73099116035f78396963fcf224821abaf3"
+  },
+  "cases": [
+    {"case": "after_s3", "fault_injected": true, "cleanup_complete": true},
+    {"case": "after_lease", "fault_injected": true, "cleanup_complete": true},
+    {"case": "after_glue", "fault_injected": true, "cleanup_complete": true},
+    {"case": "normal", "fault_injected": false, "cleanup_complete": true}
+  ],
+  "final_inventory": {
+    "clean": true,
+    "buckets": 2,
+    "tables": 3,
+    "jobs": 0,
+    "state_machines": 0,
+    "ledgerguard_log_groups": 0,
+    "probe_residue": 0,
+    "tagged_resources": 4
+  },
+  "cleanup": {"required": true, "complete": true},
+  "api_calls": 123,
+  "run_scoped_mutation_journal_entries": 42,
+  "glue_job_runs": 0,
+  "step_functions_executions": 0,
+  "athena_queries_started": 0,
+  "independently_accepted": true,
+  "managed_reconciliation_started": false,
+  "project_complete": false
+}

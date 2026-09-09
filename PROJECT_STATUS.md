@@ -6,10 +6,11 @@
 - Part: 3 — Managed AWS platform
 - Stage: 2 — Exact-target AWS qualification
 - State: `LOCAL_RECONCILIATION_VERIFIED`
-- Stage state: `PART3_STAGE2_IN_PROGRESS`
+- Stage state: `PART3_STAGE2_CLOSURE_CANDIDATE`
+- Historical Stage 2 implementation token: `PART3_STAGE2_IN_PROGRESS`
 - Highest accepted claim: Part 2 repository-local reconciliation; PR #18 closure externally verified
 - Stage 1 external closure: `EXTERNALLY_VERIFIED`
-- Stage 2 qualification: implementation locally validated; live AWS gates remain unexecuted
+- Stage 2 qualification: exact-main read-only and bounded capability evidence independently accepted
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
@@ -17,8 +18,11 @@
 - Atomic proof finalization: `EXTERNALLY_VERIFIED`
 - Spark reconciliation parity: `EXTERNALLY_VERIFIED`
 - Stage 7 external closure: `EXTERNALLY_VERIFIED`
-- AWS execution: false
-- AWS infrastructure mutated: false
+- AWS execution: bounded Stage 2 qualification only
+- Automatic CI AWS execution: false
+- AWS infrastructure mutated: temporary run-scoped S3, lease, and Glue probe resources; cleanup complete
+- Managed reconciliation execution: false
+- Stage 2 external closure gate: `P3-S2-G020 PENDING_EXTERNAL_CLOSURE`
 
 ## Accepted Stage 2 snapshot
 
@@ -163,7 +167,10 @@ PR #17 passed exact-head CI run `33871740027`, was squash-merged as
 
 The historical terminal Part 2 authority remains unchanged and active for its accepted local scope.
 The append-only Part 2 master conformance addendum records all original-master carryovers with
-owners. Part 3 Stage 1 is externally complete. Part 3 Stage 2 has a locally validated qualification
-implementation and remains open for exact-head CI, publication, and live AWS proof. All six Part 3
-AWS master gates remain `NOT_EXECUTED`. No AWS, managed, performance, scale, production-operation,
+owners. Part 3 Stage 1 is externally complete. Part 3 Stage 2 has independently accepted read-only
+and bounded capability evidence on exact main commit
+`aa136331e44dcd181f766b42d76ee2616a22f435`. All 22 requirements and Stage 2 gates G001–G019
+are verified. G020 remains pending the evidence-only closure squash and post-merge main CI.
+Exactly three Part 3 master gates are `AWS_VERIFIED`; the other three remain `NOT_EXECUTED`.
+No managed reconciliation, deployed-platform, performance, scale, production-readiness, Part 3,
 or overall-project completion claim is made.

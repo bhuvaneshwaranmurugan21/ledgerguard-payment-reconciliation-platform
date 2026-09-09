@@ -39,16 +39,20 @@ and independent post-merge validation. PR #18 completed the closure attestation 
 `33904881790` passed. Part 2's accepted 203-requirement local scope is
 `LOCAL_RECONCILIATION_VERIFIED`. Part 3 Stage 1 was closed by PR #19 at squash commit
 `5abef1a07899bd8ecd202008f1c397890184a0d2`; exact-head and independent main CI passed and the
-external closure receipt binds both artifacts. Part 3 Stage 2 is `IN_PROGRESS`: its qualification
-code and exact-main manual workflows are locally validated and await exact-head CI, publication,
-and live AWS evidence. All live AWS gates remain unexecuted. The overall project remains in
-progress.
+external closure receipt binds both artifacts. Part 3 Stage 2 closure candidate now binds the
+qualified operational commit `aa136331e44dcd181f766b42d76ee2616a22f435`, successful exact-main
+read-only run `34337121587`, successful bounded capability run `34337699794`, complete cleanup,
+and independently accepted artifacts. All 22 Stage 2 requirements and gates G001–G019 are
+verified; G020 remains pending the closure PR squash and post-merge main CI. The overall project
+remains in progress.
 
 The original master has explicit carryovers beyond the historical Part 2 ledger: generator profiles,
 generator-driven properties, corrected-source behavior, a full source-to-proof DataFrame pipeline,
 and both local and managed measurements. Their owners and evidence boundaries are recorded in
 [the conformance addendum](spec/part2-master-conformance-addendum-v1.json). Open ownership is not
-completion. All six Part 3 AWS master gates remain `NOT_EXECUTED`.
+completion. Exactly three Part 3 master gates are now `AWS_VERIFIED`:
+`environment_qualified`, `live_iam_parity_verified`, and
+`glue_definition_probe_verified`. The other three remain `NOT_EXECUTED`.
 
 The immutable Stage 1 status statement was: Part 2
 is now `PART2_IN_PROGRESS`. No reconciliation
@@ -79,9 +83,10 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Spark reconciliation parity | `EXTERNALLY_VERIFIED` after PR #16 squash and independent main CI |
 | Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` after PR #18 squash and independent main CI |
 | Part 3 Stage 1 | `EXTERNALLY_VERIFIED` after PR #19 squash and independent main CI |
-| Part 3 Stage 2 | `IN_PROGRESS` — locally validated implementation; no live Stage 2 AWS evidence yet |
+| Part 3 Stage 2 | `CLOSURE_CANDIDATE` — exact-main AWS evidence accepted; G020 awaits closure publication |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
-| Frozen-target identity and managed AWS reconciliation | `UNCLAIMED` |
+| Frozen-target identity | `AWS_VERIFIED` for Stage 2 qualification only |
+| Managed AWS reconciliation | `UNCLAIMED` |
 | AWS account-wide nonmutation | `NOT_PROVEN` |
 | Performance and cost | `UNCLAIMED` |
 | Production custody or compliance | `UNCLAIMED` |

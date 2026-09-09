@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "classification": "READ_ONLY_QUALIFICATION_EXTERNAL_RECEIPT",
+  "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+  "commit": "aa136331e44dcd181f766b42d76ee2616a22f435",
+  "ref": "refs/heads/main",
+  "workflow": ".github/workflows/part3-stage2-read-only.yml",
+  "run": {"id": 34337121587, "attempt": 1, "conclusion": "success"},
+  "artifact": {
+    "id": 10098207929,
+    "members": 4,
+    "zip_sha256": "07a17f02840c3466713c9dbd9842924b917bcc9c46a2d8289e0474943f78a21d",
+    "manifest_sha256": "aec1c91a7913646010a7543d2e6525e722412e467f09e1c655ac8e6860a44aff",
+    "journal_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "run_binding_sha256": "ce5cc4da24f4c9f5f4e423d28dd7692765c54d8726e9a16f5cb7892a334cc71d",
+    "inspection_sha256": "89a2ab6768c28b9675d1a64fa95ebc73099116035f78396963fcf224821abaf3"
+  },
+  "target": {
+    "account": "857229544428",
+    "region": "ap-southeast-2",
+    "credential_mode": "GITHUB_OIDC",
+    "identity_match": true,
+    "repository_match": true,
+    "main_ref_match": true,
+    "exact_sha_match": true
+  },
+  "iam": {
+    "trust_equal": true,
+    "trust_sha256": "bb0acba7d45560dd28826ad8e18329464d2995020ba23f8e02c4a64e1e997256",
+    "permissions_equal": true,
+    "permissions_sha256": "d7fa1c76891457d0797596f9feb62d637bb7a2f986358c37e6af4354200f5a19",
+    "missing": [],
+    "excess": [],
+    "changed": []
+  },
+  "control_plane": {
+    "backend_ready": true,
+    "lease_ready": true,
+    "glue_probe_role_trust": true,
+    "glue_probe_role_data_plane_authority": false,
+    "step_functions_definition": "OK",
+    "athena_workgroup_visible": true,
+    "athena_query_started": false,
+    "cloudwatch_visible": true,
+    "quotas_visible": true,
+    "budget_visible": true
+  },
+  "cost": {
+    "query_window": {"start": "2026-08-01", "end_exclusive": "2026-09-09"},
+    "contains_estimated_period": true,
+    "known_gross_project_spend_usd": "0.7918",
+    "conservative_unbilled_reserve_usd": "1.0000",
+    "maximum_stage2_probe_cost_usd": "0.0500",
+    "gross_project_ceiling_usd": "10.0000",
+    "remaining_usd": "8.2082",
+    "verdict": "HEADROOM_VERIFIED"
+  },
+  "inventory": {
+    "clean": true,
+    "buckets": 2,
+    "tables": 3,
+    "jobs": 0,
+    "state_machines": 0,
+    "ledgerguard_log_groups": 0,
+    "probe_residue": 0,
+    "tagged_resources": 4
+  },
+  "api_calls": 43,
+  "mutations": 0,
+  "independently_accepted": true,
+  "managed_reconciliation_started": false,
+  "project_complete": false
+}

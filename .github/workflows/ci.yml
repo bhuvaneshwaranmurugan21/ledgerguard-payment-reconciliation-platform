@@ -549,28 +549,73 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - name: Verify Stage 2 exact event ancestry
+      - name: Materialize the qualified Stage 2 operational commit
         shell: bash
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
-          git merge-base --is-ancestor 5abef1a07899bd8ecd202008f1c397890184a0d2 HEAD
-      - name: Run current Part 3 Stage 2 validation twice
+          qualified=aa136331e44dcd181f766b42d76ee2616a22f435
+          git merge-base --is-ancestor "$qualified" HEAD
+          test "$(git show -s --format=%T "$qualified")" = "184d8d7ff8d1172ec863060d4be7132339eaba49"
+          git worktree add --detach "$RUNNER_TEMP/ledgerguard-part3-stage2-qualified" "$qualified"
+      - name: Reproduce qualified Part 3 Stage 2 validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part3-stage2-qualified
         run: >-
           python tools/run_part3_stage2.py
           --clean-runs 2
-          --output "$RUNNER_TEMP/ledgerguard-part3-stage2"
-      - name: Build exact-event Stage 2 implementation evidence
+          --output "$RUNNER_TEMP/ledgerguard-part3-stage2-qualified-evidence"
+
+  part3-stage2-closure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Check out the exact closure event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements/part2-stage8-bootstrap.lock
+            requirements/part2-stage8-py311.lock
+      - name: Verify closure ancestry and qualified operational bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git merge-base --is-ancestor aa136331e44dcd181f766b42d76ee2616a22f435 HEAD
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          freeze = json.loads(Path("spec/part3-stage2-operational-freeze-v1.json").read_text())
+          assert freeze["qualified_commit"] == "aa136331e44dcd181f766b42d76ee2616a22f435"
+          assert freeze["qualified_tree"] == "184d8d7ff8d1172ec863060d4be7132339eaba49"
+          for path, expected in freeze["operational_sha256"].items():
+              assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected
+          PY
+      - name: Run Stage 2 closure validation twice
         run: >-
-          "$RUNNER_TEMP/ledgerguard-part3-stage2/run-1/venv/bin/python"
-          tools/build_part3_stage2_ci_evidence.py
-          --local-evidence "$RUNNER_TEMP/ledgerguard-part3-stage2/part3-stage2-local-evidence.json"
-          --output-directory "$RUNNER_TEMP/ledgerguard-part3-stage2-artifact"
-      - name: Upload immutable Part 3 Stage 2 implementation evidence
+          python tools/run_part3_stage2_closure.py
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-part3-stage2-closure"
+      - name: Build exact-event Stage 2 closure evidence
+        run: >-
+          "$RUNNER_TEMP/ledgerguard-part3-stage2-closure/run-1/venv/bin/python"
+          tools/build_part3_stage2_closure_ci_evidence.py
+          --local-evidence "$RUNNER_TEMP/ledgerguard-part3-stage2-closure/part3-stage2-closure-local-evidence.json"
+          --output-directory "$RUNNER_TEMP/ledgerguard-part3-stage2-closure-artifact"
+      - name: Upload immutable Part 3 Stage 2 closure evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: ledgerguard-part3-stage2-${{ github.event.pull_request.head.sha || github.sha }}
-          path: ${{ runner.temp }}/ledgerguard-part3-stage2-artifact
+          name: ledgerguard-part3-stage2-closure-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part3-stage2-closure-artifact
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90

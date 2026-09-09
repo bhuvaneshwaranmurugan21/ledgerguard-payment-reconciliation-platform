@@ -22,6 +22,7 @@ spark = [
 
 [project.scripts]
 ledgerguard-part3-stage1-correct = "ledgerguard_part3_stage1_correct:main"
+ledgerguard-part3-stage2-closure = "ledgerguard_part3_stage2_closure:main"
 ledgerguard-foundation = "ledgerguard_correction_c3:main"
 ledgerguard-stage6 = "ledgerguard_correction_c4:main"
 ledgerguard-stage7 = "ledgerguard_correction_c5:main"
@@ -51,6 +52,8 @@ py-modules = [
   "ledgerguard_part3_stage1_correct",
   "ledgerguard_part3_stage1_validation",
   "ledgerguard_part3_stage1_evidence",
+  "ledgerguard_part3_stage2_closure",
+  "ledgerguard_part3_stage2_closure_evidence",
   "ledgerguard_correction",
   "ledgerguard_correction_c1",
   "ledgerguard_correction_c2",

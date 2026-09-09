@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "authority": "spec/part3-master-gates-v1.json",
+  "authority_sha256": "abd6004b1285ab180db6750085ce166781677dabb82e421fbd36d4e8067d11aa",
+  "gates": [
+    {"gate_id": "environment_qualified", "owner_stage": 2, "state": "AWS_VERIFIED", "evidence": ["evidence/part3-stage2/read-only-receipt-v1.json", "evidence/part3-stage2/capability-receipt-v1.json"]},
+    {"gate_id": "live_iam_parity_verified", "owner_stage": 2, "state": "AWS_VERIFIED", "evidence": ["evidence/part3-stage2/read-only-receipt-v1.json"]},
+    {"gate_id": "glue_definition_probe_verified", "owner_stage": 2, "state": "AWS_VERIFIED", "evidence": ["evidence/part3-stage2/capability-receipt-v1.json", "evidence/part3-stage2/recovery-receipt-v1.json"]},
+    {"gate_id": "plan_only_verified", "owner_stage": 6, "state": "NOT_EXECUTED", "evidence": []},
+    {"gate_id": "zero_workload_canary_verified", "owner_stage": 7, "state": "NOT_EXECUTED", "evidence": []},
+    {"gate_id": "teardown_verified", "owner_stage": 7, "state": "NOT_EXECUTED", "evidence": []}
+  ],
+  "stage2_verified_gate_count": 3,
+  "remaining_gate_count": 3,
+  "part3_complete": false,
+  "project_complete": false
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "classification": "PART3_STAGE2_TO_STAGE3_HANDOFF_CANDIDATE",
+  "from_stage": "PART3_STAGE2",
+  "to_stage": "PART3_STAGE3",
+  "qualified_operational_commit": "aa136331e44dcd181f766b42d76ee2616a22f435",
+  "qualified_operational_tree": "184d8d7ff8d1172ec863060d4be7132339eaba49",
+  "operational_freeze": "spec/part3-stage2-operational-freeze-v1.json",
+  "read_only_receipt": "evidence/part3-stage2/read-only-receipt-v1.json",
+  "capability_receipt": "evidence/part3-stage2/capability-receipt-v1.json",
+  "recovery_receipt": "evidence/part3-stage2/recovery-receipt-v1.json",
+  "requirement_adjudication": "spec/part3-stage2-requirement-adjudication-executed-v1.json",
+  "gate_adjudication": "spec/part3-stage2-gate-adjudication-v1.json",
+  "master_gate_adjudication": "spec/part3-stage2-master-gate-adjudication-v1.json",
+  "target": {
+    "account": "857229544428",
+    "region": "ap-southeast-2",
+    "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+    "branch": "main",
+    "oidc_role": "LedgerGuardGitHubOidcRole",
+    "backend_bucket": "ledgerguard-tfstate-857229544428-ap-southeast-2",
+    "operation_lease_table": "ledgerguard-operation-leases",
+    "glue_probe_role": "LedgerGuardGlueProbeRole"
+  },
+  "verified": {
+    "requirements": 22,
+    "stage2_gates_premerge": 19,
+    "stage2_master_gates": ["environment_qualified", "live_iam_parity_verified", "glue_definition_probe_verified"],
+    "clean_inventory": true,
+    "probe_residue": 0,
+    "managed_reconciliation_started": false
+  },
+  "claim_boundary": {
+    "managed_platform_deployed": false,
+    "managed_reconciliation_started": false,
+    "production_ready": false,
+    "scale_verified": false,
+    "part3_complete": false,
+    "project_complete": false
+  },
+  "closure_publication": {
+    "state": "PENDING_EXTERNAL_SQUASH_AND_MAIN_CI",
+    "gate": "P3-S2-G020",
+    "receipt_location": "outside producer commit until future Stage 3 append-only import"
+  },
+  "allowed_claim": "The exact LedgerGuard AWS target, desired/live IAM parity, shared control-plane prerequisites, bounded definition/capability probes, and clean starting state were independently verified on the recorded main SHA. No managed reconciliation workload ran, and all probe residue was removed.",
+  "forbidden_claims": ["deployed_platform", "working_managed_reconciliation", "production_readiness", "scale_performance", "cost_finality", "account_wide_inactivity", "compliance", "part3_complete", "project_complete"],
+  "single_next_owner": "PART3_STAGE3",
+  "stage3_work_started": false,
+  "part3_complete": false,
+  "project_complete": false
+}

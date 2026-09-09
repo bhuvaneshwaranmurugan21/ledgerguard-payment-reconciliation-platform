@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "classification": "FAILED_ATTEMPT_AND_RECOVERY_EXTERNAL_RECEIPT",
+  "failed_attempt": {
+    "commit": "f6ab976e7efaa67d5b60e6d5270198c652f4cae5",
+    "run_id": 34322626771,
+    "artifact_id": 10092524956,
+    "artifact_zip_sha256": "3fff0e3d3cd9c7ab3278850aa5457bca1774e5b9f545f4d0bdfa705c52ffd987",
+    "inspection_sha256": "f6172e22d38f038bc7563491437e842ea79f3959cbb0a1488b671518e411ef36",
+    "mutation_journal_sha256": "77cea31260bf1b5a49a1e31e6912afe52ae1e9152400937c64a32c8c195d16ac",
+    "conclusion": "failure",
+    "safe_artifact": true,
+    "root_cause": "Glue CreateJob with mandatory tags also requires glue:TagResource."
+  },
+  "correction": {
+    "pull_request": 24,
+    "validated_head": "a3ae26e0d43b3edd767ea839e8c74cf3217b1717",
+    "squash_commit": "aa136331e44dcd181f766b42d76ee2616a22f435",
+    "added_permission": "glue:TagResource",
+    "resource_scope": "arn:aws:glue:ap-southeast-2:857229544428:job/ledgerguard-stage2-*",
+    "glue_start_job_run_forbidden": true
+  },
+  "recovery": {
+    "run_id": 34323066627,
+    "artifact_id": 10092655681,
+    "artifact_zip_sha256": "51bcc0ea5b8ee1369e08d6c922cef93f90fbb4c1e4980cb37906ac12a02f725e",
+    "inspection_sha256": "72d910ad4d5d620159aff891ad35a38322d562f330cc09a09d60cce3192df2b3",
+    "conclusion": "success",
+    "cleanup_complete": true,
+    "probe_residue": 0
+  },
+  "corrected_probe": {
+    "run_id": 34337699794,
+    "conclusion": "success",
+    "cleanup_complete": true,
+    "probe_residue": 0
+  },
+  "failure_hidden": false,
+  "project_complete": false
+}

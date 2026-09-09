@@ -11,20 +11,28 @@
 
 ## Current transaction
 
-The Stage 2 implementation is locally validated and remains in progress pending exact-head PR CI,
-publication on `main`, and live AWS evidence. Two fresh CPython 3.11.13 environments each execute
-all 167 registered Stage 2 scenarios with zero skips, produce 100% statement and branch coverage
-for every Stage 2 source module, kill all 32 registered semantic mutations, and build identical
-wheels and deterministic evidence. Repository-local validation proves only the safety and
-determinism of the qualification implementation; it does not prove an AWS fact. After this exact
-tree passes PR CI and is squash-merged, the user will manually dispatch the read-only workflow on
-the exact main SHA. The capability workflow is admitted only by an independently accepted
-read-only run and artifact. An evidence-only closure transaction follows successful cleanup.
+Stage 2 is an evidence-only closure candidate. The qualified operational commit is
+`aa136331e44dcd181f766b42d76ee2616a22f435` with tree
+`184d8d7ff8d1172ec863060d4be7132339eaba49`. Its post-merge CI run `34327726113` passed, and
+artifact `10094502981` was independently accepted with ZIP SHA-256
+`846162348f77eee8e248dc815859989ee80253ff11c69c9be6b86f8c2c1e3cdd`.
+
+Exact-main read-only run `34337121587` verified the AWS target, live IAM parity, backend, lease,
+cost headroom, service visibility, Step Functions definition validation, Glue probe role, and clean
+starting inventory. Bounded capability run `34337699794` exercised S3, conditional lease, and
+definition-only Glue behavior under three injected cleanup faults plus a normal case. All four
+cases cleaned successfully; final probe residue is zero. The independent receipts bind the
+downloaded ZIP, manifest, journal, run-binding, and inspection digests.
+
+All 22 Stage 2 source requirements and gates G001–G019 are verified. P3-S2-G020 remains pending
+the closure PR's exact-head CI, single-parent squash, and post-merge main CI. The repository does
+not self-attest those future facts.
 
 ## Claim boundary
 
 - Stage 1: externally verified.
-- Stage 2 live AWS execution: not yet executed.
+- Stage 2 live AWS qualification: externally verified on the recorded exact-main SHA.
+- Stage 2 closure publication: candidate; G020 pending.
 - Managed reconciliation: not started.
 - Workload infrastructure: not implemented.
 - Part 3 and project completion: false.
@@ -47,11 +55,26 @@ read-only run and artifact. An evidence-only closure transaction follows success
   backend bucket. After separate administrator bootstrap, run `34225326864` fully verified the S3
   backend and DynamoDB lease table, then failed closed because the definition-only Glue probe role
   was absent. Neither run performed a Stage 2 mutation.
-- Stage 2 remains open. A fresh exact-main implementation, live IAM parity, read-only evidence,
-  bounded capability evidence, cleanup proof, and evidence-only closure are still required.
+- Cost-classification correction squash `f6ab976e7efaa67d5b60e6d5270198c652f4cae5` passed main CI
+  `34318941922`. Its first capability run failed at tagged Glue definition creation because
+  `glue:TagResource` was absent. Dedicated recovery run `34323066627` proved complete cleanup.
+- The narrow Glue-tag permission correction was reviewed in PR #24, whose validated head and squash
+  share tree `184d8d7ff8d1172ec863060d4be7132339eaba49`. The correction added only
+  `glue:TagResource` for `ledgerguard-stage2-*` job definitions and kept `glue:StartJobRun`
+  forbidden.
+- Fresh read-only run `34337121587` and corrected capability run `34337699794` succeeded and
+  were independently accepted. The capability artifact records 123 API calls, 42 run-scoped
+  mutation-journal entries, four complete cleanup cases, no workload start, and zero residue.
+- P3-S2-G020 remains pending the evidence-only closure publication transaction.
 - Read-only run `34264552202` passed the target, IAM, backend, lease, Glue-role, Step Functions,
   Athena, CloudWatch, and quota checks, then failed closed because Cost Explorer's ungrouped
   monthly total was negative after credits. The correction groups `UnblendedCost` by
   `RECORD_TYPE`, sums only positive period/group amounts as charge-side gross, records excluded
   negative offsets without netting them into headroom, and preserves the strict nonnegative
   budget guard. The failed run performed no Stage 2 mutation.
+
+## Allowed completion claim
+
+The exact LedgerGuard AWS target, desired/live IAM parity, shared control-plane prerequisites,
+bounded definition/capability probes, and clean starting state were independently verified on the
+recorded main SHA. No managed reconciliation workload ran, and all probe residue was removed.

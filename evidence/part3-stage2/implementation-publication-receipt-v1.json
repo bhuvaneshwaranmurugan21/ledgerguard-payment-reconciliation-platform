@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "classification": "IMPLEMENTATION_PUBLICATION_CHAIN",
+  "transactions": [
+    {"pull_request": 20, "squash_commit": "b53ed30a38a5cd7f4c25097cb250371f7b5f0e10", "main_ci_run": 34144207295, "artifact_id": 10027066908, "artifact_zip_sha256": "20071577669c23b0d2b9de8b669621990c954876ab2bfb6adca6e5f7c48bf303"},
+    {"pull_request": 21, "squash_commit": "46eb21434ca45363055acf9ac29b7ddd7e7191b5", "main_ci_run": 34154596186, "artifact_id": 10030539635, "artifact_zip_sha256": "185548ac9d69a33471c7ee817fedfcb1bb6efb5b0b46150f5a948a788071a68c"},
+    {"pull_request": 22, "squash_commit": "184e3bab3ae510c559536141525ef5ac49827c62", "main_ci_run": 34215625919, "artifact_id": 10051689172, "artifact_zip_sha256": "a117909649afbb0457da37d64e5c6610c52a10c0331cb036caa1568619c30663"},
+    {"pull_request": 23, "squash_commit": "f6ab976e7efaa67d5b60e6d5270198c652f4cae5", "main_ci_run": 34318941922, "artifact_id": 10091142529, "artifact_zip_sha256": "9e6f27e59f6ea38a12395e2b86a16266ff73eb39fcaba844931e2092037b6854"},
+    {"pull_request": 24, "validated_head": "a3ae26e0d43b3edd767ea839e8c74cf3217b1717", "validated_tree": "184d8d7ff8d1172ec863060d4be7132339eaba49", "head_ci_run": 34324742601, "head_artifact_id": 10093348367, "head_artifact_zip_sha256": "a889427d259a10244a803bdd0bbd022c72d277efe18b0e8df3fd2dd5b66cc49a", "squash_commit": "aa136331e44dcd181f766b42d76ee2616a22f435", "sole_parent": "f6ab976e7efaa67d5b60e6d5270198c652f4cae5", "squash_tree": "184d8d7ff8d1172ec863060d4be7132339eaba49", "main_ci_run": 34327726113, "main_artifact_id": 10094502981, "main_artifact_zip_sha256": "846162348f77eee8e248dc815859989ee80253ff11c69c9be6b86f8c2c1e3cdd"}
+  ],
+  "qualified_operational_commit": "aa136331e44dcd181f766b42d76ee2616a22f435",
+  "qualified_operational_tree": "184d8d7ff8d1172ec863060d4be7132339eaba49",
+  "latest_main_ci_success": true,
+  "latest_main_ci_test_count_per_run": 167,
+  "latest_main_ci_clean_runs": 2,
+  "latest_main_ci_coverage": {"statements": 462, "branches": 94, "percent": 100.0},
+  "latest_main_ci_mutations": {"killed": 32, "survived": 0},
+  "project_complete": false
+}
