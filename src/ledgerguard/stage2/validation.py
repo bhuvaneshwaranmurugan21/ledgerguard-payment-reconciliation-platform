@@ -82,6 +82,7 @@ EXPECTED_POLICY_ACTIONS = {
         "glue:GetJob",
         "glue:GetJobRuns",
         "glue:GetTags",
+        "glue:TagResource",
     },
     "InspectAndProbeLease": {
         "dynamodb:DeleteItem",
