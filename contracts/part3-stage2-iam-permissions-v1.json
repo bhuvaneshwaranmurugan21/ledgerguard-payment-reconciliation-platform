@@ -88,7 +88,8 @@
                     "glue:DeleteJob",
                     "glue:GetJob",
                     "glue:GetJobRuns",
-                    "glue:GetTags"
+                    "glue:GetTags",
+                    "glue:TagResource"
                 ],
                 "Effect": "Allow",
                 "Resource": [

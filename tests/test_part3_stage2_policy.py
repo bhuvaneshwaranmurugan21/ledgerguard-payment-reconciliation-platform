@@ -137,6 +137,9 @@ def test_checked_in_iam_contract_cannot_broaden(tmp_path: Path, change: str) -> 
         value = json.loads(path.read_text())
         rows = value["policy"]["Statement"]
         backend_actions = set(next(row for row in rows if row["Sid"] == "InspectBackend")["Action"])
+        glue_actions = set(
+            next(row for row in rows if row["Sid"] == "GlueDefinitionProbe")["Action"]
+        )
         # S3 API operation names and IAM authorization action names differ for
         # these two reads. Keep the independently documented IAM names frozen.
         assert {
@@ -150,6 +153,10 @@ def test_checked_in_iam_contract_cannot_broaden(tmp_path: Path, change: str) -> 
             }
             & backend_actions
         )
+        # CreateJob receives the contract's mandatory Tags map, so AWS also
+        # authorizes TagResource on that same run-scoped job ARN.
+        assert {"glue:CreateJob", "glue:TagResource"} <= glue_actions
+        assert "glue:StartJobRun" not in glue_actions
         pass_row = next(row for row in rows if row["Sid"] == "PassExactGlueProbeRole")
         if change == "pass-role":
             pass_row["Resource"] = "*"
