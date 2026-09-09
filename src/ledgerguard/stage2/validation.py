@@ -399,6 +399,16 @@ def validate_repository(root: Path) -> dict[str, Any]:
         and cost["missing_or_stale"] == "UNKNOWN_BLOCK_MUTATION",
         "cost authority differs",
     )
+    require(
+        cost["aggregation"]
+        == {
+            "gross_aggregation": "SUM_POSITIVE_PERIOD_GROUP_AMOUNTS",
+            "group_by_key": "RECORD_TYPE",
+            "group_by_type": "DIMENSION",
+            "negative_amount_treatment": "EXCLUDE_WITHOUT_NETTING",
+        },
+        "cost aggregation authority differs",
+    )
     glue = read_object(root / "contracts/part3-stage2-glue-probe-v1.json")
     require(
         glue["definition"]["GlueVersion"] == "5.1" and glue["start_allowed"] is False,

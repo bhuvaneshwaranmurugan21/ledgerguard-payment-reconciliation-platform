@@ -186,7 +186,7 @@ def main() -> None:
         env,
     )
     mutations = json.loads((mutation_dir / "results.json").read_text())
-    if len(mutations) != 30 or not all(row["killed"] for row in mutations):
+    if len(mutations) != 32 or not all(row["killed"] for row in mutations):
         raise ValueError("Stage 2 mutation campaign incomplete")
     deterministic = {
         "repository": repository,

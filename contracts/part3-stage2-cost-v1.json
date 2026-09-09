@@ -1,4 +1,10 @@
 {
+  "aggregation": {
+    "gross_aggregation": "SUM_POSITIVE_PERIOD_GROUP_AMOUNTS",
+    "group_by_key": "RECORD_TYPE",
+    "group_by_type": "DIMENSION",
+    "negative_amount_treatment": "EXCLUDE_WITHOUT_NETTING"
+  },
   "conservative_unbilled_reserve_usd": "1.00",
   "currency": "USD",
   "gross_project_ceiling_usd": "10.00",

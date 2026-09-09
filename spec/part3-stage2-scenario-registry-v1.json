@@ -1,5 +1,5 @@
 {
-  "count": 143,
+  "count": 167,
   "scenarios": [
     {
       "case": 1,
@@ -60,7 +60,7 @@
     {
       "case": 8,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[trigger]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_authority_tampering_fails_closed[scenario-schema]",
       "scenario_id": "P3-S2-T008",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -68,7 +68,7 @@
     {
       "case": 9,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[ref]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[trigger]",
       "scenario_id": "P3-S2-T009",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -76,7 +76,7 @@
     {
       "case": 10,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[sha]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[ref]",
       "scenario_id": "P3-S2-T010",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -84,7 +84,7 @@
     {
       "case": 11,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[oidc]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[sha]",
       "scenario_id": "P3-S2-T011",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -92,7 +92,7 @@
     {
       "case": 12,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[cancel]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[oidc]",
       "scenario_id": "P3-S2-T012",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -100,7 +100,7 @@
     {
       "case": 13,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[action]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[cancel]",
       "scenario_id": "P3-S2-T013",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -108,7 +108,7 @@
     {
       "case": 14,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[automatic-oidc]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[action]",
       "scenario_id": "P3-S2-T014",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -116,7 +116,7 @@
     {
       "case": 15,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[status]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[automatic-oidc]",
       "scenario_id": "P3-S2-T015",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -124,7 +124,7 @@
     {
       "case": 16,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[backend]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[status]",
       "scenario_id": "P3-S2-T016",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -132,7 +132,7 @@
     {
       "case": 17,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[cost]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[backend]",
       "scenario_id": "P3-S2-T017",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -140,7 +140,7 @@
     {
       "case": 18,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[glue]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[cost]",
       "scenario_id": "P3-S2-T018",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -148,7 +148,7 @@
     {
       "case": 19,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[artifact-order]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[cost-aggregation]",
       "scenario_id": "P3-S2-T019",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -156,7 +156,7 @@
     {
       "case": 20,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[shell-input]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[glue]",
       "scenario_id": "P3-S2-T020",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -164,7 +164,7 @@
     {
       "case": 21,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[permissions]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[artifact-order]",
       "scenario_id": "P3-S2-T021",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -172,7 +172,7 @@
     {
       "case": 22,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[dispatch-input]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[shell-input]",
       "scenario_id": "P3-S2-T022",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
@@ -180,31 +180,31 @@
     {
       "case": 23,
       "group": "authority",
-      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[static-key]",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[permissions]",
       "scenario_id": "P3-S2-T023",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_authority.py"
     },
     {
       "case": 24,
-      "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_invokes_only_allowlisted_command_and_records_digest",
+      "group": "authority",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[dispatch-input]",
       "scenario_id": "P3-S2-T024",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_aws_adapter.py"
+      "test_file": "tests/test_part3_stage2_authority.py"
     },
     {
       "case": 25,
-      "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_rejects_unknown_or_forbidden_operation_before_process[UNKNOWN-args0]",
+      "group": "authority",
+      "nodeid": "tests/test_part3_stage2_authority.py::test_repository_boundaries_reject_weakening[static-key]",
       "scenario_id": "P3-S2-T025",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_aws_adapter.py"
+      "test_file": "tests/test_part3_stage2_authority.py"
     },
     {
       "case": 26,
       "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_rejects_unknown_or_forbidden_operation_before_process[GLUE_GET_JOB-args1]",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_invokes_only_allowlisted_command_and_records_digest",
       "scenario_id": "P3-S2-T026",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_aws_adapter.py"
@@ -212,7 +212,7 @@
     {
       "case": 27,
       "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_sanitizes_failed_aws_response",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_rejects_unknown_or_forbidden_operation_before_process[UNKNOWN-args0]",
       "scenario_id": "P3-S2-T027",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_aws_adapter.py"
@@ -220,7 +220,7 @@
     {
       "case": 28,
       "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_rejects_non_json_or_non_object",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_rejects_unknown_or_forbidden_operation_before_process[GLUE_GET_JOB-args1]",
       "scenario_id": "P3-S2-T028",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_aws_adapter.py"
@@ -228,7 +228,7 @@
     {
       "case": 29,
       "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_requires_and_captures_aws_cli_v2[2.36.40-True]",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_sanitizes_failed_aws_response",
       "scenario_id": "P3-S2-T029",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_aws_adapter.py"
@@ -236,7 +236,7 @@
     {
       "case": 30,
       "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_requires_and_captures_aws_cli_v2[1.42.0-False]",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_rejects_non_json_or_non_object",
       "scenario_id": "P3-S2-T030",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_aws_adapter.py"
@@ -244,31 +244,31 @@
     {
       "case": 31,
       "group": "aws_adapter",
-      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_global_billing_operations_use_required_endpoint_region",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_requires_and_captures_aws_cli_v2[2.36.40-True]",
       "scenario_id": "P3-S2-T031",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_aws_adapter.py"
     },
     {
       "case": 32,
-      "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_exact_dispatch_and_identity_are_accepted",
+      "group": "aws_adapter",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_adapter_requires_and_captures_aws_cli_v2[1.42.0-False]",
       "scenario_id": "P3-S2-T032",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_controls.py"
+      "test_file": "tests/test_part3_stage2_aws_adapter.py"
     },
     {
       "case": 33,
-      "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context0-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+      "group": "aws_adapter",
+      "nodeid": "tests/test_part3_stage2_aws_adapter.py::test_global_billing_operations_use_required_endpoint_region",
       "scenario_id": "P3-S2-T033",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_controls.py"
+      "test_file": "tests/test_part3_stage2_aws_adapter.py"
     },
     {
       "case": 34,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context1-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_exact_dispatch_and_identity_are_accepted",
       "scenario_id": "P3-S2-T034",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -276,7 +276,7 @@
     {
       "case": 35,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context2-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context0-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
       "scenario_id": "P3-S2-T035",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -284,7 +284,7 @@
     {
       "case": 36,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context3-bad]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context1-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
       "scenario_id": "P3-S2-T036",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -292,7 +292,7 @@
     {
       "case": 37,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context4-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context2-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
       "scenario_id": "P3-S2-T037",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -300,7 +300,7 @@
     {
       "case": 38,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context5-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context3-bad]",
       "scenario_id": "P3-S2-T038",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -308,7 +308,7 @@
     {
       "case": 39,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-account]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context4-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
       "scenario_id": "P3-S2-T039",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -316,7 +316,7 @@
     {
       "case": 40,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-region]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_dispatch_mismatch_rejects_before_oidc[context5-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
       "scenario_id": "P3-S2-T040",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -324,7 +324,7 @@
     {
       "case": 41,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-role]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-account]",
       "scenario_id": "P3-S2-T041",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -332,7 +332,7 @@
     {
       "case": 42,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_and_lease_controls_pass_exact_observations",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-region]",
       "scenario_id": "P3-S2-T042",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -340,7 +340,7 @@
     {
       "case": 43,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[region-us-east-1]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_identity_mismatch_rejects[wrong-role]",
       "scenario_id": "P3-S2-T043",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -348,7 +348,7 @@
     {
       "case": 44,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[versioning-None]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_and_lease_controls_pass_exact_observations",
       "scenario_id": "P3-S2-T044",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -356,7 +356,7 @@
     {
       "case": 45,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[encryption-AES256]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[region-us-east-1]",
       "scenario_id": "P3-S2-T045",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -364,7 +364,7 @@
     {
       "case": 46,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[ownership-ObjectWriter]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[versioning-None]",
       "scenario_id": "P3-S2-T046",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -372,7 +372,7 @@
     {
       "case": 47,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[tls_deny-False]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[encryption-AES256]",
       "scenario_id": "P3-S2-T047",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -380,7 +380,7 @@
     {
       "case": 48,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[prefix_isolated-False]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[ownership-ObjectWriter]",
       "scenario_id": "P3-S2-T048",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -388,7 +388,7 @@
     {
       "case": 49,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[pagination_complete-False]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[tls_deny-False]",
       "scenario_id": "P3-S2-T049",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -396,7 +396,7 @@
     {
       "case": 50,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[status-CREATING]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[prefix_isolated-False]",
       "scenario_id": "P3-S2-T050",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -404,7 +404,7 @@
     {
       "case": 51,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[partition_key-pk]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_drift_rejects[pagination_complete-False]",
       "scenario_id": "P3-S2-T051",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -412,7 +412,7 @@
     {
       "case": 52,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[partition_key_type-N]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[status-CREATING]",
       "scenario_id": "P3-S2-T052",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -420,7 +420,7 @@
     {
       "case": 53,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[encryption-False]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[partition_key-pk]",
       "scenario_id": "P3-S2-T053",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -428,7 +428,7 @@
     {
       "case": 54,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[billing_mode-PROVISIONED]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[partition_key_type-N]",
       "scenario_id": "P3-S2-T054",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -436,7 +436,7 @@
     {
       "case": 55,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[qualification_key_empty-False]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[encryption-False]",
       "scenario_id": "P3-S2-T055",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -444,7 +444,7 @@
     {
       "case": 56,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[pitr-DISABLED]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[billing_mode-PROVISIONED]",
       "scenario_id": "P3-S2-T056",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -452,7 +452,7 @@
     {
       "case": 57,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[ttl_status-DISABLED]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[qualification_key_empty-False]",
       "scenario_id": "P3-S2-T057",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -460,7 +460,7 @@
     {
       "case": 58,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[ttl_attribute-other]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[pitr-DISABLED]",
       "scenario_id": "P3-S2-T058",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -468,7 +468,7 @@
     {
       "case": 59,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_and_required_tags_pass_exactly",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[ttl_status-DISABLED]",
       "scenario_id": "P3-S2-T059",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -476,7 +476,7 @@
     {
       "case": 60,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[resource]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_table_drift_rejects[ttl_attribute-other]",
       "scenario_id": "P3-S2-T060",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -484,7 +484,7 @@
     {
       "case": 61,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[principal]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_and_required_tags_pass_exactly",
       "scenario_id": "P3-S2-T061",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -492,7 +492,7 @@
     {
       "case": 62,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[condition]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[resource]",
       "scenario_id": "P3-S2-T062",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -500,7 +500,7 @@
     {
       "case": 63,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[duplicate]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[principal]",
       "scenario_id": "P3-S2-T063",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -508,7 +508,7 @@
     {
       "case": 64,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_accepts_exact_statement_and_string_form",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[condition]",
       "scenario_id": "P3-S2-T064",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -516,7 +516,7 @@
     {
       "case": 65,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[ID-Other]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_requires_exact_deny_scope[duplicate]",
       "scenario_id": "P3-S2-T065",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -524,7 +524,7 @@
     {
       "case": 66,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[Status-Disabled]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_tls_only_bucket_policy_accepts_exact_statement_and_string_form",
       "scenario_id": "P3-S2-T066",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -532,7 +532,7 @@
     {
       "case": 67,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[Expiration-value2]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[ID-Other]",
       "scenario_id": "P3-S2-T067",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -540,7 +540,7 @@
     {
       "case": 68,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[NoncurrentVersionExpiration-value3]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[Status-Disabled]",
       "scenario_id": "P3-S2-T068",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -548,7 +548,7 @@
     {
       "case": 69,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[AbortIncompleteMultipartUpload-value4]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[Expiration-value2]",
       "scenario_id": "P3-S2-T069",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -556,7 +556,7 @@
     {
       "case": 70,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_required_tag_drift_rejects[observed0]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[NoncurrentVersionExpiration-value3]",
       "scenario_id": "P3-S2-T070",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -564,7 +564,7 @@
     {
       "case": 71,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_required_tag_drift_rejects[observed1]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_backend_lifecycle_drift_rejects[AbortIncompleteMultipartUpload-value4]",
       "scenario_id": "P3-S2-T071",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -572,7 +572,7 @@
     {
       "case": 72,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_semantics_cover_conflict_expiry_recovery_and_owner_release",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_required_tag_drift_rejects[observed0]",
       "scenario_id": "P3-S2-T072",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -580,7 +580,7 @@
     {
       "case": 73,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_headroom_is_conservative_and_exact",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_required_tag_drift_rejects[observed1]",
       "scenario_id": "P3-S2-T073",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -588,7 +588,7 @@
     {
       "case": 74,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation0]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_lease_semantics_cover_conflict_expiry_recovery_and_owner_release",
       "scenario_id": "P3-S2-T074",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -596,7 +596,7 @@
     {
       "case": 75,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation1]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_headroom_is_conservative_and_exact",
       "scenario_id": "P3-S2-T075",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -604,7 +604,7 @@
     {
       "case": 76,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation2]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_excludes_negative_offsets_without_netting",
       "scenario_id": "P3-S2-T076",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -612,7 +612,7 @@
     {
       "case": 77,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation3]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_accepts_verified_zero_rows",
       "scenario_id": "P3-S2-T077",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -620,7 +620,7 @@
     {
       "case": 78,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation4]",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods0]",
       "scenario_id": "P3-S2-T078",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -628,7 +628,7 @@
     {
       "case": 79,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_glue_inventory_and_versioned_cleanup_fail_closed",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods1]",
       "scenario_id": "P3-S2-T079",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
@@ -636,191 +636,191 @@
     {
       "case": 80,
       "group": "controls",
-      "nodeid": "tests/test_part3_stage2_controls.py::test_canonical_bytes_and_nested_policy_values_are_deterministic",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods2]",
       "scenario_id": "P3-S2-T080",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 81,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_exactness_and_finalization",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods3]",
       "scenario_id": "P3-S2-T081",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 82,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[empty]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods4]",
       "scenario_id": "P3-S2-T082",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 83,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[shape]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods5]",
       "scenario_id": "P3-S2-T083",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 84,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[path]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods6]",
       "scenario_id": "P3-S2-T084",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 85,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[absolute]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods7]",
       "scenario_id": "P3-S2-T085",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 86,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[backslash]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods8]",
       "scenario_id": "P3-S2-T086",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 87,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[self]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods9]",
       "scenario_id": "P3-S2-T087",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 88,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[digest]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods10]",
       "scenario_id": "P3-S2-T088",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 89,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[extra]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods11]",
       "scenario_id": "P3-S2-T089",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 90,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[symlink]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods12]",
       "scenario_id": "P3-S2-T090",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 91,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[long-term-access-key]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods13]",
       "scenario_id": "P3-S2-T091",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 92,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[temporary-access-key]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods14]",
       "scenario_id": "P3-S2-T092",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 93,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[private-key-pem]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods15]",
       "scenario_id": "P3-S2-T093",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 94,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[raw-account-identifier]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods16]",
       "scenario_id": "P3-S2-T094",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 95,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_safe_download_extraction_and_independent_inspection",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_gross_spend_rejects_missing_malformed_or_mixed_data[periods17]",
       "scenario_id": "P3-S2-T095",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 96,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[head_sha-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation0]",
       "scenario_id": "P3-S2-T096",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 97,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[run_attempt-2]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation1]",
       "scenario_id": "P3-S2-T097",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 98,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[event-push]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation2]",
       "scenario_id": "P3-S2-T098",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 99,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[head_branch-dev]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation3]",
       "scenario_id": "P3-S2-T099",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 100,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[status-in_progress]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_budget_unknown_or_insufficient_rejects[observation4]",
       "scenario_id": "P3-S2-T100",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 101,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[conclusion-failure]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_glue_inventory_and_versioned_cleanup_fail_closed",
       "scenario_id": "P3-S2-T101",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 102,
-      "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[path-.github/workflows/other.yml]",
+      "group": "controls",
+      "nodeid": "tests/test_part3_stage2_controls.py::test_canonical_bytes_and_nested_policy_values_are_deterministic",
       "scenario_id": "P3-S2-T102",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_evidence.py"
+      "test_file": "tests/test_part3_stage2_controls.py"
     },
     {
       "case": 103,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[repository-value7]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_exactness_and_finalization",
       "scenario_id": "P3-S2-T103",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
@@ -828,7 +828,7 @@
     {
       "case": 104,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_download_artifact_adversaries_are_rejected[metadata]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[empty]",
       "scenario_id": "P3-S2-T104",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
@@ -836,7 +836,7 @@
     {
       "case": 105,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_download_artifact_adversaries_are_rejected[digest]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[shape]",
       "scenario_id": "P3-S2-T105",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
@@ -844,304 +844,496 @@
     {
       "case": 106,
       "group": "evidence",
-      "nodeid": "tests/test_part3_stage2_evidence.py::test_download_artifact_adversaries_are_rejected[path]",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[path]",
       "scenario_id": "P3-S2-T106",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 107,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_policy_normalization_handles_order_scalar_lists_and_url_encoding",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[absolute]",
       "scenario_id": "P3-S2-T107",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 108,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_policy_diff_reports_missing_excess_and_semantic_change",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[backslash]",
       "scenario_id": "P3-S2-T108",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 109,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[version]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[self]",
       "scenario_id": "P3-S2-T109",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 110,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[field]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[digest]",
       "scenario_id": "P3-S2-T110",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 111,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[effect]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[extra]",
       "scenario_id": "P3-S2-T111",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 112,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[sid]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_manifest_adversaries_are_rejected[symlink]",
       "scenario_id": "P3-S2-T112",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 113,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[duplicate]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[long-term-access-key]",
       "scenario_id": "P3-S2-T113",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 114,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[not-action]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[temporary-access-key]",
       "scenario_id": "P3-S2-T114",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 115,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[not-resource]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[private-key-pem]",
       "scenario_id": "P3-S2-T115",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 116,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[wildcard]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_sensitive_evidence_is_rejected[raw-account-identifier]",
       "scenario_id": "P3-S2-T116",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 117,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[audience]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_safe_download_extraction_and_independent_inspection",
       "scenario_id": "P3-S2-T117",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 118,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[subject]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[head_sha-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb]",
       "scenario_id": "P3-S2-T118",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 119,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[wildcard]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[run_attempt-2]",
       "scenario_id": "P3-S2-T119",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 120,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[pass-role]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[event-push]",
       "scenario_id": "P3-S2-T120",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 121,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[pass-service]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[head_branch-dev]",
       "scenario_id": "P3-S2-T121",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 122,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[global-write]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[status-in_progress]",
       "scenario_id": "P3-S2-T122",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 123,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[workload-start]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[conclusion-failure]",
       "scenario_id": "P3-S2-T123",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 124,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[principal]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[path-.github/workflows/other.yml]",
       "scenario_id": "P3-S2-T124",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 125,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[resource]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_independent_inspector_rejects_wrong_run_identity[repository-value7]",
       "scenario_id": "P3-S2-T125",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 126,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[approved-global]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_download_artifact_adversaries_are_rejected[metadata]",
       "scenario_id": "P3-S2-T126",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 127,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[effective-authority]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_download_artifact_adversaries_are_rejected[digest]",
       "scenario_id": "P3-S2-T127",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_policy.py"
+      "test_file": "tests/test_part3_stage2_evidence.py"
     },
     {
       "case": 128,
-      "group": "policy",
-      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[scoped-write]",
+      "group": "evidence",
+      "nodeid": "tests/test_part3_stage2_evidence.py::test_download_artifact_adversaries_are_rejected[path]",
       "scenario_id": "P3-S2-T128",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_evidence.py"
+    },
+    {
+      "case": 129,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_policy_normalization_handles_order_scalar_lists_and_url_encoding",
+      "scenario_id": "P3-S2-T129",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
-      "case": 129,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[after_s3]",
-      "scenario_id": "P3-S2-T129",
-      "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
-    },
-    {
       "case": 130,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[after_lease]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_policy_diff_reports_missing_excess_and_semantic_change",
       "scenario_id": "P3-S2-T130",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 131,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[after_glue]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[version]",
       "scenario_id": "P3-S2-T131",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 132,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[normal]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[field]",
       "scenario_id": "P3-S2-T132",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 133,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_unexpected_api_failure_is_not_reclassified_as_expected_fault",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[effect]",
       "scenario_id": "P3-S2-T133",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 134,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_runtime_root_and_output_admission_are_exact",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[sid]",
       "scenario_id": "P3-S2-T134",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 135,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_read_only_contract_rejection_records_bootstrap_verdict",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[duplicate]",
       "scenario_id": "P3-S2-T135",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 136,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_recovery_validates_identity_and_removes_only_exact_failed_run",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[not-action]",
       "scenario_id": "P3-S2-T136",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 137,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_complete_service_inventory_accepts_clean_control_plane",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[not-resource]",
       "scenario_id": "P3-S2-T137",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 138,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_recovery_refuses_foreign_global_guard",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_unsafe_or_ambiguous_policy_is_rejected[wildcard]",
       "scenario_id": "P3-S2-T138",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 139,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[s3]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[audience]",
       "scenario_id": "P3-S2-T139",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 140,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[lease]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[subject]",
       "scenario_id": "P3-S2-T140",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 141,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[glue]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[wildcard]",
       "scenario_id": "P3-S2-T141",
       "state": "REQUIRED",
-      "test_file": "tests/test_part3_stage2_recovery.py"
+      "test_file": "tests/test_part3_stage2_policy.py"
     },
     {
       "case": 142,
-      "group": "recovery",
-      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[workload]",
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[pass-role]",
       "scenario_id": "P3-S2-T142",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 143,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[pass-service]",
+      "scenario_id": "P3-S2-T143",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 144,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[global-write]",
+      "scenario_id": "P3-S2-T144",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 145,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[workload-start]",
+      "scenario_id": "P3-S2-T145",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 146,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[principal]",
+      "scenario_id": "P3-S2-T146",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 147,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[resource]",
+      "scenario_id": "P3-S2-T147",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 148,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[approved-global]",
+      "scenario_id": "P3-S2-T148",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 149,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[effective-authority]",
+      "scenario_id": "P3-S2-T149",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 150,
+      "group": "policy",
+      "nodeid": "tests/test_part3_stage2_policy.py::test_checked_in_iam_contract_cannot_broaden[scoped-write]",
+      "scenario_id": "P3-S2-T150",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_policy.py"
+    },
+    {
+      "case": 151,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_runtime_cost_query_uses_record_types_and_preserves_charge_side_gross",
+      "scenario_id": "P3-S2-T151",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_recovery.py"
     },
     {
-      "case": 143,
+      "case": 152,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_runtime_cost_query_rejects_incomplete_pagination",
+      "scenario_id": "P3-S2-T152",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 153,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[after_s3]",
+      "scenario_id": "P3-S2-T153",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 154,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[after_lease]",
+      "scenario_id": "P3-S2-T154",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 155,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[after_glue]",
+      "scenario_id": "P3-S2-T155",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 156,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_real_capability_cleanup_path_removes_all_state[normal]",
+      "scenario_id": "P3-S2-T156",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 157,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_unexpected_api_failure_is_not_reclassified_as_expected_fault",
+      "scenario_id": "P3-S2-T157",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 158,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_runtime_root_and_output_admission_are_exact",
+      "scenario_id": "P3-S2-T158",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 159,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_read_only_contract_rejection_records_bootstrap_verdict",
+      "scenario_id": "P3-S2-T159",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 160,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_recovery_validates_identity_and_removes_only_exact_failed_run",
+      "scenario_id": "P3-S2-T160",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 161,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_complete_service_inventory_accepts_clean_control_plane",
+      "scenario_id": "P3-S2-T161",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 162,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_recovery_refuses_foreign_global_guard",
+      "scenario_id": "P3-S2-T162",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 163,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[s3]",
+      "scenario_id": "P3-S2-T163",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 164,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[lease]",
+      "scenario_id": "P3-S2-T164",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 165,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[glue]",
+      "scenario_id": "P3-S2-T165",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 166,
+      "group": "recovery",
+      "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[workload]",
+      "scenario_id": "P3-S2-T166",
+      "state": "REQUIRED",
+      "test_file": "tests/test_part3_stage2_recovery.py"
+    },
+    {
+      "case": 167,
       "group": "recovery",
       "nodeid": "tests/test_part3_stage2_recovery.py::test_service_inventory_rejects_residue_workload_or_partial_listing[truncated]",
-      "scenario_id": "P3-S2-T143",
+      "scenario_id": "P3-S2-T167",
       "state": "REQUIRED",
       "test_file": "tests/test_part3_stage2_recovery.py"
     }
