@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "production_surface": "ledgerguard_part3_stage2_closure",
+  "minimum_statement_percent": 100.0,
+  "minimum_branch_percent": 100.0,
+  "mutation_classes": [
+    "ACCEPT_QUALIFIED_COMMIT_DRIFT",
+    "ACCEPT_OPERATIONAL_BYTE_DRIFT",
+    "ACCEPT_LIVE_RECEIPT_COMMIT_DRIFT",
+    "ACCEPT_IAM_PARITY_FAILURE",
+    "ACCEPT_COST_HEADROOM_FAILURE",
+    "ACCEPT_INCOMPLETE_CLEANUP",
+    "ACCEPT_WORKLOAD_EXECUTION",
+    "ALLOW_UNVERIFIED_REQUIREMENT",
+    "PREMATURELY_CLOSE_EXTERNAL_GATE",
+    "ALLOW_EXCESS_MASTER_GATE",
+    "LEAVE_OWNED_CARRYOVER_OPEN",
+    "ALLOW_INFLATED_HANDOFF_CLAIM",
+    "ALLOW_WEAKENED_QUALITY_AUTHORITY"
+  ]
+}

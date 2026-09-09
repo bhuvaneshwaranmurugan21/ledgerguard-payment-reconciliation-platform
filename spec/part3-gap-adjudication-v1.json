@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "authority": "spec/part2-master-conformance-addendum-v1.json",
+  "authority_sha256": "9424cf42f42372ca0cea18bd58d875f24a75c1ecf35e952537c3ec0b253178a1",
+  "gaps": [
+    {"gap_id": "LG-P3-G001", "owner_part": 3, "owner_stage": 2, "state": "EXECUTED_VERIFIED", "evidence": ["evidence/part3-stage2/read-only-receipt-v1.json", "evidence/part3-stage2/capability-receipt-v1.json"]},
+    {"gap_id": "LG-P3-G002", "owner_part": 3, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G003", "owner_part": 3, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G004", "owner_part": 3, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G005", "owner_part": 3, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G006", "owner_part": 4, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G007", "owner_part": 4, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G008", "owner_part": 3, "owner_stage": 4, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G009", "owner_part": 4, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G010", "owner_part": 5, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G011", "owner_part": 3, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []}
+  ],
+  "closed_by_stage2": ["LG-P3-G001"],
+  "part3_complete": false,
+  "project_complete": false
+}
