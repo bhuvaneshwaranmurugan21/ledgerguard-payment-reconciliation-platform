@@ -166,6 +166,21 @@ def test_stage3_runtime_and_ci_have_no_aws_sdk_or_oidc_permission() -> None:
     assert "aws-actions/configure-aws-credentials" not in stage3
 
 
+def test_historical_stage2_closure_runs_from_frozen_source_without_reissuing_event_evidence(
+) -> None:
+    workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+    historical = workflow.split("part3-stage2-closure:", 1)[1].split(
+        "part3-stage3-current:", 1
+    )[0]
+    assert "ledgerguard-part3-stage2-closure-source" in historical
+    assert "tools/run_part3_stage2_closure.py" in historical
+    assert "tools/build_part3_stage2_closure_ci_evidence.py" not in historical
+    assert "spec/part3-stage2-external-closure-v1.json" in historical
+    assert "spec/part3-stage2-external-closure-correction-v1.json" in historical
+    binding = 'local["deterministic_payload_sha256"] == accepted["deterministic_payload_sha256"]'
+    assert binding in historical
+
+
 def test_status_claims_stage2_external_and_stage3_non_aws_candidate() -> None:
     status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")

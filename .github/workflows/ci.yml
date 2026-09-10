@@ -610,18 +610,36 @@ jobs:
           python tools/run_part3_stage2_closure.py
           --clean-runs 2
           --output "$RUNNER_TEMP/ledgerguard-part3-stage2-closure"
-      - name: Build exact-event Stage 2 closure evidence
-        working-directory: ${{ runner.temp }}/ledgerguard-part3-stage2-closure-source
-        run: >-
-          "$RUNNER_TEMP/ledgerguard-part3-stage2-closure/run-1/venv/bin/python"
-          tools/build_part3_stage2_closure_ci_evidence.py
-          --local-evidence "$RUNNER_TEMP/ledgerguard-part3-stage2-closure/part3-stage2-closure-local-evidence.json"
-          --output-directory "$RUNNER_TEMP/ledgerguard-part3-stage2-closure-artifact"
-      - name: Upload immutable Part 3 Stage 2 closure evidence
+      - name: Bind historical reproduction to the accepted Stage 2 closure
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "ledgerguard-part3-stage2-closure"
+          local = json.loads((root / "part3-stage2-closure-local-evidence.json").read_text())
+          receipt = json.loads(Path("spec/part3-stage2-external-closure-v1.json").read_text())
+          accepted = receipt["closure_validation"]
+          assert local["clean_run_count"] == accepted["clean_runs"] == 2
+          assert local["deterministic_equal"] is True
+          assert local["deterministic_payload_sha256"] == accepted["deterministic_payload_sha256"]
+          assert local["deterministic_payload"]["wheel_sha256"] == accepted["wheel_sha256"]
+          assert local["execution_boundary"]["aws_api_called"] is False
+          assert local["execution_boundary"]["managed_reconciliation_started"] is False
+          assert receipt["closure_gate"] == {
+              "gate_id": "P3-S2-G020",
+              "state": "EXTERNALLY_VERIFIED",
+          }
+          PY
+      - name: Upload immutable historical Stage 2 reproduction evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: ledgerguard-part3-stage2-closure-${{ github.event.pull_request.head.sha || github.sha }}
-          path: ${{ runner.temp }}/ledgerguard-part3-stage2-closure-artifact
+          name: ledgerguard-part3-stage2-historical-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            ${{ runner.temp }}/ledgerguard-part3-stage2-closure/part3-stage2-closure-local-evidence.json
+            spec/part3-stage2-external-closure-v1.json
+            spec/part3-stage2-external-closure-correction-v1.json
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
