@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-source-bundle:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_id", "run_id", "profile_sha256", "policy_sha256", "manifest_sha256", "objects", "normalization", "source_bundle_sha256"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "dataset_id": {"type": "string", "pattern": "^dataset-[0-9a-f]{32}$"},
+    "run_id": {"type": "string", "pattern": "^run-[0-9a-f]{32}$"},
+    "profile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "normalization": {"const": "UNCHANGED_V2_CANONICAL_JSONL"},
+    "source_bundle_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "objects": {"type": "array", "minItems": 4, "items": {"$ref": "#/$defs/object"}}
+  },
+  "$defs": {
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "relative_path", "record_count", "size_bytes", "sha256", "first_logical_index", "last_logical_index", "physical_format", "schema_version"],
+      "properties": {
+        "family": {"enum": ["PROCESSOR_EVENTS", "PROCESSOR_SETTLEMENTS", "LEDGER_JOURNALS", "BANK_ENTRIES"]},
+        "relative_path": {"type": "string", "pattern": "^raw/(?!.*(?:^|/)\\.\\.(?:/|$)).+"},
+        "record_count": {"type": "integer", "minimum": 1},
+        "size_bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "first_logical_index": {"type": "integer", "minimum": 0},
+        "last_logical_index": {"type": "integer", "minimum": 0},
+        "physical_format": {"enum": ["JSONL_CANONICAL_LF", "CSV_RFC4180_LF"]},
+        "schema_version": {"const": "2.0"}
+      }
+    }
+  }
+}

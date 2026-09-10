@@ -1,0 +1,830 @@
+{
+  "schema_version": "1.0",
+  "requirements": [
+    {
+      "requirement_id": "P3-S3-R001",
+      "gate_ids": [
+        "P3-S3-G001"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        "tools/build_part3_stage3_ci_evidence.py",
+        "tools/inspect_part3_stage3_ci_artifact.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py",
+        "tests/test_part3_stage3_tooling.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json",
+        "ci-evidence.json",
+        "artifact-manifest.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R002",
+      "gate_ids": [
+        "P3-S3-G002"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R003",
+      "gate_ids": [
+        "P3-S3-G003",
+        "P3-S3-G024"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R004",
+      "gate_ids": [
+        "P3-S3-G004"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R005",
+      "gate_ids": [
+        "P3-S3-G004",
+        "P3-S3-G005"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R006",
+      "gate_ids": [
+        "P3-S3-G004",
+        "P3-S3-G009"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R007",
+      "gate_ids": [
+        "P3-S3-G006"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R008",
+      "gate_ids": [
+        "P3-S3-G005",
+        "P3-S3-G007"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R009",
+      "gate_ids": [
+        "P3-S3-G005",
+        "P3-S3-G010"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R010",
+      "gate_ids": [
+        "P3-S3-G005"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R011",
+      "gate_ids": [
+        "P3-S3-G008"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R012",
+      "gate_ids": [
+        "P3-S3-G008"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R013",
+      "gate_ids": [
+        "P3-S3-G009"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R014",
+      "gate_ids": [
+        "P3-S3-G009"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R015",
+      "gate_ids": [
+        "P3-S3-G010"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/spark_pipeline.py",
+        "src/ledgerguard/stage3/runtime_admission.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_spark.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R016",
+      "gate_ids": [
+        "P3-S3-G011",
+        "P3-S3-G012"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/spark_pipeline.py",
+        "src/ledgerguard/stage3/runtime_admission.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_spark.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R017",
+      "gate_ids": [
+        "P3-S3-G013"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/spark_pipeline.py",
+        "src/ledgerguard/stage3/runtime_admission.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_spark.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R018",
+      "gate_ids": [
+        "P3-S3-G016"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/job.py",
+        "tools/build_part3_stage3_runtime.py",
+        "tools/inspect_part3_stage3_artifact.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_package.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R019",
+      "gate_ids": [
+        "P3-S3-G018"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/job.py",
+        "tools/build_part3_stage3_runtime.py",
+        "tools/inspect_part3_stage3_artifact.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_package.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R020",
+      "gate_ids": [
+        "P3-S3-G015"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/arguments.py",
+        "src/ledgerguard/stage3/paths.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R021",
+      "gate_ids": [
+        "P3-S3-G015"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/arguments.py",
+        "src/ledgerguard/stage3/paths.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R022",
+      "gate_ids": [
+        "P3-S3-G014"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/spark_pipeline.py",
+        "src/ledgerguard/stage3/runtime_admission.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_spark.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R023",
+      "gate_ids": [
+        "P3-S3-G017"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/job.py",
+        "tools/build_part3_stage3_runtime.py",
+        "tools/inspect_part3_stage3_artifact.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_package.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R024",
+      "gate_ids": [
+        "P3-S3-G019"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/job.py",
+        "tools/build_part3_stage3_runtime.py",
+        "tools/inspect_part3_stage3_artifact.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_package.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R025",
+      "gate_ids": [
+        "P3-S3-G006",
+        "P3-S3-G019",
+        "P3-S3-G021"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/job.py",
+        "tools/build_part3_stage3_runtime.py",
+        "tools/inspect_part3_stage3_artifact.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_package.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R026",
+      "gate_ids": [
+        "P3-S3-G007",
+        "P3-S3-G021"
+      ],
+      "implementation": [
+        "src/ledgerguard/stage3/profiles.py",
+        "src/ledgerguard/stage3/generator.py",
+        "src/ledgerguard/stage3/expectations.py",
+        "src/ledgerguard/stage3/campaign.py"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_assets.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R027",
+      "gate_ids": [
+        "P3-S3-G024"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R028",
+      "gate_ids": [
+        "P3-S3-G020",
+        "P3-S3-G021"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R029",
+      "gate_ids": [
+        "P3-S3-G022"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        "tools/build_part3_stage3_ci_evidence.py",
+        "tools/inspect_part3_stage3_ci_artifact.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py",
+        "tests/test_part3_stage3_tooling.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json",
+        "ci-evidence.json",
+        "artifact-manifest.json"
+      ],
+      "state": "PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R030",
+      "gate_ids": [
+        "P3-S3-G023"
+      ],
+      "implementation": [
+        "tools/validate_part3_stage3.py",
+        "tools/run_part3_stage3.py",
+        ".github/workflows/ci.yml"
+      ],
+      "tests": [
+        "tests/test_part3_stage3_controls.py"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "PENDING_EXTERNAL_SQUASH"
+    }
+  ],
+  "gates": [
+    {
+      "gate_id": "P3-S3-G001",
+      "requirement_ids": [
+        "P3-S3-R001"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G002",
+      "requirement_ids": [
+        "P3-S3-R002"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G003",
+      "requirement_ids": [
+        "P3-S3-R003"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G004",
+      "requirement_ids": [
+        "P3-S3-R004",
+        "P3-S3-R005",
+        "P3-S3-R006"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G005",
+      "requirement_ids": [
+        "P3-S3-R005",
+        "P3-S3-R008",
+        "P3-S3-R009",
+        "P3-S3-R010"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G006",
+      "requirement_ids": [
+        "P3-S3-R007",
+        "P3-S3-R025"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G007",
+      "requirement_ids": [
+        "P3-S3-R008",
+        "P3-S3-R026"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G008",
+      "requirement_ids": [
+        "P3-S3-R011",
+        "P3-S3-R012"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G009",
+      "requirement_ids": [
+        "P3-S3-R006",
+        "P3-S3-R013",
+        "P3-S3-R014"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G010",
+      "requirement_ids": [
+        "P3-S3-R009",
+        "P3-S3-R015"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G011",
+      "requirement_ids": [
+        "P3-S3-R016"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G012",
+      "requirement_ids": [
+        "P3-S3-R016"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G013",
+      "requirement_ids": [
+        "P3-S3-R017"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G014",
+      "requirement_ids": [
+        "P3-S3-R022"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G015",
+      "requirement_ids": [
+        "P3-S3-R020",
+        "P3-S3-R021"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G016",
+      "requirement_ids": [
+        "P3-S3-R018"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G017",
+      "requirement_ids": [
+        "P3-S3-R023"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G018",
+      "requirement_ids": [
+        "P3-S3-R019"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G019",
+      "requirement_ids": [
+        "P3-S3-R024",
+        "P3-S3-R025"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G020",
+      "requirement_ids": [
+        "P3-S3-R028"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G021",
+      "requirement_ids": [
+        "P3-S3-R025",
+        "P3-S3-R026",
+        "P3-S3-R028"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G022",
+      "requirement_ids": [
+        "P3-S3-R029"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "gate_id": "P3-S3-G023",
+      "requirement_ids": [
+        "P3-S3-R030"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "PENDING_EXTERNAL_SQUASH"
+    },
+    {
+      "gate_id": "P3-S3-G024",
+      "requirement_ids": [
+        "P3-S3-R003",
+        "P3-S3-R027"
+      ],
+      "evidence": [
+        "part3-stage3-local-evidence.json"
+      ],
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    }
+  ],
+  "reverse_index_complete": true
+}

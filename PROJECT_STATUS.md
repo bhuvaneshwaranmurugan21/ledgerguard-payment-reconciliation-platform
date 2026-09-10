@@ -4,13 +4,13 @@
 
 - Project: LedgerGuard
 - Part: 3 — Managed AWS platform
-- Stage: 2 — Exact-target AWS qualification
+- Stage: 3 — Deterministic data and Glue runtime package
 - State: `LOCAL_RECONCILIATION_VERIFIED`
-- Stage state: `PART3_STAGE2_CLOSURE_CANDIDATE`
+- Stage state: `PART3_STAGE3_IMPLEMENTED_PENDING_EXACT_HEAD_CI`
 - Historical Stage 2 implementation token: `PART3_STAGE2_IN_PROGRESS`
 - Highest accepted claim: Part 2 repository-local reconciliation; PR #18 closure externally verified
 - Stage 1 external closure: `EXTERNALLY_VERIFIED`
-- Stage 2 qualification: exact-main read-only and bounded capability evidence independently accepted
+- Stage 2 qualification and closure: `EXTERNALLY_VERIFIED`
 - Reference oracle: `EXTERNALLY_VERIFIED`
 - Production admission: `EXTERNALLY_VERIFIED`
 - Transaction reconciliation: `EXTERNALLY_VERIFIED`
@@ -22,7 +22,15 @@
 - Automatic CI AWS execution: false
 - AWS infrastructure mutated: temporary run-scoped S3, lease, and Glue probe resources; cleanup complete
 - Managed reconciliation execution: false
-- Stage 2 external closure gate: `P3-S2-G020 PENDING_EXTERNAL_CLOSURE`
+- Stage 2 external closure gate: `P3-S2-G020 EXTERNALLY_VERIFIED`
+- Stage 3 AWS execution: false; repository-local generation, Spark, and packaging only
+- Stage 3 candidate: four exact deterministic profiles, independent expectations and seeded
+  campaign, native source-to-candidate Spark, reproducible Glue 5.1 offline bundle/SBOM, strict
+  argument/path confinement, 100% owned statement/branch gate, and 24-mutation semantic gate.
+  These remain candidate claims until exact-head PR CI and independent artifact inspection pass.
+- External Stage 3 closure: pending user-controlled squash merge and independent exact-main CI;
+  Part 3 and the overall project remain incomplete.
+- Stage 3 output authority: immutable non-authoritative candidates only
 
 ## Accepted Stage 2 snapshot
 
@@ -169,8 +177,11 @@ The historical terminal Part 2 authority remains unchanged and active for its ac
 The append-only Part 2 master conformance addendum records all original-master carryovers with
 owners. Part 3 Stage 1 is externally complete. Part 3 Stage 2 has independently accepted read-only
 and bounded capability evidence on exact main commit
-`aa136331e44dcd181f766b42d76ee2616a22f435`. All 22 requirements and Stage 2 gates G001–G019
-are verified. G020 remains pending the evidence-only closure squash and post-merge main CI.
-Exactly three Part 3 master gates are `AWS_VERIFIED`; the other three remain `NOT_EXECUTED`.
+`aa136331e44dcd181f766b42d76ee2616a22f435`. PR #25 closed its evidence transaction at squash
+commit `d0fb01392f7f975909229f418c13a9c73ba8395e`; PR and post-merge main CI passed. All 22
+requirements and all 20 Stage 2 gates are externally verified. Stage 3 begins from that exact
+one-parent base and owns only deterministic data, property-campaign, and native source-to-candidate
+Spark package gaps G003, G005, and G011. Exactly three Part 3 master gates are `AWS_VERIFIED`;
+the other three remain `NOT_EXECUTED`.
 No managed reconciliation, deployed-platform, performance, scale, production-readiness, Part 3,
 or overall-project completion claim is made.

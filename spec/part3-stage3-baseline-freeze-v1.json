@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "classification": "PART3_STAGE3_ENTRY_BASELINE_FREEZE",
+  "base": {
+    "commit": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+    "tree": "6be2444b583fde20d6fd84d47a87cde9432e2952",
+    "sole_parent": "aa136331e44dcd181f766b42d76ee2616a22f435"
+  },
+  "external_closure": {
+    "receipt": "spec/part3-stage2-external-closure-v1.json",
+    "sha256": "5be2b65d425278ba0d19c5cf34cf3cf8e15737a751f9d686b00a467dec594764",
+    "correction": "spec/part3-stage2-external-closure-correction-v1.json"
+  },
+  "protected_authorities": {
+    "contracts/active-contract-set-v1.json": "dd5088a847b0396cb880089dd68ba977a8910dc6941392c3f6052ba5bc5b4288",
+    "contracts/v2/bank-entry-v2.schema.json": "3e1a69488ceb91bc8d8e894b58c782aa28dd6e721e78f3ceb5ab51270f1e0470",
+    "contracts/v2/case-revision-v2.schema.json": "029463cad2665db74ae247640d6a6fcc044fcef900a6c19c2dbfb312b90dc3e1",
+    "contracts/v2/common-v2.schema.json": "1d7f57a165e52b1c3ca3a4c8d9321ae18dd364928ce181570fb2377c51bf5ddd",
+    "contracts/v2/journal-v2.schema.json": "8fe2a989f13263fded0b0a645de64c299283c3698c3de821326950d2578e123f",
+    "contracts/v2/processor-event-v2.schema.json": "648cdb70cd5693f505d650440913e2ab95f419c0be384122fb0ed0e7d537b91f",
+    "contracts/v2/processor-settlement-v2.schema.json": "aeb2fb8828eddf95118700fd9b55072b68da54a60652064214dfba0a7bad35ca",
+    "contracts/v2/reconciliation-policy-v2.schema.json": "f908528f2a727f4c50f23791d3e1df4cb0ba73ec4babd80d559947e211813b70",
+    "contracts/v2/reconciliation-proof-v2.schema.json": "6abe1e8caf86781cc68ee8c60e90c1ad3bb3a63ad820bdcc179d321ac0005f41",
+    "contracts/v2/run-manifest-v2.schema.json": "f795ba6241b24ff0d2c8338abbd8c043a7312e881b6480154ca69a9beef31e64",
+    "spec/part2-completion-authority-v1.json": "3383c2c7725e84952cc966f084e67b7dbdd1519ed5648da35e750ea513e703ca",
+    "spec/part2-master-conformance-addendum-v1.json": "9424cf42f42372ca0cea18bd58d875f24a75c1ecf35e952537c3ec0b253178a1",
+    "spec/part3-stage1-external-closure-v1.json": "0e1ff45074913039704d2cddc36e539cc8663963a22d2c0a99f25fc6eb7ce2b2",
+    "spec/part3-stage2-operational-freeze-v1.json": "ce20d9d314fee0edcbe8b7051f92bf7a9215230b69df93805fbe54dd483fdcd4",
+    "spec/part3-stage2-master-gate-adjudication-v1.json": "5cba5f1158cf78918cc8cd6adeb2245c56fa18c932f3fcb8d4327750bddae104"
+  },
+  "implementation_baseline": {
+    "production_admission": "ce66883d304bd88252568d1a78d9d3ef693459e00c05a7d4abc15dca03b3cb9f",
+    "production_transaction": "11f7f6d9809a603bbdb861774daed3ddf63589ce66703ac7b4fddf69067df4f5",
+    "production_settlement": "4e7f0393e18381e5518232b1ee3c353f26a5712bfaffd74d8a31ca972fc0681c",
+    "production_correction": "b7433ba45b783aee214da845a4abfefd2602521952d3b573a4d26c7c14f27010",
+    "reference_oracle": "566c01c86b7f680c1aeb2a21c196446839341bb8ad4474e723cda186e0628509",
+    "historical_stage7_spark": "d708e94b35752c184c4932fd0748e71c6652547540a6c9ff5abd8e87d7e82f46"
+  },
+  "path_policy": {
+    "immutable": ["contracts/v2", "history", "spec/part2-completion-authority-v1.json"],
+    "evolvable": ["src/ledgerguard/stage3", "glue", "contracts/part3-stage3", "contracts/part3-stage3-execution-v1.json", "spec/part3-stage3-*", "tests/test_part3-stage3_*"]
+  },
+  "claim_boundary": {
+    "stage2_master_gates_verified": ["environment_qualified", "live_iam_parity_verified", "glue_definition_probe_verified"],
+    "master_gates_not_executed": ["plan_only_verified", "zero_workload_canary_verified", "teardown_verified"],
+    "managed_workload_started": false,
+    "scale_performance_verified": false,
+    "part3_complete": false,
+    "project_complete": false
+  }
+}

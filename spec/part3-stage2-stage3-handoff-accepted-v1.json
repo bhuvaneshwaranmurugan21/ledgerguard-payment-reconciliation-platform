@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "classification": "PART3_STAGE2_TO_STAGE3_HANDOFF_ACCEPTED",
+  "producer_handoff": "contracts/part3-stage2-stage3-handoff-v1.json",
+  "producer_handoff_sha256": "c4a926252905f0a3139f01eb0c17bc96869fe437a919713f4d59492452713e0f",
+  "external_receipt": "spec/part3-stage2-external-closure-v1.json",
+  "external_receipt_sha256": "5be2b65d425278ba0d19c5cf34cf3cf8e15737a751f9d686b00a467dec594764",
+  "external_receipt_correction": "spec/part3-stage2-external-closure-correction-v1.json",
+  "squash_merge": {
+    "commit": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+    "tree": "6be2444b583fde20d6fd84d47a87cde9432e2952",
+    "sole_parent": "aa136331e44dcd181f766b42d76ee2616a22f435",
+    "validated_pr_head": "68453e47a52122546282c025b006183976070221",
+    "validated_pr_tree": "6be2444b583fde20d6fd84d47a87cde9432e2952",
+    "tree_equal": true
+  },
+  "ci": {
+    "pull_request_run": 34344346897,
+    "main_push_run": 34349896899,
+    "main_artifact": 10103265561,
+    "conclusion": "success"
+  },
+  "adjudication": {
+    "stage2_requirements": {"externally_verified": 22, "total": 22},
+    "stage2_gates": {"externally_verified": 20, "total": 20},
+    "accepted_next_owner": "PART3_STAGE3"
+  },
+  "claims": {
+    "stage2_complete": true,
+    "managed_reconciliation_started": false,
+    "part3_complete": false,
+    "project_complete": false
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "profiles": [
+    {
+      "name": "correctness-small",
+      "seed": 730031,
+      "processor_event_count": 16,
+      "events_per_settlement": 4,
+      "shard_rows": 8,
+      "merchant_count": 2,
+      "currencies": [
+        "INR",
+        "USD",
+        "JPY"
+      ],
+      "negative_event_cycle": ["REFUND", "CHARGEBACK", "REVERSAL"],
+      "split_every_settlements": 10,
+      "skew_cycle": 4,
+      "skew_hotspot_slots": 3,
+      "base_timestamp": "2026-09-01T00:00:00Z",
+      "generator_version": "1.0",
+      "scale_unit": "PROCESSOR_EVENT"
+    },
+    {
+      "name": "local-10k",
+      "seed": 730031,
+      "processor_event_count": 10000,
+      "events_per_settlement": 100,
+      "shard_rows": 10000,
+      "merchant_count": 8,
+      "currencies": [
+        "INR",
+        "USD",
+        "JPY"
+      ],
+      "negative_event_cycle": ["REFUND", "CHARGEBACK", "REVERSAL"],
+      "split_every_settlements": 10,
+      "skew_cycle": 4,
+      "skew_hotspot_slots": 3,
+      "base_timestamp": "2026-09-01T00:00:00Z",
+      "generator_version": "1.0",
+      "scale_unit": "PROCESSOR_EVENT"
+    },
+    {
+      "name": "local-100k",
+      "seed": 730031,
+      "processor_event_count": 100000,
+      "events_per_settlement": 100,
+      "shard_rows": 50000,
+      "merchant_count": 32,
+      "currencies": [
+        "INR",
+        "USD",
+        "JPY"
+      ],
+      "negative_event_cycle": ["REFUND", "CHARGEBACK", "REVERSAL"],
+      "split_every_settlements": 10,
+      "skew_cycle": 4,
+      "skew_hotspot_slots": 3,
+      "base_timestamp": "2026-09-01T00:00:00Z",
+      "generator_version": "1.0",
+      "scale_unit": "PROCESSOR_EVENT"
+    },
+    {
+      "name": "managed-1m",
+      "seed": 730031,
+      "processor_event_count": 1000000,
+      "events_per_settlement": 100,
+      "shard_rows": 100000,
+      "merchant_count": 128,
+      "currencies": [
+        "INR",
+        "USD",
+        "JPY"
+      ],
+      "negative_event_cycle": ["REFUND", "CHARGEBACK", "REVERSAL"],
+      "split_every_settlements": 10,
+      "skew_cycle": 4,
+      "skew_hotspot_slots": 3,
+      "base_timestamp": "2026-09-01T00:00:00Z",
+      "generator_version": "1.0",
+      "scale_unit": "PROCESSOR_EVENT"
+    }
+  ],
+  "format_mapping": {
+    "PROCESSOR_EVENTS": "JSONL_CANONICAL_LF",
+    "LEDGER_JOURNALS": "JSONL_CANONICAL_LF",
+    "PROCESSOR_SETTLEMENTS": "CSV_RFC4180_LF",
+    "BANK_ENTRIES": "CSV_RFC4180_LF"
+  },
+  "identity_exclusions": [
+    "output_root",
+    "wall_clock",
+    "hostname",
+    "process_id",
+    "mapping_iteration_order"
+  ],
+  "created_at_semantics": "FIXED_PROFILE_VALUE"
+}

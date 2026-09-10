@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "stage": 3,
+  "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+  "scope": [
+    "src/ledgerguard/stage3",
+    "tools/build_part3_stage3_runtime.py",
+    "tools/inspect_part3_stage3_artifact.py",
+    "tools/validate_part3_stage3.py",
+    "tools/run_part3_stage3.py",
+    "tools/run_part3_stage3_mutations.py",
+    "tools/build_part3_stage3_ci_evidence.py",
+    "tools/inspect_part3_stage3_ci_artifact.py"
+  ],
+  "statement_target_percent": 100,
+  "branch_target_percent": 100,
+  "exclusions": [],
+  "claim_boundary": "STAGE3_OWNED_CODE_ONLY"
+}

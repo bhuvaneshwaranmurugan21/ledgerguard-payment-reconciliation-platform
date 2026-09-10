@@ -39,12 +39,15 @@ and independent post-merge validation. PR #18 completed the closure attestation 
 `33904881790` passed. Part 2's accepted 203-requirement local scope is
 `LOCAL_RECONCILIATION_VERIFIED`. Part 3 Stage 1 was closed by PR #19 at squash commit
 `5abef1a07899bd8ecd202008f1c397890184a0d2`; exact-head and independent main CI passed and the
-external closure receipt binds both artifacts. Part 3 Stage 2 closure candidate now binds the
+external closure receipt binds both artifacts. Part 3 Stage 2 externally verified closure binds the
 qualified operational commit `aa136331e44dcd181f766b42d76ee2616a22f435`, successful exact-main
 read-only run `34337121587`, successful bounded capability run `34337699794`, complete cleanup,
-and independently accepted artifacts. All 22 Stage 2 requirements and gates G001–G019 are
-verified; G020 remains pending the closure PR squash and post-merge main CI. The overall project
-remains in progress.
+and independently accepted artifacts. PR #25 was squash-merged at
+`d0fb01392f7f975909229f418c13a9c73ba8395e`; all 22 Stage 2 requirements and gates G001–G020
+are externally verified. Stage 3 is now implementing deterministic four-profile assets, an
+independent property campaign, native four-family source-to-candidate Spark reconciliation, and an
+offline reproducible Glue 5.1 package. It performs no AWS work and produces no authoritative proof.
+The overall project remains in progress.
 
 The original master has explicit carryovers beyond the historical Part 2 ledger: generator profiles,
 generator-driven properties, corrected-source behavior, a full source-to-proof DataFrame pipeline,
@@ -83,7 +86,8 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Spark reconciliation parity | `EXTERNALLY_VERIFIED` after PR #16 squash and independent main CI |
 | Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` after PR #18 squash and independent main CI |
 | Part 3 Stage 1 | `EXTERNALLY_VERIFIED` after PR #19 squash and independent main CI |
-| Part 3 Stage 2 | `CLOSURE_CANDIDATE` — exact-main AWS evidence accepted; G020 awaits closure publication |
+| Part 3 Stage 2 | `EXTERNALLY_VERIFIED` after PR #25 squash and independent main CI |
+| Part 3 Stage 3 | `IMPLEMENTED_PENDING_EXACT_HEAD_CI` — local assets, native Spark, and reproducible Glue package only; no AWS execution |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity | `AWS_VERIFIED` for Stage 2 qualification only |
 | Managed AWS reconciliation | `UNCLAIMED` |

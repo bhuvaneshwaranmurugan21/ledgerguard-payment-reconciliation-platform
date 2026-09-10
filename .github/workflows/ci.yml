@@ -600,12 +600,18 @@ jobs:
           for path, expected in freeze["operational_sha256"].items():
               assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == expected
           PY
+          closure=d0fb01392f7f975909229f418c13a9c73ba8395e
+          test "$(git show -s --format=%T "$closure")" = "6be2444b583fde20d6fd84d47a87cde9432e2952"
+          test "$(git show -s --format=%P "$closure")" = "aa136331e44dcd181f766b42d76ee2616a22f435"
+          git worktree add --detach "$RUNNER_TEMP/ledgerguard-part3-stage2-closure-source" "$closure"
       - name: Run Stage 2 closure validation twice
+        working-directory: ${{ runner.temp }}/ledgerguard-part3-stage2-closure-source
         run: >-
           python tools/run_part3_stage2_closure.py
           --clean-runs 2
           --output "$RUNNER_TEMP/ledgerguard-part3-stage2-closure"
       - name: Build exact-event Stage 2 closure evidence
+        working-directory: ${{ runner.temp }}/ledgerguard-part3-stage2-closure-source
         run: >-
           "$RUNNER_TEMP/ledgerguard-part3-stage2-closure/run-1/venv/bin/python"
           tools/build_part3_stage2_closure_ci_evidence.py
@@ -617,5 +623,114 @@ jobs:
           name: ledgerguard-part3-stage2-closure-${{ github.event.pull_request.head.sha || github.sha }}
           path: ${{ runner.temp }}/ledgerguard-part3-stage2-closure-artifact
           include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+  part3-stage3-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      PYTHONHASHSEED: "0"
+      SOURCE_DATE_EPOCH: "1788948092"
+    steps:
+      - name: Check out the raw event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements/part2-stage8-bootstrap.lock
+            requirements/part2-stage8-py311.lock
+            requirements/part3-stage3-bootstrap.lock
+            requirements/part3-stage3-py311.lock
+      - name: Install exact Java
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install hash-locked Stage 3 toolchain
+        run: |
+          python -m pip install --disable-pip-version-check --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --disable-pip-version-check --require-hashes -r requirements/part3-stage3-py311.lock
+          python -m pip install --no-deps --no-build-isolation -e .
+      - name: Verify exact Stage 3 event head and no AWS credential surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git merge-base --is-ancestor d0fb01392f7f975909229f418c13a9c73ba8395e HEAD
+          test "$(git show -s --format=%T d0fb01392f7f975909229f418c13a9c73ba8395e)" = "6be2444b583fde20d6fd84d47a87cde9432e2952"
+          test "$(git show -s --format=%P d0fb01392f7f975909229f418c13a9c73ba8395e)" = "aa136331e44dcd181f766b42d76ee2616a22f435"
+          test -z "${AWS_ACCESS_KEY_ID:-}"
+          test -z "${AWS_SECRET_ACCESS_KEY:-}"
+          test -z "${AWS_SESSION_TOKEN:-}"
+      - name: Run two clean Stage 3 qualifications
+        run: >-
+          python tools/run_part3_stage3.py
+          --repository .
+          --clean-runs 2
+          --output "$RUNNER_TEMP/ledgerguard-part3-stage3"
+      - name: Bind exact GitHub event evidence
+        run: >-
+          python tools/build_part3_stage3_ci_evidence.py
+          --artifact-directory "$RUNNER_TEMP/ledgerguard-part3-stage3"
+      - name: Upload immutable Stage 3 evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part3-stage3-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part3-stage3
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+  part3-stage3-artifact-inspection:
+    needs: part3-stage3-current
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Check out the exact inspected head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements/part3-stage3-bootstrap.lock
+            requirements/part3-stage3-py311.lock
+      - name: Install hash-locked inspection toolchain
+        run: |
+          python -m pip install --disable-pip-version-check --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --disable-pip-version-check --require-hashes -r requirements/part3-stage3-py311.lock
+          python -m pip install --no-deps --no-build-isolation -e .
+      - name: Download exact-run immutable evidence
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: ledgerguard-part3-stage3-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/ledgerguard-part3-stage3-inspection-input
+      - name: Independently inspect archive contents and bindings
+        run: >-
+          python tools/inspect_part3_stage3_ci_artifact.py
+          --artifact "$RUNNER_TEMP/ledgerguard-part3-stage3-inspection-input"
+          --expected-sha "$EXPECTED_SHA"
+          --expected-run-id "${{ github.run_id }}"
+          --expected-run-attempt "${{ github.run_attempt }}"
+          --output "$RUNNER_TEMP/part3-stage3-independent-inspection.json"
+      - name: Upload independent inspection receipt
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ledgerguard-part3-stage3-inspection-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/part3-stage3-independent-inspection.json
           if-no-files-found: error
           retention-days: 90

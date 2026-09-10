@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-expectations:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_id", "run_id", "counts", "processor_event_count_semantics", "expected_status", "authoritative_proof", "expectations_sha256"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "dataset_id": {"type": "string", "pattern": "^dataset-[0-9a-f]{32}$"},
+    "run_id": {"type": "string", "pattern": "^run-[0-9a-f]{32}$"},
+    "counts": {"type": "object", "additionalProperties": false, "required": ["PROCESSOR_EVENTS", "PROCESSOR_SETTLEMENTS", "LEDGER_JOURNALS", "BANK_ENTRIES"], "properties": {"PROCESSOR_EVENTS": {"type": "integer", "minimum": 1}, "PROCESSOR_SETTLEMENTS": {"type": "integer", "minimum": 1}, "LEDGER_JOURNALS": {"type": "integer", "minimum": 1}, "BANK_ENTRIES": {"type": "integer", "minimum": 1}}},
+    "processor_event_count_semantics": {"type": "integer", "minimum": 1},
+    "expected_status": {"const": "MATCHED"},
+    "authoritative_proof": {"const": false},
+    "expectations_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

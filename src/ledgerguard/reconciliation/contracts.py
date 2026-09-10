@@ -6,6 +6,7 @@ import json
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from hashlib import sha256
+from importlib import resources
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -151,6 +152,15 @@ class ContractRegistry:
             family_ids=MappingProxyType(family_ids),
             resolver=Registry().with_resources(resources),
         )
+
+    @classmethod
+    def load_packaged(cls) -> ContractRegistry:
+        """Load the same digest-bound registry from the installed production wheel."""
+        package_root = resources.files("ledgerguard.contract_data")
+        repository = Path(str(package_root))
+        if not repository.is_dir():
+            raise AdmissionRejected("SCHEMA_VIOLATION", "packaged contract root unavailable")
+        return cls.load(repository)
 
     def validate(self, family: str, value: Any) -> None:
         schema_id = self.family_ids.get(family)

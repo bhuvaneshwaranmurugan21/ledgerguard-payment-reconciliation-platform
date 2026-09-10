@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-ci-evidence:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "repository",
+    "event",
+    "head_sha",
+    "head_tree",
+    "workflow_run_id",
+    "job_name",
+    "workflow_run_attempt",
+    "git_ref",
+    "deterministic_payload_sha256",
+    "verdict",
+    "aws_execution"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "repository": {
+      "const": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform"
+    },
+    "event": {
+      "enum": [
+        "pull_request",
+        "push"
+      ]
+    },
+    "head_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "head_tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "workflow_run_id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "job_name": {
+      "const": "part3-stage3-current"
+    },
+    "workflow_run_attempt": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "git_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deterministic_payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verdict": {
+      "const": "PASS"
+    },
+    "aws_execution": {
+      "const": false
+    }
+  }
+}

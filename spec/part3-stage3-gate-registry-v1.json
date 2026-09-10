@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "project": "LedgerGuard",
+  "part": 3,
+  "stage": 3,
+  "gates": [
+    {
+      "gate_id": "P3-S3-G001",
+      "title": "Stage 2 external closure imported and append-only corrected",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G002",
+      "title": "Exact base and inherited authorities verified",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G003",
+      "title": "Bidirectional traceability complete",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G004",
+      "title": "Profile semantics and counts frozen",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G005",
+      "title": "All profiles emit complete raw and canonical assets",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G006",
+      "title": "Asset determinism and semantic identity separation",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G007",
+      "title": "Bounded-memory full 1M generation",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G008",
+      "title": "Independent expectations and defect detection",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G009",
+      "title": "Seeded metamorphic campaign",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G010",
+      "title": "Spark physical ingestion and v2 normalization",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G011",
+      "title": "Native transaction reconciliation",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G012",
+      "title": "Native settlement and allocation reconciliation",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G013",
+      "title": "Spark parity with independent authorities",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G014",
+      "title": "Immutable non-authoritative candidate output",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G015",
+      "title": "Arguments and S3 paths fail closed before Spark",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G016",
+      "title": "Packaged contracts and corrected-source behavior",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G017",
+      "title": "Runtime excludes oracle and generator",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G018",
+      "title": "Offline Glue dependency closure",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G019",
+      "title": "Reproducible package inventory and SBOM",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G020",
+      "title": "100% owned coverage and zero surviving mutations",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G021",
+      "title": "Two clean runs and inherited regressions",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G022",
+      "title": "Exact-head PR CI and artifact inspection",
+      "state": "PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    },
+    {
+      "gate_id": "P3-S3-G023",
+      "title": "Squash tree and exact-main CI",
+      "state": "PENDING_EXTERNAL_SQUASH",
+      "owner": "USER_MERGE_AND_EXTERNAL_CLOSURE"
+    },
+    {
+      "gate_id": "P3-S3-G024",
+      "title": "No AWS work or excessive claim",
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+      "owner": "STAGE3_VALIDATION"
+    }
+  ]
+}
