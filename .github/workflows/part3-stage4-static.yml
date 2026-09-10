@@ -1,0 +1,77 @@
+name: Part 3 Stage 4 static qualification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: part3-stage4-static-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      CHECKPOINT_DISABLE: "1"
+    steps:
+      - name: Check out exact event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Install hash-locked qualification dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
+      - name: Install verified Terraform and TFLint
+        shell: bash
+        run: |
+          set -euo pipefail
+          tool_dir="$RUNNER_TEMP/ledgerguard-stage4-tools"
+          mkdir -p "$tool_dir"
+          curl --fail --location --retry 3 https://releases.hashicorp.com/terraform/1.13.1/terraform_1.13.1_linux_amd64.zip --output "$tool_dir/terraform.zip"
+          curl --fail --location --retry 3 https://github.com/terraform-linters/tflint/releases/download/v0.59.1/tflint_linux_amd64.zip --output "$tool_dir/tflint.zip"
+          python - "$tool_dir" <<'PY'
+          import hashlib
+          import sys
+          import zipfile
+          from pathlib import Path
+          root = Path(sys.argv[1])
+          for name, expected in [
+              ('terraform', '4449e2ddc0dee283f0909dd603eaf98edeebaa950f4635cea94f2caf0ffacc5a'),
+              ('tflint', '6108d84282292f11d793dc8038ce08fbc629dcd25324d6f13c63d8100b52e01f'),
+          ]:
+              raw = (root / (name + '.zip')).read_bytes()
+              if hashlib.sha256(raw).hexdigest() != expected:
+                  raise SystemExit(name + ' archive digest mismatch')
+              with zipfile.ZipFile(root / (name + '.zip')) as archive:
+                  (root / name).write_bytes(archive.read(name))
+              (root / name).chmod(0o755)
+          PY
+          echo "$tool_dir" >> "$GITHUB_PATH"
+      - name: Run required real static checks
+        env:
+          STAGE4_EVIDENCE: ${{ runner.temp }}/part3-stage4-static
+        run: python tools/run_part3_stage4_static.py
+      - name: Preserve evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage4-static-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/part3-stage4-static
+          if-no-files-found: error
+          retention-days: 14

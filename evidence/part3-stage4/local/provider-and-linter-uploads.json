@@ -1,0 +1,12 @@
+{
+  "aws_provider": {
+    "version": "6.11.0",
+    "archive_sha256": "44d6581a1fc0b4f07569600bf6bee3b0bf5281fc82e6494bd72197f6335aa3e1",
+    "uploaded_checksum_match": true
+  },
+  "tflint": {
+    "version": "0.59.1",
+    "archive_sha256": "6108d84282292f11d793dc8038ce08fbc629dcd25324d6f13c63d8100b52e01f",
+    "previously_verified_github_asset_digest_match": true
+  }
+}

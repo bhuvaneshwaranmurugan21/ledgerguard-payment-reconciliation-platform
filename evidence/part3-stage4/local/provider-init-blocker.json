@@ -1,0 +1,9 @@
+{
+  "command": "terraform init -backend=false -input=false -no-color",
+  "provider": "registry.terraform.io/hashicorp/aws",
+  "version": "6.11.0",
+  "result": "BLOCKED",
+  "tool_error": "network approval was cancelled before a decision was returned",
+  "provider_installed": false,
+  "validation_waived": false
+}

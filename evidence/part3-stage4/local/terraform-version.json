@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/workspace/scratch/8bad16c7b3bb/rehearsal/stages4-8/tools/terraform",
+    "version",
+    "-json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"terraform_version\": \"1.13.1\",\n  \"platform\": \"linux_amd64\",\n  \"provider_selections\": {},\n  \"terraform_outdated\": false\n}\n",
+  "stderr": ""
+}

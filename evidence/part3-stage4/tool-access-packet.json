@@ -1,0 +1,11 @@
+{
+  "state": "UPLOADS_RECEIVED_LOCAL_GO_PLUGIN_SOCKET_BLOCKED",
+  "baseline_commit": "3370898d83539fe41594c7cb7ad15e920dcb5674",
+  "branch": "part3-stage4-platform-and-controls",
+  "completed_stage4": false,
+  "completed_stages5_to8": false,
+  "cloud_mutations": false,
+  "publication_performed": false,
+  "required_uploads": [],
+  "resume": "Run identical static checks through draft PR read-only GitHub runner; preserve all stage acceptance gates."
+}

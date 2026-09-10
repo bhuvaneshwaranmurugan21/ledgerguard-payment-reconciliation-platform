@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/ledgerguard-stage3-venv/bin/python",
+    "-m",
+    "tools.rehearse_part3_stage4_inspector",
+    "--source",
+    "/workspace/scratch/8bad16c7b3bb/rehearsal/stages4-8/run-1/ci-artifact",
+    "--destination",
+    "/workspace/scratch/8bad16c7b3bb/stage4-inspector-run2"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"aws_execution\": false,\n  \"genuine_artifact\": {\n    \"artifact_manifest_file_sha256\": \"d945def0c3d3cb8b6d6dd04de40a6bd4a163801ac1fc432c5cf29a3545ac6de1\",\n    \"deterministic_payload_sha256\": \"5229c57aea6b6eb9df056104a7efcc916be98b88f99ed7ffdf6696c9f38c6b4f\",\n    \"head_sha\": \"3370898d83539fe41594c7cb7ad15e920dcb5674\",\n    \"head_tree\": \"32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a\",\n    \"independently_accepted\": true,\n    \"member_count\": 167,\n    \"schema_version\": \"1.0\",\n    \"workflow_run_attempt\": 1,\n    \"workflow_run_id\": 34465749986\n  },\n  \"negative_cases\": [\n    {\n      \"path\": \"run-1/artifact-manifest.json\",\n      \"rejected\": true\n    },\n    {\n      \"path\": \"run-1/profiles/artifact-manifest.json\",\n      \"rejected\": true\n    }\n  ]\n}\n",
+  "stderr": ""
+}

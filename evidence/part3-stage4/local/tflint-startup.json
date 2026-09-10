@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "{\"issues\":[],\"errors\":[{\"message\":\"Failed to initialize plugins; Unrecognized remote plugin message: \\nFailed to read any lines from plugin's stdout\\nThis usually means\\n  the plugin was not compiled for this architecture,\\n  the plugin is missing dynamic-link libraries necessary to run,\\n  the plugin is not executable by this process due to file permissions, or\\n  the plugin failed to negotiate the initial go-plugin protocol handshake\\n\\nAdditional notes about plugin:\\n  Path: /workspace/scratch/8bad16c7b3bb/rehearsal/stages4-8/tools/tflint\\n  Mode: -rwxr-xr-x\\n  Owner: 0 [root] (current: 0 [root])\\n  Group: 0 [root] (current: 0 [root])\\n  ELF architecture: EM_X86_64 (current architecture: amd64)\\n\",\"severity\":\"error\"}]}",
+  "stderr": ""
+}

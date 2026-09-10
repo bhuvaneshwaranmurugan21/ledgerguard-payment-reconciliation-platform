@@ -36,7 +36,7 @@ def inspect(
     actual = {
         path.relative_to(artifact).as_posix(): path
         for path in artifact.rglob("*")
-        if path.is_file() and path.name != "artifact-manifest.json"
+        if path.is_file() and path != manifest_path
     }
     declared: set[str] = set()
     for row in rows:

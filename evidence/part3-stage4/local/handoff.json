@@ -1,0 +1,10 @@
+{
+  "command": [
+    "/tmp/ledgerguard-stage3-venv/bin/python",
+    "-m",
+    "tools.validate_part3_stage4_handoff"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"aws_execution\": false,\n  \"baseline_commit\": \"3370898d83539fe41594c7cb7ad15e920dcb5674\",\n  \"baseline_tree\": \"32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a\",\n  \"handoff_admitted\": true,\n  \"inherited_files_verified\": 330,\n  \"original_receipt_sha256\": \"0af219b16d74d17114b26f03edc41b401d655629fdd6e1b2725ec9406d15a3ea\",\n  \"original_requirement_count\": 99,\n  \"stage4_complete\": false\n}\n",
+  "stderr": ""
+}

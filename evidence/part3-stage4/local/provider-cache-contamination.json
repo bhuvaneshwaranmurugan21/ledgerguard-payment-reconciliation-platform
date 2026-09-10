@@ -1,0 +1,17 @@
+{
+  "quarantined_members": [
+    {
+      "name": ".terraform-provider-aws_v6.11.0_x5.1yAiuN",
+      "bytes": 143130624,
+      "sha256": "16c617727cbb87325b28aa85fffcff72281b532f74d4798907a0e20f6b517123",
+      "reason": "not a member of the verified distribution; incomplete temporary binary"
+    },
+    {
+      "name": ".terraform-provider-aws_v6.11.0_x5.3QlhYc",
+      "bytes": 250609664,
+      "sha256": "59d485c4149598e1d30998f411d4df801f753e3b75887b78c4538069ad05e071",
+      "reason": "not a member of the verified distribution; incomplete temporary binary"
+    }
+  ],
+  "verified_distribution_members_preserved": true
+}

@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "classification": "SOURCE_DRAFT_NOT_PROVIDER_VALIDATED",
+  "managed_address_count": 33,
+  "members": [
+    {
+      "address": "aws_glue_catalog_database.reconciliation",
+      "type": "aws_glue_catalog_database",
+      "source": "infra/part3/catalog.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_glue_catalog_table.candidate[\"transactions\"]",
+      "type": "aws_glue_catalog_table",
+      "source": "infra/part3/catalog.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_glue_catalog_table.candidate[\"settlements\"]",
+      "type": "aws_glue_catalog_table",
+      "source": "infra/part3/catalog.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_glue_catalog_table.candidate[\"bank_allocations\"]",
+      "type": "aws_glue_catalog_table",
+      "source": "infra/part3/catalog.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_athena_workgroup.reconciliation",
+      "type": "aws_athena_workgroup",
+      "source": "infra/part3/catalog.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_log_group.platform[\"glue_error\"]",
+      "type": "aws_cloudwatch_log_group",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_log_group.platform[\"glue_output\"]",
+      "type": "aws_cloudwatch_log_group",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_log_group.platform[\"workflow\"]",
+      "type": "aws_cloudwatch_log_group",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_log_group.platform[\"validator\"]",
+      "type": "aws_cloudwatch_log_group",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_log_group.platform[\"controller\"]",
+      "type": "aws_cloudwatch_log_group",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role.runtime[\"glue\"]",
+      "type": "aws_iam_role",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role.runtime[\"workflow\"]",
+      "type": "aws_iam_role",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role.runtime[\"validator\"]",
+      "type": "aws_iam_role",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role.runtime[\"controller\"]",
+      "type": "aws_iam_role",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_glue_job.reconciliation",
+      "type": "aws_glue_job",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_lambda_function.validator",
+      "type": "aws_lambda_function",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_lambda_function.controller",
+      "type": "aws_lambda_function",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_sfn_state_machine.reconciliation",
+      "type": "aws_sfn_state_machine",
+      "source": "infra/part3/compute.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_metric_alarm.control_errors[\"validator\"]",
+      "type": "aws_cloudwatch_metric_alarm",
+      "source": "infra/part3/monitoring.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_metric_alarm.control_errors[\"controller\"]",
+      "type": "aws_cloudwatch_metric_alarm",
+      "source": "infra/part3/monitoring.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_cloudwatch_metric_alarm.workflow_failure",
+      "type": "aws_cloudwatch_metric_alarm",
+      "source": "infra/part3/monitoring.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role_policy.runtime[\"glue\"]",
+      "type": "aws_iam_role_policy",
+      "source": "infra/part3/permissions.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role_policy.runtime[\"workflow\"]",
+      "type": "aws_iam_role_policy",
+      "source": "infra/part3/permissions.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role_policy.runtime[\"validator\"]",
+      "type": "aws_iam_role_policy",
+      "source": "infra/part3/permissions.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_iam_role_policy.runtime[\"controller\"]",
+      "type": "aws_iam_role_policy",
+      "source": "infra/part3/permissions.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket.workload",
+      "type": "aws_s3_bucket",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket_ownership_controls.workload",
+      "type": "aws_s3_bucket_ownership_controls",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket_public_access_block.workload",
+      "type": "aws_s3_bucket_public_access_block",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket_versioning.workload",
+      "type": "aws_s3_bucket_versioning",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket_server_side_encryption_configuration.workload",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket_policy.workload",
+      "type": "aws_s3_bucket_policy",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_s3_bucket_lifecycle_configuration.workload",
+      "type": "aws_s3_bucket_lifecycle_configuration",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    },
+    {
+      "address": "aws_dynamodb_table.control",
+      "type": "aws_dynamodb_table",
+      "source": "infra/part3/storage.tf",
+      "owner_stage": 4,
+      "teardown": "saved reviewed destroy plan; S3 versions/markers/uploads emptied separately before bucket deletion"
+    }
+  ],
+  "excluded_existing_resources": [
+    "ledgerguard-tfstate-857229544428-ap-southeast-2",
+    "ledgerguard-operation-leases",
+    "LedgerGuardGitHubOidcRole",
+    "administrator-managed permissions boundary"
+  ],
+  "not_a_terraform_plan": true
+}
