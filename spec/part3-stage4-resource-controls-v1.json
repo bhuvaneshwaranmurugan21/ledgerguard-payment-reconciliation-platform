@@ -1,0 +1,2234 @@
+{
+  "schema_version": "1.0",
+  "evidence_level": "PARSED_SOURCE_NOT_PLAN_OR_LIVE",
+  "managed_address_count": 33,
+  "resource_templates": {
+    "aws_glue_catalog_database.reconciliation": [
+      "catalog_id",
+      "name"
+    ],
+    "aws_glue_catalog_table.candidate": [
+      "catalog_id",
+      "database_name",
+      "for_each",
+      "name",
+      "parameters",
+      "partition_keys",
+      "storage_descriptor",
+      "table_type"
+    ],
+    "aws_athena_workgroup.reconciliation": [
+      "configuration",
+      "force_destroy",
+      "name",
+      "state",
+      "tags"
+    ],
+    "aws_cloudwatch_log_group.platform": [
+      "for_each",
+      "name",
+      "retention_in_days",
+      "tags"
+    ],
+    "aws_iam_role.runtime": [
+      "assume_role_policy",
+      "for_each",
+      "name",
+      "path",
+      "permissions_boundary",
+      "tags"
+    ],
+    "aws_glue_job.reconciliation": [
+      "command",
+      "default_arguments",
+      "depends_on",
+      "execution_class",
+      "execution_property",
+      "glue_version",
+      "max_retries",
+      "name",
+      "number_of_workers",
+      "role_arn",
+      "tags",
+      "timeout",
+      "worker_type"
+    ],
+    "aws_lambda_function.validator": [
+      "depends_on",
+      "environment",
+      "filename",
+      "function_name",
+      "handler",
+      "memory_size",
+      "reserved_concurrent_executions",
+      "role",
+      "runtime",
+      "source_code_hash",
+      "tags",
+      "timeout",
+      "tracing_config"
+    ],
+    "aws_lambda_function.controller": [
+      "depends_on",
+      "environment",
+      "filename",
+      "function_name",
+      "handler",
+      "memory_size",
+      "reserved_concurrent_executions",
+      "role",
+      "runtime",
+      "source_code_hash",
+      "tags",
+      "timeout",
+      "tracing_config"
+    ],
+    "aws_sfn_state_machine.reconciliation": [
+      "definition",
+      "depends_on",
+      "logging_configuration",
+      "name",
+      "role_arn",
+      "tags",
+      "type"
+    ],
+    "aws_cloudwatch_metric_alarm.control_errors": [
+      "alarm_name",
+      "comparison_operator",
+      "dimensions",
+      "evaluation_periods",
+      "for_each",
+      "metric_name",
+      "namespace",
+      "period",
+      "statistic",
+      "tags",
+      "threshold",
+      "treat_missing_data"
+    ],
+    "aws_cloudwatch_metric_alarm.workflow_failure": [
+      "alarm_name",
+      "comparison_operator",
+      "dimensions",
+      "evaluation_periods",
+      "metric_name",
+      "namespace",
+      "period",
+      "statistic",
+      "tags",
+      "threshold",
+      "treat_missing_data"
+    ],
+    "aws_iam_role_policy.runtime": [
+      "for_each",
+      "name",
+      "policy",
+      "role"
+    ],
+    "aws_s3_bucket.workload": [
+      "bucket",
+      "force_destroy",
+      "tags"
+    ],
+    "aws_s3_bucket_ownership_controls.workload": [
+      "bucket",
+      "rule"
+    ],
+    "aws_s3_bucket_public_access_block.workload": [
+      "block_public_acls",
+      "block_public_policy",
+      "bucket",
+      "ignore_public_acls",
+      "restrict_public_buckets"
+    ],
+    "aws_s3_bucket_versioning.workload": [
+      "bucket",
+      "versioning_configuration"
+    ],
+    "aws_s3_bucket_server_side_encryption_configuration.workload": [
+      "bucket",
+      "rule"
+    ],
+    "aws_s3_bucket_policy.workload": [
+      "bucket",
+      "policy"
+    ],
+    "aws_s3_bucket_lifecycle_configuration.workload": [
+      "bucket",
+      "depends_on",
+      "rule"
+    ],
+    "aws_dynamodb_table.control": [
+      "attribute",
+      "billing_mode",
+      "hash_key",
+      "name",
+      "point_in_time_recovery",
+      "range_key",
+      "server_side_encryption",
+      "tags"
+    ]
+  },
+  "required_inputs": [
+    "operation_id",
+    "expires_at",
+    "permissions_boundary_arns",
+    "stage5_release"
+  ],
+  "rules": [
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket.workload.bucket",
+      "path": [
+        "resource",
+        "aws_s3_bucket.workload",
+        "bucket"
+      ],
+      "equals": "${local.bucket}",
+      "requirement": "P3-M-L242-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket.workload.force_destroy",
+      "path": [
+        "resource",
+        "aws_s3_bucket.workload",
+        "force_destroy"
+      ],
+      "equals": false,
+      "requirement": "P3-M-L242-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket.workload.tags",
+      "path": [
+        "resource",
+        "aws_s3_bucket.workload",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L242-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_ownership_controls.workload.bucket",
+      "path": [
+        "resource",
+        "aws_s3_bucket_ownership_controls.workload",
+        "bucket"
+      ],
+      "equals": "${aws_s3_bucket.workload.id}",
+      "requirement": "P3-M-L242-04"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_ownership_controls.workload.rule",
+      "path": [
+        "resource",
+        "aws_s3_bucket_ownership_controls.workload",
+        "rule"
+      ],
+      "equals": [
+        {
+          "object_ownership": "BucketOwnerEnforced"
+        }
+      ],
+      "requirement": "P3-M-L242-04"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.bucket",
+      "path": [
+        "resource",
+        "aws_s3_bucket_public_access_block.workload",
+        "bucket"
+      ],
+      "equals": "${aws_s3_bucket.workload.id}",
+      "requirement": "P3-M-L269-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.block_public_acls",
+      "path": [
+        "resource",
+        "aws_s3_bucket_public_access_block.workload",
+        "block_public_acls"
+      ],
+      "equals": true,
+      "requirement": "P3-M-L269-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.block_public_policy",
+      "path": [
+        "resource",
+        "aws_s3_bucket_public_access_block.workload",
+        "block_public_policy"
+      ],
+      "equals": true,
+      "requirement": "P3-M-L269-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.ignore_public_acls",
+      "path": [
+        "resource",
+        "aws_s3_bucket_public_access_block.workload",
+        "ignore_public_acls"
+      ],
+      "equals": true,
+      "requirement": "P3-M-L269-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.restrict_public_buckets",
+      "path": [
+        "resource",
+        "aws_s3_bucket_public_access_block.workload",
+        "restrict_public_buckets"
+      ],
+      "equals": true,
+      "requirement": "P3-M-L269-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_versioning.workload.bucket",
+      "path": [
+        "resource",
+        "aws_s3_bucket_versioning.workload",
+        "bucket"
+      ],
+      "equals": "${aws_s3_bucket.workload.id}",
+      "requirement": "P3-M-L242-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_versioning.workload.versioning_configuration",
+      "path": [
+        "resource",
+        "aws_s3_bucket_versioning.workload",
+        "versioning_configuration"
+      ],
+      "equals": [
+        {
+          "status": "Enabled"
+        }
+      ],
+      "requirement": "P3-M-L242-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_server_side_encryption_configuration.workload.bucket",
+      "path": [
+        "resource",
+        "aws_s3_bucket_server_side_encryption_configuration.workload",
+        "bucket"
+      ],
+      "equals": "${aws_s3_bucket.workload.id}",
+      "requirement": "P3-M-L242-03"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_server_side_encryption_configuration.workload.rule",
+      "path": [
+        "resource",
+        "aws_s3_bucket_server_side_encryption_configuration.workload",
+        "rule"
+      ],
+      "equals": [
+        {
+          "apply_server_side_encryption_by_default": [
+            {
+              "sse_algorithm": "AES256"
+            }
+          ]
+        }
+      ],
+      "requirement": "P3-M-L242-03"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.name",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "name"
+      ],
+      "equals": "${local.name}-control",
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.billing_mode",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "billing_mode"
+      ],
+      "equals": "PAY_PER_REQUEST",
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.hash_key",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "hash_key"
+      ],
+      "equals": "pk",
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.range_key",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "range_key"
+      ],
+      "equals": "sk",
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.attribute",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "attribute"
+      ],
+      "equals": [
+        {
+          "name": "pk",
+          "type": "S"
+        },
+        {
+          "name": "sk",
+          "type": "S"
+        }
+      ],
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.server_side_encryption",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "server_side_encryption"
+      ],
+      "equals": [
+        {
+          "enabled": true
+        }
+      ],
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.point_in_time_recovery",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "point_in_time_recovery"
+      ],
+      "equals": [
+        {
+          "enabled": true
+        }
+      ],
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_dynamodb_table.control.tags",
+      "path": [
+        "resource",
+        "aws_dynamodb_table.control",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L247-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_log_group.platform.for_each",
+      "path": [
+        "resource",
+        "aws_cloudwatch_log_group.platform",
+        "for_each"
+      ],
+      "equals": "${local.log_names}",
+      "requirement": "P3-M-L272-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_log_group.platform.name",
+      "path": [
+        "resource",
+        "aws_cloudwatch_log_group.platform",
+        "name"
+      ],
+      "equals": "${each.value}",
+      "requirement": "P3-M-L272-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_log_group.platform.retention_in_days",
+      "path": [
+        "resource",
+        "aws_cloudwatch_log_group.platform",
+        "retention_in_days"
+      ],
+      "equals": 7,
+      "requirement": "P3-M-L272-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_log_group.platform.tags",
+      "path": [
+        "resource",
+        "aws_cloudwatch_log_group.platform",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L272-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role.runtime.for_each",
+      "path": [
+        "resource",
+        "aws_iam_role.runtime",
+        "for_each"
+      ],
+      "equals": "${local.services}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role.runtime.name",
+      "path": [
+        "resource",
+        "aws_iam_role.runtime",
+        "name"
+      ],
+      "equals": "${local.name}-${each.key}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role.runtime.path",
+      "path": [
+        "resource",
+        "aws_iam_role.runtime",
+        "path"
+      ],
+      "equals": "/ledgerguard/",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role.runtime.permissions_boundary",
+      "path": [
+        "resource",
+        "aws_iam_role.runtime",
+        "permissions_boundary"
+      ],
+      "equals": "${var.permissions_boundary_arns[each.key]}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role.runtime.tags",
+      "path": [
+        "resource",
+        "aws_iam_role.runtime",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.depends_on",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "depends_on"
+      ],
+      "equals": [
+        "${aws_iam_role_policy.runtime}",
+        "${aws_cloudwatch_log_group.platform}"
+      ],
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.name",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "name"
+      ],
+      "equals": "${local.name}-reconciliation",
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.role_arn",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "role_arn"
+      ],
+      "equals": "${aws_iam_role.runtime[\"glue\"].arn}",
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.glue_version",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "glue_version"
+      ],
+      "equals": "5.1",
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.worker_type",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "worker_type"
+      ],
+      "equals": "G.1X",
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.number_of_workers",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "number_of_workers"
+      ],
+      "equals": 2,
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.timeout",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "timeout"
+      ],
+      "equals": 15,
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.max_retries",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "max_retries"
+      ],
+      "equals": 0,
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.execution_class",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "execution_class"
+      ],
+      "equals": "STANDARD",
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.execution_property",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "execution_property"
+      ],
+      "equals": [
+        {
+          "max_concurrent_runs": 1
+        }
+      ],
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.command",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "command"
+      ],
+      "equals": [
+        {
+          "name": "glueetl",
+          "python_version": "3",
+          "script_location": "s3://${local.bucket}/${var.stage5_release.script_key}"
+        }
+      ],
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.default_arguments",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "default_arguments"
+      ],
+      "equals": {
+        "--additional-python-modules": "s3://${local.bucket}/${var.stage5_release.wheels_key}",
+        "--python-modules-installer-option": "--no-index",
+        "--enable-observability-metrics": "true",
+        "--enable-metrics": "true",
+        "--enable-s3-parquet-optimized-committer": "true",
+        "--custom-logGroup-prefix": "/${local.name}/glue",
+        "--job-bookmark-option": "job-bookmark-disable",
+        "--TempDir": "s3://${local.bucket}/temporary/glue/"
+      },
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_job.reconciliation.tags",
+      "path": [
+        "resource",
+        "aws_glue_job.reconciliation",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L245-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.function_name",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "function_name"
+      ],
+      "equals": "${local.name}-validator",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.role",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "role"
+      ],
+      "equals": "${aws_iam_role.runtime[\"validator\"].arn}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.runtime",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "runtime"
+      ],
+      "equals": "python3.11",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.handler",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "handler"
+      ],
+      "equals": "ledgerguard_control.validator.handler",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.filename",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "filename"
+      ],
+      "equals": "${var.stage5_release.validator_zip}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.source_code_hash",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "source_code_hash"
+      ],
+      "equals": "${var.stage5_release.validator_sha256_base64}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.timeout",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "timeout"
+      ],
+      "equals": 60,
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.memory_size",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "memory_size"
+      ],
+      "equals": 512,
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.reserved_concurrent_executions",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "reserved_concurrent_executions"
+      ],
+      "equals": 1,
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.tracing_config",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "tracing_config"
+      ],
+      "equals": [
+        {
+          "mode": "Active"
+        }
+      ],
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.environment",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "environment"
+      ],
+      "equals": [
+        {
+          "variables": {
+            "WORKLOAD_BUCKET": "${local.bucket}",
+            "CONTROL_TABLE": "${aws_dynamodb_table.control.name}"
+          }
+        }
+      ],
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.depends_on",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "depends_on"
+      ],
+      "equals": [
+        "${aws_cloudwatch_log_group.platform}",
+        "${aws_iam_role_policy.runtime}"
+      ],
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.validator.tags",
+      "path": [
+        "resource",
+        "aws_lambda_function.validator",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.function_name",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "function_name"
+      ],
+      "equals": "${local.name}-controller",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.role",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "role"
+      ],
+      "equals": "${aws_iam_role.runtime[\"controller\"].arn}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.runtime",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "runtime"
+      ],
+      "equals": "python3.11",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.handler",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "handler"
+      ],
+      "equals": "ledgerguard_control.controller.handler",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.filename",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "filename"
+      ],
+      "equals": "${var.stage5_release.controller_zip}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.source_code_hash",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "source_code_hash"
+      ],
+      "equals": "${var.stage5_release.controller_sha256_base64}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.timeout",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "timeout"
+      ],
+      "equals": 60,
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.memory_size",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "memory_size"
+      ],
+      "equals": 512,
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.reserved_concurrent_executions",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "reserved_concurrent_executions"
+      ],
+      "equals": 1,
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.tracing_config",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "tracing_config"
+      ],
+      "equals": [
+        {
+          "mode": "Active"
+        }
+      ],
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.environment",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "environment"
+      ],
+      "equals": [
+        {
+          "variables": {
+            "WORKLOAD_BUCKET": "${local.bucket}",
+            "CONTROL_TABLE": "${aws_dynamodb_table.control.name}"
+          }
+        }
+      ],
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.depends_on",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "depends_on"
+      ],
+      "equals": [
+        "${aws_cloudwatch_log_group.platform}",
+        "${aws_iam_role_policy.runtime}"
+      ],
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_lambda_function.controller.tags",
+      "path": [
+        "resource",
+        "aws_lambda_function.controller",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L253-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.name",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "name"
+      ],
+      "equals": "${local.name}-reconciliation",
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.role_arn",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "role_arn"
+      ],
+      "equals": "${aws_iam_role.runtime[\"workflow\"].arn}",
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.type",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "type"
+      ],
+      "equals": "STANDARD",
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.definition",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "definition"
+      ],
+      "equals": "${var.stage5_release.definition}",
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.depends_on",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "depends_on"
+      ],
+      "equals": [
+        "${aws_iam_role_policy.runtime}"
+      ],
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.logging_configuration",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "logging_configuration"
+      ],
+      "equals": [
+        {
+          "log_destination": "${aws_cloudwatch_log_group.platform[\"workflow\"].arn}:*",
+          "include_execution_data": false,
+          "level": "ALL"
+        }
+      ],
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_sfn_state_machine.reconciliation.tags",
+      "path": [
+        "resource",
+        "aws_sfn_state_machine.reconciliation",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L246-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_athena_workgroup.reconciliation.name",
+      "path": [
+        "resource",
+        "aws_athena_workgroup.reconciliation",
+        "name"
+      ],
+      "equals": "${local.name}-checks",
+      "requirement": "P3-M-L274-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_athena_workgroup.reconciliation.state",
+      "path": [
+        "resource",
+        "aws_athena_workgroup.reconciliation",
+        "state"
+      ],
+      "equals": "ENABLED",
+      "requirement": "P3-M-L274-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_athena_workgroup.reconciliation.force_destroy",
+      "path": [
+        "resource",
+        "aws_athena_workgroup.reconciliation",
+        "force_destroy"
+      ],
+      "equals": false,
+      "requirement": "P3-M-L274-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_athena_workgroup.reconciliation.configuration",
+      "path": [
+        "resource",
+        "aws_athena_workgroup.reconciliation",
+        "configuration"
+      ],
+      "equals": [
+        {
+          "enforce_workgroup_configuration": true,
+          "bytes_scanned_cutoff_per_query": 104857600,
+          "publish_cloudwatch_metrics_enabled": true,
+          "engine_version": [
+            {
+              "selected_engine_version": "Athena engine version 3"
+            }
+          ],
+          "result_configuration": [
+            {
+              "output_location": "s3://${local.bucket}/query-results/",
+              "expected_bucket_owner": "857229544428",
+              "encryption_configuration": [
+                {
+                  "encryption_option": "SSE_S3"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requirement": "P3-M-L274-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_athena_workgroup.reconciliation.tags",
+      "path": [
+        "resource",
+        "aws_athena_workgroup.reconciliation",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L274-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_database.reconciliation.name",
+      "path": [
+        "resource",
+        "aws_glue_catalog_database.reconciliation",
+        "name"
+      ],
+      "equals": "${replace(\"${local.name}-reconciliation\", \"-\", \"_\")}",
+      "requirement": "P3-M-L244-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_database.reconciliation.catalog_id",
+      "path": [
+        "resource",
+        "aws_glue_catalog_database.reconciliation",
+        "catalog_id"
+      ],
+      "equals": "857229544428",
+      "requirement": "P3-M-L244-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.for_each",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "for_each"
+      ],
+      "equals": "${local.catalog.tables}",
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.name",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "name"
+      ],
+      "equals": "${each.key}",
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.database_name",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "database_name"
+      ],
+      "equals": "${aws_glue_catalog_database.reconciliation.name}",
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.catalog_id",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "catalog_id"
+      ],
+      "equals": "857229544428",
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.table_type",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "table_type"
+      ],
+      "equals": "EXTERNAL_TABLE",
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.partition_keys",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "partition_keys"
+      ],
+      "equals": [
+        {
+          "name": "run_id",
+          "type": "string"
+        },
+        {
+          "name": "attempt_id",
+          "type": "string"
+        }
+      ],
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.parameters",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "parameters"
+      ],
+      "equals": {
+        "EXTERNAL": "TRUE",
+        "classification": "parquet",
+        "projection.enabled": "true",
+        "projection.run_id.type": "injected",
+        "projection.attempt_id.type": "injected",
+        "storage.location.template": "s3://${local.bucket}/runs/$${run_id}/attempts/$${attempt_id}/candidates/${replace(each.key, \"_\", \"-\")}/"
+      },
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.for_each",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "for_each"
+      ],
+      "equals": "${toset([validator, controller])}",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.alarm_name",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "alarm_name"
+      ],
+      "equals": "${local.name}-${each.value}-errors",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.metric_name",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "metric_name"
+      ],
+      "equals": "Errors",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.namespace",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "namespace"
+      ],
+      "equals": "AWS/Lambda",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.dimensions",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "dimensions"
+      ],
+      "equals": {
+        "FunctionName": "${local.name}-${each.value}"
+      },
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.comparison_operator",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "comparison_operator"
+      ],
+      "equals": "GreaterThanThreshold",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.evaluation_periods",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "evaluation_periods"
+      ],
+      "equals": 1,
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.period",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "period"
+      ],
+      "equals": 60,
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.statistic",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "statistic"
+      ],
+      "equals": "Sum",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.threshold",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "threshold"
+      ],
+      "equals": 0,
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.treat_missing_data",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "treat_missing_data"
+      ],
+      "equals": "missing",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.tags",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.control_errors",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.alarm_name",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "alarm_name"
+      ],
+      "equals": "${local.name}-workflow-failure",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.metric_name",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "metric_name"
+      ],
+      "equals": "ExecutionsFailed",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.namespace",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "namespace"
+      ],
+      "equals": "AWS/States",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.dimensions",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "dimensions"
+      ],
+      "equals": {
+        "StateMachineArn": "${aws_sfn_state_machine.reconciliation.arn}"
+      },
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.comparison_operator",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "comparison_operator"
+      ],
+      "equals": "GreaterThanThreshold",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.evaluation_periods",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "evaluation_periods"
+      ],
+      "equals": 1,
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.period",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "period"
+      ],
+      "equals": 60,
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.statistic",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "statistic"
+      ],
+      "equals": "Sum",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.threshold",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "threshold"
+      ],
+      "equals": 0,
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.treat_missing_data",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "treat_missing_data"
+      ],
+      "equals": "missing",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.tags",
+      "path": [
+        "resource",
+        "aws_cloudwatch_metric_alarm.workflow_failure",
+        "tags"
+      ],
+      "equals": "${local.tags}",
+      "requirement": "P3-M-L249-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role_policy.runtime.for_each",
+      "path": [
+        "resource",
+        "aws_iam_role_policy.runtime",
+        "for_each"
+      ],
+      "equals": "${local.services}",
+      "requirement": "P3-M-L250-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role_policy.runtime.name",
+      "path": [
+        "resource",
+        "aws_iam_role_policy.runtime",
+        "name"
+      ],
+      "equals": "${local.name}-${each.key}",
+      "requirement": "P3-M-L250-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role_policy.runtime.role",
+      "path": [
+        "resource",
+        "aws_iam_role_policy.runtime",
+        "role"
+      ],
+      "equals": "${aws_iam_role.runtime[each.key].id}",
+      "requirement": "P3-M-L250-01"
+    },
+    {
+      "id": "S4-RESOURCE-name",
+      "path": [
+        "locals",
+        "name"
+      ],
+      "equals": "ledgerguard-p3-${var.operation_id}",
+      "requirement": "P3-M-L275-01"
+    },
+    {
+      "id": "S4-RESOURCE-bucket",
+      "path": [
+        "locals",
+        "bucket"
+      ],
+      "equals": "ledgerguard-p3-857229544428-${var.operation_id}",
+      "requirement": "P3-M-L242-01"
+    },
+    {
+      "id": "S4-RESOURCE-tags",
+      "path": [
+        "locals",
+        "tags"
+      ],
+      "equals": {
+        "OperationId": "${var.operation_id}",
+        "ExpiresAt": "${var.expires_at}"
+      },
+      "requirement": "P3-M-L275-02"
+    },
+    {
+      "id": "S4-RESOURCE-services",
+      "path": [
+        "locals",
+        "services"
+      ],
+      "equals": {
+        "glue": "glue.amazonaws.com",
+        "workflow": "states.amazonaws.com",
+        "validator": "lambda.amazonaws.com",
+        "controller": "lambda.amazonaws.com"
+      },
+      "requirement": "P3-M-L250-01"
+    },
+    {
+      "id": "S4-RESOURCE-terraform",
+      "path": [
+        "terraform"
+      ],
+      "equals": [
+        {
+          "required_version": "= 1.13.1",
+          "required_providers": [
+            {
+              "aws": {
+                "source": "hashicorp/aws",
+                "version": "= 6.11.0"
+              }
+            }
+          ],
+          "backend": [
+            {
+              "s3": {}
+            }
+          ]
+        }
+      ],
+      "requirement": "P3-M-L252-01"
+    },
+    {
+      "id": "S4-RESOURCE-provider",
+      "path": [
+        "provider"
+      ],
+      "equals": {
+        "aws": {
+          "region": "ap-southeast-2",
+          "allowed_account_ids": [
+            "857229544428"
+          ],
+          "default_tags": [
+            {
+              "tags": {
+                "Project": "LedgerGuard",
+                "ManagedBy": "Terraform",
+                "Part": "3"
+              }
+            }
+          ]
+        }
+      },
+      "requirement": "P3-M-L275-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_policy.workload",
+      "path": [
+        "resource",
+        "aws_s3_bucket_policy.workload"
+      ],
+      "equals": {
+        "bucket": "${aws_s3_bucket.workload.id}",
+        "policy": "${jsonencode({\"Version\": \"2012-10-17\", \"Statement\": [{\"Sid\": \"DenyInsecureTransport\", \"Effect\": \"Deny\", \"Principal\": \"*\", \"Action\": \"s3:*\", \"Resource\": [\"${aws_s3_bucket.workload.arn}\", \"${aws_s3_bucket.workload.arn}/*\"], \"Condition\": {\"Bool\": {\"aws:SecureTransport\": \"false\"}}}]})}"
+      },
+      "requirement": "P3-M-L269-02"
+    },
+    {
+      "id": "S4-RESOURCE-aws_s3_bucket_lifecycle_configuration.workload",
+      "path": [
+        "resource",
+        "aws_s3_bucket_lifecycle_configuration.workload"
+      ],
+      "equals": {
+        "bucket": "${aws_s3_bucket.workload.id}",
+        "depends_on": [
+          "${aws_s3_bucket_versioning.workload}"
+        ],
+        "rule": [
+          {
+            "id": "AbortIncompleteUploads",
+            "status": "Enabled",
+            "filter": [
+              {}
+            ],
+            "abort_incomplete_multipart_upload": [
+              {
+                "days_after_initiation": 1
+              }
+            ]
+          },
+          {
+            "id": "ExpireEphemeralRuns",
+            "status": "Enabled",
+            "filter": [
+              {
+                "prefix": "runs/"
+              }
+            ],
+            "expiration": [
+              {
+                "days": 7
+              }
+            ],
+            "noncurrent_version_expiration": [
+              {
+                "noncurrent_days": 7
+              }
+            ]
+          },
+          {
+            "id": "ExpireGlueTemporaryData",
+            "status": "Enabled",
+            "filter": [
+              {
+                "prefix": "temporary/glue/"
+              }
+            ],
+            "expiration": [
+              {
+                "days": 7
+              }
+            ],
+            "noncurrent_version_expiration": [
+              {
+                "noncurrent_days": 7
+              }
+            ]
+          },
+          {
+            "id": "ExpireQueryResults",
+            "status": "Enabled",
+            "filter": [
+              {
+                "prefix": "query-results/"
+              }
+            ],
+            "expiration": [
+              {
+                "days": 7
+              }
+            ],
+            "noncurrent_version_expiration": [
+              {
+                "noncurrent_days": 7
+              }
+            ]
+          }
+        ]
+      },
+      "requirement": "P3-M-L243-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role.runtime.assume_role_policy",
+      "path": [
+        "resource",
+        "aws_iam_role.runtime",
+        "assume_role_policy"
+      ],
+      "equals": "${jsonencode({\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Action\": \"sts:AssumeRole\", \"Principal\": {\"Service\": \"${each.value}\"}}]})}",
+      "requirement": "P3-M-L250-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_iam_role_policy.runtime.policy",
+      "path": [
+        "resource",
+        "aws_iam_role_policy.runtime",
+        "policy"
+      ],
+      "equals": "${jsonencode({\"Version\": \"2012-10-17\", \"Statement\": \"${concat(local.runtime_statements[each.key], length(local.role_log_keys[each.key]) > 0 ? [{'Sid': 'WriteOwnStructuredLogs', 'Effect': 'Allow', 'Action': ['logs:CreateLogStream', 'logs:PutLogEvents'], 'Resource': '${[for name in local.role_log_keys[each.key] : \"${aws_cloudwatch_log_group.platform[name].arn}:*\"]}'}] : [], contains([validator, controller], each.key) ? [{'Sid': 'LambdaTraceTelemetry', 'Effect': 'Allow', 'Action': ['xray:PutTraceSegments', 'xray:PutTelemetryRecords'], 'Resource': ['*'], 'Condition': {'StringEquals': {'aws:RequestedRegion': 'ap-southeast-2'}}}] : [])}\"})}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-aws_glue_catalog_table.candidate.storage_descriptor",
+      "path": [
+        "resource",
+        "aws_glue_catalog_table.candidate",
+        "storage_descriptor"
+      ],
+      "equals": [
+        {
+          "location": "s3://${local.bucket}/catalog-unselected/${each.key}/",
+          "input_format": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+          "output_format": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+          "ser_de_info": [
+            {
+              "serialization_library": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+              "parameters": {
+                "serialization.format": "1"
+              }
+            }
+          ],
+          "dynamic": [
+            {
+              "columns": {
+                "for_each": "${each.value}",
+                "content": [
+                  {
+                    "name": "${columns.value.name}",
+                    "type": "${columns.value.type}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-runtime_statements",
+      "path": [
+        "locals",
+        "runtime_statements"
+      ],
+      "equals": {
+        "glue": [
+          {
+            "Sid": "ReadExactDeploymentAndRunInputs",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/${var.stage5_release.script_key}",
+              "${local.bucket_arn}/${var.stage5_release.wheels_key}",
+              "${local.bucket_arn}/runs/*/inputs/*"
+            ]
+          },
+          {
+            "Sid": "WriteNonAuthoritativeCandidates",
+            "Effect": "Allow",
+            "Action": [
+              "s3:PutObject",
+              "s3:AbortMultipartUpload",
+              "s3:ListMultipartUploadParts"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/runs/*/attempts/*/candidates/*",
+              "${local.bucket_arn}/temporary/glue/*"
+            ]
+          },
+          {
+            "Sid": "ReadBackCandidates",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/runs/*/attempts/*/candidates/*",
+              "${local.bucket_arn}/temporary/glue/*"
+            ]
+          },
+          {
+            "Sid": "ListBoundedRunAndTemporaryPrefixes",
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket"
+            ],
+            "Resource": [
+              "${local.bucket_arn}"
+            ],
+            "Condition": {
+              "StringLike": {
+                "s3:prefix": [
+                  "runs/*/inputs/*",
+                  "runs/*/attempts/*/candidates/*",
+                  "temporary/glue/*"
+                ]
+              }
+            }
+          },
+          {
+            "Sid": "RemoveCommitterTemporaryObjectsOnly",
+            "Effect": "Allow",
+            "Action": [
+              "s3:DeleteObject"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/runs/*/attempts/*/candidates/*/_temporary/*",
+              "${local.bucket_arn}/temporary/glue/*"
+            ]
+          },
+          {
+            "Sid": "LocateWorkloadBucket",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetBucketLocation"
+            ],
+            "Resource": [
+              "${local.bucket_arn}"
+            ]
+          },
+          {
+            "Sid": "GlueObservability",
+            "Effect": "Allow",
+            "Action": [
+              "cloudwatch:PutMetricData"
+            ],
+            "Resource": [
+              "*"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "cloudwatch:namespace": "Glue"
+              }
+            }
+          }
+        ],
+        "validator": [
+          {
+            "Sid": "ReadRunAndPublicationEvidence",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/runs/*",
+              "${local.bucket_arn}/publications/*",
+              "${local.bucket_arn}/query-results/*"
+            ]
+          },
+          {
+            "Sid": "InventoryRunVersions",
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket",
+              "s3:ListBucketVersions"
+            ],
+            "Resource": [
+              "${local.bucket_arn}"
+            ],
+            "Condition": {
+              "StringLike": {
+                "s3:prefix": [
+                  "runs/*",
+                  "publications/*",
+                  "query-results/*"
+                ]
+              }
+            }
+          },
+          {
+            "Sid": "ReadAuthorityOnly",
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:GetItem",
+              "dynamodb:BatchGetItem",
+              "dynamodb:Query"
+            ],
+            "Resource": [
+              "${local.control_arn}"
+            ]
+          },
+          {
+            "Sid": "InspectBoundedQueries",
+            "Effect": "Allow",
+            "Action": [
+              "athena:GetQueryExecution",
+              "athena:GetQueryResults"
+            ],
+            "Resource": [
+              "${local.workgroup_arn}"
+            ]
+          },
+          {
+            "Sid": "InspectActualGlueRun",
+            "Effect": "Allow",
+            "Action": [
+              "glue:GetJobRun"
+            ],
+            "Resource": [
+              "${local.glue_arn}"
+            ]
+          }
+        ],
+        "controller": [
+          {
+            "Sid": "ReadValidatedRunAndPublicationEvidence",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/runs/*",
+              "${local.bucket_arn}/publications/*"
+            ]
+          },
+          {
+            "Sid": "PrepareImmutableBodiesAndFailureEvidence",
+            "Effect": "Allow",
+            "Action": [
+              "s3:PutObject"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/publications/*",
+              "${local.bucket_arn}/runs/*/attempts/*/evidence/*"
+            ]
+          },
+          {
+            "Sid": "ConditionalControlMetadata",
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:GetItem",
+              "dynamodb:BatchGetItem",
+              "dynamodb:Query",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:ConditionCheckItem"
+            ],
+            "Resource": [
+              "${local.control_arn}"
+            ]
+          }
+        ],
+        "workflow": [
+          {
+            "Sid": "BoundedGlueIntegration",
+            "Effect": "Allow",
+            "Action": [
+              "glue:StartJobRun",
+              "glue:GetJobRun",
+              "glue:GetJobRuns",
+              "glue:BatchStopJobRun"
+            ],
+            "Resource": [
+              "${local.glue_arn}"
+            ]
+          },
+          {
+            "Sid": "BoundedAthenaIntegration",
+            "Effect": "Allow",
+            "Action": [
+              "athena:StartQueryExecution",
+              "athena:GetQueryExecution",
+              "athena:GetQueryResults",
+              "athena:StopQueryExecution"
+            ],
+            "Resource": [
+              "${local.workgroup_arn}"
+            ]
+          },
+          {
+            "Sid": "CatalogReadOnly",
+            "Effect": "Allow",
+            "Action": [
+              "glue:GetDatabase",
+              "glue:GetTable",
+              "glue:GetPartitions"
+            ],
+            "Resource": "${local.catalog_arns}"
+          },
+          {
+            "Sid": "QueryReadCandidates",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/runs/*/attempts/*/candidates/*",
+              "${local.bucket_arn}/query-results/*"
+            ]
+          },
+          {
+            "Sid": "QueryWriteResults",
+            "Effect": "Allow",
+            "Action": [
+              "s3:PutObject",
+              "s3:AbortMultipartUpload",
+              "s3:ListMultipartUploadParts"
+            ],
+            "Resource": [
+              "${local.bucket_arn}/query-results/*"
+            ]
+          },
+          {
+            "Sid": "QueryListPrefixes",
+            "Effect": "Allow",
+            "Action": [
+              "s3:ListBucket"
+            ],
+            "Resource": [
+              "${local.bucket_arn}"
+            ],
+            "Condition": {
+              "StringLike": {
+                "s3:prefix": [
+                  "runs/*/attempts/*/candidates/*",
+                  "query-results/*"
+                ]
+              }
+            }
+          },
+          {
+            "Sid": "QueryBucketLocation",
+            "Effect": "Allow",
+            "Action": [
+              "s3:GetBucketLocation"
+            ],
+            "Resource": [
+              "${local.bucket_arn}"
+            ]
+          },
+          {
+            "Sid": "InvokeExactControlFunctions",
+            "Effect": "Allow",
+            "Action": [
+              "lambda:InvokeFunction"
+            ],
+            "Resource": [
+              "${local.function_arns[\"validator\"]}",
+              "${local.function_arns[\"controller\"]}"
+            ]
+          },
+          {
+            "Sid": "StepFunctionsLogDelivery",
+            "Effect": "Allow",
+            "Action": [
+              "logs:CreateLogDelivery",
+              "logs:GetLogDelivery",
+              "logs:UpdateLogDelivery",
+              "logs:DeleteLogDelivery",
+              "logs:ListLogDeliveries",
+              "logs:PutResourcePolicy",
+              "logs:DescribeResourcePolicies",
+              "logs:DescribeLogGroups"
+            ],
+            "Resource": [
+              "*"
+            ]
+          }
+        ]
+      },
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-role_log_keys",
+      "path": [
+        "locals",
+        "role_log_keys"
+      ],
+      "equals": {
+        "glue": [
+          "glue_error",
+          "glue_output"
+        ],
+        "validator": [
+          "validator"
+        ],
+        "controller": [
+          "controller"
+        ],
+        "workflow": []
+      },
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-log_names",
+      "path": [
+        "locals",
+        "log_names"
+      ],
+      "equals": {
+        "glue_error": "/${local.name}/glue/error",
+        "glue_output": "/${local.name}/glue/output",
+        "workflow": "/aws/vendedlogs/states/${local.name}",
+        "validator": "/aws/lambda/${local.name}-validator",
+        "controller": "/aws/lambda/${local.name}-controller"
+      },
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-catalog_arns",
+      "path": [
+        "locals",
+        "catalog_arns"
+      ],
+      "equals": [
+        "arn:aws:glue:ap-southeast-2:857229544428:catalog",
+        "arn:aws:glue:ap-southeast-2:857229544428:database/${replace(\"${local.name}-reconciliation\", \"-\", \"_\")}",
+        "arn:aws:glue:ap-southeast-2:857229544428:table/${replace(\"${local.name}-reconciliation\", \"-\", \"_\")}/transactions",
+        "arn:aws:glue:ap-southeast-2:857229544428:table/${replace(\"${local.name}-reconciliation\", \"-\", \"_\")}/settlements",
+        "arn:aws:glue:ap-southeast-2:857229544428:table/${replace(\"${local.name}-reconciliation\", \"-\", \"_\")}/bank_allocations"
+      ],
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-function_arns",
+      "path": [
+        "locals",
+        "function_arns"
+      ],
+      "equals": "${{for role in [validator, controller] : role => \"arn:aws:lambda:ap-southeast-2:857229544428:function:${local.name}-${role}\"}}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-glue_arn",
+      "path": [
+        "locals",
+        "glue_arn"
+      ],
+      "equals": "arn:aws:glue:ap-southeast-2:857229544428:job/${local.name}-reconciliation",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-control_arn",
+      "path": [
+        "locals",
+        "control_arn"
+      ],
+      "equals": "arn:aws:dynamodb:ap-southeast-2:857229544428:table/${local.name}-control",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-workgroup_arn",
+      "path": [
+        "locals",
+        "workgroup_arn"
+      ],
+      "equals": "arn:aws:athena:ap-southeast-2:857229544428:workgroup/${local.name}-checks",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-bucket_arn",
+      "path": [
+        "locals",
+        "bucket_arn"
+      ],
+      "equals": "arn:aws:s3:::${local.bucket}",
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-catalog",
+      "path": [
+        "locals",
+        "catalog"
+      ],
+      "equals": "${jsondecode(file(\"${path.module}/../../spec/part3-stage4-catalog-v1.json\"))}",
+      "requirement": "P3-M-L244-02"
+    },
+    {
+      "id": "S4-RESOURCE-input-operation_id",
+      "path": [
+        "variable",
+        "operation_id"
+      ],
+      "equals": {
+        "type": "string",
+        "validation": [
+          {
+            "condition": "${can(regex(\"^[a-z0-9][a-z0-9-]{7,31}$\", var.operation_id))}",
+            "error_message": "Use an immutable 8\u201332 character operation identity."
+          }
+        ]
+      },
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-input-expires_at",
+      "path": [
+        "variable",
+        "expires_at"
+      ],
+      "equals": {
+        "type": "string",
+        "validation": [
+          {
+            "condition": "${can(formatdate(\"YYYY-MM-DD'T'hh:mm:ssZ\", var.expires_at))}",
+            "error_message": "An explicit RFC3339 expiry is required."
+          }
+        ]
+      },
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-input-permissions_boundary_arns",
+      "path": [
+        "variable",
+        "permissions_boundary_arns"
+      ],
+      "equals": {
+        "type": "${map(string)}",
+        "validation": [
+          {
+            "condition": "${(toset(keys(var.permissions_boundary_arns)) == toset([glue, workflow, validator, controller]) && alltrue([for role , arn in var.permissions_boundary_arns : arn == \"arn:aws:iam::857229544428:policy/LedgerGuardPart3-${role}-Boundary-v1\"]))}",
+            "error_message": "Each runtime identity requires its exact administrator-owned boundary."
+          }
+        ]
+      },
+      "requirement": "P3-M-L268-01"
+    },
+    {
+      "id": "S4-RESOURCE-input-stage5_release",
+      "path": [
+        "variable",
+        "stage5_release"
+      ],
+      "equals": {
+        "type": "${object({\"definition\": \"string\", \"definition_sha256\": \"string\", \"validator_zip\": \"string\", \"validator_sha256_base64\": \"string\", \"controller_zip\": \"string\", \"controller_sha256_base64\": \"string\", \"script_key\": \"string\", \"wheels_key\": \"string\"})}",
+        "validation": [
+          {
+            "condition": "${(sha256(var.stage5_release.definition) == var.stage5_release.definition_sha256 && try(jsondecode(var.stage5_release.definition).TimeoutSeconds, 0) == 1800 && can(jsondecode(var.stage5_release.definition).States[jsondecode(var.stage5_release.definition).StartAt]) && filebase64sha256(var.stage5_release.validator_zip) == var.stage5_release.validator_sha256_base64 && filebase64sha256(var.stage5_release.controller_zip) == var.stage5_release.controller_sha256_base64 && can(regex(\"^deployment/[0-9a-f]{64}/ledgerguard_stage3_job\\\\.py$\", var.stage5_release.script_key)) && can(regex(\"^deployment/[0-9a-f]{64}/ledgerguard\\\\.gluewheels\\\\.zip$\", var.stage5_release.wheels_key)))}",
+            "error_message": "Real package bytes, bounded workflow and deployment objects must have exact identities."
+          }
+        ]
+      },
+      "requirement": "P3-M-L268-01"
+    }
+  ]
+}

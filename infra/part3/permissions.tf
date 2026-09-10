@@ -1,9 +1,17 @@
 locals {
   bucket_arn = "arn:aws:s3:::${local.bucket}"
+  # Predictable names keep IAM policy creation ahead of compute creation without
+  # introducing a policy -> function/job -> policy dependency cycle.
+  control_arn   = "arn:aws:dynamodb:ap-southeast-2:857229544428:table/${local.name}-control"
+  glue_arn      = "arn:aws:glue:ap-southeast-2:857229544428:job/${local.name}-reconciliation"
+  workgroup_arn = "arn:aws:athena:ap-southeast-2:857229544428:workgroup/${local.name}-checks"
+  function_arns = { for role in ["validator", "controller"] : role => "arn:aws:lambda:ap-southeast-2:857229544428:function:${local.name}-${role}" }
   catalog_arns = [
     "arn:aws:glue:ap-southeast-2:857229544428:catalog",
-    "arn:aws:glue:ap-southeast-2:857229544428:database/${aws_glue_catalog_database.reconciliation.name}",
-    "arn:aws:glue:ap-southeast-2:857229544428:table/${aws_glue_catalog_database.reconciliation.name}/*"
+    "arn:aws:glue:ap-southeast-2:857229544428:database/${replace("${local.name}-reconciliation", "-", "_")}",
+    "arn:aws:glue:ap-southeast-2:857229544428:table/${replace("${local.name}-reconciliation", "-", "_")}/transactions",
+    "arn:aws:glue:ap-southeast-2:857229544428:table/${replace("${local.name}-reconciliation", "-", "_")}/settlements",
+    "arn:aws:glue:ap-southeast-2:857229544428:table/${replace("${local.name}-reconciliation", "-", "_")}/bank_allocations"
   ]
   runtime_statements = {
     glue = [
@@ -32,6 +40,18 @@ locals {
         Condition = { StringLike = { "s3:prefix" = ["runs/*/inputs/*", "runs/*/attempts/*/candidates/*", "temporary/glue/*"] } }
       },
       {
+        Sid    = "RemoveCommitterTemporaryObjectsOnly", Effect = "Allow"
+        Action = ["s3:DeleteObject"]
+        Resource = [
+          "${local.bucket_arn}/runs/*/attempts/*/candidates/*/_temporary/*",
+          "${local.bucket_arn}/temporary/glue/*"
+        ]
+      },
+      {
+        Sid    = "LocateWorkloadBucket", Effect = "Allow"
+        Action = ["s3:GetBucketLocation"], Resource = [local.bucket_arn]
+      },
+      {
         Sid       = "GlueObservability", Effect = "Allow"
         Action    = ["cloudwatch:PutMetricData"], Resource = ["*"]
         Condition = { StringEquals = { "cloudwatch:namespace" = "Glue" } }
@@ -51,17 +71,17 @@ locals {
       {
         Sid      = "ReadAuthorityOnly", Effect = "Allow"
         Action   = ["dynamodb:GetItem", "dynamodb:BatchGetItem", "dynamodb:Query"]
-        Resource = [aws_dynamodb_table.control.arn]
+        Resource = [local.control_arn]
       },
       {
         Sid      = "InspectBoundedQueries", Effect = "Allow"
         Action   = ["athena:GetQueryExecution", "athena:GetQueryResults"]
-        Resource = [aws_athena_workgroup.reconciliation.arn]
+        Resource = [local.workgroup_arn]
       },
       {
         Sid      = "InspectActualGlueRun", Effect = "Allow"
         Action   = ["glue:GetJobRun"]
-        Resource = [aws_glue_job.reconciliation.arn]
+        Resource = [local.glue_arn]
       }
     ]
     controller = [
@@ -78,19 +98,19 @@ locals {
       {
         Sid      = "ConditionalControlMetadata", Effect = "Allow"
         Action   = ["dynamodb:GetItem", "dynamodb:BatchGetItem", "dynamodb:Query", "dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:ConditionCheckItem"]
-        Resource = [aws_dynamodb_table.control.arn]
+        Resource = [local.control_arn]
       }
     ]
     workflow = [
       {
         Sid      = "BoundedGlueIntegration", Effect = "Allow"
         Action   = ["glue:StartJobRun", "glue:GetJobRun", "glue:GetJobRuns", "glue:BatchStopJobRun"]
-        Resource = [aws_glue_job.reconciliation.arn]
+        Resource = [local.glue_arn]
       },
       {
         Sid      = "BoundedAthenaIntegration", Effect = "Allow"
         Action   = ["athena:StartQueryExecution", "athena:GetQueryExecution", "athena:GetQueryResults", "athena:StopQueryExecution"]
-        Resource = [aws_athena_workgroup.reconciliation.arn]
+        Resource = [local.workgroup_arn]
       },
       {
         Sid      = "CatalogReadOnly", Effect = "Allow"
@@ -119,7 +139,7 @@ locals {
       {
         Sid      = "InvokeExactControlFunctions", Effect = "Allow"
         Action   = ["lambda:InvokeFunction"]
-        Resource = [aws_lambda_function.validator.arn, aws_lambda_function.controller.arn]
+        Resource = [local.function_arns["validator"], local.function_arns["controller"]]
       },
       {
         Sid      = "StepFunctionsLogDelivery", Effect = "Allow"
@@ -148,6 +168,10 @@ resource "aws_iam_role_policy" "runtime" {
       Sid      = "WriteOwnStructuredLogs", Effect = "Allow"
       Action   = ["logs:CreateLogStream", "logs:PutLogEvents"]
       Resource = [for name in local.role_log_keys[each.key] : "${aws_cloudwatch_log_group.platform[name].arn}:*"]
+      }] : [], contains(["validator", "controller"], each.key) ? [{
+      Sid       = "LambdaTraceTelemetry", Effect = "Allow"
+      Action    = ["xray:PutTraceSegments", "xray:PutTelemetryRecords"], Resource = ["*"]
+      Condition = { StringEquals = { "aws:RequestedRegion" = "ap-southeast-2" } }
     }] : [])
   })
 }

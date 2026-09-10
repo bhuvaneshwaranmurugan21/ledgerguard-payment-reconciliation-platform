@@ -15,6 +15,10 @@ concurrency:
 
 jobs:
   static:
+    strategy:
+      fail-fast: false
+      matrix:
+        qualification: [1, 2]
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -37,6 +41,7 @@ jobs:
           set -euo pipefail
           python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
           python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
+          python -m pip install --require-hashes -r requirements/part3-stage4-parser.lock
       - name: Install verified Terraform and TFLint
         shell: bash
         run: |
@@ -63,6 +68,40 @@ jobs:
               (root / name).chmod(0o755)
           PY
           echo "$tool_dir" >> "$GITHUB_PATH"
+      - name: Reproduce the immutable accepted runtime from frozen source
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=src python -m tools.validate_part3_stage4_handoff
+          python tools/build_part3_stage3_runtime.py --repository . --environment "$pythonLocation" --output "$RUNNER_TEMP/stage4-accepted-runtime" --source-commit 3370898d83539fe41594c7cb7ad15e920dcb5674 --source-tree 32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a --source-date-epoch 1789035768
+          python - "$RUNNER_TEMP/stage4-accepted-runtime/ledgerguard-stage3-glue-runtime.zip" <<'PYTHON'
+          from hashlib import sha256
+          from pathlib import Path
+          import sys
+          if sha256(Path(sys.argv[1]).read_bytes()).hexdigest() != "12a263615abeeea33a6202ecc49d9fe27606fe1c2b37650f25ba9adebcb7b7f7":
+              raise SystemExit("accepted Stage 3 runtime bytes did not reproduce")
+          PYTHON
+          echo "STAGE4_ACCEPTED_RUNTIME=$RUNNER_TEMP/stage4-accepted-runtime/ledgerguard-stage3-glue-runtime.zip" >> "$GITHUB_ENV"
+      - name: Install the pinned security scanner
+        shell: bash
+        run: |
+          set -euo pipefail
+          tool_dir="$RUNNER_TEMP/ledgerguard-stage4-tools"
+          curl --fail --location --retry 3 https://github.com/aquasecurity/trivy/releases/download/v0.74.0/trivy_0.74.0_Linux-64bit.tar.gz --output "$tool_dir/trivy.tar.gz"
+          python - "$tool_dir" <<'PYTHON'
+          from hashlib import sha256
+          from pathlib import Path
+          import sys, tarfile
+          root = Path(sys.argv[1])
+          if sha256((root / "trivy.tar.gz").read_bytes()).hexdigest() != "2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a":
+              raise SystemExit("Trivy archive identity differs")
+          with tarfile.open(root / "trivy.tar.gz") as archive:
+              member = archive.extractfile("trivy")
+              if member is None:
+                  raise SystemExit("Trivy executable missing")
+              (root / "trivy").write_bytes(member.read())
+          (root / "trivy").chmod(0o755)
+          PYTHON
       - name: Run required real static checks
         env:
           STAGE4_EVIDENCE: ${{ runner.temp }}/part3-stage4-static
@@ -71,7 +110,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: part3-stage4-static-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_attempt }}
+          name: part3-stage4-static-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_attempt }}-${{ matrix.qualification }}
           path: ${{ runner.temp }}/part3-stage4-static
           if-no-files-found: error
           retention-days: 14

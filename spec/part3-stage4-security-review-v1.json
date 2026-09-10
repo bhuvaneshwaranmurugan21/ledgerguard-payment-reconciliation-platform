@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "scanner": {
+    "name": "Trivy",
+    "version": "0.74.0",
+    "archive_sha256": "2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a",
+    "rules": "PINNED_BINARY_EMBEDDED_CHECKS",
+    "ignore_file": false
+  },
+  "scope": "PART3_SYNTHETIC_ZERO_WORKLOAD_CONTROL_PLANE_ONLY",
+  "master_requirements_sha256": "ffad2f173f413eff53000c2fdd7e3840e395e5b9775f4c32bd1df07c776d2cd9",
+  "resource_controls_sha256": "3cfc0a00fecdcd27eda75bc8794b6d666bff52d3934440468300a612731b6f70",
+  "source_hashes": {
+    "infra/part3/catalog.tf": "58c233e8df5867f360ca9f1ee83291e9e1160e8a78af9f4f49bfd9e19ebe4908",
+    "infra/part3/compute.tf": "7f6f87adebe25e51bc87420a70376940bf063595efbc4943a2759e6a923cd61b",
+    "infra/part3/monitoring.tf": "a35b1f94b0d7ac39efb3ec2c8258d28ab32ff5f1b5e49cb43a0012c89c389d02",
+    "infra/part3/permissions.tf": "d250304b4d07fa8f2737edbd5370a18643e9ae9d60471486025c322381fb5e14",
+    "infra/part3/storage.tf": "eed1ce39bdecc765e19b9f2000169eae45e14b67013f1cf5e37f25460d1e0f1c",
+    "infra/part3/variables.tf": "d1bb24925edd434abc6e81bf55bdb87c762039e9c26f4e8d0db6620b8c0b157c",
+    "infra/part3/versions.tf": "5a2014d9a91c6865e66ce8cded6fd980f236050a8c5ab1fa2dc713a95bab08a8"
+  },
+  "resolved_findings": [
+    {
+      "id": "AWS-0066",
+      "resources": [
+        "aws_lambda_function.validator",
+        "aws_lambda_function.controller"
+      ],
+      "remediation": "Active tracing enabled; two exact X-Ray telemetry actions restricted to the target region."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "AWS-0017",
+      "target": "compute.tf",
+      "resource": "aws_cloudwatch_log_group.platform",
+      "disposition": "INAPPLICABLE_CUSTOMER_KEY_REQUIREMENT",
+      "reason": "CloudWatch Logs encrypts all log data at rest by default. The finding tests a customer-managed key association, not whether the service encrypts data. This zero-workload synthetic lab requires encryption and seven-day retention, not customer key custody. No raw financial payload or managed execution is admitted. A new customer key would remain pending deletion for at least seven days, conflicting with the ephemeral inventory. This decision does not apply to the existing backend key or to future production activation.",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html"
+      ]
+    },
+    {
+      "id": "AWS-0025",
+      "target": "storage.tf",
+      "resource": "aws_dynamodb_table.control",
+      "disposition": "INAPPLICABLE_CUSTOMER_KEY_REQUIREMENT",
+      "reason": "The control table explicitly enables server-side encryption and uses the AWS-managed DynamoDB key. Customer-managed key custody is not an accepted Part 3 requirement. The canary requires zero business items and the table is ephemeral; persistent custom-key resources are outside this graph. Encryption may not be disabled, and this rationale cannot authorize storing production data.",
+      "sources": [
+        "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EncryptionAtRest.html"
+      ]
+    },
+    {
+      "id": "AWS-0132",
+      "target": "storage.tf",
+      "resource": "aws_s3_bucket_server_side_encryption_configuration.workload",
+      "disposition": "INAPPLICABLE_CUSTOMER_KEY_REQUIREMENT",
+      "reason": "The workload bucket explicitly uses SSE-S3 AES256 encryption, is private, owner-enforced, versioned and TLS-only. The master requirement is a versioned encrypted private workload bucket with synthetic data only. Customer-managed key custody is not required by that scope. The qualified shared Terraform backend retains its separate KMS controls and is not covered by this decision.",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html"
+      ]
+    },
+    {
+      "id": "AWS-0089",
+      "target": "storage.tf",
+      "resource": "aws_s3_bucket.workload",
+      "disposition": "INAPPLICABLE_DURABLE_ACCESS_LOG_REQUIREMENT",
+      "reason": "This finding recommends a durable S3 request access log. Part 3 admits an ephemeral control-plane-only canary with public code/configuration artifacts, zero business objects and no workload starts. Its required audit is the saved-plan/API journal, version inventory and independently paginated no-residue proof; no claim of complete S3 access auditing is made. Server access log delivery is asynchronous and best-effort, so it cannot supply those synchronous acceptance proofs. No durable data-access audit requirement exists in the accepted synthetic-only master scope. Adding an access-log sink solely for this recommendation would introduce a new retention/cleanup and authorization scope. Reassess before any production/sensitive-data activation or change to the bounded canary.",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html"
+      ]
+    }
+  ],
+  "invalidation": [
+    "Any listed Terraform or resource contract hash changes",
+    "Any unknown scanner failure or duplicate finding",
+    "Any expansion to workloads, real business data or production use",
+    "Missing raw scan or changed scanner/rules provenance"
+  ],
+  "aws_controls_verified": false,
+  "production_security_claim": false
+}

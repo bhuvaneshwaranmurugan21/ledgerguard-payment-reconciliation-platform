@@ -42,3 +42,58 @@ The user supplied AWS provider 6.11.0 and TFLint 0.59.1. The provider archive ma
 The runtime then rejected the local sockets needed by Go plugins (`operation not permitted`), affecting TFLint and Terraform's provider schema process. No socket restriction or checksum validation was bypassed. A draft PR with a read-only static qualification workflow is the execution-location adaptation: real provider initialization/schema validation and TFLint will run on GitHub's Ubuntu runner with contents-read permission only, no OIDC grant, no AWS credentials and no plan/apply/destroy. This is validation work within the authorized combined execution, not admission of Stage 4 or a request to merge. Full remaining Stage 4 and rehearsal gates still apply.
 
 The workflow pins existing reviewed Actions, verifies Terraform/TFLint archive digests, uses locked Python dependencies and the provider lock, checks exact source identity, and retains failed commands as failed. Source security and full Stage 4 acceptance remain separately pending even if this static subset passes.
+
+## Resumed controls implementation, 2026-09-10
+
+This successor remains a draft. The prior toolchain head `150831fec6f9df6d1e945255a62e8a8013dcdae8`
+has successful CI and tool acquisition. Those results do not validate these new source bytes.
+The updated static workflow requests two independent clean runner jobs for this successor.
+
+Completed local work:
+
+- Parse actual HCL and check 142 registered properties. Expand the finite maps and reconcile all
+  33 addresses; detect count changes, renamed/extra resources, unknown expressions and side channels.
+- Correct resource dependency cycles by deriving exact owned ARNs before rendering IAM policies;
+  make Glue and Lambda wait for their policies/log groups. Add exact committer temporary-object
+  cleanup permission without granting deletion of final candidate objects.
+- Fix the Lambda tracing findings with Active tracing and region-constrained X-Ray telemetry.
+- Derive all three catalog column sets from actual accepted-runtime Parquet readback (16 transaction,
+  4 settlement and 5 allocation rows). These are local Spark observations, not Athena execution.
+- Materialize the real accepted Stage 3 script and seven wheels into a deterministic `.gluewheels.zip`.
+  Offline `pip --no-index --require-hashes` installation succeeds. With the separately installed
+  pinned local Spark 3.5.6/py4j base, the installed job imports and schema/count SQL checks pass.
+  This does not claim AWS Glue execution. Original wheel/script/SBOM identities remain unchanged.
+- Reproduce the accepted archive SHA-256
+  `12a263615abeeea33a6202ecc49d9fe27606fe1c2b37650f25ba9adebcb7b7f7`.
+  An initial rebuild from the local uv-installed environment differed in dependency `INSTALLER`
+  metadata. Rebuilding from the genuinely pip-installed clean transport environment reproduces
+  the accepted bytes; neither metadata nor the accepted digest was edited to force equality.
+- Implement exact-decimal cumulative gross budget admission with freshness, attribution, separate
+  exposure/operation/rescue bounds, strict USD 10 ceiling and no credit netting. Test vectors are
+  not fresh AWS billing observations; the historical USD 0.7918 observation is not current admission.
+- Render separate role policies/boundaries and administrator deployment/read/rescue documents.
+  Role creation requires its exact administrator boundary; PassRole targets exact services/roles.
+  Self-remediation and normal-identity workload starts are absent; rescue is a separate delta.
+  The backend key ARN is mandatory. No deployable administrator packet has been generated using
+  a fabricated or wildcard key. Role-specific boundaries must be re-rendered and reviewed when
+  Stage 5 introduces its real successor adapter/release; old code hashes do not authorize new code.
+- Preserve the original 99 requirement IDs and add a 35-row Stage 4 mapping plus 13 explicit
+  plan obligations. No source-only assertion upgrades a requirement to `AWS_VERIFIED`.
+
+Local verification: 269 Stage 4 tests passed in the combined run; the subsequent additive
+traceability test also passed. The seven new package modules cover 369 statements and 178 branches
+at 100%. This denominator does not claim full runner/closure-tool coverage. All 15 registered
+semantic faults were killed by real isolated tests with no collection errors or skips. Ruff and
+strict mypy pass for the new source. Full source-bound CI results remain external pending facts.
+
+The pinned Trivy 0.74.0 embedded-rule scan retains 65 successes and four raw failures after tracing
+remediation. `spec/part3-stage4-security-review-v1.json` explains their applicability to the
+synthetic, zero-workload, ephemeral Part 3 boundary using source hashes and AWS documentation.
+The raw scanner is not reported as all-green. Any new finding, changed source or expanded use
+invalidates that review. No rule, severity or scanner failure has been globally ignored.
+
+Remaining acceptance work includes independently inspecting both clean native runner artifacts,
+completing the full critical runner/claim coverage and mutation scope, binding the exact backend
+KMS ARN and administrator review/rollback packet, closing the full rehearsal queue, and satisfying
+Stage 4 publication/main gates. PR #27 must remain draft. Stage 5 code is not admitted until Stage 4
+is accepted; Stage 6 plan-only, Stage 7 canary/cleanup and Stage 8 promotion/closure remain pending.

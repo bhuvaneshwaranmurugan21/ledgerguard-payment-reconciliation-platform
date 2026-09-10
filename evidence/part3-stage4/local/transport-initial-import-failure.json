@@ -1,0 +1,38 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/tmp/ledgerguard-stage3-venv/bin/python",
+        "-m",
+        "venv",
+        "/workspace/scratch/8bad16c7b3bb/stage4-completion-inputs/offline-transport-install/venv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/8bad16c7b3bb/stage4-completion-inputs/offline-transport-install/venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--require-hashes",
+        "--find-links",
+        "/workspace/scratch/8bad16c7b3bb/stage4-completion-inputs/offline-transport-install",
+        "-r",
+        "/workspace/scratch/8bad16c7b3bb/stage4-completion-inputs/runtime-transport/runtime.lock"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/8bad16c7b3bb/stage4-completion-inputs/offline-transport-install/venv/bin/python",
+        "-I",
+        "-c",
+        "import ledgerguard.reconciliation,ledgerguard.stage3.runtime,jsonschema,attrs,referencing,rpds; print(ledgerguard.stage3.runtime.__file__)"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "aws_execution": false
+}

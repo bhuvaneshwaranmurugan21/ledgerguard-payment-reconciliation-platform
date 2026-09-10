@@ -14,11 +14,14 @@ variable "expires_at" {
   }
 }
 
-variable "permissions_boundary_arn" {
-  type = string
+variable "permissions_boundary_arns" {
+  type = map(string)
   validation {
-    condition     = can(regex("^arn:aws:iam::857229544428:policy/ledgerguard/", var.permissions_boundary_arn))
-    error_message = "Use the reviewed administrator-owned LedgerGuard boundary."
+    condition = (
+      toset(keys(var.permissions_boundary_arns)) == toset(["glue", "workflow", "validator", "controller"]) &&
+      alltrue([for role, arn in var.permissions_boundary_arns : arn == "arn:aws:iam::857229544428:policy/LedgerGuardPart3-${role}-Boundary-v1"])
+    )
+    error_message = "Each runtime identity requires its exact administrator-owned boundary."
   }
 }
 
@@ -38,22 +41,14 @@ variable "stage5_release" {
   validation {
     condition = (
       sha256(var.stage5_release.definition) == var.stage5_release.definition_sha256 &&
-      can(regex("^deployment/[0-9a-f]{64}/ledgerguard_stage3_job.py$", var.stage5_release.script_key)) &&
-      can(regex("^deployment/[0-9a-f]{64}/ledgerguard.gluewheels.zip$", var.stage5_release.wheels_key))
+      try(jsondecode(var.stage5_release.definition).TimeoutSeconds, 0) == 1800 &&
+      can(jsondecode(var.stage5_release.definition).States[jsondecode(var.stage5_release.definition).StartAt]) &&
+      filebase64sha256(var.stage5_release.validator_zip) == var.stage5_release.validator_sha256_base64 &&
+      filebase64sha256(var.stage5_release.controller_zip) == var.stage5_release.controller_sha256_base64 &&
+      can(regex("^deployment/[0-9a-f]{64}/ledgerguard_stage3_job\\.py$", var.stage5_release.script_key)) &&
+      can(regex("^deployment/[0-9a-f]{64}/ledgerguard\\.gluewheels\\.zip$", var.stage5_release.wheels_key))
     )
-    error_message = "Definition and deployment objects must have exact content identities."
-  }
-}
-
-variable "catalog_columns" {
-  description = "Qualified physical Parquet columns, checked against the installed runtime by Stage 5."
-  type        = map(list(object({ name = string, type = string })))
-  validation {
-    condition = (
-      toset(keys(var.catalog_columns)) == toset(["transactions", "settlements", "bank_allocations"]) &&
-      alltrue([for columns in values(var.catalog_columns) : length(columns) > 0])
-    )
-    error_message = "All three candidate schemas are required; no inferred or empty table."
+    error_message = "Real package bytes, bounded workflow and deployment objects must have exact identities."
   }
 }
 

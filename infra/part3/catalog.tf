@@ -1,10 +1,14 @@
+locals {
+  catalog = jsondecode(file("${path.module}/../../spec/part3-stage4-catalog-v1.json"))
+}
+
 resource "aws_glue_catalog_database" "reconciliation" {
   name       = replace("${local.name}-reconciliation", "-", "_")
   catalog_id = "857229544428"
 }
 
 resource "aws_glue_catalog_table" "candidate" {
-  for_each      = var.catalog_columns
+  for_each      = local.catalog.tables
   name          = each.key
   database_name = aws_glue_catalog_database.reconciliation.name
   catalog_id    = "857229544428"

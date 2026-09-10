@@ -9,7 +9,7 @@ resource "aws_iam_role" "runtime" {
   for_each             = local.services
   name                 = "${local.name}-${each.key}"
   path                 = "/ledgerguard/"
-  permissions_boundary = var.permissions_boundary_arn
+  permissions_boundary = var.permissions_boundary_arns[each.key]
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -22,6 +22,7 @@ resource "aws_iam_role" "runtime" {
 }
 
 resource "aws_glue_job" "reconciliation" {
+  depends_on        = [aws_iam_role_policy.runtime, aws_cloudwatch_log_group.platform]
   name              = "${local.name}-reconciliation"
   role_arn          = aws_iam_role.runtime["glue"].arn
   glue_version      = "5.1"
@@ -37,13 +38,14 @@ resource "aws_glue_job" "reconciliation" {
     script_location = "s3://${local.bucket}/${var.stage5_release.script_key}"
   }
   default_arguments = {
-    "--additional-python-modules"       = "s3://${local.bucket}/${var.stage5_release.wheels_key}"
-    "--python-modules-installer-option" = "--no-index"
-    "--enable-observability-metrics"    = "true"
-    "--enable-metrics"                  = "true"
-    "--custom-logGroup-prefix"          = "/${local.name}/glue"
-    "--job-bookmark-option"             = "job-bookmark-disable"
-    "--TempDir"                         = "s3://${local.bucket}/temporary/glue/"
+    "--additional-python-modules"             = "s3://${local.bucket}/${var.stage5_release.wheels_key}"
+    "--python-modules-installer-option"       = "--no-index"
+    "--enable-observability-metrics"          = "true"
+    "--enable-metrics"                        = "true"
+    "--enable-s3-parquet-optimized-committer" = "true"
+    "--custom-logGroup-prefix"                = "/${local.name}/glue"
+    "--job-bookmark-option"                   = "job-bookmark-disable"
+    "--TempDir"                               = "s3://${local.bucket}/temporary/glue/"
   }
   tags = local.tags
 }
@@ -58,13 +60,14 @@ resource "aws_lambda_function" "validator" {
   timeout                        = 60
   memory_size                    = 512
   reserved_concurrent_executions = 1
+  tracing_config { mode = "Active" }
   environment {
     variables = {
       WORKLOAD_BUCKET = local.bucket
       CONTROL_TABLE   = aws_dynamodb_table.control.name
     }
   }
-  depends_on = [aws_cloudwatch_log_group.platform]
+  depends_on = [aws_cloudwatch_log_group.platform, aws_iam_role_policy.runtime]
   tags       = local.tags
 }
 
@@ -78,13 +81,14 @@ resource "aws_lambda_function" "controller" {
   timeout                        = 60
   memory_size                    = 512
   reserved_concurrent_executions = 1
+  tracing_config { mode = "Active" }
   environment {
     variables = {
       WORKLOAD_BUCKET = local.bucket
       CONTROL_TABLE   = aws_dynamodb_table.control.name
     }
   }
-  depends_on = [aws_cloudwatch_log_group.platform]
+  depends_on = [aws_cloudwatch_log_group.platform, aws_iam_role_policy.runtime]
   tags       = local.tags
 }
 

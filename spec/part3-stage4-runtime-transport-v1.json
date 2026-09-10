@@ -1,0 +1,99 @@
+{
+  "accepted_runtime": {
+    "runtime_bundle_sha256": "12a263615abeeea33a6202ecc49d9fe27606fe1c2b37650f25ba9adebcb7b7f7",
+    "runtime_wheel_sha256": "dbc78cb26fdceca4aac805826b572381c837505276ebf8297ef6304a17783476",
+    "sbom_sha256": "09199428f39f781275c734e1036d20b3894fdf35451af64f58b2c2088fcbecd3",
+    "source_commit": "3370898d83539fe41594c7cb7ad15e920dcb5674",
+    "source_tree": "32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a"
+  },
+  "aws_execution": false,
+  "deployment_ready": false,
+  "inspection": {
+    "bundle_member_count": 14,
+    "bundle_sha256": "12a263615abeeea33a6202ecc49d9fe27606fe1c2b37650f25ba9adebcb7b7f7",
+    "generator_excluded": true,
+    "oracle_excluded": true,
+    "runtime_member_count": 35,
+    "sbom_valid": true,
+    "timestamps": [
+      [
+        2026,
+        9,
+        10,
+        10,
+        22,
+        48
+      ]
+    ],
+    "wheel_count": 7
+  },
+  "members": [
+    {
+      "path": "LICENSES.json",
+      "sha256": "b11a2fd9be48b6f2f0e3acba8cf3c00ec7864f8b922be7de415665f6e2cac2b1",
+      "size_bytes": 765
+    },
+    {
+      "path": "PROVENANCE.json",
+      "sha256": "1cb64a76feb5a39ea8c3624943b17143cfc89f82cd87ae6883f74357d8ab4a0f",
+      "size_bytes": 654
+    },
+    {
+      "path": "SBOM.spdx.json",
+      "sha256": "09199428f39f781275c734e1036d20b3894fdf35451af64f58b2c2088fcbecd3",
+      "size_bytes": 4756
+    },
+    {
+      "path": "ledgerguard.gluewheels.zip",
+      "sha256": "8412287d1b8456796068200ff6c12d8c008914d0f93d370090f81c9afc962641",
+      "size_bytes": 665068
+    },
+    {
+      "path": "ledgerguard_stage3_job.py",
+      "sha256": "c742a3d3d189c93e3e993c0ff8d82cad451682d17e6bd1512c4f5d3f600b461f",
+      "size_bytes": 173
+    },
+    {
+      "path": "runtime.lock",
+      "sha256": "e36e2b5a2aa0fbf48866ad0fd30654207675869a9362f76f96c8936c4d30855b",
+      "size_bytes": 713
+    }
+  ],
+  "objects": {
+    "script_key": "deployment/c742a3d3d189c93e3e993c0ff8d82cad451682d17e6bd1512c4f5d3f600b461f/ledgerguard_stage3_job.py",
+    "wheels_key": "deployment/8412287d1b8456796068200ff6c12d8c008914d0f93d370090f81c9afc962641/ledgerguard.gluewheels.zip"
+  },
+  "runtime_installation": "REQUIRES_OFFLINE_INSTALL_QUALIFICATION",
+  "schema_version": "1.0",
+  "service_argument_adapter": "REQUIRED_STAGE5_SUCCESSOR_WITH_EXPLICIT_PROVENANCE",
+  "wheels": [
+    {
+      "name": "attrs-26.1.0-py3-none-any.whl",
+      "sha256": "52d350eb41b40ed1e2e7776a29631c91aa6e6e4f8399752180d9031980aad437"
+    },
+    {
+      "name": "jsonschema-4.26.0-py3-none-any.whl",
+      "sha256": "5225b4e4871281f0a0812f48697062cfa4d5c547d5aea7a653ff11690aa0a5d5"
+    },
+    {
+      "name": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+      "sha256": "ea7fae1944423626d7f25035bf1ab4d0a8f50cf332fe6fefe13fdfd595555802"
+    },
+    {
+      "name": "ledgerguard_runtime-0.1.0-py3-none-any.whl",
+      "sha256": "dbc78cb26fdceca4aac805826b572381c837505276ebf8297ef6304a17783476"
+    },
+    {
+      "name": "referencing-0.37.0-py3-none-any.whl",
+      "sha256": "5244ad3ad9b3295320946411d5da4831367124d4ad46649c85bf2733eee2b33e"
+    },
+    {
+      "name": "rpds_py-2026.6.3-cp311-cp311-manylinux_2_17_x86_64.whl",
+      "sha256": "bb1655f15e496fd41d8aa9906ddc7bb5263d23f92a52e2e4bb78ee2dfa14d63e"
+    },
+    {
+      "name": "typing_extensions-4.16.0-py3-none-any.whl",
+      "sha256": "46a5e53990b5e7ff12f3d0761f53998716db5b8f7cda2f66b8d50196ec16eb5d"
+    }
+  ]
+}

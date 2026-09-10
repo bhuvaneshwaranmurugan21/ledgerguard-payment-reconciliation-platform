@@ -1,6 +1,22 @@
 # Project status
 
-## Active boundary
+## Active boundary — Part 3 Stage 4
+
+Stage 3 is externally accepted at PR #26 squash `3370898d83539fe41594c7cb7ad15e920dcb5674`.
+The immutable external receipt and append-only gate-name correction remain authoritative.
+Stage 4 is in progress on draft PR #27. It is not ready to merge or deploy.
+
+The successor implements resource controls, actual runtime transport and catalog schemas,
+exact-decimal budget admission, separated IAM policy construction, and source-bound security
+review. Local evidence is recorded in `docs/part3-stage4-execution-checkpoint.md`.
+Full native CI on this successor, administrator packet binding, clean qualification inspection,
+and Stage 4 acceptance remain required. The actual backend KMS key ARN is not present in the
+historical observation; no wildcard or invented key is accepted in its place.
+
+Stages 5–8 are pending. No AWS change, workload execution, new merge or Part 3 completion is
+claimed. The combined sequence retains every stage admission and user-controlled AWS boundary.
+
+## Historical Stage 3 producer status (unchanged below)
 
 - Project: LedgerGuard
 - Part: 3 — Managed AWS platform
