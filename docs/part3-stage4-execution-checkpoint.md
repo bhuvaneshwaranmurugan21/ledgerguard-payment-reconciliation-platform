@@ -97,3 +97,48 @@ completing the full critical runner/claim coverage and mutation scope, binding t
 KMS ARN and administrator review/rollback packet, closing the full rehearsal queue, and satisfying
 Stage 4 publication/main gates. PR #27 must remain draft. Stage 5 code is not admitted until Stage 4
 is accepted; Stage 6 plan-only, Stage 7 canary/cleanup and Stage 8 promotion/closure remain pending.
+
+## Qualification machinery continuation
+
+Resumed from published `f23d77d2f2ef430190239557711b518d02db8bc7`, without replaying the
+accepted Stage 3 work or the previous controls implementation. Its immutable publication and
+CI receipt is retained in `evidence/part3-stage4/external/f23d77d-publication-and-ci.json`.
+Both native jobs and broader CI passed there; the original artifact-service timeout and the
+successful unchanged-source rerun remain distinct historical observations.
+
+The successor now rejects AWS credential/profile/container/OIDC authority and inherited credential
+configuration before native checks. It verifies actual Terraform/TFLint result payloads and
+identities, exact command inventories, coverage inventories, exclusions and aggregate counts.
+Real process failures, timeouts and missing executables retain their statuses and both streams.
+An exact Git head plus a clean checkout is required; a commit label cannot qualify dirty source.
+
+The original 15 semantic faults remain unchanged. Seven additional registered faults cover
+credential authority, native-result types, coverage inventory/exclusions, timeout/exit-status
+handling and mutation-registry identity. The mutation driver now requires the exact ordered
+registry, checks JUnit counts against actual test cases, rejects no-op faults, and restores
+original source in a finally block. Trial-directory setup precedes mutation of its isolated copy.
+
+Handoff validation retains every frozen-byte/Git/requirement check while exposing the rejection
+rules to direct adversarial record tests. The rehearsal driver still inspects the genuine
+accepted 167-member Stage 3 artifact and rejects both undeclared nested-manifest cases.
+Historical native fixtures are exact extracted GitHub artifact bytes with member provenance;
+they test admission and rejection, not execution of the successor Terraform source.
+
+Local expanded qualification: 362 tests passed; 22/22 registered semantic faults were killed
+by actual test failures without errors or skips. Ruff and strict mypy passed. YAML parsing
+(PyYAML 6.0.3) and real Bash syntax checks passed for the changed workflow. The combined local
+coverage observation was 97% of 716 statements/282 branches: 24 statements in the real native
+runner had not executed locally. This remains a failing full-coverage gate, not a local pass.
+The driver setup-order adjustment followed this observation and requires successor CI evidence.
+
+CI now measures the control package and all four qualification/handoff/rehearsal drivers,
+combining real CLI execution with tests under an explicit coverage configuration with no
+exclusions. The existing control-package 100% gate remains; the additional full-scope 100% gate
+must also pass. Both clean native jobs must produce independently inspectable successor evidence.
+The immutable Stage 3 artifact download uses actions-read permission only; no AWS authority or
+OIDC permission is granted. The local socket restriction was not bypassed.
+
+Stage 4 remains incomplete. The actual backend KMS ARN, final administrator and rollback packet,
+remaining stage-specific rehearsal/admission obligations, draft-PR acceptance and independent
+main-CI closure are still required. Later-stage rehearsal cases retain their actual pending
+owners; this continuation does not admit Stage 5 implementation or any AWS mutation.

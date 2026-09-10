@@ -13,6 +13,11 @@ Full native CI on this successor, administrator packet binding, clean qualificat
 and Stage 4 acceptance remain required. The actual backend KMS key ARN is not present in the
 historical observation; no wildcard or invented key is accepted in its place.
 
+The `f23d77d` publication/CI receipt is preserved as historical evidence. Its successor extends
+qualification to native payload admission, credential and source boundaries, exact mutation
+identity, and full critical-driver coverage. Local full-scope coverage remains short of the
+required 100% until the real native runner executes in CI; no uncovered code was excluded.
+
 Stages 5–8 are pending. No AWS change, workload execution, new merge or Part 3 completion is
 claimed. The combined sequence retains every stage admission and user-controlled AWS boundary.
 

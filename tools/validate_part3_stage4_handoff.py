@@ -43,6 +43,43 @@ def admit_receipt(raw: bytes, correction: dict[str, Any], registry_raw: bytes) -
         raise ValueError("unregistered or incorrect successor gates")
 
 
+def validate_freeze_identity(freeze: dict[str, Any]) -> None:
+    if freeze["baseline_commit"] != BASELINE_COMMIT or freeze["baseline_tree"] != BASELINE_TREE:
+        raise ValueError("inherited source identity differs")
+
+
+def validate_baseline_tree(actual_tree: str) -> None:
+    if actual_tree != BASELINE_TREE:
+        raise ValueError("baseline tree differs")
+
+
+def validate_member(root: Path, row: dict[str, Any], names: set[str]) -> Path:
+    name = row["path"]
+    if (
+        not isinstance(name, str)
+        or name in names
+        or Path(name).is_absolute()
+        or ".." in Path(name).parts
+    ):
+        raise ValueError("unsafe inherited inventory path")
+    names.add(name)
+    path = root / name
+    if path.is_symlink() or sha256(path.read_bytes()).hexdigest() != row["sha256"]:
+        raise ValueError("inherited file differs: " + name)
+    return path
+
+
+def validate_blob(actual: str, expected: str, name: str) -> None:
+    if actual != expected:
+        raise ValueError("inherited Git binding differs: " + name)
+
+
+def validate_requirement_ids(requirements: dict[str, Any]) -> None:
+    ids = [row["requirement_id"] for row in requirements["requirements"]]
+    if len(ids) != 99 or len(set(ids)) != 99:
+        raise ValueError("original requirement identity set differs")
+
+
 def validate(root: Path) -> dict[str, Any]:
     raw = (root / "spec/part3-stage3-external-closure-v1.json").read_bytes()
     correction = json.loads(
@@ -53,37 +90,27 @@ def validate(root: Path) -> dict[str, Any]:
     if sha256(freeze_raw).hexdigest() != FREEZE_SHA256:
         raise ValueError("inherited inventory bytes changed")
     freeze = json.loads(freeze_raw)
-    if freeze["baseline_commit"] != BASELINE_COMMIT or freeze["baseline_tree"] != BASELINE_TREE:
-        raise ValueError("inherited source identity differs")
+    validate_freeze_identity(freeze)
     result = subprocess.run(
         ["git", "-C", str(root), "rev-parse", BASELINE_COMMIT + "^{tree}"],
         check=True,
         capture_output=True,
         text=True,
     )
-    if result.stdout.strip() != BASELINE_TREE:
-        raise ValueError("baseline tree differs")
+    validate_baseline_tree(result.stdout.strip())
     names: set[str] = set()
     for row in freeze["members"]:
         name = row["path"]
-        if name in names or Path(name).is_absolute() or ".." in Path(name).parts:
-            raise ValueError("unsafe inherited inventory path")
-        names.add(name)
-        path = root / name
-        if path.is_symlink() or sha256(path.read_bytes()).hexdigest() != row["sha256"]:
-            raise ValueError("inherited file differs: " + name)
+        validate_member(root, row, names)
         blob = subprocess.run(
             ["git", "-C", str(root), "rev-parse", BASELINE_COMMIT + ":" + name],
             check=True,
             capture_output=True,
             text=True,
         ).stdout.strip()
-        if blob != row["git_blob"]:
-            raise ValueError("inherited Git binding differs: " + name)
+        validate_blob(blob, row["git_blob"], name)
     requirements = json.loads((root / "spec/part3-requirements-v1.json").read_text())
-    ids = [row["requirement_id"] for row in requirements["requirements"]]
-    if len(ids) != 99 or len(set(ids)) != 99:
-        raise ValueError("original requirement identity set differs")
+    validate_requirement_ids(requirements)
     return {
         "baseline_commit": BASELINE_COMMIT,
         "baseline_tree": BASELINE_TREE,
@@ -96,10 +123,10 @@ def validate(root: Path) -> dict[str, Any]:
     }
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=ROOT)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     print(json.dumps(validate(args.root), indent=2, sort_keys=True))
 
 

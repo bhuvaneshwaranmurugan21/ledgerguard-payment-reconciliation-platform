@@ -105,6 +105,55 @@
       "before": "> 6144:",
       "after": "> 999999:",
       "test": "tests/test_part3_stage4_administrator.py::test_partitioning_handles_boundaries_without_truncation"
+    },
+    {
+      "id": "S4-M16-credential-authority",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "if any(environment.get(key) for key in AUTHORITY_ENVIRONMENT):",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_qualification.py::test_every_credential_authority_surface_rejects"
+    },
+    {
+      "id": "S4-M17-native-result-types",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "validation.get(\"valid\") is not True",
+      "after": "False",
+      "test": "tests/test_part3_stage4_qualification.py::test_native_result_drift_rejects_even_if_process_exited_zero"
+    },
+    {
+      "id": "S4-M18-coverage-inventory",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "set(data[\"files\"]) != required_files",
+      "after": "False",
+      "test": "tests/test_part3_stage4_qualification.py::test_coverage_omissions_and_forged_summaries_reject"
+    },
+    {
+      "id": "S4-M19-excluded-code",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "row[\"missing_lines\"] or row[\"excluded_lines\"] or row[\"missing_branches\"]",
+      "after": "row[\"missing_lines\"] or row[\"missing_branches\"]",
+      "test": "tests/test_part3_stage4_qualification.py::test_coverage_omissions_and_forged_summaries_reject"
+    },
+    {
+      "id": "S4-M20-process-timeout",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "code = 124",
+      "after": "code = 0",
+      "test": "tests/test_part3_stage4_qualification.py::test_actual_timeout_and_missing_executable_are_not_success"
+    },
+    {
+      "id": "S4-M21-registry-identity",
+      "path": "tools/run_part3_stage4_mutations.py",
+      "before": "if tuple(row[\"id\"] for row in rows) != REQUIRED_MUTATIONS:",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_mutation_driver.py::test_mutation_inventory_cannot_be_redefined"
+    },
+    {
+      "id": "S4-M22-process-status",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "code = completed.returncode",
+      "after": "code = 0",
+      "test": "tests/test_part3_stage4_qualification.py::test_actual_process_status_and_both_streams_are_preserved"
     }
   ]
 }

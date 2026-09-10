@@ -6,9 +6,46 @@ from pathlib import Path
 
 import pytest
 
-from tools.run_part3_stage4_static import prepare_schema_context
+from tools.run_part3_stage4_static import build_commands, prepare_schema_context
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_native_command_graph_retains_every_gate_and_has_no_aws_mutation(tmp_path: Path) -> None:
+    commands = build_commands(ROOT, tmp_path / "evidence", tmp_path / "schema")
+    assert set(commands) == {
+        "terraform-version",
+        "terraform-format",
+        "terraform-initialize",
+        "terraform-validate",
+        "terraform-schema-initialize",
+        "terraform-schema",
+        "tflint-version",
+        "tflint",
+        "handoff",
+        "tests",
+        "python-lint",
+        "python-types",
+        "controls-tests",
+        "controls-coverage-combine",
+        "controls-coverage",
+        "controls-coverage-json",
+        "controls-lint",
+        "controls-types",
+        "controls-mutations",
+        "inspector-rehearsal",
+        "security-raw-scan",
+        "security-applicability",
+    }
+    for name in ("terraform-initialize", "terraform-schema-initialize"):
+        assert "-backend=false" in commands[name]
+        assert "-lockfile=readonly" in commands[name]
+    assert "--fail-under=100" in commands["controls-coverage"]
+    assert "--rcfile=spec/part3-stage4-coverage.ini" in commands["controls-tests"]
+    assert commands["terraform-schema"][1] == "-chdir=" + str(tmp_path / "schema")
+    assert not {"apply", "plan", "destroy", "aws"}.intersection(
+        token for c in commands.values() for token in c
+    )
 
 
 def test_schema_context_preserves_exact_lock_and_workload_backend(tmp_path: Path) -> None:

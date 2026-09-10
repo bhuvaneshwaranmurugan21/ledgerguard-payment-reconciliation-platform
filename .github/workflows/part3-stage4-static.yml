@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: part3-stage4-static-${{ github.event.pull_request.number || github.ref }}
@@ -35,6 +36,14 @@ jobs:
         uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
           python-version: "3.11.13"
+      - name: Download the immutable accepted Stage 3 rehearsal evidence
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: 10147923228
+          run-id: 34465749986
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/stage4-accepted-ci
+          merge-multiple: true
       - name: Install hash-locked qualification dependencies
         shell: bash
         run: |
@@ -105,12 +114,27 @@ jobs:
       - name: Run required real static checks
         env:
           STAGE4_EVIDENCE: ${{ runner.temp }}/part3-stage4-static
-        run: python tools/run_part3_stage4_static.py
+          STAGE4_ACCEPTED_CI_ARTIFACT: ${{ runner.temp }}/stage4-accepted-ci
+        run: >-
+          python -m coverage run --rcfile=spec/part3-stage4-coverage.ini
+          --data-file="$STAGE4_EVIDENCE/.coverage.critical"
+          -m tools.run_part3_stage4_static
+      - name: Require complete coverage of controls and qualification machinery
+        if: always()
+        env:
+          STAGE4_EVIDENCE: ${{ runner.temp }}/part3-stage4-static
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m coverage combine --rcfile=spec/part3-stage4-coverage.ini --append --keep --data-file="$STAGE4_EVIDENCE/.coverage.critical"
+          python -m coverage json --rcfile=spec/part3-stage4-coverage.ini --data-file="$STAGE4_EVIDENCE/.coverage.critical" -o "$STAGE4_EVIDENCE/critical-coverage.json"
+          python -m coverage report --rcfile=spec/part3-stage4-coverage.ini --data-file="$STAGE4_EVIDENCE/.coverage.critical" --fail-under=100
       - name: Preserve evidence including failures
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: part3-stage4-static-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_attempt }}-${{ matrix.qualification }}
           path: ${{ runner.temp }}/part3-stage4-static
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 14

@@ -1411,7 +1411,11 @@
       "requirement": "Critical controls require complete branch/statement coverage and killed semantic faults",
       "evidence": [
         "tools/run_part3_stage4_mutations.py",
-        "spec/part3-stage4-mutations-v1.json"
+        "spec/part3-stage4-mutations-v1.json",
+        "spec/part3-stage4-coverage.ini",
+        "tools/part3_stage4/qualification.py",
+        "tests/test_part3_stage4_qualification.py",
+        "tests/test_part3_stage4_mutation_driver.py"
       ],
       "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
     },

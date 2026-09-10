@@ -1,0 +1,203 @@
+{
+  "authorized_tree": "9b64d825b255f3cddacfe121d6754bd9fe482566",
+  "authorized_commit": "8b310e084e2372f0b7e773e1193bab98bddeeb4b",
+  "current_commit": "f23d77d2f2ef430190239557711b518d02db8bc7",
+  "current_tree": "67230ae39125e4f5ea4cbc070094232afb426da1",
+  "followup_change": {
+    "path": "tools/part3_stage4/resources.py",
+    "reason": "Replace executable Protocol stub with Callable typing; preserve parser behavior and remove default coverage exclusion. No test or threshold was weakened."
+  },
+  "static_run": 34520830367,
+  "static_inspection": {
+    "inspections": [
+      {
+        "source_commit": "f23d77d2f2ef430190239557711b518d02db8bc7",
+        "source_tree": "67230ae39125e4f5ea4cbc070094232afb426da1",
+        "artifact_id": 10169621677,
+        "artifact_name": "part3-stage4-static-f23d77d2f2ef430190239557711b518d02db8bc7-1-1",
+        "zip_sha256": "19cc0d097a79df9fd2800584b9205c5038f2c2a4a03f9a1c7744cd5ed4ed4c8e",
+        "member_count": 92,
+        "native_terraform_valid": true,
+        "tflint_issues": 0,
+        "checks": 20,
+        "typing_protocol_exclusions": {},
+        "tests": {
+          "tests": 270,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "covered_lines": 369,
+          "num_statements": 369,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 178,
+          "num_partial_branches": 0,
+          "covered_branches": 178,
+          "missing_branches": 0
+        },
+        "semantic_mutations_killed": 15,
+        "raw_security_successes": 65,
+        "raw_security_failures": 4,
+        "source_bound_inapplicable": 4,
+        "static_subset_verified": true,
+        "stage4_complete": false,
+        "aws_execution": false
+      },
+      {
+        "source_commit": "f23d77d2f2ef430190239557711b518d02db8bc7",
+        "source_tree": "67230ae39125e4f5ea4cbc070094232afb426da1",
+        "artifact_id": 10169629692,
+        "artifact_name": "part3-stage4-static-f23d77d2f2ef430190239557711b518d02db8bc7-1-2",
+        "zip_sha256": "148c115d604d29be2a22f0189286f42573779489c7f507af63a934a1e248f061",
+        "member_count": 92,
+        "native_terraform_valid": true,
+        "tflint_issues": 0,
+        "checks": 20,
+        "typing_protocol_exclusions": {},
+        "tests": {
+          "tests": 270,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "coverage": {
+          "covered_lines": 369,
+          "num_statements": 369,
+          "percent_covered": 100.0,
+          "percent_covered_display": "100",
+          "missing_lines": 0,
+          "excluded_lines": 0,
+          "num_branches": 178,
+          "num_partial_branches": 0,
+          "covered_branches": 178,
+          "missing_branches": 0
+        },
+        "semantic_mutations_killed": 15,
+        "raw_security_successes": 65,
+        "raw_security_failures": 4,
+        "source_bound_inapplicable": 4,
+        "static_subset_verified": true,
+        "stage4_complete": false,
+        "aws_execution": false
+      }
+    ],
+    "independent_payloads_equal": true,
+    "stage4_complete": false,
+    "aws_execution": false
+  },
+  "broader_ci": {
+    "run_id": 34520830355,
+    "state": "SUCCESS",
+    "attempt_1": {
+      "conclusion": "failure",
+      "stage3_qualification_step": "success",
+      "failure_step": "Upload immutable Stage 3 evidence",
+      "cause": "CreateArtifact request timeout after five attempts",
+      "dependent_inspection": "skipped",
+      "other_jobs": "success"
+    },
+    "recovery": "Rerun failed jobs on unchanged source; successful jobs retained",
+    "final_attempt": 2,
+    "jobs": [
+      {
+        "name": "part3-stage3-current",
+        "id": 103029199171,
+        "conclusion": "success"
+      },
+      {
+        "name": "part3-stage1-closure",
+        "id": 103029200165,
+        "conclusion": "success"
+      },
+      {
+        "name": "part3-stage2-closure",
+        "id": 103029201007,
+        "conclusion": "success"
+      },
+      {
+        "name": "foundation",
+        "id": 103029201336,
+        "conclusion": "success"
+      },
+      {
+        "name": "part3-stage2-current",
+        "id": 103029235112,
+        "conclusion": "success"
+      },
+      {
+        "name": "part3-stage3-artifact-inspection",
+        "id": 103036811638,
+        "conclusion": "success"
+      }
+    ],
+    "independent_inspection": {
+      "artifact_manifest_file_sha256": "64531df537dd2e8d6087c7b4b45951d5f6601b18b980c65ea988ab8b9bb3d1ed",
+      "deterministic_payload_sha256": "b90af84e44727f0e5542d12d173d325a0e2c3811f82ffa5fca1b27ba423e4f8b",
+      "head_sha": "f23d77d2f2ef430190239557711b518d02db8bc7",
+      "head_tree": "67230ae39125e4f5ea4cbc070094232afb426da1",
+      "independently_accepted": true,
+      "member_count": 167,
+      "schema_version": "1.0",
+      "workflow_run_attempt": 2,
+      "workflow_run_id": 34520830355
+    },
+    "raw_evidence_inspection": {
+      "source_commit": "f23d77d2f2ef430190239557711b518d02db8bc7",
+      "source_tree": "67230ae39125e4f5ea4cbc070094232afb426da1",
+      "workflow_run_id": 34520830355,
+      "workflow_run_attempt": 2,
+      "two_clean_payloads_equal": true,
+      "tests": {
+        "focused-tests": {
+          "tests": 166,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "current-compatibility-tests": {
+          "tests": 219,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "coverage": {
+        "covered_lines": 1924,
+        "num_statements": 1924,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "num_branches": 614,
+        "num_partial_branches": 0,
+        "covered_branches": 614,
+        "missing_branches": 0
+      },
+      "mutations_verified_and_killed": 24,
+      "ci_and_local_inspection_bytes_equal": true,
+      "deterministic_payload_sha256": "b90af84e44727f0e5542d12d173d325a0e2c3811f82ffa5fca1b27ba423e4f8b",
+      "aws_execution": false
+    }
+  },
+  "pr": 27,
+  "draft": true,
+  "merged": false,
+  "aws_changes": false,
+  "stage4_complete": false,
+  "part3_complete": false,
+  "toolchain_acquisition": {
+    "run_id": 34520830411,
+    "conclusion": "success"
+  },
+  "remaining_stage4_gates": [
+    "Exact backend KMS ARN and final administrator review/rollback packet",
+    "Full remaining critical runner and claim coverage/mutation qualification",
+    "Full rehearsal queue and Stage 4 acceptance/publication/main gates"
+  ],
+  "observed_at_utc": "2026-09-10T20:33:11.952607+00:00",
+  "pr_final_evidence": "current-publication/pr-final.json"
+}

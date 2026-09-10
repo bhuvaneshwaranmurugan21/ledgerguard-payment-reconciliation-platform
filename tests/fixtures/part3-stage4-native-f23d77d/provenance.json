@@ -1,0 +1,17 @@
+{
+  "source_commit": "f23d77d2f2ef430190239557711b518d02db8bc7",
+  "workflow_run_id": 34520830367,
+  "artifact_id": 10169621677,
+  "zip_sha256": "19cc0d097a79df9fd2800584b9205c5038f2c2a4a03f9a1c7744cd5ed4ed4c8e",
+  "purpose": "Genuine historical native records for admission and adversarial rejection tests; not qualification of successor source",
+  "members": {
+    "terraform-version.stdout": "f08f5bbe4c5a5a9b4e46632ce8c9364d3365b9c1789956327a7a2296f102265f",
+    "terraform-validate.stdout": "4cd9eddc4d07c5aff74dadb6b3544f98186f6705ac60e0d94d545fc42b45b9b6",
+    "tflint-version.stdout": "b4b752cd2dc06ef50cb31d1cafd3c01ef2134b056a3abf511d088124fb6e99c7",
+    "tflint.stdout": "eb0c9cd9ebc8cea0750088a7780d57e38d0340be03492abf96fd262edc821b6a",
+    "controls-coverage.json": "78e17bdd41299d0c0c0709a06bbbbe8c57b588f1f1e15301a94f4fb7c533fa3c",
+    "summary.json": "8167bd345eee15e1cc10ddcb0063335c243986d230d152af83ef753f3bb05ccd",
+    "passed-tests.xml": "268a2b9f873a88e9f3e63b3267748968658392a5db1a74315e8bc3961e1b212a",
+    "killed-mutation.xml": "0cf978634c5e434d47e9fbdd65c7643c7ce0169a3c13188e6e70508b67bc42f3"
+  }
+}
