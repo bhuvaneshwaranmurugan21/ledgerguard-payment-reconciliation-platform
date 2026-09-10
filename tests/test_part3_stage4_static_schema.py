@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from hashlib import sha256
 from pathlib import Path
 
@@ -9,6 +11,49 @@ import pytest
 from tools.run_part3_stage4_static import build_commands, prepare_schema_context
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def test_real_coverage_storage_must_not_precreate_fresh_evidence(tmp_path: Path) -> None:
+    program = tmp_path / "create_fresh_evidence.py"
+    program.write_text(
+        "from pathlib import Path\nimport sys\nPath(sys.argv[1]).mkdir(exist_ok=False)\n"
+    )
+    bad = tmp_path / "bad-evidence"
+    failure = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile=/dev/null",
+            "--parallel-mode",
+            "--data-file=" + str(bad / ".coverage"),
+            str(program),
+            str(bad),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert failure.returncode == 1 and "FileExistsError" in failure.stderr
+    good = tmp_path / "fresh-evidence"
+    accepted = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "coverage",
+            "run",
+            "--rcfile=/dev/null",
+            "--parallel-mode",
+            "--data-file=" + str(tmp_path / ".coverage.native"),
+            str(program),
+            str(good),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert accepted.returncode == 0, accepted.stderr
+    assert good.is_dir() and not list(good.iterdir())
+    assert len(list(tmp_path.glob(".coverage.native.*"))) == 1
 
 
 def test_native_command_graph_retains_every_gate_and_has_no_aws_mutation(tmp_path: Path) -> None:

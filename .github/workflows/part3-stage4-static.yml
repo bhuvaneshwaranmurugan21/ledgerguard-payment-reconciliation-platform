@@ -117,7 +117,7 @@ jobs:
           STAGE4_ACCEPTED_CI_ARTIFACT: ${{ runner.temp }}/stage4-accepted-ci
         run: >-
           python -m coverage run --rcfile=spec/part3-stage4-coverage.ini
-          --data-file="$STAGE4_EVIDENCE/.coverage.critical"
+          --data-file="$RUNNER_TEMP/.coverage.stage4-native"
           -m tools.run_part3_stage4_static
       - name: Require complete coverage of controls and qualification machinery
         if: always()
@@ -126,7 +126,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m coverage combine --rcfile=spec/part3-stage4-coverage.ini --append --keep --data-file="$STAGE4_EVIDENCE/.coverage.critical"
+          cp "$RUNNER_TEMP"/.coverage.stage4-native.* "$STAGE4_EVIDENCE/"
+          python -m coverage combine --rcfile=spec/part3-stage4-coverage.ini --append --keep --data-file="$STAGE4_EVIDENCE/.coverage.critical" "$STAGE4_EVIDENCE" "$STAGE4_EVIDENCE"/.coverage.stage4-native.*
           python -m coverage json --rcfile=spec/part3-stage4-coverage.ini --data-file="$STAGE4_EVIDENCE/.coverage.critical" -o "$STAGE4_EVIDENCE/critical-coverage.json"
           python -m coverage report --rcfile=spec/part3-stage4-coverage.ini --data-file="$STAGE4_EVIDENCE/.coverage.critical" --fail-under=100
       - name: Preserve evidence including failures

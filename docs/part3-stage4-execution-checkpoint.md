@@ -142,3 +142,11 @@ Stage 4 remains incomplete. The actual backend KMS ARN, final administrator and 
 remaining stage-specific rehearsal/admission obligations, draft-PR acceptance and independent
 main-CI closure are still required. Later-stage rehearsal cases retain their actual pending
 owners; this continuation does not admit Stage 5 implementation or any AWS mutation.
+
+Native run `34530344950` on `050bc228e9e96737b323182bf46afba76916dbab` failed before
+command execution: coverage created the evidence directory before the runner's fresh-directory
+guard. The guard correctly rejected it. The correction stores the outer coverage shard beside
+the evidence directory, then copies and explicitly combines it after execution. A real coverage
+subprocess regression reproduces the old FileExistsError and verifies the corrected layout.
+The fresh-output requirement and 100% coverage threshold remain unchanged; this failed run is
+retained and is not claimed as native qualification.
