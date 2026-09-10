@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-package-manifest:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_commit", "source_tree", "python", "spark", "java", "members", "runtime_wheel_sha256", "sbom_sha256", "oracle_excluded", "generator_excluded"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_tree": {"type": "string", "pattern": "^[0-9a-f]{40}$|^[0-9a-f]{64}$"},
+    "python": {"const": "3.11.13"},
+    "spark": {"const": "3.5.6"},
+    "java": {"const": "17"},
+    "members": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["path", "size_bytes", "sha256"], "properties": {"path": {"type": "string"}, "size_bytes": {"type": "integer", "minimum": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}}},
+    "runtime_wheel_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sbom_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "oracle_excluded": {"const": true},
+    "generator_excluded": {"const": true}
+  }
+}

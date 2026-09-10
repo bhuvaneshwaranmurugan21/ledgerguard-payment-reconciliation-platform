@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "project": "LedgerGuard",
+  "part": 3,
+  "stage": 3,
+  "authority": "PART3_STAGE3_EXECUTION_ADDENDUM",
+  "base_commit": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+  "owned_master_gaps": [
+    "LG-P3-G003",
+    "LG-P3-G005",
+    "LG-P3-G011"
+  ],
+  "requirements": [
+    {
+      "requirement_id": "P3-S3-R001",
+      "statement": "Admit exact Stage 2 squash/main CI and correct its receipt append-only.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R002",
+      "statement": "Preserve all accepted schemas, financial semantics, histories, and claim boundaries.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R003",
+      "statement": "Close only G003, G005, and G011; preserve every downstream owner.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R004",
+      "statement": "Define immutable semantics for all four named profiles.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R005",
+      "statement": "Make profile scale equal processor payment-event count and disclose all source counts.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R006",
+      "statement": "Freeze seed, merchant/currency/settlement/posting, exception, split, skew, late, replay, conflict, missing, and policy-change parameters.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R007",
+      "statement": "Derive dataset/run/batch/record IDs and timestamps solely from canonical semantic inputs, never wall-clock time or process order.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R008",
+      "statement": "Generate in bounded memory with deterministic shard boundaries and ordering.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R009",
+      "statement": "Emit all four families in the frozen heterogeneous raw format mapping and an equivalent strict canonical v2 JSONL/LF bundle without changing v2 schemas.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R010",
+      "statement": "Emit digest-bound policy, run manifest, profile lock, scenario inventory, and canonical asset manifest.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R011",
+      "statement": "Produce expected totals/reasons without importing or calling production reconciliation.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R012",
+      "statement": "Recompute counts, bytes, digests, currency totals, and financial expectations with a separate streaming reader.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R013",
+      "statement": "Cover every required normal, exception, replay/conflict, correction, skew, split, late, and policy scenario explicitly.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R014",
+      "statement": "Execute deterministic property/metamorphic campaigns with reproducible case IDs and minimal failure records.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R015",
+      "statement": "Read manifest-bound source objects into typed Spark DataFrames and derive candidates without accepting Python candidates as input.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R016",
+      "statement": "Enforce identities, journal balance/roles, references, formulae, bank allocation, currency isolation, checked arithmetic, reason order, and non-authoritative output in Spark.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R017",
+      "statement": "Prove logical parity against the accepted local engine and independent oracle on correctness fixtures.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R018",
+      "statement": "Include accepted corrected-source behavior and packaged schemas in the runtime distribution.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R019",
+      "statement": "Provide a Glue 5.1-compatible Python 3.11 / Spark 3.5.6 entrypoint and offline dependency closure.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R020",
+      "statement": "Strictly require and bind run, attempt, policy/manifest, input/output/evidence, and control-record arguments.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R021",
+      "statement": "Reject unsafe, ambiguous, mutable, overlapping, wrong-bucket, wrong-run, and cross-attempt S3 paths before Spark starts.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R022",
+      "statement": "Write only immutable non-authoritative candidate output and completion evidence; no authoritative pointer.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R023",
+      "statement": "Prove production package/import graph has no path to the reference oracle or generator expectations.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R024",
+      "statement": "Emit an exact standards-based SBOM and artifact/member/toolchain inventory.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R025",
+      "statement": "Make promised source/package artifacts byte-reproducible in two isolated clean builds.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R026",
+      "statement": "Prove small/10K/100K generation and 1M generation capability within the 8 GB boundary.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R027",
+      "statement": "Keep AWS SDK/client imports out of pure reconciliation modules and automatic CI without OIDC.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R028",
+      "statement": "Give new owned branches 100% coverage and kill every non-equivalent semantic mutation.",
+      "owner_stage": 3,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R029",
+      "statement": "Produce exact-head CI evidence and independently inspect its archive.",
+      "owner_stage": 3,
+      "state": "PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "requirement_id": "P3-S3-R030",
+      "statement": "Close Stage 3 only after squash topology, tree equality, and independent green main CI are externally verified.",
+      "owner_stage": 3,
+      "state": "PENDING_EXTERNAL_SQUASH"
+    }
+  ]
+}

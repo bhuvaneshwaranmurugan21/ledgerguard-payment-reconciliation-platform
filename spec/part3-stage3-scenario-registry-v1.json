@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "campaign_seed": 730031,
+  "scenarios": [
+    {
+      "scenario_id": "P3-S3-S001",
+      "title": "balanced multi-currency source bundle",
+      "expected": "EXPECTED_MATCH",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S002",
+      "title": "transaction amount mismatch",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S003",
+      "title": "settlement formula mismatch",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S004",
+      "title": "missing processor activity",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S005",
+      "title": "missing ledger movement",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S006",
+      "title": "missing bank settlement",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S007",
+      "title": "invalid ledger account role",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S008",
+      "title": "invalid bank account",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S009",
+      "title": "exact split deposit",
+      "expected": "EXPECTED_MATCH",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S010",
+      "title": "identical replay",
+      "expected": "EXPECTED_IDEMPOTENT",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S011",
+      "title": "source identity conflict",
+      "expected": "EXPECTED_REJECTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S012",
+      "title": "unresolved capture reference",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S013",
+      "title": "over-applied capture reference",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S014",
+      "title": "partition and input ordering permutation",
+      "expected": "EXPECTED_INVARIANT",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S015",
+      "title": "merchant and currency isolation",
+      "expected": "EXPECTED_INVARIANT",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S016",
+      "title": "late-data immutable revision",
+      "expected": "EXPECTED_NEW_REVISION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S017",
+      "title": "corrected-source provenance",
+      "expected": "EXPECTED_NEW_REVISION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S018",
+      "title": "policy change is not source correction",
+      "expected": "EXPECTED_REJECTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S019",
+      "title": "skewed merchant concentration",
+      "expected": "EXPECTED_INVARIANT",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S020",
+      "title": "duplicate bank identity",
+      "expected": "EXPECTED_EXCEPTION",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    },
+    {
+      "scenario_id": "P3-S3-S021",
+      "title": "unknown bank reference",
+      "expected": "EXPECTED_UNALLOCATED",
+      "seed": 730031,
+      "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI"
+    }
+  ]
+}

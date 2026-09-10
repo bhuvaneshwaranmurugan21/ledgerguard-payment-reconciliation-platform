@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "classification": "PART3_STAGE2_EXTERNAL_CLOSURE_RECEIPT",
+  "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+  "pull_request": 25,
+  "closure_gate": {
+    "gate_id": "P3-S2-G020",
+    "state": "EXTERNALLY_VERIFIED"
+  },
+  "qualified_operational_authority": {
+    "commit": "aa136331e44dcd181f766b42d76ee2616a22f435",
+    "tree": "184d8d7ff8d1172ec863060d4be7132339eaba49"
+  },
+  "validated_pr": {
+    "head": "68453e47a52122546282c025b006183976070221",
+    "base": "aa136331e44dcd181f766b42d76ee2616a22f435",
+    "tree": "6be2444b583fde20d6fd84d47a87cde9432e2952",
+    "commits": 1,
+    "changed_files": 24,
+    "ci": {
+      "run_id": 34344346897,
+      "run_number": 65,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        {"id": 102442280184, "name": "foundation", "conclusion": "success"},
+        {"id": 102442280424, "name": "part3-stage1-closure", "conclusion": "success"},
+        {"id": 102442280454, "name": "part3-stage2-current", "conclusion": "success"},
+        {"id": 102442280484, "name": "part3-stage2-closure", "conclusion": "success"}
+      ],
+      "artifact": {
+        "id": 10101069466,
+        "name": "ledgerguard-part3-stage2-closure-68453e47a52122546282c025b006183976070221",
+        "members": 7,
+        "zip_sha256": "36c4e9700096343a5479fb11c0ed2641a35850967f3f7881a9cb44853b98cc06",
+        "manifest_sha256": "2cb3cb930d4b6c9159f14eab4d582c21b129388ef301a37c295fde7e3299f42b",
+        "closure_ci_evidence_sha256": "40e9cbbe4b1f35b1910eb98f3100a7aa780abfe050cd90cf84db02da7cb46bd3",
+        "local_evidence_sha256": "fdcb43beb1310bb9fdd6a80ef38cdde0d4a489d4276aa12f13567746a691f15d"
+      }
+    }
+  },
+  "squash_merge": {
+    "commit": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+    "sole_parent": "aa136331e44dcd181f766b42d76ee2616a22f435",
+    "tree": "6be2444b583fde20d6fd84d47a87cde9432e2952",
+    "tree_equals_validated_pr": true,
+    "github_signature_present": true
+  },
+  "main_ci": {
+    "run_id": 34349896899,
+    "run_number": 66,
+    "event": "push",
+    "ref": "refs/heads/main",
+    "head": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+    "conclusion": "success",
+    "jobs": [
+      {"id": 102460307887, "name": "foundation", "conclusion": "success"},
+      {"id": 102460308085, "name": "part3-stage1-closure", "conclusion": "success"},
+      {"id": 102460308138, "name": "part3-stage2-closure", "conclusion": "success"},
+      {"id": 102460308262, "name": "part3-stage2-current", "conclusion": "success"}
+    ],
+    "artifact": {
+      "id": 10103265561,
+      "name": "ledgerguard-part3-stage2-closure-d0fb01392f7f975909229f418c13a9c73ba8395e",
+      "members": 7,
+      "zip_sha256": "149cb5205762109b2938ac92a04b778d88b46cfbd98d83e461b9dd269d48bd57",
+      "manifest_sha256": "2a9dbd09237fca50c67a94fd2a9037cc2cddcfcb86b9599b8da364cb8287d3ab",
+      "closure_ci_evidence_sha256": "20a86b77b322a434cfe942cf929c5ce50b1a2965671f8cecbf783d0a64628b11",
+      "local_evidence_sha256": "fdcb43beb1310bb9fdd6a80ef38cdde0d4a489d4276aa12f13567746a691f15d"
+    }
+  },
+  "closure_validation": {
+    "clean_runs": 2,
+    "tests_per_run": 9,
+    "coverage": {"statements": 141, "branches": 12, "percent": 100.0},
+    "semantic_mutations": {"checks": 13, "survivors": 0},
+    "wheel_sha256": "4ac619ee6cb7d86bf7d004a5badb79efa9670e731ddf80ee47aa69499ee88dc2",
+    "deterministic_payload_sha256": "b0f85b8c9f05a0604f680e43ce1240a705fdd037de10cc2b75d3304de9563874",
+    "artifact_safety_verified": true
+  },
+  "stage2_adjudication": {
+    "requirements_total": 22,
+    "requirements_externally_verified": 22,
+    "stage2_gates_total": 20,
+    "stage2_gates_externally_verified": 20,
+    "part3_master_gates_aws_verified": [
+      "environment_qualified",
+      "live_iam_parity_verified",
+      "glue_definition_probe_verified"
+    ],
+    "part3_master_gates_not_executed": [
+      "managed_deployment_verified",
+      "managed_reconciliation_verified",
+      "scale_and_cost_verified"
+    ],
+    "stage_complete": true,
+    "next_owner": "PART3_STAGE3"
+  },
+  "claim_boundary": {
+    "aws_qualification_verified": true,
+    "temporary_probe_cleanup_complete": true,
+    "probe_residue": 0,
+    "managed_platform_deployed": false,
+    "managed_reconciliation_started": false,
+    "production_ready": false,
+    "scale_verified": false,
+    "part3_complete": false,
+    "project_complete": false
+  },
+  "repository_import": {
+    "state": "PENDING_APPEND_ONLY_IMPORT_BY_PART3_STAGE3",
+    "stage3_work_started": false
+  }
+}

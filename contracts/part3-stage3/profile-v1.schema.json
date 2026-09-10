@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-profile:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "seed", "processor_event_count", "events_per_settlement", "shard_rows", "merchant_count", "currencies", "negative_event_cycle", "split_every_settlements", "skew_cycle", "skew_hotspot_slots", "base_timestamp", "generator_version"],
+  "properties": {
+    "name": {"enum": ["correctness-small", "local-10k", "local-100k", "managed-1m"]},
+    "seed": {"type": "integer", "minimum": 0},
+    "processor_event_count": {"type": "integer", "minimum": 1, "maximum": 1000000},
+    "events_per_settlement": {"type": "integer", "minimum": 2},
+    "shard_rows": {"type": "integer", "minimum": 1, "maximum": 100000},
+    "merchant_count": {"type": "integer", "minimum": 1, "maximum": 1000},
+    "currencies": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["INR", "JPY", "USD"]}},
+    "negative_event_cycle": {"const": ["REFUND", "CHARGEBACK", "REVERSAL"]},
+    "split_every_settlements": {"type": "integer", "minimum": 1},
+    "skew_cycle": {"type": "integer", "minimum": 2},
+    "skew_hotspot_slots": {"type": "integer", "minimum": 1},
+    "base_timestamp": {"const": "2026-09-01T00:00:00Z"},
+    "generator_version": {"const": "1.0"}
+  }
+}

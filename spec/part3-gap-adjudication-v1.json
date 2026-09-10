@@ -5,17 +5,18 @@
   "gaps": [
     {"gap_id": "LG-P3-G001", "owner_part": 3, "owner_stage": 2, "state": "EXECUTED_VERIFIED", "evidence": ["evidence/part3-stage2/read-only-receipt-v1.json", "evidence/part3-stage2/capability-receipt-v1.json"]},
     {"gap_id": "LG-P3-G002", "owner_part": 3, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
-    {"gap_id": "LG-P3-G003", "owner_part": 3, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G003", "owner_part": 3, "owner_stage": 3, "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI", "evidence": ["spec/part3-stage3-profile-registry-v1.json", "tools/validate_part3_stage3.py"]},
     {"gap_id": "LG-P3-G004", "owner_part": 3, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
-    {"gap_id": "LG-P3-G005", "owner_part": 3, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
+    {"gap_id": "LG-P3-G005", "owner_part": 3, "owner_stage": 3, "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI", "evidence": ["spec/part3-stage3-scenario-registry-v1.json", "src/ledgerguard/stage3/campaign.py"]},
     {"gap_id": "LG-P3-G006", "owner_part": 4, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
     {"gap_id": "LG-P3-G007", "owner_part": 4, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []},
     {"gap_id": "LG-P3-G008", "owner_part": 3, "owner_stage": 4, "state": "OWNED_OPEN", "evidence": []},
     {"gap_id": "LG-P3-G009", "owner_part": 4, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
     {"gap_id": "LG-P3-G010", "owner_part": 5, "owner_stage": 1, "state": "OWNED_OPEN", "evidence": []},
-    {"gap_id": "LG-P3-G011", "owner_part": 3, "owner_stage": 3, "state": "OWNED_OPEN", "evidence": []}
+    {"gap_id": "LG-P3-G011", "owner_part": 3, "owner_stage": 3, "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI", "evidence": ["src/ledgerguard/stage3/spark_pipeline.py", "tests/test_part3_stage3_spark.py"]}
   ],
   "closed_by_stage2": ["LG-P3-G001"],
+  "stage3_candidate_owned": ["LG-P3-G003", "LG-P3-G005", "LG-P3-G011"],
   "part3_complete": false,
   "project_complete": false
 }

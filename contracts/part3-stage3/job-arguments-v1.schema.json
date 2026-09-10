@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-job-arguments:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "attempt_id", "policy_sha256", "source_bundle_sha256", "manifest_sha256", "input_prefix", "candidate_output_prefix", "evidence_prefix", "control_record_identity", "source_commit", "source_tree", "runtime_package_sha256", "workload_bucket"],
+  "properties": {
+    "run_id": {"$ref": "#/$defs/id"},
+    "attempt_id": {"$ref": "#/$defs/id"},
+    "control_record_identity": {"$ref": "#/$defs/id"},
+    "policy_sha256": {"$ref": "#/$defs/sha256"},
+    "source_bundle_sha256": {"$ref": "#/$defs/sha256"},
+    "manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "source_tree": {"$ref": "#/$defs/sha1"},
+    "runtime_package_sha256": {"$ref": "#/$defs/sha256"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "input_prefix": {"type": "string", "pattern": "^s3://"},
+    "candidate_output_prefix": {"type": "string", "pattern": "^s3://"},
+    "evidence_prefix": {"type": "string", "pattern": "^s3://"},
+    "workload_bucket": {"type": "string", "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{7,63}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sha1": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+  }
+}

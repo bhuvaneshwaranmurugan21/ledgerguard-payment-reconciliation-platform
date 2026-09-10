@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "classification": "PART3_STAGE3_EXECUTION_CONTRACT",
+  "base_commit": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+  "scope": "DETERMINISTIC_DATA_AND_GLUE_PACKAGE",
+  "owned_master_gaps": ["LG-P3-G003", "LG-P3-G005", "LG-P3-G011"],
+  "profiles": ["correctness-small", "local-10k", "local-100k", "managed-1m"],
+  "scale_definition": "EXACT_PROCESSOR_EVENT_COUNT",
+  "physical_formats": {
+    "PROCESSOR_EVENTS": "JSONL_CANONICAL_LF",
+    "LEDGER_JOURNALS": "JSONL_CANONICAL_LF",
+    "PROCESSOR_SETTLEMENTS": "CSV_RFC4180_LF",
+    "BANK_ENTRIES": "CSV_RFC4180_LF"
+  },
+  "runtime": {"python": "3.11.13", "spark": "3.5.6", "java": "17", "aws_glue": "5.1"},
+  "output_authority": "NON_AUTHORITATIVE_CANDIDATES_ONLY",
+  "aws_calls_allowed": false,
+  "infrastructure_mutation_allowed": false,
+  "managed_workload_allowed": false,
+  "merge_automation_allowed": false,
+  "part3_complete": false,
+  "project_complete": false
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "stage": 3,
+  "state": "IMPLEMENTED_PENDING_EXACT_HEAD_CI",
+  "suites": [
+    {
+      "suite": "assets_and_controls",
+      "path": "tests/test_part3_stage3_assets.py"
+    },
+    {
+      "suite": "native_spark",
+      "path": "tests/test_part3_stage3_spark.py"
+    },
+    {
+      "suite": "failure_semantics",
+      "path": "tests/test_part3_stage3_failures.py"
+    },
+    {
+      "suite": "managed_job_entrypoint",
+      "path": "tests/test_part3_stage3_job.py"
+    },
+    {
+      "suite": "runtime_package",
+      "path": "tests/test_part3_stage3_package.py"
+    },
+    {
+      "suite": "governance_and_evidence",
+      "path": "tests/test_part3_stage3_controls.py"
+    },
+    {
+      "suite": "tooling_and_mutation_controls",
+      "path": "tests/test_part3_stage3_tooling.py"
+    }
+  ],
+  "current_compatibility_suite": [
+    "tests/test_financial_contracts_v2.py",
+    "tests/test_financial_semantics_spec.py",
+    "tests/test_part2_stage3_admission.py",
+    "tests/test_part2_stage4_transaction.py",
+    "tests/test_part2_stage5_settlement.py",
+    "tests/test_part2_stage6_finalization.py",
+    "tests/test_part2_stage7_spark_parity.py"
+  ],
+  "historical_runner_boundary": "Immutable Part 1, Part 2 Stage 1-8, Part 3 Stage 1, and Part 3 Stage 2 validators run from their exact closure worktrees in parallel CI jobs because their stage-local status assertions intentionally reject later active states.",
+  "zero_failures": true,
+  "zero_errors": true,
+  "zero_skips": true,
+  "zero_xfails": true,
+  "zero_deselections": true
+}

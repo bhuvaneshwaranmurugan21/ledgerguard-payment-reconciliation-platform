@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ledgerguard:part3-stage3-asset-manifest:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_id", "run_id", "profile_lock_file_sha256", "scenario_inventory_file_sha256", "policy_file_sha256", "run_manifest_file_sha256", "source_bundle_file_sha256", "expectations_file_sha256", "files", "authoritative_proof", "asset_manifest_sha256"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "dataset_id": {"type": "string", "pattern": "^dataset-[0-9a-f]{32}$"},
+    "run_id": {"type": "string", "pattern": "^run-[0-9a-f]{32}$"},
+    "profile_lock_file_sha256": {"$ref": "#/$defs/sha"},
+    "scenario_inventory_file_sha256": {"$ref": "#/$defs/sha"},
+    "policy_file_sha256": {"$ref": "#/$defs/sha"},
+    "run_manifest_file_sha256": {"$ref": "#/$defs/sha"},
+    "source_bundle_file_sha256": {"$ref": "#/$defs/sha"},
+    "expectations_file_sha256": {"$ref": "#/$defs/sha"},
+    "files": {"type": "array", "minItems": 9, "items": {"type": "object", "additionalProperties": false, "required": ["path", "size_bytes", "sha256"], "properties": {"path": {"type": "string", "minLength": 1}, "size_bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha"}}}},
+    "authoritative_proof": {"const": false},
+    "asset_manifest_sha256": {"$ref": "#/$defs/sha"}
+  },
+  "$defs": {"sha": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+}
