@@ -8,16 +8,13 @@ from __future__ import annotations
 
 import importlib
 import json
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Protocol, TextIO, cast
-
-
-class HCLParser(Protocol):
-    def load(self, file: TextIO) -> dict[str, Any]: ...
+from typing import Any, TextIO, cast
 
 
 def parse_module(root: Path) -> dict[str, Any]:
-    parser = cast(HCLParser, importlib.import_module("hcl2"))
+    parse_hcl = cast(Callable[[TextIO], dict[str, Any]], importlib.import_module("hcl2").load)
     result: dict[str, Any] = {
         "resource": {},
         "locals": {},
@@ -32,7 +29,7 @@ def parse_module(root: Path) -> dict[str, Any]:
         if path.is_symlink():
             raise ValueError("configuration symlink is not admitted")
         with path.open() as stream:
-            document = parser.load(stream)
+            document = parse_hcl(stream)
         for kind, entries in document.items():
             if kind not in result:
                 raise ValueError("unadmitted configuration block: " + kind)
