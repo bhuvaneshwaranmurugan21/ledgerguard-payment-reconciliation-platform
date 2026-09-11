@@ -244,6 +244,48 @@ MUTATIONS = (
         'f"s3://{bucket}/runs/query-proofs/{identity[\'run_id\']}/"',
     ),
     (
+        "immutable-publication-prefix",
+        "aws_objects.py",
+        'or not key.startswith("publications/")',
+        "or False",
+    ),
+    (
+        "immutable-conditional-create",
+        "aws_objects.py",
+        'IfNoneMatch="*",',
+        'IfNoneMatch="changed",',
+    ),
+    (
+        "immutable-readback-body",
+        "aws_objects.py",
+        "self.read(uri, history[0].version_id) != raw",
+        "False",
+    ),
+    (
+        "dynamodb-registration-identity",
+        "aws_authority.py",
+        'or self._s(item, "identity") != identity',
+        "or False",
+    ),
+    (
+        "dynamodb-active-fence",
+        "aws_authority.py",
+        'or self._n(run, "fence") != attempt.fence',
+        "or False",
+    ),
+    (
+        "dynamodb-terminal-authority",
+        "aws_authority.py",
+        'self._s(run, "status") != "COMMITTED" or self._s(run, "commit") != digest',
+        "False",
+    ),
+    (
+        "dynamodb-reachable-identity",
+        "aws_authority.py",
+        'identity is not None and value.get("identity_sha256") != identity',
+        "False",
+    ),
+    (
         "workflow-target-account",
         "workflow.py",
         'ACCOUNT_ID = "857229544428"',

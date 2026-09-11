@@ -305,8 +305,8 @@ output is not presented as a fresh scan of this successor.
 
 ## Qualification and outstanding work
 
-The current Glue successor passed the 359-test, 1,380-statement, 584-branch and
-42-mutation two-workspace qualification recorded above. All 388 inherited Stage 4
+The current authority-transport successor passed the 465-test, 1,848-statement,
+790-branch and 64-mutation two-workspace qualification recorded below. All 388 inherited Stage 4
 tests also passed when supplied the actual accepted runtime and CI artifact; the
 additional test enforces the expanded non-overridable release identity. Ruff and
 strict mypy passed. These local results do not replace native Terraform/TFLint/Trivy
@@ -314,7 +314,7 @@ CI or complete Stage 5 acceptance.
 
 `python -m tools.run_part3_stage5_incremental --output <new-directory>` runs two
 isolated source workspaces, complete coverage of every current control module,
-and 42 actual source mutations using the accepted JUnit failure verifier. Every
+and 64 actual source mutations using the accepted JUnit failure verifier. Every
 mutant runs in its own newly populated workspace to prevent interpreter/import
 state from one fault from affecting the next.
 An increment receipt explicitly reports `stage5_complete: false` and records
@@ -322,13 +322,12 @@ whether its source checkout was dirty. This is not the final Stage 5 gate runner
 
 Remaining S5-G01 work: build and qualify the installable release, provenance/SBOM and
 the final producer/consumer inventory against those exact release bytes.
-Remaining S5-G02 work: real ASL/handlers and binding the independently compared
+Remaining S5-G02 work: concrete handlers and binding the independently compared
 Parquet truth, terminal Glue receipt and complete Athena proofs to publication.
-Remaining S5-G03 work: operational registration/attempt/publication DynamoDB and S3
-adapters, complete end-to-end Part 2 replay/correction/scope semantics, AWS reader
-transport contracts and full recovery qualification. Local metadata authority,
-fixed-size publication transaction, paged financial snapshots and immutable bodies
-are implemented above; they do not by themselves close S5-G03.
+Remaining S5-G03 work: connect the operational DynamoDB/S3 transports through the
+handlers, preserve complete end-to-end Part 2 replay/correction/scope semantics,
+and complete process-crash, concurrency, ambiguous-response and effective-permission
+qualification. Local and AWS transport contracts do not by themselves close S5-G03.
 Remaining S5-G04 work: retries/failure ownership/recovery, packaging/SBOM, complete
 critical gate-tool coverage and mutations, exact-head/main acceptance and read-only
 AWS `ValidateStateMachineDefinition` receipt. Stages 6–8 remain unadmitted.
@@ -336,3 +335,59 @@ AWS `ValidateStateMachineDefinition` receipt. Stages 6–8 remain unadmitted.
 Administrator IAM installation is deferred until the final release is qualified.
 Organization/SCP/session restrictions remain unknown, and effective successor
 permissions remain unverified. The approved combined authorization remains in force.
+
+## Exact workflow head and AWS authority transport increment
+
+The production-workflow head `04650344e709281339322c1c5c9a8f70b061eb99`,
+tree `86c95387e9ae639abf5597ce152598b3e31e2960`, passed all three
+pull-request workflows. Native run 34610710910 produced independently equal
+artifacts 10268410667 (SHA-256
+`25b73676117cdee0f91697f29ed15bb0f137f4d228d4269d092974a47ad9c48c`)
+and 10268810387 (SHA-256
+`837a7b5aa149fa23ee18cf95f8e44a1777a095817d16dc5003ee0be487452d1c`).
+Independent inspection bound Terraform 1.13.1 validation, zero TFLint issues,
+388 tests, 26 killed mutations, 478/226 control and 742/292 critical
+statement/branch coverage at 100%, and the four exact source-bound Trivy
+applicability decisions with zero unreviewed findings.
+
+Incremental run 34610710948 artifact 10270085641 (SHA-256
+`e118ae0349749a7924264b0f889e1c481c1f782c04fb46bf3d2dc840806e913f`)
+independently binds two clean 431-test, 1,623-statement, 698-branch and
+57-mutation campaigns. Broader run 34610710929 passed all six jobs. Its Stage 3
+producer artifact 10268979087 (SHA-256
+`163b867671d2738473d7f3a0d70e4a29280f40743bc96d467d3adc1c28b41e40`)
+and inspection artifact 10269530464 (SHA-256
+`3f84346ceb03df4c684b351852b083d0269a6b1b4c32a9ac0d8a81b9fefda05a`)
+were independently checked: 167 manifest-bound members, equal two-run payloads,
+166 focused and 219 compatibility tests, 1,924 statements and 614 branches at
+100%, and all 24 mutations killed. No AWS call or mutation occurred.
+
+The next successor supplies fail-closed transport adapters for immutable S3
+publication objects and DynamoDB authority state. S3 publication uses conditional
+creation, SHA-256 checksum binding, bounded version-history inspection, exact
+version reads and byte-for-byte replay verification. DynamoDB registration,
+attempt admission, monotonically increasing fences, failure ownership and the
+fixed four-item namespace-root publication transaction use conditional writes and
+strongly consistent reads. Ambiguous outcomes are accepted only after exact
+terminal-run and reachable-commit verification. Stateful transport tests are
+contract tests, not managed-service evidence.
+
+This work exposed a real least-privilege defect: the controller table policy
+permitted item operations but omitted `dynamodb:TransactWriteItems`, which the
+already accepted four-item protocol requires. The action is added only to the
+existing control-table resource statement, and the resource-control and
+security-review hash bindings are renewed. This does not install or prove the
+separate administrator IAM boundary; final release and administrator qualification
+remain required.
+
+Two immutable-input local workspaces each passed 465 tests, all 1,848 statements
+and 790 branches at 100% with zero exclusions, and all 64 non-equivalent source
+mutations were killed by assertion in both campaigns. An initial trial correctly
+identified an equivalent deletion-history mutation because independent size/latest
+checks rejected the same states; it was replaced with a distinct AWS read-back
+byte-integrity mutation. No production check or acceptance threshold was removed.
+`evidence/part3-stage5/aws-authority-local.json` retains the LOCAL_VERIFIED receipt
+(SHA-256
+`e2c825688894e4dae542fde742e2ffac2a82e089e0be810cb7ae31ef047f5ca3`),
+records zero AWS calls and keeps `stage5_complete` false. Exact successor CI and
+independent artifact inspection remain required.

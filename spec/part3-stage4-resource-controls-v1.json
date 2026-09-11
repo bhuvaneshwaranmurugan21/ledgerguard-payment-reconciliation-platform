@@ -1947,7 +1947,8 @@
               "dynamodb:Query",
               "dynamodb:PutItem",
               "dynamodb:UpdateItem",
-              "dynamodb:ConditionCheckItem"
+              "dynamodb:ConditionCheckItem",
+              "dynamodb:TransactWriteItems"
             ],
             "Resource": [
               "${local.control_arn}"
