@@ -41,7 +41,7 @@ resource "aws_glue_job" "reconciliation" {
     "--additional-python-modules"             = "s3://${local.bucket}/${var.stage5_release.wheels_key}"
     "--python-modules-installer-option"       = "--no-index"
     "--enable-observability-metrics"          = "true"
-    "--enable-metrics"                        = "true"
+    "--enable-metrics"                        = ""
     "--enable-s3-parquet-optimized-committer" = "true"
     "--custom-logGroup-prefix"                = "/${local.name}/glue"
     "--job-bookmark-option"                   = "job-bookmark-disable"

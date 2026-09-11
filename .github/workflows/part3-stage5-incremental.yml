@@ -1,0 +1,53 @@
+name: Part 3 Stage 5 incremental control qualification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: part3-stage5-incremental-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  control-increment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Install hash-locked dependencies
+        run: |
+          python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
+      - name: Check control source and evidence driver
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m ruff check src/ledgerguard_control tests/test_part3_stage5_*.py tools/run_part3_stage5_incremental.py
+          python -m mypy --strict src/ledgerguard_control tools/run_part3_stage5_incremental.py
+      - name: Qualify current increment twice without AWS access
+        env:
+          PYTHONPATH: src
+        run: python -m tools.run_part3_stage5_incremental --output "$RUNNER_TEMP/stage5-increment"
+      - name: Preserve raw increment evidence including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage5-increment-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/stage5-increment
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

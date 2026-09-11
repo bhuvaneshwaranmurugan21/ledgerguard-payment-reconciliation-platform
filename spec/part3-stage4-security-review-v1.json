@@ -9,10 +9,10 @@
   },
   "scope": "PART3_SYNTHETIC_ZERO_WORKLOAD_CONTROL_PLANE_ONLY",
   "master_requirements_sha256": "ffad2f173f413eff53000c2fdd7e3840e395e5b9775f4c32bd1df07c776d2cd9",
-  "resource_controls_sha256": "3cfc0a00fecdcd27eda75bc8794b6d666bff52d3934440468300a612731b6f70",
+  "resource_controls_sha256": "33c420ef8c7f17f9fef5bf14f2ce0e34f7d5090f38796fc6be4c3bfe03d4a9db",
   "source_hashes": {
     "infra/part3/catalog.tf": "58c233e8df5867f360ca9f1ee83291e9e1160e8a78af9f4f49bfd9e19ebe4908",
-    "infra/part3/compute.tf": "7f6f87adebe25e51bc87420a70376940bf063595efbc4943a2759e6a923cd61b",
+    "infra/part3/compute.tf": "ae9dd0a337645e5b87f2e58ceda75e0cd51b29af3210f48c63c426bb1a21f435",
     "infra/part3/monitoring.tf": "a35b1f94b0d7ac39efb3ec2c8258d28ab32ff5f1b5e49cb43a0012c89c389d02",
     "infra/part3/permissions.tf": "d250304b4d07fa8f2737edbd5370a18643e9ae9d60471486025c322381fb5e14",
     "infra/part3/storage.tf": "eed1ce39bdecc765e19b9f2000169eae45e14b67013f1cf5e37f25460d1e0f1c",
