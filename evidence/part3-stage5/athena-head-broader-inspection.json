@@ -1,0 +1,41 @@
+{
+  "source_commit": "4d3f36960da3bcc072087abe9c861ab55251935c",
+  "source_tree": "2416891cec9748538eed9c761e462c27750eb4c5",
+  "workflow_run_id": 34584138945,
+  "workflow_run_attempt": 1,
+  "artifact_id": 10193604829,
+  "artifact_sha256": "7a53a92d080368c04f7467c44f1d0a2e3de8c25663de46c1eaeef21d6ef9e33a",
+  "inspection_artifact_id": 10193628393,
+  "inspection_artifact_sha256": "ba481092a93ccc22ad942001b80fe8967942abbbd8ebe1b09c83148cb6f78228",
+  "manifest_member_count": 167,
+  "two_clean_payloads_equal": true,
+  "tests": {
+    "focused-tests": {
+      "tests": 166,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "current-compatibility-tests": {
+      "tests": 219,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "covered_lines": 1924,
+    "num_statements": 1924,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "num_branches": 614,
+    "num_partial_branches": 0,
+    "covered_branches": 614,
+    "missing_branches": 0
+  },
+  "mutations_verified_and_killed": 24,
+  "deterministic_payload_sha256": "848ff8b49e3c62c2d3e7779da13ee48a05a2cda05fd8036f2b7050608eb28ec8",
+  "aws_execution": false
+}

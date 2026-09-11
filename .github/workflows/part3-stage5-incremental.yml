@@ -37,8 +37,8 @@ jobs:
         env:
           PYTHONPATH: src
         run: |
-          python -m ruff check src/ledgerguard_control tests/test_part3_stage5_*.py tools/run_part3_stage5_incremental.py
-          python -m mypy --strict src/ledgerguard_control tools/run_part3_stage5_incremental.py
+          python -m ruff check src/ledgerguard_control glue tests/test_part3_stage5_*.py tools/run_part3_stage5_incremental.py
+          python -m mypy --strict src/ledgerguard_control glue/ledgerguard_stage5_job.py tools/run_part3_stage5_incremental.py
       - name: Qualify current increment twice without AWS access
         env:
           PYTHONPATH: src

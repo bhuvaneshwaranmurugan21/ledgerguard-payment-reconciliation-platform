@@ -20,7 +20,7 @@ def module() -> dict[str, Any]:
 
 def test_actual_hcl_meets_reviewed_resource_controls(module: dict[str, Any]) -> None:
     report = evaluate(module, CONTRACT)
-    assert report["controls_passed"] == 142
+    assert report["controls_passed"] == 143
     assert report["managed_addresses"] == 33
     assert report["native_terraform_validation_required"] is True
     assert report["stage5_artifacts_required"] is True

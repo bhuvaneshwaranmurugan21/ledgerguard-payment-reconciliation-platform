@@ -97,8 +97,8 @@ tree `c3a4dc22fd59e001373cc034f0d0513471aabf65`, passed its native and
 incremental workflows. Both native artifacts were independently equal with 387 tests,
 26 mutations and complete control/critical coverage. The incremental artifact was
 independently bound to 251 tests, 984 statements, 434 branches and 28 killed
-mutations. Broader exact-head compatibility remains a publication gate for this
-successor and is not preclaimed.
+mutations. Its broader compatibility was cleared before the Athena successor was
+published; the exact Athena-head gate is recorded below.
 
 The next successor renders exactly three SELECT-only Athena summaries from closed
 database/run/attempt identifiers. Every query is confined to both injected partitions,
@@ -115,6 +115,47 @@ Two immutable-input local workspaces each passed 290 tests, all 1,136 statements
 `evidence/part3-stage5/athena-local.json` is LOCAL_VERIFIED, records zero AWS calls and
 keeps `stage5_complete` false. AWS response normalization, candidate version recheck,
 query-proof object persistence and handler/ASL integration remain required.
+
+The exact published Athena head `4d3f36960da3bcc072087abe9c861ab55251935c`,
+tree `2416891cec9748538eed9c761e462c27750eb4c5`, passed native run 34584138876,
+incremental run 34584139024 and all six jobs in broader run 34584138945. The broader
+Stage 3 artifact 10193604829 (SHA-256
+`7a53a92d080368c04f7467c44f1d0a2e3de8c25663de46c1eaeef21d6ef9e33a`)
+and its independent-inspection artifact 10193628393 (SHA-256
+`ba481092a93ccc22ad942001b80fe8967942abbbd8ebe1b09c83148cb6f78228`)
+were downloaded and independently re-evaluated. The retained manifest binds all 167
+members; two Stage 3 payloads are equal, 166 focused and 219 compatibility tests pass,
+all 1,924 statements and 614 branches are covered, and all 24 mutations fail by
+assertion. `evidence/part3-stage5/athena-head-broader-inspection.json` records the
+admission gate. This evidence admits the Glue successor increment; it does not prove
+that successor before exact-head CI.
+
+## Glue successor and terminal ownership increment
+
+The next successor keeps the accepted Stage 3 business computation byte-frozen and
+adds an explicit Stage 5 Glue entrypoint and candidate writer. Terraform supplies the
+complete release identity as non-overridable job arguments: source commit and tree,
+release-manifest and runtime-package digests, script key/digest, and both dependency
+wheel keys/digests. The adapter requires every value, rejects duplicates and unknown
+arguments, binds the workload bucket and operation-derived job name, and keeps the
+presence-only metrics flag correction described below.
+
+Candidate manifest and completion-marker schema version 2 bind the exact Glue job-run
+identity. The control-plane verifier requires the retained start arguments, first
+attempt, no predecessor, `SUCCEEDED`, no error, exact effective Glue 5.1/G.1X/two-worker
+configuration, bounded wall/execution/DPU use, and the candidate's identical job-run
+identity. Ambiguous start recovery only discovers one existing exact-argument run in
+a five-minute window with bounded pagination; it never authorizes a blind second
+start. This increment performs no Glue run and makes no AWS call.
+
+Two immutable-input local workspaces each passed 359 tests, all 1,380 statements and
+584 branches at 100% with zero exclusions, and all 42 source mutations were killed by
+assertion. `evidence/part3-stage5/glue-ownership-local.json` retains the source-bound
+LOCAL_VERIFIED receipt and truthfully records the dirty pre-commit working tree.
+An initial trial exposed mutation-process module reuse when equal-size source writes
+shared a filesystem timestamp; every mutant now receives a new byte-identical
+workspace and deterministic hash seed. Both full campaigns then produced identical
+test, coverage and mutation results without changing an acceptance threshold.
 
 ## Historical first increment
 
@@ -163,29 +204,31 @@ output is not presented as a fresh scan of this successor.
 
 ## Qualification and outstanding work
 
-The current increment passed 153 tests in each of two fresh workspaces, all 12
-source mutations were killed twice by assertion failures, and all 465 statements /
-190 branches in the seven control modules were covered with zero exclusions.
-All 387 inherited Stage 4 tests also passed when supplied the actual accepted
-runtime and CI artifact. Ruff and strict mypy passed. These local results do not
-replace native Terraform/TFLint/Trivy CI or complete Stage 5 acceptance.
+The current Glue successor passed the 359-test, 1,380-statement, 584-branch and
+42-mutation two-workspace qualification recorded above. All 388 inherited Stage 4
+tests also passed when supplied the actual accepted runtime and CI artifact; the
+additional test enforces the expanded non-overridable release identity. Ruff and
+strict mypy passed. These local results do not replace native Terraform/TFLint/Trivy
+CI or complete Stage 5 acceptance.
 
 `python -m tools.run_part3_stage5_incremental --output <new-directory>` runs two
 isolated source workspaces, complete coverage of every current control module,
-and twelve actual source mutations using the accepted JUnit failure verifier.
+and 42 actual source mutations using the accepted JUnit failure verifier. Every
+mutant runs in its own newly populated workspace to prevent interpreter/import
+state from one fault from affecting the next.
 An increment receipt explicitly reports `stage5_complete: false` and records
 whether its source checkout was dirty. This is not the final Stage 5 gate runner.
 
-Remaining S5-G01 work: concrete producers/consumers for every contract; independently
-validated input/expectation material; installed release provenance and adapter wiring.
-Remaining S5-G02 work: real ASL/handlers; independently read Parquet financial truth;
-exact bounded SQL and complete Athena proof consumption; writer ownership and race
-analysis; immutable publication copies outside the seven-day `runs/` lifecycle.
-Remaining S5-G03 work: operational registration/attempt AWS adapters, binding the
-validated run and financial preparation to publication, complete end-to-end Part 2
-replay/correction/scope semantics, AWS reader transport contracts and full recovery
-qualification. Local metadata and paged financial snapshot foundations are implemented
-above; they do not by themselves close S5-G03.
+Remaining S5-G01 work: build and qualify the installable release, provenance/SBOM and
+the final producer/consumer inventory against those exact release bytes.
+Remaining S5-G02 work: real ASL/handlers; AWS response normalization and immutable
+Athena proof persistence; binding the independently compared Parquet truth, terminal
+Glue receipt and complete Athena proofs to publication.
+Remaining S5-G03 work: operational registration/attempt/publication DynamoDB and S3
+adapters, complete end-to-end Part 2 replay/correction/scope semantics, AWS reader
+transport contracts and full recovery qualification. Local metadata authority,
+fixed-size publication transaction, paged financial snapshots and immutable bodies
+are implemented above; they do not by themselves close S5-G03.
 Remaining S5-G04 work: retries/failure ownership/recovery, packaging/SBOM, complete
 critical gate-tool coverage and mutations, exact-head/main acceptance and read-only
 AWS `ValidateStateMachineDefinition` receipt. Stages 6–8 remain unadmitted.

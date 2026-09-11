@@ -33,10 +33,11 @@ def candidate_bytes(arguments: Any) -> dict[str, bytes]:
         for family in ("transactions", "settlements", "bank-allocations")
     }
     manifest = {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "run_id": arguments.run_id,
         "attempt_id": arguments.attempt_id,
         "control_record_identity": "control-1",
+        "glue_job_run_id": "jr_" + "d" * 64,
         "transaction_count": 1,
         "settlement_count": 1,
         "allocation_count": 1,
@@ -52,7 +53,8 @@ def candidate_bytes(arguments: Any) -> dict[str, bytes]:
     values[f"completion/{PART}.txt"] = (
         canonical_bytes(
             {
-                "schema_version": "1.0",
+                "schema_version": "2.0",
+                "glue_job_run_id": "jr_" + "d" * 64,
                 "candidate_manifest_file_sha256": sha256(raw).hexdigest(),
                 "logical_sha256": "a" * 64,
                 "authoritative_proof": False,
@@ -213,6 +215,16 @@ def test_candidate_identity_and_authority_rejections(
 def test_completion_link_rejections(tmp_path: Path, field: str) -> None:
     _, values = inputs()
     rewrite_marker(values, "completion", lambda v: v.update({field: "b" * 64}))
+    store, arguments = persist(tmp_path, values)
+    with pytest.raises(ControlRejected, match="does not bind"):
+        verify_physical_candidate(store, arguments)
+
+
+def test_completion_must_bind_same_valid_glue_job_run(tmp_path: Path) -> None:
+    _, values = inputs()
+    rewrite_marker(
+        values, "completion", lambda v: v.update(glue_job_run_id="jr_" + "e" * 64)
+    )
     store, arguments = persist(tmp_path, values)
     with pytest.raises(ControlRejected, match="does not bind"):
         verify_physical_candidate(store, arguments)

@@ -123,6 +123,60 @@ MUTATIONS = (
         'f" WHERE run_id = \'{run_id}\' AND attempt_id = \'{attempt_id}\'"',
         'f" WHERE run_id = \'{run_id}\'"',
     ),
+    (
+        "candidate-glue-run-binding",
+        "candidates.py",
+        'or completion["glue_job_run_id"] != manifest["glue_job_run_id"]',
+        "or False",
+    ),
+    (
+        "glue-terminal-state",
+        "glue_run.py",
+        'run.get("JobRunState") != "SUCCEEDED"',
+        "False",
+    ),
+    (
+        "glue-start-arguments",
+        "glue_run.py",
+        '_arguments(run.get("Arguments")) != expected_arguments',
+        "False",
+    ),
+    (
+        "glue-effective-config",
+        "glue_run.py",
+        "run.get(name) != expected",
+        "False",
+    ),
+    (
+        "glue-recovery-unique",
+        "glue_run.py",
+        "len(matches) != 1",
+        "False",
+    ),
+    (
+        "glue-release-shape",
+        "glue_arguments.py",
+        "pattern.fullmatch(value) is None",
+        "False",
+    ),
+    (
+        "glue-business-completeness",
+        "glue_arguments.py",
+        "if not business.issubset(values):",
+        "if False:",
+    ),
+    (
+        "successor-bucket-binding",
+        "successor_job.py",
+        "_BUCKET.fullmatch(admitted.workload_bucket)",
+        're.fullmatch(r"ledgerguard-(.*)", admitted.workload_bucket)',
+    ),
+    (
+        "successor-marker-job-run",
+        "successor_writer.py",
+        "_JOB_RUN.fullmatch(glue_job_run_id) is None",
+        "False",
+    ),
 )
 
 
@@ -131,6 +185,7 @@ def command(argv: list[str], root: Path, output: Path, name: str) -> int:
         os.environ,
         PYTHONPATH=str(root / "src") + os.pathsep + str(root),
         PYTHONDONTWRITEBYTECODE="1",
+        PYTHONHASHSEED="0",
         PYTHONNOUSERSITE="1",
     )
     completed = subprocess.run(
@@ -146,6 +201,14 @@ def command(argv: list[str], root: Path, output: Path, name: str) -> int:
     return completed.returncode
 
 
+def populate_workspace(workspace: Path, snapshot: dict[Path, bytes]) -> None:
+    workspace.mkdir()
+    for relative, raw in snapshot.items():
+        destination = workspace / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(raw)
+
+
 def run(root: Path, output: Path) -> None:
     output.mkdir(parents=True, exist_ok=False)
     tests = sorted(
@@ -154,7 +217,7 @@ def run(root: Path, output: Path) -> None:
     if not tests:
         raise ValueError("Stage 5 tests missing")
     snapshot: dict[Path, bytes] = {}
-    for directory in ("src", "tests", "spec", "contracts"):
+    for directory in ("src", "tests", "spec", "contracts", "glue"):
         for path in sorted((root / directory).rglob("*")):
             relative = path.relative_to(root)
             if path.is_symlink():
@@ -180,11 +243,7 @@ def run(root: Path, output: Path) -> None:
         trial = output / f"run-{number}"
         trial.mkdir()
         workspace = trial / "workspace"
-        workspace.mkdir()
-        for relative, raw in snapshot.items():
-            destination = workspace / relative
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_bytes(raw)
+        populate_workspace(workspace, snapshot)
         code = command(
             [
                 sys.executable,
@@ -231,29 +290,30 @@ def run(root: Path, output: Path) -> None:
             raise ValueError("critical coverage is incomplete or excluded")
         coverage_by_run.append(totals)
         results = []
-        for name, filename, before, after in MUTATIONS:
-            path = workspace / "src/ledgerguard_control" / filename
+        shutil.rmtree(workspace)
+        for index, (name, filename, before, after) in enumerate(MUTATIONS):
+            mutation_workspace = trial / f"mutation-{index:02d}"
+            populate_workspace(mutation_workspace, snapshot)
+            path = mutation_workspace / "src/ledgerguard_control" / filename
             original = path.read_text()
             mutant = prepare_mutation(original, {"id": name, "before": before, "after": after})
             path.write_text(mutant)
-            try:
-                code = command(
-                    [
-                        sys.executable,
-                        "-B",
-                        "-m",
-                        "pytest",
-                        *tests,
-                        "--maxfail=1",
-                        "--tb=short",
-                        "--junitxml=" + str(trial / f"{name}.xml"),
-                    ],
-                    workspace,
-                    trial,
-                    name,
-                )
-            finally:
-                path.write_text(original)
+            code = command(
+                [
+                    sys.executable,
+                    "-B",
+                    "-m",
+                    "pytest",
+                    *tests,
+                    "--maxfail=1",
+                    "--tb=short",
+                    "--junitxml=" + str(trial / f"{name}.xml"),
+                ],
+                mutation_workspace,
+                trial,
+                name,
+            )
+            shutil.rmtree(mutation_workspace)
             counts, killed = evaluate_test_result(code, trial / f"{name}.xml")
             result = {
                 "id": name,
@@ -267,7 +327,6 @@ def run(root: Path, output: Path) -> None:
             (trial / "mutations.json").write_text(json.dumps(results, indent=2) + "\n")
             require_killed(result)
         mutations_by_run.append(results)
-        shutil.rmtree(workspace)
     if counts_by_run[0] != counts_by_run[1] or coverage_by_run[0] != coverage_by_run[1]:
         raise ValueError("clean-run qualification differs")
     if mutations_by_run[0] != mutations_by_run[1]:

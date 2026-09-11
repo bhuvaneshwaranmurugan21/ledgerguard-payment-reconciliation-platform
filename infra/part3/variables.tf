@@ -37,6 +37,12 @@ variable "stage5_release" {
     controller_sha256_base64 = string
     script_key               = string
     wheels_key               = string
+    manifest_sha256          = string
+    source_commit            = string
+    source_tree              = string
+    runtime_package_sha256   = string
+    script_sha256            = string
+    wheels_sha256            = string
   })
   validation {
     condition = (
@@ -45,8 +51,14 @@ variable "stage5_release" {
       can(jsondecode(var.stage5_release.definition).States[jsondecode(var.stage5_release.definition).StartAt]) &&
       filebase64sha256(var.stage5_release.validator_zip) == var.stage5_release.validator_sha256_base64 &&
       filebase64sha256(var.stage5_release.controller_zip) == var.stage5_release.controller_sha256_base64 &&
-      can(regex("^deployment/[0-9a-f]{64}/ledgerguard_stage3_job\\.py$", var.stage5_release.script_key)) &&
-      can(regex("^deployment/[0-9a-f]{64}/ledgerguard\\.gluewheels\\.zip$", var.stage5_release.wheels_key))
+      can(regex("^[0-9a-f]{64}$", var.stage5_release.manifest_sha256)) &&
+      can(regex("^[0-9a-f]{40}$", var.stage5_release.source_commit)) &&
+      can(regex("^[0-9a-f]{40}$", var.stage5_release.source_tree)) &&
+      can(regex("^[0-9a-f]{64}$", var.stage5_release.runtime_package_sha256)) &&
+      can(regex("^[0-9a-f]{64}$", var.stage5_release.script_sha256)) &&
+      can(regex("^[0-9a-f]{64}$", var.stage5_release.wheels_sha256)) &&
+      var.stage5_release.script_key == "deployment/${var.stage5_release.script_sha256}/ledgerguard_stage5_job.py" &&
+      var.stage5_release.wheels_key == "deployment/${var.stage5_release.wheels_sha256}/ledgerguard.gluewheels.zip"
     )
     error_message = "Real package bytes, bounded workflow and deployment objects must have exact identities."
   }

@@ -21,6 +21,7 @@ from .objects import ObjectVersion, VersionedObjects, assert_unchanged, snapshot
 
 _UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 _PART = rf"part-[0-9]{{5}}-{_UUID}"
+_JOB_RUN = r"^jr_[0-9a-f]{64}$"
 _PARQUET = re.compile(
     rf"(transactions|settlements|bank-allocations)/{_PART}-c[0-9]{{3}}\.snappy\.parquet"
 )
@@ -32,10 +33,11 @@ _PHYSICAL = closed(
 )
 _MANIFEST = closed(
     {
-        "schema_version": {"const": "1.0"},
+        "schema_version": {"const": "2.0"},
         "run_id": ID,
         "attempt_id": ID,
         "control_record_identity": ID,
+        "glue_job_run_id": {"type": "string", "pattern": _JOB_RUN},
         "transaction_count": UINT,
         "settlement_count": UINT,
         "allocation_count": UINT,
@@ -46,7 +48,8 @@ _MANIFEST = closed(
 )
 _COMPLETION = closed(
     {
-        "schema_version": {"const": "1.0"},
+        "schema_version": {"const": "2.0"},
+        "glue_job_run_id": {"type": "string", "pattern": _JOB_RUN},
         "candidate_manifest_file_sha256": SHA256,
         "logical_sha256": SHA256,
         "authoritative_proof": {"const": False},
@@ -151,6 +154,7 @@ def verify_physical_candidate(
     if (
         completion["candidate_manifest_file_sha256"] != manifest_ref["sha256"]
         or completion["logical_sha256"] != manifest["logical_sha256"]
+        or completion["glue_job_run_id"] != manifest["glue_job_run_id"]
     ):
         raise ControlRejected("completion does not bind candidate manifest")
     rows = manifest["physical_files"]

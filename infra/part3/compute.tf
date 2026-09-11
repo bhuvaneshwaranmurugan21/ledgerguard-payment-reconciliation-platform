@@ -47,6 +47,14 @@ resource "aws_glue_job" "reconciliation" {
     "--job-bookmark-option"                   = "job-bookmark-disable"
     "--TempDir"                               = "s3://${local.bucket}/temporary/glue/"
   }
+  non_overridable_arguments = {
+    "--release-manifest-sha256" = var.stage5_release.manifest_sha256
+    "--runtime-source-commit"    = var.stage5_release.source_commit
+    "--runtime-source-tree"      = var.stage5_release.source_tree
+    "--runtime-package-sha256"   = var.stage5_release.runtime_package_sha256
+    "--runtime-script-sha256"    = var.stage5_release.script_sha256
+    "--runtime-wheels-sha256"    = var.stage5_release.wheels_sha256
+  }
   tags = local.tags
 }
 
