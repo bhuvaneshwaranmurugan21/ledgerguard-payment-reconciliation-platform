@@ -150,3 +150,32 @@ the evidence directory, then copies and explicitly combines it after execution. 
 subprocess regression reproduces the old FileExistsError and verifies the corrected layout.
 The fresh-output requirement and 100% coverage threshold remain unchanged; this failed run is
 retained and is not claimed as native qualification.
+
+
+## Administrator successor continuation, 2026-09-11
+
+Resumed at verified source `81be7bd`; the previous native and broader CI acceptance remains
+valid for that source. Fresh read-only run `34559335116`, artifact `10183766796`, ZIP
+`bcf83bf2da942ce8f48d71cbb8202511b92a17b327eec3fbee6d72c10ba828b4`, resolves the old-policy
+baseline requirement. User-supplied AWS-managed S3 KMS key ARN resolves the missing binding.
+Neither observation proves the proposed successor installed or its effective permissions.
+
+The successor names separate bootstrap reader/recovery identities, extends only their
+read-side IAM observation scope, renders exact attachments and preserves the accepted main-only
+OIDC trust. A complete-snapshot comparator rejects role identity/path/trust/session-duration/
+boundary/inline/attachment drift, policy document drift and non-default/stale managed-policy
+versions. It returns document parity only, never AWS execution authorization or effective access.
+No historical comparator, frozen source, Terraform graph or workload denial was changed.
+
+Local qualification: 387 tests pass; 478 statements/226 branches in all eight control modules
+are covered at 100%, without exclusions. The first full local invocation omitted the required
+accepted-artifact environment bindings and failed (379 passed, 2 failures, 6 errors); the
+first mutation invocation likewise rejected a transport fault for six setup errors. Actual
+accepted-main artifact and runtime bytes were then restored from retained evidence, with the
+runtime SHA-256 verified, and used in the corrected invocations. Requirements were not skipped.
+Original failed JUnit/mutation records remain in the continuation evidence packet.
+
+The first 22 mutation entries are preserved verbatim; S4-M23 through S4-M26 exercise reader
+self-observation, role composition, policy parity and default-version binding. PR #27 remains
+draft. Fresh native/full CI, exact administrator review and remaining acceptance gates are
+required for this successor. No Stage 5 implementation or AWS mutation is claimed.

@@ -37,6 +37,10 @@ REQUIRED_MUTATIONS = (
     "S4-M20-process-timeout",
     "S4-M21-registry-identity",
     "S4-M22-process-status",
+    "S4-M23-reader-self-observation",
+    "S4-M24-successor-role-parity",
+    "S4-M25-successor-policy-parity",
+    "S4-M26-default-policy-version",
 )
 
 

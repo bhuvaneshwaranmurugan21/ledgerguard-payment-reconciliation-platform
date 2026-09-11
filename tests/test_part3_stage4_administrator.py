@@ -8,10 +8,15 @@ from typing import Any
 import pytest
 
 from tools.part3_stage4.administrator import (
+    ADMINISTRATOR_ROLES,
     BACKEND_BUCKET,
     DEPLOY_ROLE,
     LEASE_KEY,
+    READ_ROLE,
+    RESCUE_ROLE,
+    admit_identity_snapshot,
     compose,
+    identity_contract,
     partition_policies,
     statement,
 )
@@ -189,3 +194,168 @@ def test_partitioning_handles_boundaries_without_truncation() -> None:
     for rows in ([], [huge], [a, huge], [a] * 11):
         with pytest.raises(ValueError):
             partition_policies(rows, "Reviewed")
+
+
+def desired_identities(module: dict[str, Any]) -> dict[str, Any]:
+    trust = json.loads((ROOT / "contracts/part3-stage2-oidc-trust-v1.json").read_text())
+    return identity_contract(
+        compose(contract("provider-actions"), module, OPERATION, KEY_VECTOR), trust
+    )
+
+
+def local_snapshot_vector(expected: dict[str, Any]) -> dict[str, Any]:
+    """Local contract vector; not an AWS response or live qualification artifact."""
+    return {
+        "pagination_complete": True,
+        "read_errors": [],
+        "roles": deepcopy(expected["roles"]),
+        "policies": {
+            arn: {
+                "document": deepcopy(doc),
+                "default_version_id": "v1",
+                "observed_version_id": "v1",
+                "is_default_version": True,
+            }
+            for arn, doc in expected["policies"].items()
+        },
+    }
+
+
+def test_all_bootstrap_identities_can_observe_the_complete_successor(
+    module: dict[str, Any],
+) -> None:
+    packet = compose(contract("provider-actions"), module, OPERATION, KEY_VECTOR)
+    desired = desired_identities(module)
+    assert packet["read_identity"] == READ_ROLE and packet["rescue_identity"] == RESCUE_ROLE
+    assert packet["administrator_roles"] == ADMINISTRATOR_ROLES
+    assert len(set(ADMINISTRATOR_ROLES.values())) == 3
+    assert set(desired["roles"]) == set(ADMINISTRATOR_ROLES.values())
+    assert desired["workload_destroy_targets"] == []
+    assert desired["effective_permissions_verified"] is False
+    trust = json.loads((ROOT / "contracts/part3-stage2-oidc-trust-v1.json").read_text())
+    for kind in ("read", "deploy"):
+        rows = {r["Sid"]: r for p in packet[kind + "_policies"].values() for r in p["Statement"]}
+        assert set(ADMINISTRATOR_ROLES.values()).issubset(
+            rows["ReadRuntimeAndDeployIdentity"]["Resource"]
+        )
+        assert set(desired["policies"]).issubset(rows["ReadApprovedPolicyVersions"]["Resource"])
+        for row in rows.values():
+            if row["Effect"] == "Allow" and set(row["Resource"]) & set(
+                ADMINISTRATOR_ROLES.values()
+            ):
+                assert all(action.startswith(("iam:Get", "iam:List")) for action in row["Action"])
+    for arn, role in desired["roles"].items():
+        assert role["role_name"] == arn.rsplit("/", 1)[1]
+        assert role["path"] == "/" and role["permissions_boundary"] is None
+        assert role["inline_policies"] == {}
+        assert role["trust_policy"] == trust["policy"]
+        assert role["maximum_session_duration_seconds"] == 3600
+        assert 0 < len(role["attached_policy_arns"]) <= 10
+    assert desired["roles"][RESCUE_ROLE]["attached_policy_arns"] == sorted(
+        desired["roles"][DEPLOY_ROLE]["attached_policy_arns"]
+        + [f"arn:aws:iam::{ACCOUNT}:policy/{name}" for name in packet["rescue_delta_policies"]]
+    )
+    assert all("Read-v1" in arn for arn in desired["roles"][READ_ROLE]["attached_policy_arns"])
+
+
+@pytest.mark.parametrize("count", [0, 11])
+def test_bootstrap_contract_rejects_invalid_attachment_count(
+    module: dict[str, Any], count: int
+) -> None:
+    packet = compose(contract("provider-actions"), module, OPERATION, KEY_VECTOR)
+    packet["read_policies"] = {str(i): {} for i in range(count)}
+    trust = json.loads((ROOT / "contracts/part3-stage2-oidc-trust-v1.json").read_text())
+    with pytest.raises(ValueError, match="quota envelope"):
+        identity_contract(packet, trust)
+
+
+def test_document_parity_does_not_claim_effective_permission(module: dict[str, Any]) -> None:
+    desired = desired_identities(module)
+    observed = local_snapshot_vector(desired)
+    before = deepcopy(observed)
+    result = admit_identity_snapshot(desired, observed)
+    assert result["equal"] is True and result["identity_count"] == 3
+    assert result["effective_permissions_verified"] is False
+    assert result["aws_execution_authorized"] is False
+    assert result["classification"] == "IAM_DOCUMENT_PARITY_ONLY"
+    assert observed == before
+
+
+@pytest.mark.parametrize(
+    "fault",
+    [
+        "pagination",
+        "errors",
+        "missing-role",
+        "extra-role",
+        "trust",
+        "boundary",
+        "duration",
+        "inline",
+        "extra-attachment",
+        "missing-attachment",
+        "wrong-name",
+        "wrong-path",
+        "missing-policy",
+        "extra-policy",
+        "changed-policy",
+        "lost-deny",
+        "stale-version",
+        "not-default",
+        "invalid-version",
+        "integer-default-flag",
+    ],
+)
+def test_successor_parity_rejects_permission_and_observation_drift(
+    module: dict[str, Any], fault: str
+) -> None:
+    desired = desired_identities(module)
+    observed = local_snapshot_vector(desired)
+    role = observed["roles"][DEPLOY_ROLE]
+    arn = next(iter(observed["policies"]))
+    version = observed["policies"][arn]
+    if fault == "pagination":
+        observed["pagination_complete"] = False
+    if fault == "errors":
+        observed["read_errors"] = ["AccessDenied"]
+    if fault == "missing-role":
+        del observed["roles"][READ_ROLE]
+    if fault == "extra-role":
+        observed["roles"]["unexpected"] = deepcopy(role)
+    if fault == "trust":
+        role["trust_policy"]["Statement"][0].pop("Condition")
+    if fault == "boundary":
+        role["permissions_boundary"] = "unreviewed-boundary"
+    if fault == "duration":
+        role["maximum_session_duration_seconds"] = 43200
+    if fault == "inline":
+        role["inline_policies"]["old-policy"] = {"Statement": []}
+    if fault == "extra-attachment":
+        role["attached_policy_arns"].append("unreviewed-policy")
+    if fault == "missing-attachment":
+        role["attached_policy_arns"].pop()
+    if fault == "wrong-name":
+        role["role_name"] = "another-role"
+    if fault == "wrong-path":
+        role["path"] = "/another/"
+    if fault == "missing-policy":
+        del observed["policies"][arn]
+    if fault == "extra-policy":
+        observed["policies"]["unreviewed-policy"] = deepcopy(version)
+    if fault == "changed-policy":
+        version["document"]["Statement"][0]["Action"] = ["iam:*"]
+    if fault == "lost-deny":
+        for row in observed["policies"].values():
+            row["document"]["Statement"] = [
+                s for s in row["document"]["Statement"] if s["Effect"] != "Deny"
+            ]
+    if fault == "stale-version":
+        version["observed_version_id"] = "v2"
+    if fault == "not-default":
+        version["is_default_version"] = False
+    if fault == "invalid-version":
+        version["default_version_id"] = "v0"
+    if fault == "integer-default-flag":
+        version["is_default_version"] = 1
+    with pytest.raises(ValueError):
+        admit_identity_snapshot(desired, observed)

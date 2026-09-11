@@ -8,14 +8,26 @@ from __future__ import annotations
 
 import json
 import re
+from copy import deepcopy
 from typing import Any
 
-from tools.part3_stage4.iam import ACCOUNT, REGION, ROLES, WORKLOAD_STARTS, identities, resolve
+from tools.part3_stage4.iam import (
+    ACCOUNT,
+    REGION,
+    ROLES,
+    WORKLOAD_STARTS,
+    exact_policy_set,
+    identities,
+    resolve,
+)
 
 BACKEND_BUCKET = f"ledgerguard-tfstate-{ACCOUNT}-{REGION}"
 LEASE_TABLE = f"arn:aws:dynamodb:{REGION}:{ACCOUNT}:table/ledgerguard-operation-leases"
 LEASE_KEY = "ledgerguard/part3/platform/deployment"
 DEPLOY_ROLE = f"arn:aws:iam::{ACCOUNT}:role/LedgerGuardGitHubOidcRole"
+READ_ROLE = f"arn:aws:iam::{ACCOUNT}:role/LedgerGuardPart3ReadOnlyRole"
+RESCUE_ROLE = f"arn:aws:iam::{ACCOUNT}:role/LedgerGuardPart3RecoveryRole"
+ADMINISTRATOR_ROLES = {"deploy": DEPLOY_ROLE, "read": READ_ROLE, "rescue": RESCUE_ROLE}
 
 
 def statement(
@@ -160,7 +172,7 @@ def compose(
                 "iam:ListRoleTags",
                 "iam:ListInstanceProfilesForRole",
             ],
-            [DEPLOY_ROLE, *names["role_arns"].values()],
+            [*ADMINISTRATOR_ROLES.values(), *names["role_arns"].values()],
         )
     )
     read.append(
@@ -265,7 +277,12 @@ def compose(
             ["iam:GetPolicy", "iam:GetPolicyVersion", "iam:ListPolicyVersions"],
             list(names["boundary_arns"].values())
             + [
-                f"arn:aws:iam::{ACCOUNT}:policy/LedgerGuardPart3Deploy-v1-{i:02}"
+                f"arn:aws:iam::{ACCOUNT}:policy/{prefix}-{i:02}"
+                for prefix in (
+                    "LedgerGuardPart3Deploy-v1",
+                    "LedgerGuardPart3Read-v1",
+                    "LedgerGuardPart3RescueDelta-v1",
+                )
                 for i in range(1, 11)
             ],
         )
@@ -302,8 +319,82 @@ def compose(
         "read_policies": read_policies,
         "deploy_policies": deploy_policies,
         "rescue_delta_policies": rescue,
-        "rescue_identity": "ADMINISTRATOR_SELECTED_SEPARATE_ROLE",
+        "read_identity": READ_ROLE,
+        "rescue_identity": RESCUE_ROLE,
+        "administrator_roles": ADMINISTRATOR_ROLES.copy(),
         "trust_change": False,
         "executor_self_remediation": False,
         "aws_execution": False,
+    }
+
+
+def identity_contract(packet: dict[str, Any], trust: dict[str, Any]) -> dict[str, Any]:
+    """Bind bootstrap identities and attachments; bootstrap stays outside Terraform.
+
+    The caller supplies the frozen Stage 2 trust contract. No identity can assume
+    another identity, and only a separate administrator can install these policies.
+    """
+    groups = {
+        "deploy": packet["deploy_policies"],
+        "read": packet["read_policies"],
+        "rescue": {**packet["deploy_policies"], **packet["rescue_delta_policies"]},
+    }
+    roles = {}
+    policies = {}
+    for kind, arn in ADMINISTRATOR_ROLES.items():
+        attached = sorted(f"arn:aws:iam::{ACCOUNT}:policy/{name}" for name in groups[kind])
+        if not attached or len(attached) > 10:
+            raise ValueError("identity attachment quota envelope exceeded or empty")
+        roles[arn] = {
+            "role_name": arn.rsplit("/", 1)[1],
+            "path": "/",
+            "trust_policy": deepcopy(trust["policy"]),
+            "maximum_session_duration_seconds": trust["maximum_session_duration_seconds"],
+            "permissions_boundary": None,
+            "inline_policies": {},
+            "attached_policy_arns": attached,
+        }
+        policies.update(
+            {
+                f"arn:aws:iam::{ACCOUNT}:policy/{name}": deepcopy(doc)
+                for name, doc in groups[kind].items()
+            }
+        )
+    return {
+        "schema_version": "1.0",
+        "classification": "DESIRED_ADMINISTRATOR_BOOTSTRAP_NOT_INSTALLED",
+        "roles": roles,
+        "policies": policies,
+        "workload_destroy_targets": [],
+        "effective_permissions_verified": False,
+    }
+
+
+def admit_identity_snapshot(expected: dict[str, Any], snapshot: dict[str, Any]) -> dict[str, Any]:
+    """Check complete collected IAM projections, never infer effective AWS access.
+
+    The collector must bind the raw API journal/source/identity separately. This
+    function admits document parity only. SCPs, resource policies and actual
+    session restrictions remain operational admission inputs, not assumed absent.
+    """
+    if snapshot.get("pagination_complete") is not True or snapshot.get("read_errors") != []:
+        raise ValueError("incomplete IAM observation")
+    exact_policy_set(expected["roles"], snapshot["roles"])
+    documents = {}
+    for arn, version in snapshot["policies"].items():
+        if (
+            not re.fullmatch(r"v[1-9][0-9]*(\.[A-Za-z0-9-]*)?", version["default_version_id"])
+            or version["observed_version_id"] != version["default_version_id"]
+            or version["is_default_version"] is not True
+        ):
+            raise ValueError("managed policy default version differs")
+        documents[arn] = version["document"]
+    exact_policy_set(expected["policies"], documents)
+    return {
+        "classification": "IAM_DOCUMENT_PARITY_ONLY",
+        "identity_count": len(expected["roles"]),
+        "policy_count": len(documents),
+        "equal": True,
+        "effective_permissions_verified": False,
+        "aws_execution_authorized": False,
     }
