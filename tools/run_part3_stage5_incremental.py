@@ -93,6 +93,36 @@ MUTATIONS = (
         '        raise ControlRejected("Parquet changed during read")',
         "if False:\n        raise ControlRejected(\"Parquet changed during read\")",
     ),
+    (
+        "athena-expectation-pin",
+        "athena.py",
+        "digest.hexdigest() != trusted_sha256",
+        "False",
+    ),
+    (
+        "athena-scan-bound",
+        "athena.py",
+        "execution.scanned_bytes <= SCAN_LIMIT_BYTES",
+        "execution.scanned_bytes <= SCAN_LIMIT_BYTES + 1",
+    ),
+    (
+        "athena-pagination-chain",
+        "athena.py",
+        "page.request_token != expected_token",
+        "False",
+    ),
+    (
+        "athena-exact-rows",
+        "athena.py",
+        "rows != list(expected)",
+        "False",
+    ),
+    (
+        "athena-partition-confinement",
+        "athena.py",
+        'f" WHERE run_id = \'{run_id}\' AND attempt_id = \'{attempt_id}\'"',
+        'f" WHERE run_id = \'{run_id}\'"',
+    ),
 )
 
 

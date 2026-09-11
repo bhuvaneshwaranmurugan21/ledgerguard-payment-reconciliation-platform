@@ -90,6 +90,32 @@ retains the source-bound LOCAL_VERIFIED receipt; `stage5_complete` remains false
 `aws_calls` remains zero. Exact successor CI and independent artifact inspection are
 still required.
 
+## Bounded Athena proof increment
+
+The published financial head `e353f5744f69b4eb07c60642f01a7404c95293db`,
+tree `c3a4dc22fd59e001373cc034f0d0513471aabf65`, passed its native and
+incremental workflows. Both native artifacts were independently equal with 387 tests,
+26 mutations and complete control/critical coverage. The incremental artifact was
+independently bound to 251 tests, 984 statements, 434 branches and 28 killed
+mutations. Broader exact-head compatibility remains a publication gate for this
+successor and is not preclaimed.
+
+The next successor renders exactly three SELECT-only Athena summaries from closed
+database/run/attempt identifiers. Every query is confined to both injected partitions,
+groups by currency/status-or-disposition/reasons, uses DECIMAL(38,0) sums exposed as
+canonical strings, and has a source-derived SQL digest. Verification binds the exact
+query, workgroup, engine, result location, expected owner, SSE-S3, terminal success,
+100 MiB scan maximum and five-minute execution maximum. It consumes the complete
+request/next-token chain with explicit 128-page, 4,096-row and expectation-document
+bounds, rejects null/header/type/order errors, and compares exact aggregate rows to
+an independently digest-pinned canonical input. No query is started by this code.
+
+Two immutable-input local workspaces each passed 290 tests, all 1,136 statements and
+510 branches at 100% with zero exclusions, and all 33 source mutations were killed.
+`evidence/part3-stage5/athena-local.json` is LOCAL_VERIFIED, records zero AWS calls and
+keeps `stage5_complete` false. AWS response normalization, candidate version recheck,
+query-proof object persistence and handler/ASL integration remain required.
+
 ## Historical first increment
 
 The control package now implements bounded strict JSON and seven draft versioned
