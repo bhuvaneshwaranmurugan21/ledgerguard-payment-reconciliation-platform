@@ -243,6 +243,30 @@ MUTATIONS = (
         'f"s3://{bucket}/publications/query-proofs/{identity[\'run_id\']}/"',
         'f"s3://{bucket}/runs/query-proofs/{identity[\'run_id\']}/"',
     ),
+    (
+        "workflow-target-account",
+        "workflow.py",
+        'ACCOUNT_ID = "857229544428"',
+        'ACCOUNT_ID = "857229544429"',
+    ),
+    (
+        "workflow-success-bypass",
+        "workflow.py",
+        'states["ValidateCandidate"]["Next"] = "RunTransactionsQuery"',
+        'states["ValidateCandidate"]["Next"] = "PreparePublication"',
+    ),
+    (
+        "workflow-retry-bound",
+        "workflow.py",
+        '"MaxAttempts": 3,',
+        '"MaxAttempts": 4,',
+    ),
+    (
+        "workflow-failure-ownership",
+        "workflow.py",
+        'return {"Type": "Pass", "Parameters": parameters, "Next": "RecordFailure"}',
+        'return {"Type": "Pass", "Parameters": parameters, "Next": "WorkflowFailed"}',
+    ),
 )
 
 

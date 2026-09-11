@@ -203,6 +203,61 @@ source-bound LOCAL_VERIFIED receipt, records zero AWS calls and keeps
 `stage5_complete` false. Exact successor CI and independent artifact inspection
 remain required.
 
+## Exact Athena-proof head and production workflow increment
+
+The exact published Athena-proof head
+`9afb0570ba26ab5ba1c939c79be414d7b3092cfb`, tree
+`53a3980ea495aedac572817be99ca4969e994377`, passed all three pull-request
+workflows. Native run 34602995559 passed both independent jobs. Artifacts
+10265515905 (SHA-256
+`e4bcf67a55004f4303dc803e7d76dad6bc18a4c7c8d8e2da82d44c90239676d1`)
+and 10265675836 (SHA-256
+`72947316e228211fe6496d6e724c0b32554d1fdbb1bdaaffed478bf6075dd080`)
+were independently downloaded and revalidated: exact commit/tree binding,
+Terraform 1.13.1 validation, zero TFLint issues, 388 tests, 26 killed
+mutations, complete 478/226 control and 742/292 critical statement/branch
+coverage, equal normalized payloads, and all four source-bound Trivy decisions
+with zero unreviewed findings.
+
+Incremental run 34602995189 artifact 10264734895 (SHA-256
+`3262fc991f68a7bd36ca396244d11f7f193d7155fb9268d0e097d27d125063c0`)
+independently binds two clean 405-test, 1,495-statement, 636-branch and
+53-mutation campaigns to that exact head. Broader run 34602995168 passed all
+six jobs. Its Stage 3 producer artifact 10265439362 (SHA-256
+`80673837aed47615bf350cd65decb3a92b37c291ed596812d392c982b9e4df5b`)
+and inspection artifact 10264804887 (SHA-256
+`c2a4628e63b5ad78448a487b35a932d9a5e96cba04d25db6d03e2ad1ae458318`)
+were independently checked: 167 manifest-bound members, equal two-run
+payloads, 166 focused and 219 compatibility tests, 1,924 statements and 614
+branches at 100%, and all 24 mutations killed. No AWS call or mutation occurred.
+
+The next successor renders the real Standard Workflow for one closed operation
+identity in the frozen account and region. It uses exact direct Lambda ARNs,
+optimized `StartJobRun.sync`, and three separately partition-confined
+`StartQueryExecution.sync` tasks with deterministic idempotency tokens. The
+ordered success path cannot bypass input validation, durable registration,
+Glue, physical/financial candidate validation, all three query proofs,
+preparation or conditional authority publication. A committed replay terminates
+without running a workload.
+
+Lambda and Athena retries are limited to named transient service errors with
+capped exponential backoff. Glue start has no blind retry because Glue exposes
+no start idempotency token. Every task catches its original error and cause into
+the untouched pointer-only state before the dedicated failure recorder; early
+failure handling deliberately does not select optional paths that do not yet
+exist. Static admission proves complete reachability, exact task resources,
+bounded retries, explicit failure ownership and the exact success chain.
+
+Two immutable-input local workspaces each passed 431 tests. All 1,623 statements
+and 698 branches are covered at 100% with zero exclusions, and all 57 source
+mutations were killed by assertion in both campaigns. The exact receipt is
+`evidence/part3-stage5/workflow-local.json` (SHA-256
+`abee8a4aafc0f3b1b706c6aa5fa453c4a04dd2363ca071b5bf8b8c468a1c904d`).
+It truthfully records zero AWS calls, a dirty pre-commit tree and
+`stage5_complete: false`. AWS definition validation, concrete controller and
+validator entrypoints, installed release/SBOM qualification, operational AWS
+authority transports and the complete final gate remain outstanding.
+
 ## Historical first increment
 
 The control package now implements bounded strict JSON and seven draft versioned
