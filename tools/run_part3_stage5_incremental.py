@@ -62,6 +62,37 @@ MUTATIONS = (
     ("snapshot-head", "publication.py", 'store.read_head() != root["financial_head"]', "False"),
     ("snapshot-offset", "publication.py", 'entry["offset"] != offset', "False"),
     ("snapshot-order", "publication.py", "name < previous", "False"),
+    (
+        "financial-expected-pin",
+        "financial_rows.py",
+        "digest.hexdigest() != trusted_expected_sha256",
+        "False",
+    ),
+    (
+        "financial-family-inventory",
+        "financial_rows.py",
+        "member_families != expected_families",
+        "False",
+    ),
+    (
+        "financial-delta",
+        "financial_rows.py",
+        "amounts[name] != amount",
+        "False",
+    ),
+    (
+        "financial-key",
+        "financial_rows.py",
+        "row[\"reconciliation_key\"] != expected_key",
+        "False",
+    ),
+    (
+        "financial-post-read-identity",
+        "financial_rows.py",
+        'if _hash_file(member.path) != (member.size_bytes, member.sha256):\n'
+        '        raise ControlRejected("Parquet changed during read")',
+        "if False:\n        raise ControlRejected(\"Parquet changed during read\")",
+    ),
 )
 
 
@@ -92,10 +123,26 @@ def run(root: Path, output: Path) -> None:
     )
     if not tests:
         raise ValueError("Stage 5 tests missing")
+    snapshot: dict[Path, bytes] = {}
+    for directory in ("src", "tests", "spec", "contracts"):
+        for path in sorted((root / directory).rglob("*")):
+            relative = path.relative_to(root)
+            if path.is_symlink():
+                raise ValueError("qualification input contains a symbolic link")
+            if path.is_file() and not {"__pycache__", ".pytest_cache"} & set(relative.parts):
+                snapshot[relative] = path.read_bytes()
+    snapshot[Path("pyproject.toml")] = (root / "pyproject.toml").read_bytes()
     source = {
         str(path.relative_to(root)): sha256(path.read_bytes()).hexdigest()
         for path in sorted((root / "src/ledgerguard_control").glob("*.py"))
     }
+    captured_source = {
+        str(path): sha256(raw).hexdigest()
+        for path, raw in snapshot.items()
+        if path.parent == Path("src/ledgerguard_control") and path.suffix == ".py"
+    }
+    if captured_source != source:
+        raise ValueError("captured control source inventory differs")
     counts_by_run = []
     coverage_by_run = []
     mutations_by_run = []
@@ -104,13 +151,10 @@ def run(root: Path, output: Path) -> None:
         trial.mkdir()
         workspace = trial / "workspace"
         workspace.mkdir()
-        for name in ("src", "tests", "spec", "contracts"):
-            shutil.copytree(
-                root / name,
-                workspace / name,
-                ignore=shutil.ignore_patterns("__pycache__", ".pytest_cache"),
-            )
-        shutil.copy(root / "pyproject.toml", workspace / "pyproject.toml")
+        for relative, raw in snapshot.items():
+            destination = workspace / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(raw)
         code = command(
             [
                 sys.executable,

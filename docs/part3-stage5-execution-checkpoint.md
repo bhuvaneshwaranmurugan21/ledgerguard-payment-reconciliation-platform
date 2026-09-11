@@ -57,6 +57,39 @@ producer/inspection ZIP digests are respectively
 Those receipts establish the first increment's compatibility, not this successor's
 exact-head CI or full Stage 5 acceptance. PR #28 remains draft.
 
+## Independently compared Parquet increment
+
+The exact published snapshot head `80e81d249d10f8d47b277f59a25133ef2f2b3c57`
+passed all three workflows. Broader run 34576410961 passed all six jobs; native run
+34576410960 produced two independently equal payloads with 387 tests, 26 killed
+mutations, 478/226 control statements/branches and 742/292 critical
+statements/branches all at 100%. Incremental run 34576411110 independently bound
+215 tests, 803 statements, 332 branches and 23 killed mutations to the exact source.
+The broader Stage 3 producer artifact and its CI inspection were downloaded, parsed
+independently and matched byte-for-byte. No AWS workload or mutation occurred.
+
+The successor adds an independent disk-backed exact row comparison of real Arrow
+Parquet transaction, settlement and bank-allocation data against externally admitted
+canonical JSONL evidence. It verifies the trusted expectation digest, exact family
+inventory, physical member digests/sizes before and after streaming, strict Arrow
+schemas, complete row counts, canonical types, int64 arithmetic, currency, grain,
+reconciliation identities, status/reason consistency and both directions of set
+equality. A 256-row batch bound and SQLite temporary store avoid unbounded in-memory
+materialization. Candidate rows cannot claim financial authority. Tests include
+values above 2^53, offsetting cross-currency errors, omissions, extras, duplicates,
+file substitution, schema changes and every semantic rejection boundary.
+
+The CPython 3.11 dependency closure admits only the hashed manylinux2014 x86_64
+`numpy 2.1.3` and `pyarrow 17.0.0` wheels and was installed successfully in a fresh
+environment with no index or source build. The two-workspace driver now snapshots
+every source, test, spec and contract byte once before either run, closing a discovered
+copy-time race. Its complete local qualification passed 251 tests in each workspace,
+all 984 statements and 434 branches at 100% with zero exclusions, and all 28 source
+mutations were killed twice. `evidence/part3-stage5/financial-parquet-local.json`
+retains the source-bound LOCAL_VERIFIED receipt; `stage5_complete` remains false and
+`aws_calls` remains zero. Exact successor CI and independent artifact inspection are
+still required.
+
 ## Historical first increment
 
 The control package now implements bounded strict JSON and seven draft versioned
