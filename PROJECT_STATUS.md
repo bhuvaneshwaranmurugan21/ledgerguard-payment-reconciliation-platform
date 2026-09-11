@@ -8,9 +8,10 @@ and all six broader CI jobs in run 34565883880 passed. Required artifacts were
 downloaded and independently inspected before Stage 5 source admission.
 
 Stage 5 is in progress: strict control contracts, release/input admission, the Glue
-service adapter, candidate byte/version validation and local/S3 object interfaces
-are implemented as an increment. Full orchestration, financial validation and atomic
-publication remain open. See `docs/part3-stage5-execution-checkpoint.md` for the
+service adapter, candidate byte/version validation, local/S3 object interfaces,
+durable local metadata authority and paged financial-store snapshots are implemented
+as increments. Full orchestration, independent Parquet financial validation and
+production publication/reader adapters remain open. See `docs/part3-stage5-execution-checkpoint.md` for the
 implemented boundary and every remaining Stage 5 gate. Stages 6–8 remain pending.
 Successor IAM is not installed; effective permissions are not verified. No new
 AWS mutation, managed workload execution or Part 3 completion is claimed.

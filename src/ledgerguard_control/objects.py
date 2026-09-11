@@ -128,6 +128,23 @@ class LocalVersionedObjects:
     def put(self, uri: str, raw: bytes) -> str:
         return self._append(uri, raw, False)
 
+    def put_immutable(self, uri: str, raw: bytes) -> str:
+        """Atomic create-or-verify; any previous overwrite/deletion is a conflict."""
+        parse_s3_uri(uri)
+        with self._connect() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            rows = connection.execute(
+                "SELECT sequence, deleted, body FROM versions WHERE uri=?", (uri,)
+            ).fetchall()
+            if rows:
+                if len(rows) != 1 or rows[0][1] or bytes(rows[0][2]) != raw:
+                    raise ControlRejected("immutable object conflict")
+                return str(rows[0][0])
+            cursor = connection.execute(
+                "INSERT INTO versions (uri, deleted, body) VALUES (?, 0, ?)", (uri, raw)
+            )
+            return str(cursor.lastrowid)
+
     def delete(self, uri: str) -> str:
         return self._append(uri, b"", True)
 

@@ -36,6 +36,32 @@ MUTATIONS = (
     ("version-stability", "objects.py", "snapshot(store, prefix) != before", "False"),
     ("version-identity", "aws_objects.py", 'response.get("VersionId") != version_id', "False"),
     ("truncated-stream", "aws_objects.py", "size != length", "False"),
+    ("run-identity", "authority.py", "row[0] != identity or row[2] != namespace", "False"),
+    ("attempt-owner-fence", "authority.py", "if row != expected:", "if False:"),
+    (
+        "namespace-cas",
+        "authority.py",
+        "(None if root is None else root[0]) != predecessor",
+        "False",
+    ),
+    ("terminal-authority", "authority.py", 'run != ("COMMITTED", digest)', "False"),
+    (
+        "early-transaction-commit",
+        "authority.py",
+        'fault("before_run_terminal")',
+        'connection.commit(); fault("before_run_terminal")',
+    ),
+    (
+        "read-integrity",
+        "authority.py",
+        'canonical_digest(value) != digest or value.get("namespace") != namespace',
+        "False",
+    ),
+    ("immutable-body", "objects.py", "bytes(rows[0][2]) != raw", "False"),
+    ("snapshot-body", "publication.py", "sha256(raw).hexdigest() != digest", "False"),
+    ("snapshot-head", "publication.py", 'store.read_head() != root["financial_head"]', "False"),
+    ("snapshot-offset", "publication.py", 'entry["offset"] != offset', "False"),
+    ("snapshot-order", "publication.py", "name < previous", "False"),
 )
 
 
@@ -78,7 +104,7 @@ def run(root: Path, output: Path) -> None:
         trial.mkdir()
         workspace = trial / "workspace"
         workspace.mkdir()
-        for name in ("src", "tests", "spec"):
+        for name in ("src", "tests", "spec", "contracts"):
             shutil.copytree(
                 root / name,
                 workspace / name,
@@ -144,6 +170,7 @@ def run(root: Path, output: Path) -> None:
                         "-m",
                         "pytest",
                         *tests,
+                        "--maxfail=1",
                         "--tb=short",
                         "--junitxml=" + str(trial / f"{name}.xml"),
                     ],

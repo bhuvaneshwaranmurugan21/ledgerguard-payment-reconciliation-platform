@@ -7,7 +7,57 @@ Native main run 34565883871 and all six jobs in broader main run 34565883880 pas
 Both native artifacts and the broader Stage 3 producer/inspection artifacts were
 downloaded and independently inspected before this Stage 5 branch was admitted.
 
-## Current increment
+## Current continuation — metadata authority and financial snapshots
+
+The next increment adds durable immutable run registration, active attempt ownership,
+monotonic fencing, namespace predecessor CAS, a fixed four-item DynamoDB publication
+request, and exact persisted replay verification beyond service token windows.
+The local metadata transaction covers the namespace root, immutable commit, terminal
+run pointer and attempt status together. These are actual SQLite transactions;
+the DynamoDB request builder is a transport contract, not live AWS evidence.
+
+Financial snapshots now seal and restore the actual accepted `FinalizationStore`:
+requests, commit ancestry, proofs, cases, outcomes and source history are retained.
+Readers resolve one committed metadata root before restoring and verifying its entire
+financial history. Snapshot bodies are content-addressed under `publications/`, outside
+the seven-day `runs/` lifecycle. Atomic create-or-verify rejects overwrite/deletion
+history. Objects are at most 64 KiB; index pages contain at most 32 entries or children.
+The tree grows across levels without enlarging the four-item publication transaction.
+
+Tests exercise 1,000 actual finalized exception cases, index page boundaries, durable
+reopen, accepted balanced-journal correction and exact correction replay, malformed
+and missing snapshot identities, concurrent creation and predecessor publication,
+stale fences, and process termination during preparation and atomic publication.
+These local snapshot tests do not establish independently computed Parquet truth,
+managed job ownership, effective AWS permissions or a complete production handler.
+The handler must still bind the admitted run and validation evidence to the prepared
+financial snapshot and preserve complete correction/scope behavior end to end.
+
+Local qualification passed 215 tests in each of two fresh workspaces, with all 803
+statements and 332 branches covered, zero exclusions, and all 23 actual source
+mutations killed twice. Ruff and strict mypy passed. The raw source-bound receipt is
+`evidence/part3-stage5/snapshot-local.json`; it truthfully records a dirty working
+tree based on the first published head. Exact successor CI is still required.
+Both full clean baselines include every Stage 5 test,
+including the 1,000-case test; the critical coverage threshold remains 100% for all
+control source with zero exclusions. The mutation campaign retains all original
+mutations and adds authority/snapshot faults. Each mutant stops at its first failure;
+acceptance still requires an actual assertion failure, zero collection/runtime errors,
+and zero skipped tests. Stopping a killed mutant does not truncate either baseline.
+The CI timeout is increased to accommodate the larger real financial-store campaign.
+
+The first published head `1983ceb37ea36ee92bb131c4552f9ad62ee769ff` passed broader run
+34571572450 (all six jobs), native run 34571572578 (both artifacts independently
+inspected), and incremental run 34571572570 (raw tests, executable-source coverage
+inventory and all source mutations independently inspected). Its fresh native scans
+retain the existing exact four source-bound applicability decisions. Broader Stage 3
+producer/inspection ZIP digests are respectively
+`5afd4fbf42de8e3f5fdc38ac87492d3b669e64307291b5a95f1b826d58221bd1` and
+`f9504c869aa4dc090a4bc69e729838dd1c7d3fa2688abba4de08516f31cd9f64`.
+Those receipts establish the first increment's compatibility, not this successor's
+exact-head CI or full Stage 5 acceptance. PR #28 remains draft.
+
+## Historical first increment
 
 The control package now implements bounded strict JSON and seven draft versioned
 control-document shapes; execution/release admission; an enumerated Glue argument
@@ -72,9 +122,11 @@ validated input/expectation material; installed release provenance and adapter w
 Remaining S5-G02 work: real ASL/handlers; independently read Parquet financial truth;
 exact bounded SQL and complete Athena proof consumption; writer ownership and race
 analysis; immutable publication copies outside the seven-day `runs/` lifecycle.
-Remaining S5-G03 work: registration, attempt/fence, fixed-size DynamoDB CAS,
-full accepted Part 2 replay/correction/scope semantics, durable reader/index paging,
-concurrent and process-crash qualification and ambiguous-response recovery.
+Remaining S5-G03 work: operational registration/attempt AWS adapters, binding the
+validated run and financial preparation to publication, complete end-to-end Part 2
+replay/correction/scope semantics, AWS reader transport contracts and full recovery
+qualification. Local metadata and paged financial snapshot foundations are implemented
+above; they do not by themselves close S5-G03.
 Remaining S5-G04 work: retries/failure ownership/recovery, packaging/SBOM, complete
 critical gate-tool coverage and mutations, exact-head/main acceptance and read-only
 AWS `ValidateStateMachineDefinition` receipt. Stages 6–8 remain unadmitted.
