@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/workspace/scratch/8bad16c7b3bb/rehearsal/stages4-8/tools/terraform",
+    "-chdir=/workspace/scratch/8bad16c7b3bb/ledgerguard-execution/infra/part3",
+    "validate",
+    "-json"
+  ],
+  "exit_code": 1,
+  "stdout": "{\n  \"format_version\": \"1.0\",\n  \"valid\": false,\n  \"error_count\": 1,\n  \"warning_count\": 0,\n  \"diagnostics\": [\n    {\n      \"severity\": \"error\",\n      \"summary\": \"Missing required provider\",\n      \"detail\": \"This configuration requires provider registry.terraform.io/hashicorp/aws, but that provider isn't available. You may be able to install it automatically by running:\\n  terraform init\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

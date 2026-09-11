@@ -1,0 +1,615 @@
+{
+  "schema_version": "1.0",
+  "provider_version": "6.11.0",
+  "provider_sources": [
+    {
+      "path": "athena/workgroup.go",
+      "git_blob": "0ccc8d9b2fbf16c85d85188346cdc97a06cb6eba",
+      "sha256": "e2d2e8dff35b415b694fac37c9da4d0c268b3c78929c4beff43530a63ce9cfbd",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/athena/workgroup.go"
+    },
+    {
+      "path": "cloudwatch/metric_alarm.go",
+      "git_blob": "fa116ce377ab732fbca0be96334f2169deed53b9",
+      "sha256": "864c2c933f1204b709f0f4caa891fcca6f3fd480cf8a55fcc76b09e0f9da9548",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/cloudwatch/metric_alarm.go"
+    },
+    {
+      "path": "dynamodb/table.go",
+      "git_blob": "b221d4ef9c06f86c095bd36448f29b021235b0a6",
+      "sha256": "f5abc5177e8de9d88d4ada1aa029a624515af3cef7ddab6fff947b24e3d36472",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/dynamodb/table.go"
+    },
+    {
+      "path": "glue/catalog_database.go",
+      "git_blob": "74c6a6f818bdbcde75e7ced880a3a3271da49c8c",
+      "sha256": "158755341ea6087ac078577bd408aeb2b3c8fdab5fc5907ef39849df881a1e40",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/glue/catalog_database.go"
+    },
+    {
+      "path": "glue/catalog_table.go",
+      "git_blob": "67dc1ecab8112099207a8b46c1dd618ab41f4487",
+      "sha256": "7e9b61c0f455a857b7736b8640f7a5406a27daba3034f1b5c7c10b914461d90f",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/glue/catalog_table.go"
+    },
+    {
+      "path": "glue/job.go",
+      "git_blob": "0ab40df19fe6673b56c7460f36b0aacc20ca4bd1",
+      "sha256": "331c6dbe286a11470cddca0517f966eb1e313ef0868691fd3a93c16ced9d809f",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/glue/job.go"
+    },
+    {
+      "path": "iam/role.go",
+      "git_blob": "66887151464ab48dd89b7b7f2362e254498a6254",
+      "sha256": "d467394948e4a9e45f96631beace975e7ab3f821f759d0e3799841a7cb361b40",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/iam/role.go"
+    },
+    {
+      "path": "iam/role_policy.go",
+      "git_blob": "0de22e1ecb0aafb0364ed40640919cc7a62c1c08",
+      "sha256": "7ae420ed43e786e8a143e05436cf84307ba6c6a0811178534e7e0ca5f9a6c3eb",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/iam/role_policy.go"
+    },
+    {
+      "path": "lambda/function.go",
+      "git_blob": "74422a7b53de26baf0f936ed322592c1f491494c",
+      "sha256": "2596a3e5f3f8acf2c96403f599b88cee556c5b77ac56c5c84dd8c3e54064d624",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/lambda/function.go"
+    },
+    {
+      "path": "logs/group.go",
+      "git_blob": "640658404788c882f6cc485d5d909edc197199ec",
+      "sha256": "23e9662fdfb008d664e742b09e0120678e6ecc790fdf52d1cfa8d4f7d2ae2f4f",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/logs/group.go"
+    },
+    {
+      "path": "s3/bucket.go",
+      "git_blob": "f9f031052d0d16168f5d94ff08d2ef427d86116e",
+      "sha256": "db97326a399f5063c07d432c84d68f89a18f93b2f586ac62ca766f5c1423a546",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket.go"
+    },
+    {
+      "path": "s3/bucket_lifecycle_configuration.go",
+      "git_blob": "3bb4bdc8a09d63037ca8d2c0a3fd4a0270ae7bd5",
+      "sha256": "ccb2bc0c09022832852620c58d707b6595204abe1b4cbfb80cd340c4dfd5206a",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket_lifecycle_configuration.go"
+    },
+    {
+      "path": "s3/bucket_ownership_controls.go",
+      "git_blob": "54b83e3d932adcbe9174fe660bc06f2835d48c0b",
+      "sha256": "28789f7352fb6754eedba6184b35f5922231896e092cac0c237fbd0fb3009601",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket_ownership_controls.go"
+    },
+    {
+      "path": "s3/bucket_policy.go",
+      "git_blob": "6f045b8bf8eeb046f0b2c69408372d0406abbc3d",
+      "sha256": "74a49c25d54b8db6a4c3d6c9d88b2398b0d8ff467f66ef06847f19d96ad5ae22",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket_policy.go"
+    },
+    {
+      "path": "s3/bucket_public_access_block.go",
+      "git_blob": "3089034f69e91099fbe0be9916262fce892ed113",
+      "sha256": "4ffca072ccd67cd4b1842762b3022ae7e8855f0cec21d119303a0bcbd13650fe",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket_public_access_block.go"
+    },
+    {
+      "path": "s3/bucket_server_side_encryption_configuration.go",
+      "git_blob": "8c3eccbf72b3636439394c44241fa2a039a17c5e",
+      "sha256": "e48862a97be04c5081e56e223f8fe58a8d7c7956a40df158fd8d75d28eb7bf5a",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket_server_side_encryption_configuration.go"
+    },
+    {
+      "path": "s3/bucket_versioning.go",
+      "git_blob": "43887f069e5f1b70f26b68717d2e33f0f029f696",
+      "sha256": "6c69d31fb484d2e1feb5fe1a50c41f8e1d6494404f38cbc5c219dccd5813b2dc",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/s3/bucket_versioning.go"
+    },
+    {
+      "path": "sfn/state_machine.go",
+      "git_blob": "d017f4c5a839695ccae71d43d1358997398179b7",
+      "sha256": "ce6ec80493ad6b5fb663b67430403681267ede54a6041d71aceb66eb90f96df1",
+      "url": "https://github.com/hashicorp/terraform-provider-aws/blob/v6.11.0/internal/service/sfn/state_machine.go"
+    }
+  ],
+  "statements": [
+    {
+      "sid": "WorkloadBucketRead",
+      "actions": [
+        "s3:ListBucket",
+        "s3:ListBucketVersions",
+        "s3:ListBucketMultipartUploads",
+        "s3:GetBucketAcl",
+        "s3:GetBucketCORS",
+        "s3:GetBucketWebsite",
+        "s3:GetBucketVersioning",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketRequestPayment",
+        "s3:GetBucketLogging",
+        "s3:GetLifecycleConfiguration",
+        "s3:GetReplicationConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:GetBucketLocation",
+        "s3:GetBucketOwnershipControls",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:GetBucketTagging",
+        "s3:GetBucketPolicy",
+        "s3:GetBucketNotification"
+      ],
+      "resources": [
+        "${bucket_arn}"
+      ],
+      "classification": "READ",
+      "provider_source": "s3/bucket.go",
+      "reason": "Provider refresh reads the complete bucket configuration even where optional settings are absent; inventory detects unexpected triggers, versions and uploads."
+    },
+    {
+      "sid": "WorkloadBucketConfigure",
+      "actions": [
+        "s3:DeleteBucket",
+        "s3:PutBucketPolicy",
+        "s3:DeleteBucketPolicy",
+        "s3:PutBucketOwnershipControls",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutBucketVersioning",
+        "s3:PutEncryptionConfiguration",
+        "s3:PutLifecycleConfiguration",
+        "s3:PutBucketTagging"
+      ],
+      "resources": [
+        "${bucket_arn}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "s3/bucket.go",
+      "reason": "Only the enumerated bucket controls, tag updates and final empty-bucket removal. No website, replication, notification or ACL grant mutation."
+    },
+    {
+      "sid": "WorkloadCodeRead",
+      "actions": [
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+      ],
+      "resources": [
+        "${bucket_arn}/deployment/*"
+      ],
+      "classification": "READ",
+      "provider_source": "lambda/function.go",
+      "reason": "Inspect exact admitted code object bytes; real Stage 5 manifest constrains each uploaded key and version."
+    },
+    {
+      "sid": "WorkloadCodeWrite",
+      "actions": [
+        "s3:PutObject",
+        "s3:AbortMultipartUpload",
+        "s3:ListMultipartUploadParts"
+      ],
+      "resources": [
+        "${bucket_arn}/deployment/*"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "s3/bucket.go",
+      "reason": "Only admitted code materialization in the canary, never synthetic business input."
+    },
+    {
+      "sid": "OwnedVersionCleanup",
+      "actions": [
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:AbortMultipartUpload",
+        "s3:ListMultipartUploadParts"
+      ],
+      "resources": [
+        "${bucket_arn}/*"
+      ],
+      "classification": "CLEANUP",
+      "provider_source": "s3/bucket.go",
+      "reason": "Owned-scope version/marker/multipart cleanup after evidence preservation. No bootstrap bucket deletion rights."
+    },
+    {
+      "sid": "ControlTableRead",
+      "actions": [
+        "dynamodb:DescribeTable",
+        "dynamodb:DescribeContinuousBackups",
+        "dynamodb:DescribeTimeToLive",
+        "dynamodb:ListTagsOfResource",
+        "dynamodb:GetItem",
+        "dynamodb:Scan"
+      ],
+      "resources": [
+        "${control_arn}"
+      ],
+      "classification": "READ",
+      "provider_source": "dynamodb/table.go",
+      "reason": "Property and zero-business-record observation, with paginated scan."
+    },
+    {
+      "sid": "ControlTableLifecycle",
+      "actions": [
+        "dynamodb:CreateTable",
+        "dynamodb:DeleteTable",
+        "dynamodb:UpdateContinuousBackups",
+        "dynamodb:TagResource",
+        "dynamodb:UntagResource"
+      ],
+      "resources": [
+        "${control_arn}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "dynamodb/table.go",
+      "reason": "Create/delete one on-demand table and enable specified PITR after creation. No restore/import, indexes, stream, TTL or item writes."
+    },
+    {
+      "sid": "GlueJobRead",
+      "actions": [
+        "glue:GetJob",
+        "glue:GetJobRuns",
+        "glue:GetTags"
+      ],
+      "resources": [
+        "${glue_arn}"
+      ],
+      "classification": "READ",
+      "provider_source": "glue/job.go",
+      "reason": "Read the owned definition, retained histories and tags without job starts."
+    },
+    {
+      "sid": "GlueJobLifecycle",
+      "actions": [
+        "glue:CreateJob",
+        "glue:DeleteJob",
+        "glue:TagResource",
+        "glue:UntagResource"
+      ],
+      "resources": [
+        "${glue_arn}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "glue/job.go",
+      "reason": "Create/delete the exact inert job definition; update/retry/start are not admitted canary operations."
+    },
+    {
+      "sid": "CatalogRead",
+      "actions": [
+        "glue:GetDatabase",
+        "glue:GetDatabases",
+        "glue:GetTable",
+        "glue:GetTables",
+        "glue:GetTableVersions",
+        "glue:GetPartitionIndexes"
+      ],
+      "resources": [
+        "${catalog_arns}"
+      ],
+      "classification": "READ",
+      "provider_source": "glue/catalog_table.go",
+      "reason": "Read all declared catalog ancestors and owned table/version/index metadata; there are no crawler or partition writes."
+    },
+    {
+      "sid": "CatalogLifecycle",
+      "actions": [
+        "glue:CreateDatabase",
+        "glue:DeleteDatabase",
+        "glue:CreateTable",
+        "glue:DeleteTable"
+      ],
+      "resources": [
+        "${catalog_arns}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "glue/catalog_table.go",
+      "reason": "Create/delete the qualified explicit database and three tables."
+    },
+    {
+      "sid": "AthenaRead",
+      "actions": [
+        "athena:GetWorkGroup",
+        "athena:ListQueryExecutions",
+        "athena:ListTagsForResource"
+      ],
+      "resources": [
+        "${workgroup_arn}"
+      ],
+      "classification": "READ",
+      "provider_source": "athena/workgroup.go",
+      "reason": "Verify bounded workgroup configuration and zero query history."
+    },
+    {
+      "sid": "AthenaLifecycle",
+      "actions": [
+        "athena:CreateWorkGroup",
+        "athena:DeleteWorkGroup",
+        "athena:TagResource",
+        "athena:UntagResource"
+      ],
+      "resources": [
+        "${workgroup_arn}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "athena/workgroup.go",
+      "reason": "Create/delete the enforced workgroup; no query start or named query creation."
+    },
+    {
+      "sid": "FunctionsRead",
+      "actions": [
+        "lambda:GetFunction",
+        "lambda:GetFunctionConfiguration",
+        "lambda:GetFunctionConcurrency",
+        "lambda:GetFunctionCodeSigningConfig",
+        "lambda:GetPolicy",
+        "lambda:ListTags",
+        "lambda:ListVersionsByFunction",
+        "lambda:ListAliases",
+        "lambda:ListFunctionUrlConfigs",
+        "lambda:ListFunctionEventInvokeConfigs"
+      ],
+      "resources": [
+        "${function_arns}"
+      ],
+      "classification": "READ",
+      "provider_source": "lambda/function.go",
+      "reason": "Provider refresh and independent no-trigger/no-url/no-alias/no-invocation-capability inventory."
+    },
+    {
+      "sid": "FunctionsLifecycle",
+      "actions": [
+        "lambda:CreateFunction",
+        "lambda:DeleteFunction",
+        "lambda:PutFunctionConcurrency",
+        "lambda:TagResource",
+        "lambda:UntagResource"
+      ],
+      "resources": [
+        "${function_arns}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "lambda/function.go",
+      "reason": "Create/delete the two real packages with bounded concurrency. No invocation, URL, permission grant or event-source creation."
+    },
+    {
+      "sid": "WorkflowRead",
+      "actions": [
+        "states:DescribeStateMachine",
+        "states:ListStateMachineVersions",
+        "states:ListExecutions",
+        "states:ListTagsForResource"
+      ],
+      "resources": [
+        "${workflow_arn}"
+      ],
+      "classification": "READ",
+      "provider_source": "sfn/state_machine.go",
+      "reason": "Read Standard definition and ensure no executions or extra versions."
+    },
+    {
+      "sid": "WorkflowLifecycle",
+      "actions": [
+        "states:CreateStateMachine",
+        "states:DeleteStateMachine",
+        "states:TagResource",
+        "states:UntagResource"
+      ],
+      "resources": [
+        "${workflow_arn}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "sfn/state_machine.go",
+      "reason": "Only exact Standard definition create/delete; no start/update/publication."
+    },
+    {
+      "sid": "LogsRead",
+      "actions": [
+        "logs:ListTagsForResource",
+        "logs:DescribeLogStreams",
+        "logs:GetLogEvents",
+        "logs:FilterLogEvents"
+      ],
+      "resources": [
+        "${log_arns}"
+      ],
+      "classification": "READ",
+      "provider_source": "logs/group.go",
+      "reason": "Inspect only owned metadata/log groups; payload-free log policy remains required."
+    },
+    {
+      "sid": "LogsLifecycle",
+      "actions": [
+        "logs:CreateLogGroup",
+        "logs:PutRetentionPolicy",
+        "logs:DeleteLogGroup",
+        "logs:TagResource",
+        "logs:UntagResource"
+      ],
+      "resources": [
+        "${log_arns}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "logs/group.go",
+      "reason": "Create/delete exact short-retention log groups; no account-wide resource policy edits by the deploy identity."
+    },
+    {
+      "sid": "AlarmRead",
+      "actions": [
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:ListTagsForResource"
+      ],
+      "resources": [
+        "${alarm_arns}"
+      ],
+      "classification": "READ",
+      "provider_source": "cloudwatch/metric_alarm.go",
+      "reason": "Verify alarm definitions and absence of actions."
+    },
+    {
+      "sid": "AlarmLifecycle",
+      "actions": [
+        "cloudwatch:PutMetricAlarm",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource"
+      ],
+      "resources": [
+        "${alarm_arns}"
+      ],
+      "classification": "MUTATE",
+      "provider_source": "cloudwatch/metric_alarm.go",
+      "reason": "Only three owned metric alarms with no action targets."
+    },
+    {
+      "sid": "GlobalReadOnlyInventory",
+      "actions": [
+        "glue:GetJobs"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": "glue/job.go",
+      "reason": "This list API has no useful per-job resource restriction; collectors must fully paginate and filter the frozen ownership scope."
+    },
+    {
+      "sid": "GlobalS3Inventory",
+      "actions": [
+        "s3:ListAllMyBuckets"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "List-only bucket metadata needed for independent zero-residue proof."
+    },
+    {
+      "sid": "GlobalTableInventory",
+      "actions": [
+        "dynamodb:ListTables"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "List-only table metadata needed for independent zero-residue proof."
+    },
+    {
+      "sid": "GlobalFunctionInventory",
+      "actions": [
+        "lambda:ListFunctions",
+        "lambda:ListEventSourceMappings"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "List-only function/trigger inventory with explicit owned-scope filtering."
+    },
+    {
+      "sid": "GlobalWorkflowInventory",
+      "actions": [
+        "states:ListStateMachines",
+        "states:ValidateStateMachineDefinition"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "List-only inventory and syntax validation, without executions."
+    },
+    {
+      "sid": "GlobalLogsInventory",
+      "actions": [
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:ListLogDeliveries"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "List-only logs support/inventory; global mutation is not granted."
+    },
+    {
+      "sid": "ReadCost",
+      "actions": [
+        "ce:GetCostAndUsage"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "Cumulative gross cost, complete pagination and no credit netting."
+    },
+    {
+      "sid": "ReadBudget",
+      "actions": [
+        "budgets:ViewBudget"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "Existing budget observation only."
+    },
+    {
+      "sid": "ReadMetrics",
+      "actions": [
+        "cloudwatch:GetMetricData",
+        "cloudwatch:GetMetricStatistics",
+        "cloudwatch:ListMetrics"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "Independent complete no-workload metric window; no invented samples."
+    },
+    {
+      "sid": "ReadTagInventory",
+      "actions": [
+        "tag:GetResources"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "Cross-service paginated tagged-resource reconciliation."
+    },
+    {
+      "sid": "ReadQuotas",
+      "actions": [
+        "servicequotas:ListServiceQuotas"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "Current owned-service quota admission."
+    },
+    {
+      "sid": "ValidatePolicies",
+      "actions": [
+        "access-analyzer:ValidatePolicy"
+      ],
+      "resources": [
+        "*"
+      ],
+      "classification": "READ",
+      "provider_source": null,
+      "reason": "IAM Access Analyzer syntax/security validation, not a policy mutation or execution simulation."
+    }
+  ],
+  "qualification": "SOURCE_AUDITED_NOT_EFFECTIVE_AWS_PERMISSION_PROOF",
+  "excluded_provider_branches": {
+    "restore_import": "No restore/import configuration exists; those API calls remain denied.",
+    "updates": "The canary admits creates and its reviewed destroy only; generic update/replace/import plans are rejected.",
+    "iam_profiles_and_attachments": "No instance profiles or managed role attachments are created. Unexpected attachment/profile residue blocks; no force detach permission is granted.",
+    "bucket_optional_mutations": "No website, ACL grants, CORS, logging target, replication, object lock or notification resources are configured; their generic provider update paths remain denied."
+  }
+}

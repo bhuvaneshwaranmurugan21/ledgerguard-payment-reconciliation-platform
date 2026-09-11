@@ -1,0 +1,24 @@
+{
+  "classification": "LOCAL_SOURCE_VERIFIED_NOT_NATIVE_OR_AWS_QUALIFIED",
+  "source_parent": "81be7bdadbdaf9e23c73f552b37d3343df8b52a3",
+  "source_sha256": {
+    "tools/part3_stage4/administrator.py": "0bef8d56bcc9efeb6d20dbd4a429b9cffdccba60f2b0e9625cedc727fb09b6ba",
+    "tools/run_part3_stage4_mutations.py": "44ec1c21093e3d223f765c322e1a483f95f113b8a410b09244d6a7b12aac1031",
+    "tests/test_part3_stage4_administrator.py": "913e4dd66948d98f1f0aff5e8fde0375e83f02592998937109f496d018adb884",
+    "spec/part3-stage4-mutations-v1.json": "da12705b1bc3690b6d710ae1ce81a747be6e104ed030b2012eb1f3da97582dec"
+  },
+  "tests": 387,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "package_statements": 478,
+  "package_branches": 226,
+  "package_coverage_percent": 100,
+  "excluded_lines": 0,
+  "registered_mutations": 26,
+  "killed_mutations": 26,
+  "original_22_mutations_unchanged": true,
+  "python": "3.11.13",
+  "effective_aws_permission_verified": false,
+  "stage4_complete": false
+}

@@ -1,0 +1,243 @@
+{
+  "schema_version": "1.0",
+  "classification": "PART3_STAGE3_EXTERNAL_CLOSURE_RECEIPT",
+  "repository": "bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform",
+  "pull_request": 26,
+  "validated_pr": {
+    "head": "32d4eca4a74a7215c32e36684e619b822b3df675",
+    "base": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+    "tree": "32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a",
+    "commits": 2,
+    "changed_files": 61,
+    "ci": {
+      "run_id": 34460546656,
+      "run_number": 68,
+      "run_attempt": 1,
+      "event": "pull_request",
+      "conclusion": "success",
+      "jobs": [
+        {"id": 102817206114, "name": "foundation", "conclusion": "success"},
+        {"id": 102817206209, "name": "part3-stage1-closure", "conclusion": "success"},
+        {"id": 102817205885, "name": "part3-stage2-current", "conclusion": "success"},
+        {"id": 102817206295, "name": "part3-stage2-closure", "conclusion": "success"},
+        {"id": 102817206106, "name": "part3-stage3-current", "conclusion": "success"},
+        {"id": 102823860997, "name": "part3-stage3-artifact-inspection", "conclusion": "success"}
+      ],
+      "artifacts": [
+        {
+          "purpose": "STAGE3_EVIDENCE",
+          "id": 10146167661,
+          "name": "ledgerguard-part3-stage3-32d4eca4a74a7215c32e36684e619b822b3df675",
+          "zip_sha256": "ff275299bd55f324a9fdd52a93e9e1ac3fd3e1cf5eb27b02be4f0408e0a5f7c4",
+          "governed_members": 167
+        },
+        {
+          "purpose": "INDEPENDENT_INSPECTION",
+          "id": 10146192989,
+          "name": "ledgerguard-part3-stage3-inspection-32d4eca4a74a7215c32e36684e619b822b3df675",
+          "zip_sha256": "04a8f8ee42db858e925881c2863ca2cf06dbcb6afa27f941a421ea1eb0621a87"
+        },
+        {
+          "purpose": "HISTORICAL_STAGE2_REPRODUCTION",
+          "id": 10145385351,
+          "name": "ledgerguard-part3-stage2-historical-32d4eca4a74a7215c32e36684e619b822b3df675",
+          "zip_sha256": "234b1d12175a1de77e005efb796d87ddb2f45a27656620faf1061b6c18dfc3c3"
+        }
+      ],
+      "inspection": {
+        "independently_accepted": true,
+        "artifact_manifest_file_sha256": "6926cb63e5dec98292386f034f6471ff7cc77c8fd2a778e06ff1fe49fbcf1eab",
+        "deterministic_payload_sha256": "9cdb8ec95acb16d5f913248c2c7ceb4ebe61cf776a15fcc02867c0541eaab8f2"
+      }
+    }
+  },
+  "squash_merge": {
+    "commit": "3370898d83539fe41594c7cb7ad15e920dcb5674",
+    "sole_parent": "d0fb01392f7f975909229f418c13a9c73ba8395e",
+    "tree": "32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a",
+    "tree_equals_validated_pr": true,
+    "github_signature_verified": true,
+    "merged_at": "2026-09-10T10:22:49Z"
+  },
+  "main_ci": {
+    "run_id": 34465749986,
+    "run_number": 69,
+    "run_attempt": 1,
+    "event": "push",
+    "ref": "refs/heads/main",
+    "head": "3370898d83539fe41594c7cb7ad15e920dcb5674",
+    "tree": "32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a",
+    "conclusion": "success",
+    "jobs": [
+      {"id": 102833805828, "name": "foundation", "conclusion": "success"},
+      {"id": 102833805647, "name": "part3-stage1-closure", "conclusion": "success"},
+      {"id": 102833805941, "name": "part3-stage2-current", "conclusion": "success"},
+      {"id": 102833806033, "name": "part3-stage2-closure", "conclusion": "success"},
+      {"id": 102833806028, "name": "part3-stage3-current", "conclusion": "success"},
+      {"id": 102837851917, "name": "part3-stage3-artifact-inspection", "conclusion": "success"}
+    ],
+    "artifacts": [
+      {
+        "purpose": "STAGE3_EVIDENCE",
+        "id": 10147923228,
+        "name": "ledgerguard-part3-stage3-3370898d83539fe41594c7cb7ad15e920dcb5674",
+        "zip_sha256": "4a7672f8c5ca2c8112847db2ffd881abd6efd6baf782914ddea0708560598236",
+        "governed_members": 167
+      },
+      {
+        "purpose": "INDEPENDENT_INSPECTION",
+        "id": 10147944010,
+        "name": "ledgerguard-part3-stage3-inspection-3370898d83539fe41594c7cb7ad15e920dcb5674",
+        "zip_sha256": "5ee6afde6ac1aabf1703211ef4a8077c2ecfd8040285ae603565275e4bc17cbb"
+      },
+      {
+        "purpose": "HISTORICAL_STAGE2_REPRODUCTION",
+        "id": 10147459619,
+        "name": "ledgerguard-part3-stage2-historical-3370898d83539fe41594c7cb7ad15e920dcb5674",
+        "zip_sha256": "0befa805264e79f029795a0bd39fe64138dc463658b3d9b7975a0ef4007064ca"
+      }
+    ],
+    "inspection": {
+      "independently_accepted": true,
+      "member_count": 167,
+      "artifact_manifest_file_sha256": "d945def0c3d3cb8b6d6dd04de40a6bd4a163801ac1fc432c5cf29a3545ac6de1",
+      "deterministic_payload_sha256": "5229c57aea6b6eb9df056104a7efcc916be98b88f99ed7ffdf6696c9f38c6b4f",
+      "local_reinspection_equal_to_ci_receipt": true
+    }
+  },
+  "closure_validation": {
+    "clean_runs": 2,
+    "deterministic_equal": true,
+    "focused_tests": {"tests": 166, "failures": 0, "errors": 0, "skipped": 0},
+    "compatibility_tests": {"tests": 219, "failures": 0, "errors": 0, "skipped": 0},
+    "coverage": {
+      "statements": 1924,
+      "covered_statements": 1924,
+      "branches": 614,
+      "covered_branches": 614,
+      "missing_lines": 0,
+      "missing_branches": 0,
+      "partial_branches": 0,
+      "percent": 100.0
+    },
+    "semantic_mutations": {"total": 24, "killed": 24, "survivors": 0},
+    "ruff": "PASS",
+    "mypy_strict": "PASS",
+    "seeded_campaign": {"seed": 730031, "cases": 13, "passed": 13},
+    "accepted_asset_set": {
+      "source_tree": "32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a",
+      "profiles": {
+        "correctness-small": {
+          "dataset_id": "dataset-3ad45e045a2aa24ef53459437ff1b7cc",
+          "source_bundle_sha256": "c5462863aa3d3f7989efe61cec83dd43dc14633a5e4142f05fc5444d16d6033b",
+          "asset_manifest_sha256": "6b051db17d87b001fd7f4e51527e9bfa2e331ac08dad45ae3a2e9aeff7408491"
+        },
+        "local-10k": {
+          "dataset_id": "dataset-4655dff50731d6b8c0f474bca8783f8d",
+          "source_bundle_sha256": "f51dddc21d3c3b5dde0e5da77f435d8165bf3a8eef3636e7b21591fcd6708f73",
+          "asset_manifest_sha256": "292e669d718b4123817bd647236c8c4b358229dea639b32a9d6e47a5e625d099"
+        },
+        "local-100k": {
+          "dataset_id": "dataset-f77fa1d59e83b8b803b09fc089d2daed",
+          "source_bundle_sha256": "2e4b82c5e4d0ce70ee5735ef2244dbf764b45f6acf8080067863d10c06d6c6ef",
+          "asset_manifest_sha256": "de9e6d8c8b8e9f1b7442b9b86757e75757914dcb91420b361e67e96c6a789ae4"
+        },
+        "managed-1m": {
+          "dataset_id": "dataset-ce92cdd2f462d586102270663ed8193c",
+          "source_bundle_sha256": "63e84cfd84d284ac0ead6a1c1cd20778ea40234f0442e9d13f5bcf594e598b84",
+          "asset_manifest_sha256": "1d7c1b2f2bb6f54e539c21924ab1a9d0c34bf620beefaece82ad90cd82bf209a"
+        }
+      }
+    },
+    "managed_1m": {
+      "dataset_id": "dataset-ce92cdd2f462d586102270663ed8193c",
+      "counts": {
+        "PROCESSOR_EVENTS": 1000000,
+        "LEDGER_JOURNALS": 1010000,
+        "PROCESSOR_SETTLEMENTS": 10000,
+        "BANK_ENTRIES": 11000
+      },
+      "source_bundle_sha256": "63e84cfd84d284ac0ead6a1c1cd20778ea40234f0442e9d13f5bcf594e598b84",
+      "asset_manifest_sha256": "1d7c1b2f2bb6f54e539c21924ab1a9d0c34bf620beefaece82ad90cd82bf209a",
+      "maximum_peak_rss_kib": 39700
+    },
+    "spark": {
+      "transaction_count": 16,
+      "settlement_count": 4,
+      "allocation_count": 5,
+      "logical_sha256": "fd00042b465b94f55ade7b45f8b8e2cd114217ba1dd6f1e8d5fab31e6608e9af",
+      "authoritative_proof": false
+    },
+    "package_identity": {
+      "source_commit": "3370898d83539fe41594c7cb7ad15e920dcb5674",
+      "source_tree": "32e66b9d97cc63cd588eca14ecaf6602b9ff7f0a",
+      "runtime_bundle_sha256": "12a263615abeeea33a6202ecc49d9fe27606fe1c2b37650f25ba9adebcb7b7f7",
+      "runtime_bundle_members": 14,
+      "runtime_wheel_sha256": "dbc78cb26fdceca4aac805826b572381c837505276ebf8297ef6304a17783476",
+      "runtime_wheel_members": 35,
+      "sbom_sha256": "09199428f39f781275c734e1036d20b3894fdf35451af64f58b2c2088fcbecd3",
+      "toolchain": {"python": "3.11.13", "spark": "3.5.6", "java": "17", "aws_glue": "5.1"},
+      "offline_install_verified": true,
+      "generator_excluded": true,
+      "oracle_excluded": true
+    },
+    "artifact_safety_verified": true
+  },
+  "stage3_adjudication": {
+    "requirements_total": 30,
+    "requirements_externally_verified": 30,
+    "stage3_gates_total": 24,
+    "stage3_gates_externally_verified": 24,
+    "gates": [
+      {"gate_id": "P3-S3-G001", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G002", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G003", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G004", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G005", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G006", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G007", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G008", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G009", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G010", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G011", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G012", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G013", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G014", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G015", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G016", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G017", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G018", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G019", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G020", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G021", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G022", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G023", "state": "EXTERNALLY_VERIFIED"},
+      {"gate_id": "P3-S3-G024", "state": "EXTERNALLY_VERIFIED"}
+    ],
+    "owned_master_gaps_externally_verified": ["LG-P3-G003", "LG-P3-G005", "LG-P3-G011"],
+    "downstream_part3_master_gates_not_executed": [
+      "managed_deployment_verified",
+      "managed_reconciliation_verified",
+      "scale_and_cost_verified"
+    ],
+    "stage_complete": true,
+    "next_owner": "PART3_STAGE4"
+  },
+  "claim_boundary": {
+    "aws_execution": false,
+    "managed_workload_execution": false,
+    "infrastructure_mutation": false,
+    "authoritative_proof": false,
+    "managed_correctness_verified": false,
+    "managed_performance_verified": false,
+    "managed_scale_verified": false,
+    "production_ready": false,
+    "part3_complete": false,
+    "project_complete": false
+  },
+  "repository_import": {
+    "state": "PENDING_APPEND_ONLY_IMPORT_BY_PART3_STAGE4",
+    "producer_gate_preserved_historically_pending": "P3-S3-G023",
+    "stage4_work_started": false
+  }
+}

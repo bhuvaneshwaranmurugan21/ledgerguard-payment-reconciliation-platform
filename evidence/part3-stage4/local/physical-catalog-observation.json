@@ -1,0 +1,493 @@
+{
+  "classification": "INSTALLED_ACCEPTED_RUNTIME_PARQUET_READBACK",
+  "schemas": {
+    "transactions": {
+      "columns": [
+        {
+          "name": "reconciliation_key",
+          "type": "string"
+        },
+        {
+          "name": "key_components",
+          "type": "struct<processor:string,merchant_id:string,payment_id:string,event_class:string,currency:string>"
+        },
+        {
+          "name": "totals",
+          "type": "struct<processor_minor:bigint,ledger_minor:bigint,processor_ledger_delta_minor:bigint,difference_minor:bigint,processor_record_count:bigint,ledger_journal_count:bigint>"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "reason_codes",
+          "type": "array<string>"
+        },
+        {
+          "name": "source_identities",
+          "type": "array<array<string>>"
+        },
+        {
+          "name": "authoritative_proof",
+          "type": "boolean"
+        }
+      ],
+      "count": 16,
+      "schema": {
+        "type": "struct",
+        "fields": [
+          {
+            "name": "reconciliation_key",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "key_components",
+            "type": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "processor",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "merchant_id",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "payment_id",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "event_class",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "currency",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                }
+              ]
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "totals",
+            "type": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "processor_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "ledger_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "processor_ledger_delta_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "difference_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "processor_record_count",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "ledger_journal_count",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                }
+              ]
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "reason_codes",
+            "type": {
+              "type": "array",
+              "elementType": "string",
+              "containsNull": true
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "source_identities",
+            "type": {
+              "type": "array",
+              "elementType": {
+                "type": "array",
+                "elementType": "string",
+                "containsNull": true
+              },
+              "containsNull": true
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "authoritative_proof",
+            "type": "boolean",
+            "nullable": true,
+            "metadata": {}
+          }
+        ]
+      }
+    },
+    "settlements": {
+      "columns": [
+        {
+          "name": "reconciliation_key",
+          "type": "string"
+        },
+        {
+          "name": "key_components",
+          "type": "struct<processor:string,merchant_id:string,settlement_id:string,settlement_cycle:string,currency:string>"
+        },
+        {
+          "name": "totals",
+          "type": "struct<processor_net_minor:bigint,ledger_clearing_minor:bigint,bank_minor:bigint,processor_ledger_delta_minor:bigint,processor_bank_delta_minor:bigint,ledger_bank_delta_minor:bigint,difference_minor:bigint,processor_settlement_count:bigint,ledger_journal_count:bigint,allocated_bank_entry_count:bigint>"
+        },
+        {
+          "name": "status",
+          "type": "string"
+        },
+        {
+          "name": "reason_codes",
+          "type": "array<string>"
+        },
+        {
+          "name": "source_identities",
+          "type": "array<array<string>>"
+        },
+        {
+          "name": "authoritative_proof",
+          "type": "boolean"
+        }
+      ],
+      "count": 4,
+      "schema": {
+        "type": "struct",
+        "fields": [
+          {
+            "name": "reconciliation_key",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "key_components",
+            "type": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "processor",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "merchant_id",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "settlement_id",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "settlement_cycle",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "currency",
+                  "type": "string",
+                  "nullable": true,
+                  "metadata": {}
+                }
+              ]
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "totals",
+            "type": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "processor_net_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "ledger_clearing_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "bank_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "processor_ledger_delta_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "processor_bank_delta_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "ledger_bank_delta_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "difference_minor",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "processor_settlement_count",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "ledger_journal_count",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                },
+                {
+                  "name": "allocated_bank_entry_count",
+                  "type": "long",
+                  "nullable": true,
+                  "metadata": {}
+                }
+              ]
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "reason_codes",
+            "type": {
+              "type": "array",
+              "elementType": "string",
+              "containsNull": true
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "source_identities",
+            "type": {
+              "type": "array",
+              "elementType": {
+                "type": "array",
+                "elementType": "string",
+                "containsNull": true
+              },
+              "containsNull": true
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "authoritative_proof",
+            "type": "boolean",
+            "nullable": true,
+            "metadata": {}
+          }
+        ]
+      }
+    },
+    "bank_allocations": {
+      "columns": [
+        {
+          "name": "source_identity",
+          "type": "array<string>"
+        },
+        {
+          "name": "merchant_id",
+          "type": "string"
+        },
+        {
+          "name": "currency",
+          "type": "string"
+        },
+        {
+          "name": "normalized_settlement_reference",
+          "type": "string"
+        },
+        {
+          "name": "disposition",
+          "type": "string"
+        },
+        {
+          "name": "settlement_reconciliation_key",
+          "type": "string"
+        },
+        {
+          "name": "signed_minor",
+          "type": "bigint"
+        },
+        {
+          "name": "account_permitted",
+          "type": "boolean"
+        },
+        {
+          "name": "duplicate_current_bundle",
+          "type": "boolean"
+        },
+        {
+          "name": "reason_codes",
+          "type": "array<string>"
+        }
+      ],
+      "count": 5,
+      "schema": {
+        "type": "struct",
+        "fields": [
+          {
+            "name": "source_identity",
+            "type": {
+              "type": "array",
+              "elementType": "string",
+              "containsNull": true
+            },
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "merchant_id",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "normalized_settlement_reference",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "disposition",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "settlement_reconciliation_key",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "signed_minor",
+            "type": "long",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "account_permitted",
+            "type": "boolean",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "duplicate_current_bundle",
+            "type": "boolean",
+            "nullable": true,
+            "metadata": {}
+          },
+          {
+            "name": "reason_codes",
+            "type": {
+              "type": "array",
+              "elementType": "string",
+              "containsNull": true
+            },
+            "nullable": true,
+            "metadata": {}
+          }
+        ]
+      }
+    }
+  },
+  "physical_files": [
+    {
+      "path": "bank-allocations/part-00000-30b1eb31-b700-4bc7-a166-b47243ae7240-c000.snappy.parquet",
+      "sha256": "f099f31a46bf8404858a91ce1a2bbea7ae5d1be34b3275b48d96c497fb5bddd2"
+    },
+    {
+      "path": "settlements/part-00000-7989e7d9-4ba7-4ffb-8c08-b75dd2e38863-c000.snappy.parquet",
+      "sha256": "f86b7035976ebd37cbbb2e5cf385a32a6207e56e27dd0601fb7dcafa24bb8035"
+    },
+    {
+      "path": "transactions/part-00000-7d33a2e1-c4f0-440b-82e5-8814f3a39419-c000.snappy.parquet",
+      "sha256": "6333851f63cce2bed0a4c73b2225172108d3af628a82628fc5ca13d1371e1080"
+    }
+  ]
+}

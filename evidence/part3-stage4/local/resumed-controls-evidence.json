@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "classification": "LOCAL_IMPLEMENTATION_EVIDENCE_NOT_STAGE4_CLOSURE",
+  "source_parent": "150831fec6f9df6d1e945255a62e8a8013dcdae8",
+  "files": [
+    {
+      "path": "evidence/part3-stage4/local/controls-coverage.json",
+      "sha256": "3c86a09ea6c0ce53fb4f5196a3b4899c4e1851d67e0836e867e74934c630064d",
+      "size_bytes": 26270
+    },
+    {
+      "path": "evidence/part3-stage4/local/controls-tests.xml",
+      "sha256": "7f7c8c7c4f6300b046b3b117a454217790b2ada43eeb710dab60dd2b61c8ac8e",
+      "size_bytes": 43440
+    },
+    {
+      "path": "evidence/part3-stage4/local/handoff-and-inspector-tests.xml",
+      "sha256": "c1282d10a3011f2b479a1aaddefe97a212f684ba85ad0536727ca2127ebff08b",
+      "size_bytes": 2001
+    },
+    {
+      "path": "evidence/part3-stage4/local/handoff.json",
+      "sha256": "2f95bbcc3c8b546037570d260bb5e73e3463b8b2f68258174b28a27c798f7593",
+      "size_bytes": 585
+    },
+    {
+      "path": "evidence/part3-stage4/local/initial-provider-lock.hcl.txt",
+      "sha256": "15dd8994230cf7a8a6af08ee50b2dfdd3e0fa5bb63bdace3ab9a34de0fe35028",
+      "size_bytes": 281
+    },
+    {
+      "path": "evidence/part3-stage4/local/inspector-repair.json",
+      "sha256": "2b0b064fb17d436b929a48cd66bb63360569b5e26fe175c810ab798741f2bcc8",
+      "size_bytes": 1162
+    },
+    {
+      "path": "evidence/part3-stage4/local/physical-catalog-observation.json",
+      "sha256": "bcfa0886fbd6b0641b106b808aa30bcfc8f812d2e94bb0a6ca05e86fc9391a0f",
+      "size_bytes": 13635
+    },
+    {
+      "path": "evidence/part3-stage4/local/provider-and-linter-uploads.json",
+      "sha256": "c35898d7d7960bcafb45a01d394dd8e6f7abe682100e37d87d7bb197148f8c7a",
+      "size_bytes": 371
+    },
+    {
+      "path": "evidence/part3-stage4/local/provider-cache-contamination.json",
+      "sha256": "4b5c94295942f8b5a7cafc5a39850b218fcf73d4fb916515adc39c2fd65c4fc8",
+      "size_bytes": 627
+    },
+    {
+      "path": "evidence/part3-stage4/local/provider-init-blocker.json",
+      "sha256": "a1645b424df20606e71299b2dd3a7c98b3f5338f5dc804650b75066fbaab7e3c",
+      "size_bytes": 313
+    },
+    {
+      "path": "evidence/part3-stage4/local/provider-startup.json",
+      "sha256": "6112459110a1cfe675f66166f773662ff320a9a434514cc6051246d31976f18a",
+      "size_bytes": 1270
+    },
+    {
+      "path": "evidence/part3-stage4/local/semantic-mutations.json",
+      "sha256": "360319cc32f1d481545f3bf4c8c8e07ce865c10ec73fa90a0787ea8aebac10f7",
+      "size_bytes": 5432
+    },
+    {
+      "path": "evidence/part3-stage4/local/terraform-validation.json",
+      "sha256": "94076ba9ee8e199cdec497fae90fd20e5eb622ab3a7347c6f8509a57840105ae",
+      "size_bytes": 694
+    },
+    {
+      "path": "evidence/part3-stage4/local/terraform-version.json",
+      "sha256": "2402b94a7ab58b21c624ada0e60ca78b21e22e45676482750b3722ca98d12df2",
+      "size_bytes": 318
+    },
+    {
+      "path": "evidence/part3-stage4/local/tflint-startup.json",
+      "sha256": "f3754a044d83ea36238cddf1825a4ba29123242e336dd9d43cabbe939b1b25f5",
+      "size_bytes": 810
+    },
+    {
+      "path": "evidence/part3-stage4/local/transport-initial-import-failure.json",
+      "sha256": "e1d76a357759f84256ec8fbe6533f39a0bb6b85a0763f3015d81b8ec074cb2fa",
+      "size_bytes": 1139
+    },
+    {
+      "path": "evidence/part3-stage4/local/transport-missing-service-base-failure.json",
+      "sha256": "621f7edf2b5ce11f40016073b71a40c3b9acdfb0406316def79a0246273e5788",
+      "size_bytes": 1171
+    },
+    {
+      "path": "evidence/part3-stage4/local/transport-service-base-result.json",
+      "sha256": "ceaf966977eaf7734a286e3d3a03bbfade744afbee382fda8d0a4cea072e21d0",
+      "size_bytes": 60
+    },
+    {
+      "path": "evidence/part3-stage4/local/transport-spark-catalog.json",
+      "sha256": "079195ad6a6d02222c47389bc4233f3806347057524864388fe7579d831e0481",
+      "size_bytes": 2169
+    },
+    {
+      "path": "evidence/part3-stage4/local/trivy-after-tracing.json",
+      "sha256": "269400a1e12f34df279708c6c5a6d60c405fad1fea9bc91a404ad5278f2fd424",
+      "size_bytes": 84314
+    },
+    {
+      "path": "evidence/part3-stage4/local/uploaded-terraform.json",
+      "sha256": "351ee0f8a42c4c32ee58fcdcb4cdf2da5704efd11eb646b4b0f9cd95d76e546a",
+      "size_bytes": 171
+    }
+  ],
+  "aws_execution": false,
+  "stage4_complete": false,
+  "part3_complete": false,
+  "backend_key_arn": "UNOBSERVED_NOT_SUBSTITUTED",
+  "native_successor_ci": "PENDING"
+}

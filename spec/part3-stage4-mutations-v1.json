@@ -1,0 +1,187 @@
+{
+  "schema_version": "1.0",
+  "mutations": [
+    {
+      "id": "S4-M01-ceiling-equality",
+      "path": "tools/part3_stage4/cost.py",
+      "before": "maximum >= CEILING",
+      "after": "maximum > CEILING",
+      "test": "tests/test_part3_stage4_cost.py::test_stale_and_exact_ceiling_block_new_mutation"
+    },
+    {
+      "id": "S4-M02-stale-cost",
+      "path": "tools/part3_stage4/cost.py",
+      "before": "now - through > MAXIMUM_AGE_SECONDS",
+      "after": "now - through > MAXIMUM_AGE_SECONDS * 100",
+      "test": "tests/test_part3_stage4_cost.py::test_stale_and_exact_ceiling_block_new_mutation"
+    },
+    {
+      "id": "S4-M03-credit-netting",
+      "path": "tools/part3_stage4/cost.py",
+      "before": "observation.get(\"gross_no_credit_netting\") is not True",
+      "after": "False",
+      "test": "tests/test_part3_stage4_cost.py::test_incomplete_or_invalid_observation_blocks"
+    },
+    {
+      "id": "S4-M04-reserve-overlap",
+      "path": "tools/part3_stage4/cost.py",
+      "before": "if row[\"id\"] in identities:",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_cost.py::test_overlap_and_insufficient_reserves_rejected"
+    },
+    {
+      "id": "S4-M05-cleanup-reserve",
+      "path": "tools/part3_stage4/cost.py",
+      "before": "CLEANUP_FLOOR = Decimal(\"2.00\")",
+      "after": "CLEANUP_FLOOR = Decimal(\"0.00\")",
+      "test": "tests/test_part3_stage4_cost.py::test_overlap_and_insufficient_reserves_rejected"
+    },
+    {
+      "id": "S4-M06-resource-properties",
+      "path": "tools/part3_stage4/resources.py",
+      "before": "if _encoded(current) != _encoded(rule[\"equals\"]):",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_resources.py::test_numeric_one_is_not_boolean_true"
+    },
+    {
+      "id": "S4-M07-address-count",
+      "path": "tools/part3_stage4/resources.py",
+      "before": "or len(addresses) != inventory[\"managed_address_count\"]",
+      "after": "or False",
+      "test": "tests/test_part3_stage4_administrator.py::test_changed_expansion_cannot_hide_behind_declared_count"
+    },
+    {
+      "id": "S4-M08-resource-extras",
+      "path": "tools/part3_stage4/resources.py",
+      "before": "sorted(addresses) != sorted(expected)",
+      "after": "False",
+      "test": "tests/test_part3_stage4_administrator.py::test_changed_expansion_cannot_hide_behind_declared_count"
+    },
+    {
+      "id": "S4-M09-runtime-identity",
+      "path": "tools/part3_stage4/transport.py",
+      "before": "if manifest.get(name) != ACCEPTED[name]:",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_transport.py"
+    },
+    {
+      "id": "S4-M10-artifact-admission",
+      "path": "tools/part3_stage4/transport.py",
+      "before": "if sha256(bundle.read_bytes()).hexdigest() != ACCEPTED[\"runtime_bundle_sha256\"]:",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_transport.py"
+    },
+    {
+      "id": "S4-M11-excess-iam",
+      "path": "tools/part3_stage4/iam.py",
+      "before": "if missing or excess or changed:",
+      "after": "if missing or changed:",
+      "test": "tests/test_part3_stage4_iam.py::test_named_policy_comparison_rejects_missing_excess_or_changed"
+    },
+    {
+      "id": "S4-M12-runtime-start-deny",
+      "path": "tools/part3_stage4/iam.py",
+      "before": "\"Action\": WORKLOAD_STARTS,",
+      "after": "\"Action\": [],",
+      "test": "tests/test_part3_stage4_iam.py::test_role_specific_boundaries_block_part3_workloads_and_business_writes"
+    },
+    {
+      "id": "S4-M13-boundary-resource",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "[arn],\n                    {\"StringEquals\": {\"iam:PermissionsBoundary\": names[\"boundary_arns\"][role]}},",
+      "after": "[\"*\"],\n                    {\"StringEquals\": {\"iam:PermissionsBoundary\": names[\"boundary_arns\"][role]}},",
+      "test": "tests/test_part3_stage4_administrator.py::test_exact_successor_preserves_boundaries_and_separates_rescue"
+    },
+    {
+      "id": "S4-M14-state-deletion",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "[\"s3:DeleteObject\"], [state_arn + \".tflock\"]",
+      "after": "[\"s3:DeleteObject\"], [state_arn, state_arn + \".tflock\"]",
+      "test": "tests/test_part3_stage4_administrator.py::test_exact_successor_preserves_boundaries_and_separates_rescue"
+    },
+    {
+      "id": "S4-M15-policy-size",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "> 6144:",
+      "after": "> 999999:",
+      "test": "tests/test_part3_stage4_administrator.py::test_partitioning_handles_boundaries_without_truncation"
+    },
+    {
+      "id": "S4-M16-credential-authority",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "if any(environment.get(key) for key in AUTHORITY_ENVIRONMENT):",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_qualification.py::test_every_credential_authority_surface_rejects"
+    },
+    {
+      "id": "S4-M17-native-result-types",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "validation.get(\"valid\") is not True",
+      "after": "False",
+      "test": "tests/test_part3_stage4_qualification.py::test_native_result_drift_rejects_even_if_process_exited_zero"
+    },
+    {
+      "id": "S4-M18-coverage-inventory",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "set(data[\"files\"]) != required_files",
+      "after": "False",
+      "test": "tests/test_part3_stage4_qualification.py::test_coverage_omissions_and_forged_summaries_reject"
+    },
+    {
+      "id": "S4-M19-excluded-code",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "row[\"missing_lines\"] or row[\"excluded_lines\"] or row[\"missing_branches\"]",
+      "after": "row[\"missing_lines\"] or row[\"missing_branches\"]",
+      "test": "tests/test_part3_stage4_qualification.py::test_coverage_omissions_and_forged_summaries_reject"
+    },
+    {
+      "id": "S4-M20-process-timeout",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "code = 124",
+      "after": "code = 0",
+      "test": "tests/test_part3_stage4_qualification.py::test_actual_timeout_and_missing_executable_are_not_success"
+    },
+    {
+      "id": "S4-M21-registry-identity",
+      "path": "tools/run_part3_stage4_mutations.py",
+      "before": "if tuple(row[\"id\"] for row in rows) != REQUIRED_MUTATIONS:",
+      "after": "if False:",
+      "test": "tests/test_part3_stage4_mutation_driver.py::test_mutation_inventory_cannot_be_redefined"
+    },
+    {
+      "id": "S4-M22-process-status",
+      "path": "tools/part3_stage4/qualification.py",
+      "before": "code = completed.returncode",
+      "after": "code = 0",
+      "test": "tests/test_part3_stage4_qualification.py::test_actual_process_status_and_both_streams_are_preserved"
+    },
+    {
+      "id": "S4-M23-reader-self-observation",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "[*ADMINISTRATOR_ROLES.values(), *names[\"role_arns\"].values()]",
+      "after": "[DEPLOY_ROLE, *names[\"role_arns\"].values()]",
+      "test": "tests/test_part3_stage4_administrator.py::test_all_bootstrap_identities_can_observe_the_complete_successor"
+    },
+    {
+      "id": "S4-M24-successor-role-parity",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "    exact_policy_set(expected[\"roles\"], snapshot[\"roles\"])",
+      "after": "    exact_policy_set(expected[\"roles\"], expected[\"roles\"])",
+      "test": "tests/test_part3_stage4_administrator.py::test_successor_parity_rejects_permission_and_observation_drift"
+    },
+    {
+      "id": "S4-M25-successor-policy-parity",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "    exact_policy_set(expected[\"policies\"], documents)",
+      "after": "    exact_policy_set(expected[\"policies\"], expected[\"policies\"])",
+      "test": "tests/test_part3_stage4_administrator.py::test_successor_parity_rejects_permission_and_observation_drift"
+    },
+    {
+      "id": "S4-M26-default-policy-version",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "version[\"observed_version_id\"] != version[\"default_version_id\"]",
+      "after": "False",
+      "test": "tests/test_part3_stage4_administrator.py::test_successor_parity_rejects_permission_and_observation_drift"
+    }
+  ]
+}

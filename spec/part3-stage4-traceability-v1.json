@@ -1,0 +1,1443 @@
+{
+  "schema_version": "1.0",
+  "master_sha256": "ffad2f173f413eff53000c2fdd7e3840e395e5b9775f4c32bd1df07c776d2cd9",
+  "master_count": 99,
+  "stage4_master_count": 35,
+  "master_rows": [
+    {
+      "requirement_id": "P3-M-L223-01",
+      "normative_statement": "Admit exact current source",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L223-02",
+      "normative_statement": "Deploy the minimal platform safely",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L223-03",
+      "normative_statement": "Validate the deployed control plane",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L223-04",
+      "normative_statement": "Destroy the minimal platform safely",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L223-05",
+      "normative_statement": "Run no reconciliation workload in Part 3",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L226-01",
+      "normative_statement": "Verify OIDC identity.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L227-01",
+      "normative_statement": "Verify exact account",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L227-02",
+      "normative_statement": "Verify ap-southeast-2",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L228-01",
+      "normative_statement": "Verify repository trust boundary",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L228-02",
+      "normative_statement": "Verify main branch trust boundary",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L229-01",
+      "normative_statement": "Compare live IAM with checked-in IAM.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L230-01",
+      "normative_statement": "Verify backend access.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L231-01",
+      "normative_statement": "Verify lease behavior.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L232-01",
+      "normative_statement": "Verify budget headroom.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L233-01",
+      "normative_statement": "Verify S3 capabilities.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L234-01",
+      "normative_statement": "Verify Glue definition create",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L234-02",
+      "normative_statement": "Verify Glue definition read",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L234-03",
+      "normative_statement": "Verify Glue definition delete",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L235-01",
+      "normative_statement": "Verify Step Functions definition validation.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L236-01",
+      "normative_statement": "Verify Athena workgroup access.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L237-01",
+      "normative_statement": "Verify CloudWatch evidence access.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L238-01",
+      "normative_statement": "Prove no active LedgerGuard workload resources exist.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L239-01",
+      "normative_statement": "CloudShell will not be a dependency.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L242-01",
+      "normative_statement": "Exactly one workload bucket",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket.workload.bucket",
+        "S4-RESOURCE-aws_s3_bucket.workload.force_destroy",
+        "S4-RESOURCE-aws_s3_bucket.workload.tags",
+        "S4-RESOURCE-bucket"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L242-02",
+      "normative_statement": "Enable workload bucket versioning",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket_versioning.workload.bucket",
+        "S4-RESOURCE-aws_s3_bucket_versioning.workload.versioning_configuration"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L242-03",
+      "normative_statement": "Encrypt workload bucket",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket_server_side_encryption_configuration.workload.bucket",
+        "S4-RESOURCE-aws_s3_bucket_server_side_encryption_configuration.workload.rule"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L242-04",
+      "normative_statement": "Make workload bucket private",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket_ownership_controls.workload.bucket",
+        "S4-RESOURCE-aws_s3_bucket_ownership_controls.workload.rule"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L242-05",
+      "normative_statement": "Isolate workload prefixes",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/permissions.tf",
+        "tests/test_part3_stage4_iam.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L243-01",
+      "normative_statement": "Configure lifecycle expiry",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket_lifecycle_configuration.workload"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L243-02",
+      "normative_statement": "Clean incomplete multipart uploads",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/storage.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L244-01",
+      "normative_statement": "Justify and implement required Glue database",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_glue_catalog_database.reconciliation.name",
+        "S4-RESOURCE-aws_glue_catalog_database.reconciliation.catalog_id"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L244-02",
+      "normative_statement": "Justify and implement required Glue tables",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.for_each",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.name",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.database_name",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.catalog_id",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.table_type",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.partition_keys",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.parameters",
+        "S4-RESOURCE-aws_glue_catalog_table.candidate.storage_descriptor",
+        "S4-RESOURCE-catalog"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L245-01",
+      "normative_statement": "One Glue 5.1 reconciliation job.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_glue_job.reconciliation.depends_on",
+        "S4-RESOURCE-aws_glue_job.reconciliation.name",
+        "S4-RESOURCE-aws_glue_job.reconciliation.role_arn",
+        "S4-RESOURCE-aws_glue_job.reconciliation.glue_version",
+        "S4-RESOURCE-aws_glue_job.reconciliation.worker_type",
+        "S4-RESOURCE-aws_glue_job.reconciliation.number_of_workers",
+        "S4-RESOURCE-aws_glue_job.reconciliation.timeout",
+        "S4-RESOURCE-aws_glue_job.reconciliation.max_retries",
+        "S4-RESOURCE-aws_glue_job.reconciliation.execution_class",
+        "S4-RESOURCE-aws_glue_job.reconciliation.execution_property",
+        "S4-RESOURCE-aws_glue_job.reconciliation.command",
+        "S4-RESOURCE-aws_glue_job.reconciliation.default_arguments",
+        "S4-RESOURCE-aws_glue_job.reconciliation.tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L246-01",
+      "normative_statement": "One real Step Functions workflow.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.name",
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.role_arn",
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.type",
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.definition",
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.depends_on",
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.logging_configuration",
+        "S4-RESOURCE-aws_sfn_state_machine.reconciliation.tags"
+      ],
+      "remaining": "Stage 4 resource interface only. Real ASL and handlers remain a mandatory unresolved Stage 5 dependency; no dummy definition is accepted."
+    },
+    {
+      "requirement_id": "P3-M-L247-01",
+      "normative_statement": "One DynamoDB control/case table or two small tables if separation is clearer.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_dynamodb_table.control.name",
+        "S4-RESOURCE-aws_dynamodb_table.control.billing_mode",
+        "S4-RESOURCE-aws_dynamodb_table.control.hash_key",
+        "S4-RESOURCE-aws_dynamodb_table.control.range_key",
+        "S4-RESOURCE-aws_dynamodb_table.control.attribute",
+        "S4-RESOURCE-aws_dynamodb_table.control.server_side_encryption",
+        "S4-RESOURCE-aws_dynamodb_table.control.point_in_time_recovery",
+        "S4-RESOURCE-aws_dynamodb_table.control.tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L248-01",
+      "normative_statement": "One bounded Athena workgroup.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/catalog.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L249-01",
+      "normative_statement": "Configure CloudWatch log groups",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L249-02",
+      "normative_statement": "Configure CloudWatch metrics",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.for_each",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.alarm_name",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.metric_name",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.namespace",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.dimensions",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.comparison_operator",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.evaluation_periods",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.period",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.statistic",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.threshold",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.treat_missing_data",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.control_errors.tags",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.alarm_name",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.metric_name",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.namespace",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.dimensions",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.comparison_operator",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.evaluation_periods",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.period",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.statistic",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.threshold",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.treat_missing_data",
+        "S4-RESOURCE-aws_cloudwatch_metric_alarm.workflow_failure.tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L250-01",
+      "normative_statement": "Exact workload roles.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_iam_role_policy.runtime.for_each",
+        "S4-RESOURCE-aws_iam_role_policy.runtime.name",
+        "S4-RESOURCE-aws_iam_role_policy.runtime.role",
+        "S4-RESOURCE-services",
+        "S4-RESOURCE-aws_iam_role.runtime.assume_role_policy"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L251-01",
+      "normative_statement": "Repository OIDC policy.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "tools/part3_stage4/administrator.py",
+        "contracts/part3-stage2-oidc-trust-v1.json",
+        "tests/test_part3_stage4_administrator.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact backend KMS ARN and administrator policy packet, live policy/trust/lease/backend observations and later qualified workflow integration remain required."
+    },
+    {
+      "requirement_id": "P3-M-L252-01",
+      "normative_statement": "Integrate Terraform backend",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-terraform"
+      ],
+      "remaining": "Exact backend KMS ARN and administrator policy packet, live policy/trust/lease/backend observations and later qualified workflow integration remain required."
+    },
+    {
+      "requirement_id": "P3-M-L252-02",
+      "normative_statement": "Integrate lease",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "tools/part3_stage4/administrator.py",
+        "tests/test_part3_stage4_administrator.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact backend KMS ARN and administrator policy packet, live policy/trust/lease/backend observations and later qualified workflow integration remain required."
+    },
+    {
+      "requirement_id": "P3-M-L253-01",
+      "normative_statement": "Every resource must justify a project requirement.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_lambda_function.validator.function_name",
+        "S4-RESOURCE-aws_lambda_function.validator.role",
+        "S4-RESOURCE-aws_lambda_function.validator.runtime",
+        "S4-RESOURCE-aws_lambda_function.validator.handler",
+        "S4-RESOURCE-aws_lambda_function.validator.filename",
+        "S4-RESOURCE-aws_lambda_function.validator.source_code_hash",
+        "S4-RESOURCE-aws_lambda_function.validator.timeout",
+        "S4-RESOURCE-aws_lambda_function.validator.memory_size",
+        "S4-RESOURCE-aws_lambda_function.validator.reserved_concurrent_executions",
+        "S4-RESOURCE-aws_lambda_function.validator.tracing_config",
+        "S4-RESOURCE-aws_lambda_function.validator.environment",
+        "S4-RESOURCE-aws_lambda_function.validator.depends_on",
+        "S4-RESOURCE-aws_lambda_function.validator.tags",
+        "S4-RESOURCE-aws_lambda_function.controller.function_name",
+        "S4-RESOURCE-aws_lambda_function.controller.role",
+        "S4-RESOURCE-aws_lambda_function.controller.runtime",
+        "S4-RESOURCE-aws_lambda_function.controller.handler",
+        "S4-RESOURCE-aws_lambda_function.controller.filename",
+        "S4-RESOURCE-aws_lambda_function.controller.source_code_hash",
+        "S4-RESOURCE-aws_lambda_function.controller.timeout",
+        "S4-RESOURCE-aws_lambda_function.controller.memory_size",
+        "S4-RESOURCE-aws_lambda_function.controller.reserved_concurrent_executions",
+        "S4-RESOURCE-aws_lambda_function.controller.tracing_config",
+        "S4-RESOURCE-aws_lambda_function.controller.environment",
+        "S4-RESOURCE-aws_lambda_function.controller.depends_on",
+        "S4-RESOURCE-aws_lambda_function.controller.tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L256-01",
+      "normative_statement": "Validate run identity",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L256-02",
+      "normative_statement": "Validate manifest identity",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L257-01",
+      "normative_statement": "Conditionally register the run.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L258-01",
+      "normative_statement": "Execute Glue through .sync.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L259-01",
+      "normative_statement": "Independently validate produced results.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L260-01",
+      "normative_statement": "Run bounded Athena checks.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L261-01",
+      "normative_statement": "Persist reconciliation summary",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L261-02",
+      "normative_statement": "Persist case revisions",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L262-01",
+      "normative_statement": "Finalize only when required evidence exists.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L263-01",
+      "normative_statement": "Preserve exact failure state when a step fails.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L264-01",
+      "normative_statement": "No placeholder states may remain.",
+      "owner_stage": 5,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L266-01",
+      "normative_statement": "Restrict managed execution to main",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L266-02",
+      "normative_statement": "Restrict managed execution to manual dispatch",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L267-01",
+      "normative_statement": "Short-lived OIDC credentials.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L268-01",
+      "normative_statement": "Least-privilege execution roles.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_iam_role.runtime.for_each",
+        "S4-RESOURCE-aws_iam_role.runtime.name",
+        "S4-RESOURCE-aws_iam_role.runtime.path",
+        "S4-RESOURCE-aws_iam_role.runtime.permissions_boundary",
+        "S4-RESOURCE-aws_iam_role.runtime.tags",
+        "S4-RESOURCE-aws_iam_role_policy.runtime.policy",
+        "S4-RESOURCE-runtime_statements",
+        "S4-RESOURCE-role_log_keys",
+        "S4-RESOURCE-log_names",
+        "S4-RESOURCE-catalog_arns",
+        "S4-RESOURCE-function_arns",
+        "S4-RESOURCE-glue_arn",
+        "S4-RESOURCE-control_arn",
+        "S4-RESOURCE-workgroup_arn",
+        "S4-RESOURCE-bucket_arn",
+        "S4-RESOURCE-input-operation_id",
+        "S4-RESOURCE-input-expires_at",
+        "S4-RESOURCE-input-permissions_boundary_arns",
+        "S4-RESOURCE-input-stage5_release"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L269-01",
+      "normative_statement": "Private S3 access",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.bucket",
+        "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.block_public_acls",
+        "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.block_public_policy",
+        "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.ignore_public_acls",
+        "S4-RESOURCE-aws_s3_bucket_public_access_block.workload.restrict_public_buckets"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L269-02",
+      "normative_statement": "TLS-only S3 access",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_s3_bucket_policy.workload"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L270-01",
+      "normative_statement": "Synthetic data only.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage3-external-closure-v1.json",
+        "tools/part3_stage4/iam.py",
+        "tests/test_part3_stage4_iam.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L271-01",
+      "normative_statement": "Structured logs without raw financial records.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "spec/part3-stage4-security-review-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L272-01",
+      "normative_statement": "Short log retention.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_cloudwatch_log_group.platform.for_each",
+        "S4-RESOURCE-aws_cloudwatch_log_group.platform.name",
+        "S4-RESOURCE-aws_cloudwatch_log_group.platform.retention_in_days",
+        "S4-RESOURCE-aws_cloudwatch_log_group.platform.tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L273-01",
+      "normative_statement": "Bound Glue workers",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L273-02",
+      "normative_statement": "Bound Glue timeout",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L274-01",
+      "normative_statement": "Athena scan cutoff.",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-aws_athena_workgroup.reconciliation.name",
+        "S4-RESOURCE-aws_athena_workgroup.reconciliation.state",
+        "S4-RESOURCE-aws_athena_workgroup.reconciliation.force_destroy",
+        "S4-RESOURCE-aws_athena_workgroup.reconciliation.configuration",
+        "S4-RESOURCE-aws_athena_workgroup.reconciliation.tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L275-01",
+      "normative_statement": "Attach run tags",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-name",
+        "S4-RESOURCE-provider"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L275-02",
+      "normative_statement": "Attach expiry tags",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "spec/part3-stage4-resource-controls-v1.json",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [
+        "S4-RESOURCE-tags"
+      ],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L276-01",
+      "normative_statement": "Gross run-cost ceiling.",
+      "owner_stage": 2,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L277-01",
+      "normative_statement": "Always-running teardown.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L278-01",
+      "normative_statement": "Independent post-teardown verification.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L279-01",
+      "normative_statement": "Enable Glue reliability metrics",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L279-02",
+      "normative_statement": "Enable Glue skew metrics",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L279-03",
+      "normative_statement": "Enable Glue throughput metrics",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L279-04",
+      "normative_statement": "Enable Glue resource utilization metrics",
+      "owner_stage": 4,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "SOURCE_AND_LOCAL_CONTROLS_ONLY_AWS_PROOF_PENDING",
+      "evidence": [
+        "infra/part3/compute.tf",
+        "tests/test_part3_stage4_resources.py"
+      ],
+      "resource_controls": [],
+      "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."
+    },
+    {
+      "requirement_id": "P3-M-L282-01",
+      "normative_statement": "Admit exact current-source prerequisites.",
+      "owner_stage": 6,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L283-01",
+      "normative_statement": "Create saved plan",
+      "owner_stage": 6,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L283-02",
+      "normative_statement": "Validate saved plan",
+      "owner_stage": 6,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L284-01",
+      "normative_statement": "Apply only the expected resources.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L285-01",
+      "normative_statement": "Verify the control plane.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L286-01",
+      "normative_statement": "Prove zero Glue job runs.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L287-01",
+      "normative_statement": "Prove zero Step Functions executions.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L288-01",
+      "normative_statement": "Prove zero Athena queries.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L289-01",
+      "normative_statement": "Prove empty DynamoDB business state.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L290-01",
+      "normative_statement": "Destroy the exact managed inventory.",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L291-01",
+      "normative_statement": "Prove empty Terraform state",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L291-02",
+      "normative_statement": "Prove zero active residue",
+      "owner_stage": 7,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L294-01",
+      "normative_statement": "Read-only qualification passes.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L295-01",
+      "normative_statement": "IAM parity passes.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L296-01",
+      "normative_statement": "Definition-only Glue probe passes",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L296-02",
+      "normative_statement": "Definition-only Glue probe cleans itself",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L297-01",
+      "normative_statement": "Plan-only proof passes.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L298-01",
+      "normative_statement": "Controlled deployment succeeds.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L299-01",
+      "normative_statement": "No workload starts during the canary.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L300-01",
+      "normative_statement": "Teardown succeeds.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L301-01",
+      "normative_statement": "Independent clean-state verification succeeds.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L302-01",
+      "normative_statement": "Prove no orphaned lease",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L302-02",
+      "normative_statement": "Prove no active resources",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    },
+    {
+      "requirement_id": "P3-M-L303-01",
+      "normative_statement": "Actual billing remains honestly classified.",
+      "owner_stage": 8,
+      "source": "spec/part3-requirements-v1.json",
+      "allowed_claim": "AWS_VERIFIED",
+      "current_stage4_claim": "NOT_ADJUDICATED_BY_STAGE4",
+      "evidence": [],
+      "resource_controls": []
+    }
+  ],
+  "additive": [
+    {
+      "id": "S4-A01",
+      "gate": "S4-G01",
+      "requirement": "Preserve accepted Stage 3 bytes and all 99 original obligations",
+      "evidence": [
+        "tools/validate_part3_stage4_handoff.py",
+        "tests/test_part3_stage4_handoff.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A02",
+      "gate": "S4-G02",
+      "requirement": "Expand every finite resource address and reject hidden resources",
+      "evidence": [
+        "tools/part3_stage4/resources.py",
+        "tests/test_part3_stage4_administrator.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A03",
+      "gate": "S4-G03",
+      "requirement": "Materialize exact accepted runtime wheels into documented Glue transport",
+      "evidence": [
+        "tools/part3_stage4/transport.py",
+        "tests/test_part3_stage4_transport.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A04",
+      "gate": "S4-G03",
+      "requirement": "Read actual candidate Parquet schema without inferred placeholder types",
+      "evidence": [
+        "spec/part3-stage4-catalog-v1.json",
+        "evidence/part3-stage4/local/physical-catalog-observation.json"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A05",
+      "gate": "S4-G04",
+      "requirement": "Separate exact role permissions, administrator boundaries and rescue",
+      "evidence": [
+        "tools/part3_stage4/iam.py",
+        "tools/part3_stage4/administrator.py",
+        "tests/test_part3_stage4_iam.py",
+        "tests/test_part3_stage4_administrator.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A06",
+      "gate": "S4-G04",
+      "requirement": "Reject missing or excess installed policies; never self-remediate",
+      "evidence": [
+        "tools/part3_stage4/iam.py",
+        "tests/test_part3_stage4_iam.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A07",
+      "gate": "S4-G04",
+      "requirement": "Use exact backend KMS key and shared deployment lease",
+      "evidence": [
+        "tools/part3_stage4/administrator.py",
+        "tests/test_part3_stage4_administrator.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A08",
+      "gate": "S4-G05",
+      "requirement": "Keep cumulative gross, delayed exposure, operation and cleanup reserve separate",
+      "evidence": [
+        "tools/part3_stage4/cost.py",
+        "tests/test_part3_stage4_cost.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A09",
+      "gate": "S4-G05",
+      "requirement": "Retain all raw scanner failures and reject unreviewed applicability drift",
+      "evidence": [
+        "tools/part3_stage4/security.py",
+        "tests/test_part3_stage4_security.py",
+        "spec/part3-stage4-security-review-v1.json"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A10",
+      "gate": "S4-G05",
+      "requirement": "Run native locked Terraform and TFLint without AWS execution",
+      "evidence": [
+        ".github/workflows/part3-stage4-static.yml",
+        "tools/run_part3_stage4_static.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A11",
+      "gate": "S4-G05",
+      "requirement": "Critical controls require complete branch/statement coverage and killed semantic faults",
+      "evidence": [
+        "tools/run_part3_stage4_mutations.py",
+        "spec/part3-stage4-mutations-v1.json",
+        "spec/part3-stage4-coverage.ini",
+        "tools/part3_stage4/qualification.py",
+        "tests/test_part3_stage4_qualification.py",
+        "tests/test_part3_stage4_mutation_driver.py"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A12",
+      "gate": "S4-G06",
+      "requirement": "Two clean qualifications and independent artifact inspection before manual squash",
+      "evidence": [
+        "docs/part3-stage4-execution-checkpoint.md"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    },
+    {
+      "id": "S4-A13",
+      "gate": "S4-G06",
+      "requirement": "Stage 5 code admission requires accepted Stage 4 main and independent push CI",
+      "evidence": [
+        "docs/part3-stage4-execution-checkpoint.md"
+      ],
+      "state": "LOCAL_PARTIAL_NOT_STAGE_ACCEPTANCE"
+    }
+  ],
+  "stage4_complete": false,
+  "part3_complete": false
+}

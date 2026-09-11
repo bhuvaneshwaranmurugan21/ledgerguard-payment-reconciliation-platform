@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "runtime_bundle_sha256": "12a263615abeeea33a6202ecc49d9fe27606fe1c2b37650f25ba9adebcb7b7f7",
+  "tables": {
+    "transactions": [
+      {
+        "name": "reconciliation_key",
+        "type": "string"
+      },
+      {
+        "name": "key_components",
+        "type": "struct<processor:string,merchant_id:string,payment_id:string,event_class:string,currency:string>"
+      },
+      {
+        "name": "totals",
+        "type": "struct<processor_minor:bigint,ledger_minor:bigint,processor_ledger_delta_minor:bigint,difference_minor:bigint,processor_record_count:bigint,ledger_journal_count:bigint>"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "reason_codes",
+        "type": "array<string>"
+      },
+      {
+        "name": "source_identities",
+        "type": "array<array<string>>"
+      },
+      {
+        "name": "authoritative_proof",
+        "type": "boolean"
+      }
+    ],
+    "settlements": [
+      {
+        "name": "reconciliation_key",
+        "type": "string"
+      },
+      {
+        "name": "key_components",
+        "type": "struct<processor:string,merchant_id:string,settlement_id:string,settlement_cycle:string,currency:string>"
+      },
+      {
+        "name": "totals",
+        "type": "struct<processor_net_minor:bigint,ledger_clearing_minor:bigint,bank_minor:bigint,processor_ledger_delta_minor:bigint,processor_bank_delta_minor:bigint,ledger_bank_delta_minor:bigint,difference_minor:bigint,processor_settlement_count:bigint,ledger_journal_count:bigint,allocated_bank_entry_count:bigint>"
+      },
+      {
+        "name": "status",
+        "type": "string"
+      },
+      {
+        "name": "reason_codes",
+        "type": "array<string>"
+      },
+      {
+        "name": "source_identities",
+        "type": "array<array<string>>"
+      },
+      {
+        "name": "authoritative_proof",
+        "type": "boolean"
+      }
+    ],
+    "bank_allocations": [
+      {
+        "name": "source_identity",
+        "type": "array<string>"
+      },
+      {
+        "name": "merchant_id",
+        "type": "string"
+      },
+      {
+        "name": "currency",
+        "type": "string"
+      },
+      {
+        "name": "normalized_settlement_reference",
+        "type": "string"
+      },
+      {
+        "name": "disposition",
+        "type": "string"
+      },
+      {
+        "name": "settlement_reconciliation_key",
+        "type": "string"
+      },
+      {
+        "name": "signed_minor",
+        "type": "bigint"
+      },
+      {
+        "name": "account_permitted",
+        "type": "boolean"
+      },
+      {
+        "name": "duplicate_current_bundle",
+        "type": "boolean"
+      },
+      {
+        "name": "reason_codes",
+        "type": "array<string>"
+      }
+    ]
+  },
+  "partitions": [
+    {
+      "name": "run_id",
+      "type": "string"
+    },
+    {
+      "name": "attempt_id",
+      "type": "string"
+    }
+  ],
+  "query_consumers": {
+    "transactions": "Stage 5 transaction-grain count/status/currency and exact-decimal totals validation",
+    "settlements": "Stage 5 settlement-grain count/status/currency and exact-decimal three-way totals validation",
+    "bank_allocations": "Stage 5 exact bank allocation conservation, uniqueness and disposition validation"
+  },
+  "source_validation": "Stage 3 strict source admission and Stage 5 independent object/record identity validation; no source query or inferred source catalog table."
+}

@@ -1,0 +1,63 @@
+name: Part 3 Stage 4 toolchain acquisition
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/part3-stage4-toolchain.yml
+
+permissions:
+  contents: read
+
+jobs:
+  acquire:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Acquire and identify pinned configuration tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/stage4-toolchain/wheels"
+          python -m pip download --only-binary=:all: --dest "$RUNNER_TEMP/stage4-toolchain/wheels" python-hcl2==7.3.1 lark==1.2.2 regex==2025.9.1
+          curl --fail --location --retry 3 https://github.com/aquasecurity/trivy/releases/download/v0.74.0/trivy_0.74.0_Linux-64bit.tar.gz --output "$RUNNER_TEMP/stage4-toolchain/trivy.tar.gz"
+          python - "$RUNNER_TEMP/stage4-toolchain" <<'PY'
+          import hashlib
+          import json
+          import sys
+          import urllib.request
+          from pathlib import Path
+          root = Path(sys.argv[1])
+          trivy = root / 'trivy.tar.gz'
+          assert hashlib.sha256(trivy.read_bytes()).hexdigest() == '2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a'
+          pins = {'python-hcl2': '7.3.1', 'lark': '1.2.2', 'regex': '2025.9.1'}
+          rows = []
+          lock = []
+          for name, version in pins.items():
+              with urllib.request.urlopen(f'https://pypi.org/pypi/{name}/{version}/json', timeout=30) as response:
+                  metadata = json.load(response)
+              candidates = [row for row in metadata['urls'] if (root / 'wheels' / row['filename']).is_file()]
+              assert len(candidates) == 1
+              row = candidates[0]
+              raw = (root / 'wheels' / row['filename']).read_bytes()
+              assert hashlib.sha256(raw).hexdigest() == row['digests']['sha256']
+              rows.append({'name': name, 'version': version, 'filename': row['filename'], 'sha256': row['digests']['sha256'], 'source_url': row['url']})
+              lock.append(f"{name}=={version} --hash=sha256:{row['digests']['sha256']}")
+          assert len(list((root / 'wheels').iterdir())) == len(rows)
+          (root / 'parser.lock').write_text('\n'.join(lock) + '\n')
+          (root / 'provenance.json').write_text(json.dumps({'purpose': 'TOOL_ACQUISITION_NOT_STAGE_ACCEPTANCE', 'wheels': rows, 'trivy_version': '0.74.0', 'trivy_sha256': hashlib.sha256(trivy.read_bytes()).hexdigest()}, indent=2) + '\n')
+          PY
+          python -m pip install --no-index --find-links "$RUNNER_TEMP/stage4-toolchain/wheels" --require-hashes -r "$RUNNER_TEMP/stage4-toolchain/parser.lock"
+          python -c 'import hcl2; assert hcl2.loads("locals { x = 1 }")["locals"][0]["x"] == 1'
+      - name: Retain verified tool bytes and provenance
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage4-toolchain-${{ github.event.pull_request.head.sha }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/stage4-toolchain
+          if-no-files-found: error
+          retention-days: 14

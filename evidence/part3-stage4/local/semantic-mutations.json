@@ -1,0 +1,197 @@
+[
+  {
+    "id": "S4-M01-ceiling-equality",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "706fac55e857b53d22c94bad5da3a1abe1876bde52e86dfcaaf663cfec8b9ec1",
+    "mutant_sha256": "ee255061e4ec036a9d3f7a226b6bb3d74c6ce2a8d08c323ee31a6905c1f272d5"
+  },
+  {
+    "id": "S4-M02-stale-cost",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "706fac55e857b53d22c94bad5da3a1abe1876bde52e86dfcaaf663cfec8b9ec1",
+    "mutant_sha256": "49e53e02cf48162d94f511d9298e596a666a9218cb1e4ffb4f2b07905cd38e23"
+  },
+  {
+    "id": "S4-M03-credit-netting",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 12,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "706fac55e857b53d22c94bad5da3a1abe1876bde52e86dfcaaf663cfec8b9ec1",
+    "mutant_sha256": "0c78c8d84bbf469d44adb94d22cde29340b1b6f5e929262b35d3997b40fb7bdd"
+  },
+  {
+    "id": "S4-M04-reserve-overlap",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "706fac55e857b53d22c94bad5da3a1abe1876bde52e86dfcaaf663cfec8b9ec1",
+    "mutant_sha256": "e74a03eba07397b1d3eafe5659c7899751eca092636d0fba54cdf8f9aa1f5b83"
+  },
+  {
+    "id": "S4-M05-cleanup-reserve",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "706fac55e857b53d22c94bad5da3a1abe1876bde52e86dfcaaf663cfec8b9ec1",
+    "mutant_sha256": "2f4780378e78d99bd2dcae7b3b656732d85c87ba0f2e89ec91e64ae0a684d612"
+  },
+  {
+    "id": "S4-M06-resource-properties",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "0cedde0d5e2d519cde4c3d5a04c8f31efc52004472f4f41051d34650e012cf14",
+    "mutant_sha256": "1f182b2969c4c24e2c67198e4037d3a2c09f4e2985cab1c8624293dffeeb8ee3"
+  },
+  {
+    "id": "S4-M07-address-count",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "0cedde0d5e2d519cde4c3d5a04c8f31efc52004472f4f41051d34650e012cf14",
+    "mutant_sha256": "e53a2ad54eef97e13bdd6cb5c4d1f3b5ee6c5d53c0e3ea699084f47e749c139b"
+  },
+  {
+    "id": "S4-M08-resource-extras",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "0cedde0d5e2d519cde4c3d5a04c8f31efc52004472f4f41051d34650e012cf14",
+    "mutant_sha256": "0b0c05a94b32b6a08d49514ab17f35c82d03d5429ed21970787d30cc63f0e49b"
+  },
+  {
+    "id": "S4-M09-runtime-identity",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 10,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "a8f6dd671e86d18b464dd1a0ece0251a63932028746165bf60e6550334bd2067",
+    "mutant_sha256": "f8b1c68a0510e39d1f7c3f9d26109e9ebdde15dda04b552f57ef926542b2b4dc"
+  },
+  {
+    "id": "S4-M10-artifact-admission",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 10,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "a8f6dd671e86d18b464dd1a0ece0251a63932028746165bf60e6550334bd2067",
+    "mutant_sha256": "48aff00410cdc48bef7495812dd031d614104ef8cf72f7ae34cf9f95cd168cf2"
+  },
+  {
+    "id": "S4-M11-excess-iam",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "4e81d0252a38fbdd4ccd02bc611f94e33da5c3fa8eee4361905132c19217bc2a",
+    "mutant_sha256": "53382759588a3c7879a63448fe7c1204f3468d50e94c4ea3aa30ab578bc76ad4"
+  },
+  {
+    "id": "S4-M12-runtime-start-deny",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "4e81d0252a38fbdd4ccd02bc611f94e33da5c3fa8eee4361905132c19217bc2a",
+    "mutant_sha256": "928e216b0c2d2c38768f973b5c19e32c0bbdfd20faf75454fc474cca3ad3277f"
+  },
+  {
+    "id": "S4-M13-boundary-resource",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "f179782acec7dacc1a27e561db430a7d31a77e5e4c9667d70a6a515cdec6196c",
+    "mutant_sha256": "ee2b505eed4e5e1767272cf1ef9b47b33938d7ded3977a132e7882e871ea16e6"
+  },
+  {
+    "id": "S4-M14-state-deletion",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "f179782acec7dacc1a27e561db430a7d31a77e5e4c9667d70a6a515cdec6196c",
+    "mutant_sha256": "9c2469c8bd0c8fce9eb790ca766d9db550b712cf15bc0c24c011a27748e0b438"
+  },
+  {
+    "id": "S4-M15-policy-size",
+    "killed": true,
+    "exit_code": 1,
+    "counts": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha256": "f179782acec7dacc1a27e561db430a7d31a77e5e4c9667d70a6a515cdec6196c",
+    "mutant_sha256": "078986c1eb9dd6fca1f905f2e83f05a92fa90dd39de3aee8bd81573386c7163e"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "authoritative_gate_registry_sha256": "abd6004b1285ab180db6750085ce166781677dabb82e421fbd36d4e8067d11aa",
+  "classification": "PART3_STAGE3_EXTERNAL_CLOSURE_APPEND_ONLY_CORRECTION",
+  "correction": {
+    "corrected_value": [
+      "plan_only_verified",
+      "zero_workload_canary_verified",
+      "teardown_verified"
+    ],
+    "json_pointer": "/stage3_adjudication/downstream_part3_master_gates_not_executed",
+    "superseded_value": [
+      "managed_deployment_verified",
+      "managed_reconciliation_verified",
+      "scale_and_cost_verified"
+    ]
+  },
+  "original_receipt_mutated": false,
+  "original_receipt_sha256": "0af219b16d74d17114b26f03edc41b401d655629fdd6e1b2725ec9406d15a3ea",
+  "unaffected_fields_remain_authoritative": true,
+  "original_receipt": "spec/part3-stage3-external-closure-v1.json",
+  "authoritative_gate_registry": "spec/part3-master-gates-v1.json",
+  "reason": "Correct obsolete downstream gate names without altering accepted Stage 3 implementation, CI, artifact or closure facts."
+}

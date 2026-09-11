@@ -1,0 +1,277 @@
+{
+  "source_commit": "f23d77d2f2ef430190239557711b518d02db8bc7",
+  "checks": [
+    {
+      "check": "terraform-version",
+      "command": [
+        "terraform",
+        "version",
+        "-json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "terraform-format",
+      "command": [
+        "terraform",
+        "-chdir=infra/part3",
+        "fmt",
+        "-check",
+        "-recursive"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "terraform-initialize",
+      "command": [
+        "terraform",
+        "-chdir=infra/part3",
+        "init",
+        "-backend=false",
+        "-input=false",
+        "-lockfile=readonly",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "terraform-validate",
+      "command": [
+        "terraform",
+        "-chdir=infra/part3",
+        "validate",
+        "-json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "terraform-schema-initialize",
+      "command": [
+        "terraform",
+        "-chdir=/home/runner/work/_temp/part3-stage4-static-provider-schema",
+        "init",
+        "-backend=false",
+        "-input=false",
+        "-lockfile=readonly",
+        "-no-color"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "terraform-schema",
+      "command": [
+        "terraform",
+        "-chdir=/home/runner/work/_temp/part3-stage4-static-provider-schema",
+        "providers",
+        "schema",
+        "-json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "tflint-version",
+      "command": [
+        "tflint",
+        "--version"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "tflint",
+      "command": [
+        "tflint",
+        "--chdir=infra/part3",
+        "--format=json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "handoff",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "tools.validate_part3_stage4_handoff"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "tests",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "pytest",
+        "tests/test_part3_stage4_handoff.py",
+        "tests/test_part3_stage4_static_schema.py",
+        "tests/test_part3_stage3_tooling.py",
+        "-k",
+        "handoff or ci_artifact or schema_context",
+        "-q",
+        "-o",
+        "addopts=",
+        "--junitxml=/home/runner/work/_temp/part3-stage4-static/tests.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "python-lint",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "tools/validate_part3_stage4_handoff.py",
+        "tools/rehearse_part3_stage4_inspector.py",
+        "tools/run_part3_stage4_static.py",
+        "tests/test_part3_stage4_handoff.py",
+        "tests/test_part3_stage4_static_schema.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "python-types",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "mypy",
+        "--strict",
+        "tools/validate_part3_stage4_handoff.py",
+        "tools/rehearse_part3_stage4_inspector.py",
+        "tools/run_part3_stage4_static.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "controls-tests",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "coverage",
+        "run",
+        "--branch",
+        "--source=tools.part3_stage4",
+        "-m",
+        "pytest",
+        "tests/test_part3_stage4_administrator.py",
+        "tests/test_part3_stage4_cost.py",
+        "tests/test_part3_stage4_handoff.py",
+        "tests/test_part3_stage4_iam.py",
+        "tests/test_part3_stage4_resources.py",
+        "tests/test_part3_stage4_security.py",
+        "tests/test_part3_stage4_static_schema.py",
+        "tests/test_part3_stage4_transport.py",
+        "-q",
+        "-o",
+        "addopts=",
+        "--junitxml=/home/runner/work/_temp/part3-stage4-static/controls-tests.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "controls-coverage",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "coverage",
+        "report",
+        "--fail-under=100"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "controls-coverage-json",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "coverage",
+        "json",
+        "-o",
+        "/home/runner/work/_temp/part3-stage4-static/controls-coverage.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "controls-lint",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "tools/part3_stage4",
+        "tools/run_part3_stage4_mutations.py",
+        "tests/test_part3_stage4_administrator.py",
+        "tests/test_part3_stage4_cost.py",
+        "tests/test_part3_stage4_handoff.py",
+        "tests/test_part3_stage4_iam.py",
+        "tests/test_part3_stage4_resources.py",
+        "tests/test_part3_stage4_security.py",
+        "tests/test_part3_stage4_static_schema.py",
+        "tests/test_part3_stage4_transport.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "controls-types",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-m",
+        "mypy",
+        "--strict",
+        "tools/part3_stage4",
+        "tools/run_part3_stage4_mutations.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "controls-mutations",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "tools/run_part3_stage4_mutations.py",
+        "--output",
+        "/home/runner/work/_temp/part3-stage4-static/mutations"
+      ],
+      "exit_code": 0
+    },
+    {
+      "check": "security-raw-scan",
+      "command": [
+        "trivy",
+        "config",
+        "--disable-telemetry",
+        "--cache-dir",
+        "/home/runner/work/_temp/part3-stage4-static/trivy-cache",
+        "--skip-version-check",
+        "--skip-check-update",
+        "--include-non-failures",
+        "--exit-code",
+        "1",
+        "--format",
+        "json",
+        "--output",
+        "/home/runner/work/_temp/part3-stage4-static/trivy.json",
+        "infra/part3"
+      ],
+      "exit_code": 1
+    },
+    {
+      "check": "security-applicability",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.13/x64/bin/python",
+        "-c",
+        "import json,sys; from pathlib import Path; from tools.part3_stage4.security import assess; print(json.dumps(assess(Path.cwd(), Path(sys.argv[1]).read_bytes()),sort_keys=True))",
+        "/home/runner/work/_temp/part3-stage4-static/trivy.json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "static_subset_passed": true,
+  "schema_binding": {
+    "provider": "registry.terraform.io/hashicorp/aws",
+    "version": "6.11.0",
+    "workload_lock_sha256": "0d481b58027a189fc1167eed186ba734d671b78c2fc6481c9b890b7afd92b96c",
+    "schema_lock_sha256": "0d481b58027a189fc1167eed186ba734d671b78c2fc6481c9b890b7afd92b96c",
+    "schema_configuration_sha256": "7ba3f67194d387e6e2364a61e8787afc58099f3f2852ed3bebaaf5378c3734c9"
+  },
+  "stage4_complete": false,
+  "rehearsal_ready": false,
+  "aws_execution": false
+}

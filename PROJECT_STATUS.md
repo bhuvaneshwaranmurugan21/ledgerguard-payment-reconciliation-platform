@@ -1,6 +1,33 @@
 # Project status
 
-## Active boundary
+## Active boundary — Part 3 Stage 4
+
+Stage 3 is externally accepted at PR #26 squash `3370898d83539fe41594c7cb7ad15e920dcb5674`.
+The immutable external receipt and append-only gate-name correction remain authoritative.
+Stage 4 is in progress on draft PR #27. It is not ready to merge or deploy.
+
+The successor implements resource controls, actual runtime transport and catalog schemas,
+exact-decimal budget admission, separated IAM policy construction, and source-bound security
+review. Local evidence is recorded in `docs/part3-stage4-execution-checkpoint.md`.
+The previous source `81be7bd` passed both independent native jobs (run 34530756877)
+and full repository CI (34530756937). Its verified 100% critical coverage and 22 killed
+mutations remain historical evidence. User-dispatched read-only run 34559335116 verified
+the accepted Stage 2 IAM/trust and backend/lease baseline with 43 read-only calls and no
+mutations. The actual backend KMS ARN was supplied and bound to the review packet.
+
+The current successor completes named reader/recovery identities, their self-observation
+permissions, exact bootstrap attachments, and rejection of role/policy/default-version drift.
+Local qualification passed 387 tests with 100% of 478 package statements and 226 branches;
+full native qualification and independent inspection must bind this successor before acceptance.
+The original 22 mutation entries remain unchanged; four additional administrator faults are
+registered. See `docs/part3-stage4-administrator-handoff.md` for the concrete handoff.
+The successor IAM is not installed and document parity does not establish effective permissions.
+Administrator review, restriction/capability evidence and stage publication/main gates remain open.
+
+Stages 5–8 are pending. No AWS change, workload execution, new merge or Part 3 completion is
+claimed. The combined sequence retains every stage admission and user-controlled AWS boundary.
+
+## Historical Stage 3 producer status (unchanged below)
 
 - Project: LedgerGuard
 - Part: 3 — Managed AWS platform
