@@ -177,6 +177,72 @@ MUTATIONS = (
         "_JOB_RUN.fullmatch(glue_job_run_id) is None",
         "False",
     ),
+    (
+        "athena-aws-execution-identity",
+        "athena_aws.py",
+        'raw.get("QueryExecutionId") != query_execution_id',
+        "False",
+    ),
+    (
+        "athena-aws-pagination-token",
+        "athena_aws.py",
+        "not next_token or next_token in seen",
+        "False",
+    ),
+    (
+        "athena-proof-family-binding",
+        "athena_aws.py",
+        "family != query.family",
+        "False",
+    ),
+    (
+        "athena-proof-sql-binding",
+        "athena_aws.py",
+        'verification.get("sql_sha256") != query.sha256',
+        "False",
+    ),
+    (
+        "athena-proof-scan-binding",
+        "athena_aws.py",
+        'verification.get("scanned_bytes") != execution.scanned_bytes',
+        "False",
+    ),
+    (
+        "athena-proof-time-binding",
+        "athena_aws.py",
+        'verification.get("execution_ms") != execution.execution_ms',
+        "False",
+    ),
+    (
+        "athena-proof-execution-sql-binding",
+        "athena_aws.py",
+        "sha256(execution.sql.encode()).hexdigest() != query.sha256",
+        "False",
+    ),
+    (
+        "athena-proof-output-binding",
+        "athena_aws.py",
+        'execution.output_location != result.get("uri")',
+        "False",
+    ),
+    (
+        "athena-proof-account-binding",
+        "athena_aws.py",
+        "execution.expected_bucket_owner != account_id",
+        "False",
+    ),
+    (
+        "athena-proof-encryption-binding",
+        "athena_aws.py",
+        'execution.encryption_option != "SSE_S3"',
+        "False",
+    ),
+    (
+        "athena-proof-retention-prefix",
+        "athena_aws.py",
+        'f"s3://{bucket}/publications/query-proofs/{identity[\'run_id\']}/"',
+        'f"s3://{bucket}/runs/query-proofs/{identity[\'run_id\']}/"',
+    ),
 )
 
 

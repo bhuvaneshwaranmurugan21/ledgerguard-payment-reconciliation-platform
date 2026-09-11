@@ -121,12 +121,16 @@ SCHEMAS = {
         "query-proof",
         {
             **IDENTITY,
+            "family": {
+                "enum": ["transactions", "settlements", "bank_allocations"]
+            },
             "query_execution_id": TEXT,
             "sql_sha256": SHA256,
             "workgroup": TEXT,
             "engine_version": {"const": "Athena engine version 3"},
             "status": {"const": "SUCCEEDED"},
             "scanned_bytes": UINT,
+            "execution_ms": UINT,
             "result": OBJECT,
             "rows_sha256": SHA256,
             "row_count": UINT,

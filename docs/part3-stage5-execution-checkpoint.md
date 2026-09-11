@@ -157,6 +157,52 @@ shared a filesystem timestamp; every mutant now receives a new byte-identical
 workspace and deterministic hash seed. Both full campaigns then produced identical
 test, coverage and mutation results without changing an acceptance threshold.
 
+The exact published Glue successor head
+`5aac335cea1700b4d6f848ba5a175e6d730cfdf9`, tree
+`29889ede103b4ad2b373ffe2d95946c7c774e401`, passed all three pull-request
+workflows. Native run 34591074547 passed both independent jobs. Its artifacts
+10195703295 (SHA-256
+`95400d58debb395ba06598ddbfbd593dc48b5f8794051d9e869eb98d77f3b9a8`) and
+10195688900 (SHA-256
+`db32ab130b4476516daf3aeaac60a11bd287b2a33b187f0d0f9a9e3e8f3d9f43`)
+were independently downloaded and revalidated: Terraform 1.13.1 validation,
+zero TFLint issues, 388 tests, 26 killed mutations, complete control and critical
+coverage, equal normalized payloads, and all four source-bound Trivy decisions
+with zero unreviewed findings. Incremental run 34591074560 artifact 10196328385
+(SHA-256
+`99debdcb7158747bb9565ec31db3f49bd0ee261fc49895f48e06b4b0deecca8e`)
+independently binds two clean 359-test, 1,380-statement, 584-branch and
+42-mutation campaigns to that head. Broader run 34591074564 passed all six jobs;
+its Stage 3 producer and inspection artifacts were independently re-evaluated at
+SHA-256 `b9b240fa1bf3a9ff98224592796bfd4693e7cc083ed5d3a77ea00569a376f82a`
+and `f9d7bea7e7771d23b057546888239a68dc093bd80dd0ed9bb3c09034345e8c9c`.
+
+## AWS Athena observation and retained proof increment
+
+The next successor strictly normalizes an already-started Athena execution and
+consumes its complete bounded result-page token chain. It neither starts a query
+nor calls AWS during qualification. Missing, mistyped, substituted and unknown
+execution/result fields fail closed; response identity must match the requested
+query execution exactly.
+
+The persisted query proof is canonical and content-addressed under
+`publications/query-proofs/`, outside transient run lifecycle. It independently
+binds the exact query bytes and digest, family, execution identity, engine,
+workgroup, result URI, expected AWS account owner, SSE-S3 encryption, terminal
+success, scanned bytes, execution time, result bytes, exact aggregate rows and
+both candidate version inventories. Repeated persistence is idempotent, while
+any body difference creates a distinct immutable identity.
+
+Two immutable-input local workspaces each passed 405 tests. All 1,495 statements
+and 636 branches are covered at 100% with zero exclusions, and all 53 source
+mutations were killed by assertion in both campaigns. The first strengthened
+trial correctly rejected a redundant SQL comparison mutation; the gate now
+targets the single SHA-256 exact-byte binding instead of accepting an equivalent,
+untestable branch. `evidence/part3-stage5/athena-aws-local.json` retains the final
+source-bound LOCAL_VERIFIED receipt, records zero AWS calls and keeps
+`stage5_complete` false. Exact successor CI and independent artifact inspection
+remain required.
+
 ## Historical first increment
 
 The control package now implements bounded strict JSON and seven draft versioned
@@ -221,9 +267,8 @@ whether its source checkout was dirty. This is not the final Stage 5 gate runner
 
 Remaining S5-G01 work: build and qualify the installable release, provenance/SBOM and
 the final producer/consumer inventory against those exact release bytes.
-Remaining S5-G02 work: real ASL/handlers; AWS response normalization and immutable
-Athena proof persistence; binding the independently compared Parquet truth, terminal
-Glue receipt and complete Athena proofs to publication.
+Remaining S5-G02 work: real ASL/handlers and binding the independently compared
+Parquet truth, terminal Glue receipt and complete Athena proofs to publication.
 Remaining S5-G03 work: operational registration/attempt/publication DynamoDB and S3
 adapters, complete end-to-end Part 2 replay/correction/scope semantics, AWS reader
 transport contracts and full recovery qualification. Local metadata authority,
