@@ -97,7 +97,7 @@ locals {
       },
       {
         Sid      = "ConditionalControlMetadata", Effect = "Allow"
-        Action = [
+        Action   = [
           "dynamodb:GetItem",
           "dynamodb:BatchGetItem",
           "dynamodb:Query",
