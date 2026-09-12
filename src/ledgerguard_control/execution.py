@@ -179,9 +179,11 @@ def validate_execution(
     }
 
 
-def register_run(event: Any, authority: Any) -> dict[str, Any]:
-    """Register and fence one exact attempt, or prove a committed replay."""
-    owner, state = _invocation(event, "register-run")
+def _registered_state(
+    event: Any, action: str
+) -> tuple[str, dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Validate the closed run state shared by registration and admission."""
+    owner, state = _invocation(event, action)
     if set(state) != {"control", "managed"} or state.get("managed") != {"athena": {}}:
         raise ControlRejected("validated run state shape differs")
     control = state["control"]
@@ -190,21 +192,43 @@ def register_run(event: Any, authority: Any) -> dict[str, Any]:
     execution = control.get("execution")
     if type(execution) is not dict:
         raise ControlRejected("validated execution is missing")
+    return owner, state, control, execution
+
+
+def register_run(event: Any, authority: Any) -> dict[str, Any]:
+    """Register one immutable run identity or prove a committed replay."""
+    _owner, state, control, execution = _registered_state(event, "register-run")
     arguments = job_arguments(execution.get("job", {}))
     namespace = execution.get("namespace")
     identity = control.get("execution_input_sha256")
     committed = authority.register(namespace, arguments.run_id, identity)
+    control["namespace"] = namespace
+    control["predecessor"] = execution["predecessor"]
     if committed is not None:
         control["replay_committed"] = True
         control["committed_sha256"] = committed
-        return state
+    return state
+
+
+def admit_attempt(event: Any, authority: Any) -> dict[str, Any]:
+    """Allocate or replay the exact execution-owned attempt fence."""
+    owner, state, control, execution = _registered_state(event, "admit-attempt")
+    if control.get("replay_committed") is not False or "committed_sha256" in control:
+        raise ControlRejected("committed replay cannot admit an attempt")
+    if control.get("namespace") != execution.get("namespace"):
+        raise ControlRejected("registered namespace differs")
+    if control.get("predecessor") != execution.get("predecessor"):
+        raise ControlRejected("registered predecessor differs")
+    if "attempt" in control:
+        raise ControlRejected("attempt must be admitted from registered state")
+    arguments = job_arguments(execution.get("job", {}))
+    identity = control.get("execution_input_sha256")
     attempt: Attempt = authority.admit(
-        namespace,
+        execution["namespace"],
         arguments.run_id,
         identity,
         arguments.attempt_id,
         owner,
     )
     control["attempt"] = asdict(attempt)
-    control["predecessor"] = execution["predecessor"]
     return state

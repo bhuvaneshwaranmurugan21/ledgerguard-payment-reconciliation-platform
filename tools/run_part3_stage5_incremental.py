@@ -342,6 +342,18 @@ MUTATIONS = (
         "if False:",
     ),
     (
+        "handler-registered-namespace",
+        "execution.py",
+        'control["namespace"] = namespace',
+        'control["namespace"] = "wrong-namespace"',
+    ),
+    (
+        "handler-replay-cannot-admit",
+        "execution.py",
+        'if control.get("replay_committed") is not False or "committed_sha256" in control:',
+        "if False:",
+    ),
+    (
         "expected-summary-input-digest",
         "athena.py",
         'if digest.hexdigest() != trusted_sha256:\n'
@@ -379,10 +391,16 @@ MUTATIONS = (
         "False",
     ),
     (
-        "controller-action-dispatch",
+        "controller-attempt-action-dispatch",
         "controller.py",
-        'event.get("action") != "register-run"',
-        "False",
+        '"admit-attempt",',
+        '"wrong-attempt",',
+    ),
+    (
+        "workflow-attempt-admission-order",
+        "workflow.py",
+        '"Default": "AdmitAttempt",',
+        '"Default": "StartGlue",',
     ),
 )
 

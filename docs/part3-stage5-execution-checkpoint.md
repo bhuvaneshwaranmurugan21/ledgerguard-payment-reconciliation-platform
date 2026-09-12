@@ -541,3 +541,51 @@ The source-bound receipt is
 the admitted base commit/tree, a dirty successor workspace, and keeps
 `stage5_complete` false. Fresh exact-head CI and independent artifact inspection
 remain mandatory.
+
+## Exact entrypoint head and separate attempt admission
+
+The exact published entrypoint head
+`97c0578cb5a5ca6e29e0edfe1946da4347fcea29`, tree
+`c398b7e124ebb6327e969864fd3023f1fd80b9e4`, passed all three pull-request
+workflows. Native run 34695749249 passed both independent jobs. Its artifacts
+10299170341 (SHA-256
+`a23dd25a1e90b9be5b4ae9152e2397aebf5e496df4afe76a62c00a41c2fcaae9`)
+and 10297803965 (SHA-256
+`56db0324f58eb0e91cf30700f0981d2235fcb367f7a948e6db3d805461f6fcd5`)
+were independently downloaded and revalidated: exact commit/tree binding,
+Terraform 1.13.1 validation, zero TFLint issues, 388 tests, 26 killed
+mutations, complete 478/226 control and 742/292 critical statement/branch
+coverage, equal normalized payloads, and all four source-bound Trivy decisions
+with zero unreviewed findings.
+
+Incremental run 34695749236 artifact 10298504697 (SHA-256
+`c0218de65e40f5f013e3effbe19b2d1c54f8c479a83c43a72d4b49c06602169b`)
+independently binds two clean 509-test, 2,069-statement, 866-branch and
+76-mutation campaigns. Broader run 34695749247 passed all six jobs. Its Stage 3
+producer artifact 10298369630 (SHA-256
+`ae359cdd4a0c3a2e8a5eb3147163578859b5f3ece8a0698ef4f4314c7b7be39e`)
+and inspection artifact 10298164800 (SHA-256
+`755cbdaee6a7a279a8dc440e11711d304a5b34217eea31c118efadafd43879b0`)
+were independently checked: 167 manifest-bound members, equal two-run
+payloads, 166 focused and 219 compatibility tests, 1,924 statements and 614
+branches at 100%, and all 24 mutations killed. No AWS call or mutation occurred.
+This exact head is admitted for the next Stage 5 increment.
+
+The successor separates immutable run registration from attempt admission as
+required by the approved workflow contract. `RegisterRun` now only creates or
+verifies the immutable run identity and predecessor, or proves an existing
+committed replay. Its choice state terminates that replay before any managed
+work. A distinct `AdmitAttempt` Lambda action then allocates or replays the exact
+execution-owned fence before Glue. It rejects committed replays, substituted
+namespace/predecessor values and states that already contain an attempt. This
+preserves same-step redelivery while preventing a registration result from
+silently performing the separately ordered authority transition.
+
+Two immutable-input local campaigns each passed 510 tests. All 2,090 statements
+and 876 branches are covered at 100% with zero exclusions, and all 79 source
+mutations were killed by assertion in both campaigns. Ruff and strict mypy pass.
+The source-bound receipt is
+`evidence/part3-stage5/attempt-admission-local.json`; it records zero AWS calls,
+the admitted base commit/tree, a dirty successor workspace, and keeps
+`stage5_complete` false. Fresh exact-head CI and independent artifact inspection
+remain mandatory.

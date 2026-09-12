@@ -44,7 +44,8 @@ def test_success_path_is_complete_and_ordered() -> None:
     assert isinstance(states, dict)
     assert states["ValidateExecution"]["Next"] == "RegisterRun"
     assert states["RegisterRun"]["Next"] == "RegistrationOutcome"
-    assert states["RegistrationOutcome"]["Default"] == "StartGlue"
+    assert states["RegistrationOutcome"]["Default"] == "AdmitAttempt"
+    assert states["AdmitAttempt"]["Next"] == "StartGlue"
     assert states["StartGlue"]["Next"] == "ValidateCandidate"
     current = "ValidateCandidate"
     for family in FAMILIES:
@@ -108,7 +109,7 @@ def test_failure_paths_preserve_original_error_and_end_in_fail() -> None:
     states = definition()["States"]
     assert isinstance(states, dict)
     captures = [name for name in states if name.startswith("Capture")]
-    assert len(captures) == 9
+    assert len(captures) == 10
     for name in captures:
         state = states[name]
         assert state["Type"] == "Pass"

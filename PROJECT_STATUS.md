@@ -12,10 +12,10 @@ byte/version validation, local/S3 object interfaces, durable metadata authority,
 paged financial-store snapshots, independent Parquet financial comparison, bounded
 Athena proof verification with expectations independently derived from the admitted
 financial rows, the Glue successor/terminal-run ownership boundary,
-production authority/publication transports, and initial validation/registration
-handler transitions and their concrete fail-closed Lambda entrypoints are implemented
-as increments. The latest local successor passed two 509-test campaigns with 2,069
-statements and 866 branches at 100% and all 76 mutations killed. Remaining actions,
+production authority/publication transports, and distinct validation, registration and
+attempt-admission handler transitions with concrete fail-closed Lambda entrypoints are
+implemented as increments. The latest local successor passed two 510-test campaigns
+with 2,090 statements and 876 branches at 100% and all 79 mutations killed. Remaining actions,
 end-to-end ASL binding, release packaging and the final gate
 qualification remain open. See `docs/part3-stage5-execution-checkpoint.md` for the
 implemented boundary and every remaining Stage 5 gate. Stages 6–8 remain pending.

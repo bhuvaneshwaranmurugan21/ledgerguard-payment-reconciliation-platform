@@ -13,6 +13,7 @@ from ledgerguard.stage3.canonical import canonical_bytes
 from ledgerguard_control.authority import LocalAuthority
 from ledgerguard_control.contracts import ControlRejected
 from ledgerguard_control.execution import (
+    admit_attempt,
     parse_config,
     read_reference,
     register_run,
@@ -132,7 +133,12 @@ def test_registration_is_durable_fenced_and_committed_replay_is_terminal(tmp_pat
     authority = LocalAuthority(tmp_path / "authority.sqlite")
     event = {"action": "register-run", "execution_arn": OWNER, "state": state}
     registered = register_run(event, authority)
-    attempt = registered["control"]["attempt"]
+    assert "attempt" not in registered["control"]
+    assert registered["control"]["namespace"] == "namespace-1"
+    admitted_state = admit_attempt(
+        {"action": "admit-attempt", "execution_arn": OWNER, "state": registered}, authority
+    )
+    attempt = admitted_state["control"]["attempt"]
     assert attempt["owner"] == OWNER and attempt["fence"] == 1
     from ledgerguard_control.authority import Attempt
 
@@ -143,6 +149,10 @@ def test_registration_is_durable_fenced_and_committed_replay_is_terminal(tmp_pat
     )
     assert replay["control"]["replay_committed"] is True
     assert replay["control"]["committed_sha256"] == commit
+    with pytest.raises(ControlRejected, match="committed replay"):
+        admit_attempt(
+            {"action": "admit-attempt", "execution_arn": OWNER, "state": replay}, authority
+        )
 
 
 @pytest.mark.parametrize(
@@ -238,6 +248,37 @@ def test_workflow_input_and_registration_state_cannot_be_substituted(tmp_path: P
     state["control"].pop("execution")
     with pytest.raises(ControlRejected, match="execution is missing"):
         register_run({"action": "register-run", "execution_arn": OWNER, "state": state}, object())
+
+
+def test_attempt_admission_requires_exact_registered_boundary(tmp_path: Path) -> None:
+    authority = LocalAuthority(tmp_path / "authority.sqlite")
+    state, _, _ = admitted(tmp_path / "registered")
+    registered = register_run(
+        {"action": "register-run", "execution_arn": OWNER, "state": state}, authority
+    )
+    replay = admit_attempt(
+        {"action": "admit-attempt", "execution_arn": OWNER, "state": registered}, authority
+    )
+    assert replay["control"]["attempt"]["owner"] == OWNER
+    fresh = dict(replay)
+    fresh["control"] = dict(replay["control"])
+    fresh["control"].pop("attempt")
+    repeated = admit_attempt(
+        {"action": "admit-attempt", "execution_arn": OWNER, "state": fresh}, authority
+    )
+    assert repeated["control"]["attempt"] == replay["control"]["attempt"]
+    for field, value in (("namespace", "other-space"), ("predecessor", "0" * 64)):
+        changed = dict(fresh)
+        changed["control"] = dict(fresh["control"])
+        changed["control"][field] = value
+        with pytest.raises(ControlRejected, match=f"registered {field}"):
+            admit_attempt(
+                {"action": "admit-attempt", "execution_arn": OWNER, "state": changed}, authority
+            )
+    with pytest.raises(ControlRejected, match="must be admitted"):
+        admit_attempt(
+            {"action": "admit-attempt", "execution_arn": OWNER, "state": replay}, authority
+        )
 
 
 def test_reference_rejects_nonbytes_oversize_and_truncation(tmp_path: Path) -> None:

@@ -94,6 +94,10 @@ def test_controller_handler_executes_durable_registration(
     )
     event = {"action": "register-run", "execution_arn": OWNER, "state": state}
     result = controller.handler(event, None)
+    assert "attempt" not in result["control"]
+    result = controller.handler(
+        {"action": "admit-attempt", "execution_arn": OWNER, "state": result}, None
+    )
     assert result["control"]["attempt"]["owner"] == OWNER
 
 

@@ -136,9 +136,13 @@ def render_definition(operation_id: str) -> dict[str, Any]:
                 "Next": "ReplaySucceeded",
             }
         ],
-        "Default": "StartGlue",
+        "Default": "AdmitAttempt",
     }
     states["ReplaySucceeded"] = {"Type": "Succeed"}
+    states["AdmitAttempt"] = _lambda_task(
+        controller, "admit-attempt", "CaptureAdmitAttemptFailure"
+    )
+    states["AdmitAttempt"]["Next"] = "StartGlue"
     states["StartGlue"] = {
         "Type": "Task",
         "Resource": "arn:aws:states:::glue:startJobRun.sync",
@@ -192,6 +196,7 @@ def render_definition(operation_id: str) -> dict[str, Any]:
     failure_sources = {
         "CaptureValidateExecutionFailure": "ValidateExecution",
         "CaptureRegisterFailure": "RegisterRun",
+        "CaptureAdmitAttemptFailure": "AdmitAttempt",
         "CaptureGlueFailure": "StartGlue",
         "CaptureValidateCandidateFailure": "ValidateCandidate",
         "CaptureTransactionsQueryFailure": "TransactionsQuery",
@@ -294,6 +299,7 @@ def validate_definition(definition: Mapping[str, Any], operation_id: str) -> Non
     required_success_chain = [
         "ValidateExecution",
         "RegisterRun",
+        "AdmitAttempt",
         "StartGlue",
         "ValidateCandidate",
         "RunTransactionsQuery",
