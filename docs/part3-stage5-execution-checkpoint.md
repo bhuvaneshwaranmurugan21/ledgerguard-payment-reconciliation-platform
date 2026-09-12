@@ -443,3 +443,52 @@ mutation outputs were independently compared; the retained
 base head/tree and truthfully records the successor workspace as dirty. The
 incident did not alter test inputs, results or gates. Exact successor CI and
 independent artifact inspection remain mandatory; Stage 5 is not complete.
+
+## Exact handler head and independently derived Athena expectations
+
+The exact published handler head
+`94a185d0a3b76a967ddecb2b5dc497413b3cf6ab`, tree
+`426595ed747863c3e0f35d9e3e80d1472877e167`, passed all three pull-request
+workflows. Native run 34688818944 passed both independent jobs. Its artifacts
+10297180433 (SHA-256
+`e87a74538539e002324d2871c38af913d9a1e5361035612f4decd22d468e575e`)
+and 10296620897 (SHA-256
+`ba2f45f743a7b1969d0eced47138c3f04da37b3c71017fa626692bce7c7413c6`)
+were independently downloaded and revalidated: exact commit/tree binding,
+Terraform 1.13.1 validation, zero TFLint issues, 388 tests, 26 killed
+mutations, complete 478/226 control and 742/292 critical statement/branch
+coverage, equal normalized payloads, and all four source-bound Trivy decisions
+with zero unreviewed findings.
+
+Incremental run 34688818943 artifact 10296638330 (SHA-256
+`eff9549d7142e74ae1cf579e868f8faaf775af38489f759feefd2c085b02a0b7`)
+independently binds two clean 480-test, 1,964-statement, 832-branch and
+69-mutation campaigns to that exact head. Broader run 34688818947 passed all
+six jobs. Its Stage 3 producer artifact 10296956781 (SHA-256
+`bbd3cecfc73b2aa2893f41079a96129256e72af75bfda725012f55e948cf22dd`)
+and inspection artifact 10296936869 (SHA-256
+`fc7b7778bdba5fda8017ddcaebed23253a97e97d87707bea9ad9fbbd7e8a7523`)
+were independently checked: 167 manifest-bound members, equal two-run
+payloads, 166 focused and 219 compatibility tests, 1,924 statements and 614
+branches at 100%, and all 24 mutations killed by assertion. This exact head is
+therefore admitted for the next Stage 5 increment.
+
+The successor now derives each expected Athena summary directly from the same
+externally admitted canonical financial-row evidence used for exact Parquet
+comparison. It streams and validates the entire mixed-family file, including
+non-selected families, and verifies its complete trusted digest before success.
+Grouping follows the fixed SQL currency/status-or-disposition/reason dimensions;
+all counts and amounts remain exact integers and bank-allocation naming is mapped
+explicitly. The 1,000,000-row, 256 MiB input and 4,096-group bounds fail closed.
+Tests include values above 2^53, complete-inventory substitution, family filtering,
+bank allocation mapping and every new input bound.
+
+Two immutable-input local campaigns each passed 492 tests. All 2,014 statements
+and 854 branches are covered at 100% with zero exclusions, and all 71 source
+mutations were killed by assertion in both campaigns. The recovered worktree's
+Git administration path was unavailable, so the qualifier now accepts an explicit
+pair of independently verified full base commit/tree object IDs for local successor
+trials, records such a trial as dirty, and retains unchanged exact-Git discovery in
+CI. Its fail-closed metadata contract is tested. The source-bound receipt is
+`evidence/part3-stage5/expected-summary-local.json`; it records zero AWS calls and
+keeps `stage5_complete` false. Exact successor CI remains required.

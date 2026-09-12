@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -96,8 +97,9 @@ MUTATIONS = (
     (
         "athena-expectation-pin",
         "athena.py",
-        "digest.hexdigest() != trusted_sha256",
-        "False",
+        'if digest.hexdigest() != trusted_sha256:\n'
+        '        raise ControlRejected("Athena expectation digest differs")',
+        'if False:\n        raise ControlRejected("Athena expectation digest differs")',
     ),
     (
         "athena-scan-bound",
@@ -339,6 +341,19 @@ MUTATIONS = (
         "if committed is not None:",
         "if False:",
     ),
+    (
+        "expected-summary-input-digest",
+        "athena.py",
+        'if digest.hexdigest() != trusted_sha256:\n'
+        '        raise ControlRejected("financial expectation digest differs")',
+        'if False:\n        raise ControlRejected("financial expectation digest differs")',
+    ),
+    (
+        "expected-summary-family-confinement",
+        "athena.py",
+        "if row_family != evidence_family:",
+        "if False:",
+    ),
 )
 
 
@@ -371,7 +386,30 @@ def populate_workspace(workspace: Path, snapshot: dict[Path, bytes]) -> None:
         destination.write_bytes(raw)
 
 
-def run(root: Path, output: Path) -> None:
+def _source_metadata(
+    root: Path, base_commit: str | None, base_tree: str | None
+) -> tuple[str, str, bool]:
+    if (base_commit is None) != (base_tree is None):
+        raise ValueError("base commit and tree must be supplied together")
+    if base_commit is not None and base_tree is not None:
+        if any(re.fullmatch(r"[0-9a-f]{40}", value) is None for value in (base_commit, base_tree)):
+            raise ValueError("base commit and tree must be lowercase full object IDs")
+        return base_commit, base_tree, True
+    return (
+        subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
+        subprocess.check_output(
+            ["git", "rev-parse", "HEAD^{tree}"], cwd=root, text=True
+        ).strip(),
+        bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=root)),
+    )
+
+
+def run(
+    root: Path,
+    output: Path,
+    base_commit: str | None = None,
+    base_tree: str | None = None,
+) -> None:
     output.mkdir(parents=True, exist_ok=False)
     tests = sorted(
         str(p.relative_to(root)) for p in (root / "tests").glob("test_part3_stage5_*.py")
@@ -379,7 +417,7 @@ def run(root: Path, output: Path) -> None:
     if not tests:
         raise ValueError("Stage 5 tests missing")
     snapshot: dict[Path, bytes] = {}
-    for directory in ("src", "tests", "spec", "contracts", "glue"):
+    for directory in ("src", "tests", "spec", "contracts", "glue", "tools"):
         for path in sorted((root / directory).rglob("*")):
             relative = path.relative_to(root)
             if path.is_symlink():
@@ -493,6 +531,7 @@ def run(root: Path, output: Path) -> None:
         raise ValueError("clean-run qualification differs")
     if mutations_by_run[0] != mutations_by_run[1]:
         raise ValueError("clean-run mutation results differ")
+    commit, tree, working_tree_dirty = _source_metadata(root, base_commit, base_tree)
     receipt: dict[str, Any] = {
         "schema_version": "1.0",
         "claim": "STAGE5_INCREMENT_LOCAL_VERIFIED",
@@ -503,15 +542,9 @@ def run(root: Path, output: Path) -> None:
         "coverage": coverage_by_run[0],
         "mutations_killed": len(MUTATIONS),
         "clean_runs": 2,
-        "commit": subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=root, text=True
-        ).strip(),
-        "tree": subprocess.check_output(
-            ["git", "rev-parse", "HEAD^{tree}"], cwd=root, text=True
-        ).strip(),
-        "working_tree_dirty": bool(
-            subprocess.check_output(["git", "status", "--porcelain"], cwd=root)
-        ),
+        "commit": commit,
+        "tree": tree,
+        "working_tree_dirty": working_tree_dirty,
         "run_id": os.environ.get("GITHUB_RUN_ID"),
         "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
     }
@@ -523,5 +556,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--base-commit")
+    parser.add_argument("--base-tree")
     args = parser.parse_args()
-    run(args.root.resolve(), args.output.resolve())
+    run(args.root.resolve(), args.output.resolve(), args.base_commit, args.base_tree)

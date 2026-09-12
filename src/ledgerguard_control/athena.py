@@ -15,12 +15,15 @@ from typing import Any, cast
 from ledgerguard.stage3.canonical import canonical_bytes
 
 from .contracts import MAX_DOCUMENT_BYTES, ControlRejected, exact_amount, strict_json
+from .financial_rows import validate_row
 
 SCAN_LIMIT_BYTES = 100 * 1024 * 1024
 EXECUTION_LIMIT_MS = 5 * 60 * 1000
 ENGINE = "Athena engine version 3"
 MAX_RESULT_PAGES = 128
 MAX_RESULT_ROWS = 4096
+MAX_EXPECTED_ROWS = 1_000_000
+MAX_EXPECTED_BYTES = 256 * 1024 * 1024
 
 GROUPS = {
     "transactions": ("currency", "status", "reason_codes"),
@@ -219,6 +222,73 @@ def read_expected(path: Path, trusted_sha256: str, query: FixedQuery) -> tuple[d
     if rows != sorted(rows, key=lambda row: tuple(row[name] for name in GROUPS[query.family])):
         raise ControlRejected("Athena expectation order differs")
     return tuple(rows)
+
+
+def summarize_expected_rows(
+    path: Path, trusted_sha256: str, query: FixedQuery
+) -> tuple[dict[str, str], ...]:
+    """Independently derive a bounded Athena expectation from admitted row evidence.
+
+    The complete canonical JSONL input is streamed and hash-checked even though only
+    one query family contributes to the result. Values remain exact integers and no
+    production reconciliation implementation is imported.
+    """
+    if re.fullmatch(r"[0-9a-f]{64}", trusted_sha256) is None:
+        raise ControlRejected("invalid financial expectation digest")
+    evidence_family = (
+        "bank-allocations" if query.family == "bank_allocations" else query.family
+    )
+    digest = sha256()
+    groups: dict[tuple[str, ...], dict[str, int]] = {}
+    size = 0
+    count = 0
+    with path.open("rb") as stream:
+        while raw := stream.readline(MAX_DOCUMENT_BYTES + 1):
+            size += len(raw)
+            count += 1
+            if size > MAX_EXPECTED_BYTES or count > MAX_EXPECTED_ROWS:
+                raise ControlRejected("financial expectation exceeds bound")
+            value = strict_json(raw)
+            if raw != canonical_bytes(value) + b"\n" or set(value) != {"family", "row"}:
+                raise ControlRejected("financial expectation framing differs")
+            row_family = value["family"]
+            row = value["row"]
+            if type(row_family) is not str or type(row) is not dict:
+                raise ControlRejected("financial expectation record differs")
+            validate_row(row_family, row)
+            digest.update(raw)
+            if row_family != evidence_family:
+                continue
+            currency = (
+                row["currency"]
+                if row_family == "bank-allocations"
+                else row["key_components"]["currency"]
+            )
+            status = (
+                row["disposition"] if row_family == "bank-allocations" else row["status"]
+            )
+            group_key = (currency, status, "|".join(row["reason_codes"]))
+            if group_key not in groups:
+                if len(groups) == MAX_RESULT_ROWS:
+                    raise ControlRejected("financial expectation groups exceed bound")
+                groups[group_key] = {name: 0 for name in AMOUNTS[query.family]}
+                groups[group_key]["row_count"] = 0
+            aggregate = groups[group_key]
+            aggregate["row_count"] += 1
+            amounts = row if row_family == "bank-allocations" else row["totals"]
+            for name in AMOUNTS[query.family]:
+                aggregate[name] += amounts[name]
+    if digest.hexdigest() != trusted_sha256:
+        raise ControlRejected("financial expectation digest differs")
+    result = []
+    for output_group_key in sorted(groups):
+        summary = dict(zip(GROUPS[query.family], output_group_key, strict=True))
+        summary.update(
+            {name: str(value) for name, value in groups[output_group_key].items()}
+        )
+        _validate_summary_row(query, summary)
+        result.append(summary)
+    return tuple(result)
 
 
 def verify_query(

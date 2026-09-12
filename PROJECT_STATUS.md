@@ -10,7 +10,8 @@ downloaded and independently inspected before Stage 5 source admission.
 Stage 5 is in progress: strict control contracts, release/input admission, candidate
 byte/version validation, local/S3 object interfaces, durable metadata authority,
 paged financial-store snapshots, independent Parquet financial comparison, bounded
-Athena proof verification, the Glue successor/terminal-run ownership boundary,
+Athena proof verification with expectations independently derived from the admitted
+financial rows, the Glue successor/terminal-run ownership boundary,
 production authority/publication transports, and initial validation/registration
 handler transitions are implemented as increments. Remaining handlers and end-to-end
 ASL binding, release packaging and the final gate

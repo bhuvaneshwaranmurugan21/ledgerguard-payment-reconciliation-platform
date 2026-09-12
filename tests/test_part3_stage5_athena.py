@@ -7,6 +7,7 @@ from hashlib import sha256
 
 import pytest
 
+import ledgerguard_control.athena as athena_module
 from ledgerguard.stage3.canonical import canonical_bytes
 from ledgerguard_control.athena import (
     AMOUNTS,
@@ -18,6 +19,7 @@ from ledgerguard_control.athena import (
     _validate_summary_row,
     fixed_queries,
     read_expected,
+    summarize_expected_rows,
     verify_query,
 )
 from ledgerguard_control.contracts import MAX_DOCUMENT_BYTES, ControlRejected
@@ -49,6 +51,48 @@ def execution(q=None):
         1024,
         200,
     )
+
+
+def financial_transaction(payment_id, processor_minor, ledger_minor):
+    components = {
+        "processor": "processor-a",
+        "merchant_id": "merchant-1",
+        "payment_id": payment_id,
+        "event_class": "CAPTURE",
+        "currency": "INR",
+    }
+    delta = processor_minor - ledger_minor
+    return {
+        "reconciliation_key": "txn:" + sha256(canonical_bytes(components)).hexdigest(),
+        "key_components": components,
+        "totals": {
+            "processor_minor": processor_minor,
+            "ledger_minor": ledger_minor,
+            "processor_ledger_delta_minor": delta,
+            "difference_minor": abs(delta),
+            "processor_record_count": 1,
+            "ledger_journal_count": 1,
+        },
+        "status": "EXCEPTION",
+        "reason_codes": ["PROCESSOR_LEDGER_MISMATCH"],
+        "source_identities": [["PROCESSOR_EVENT", "processor-a", payment_id]],
+        "authoritative_proof": False,
+    }
+
+
+def financial_bank():
+    return {
+        "source_identity": ["BANK_ENTRY", "bank-a", "entry-1"],
+        "merchant_id": "merchant-1",
+        "currency": "INR",
+        "normalized_settlement_reference": "settlement-1",
+        "disposition": "ALLOCATED",
+        "settlement_reconciliation_key": "stl:" + "a" * 64,
+        "signed_minor": 2**53 + 7,
+        "account_permitted": True,
+        "duplicate_current_bundle": False,
+        "reason_codes": [],
+    }
 
 
 def test_three_fixed_partition_confined_queries():
@@ -169,6 +213,91 @@ def test_expected_total_size_bound(tmp_path):
     path.write_bytes(raw)
     with pytest.raises(ControlRejected, match="exceeds bound"):
         read_expected(path, sha256(raw).hexdigest(), query())
+
+
+def test_expected_financial_rows_independently_aggregate_exact_large_integers(tmp_path):
+    q = query()
+    financial_rows = [
+        {
+            "family": "transactions",
+            "row": financial_transaction("payment-1", 2**53 + 19, 2**53 + 9),
+        },
+        {
+            "family": "transactions",
+            "row": financial_transaction("payment-2", 101, 91),
+        },
+    ]
+    raw = b"".join(canonical_bytes(row) + b"\n" for row in financial_rows)
+    path = tmp_path / "financial-expected.jsonl"
+    path.write_bytes(raw)
+    rows = summarize_expected_rows(path, sha256(raw).hexdigest(), q)
+    assert rows == (
+        {
+            "currency": "INR",
+            "status": "EXCEPTION",
+            "reason_codes": "PROCESSOR_LEDGER_MISMATCH",
+            "row_count": "2",
+            "processor_minor": str(2**53 + 120),
+            "ledger_minor": str(2**53 + 100),
+            "processor_ledger_delta_minor": "20",
+            "difference_minor": "20",
+            "processor_record_count": "2",
+            "ledger_journal_count": "2",
+        },
+    )
+
+
+def test_expected_financial_summary_hashes_full_inventory_and_filters_family(tmp_path):
+    transaction = {
+        "family": "transactions",
+        "row": financial_transaction("payment-1", 100, 90),
+    }
+    bank = {"family": "bank-allocations", "row": financial_bank()}
+    raw = canonical_bytes(transaction) + b"\n" + canonical_bytes(bank) + b"\n"
+    path = tmp_path / "financial-expected.jsonl"
+    path.write_bytes(raw)
+    assert len(summarize_expected_rows(path, sha256(raw).hexdigest(), query())) == 1
+    bank_query = fixed_queries("ledgerguard_p3_reconciliation", "run-test1", "attempt-1")[2]
+    assert summarize_expected_rows(path, sha256(raw).hexdigest(), bank_query) == (
+        {
+            "currency": "INR",
+            "disposition": "ALLOCATED",
+            "reason_codes": "",
+            "row_count": "1",
+            "signed_minor": str(2**53 + 7),
+        },
+    )
+    with pytest.raises(ControlRejected, match="digest"):
+        summarize_expected_rows(path, "0" * 64, query())
+    malformed_other_family = {
+        "family": "settlements",
+        "row": {"reconciliation_key": "bad"},
+    }
+    path.write_bytes(raw + canonical_bytes(malformed_other_family) + b"\n")
+    with pytest.raises(ControlRejected):
+        summarize_expected_rows(path, sha256(path.read_bytes()).hexdigest(), query())
+
+
+@pytest.mark.parametrize("fault", ["digest-shape", "framing", "record", "size", "groups"])
+def test_expected_financial_summary_rejects_invalid_input(tmp_path, monkeypatch, fault):
+    value = {
+        "family": "transactions",
+        "row": financial_transaction("payment-1", 100, 90),
+    }
+    raw = canonical_bytes(value) + b"\n"
+    if fault == "framing":
+        raw = canonical_bytes({}) + b"\n"
+    if fault == "record":
+        raw = canonical_bytes({"family": 1, "row": {}}) + b"\n"
+    if fault == "size":
+        monkeypatch.setattr(athena_module, "MAX_EXPECTED_BYTES", 0)
+    if fault == "groups":
+        monkeypatch.setattr(athena_module, "MAX_RESULT_ROWS", 0)
+    path = tmp_path / "financial-invalid.jsonl"
+    path.write_bytes(raw)
+    digest = "bad" if fault == "digest-shape" else sha256(raw).hexdigest()
+    with pytest.raises(ControlRejected):
+        summarize_expected_rows(path, digest, query())
 
 
 def test_verify_complete_two_page_result():
