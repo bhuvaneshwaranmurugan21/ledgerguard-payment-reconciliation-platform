@@ -9,6 +9,7 @@ from .candidate_validation import validate_candidate
 from .contracts import ControlRejected
 from .execution import HandlerConfig, validate_execution
 from .objects import VersionedObjects
+from .query_validation import FAMILIES, validate_query
 from .runtime import aws_client, load_config
 
 
@@ -20,15 +21,25 @@ def _candidate_dependencies(config: HandlerConfig) -> tuple[Any, Any]:
     return S3ImmutableObjects(aws_client("s3"), config.bucket), aws_client("glue")
 
 
+def _query_dependencies(config: HandlerConfig) -> tuple[Any, Any]:
+    s3 = aws_client("s3")
+    return S3ImmutableObjects(s3, config.bucket), aws_client("athena")
+
+
 def handler(event: Any, _context: Any) -> dict[str, Any]:
     """Admit only implemented validator actions; unknown work cannot fail open."""
+    query_actions = {f"validate-{family}-query" for family in FAMILIES}
     if type(event) is not dict or event.get("action") not in {
         "validate-execution",
         "validate-candidate",
+        *query_actions,
     }:
         raise ControlRejected("unsupported validator action")
     config = load_config()
     if event["action"] == "validate-execution":
         return validate_execution(event, config, _objects(config))
-    objects, glue = _candidate_dependencies(config)
-    return validate_candidate(event, config, objects, glue, objects)
+    if event["action"] == "validate-candidate":
+        objects, glue = _candidate_dependencies(config)
+        return validate_candidate(event, config, objects, glue, objects)
+    objects, athena = _query_dependencies(config)
+    return validate_query(event, config, objects, athena, objects)

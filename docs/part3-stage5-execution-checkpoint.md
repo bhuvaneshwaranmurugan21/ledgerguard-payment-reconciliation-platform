@@ -619,3 +619,37 @@ The source-bound receipt is
 the admitted base commit/tree, a dirty successor workspace, and keeps
 `stage5_complete` false. Fresh exact-head CI and independent artifact inspection
 remain mandatory.
+
+## Complete ordered Athena-query validation transitions
+
+The successor now implements all three production query-validation Lambda
+boundaries. Each transition re-reads and re-admits the deployment-pinned
+execution input, immutable registration, terminal Glue validation receipt and
+complete physical candidate inventory before it trusts workflow state. Query
+families must arrive once and in the fixed transactions, settlements and
+bank-allocations order; every earlier retained proof is reopened and its exact
+identity is reverified before the next query can be admitted.
+
+The validator only observes an already-completed Athena execution. It derives
+the expected aggregate rows independently from the admitted canonical financial
+JSONL, then verifies the fixed SQL, workgroup, engine, account owner, SSE-S3
+configuration, terminal status, scan/time bounds and every bounded result page.
+The exact versioned result CSV must be the sole non-deleted object at its
+deterministic result URI, remain at or below 8 MiB and retain unchanged version
+history before and after streaming. Candidate versions are also checked again
+after observation. The canonical proof body is content-addressed below
+`publications/query-proofs/`, outside the transient run lifecycle. No query is
+started by this code.
+
+Two immutable-input local campaigns each passed 552 tests. All 2,351 statements
+and 978 branches are covered at 100% with zero exclusions, and all 93 source
+mutations were killed by assertion in both campaigns. The mutation runner merely
+places each mutation's detecting test file first while retaining the exact full
+17-file test inventory; it rejects any missing or changed inventory. One prior
+local attempt was externally terminated after 78 killed mutations and emitted no
+receipt, so it was not admitted. The complete source-bound receipt is
+`evidence/part3-stage5/query-validation-local.json` (SHA-256
+`afe8fe88e5b426cd0d635500e44513ba5273368262c88b48202bd1ccbdffd5d7`).
+It records zero AWS calls, the admitted base commit/tree, a dirty successor
+workspace and `stage5_complete: false`. Fresh exact-head native, incremental and
+broader compatibility CI plus independent artifact inspection remain mandatory.

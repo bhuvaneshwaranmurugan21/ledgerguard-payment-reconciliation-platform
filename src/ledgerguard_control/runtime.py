@@ -37,7 +37,7 @@ def load_config(environment: Mapping[str, str] | None = None) -> HandlerConfig:
 
 def aws_client(service: str) -> Any:
     """Construct one regional AWS SDK client from the Lambda-provided SDK."""
-    if service not in {"dynamodb", "glue", "s3"}:
+    if service not in {"athena", "dynamodb", "glue", "s3"}:
         raise ControlRejected("unsupported runtime AWS client")
     boto3 = importlib.import_module("boto3")
     return boto3.client(service, region_name=REGION)

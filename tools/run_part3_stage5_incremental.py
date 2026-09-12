@@ -444,7 +444,87 @@ MUTATIONS = (
         'f"s3://{bucket}/publications/validation-receipts/{suffix}/{digest}.json"',
         'f"s3://{bucket}/runs/validation-receipts/{suffix}/{digest}.json"',
     ),
+    (
+        "query-state-readmission",
+        "query_validation.py",
+        "if set(control) != allowed or any(\n"
+        "        control.get(name) != value for name, value in initial.items()\n"
+        "    ):",
+        "if False:",
+    ),
+    (
+        "query-validation-receipt-binding",
+        "query_validation.py",
+        "any(receipt.get(name) != value for name, value in expected_receipt.items())",
+        "False",
+    ),
+    (
+        "query-managed-order",
+        "query_validation.py",
+        "set(athena) != set(completed)",
+        "False",
+    ),
+    (
+        "query-candidate-version-binding",
+        "query_validation.py",
+        'inventory_digest != receipt["version_inventory_sha256"]',
+        "False",
+    ),
+    (
+        "query-result-object-address",
+        "query_validation.py",
+        "output_location != expected_uri",
+        "False",
+    ),
+    (
+        "query-post-observation-stability",
+        "query_validation.py",
+        "after_digest != inventory_digest",
+        "False",
+    ),
+    (
+        "validator-query-action-dispatch",
+        "validator.py",
+        'query_actions = {f"validate-{family}-query" for family in FAMILIES}',
+        "query_actions = set()",
+    ),
 )
+
+MUTATION_TEST_PRIORITY = {
+    "admission.py": "tests/test_part3_stage5_admission.py",
+    "athena.py": "tests/test_part3_stage5_athena.py",
+    "athena_aws.py": "tests/test_part3_stage5_athena_aws.py",
+    "authority.py": "tests/test_part3_stage5_authority.py",
+    "aws_authority.py": "tests/test_part3_stage5_aws_authority.py",
+    "aws_objects.py": "tests/test_part3_stage5_aws_objects.py",
+    "candidate_validation.py": "tests/test_part3_stage5_candidate_validation.py",
+    "candidates.py": "tests/test_part3_stage5_candidates.py",
+    "contracts.py": "tests/test_part3_stage5_admission.py",
+    "controller.py": "tests/test_part3_stage5_handlers.py",
+    "execution.py": "tests/test_part3_stage5_execution.py",
+    "financial_rows.py": "tests/test_part3_stage5_financial_rows.py",
+    "glue_arguments.py": "tests/test_part3_stage5_admission.py",
+    "glue_run.py": "tests/test_part3_stage5_glue_run.py",
+    "objects.py": "tests/test_part3_stage5_candidates.py",
+    "publication.py": "tests/test_part3_stage5_publication.py",
+    "query_validation.py": "tests/test_part3_stage5_query_validation.py",
+    "runtime.py": "tests/test_part3_stage5_handlers.py",
+    "successor_job.py": "tests/test_part3_stage5_successor.py",
+    "successor_writer.py": "tests/test_part3_stage5_successor.py",
+    "validator.py": "tests/test_part3_stage5_handlers.py",
+    "workflow.py": "tests/test_part3_stage5_workflow.py",
+}
+
+
+def mutation_test_order(filename: str, tests: list[str]) -> list[str]:
+    """Run the detecting file first while retaining the complete test inventory."""
+    preferred = MUTATION_TEST_PRIORITY.get(filename)
+    if preferred is None or preferred not in tests:
+        raise ValueError(f"mutation test priority is missing for {filename}")
+    ordered = [preferred, *(test for test in tests if test != preferred)]
+    if len(ordered) != len(tests) or set(ordered) != set(tests):
+        raise ValueError("mutation test ordering changed the test inventory")
+    return ordered
 
 
 def command(argv: list[str], root: Path, output: Path, name: str) -> int:
@@ -588,13 +668,14 @@ def run(
             original = path.read_text()
             mutant = prepare_mutation(original, {"id": name, "before": before, "after": after})
             path.write_text(mutant)
+            mutation_tests = mutation_test_order(filename, tests)
             code = command(
                 [
                     sys.executable,
                     "-B",
                     "-m",
                     "pytest",
-                    *tests,
+                    *mutation_tests,
                     "--maxfail=1",
                     "--tb=short",
                     "--junitxml=" + str(trial / f"{name}.xml"),

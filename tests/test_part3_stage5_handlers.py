@@ -41,14 +41,16 @@ def test_runtime_configuration_and_aws_client_are_exact(tmp_path: Any) -> None:
     try:
         assert runtime.aws_client("s3") == "s3"
         assert runtime.aws_client("glue") == "glue"
+        assert runtime.aws_client("athena") == "athena"
     finally:
         del sys.modules["boto3"]
     assert calls == [
         ("s3", {"region_name": "ap-southeast-2"}),
         ("glue", {"region_name": "ap-southeast-2"}),
+        ("athena", {"region_name": "ap-southeast-2"}),
     ]
     with pytest.raises(ControlRejected, match="unsupported"):
-        runtime.aws_client("athena")
+        runtime.aws_client("lambda")
 
 
 @pytest.mark.parametrize(
@@ -130,10 +132,14 @@ def test_default_environment_and_transport_factories(
     s3 = validator._objects(config)
     authority = controller._authority(config)
     candidate, glue = validator._candidate_dependencies(config)
+    query_objects, athena = validator._query_dependencies(config)
     assert s3.client == ("client", "s3")
     assert candidate.client == ("client", "s3")
     assert candidate.bucket == config.bucket
     assert glue == ("client", "glue")
+    assert query_objects.client == ("client", "s3")
+    assert query_objects.bucket == config.bucket
+    assert athena == ("client", "athena")
     assert authority.client == ("client", "dynamodb")
     assert authority.table == config.table
 
