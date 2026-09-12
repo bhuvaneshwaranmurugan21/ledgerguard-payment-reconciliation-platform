@@ -354,6 +354,36 @@ MUTATIONS = (
         "if row_family != evidence_family:",
         "if False:",
     ),
+    (
+        "handler-runtime-bucket-binding",
+        "runtime.py",
+        'values.get("WORKLOAD_BUCKET") != config.bucket',
+        "False",
+    ),
+    (
+        "handler-runtime-table-binding",
+        "runtime.py",
+        'values.get("CONTROL_TABLE") != config.table',
+        "False",
+    ),
+    (
+        "handler-runtime-region-binding",
+        "runtime.py",
+        "region_name=REGION",
+        'region_name="us-east-1"',
+    ),
+    (
+        "validator-action-dispatch",
+        "validator.py",
+        'event.get("action") != "validate-execution"',
+        "False",
+    ),
+    (
+        "controller-action-dispatch",
+        "controller.py",
+        'event.get("action") != "register-run"',
+        "False",
+    ),
 )
 
 

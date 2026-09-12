@@ -492,3 +492,52 @@ trials, records such a trial as dirty, and retains unchanged exact-Git discovery
 CI. Its fail-closed metadata contract is tested. The source-bound receipt is
 `evidence/part3-stage5/expected-summary-local.json`; it records zero AWS calls and
 keeps `stage5_complete` false. Exact successor CI remains required.
+
+## Exact expected-summary head and initial Lambda entrypoints
+
+The exact published expected-summary head
+`e6228bfe9c2a9073bf05f7f741fad59e0db5bfc4`, tree
+`124689500195d297b2b50543b9e1eb789ba06792`, passed all three pull-request
+workflows. Native run 34692144685 passed both independently inspected jobs. Its
+artifacts 10298070423 (SHA-256
+`684af95493443f431ed2929277faea9130d01689a57191e64aca25be1cd92adc`)
+and 10297730229 (SHA-256
+`2c7598529306b5355c1573c2439fad6a4202e0c80643a9e76d3ff96a053e254c`)
+were independently downloaded and revalidated: exact commit/tree binding,
+Terraform 1.13.1 validation, zero TFLint issues, 388 tests, 26 killed
+mutations, complete 478/226 control and 742/292 critical statement/branch
+coverage, equal normalized payloads, and all four source-bound Trivy decisions
+with zero unreviewed findings.
+
+Incremental run 34692144669 artifact 10297762673 (SHA-256
+`4c94353475c5512261f8f6f2d9ccfc1eeb0275af9d2cca212b68d1665d987f81`)
+independently binds two clean 492-test, 2,014-statement, 854-branch and
+71-mutation campaigns to that exact head. Broader run 34692144672 passed all
+six jobs. Its Stage 3 producer artifact 10297372015 (SHA-256
+`6e6e3f65209f55d5f77e4c3695d67e87cec1e9aa305032155ed999199683c9d7`)
+and inspection artifact 10297926849 (SHA-256
+`771a4316318a9da8c0cfabc8658fb4cb3dcb916bdf5b963385445262c32d6d36`)
+were independently checked: 167 manifest-bound members, equal two-run
+payloads, 166 focused and 219 compatibility tests, 1,924 statements and 614
+branches at 100%, and all 24 mutations killed by assertion. No AWS call or
+mutation occurred. This exact head is admitted for the next Stage 5 increment.
+
+The successor adds the initial concrete Lambda module entrypoints. Deployment
+configuration is read only from canonical JSON with its independent SHA-256,
+then cross-checked against the operation-derived workload bucket and control
+table. AWS client construction is confined to S3 or DynamoDB in
+`ap-southeast-2`. The validator accepts only the implemented
+`validate-execution` action and uses the paginated immutable S3 adapter; the
+controller accepts only `register-run` and uses the durable DynamoDB authority.
+All other actions fail before configuration or transport access. These are real
+entrypoints for the two implemented transitions, not a claim that the remaining
+workflow actions or release package are complete.
+
+Two immutable-input local campaigns each passed 509 tests. All 2,069 statements
+and 866 branches are covered at 100% with zero exclusions, and all 76 source
+mutations were killed by assertion in both campaigns. Ruff and strict mypy pass.
+The source-bound receipt is
+`evidence/part3-stage5/lambda-entrypoints-local.json`; it records zero AWS calls,
+the admitted base commit/tree, a dirty successor workspace, and keeps
+`stage5_complete` false. Fresh exact-head CI and independent artifact inspection
+remain mandatory.
