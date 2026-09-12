@@ -44,13 +44,10 @@ qualified operational commit `aa136331e44dcd181f766b42d76ee2616a22f435`, success
 read-only run `34337121587`, successful bounded capability run `34337699794`, complete cleanup,
 and independently accepted artifacts. PR #25 was squash-merged at
 `d0fb01392f7f975909229f418c13a9c73ba8395e`; all 22 Stage 2 requirements and gates G001–G020
-are externally verified. Stage 3's deterministic four-profile assets, independent property
-campaign, native four-family source-to-candidate Spark reconciliation and offline reproducible
-Glue 5.1 package are externally verified. Stage 4's bounded infrastructure and execution controls
-are accepted on `main`. Draft PR #28 is implementing Stage 5 orchestration and authority; its
-latest local successor includes complete ordered Athena-query validation but remains pending fresh
-exact-head qualification. It performs no AWS work and produces no authoritative proof. The overall
-project remains in progress.
+are externally verified. Stage 3 is now implementing deterministic four-profile assets, an
+independent property campaign, native four-family source-to-candidate Spark reconciliation, and an
+offline reproducible Glue 5.1 package. It performs no AWS work and produces no authoritative proof.
+The overall project remains in progress.
 
 The original master has explicit carryovers beyond the historical Part 2 ledger: generator profiles,
 generator-driven properties, corrected-source behavior, a full source-to-proof DataFrame pipeline,
@@ -90,9 +87,7 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` after PR #18 squash and independent main CI |
 | Part 3 Stage 1 | `EXTERNALLY_VERIFIED` after PR #19 squash and independent main CI |
 | Part 3 Stage 2 | `EXTERNALLY_VERIFIED` after PR #25 squash and independent main CI |
-| Part 3 Stage 3 | `EXTERNALLY_VERIFIED` — deterministic local assets, native Spark, and reproducible Glue package only; no AWS execution |
-| Part 3 Stage 4 | `EXTERNALLY_VERIFIED` after PR #27 squash and independent main CI |
-| Part 3 Stage 5 | `LOCAL_VERIFIED_INCREMENT` — orchestration/query validation in draft PR #28; exact-head CI and remaining Stage 5 gates outstanding |
+| Part 3 Stage 3 | `IMPLEMENTED_PENDING_EXACT_HEAD_CI` — local assets, native Spark, and reproducible Glue package only; no AWS execution |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity | `AWS_VERIFIED` for Stage 2 qualification only |
 | Managed AWS reconciliation | `UNCLAIMED` |
