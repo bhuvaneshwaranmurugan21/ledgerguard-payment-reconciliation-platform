@@ -96,8 +96,8 @@ locals {
         Resource = ["${local.bucket_arn}/publications/*", "${local.bucket_arn}/runs/*/attempts/*/evidence/*"]
       },
       {
-        Sid      = "ConditionalControlMetadata", Effect = "Allow"
-        Action   = [
+        Sid    = "ConditionalControlMetadata", Effect = "Allow"
+        Action = [
           "dynamodb:GetItem",
           "dynamodb:BatchGetItem",
           "dynamodb:Query",

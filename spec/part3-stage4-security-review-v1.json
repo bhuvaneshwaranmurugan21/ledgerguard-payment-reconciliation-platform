@@ -14,7 +14,7 @@
     "infra/part3/catalog.tf": "58c233e8df5867f360ca9f1ee83291e9e1160e8a78af9f4f49bfd9e19ebe4908",
     "infra/part3/compute.tf": "c7d212644b235d5584e91071c8eb55d0570a3c3dbd8e8d59354dc887450cbe47",
     "infra/part3/monitoring.tf": "a35b1f94b0d7ac39efb3ec2c8258d28ab32ff5f1b5e49cb43a0012c89c389d02",
-    "infra/part3/permissions.tf": "22558c906973cd16aac94801e1ffe1cdb161deb5ef93ee9188b086aa8dcc9229",
+    "infra/part3/permissions.tf": "e57c8ecad46cad85badf5f55aef70401a756563a8328ae84a19f399fdeb3c1ee",
     "infra/part3/storage.tf": "eed1ce39bdecc765e19b9f2000169eae45e14b67013f1cf5e37f25460d1e0f1c",
     "infra/part3/variables.tf": "59279f7ed98471417d11fd75284c4a845d21e68859a50de61ff8839c9e6e978d",
     "infra/part3/versions.tf": "5a2014d9a91c6865e66ce8cded6fd980f236050a8c5ab1fa2dc713a95bab08a8"
