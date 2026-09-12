@@ -10,9 +10,10 @@ downloaded and independently inspected before Stage 5 source admission.
 Stage 5 is in progress: strict control contracts, release/input admission, candidate
 byte/version validation, local/S3 object interfaces, durable metadata authority,
 paged financial-store snapshots, independent Parquet financial comparison, bounded
-Athena proof verification, and the Glue successor/terminal-run ownership boundary are
-implemented as increments. Full handlers/ASL, immutable Athena proof persistence,
-production authority/publication/reader adapters, release packaging and final gate
+Athena proof verification, the Glue successor/terminal-run ownership boundary,
+production authority/publication transports, and initial validation/registration
+handler transitions are implemented as increments. Remaining handlers and end-to-end
+ASL binding, release packaging and the final gate
 qualification remain open. See `docs/part3-stage5-execution-checkpoint.md` for the
 implemented boundary and every remaining Stage 5 gate. Stages 6–8 remain pending.
 Successor IAM is not installed; effective permissions are not verified. No new

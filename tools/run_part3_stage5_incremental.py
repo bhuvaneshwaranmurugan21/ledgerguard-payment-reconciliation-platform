@@ -309,6 +309,36 @@ MUTATIONS = (
         'return {"Type": "Pass", "Parameters": parameters, "Next": "RecordFailure"}',
         'return {"Type": "Pass", "Parameters": parameters, "Next": "WorkflowFailed"}',
     ),
+    (
+        "handler-config-digest",
+        "execution.py",
+        "sha256(raw).hexdigest() != trusted_sha256",
+        "False",
+    ),
+    (
+        "handler-execution-input-binding",
+        "execution.py",
+        'state != {"execution_input_sha256": config.execution_input["sha256"]}',
+        "False",
+    ),
+    (
+        "handler-operation-bucket-binding",
+        "execution.py",
+        "arguments.workload_bucket != config.bucket",
+        "False",
+    ),
+    (
+        "handler-query-token-family-binding",
+        "execution.py",
+        '{"identity": identity, "family": family}',
+        '{"identity": identity}',
+    ),
+    (
+        "handler-committed-replay",
+        "execution.py",
+        "if committed is not None:",
+        "if False:",
+    ),
 )
 
 

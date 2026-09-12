@@ -391,3 +391,55 @@ byte-integrity mutation. No production check or acceptance threshold was removed
 `e2c825688894e4dae542fde742e2ffac2a82e089e0be810cb7ae31ef047f5ca3`),
 records zero AWS calls and keeps `stage5_complete` false. Exact successor CI and
 independent artifact inspection remain required.
+
+## Exact authority head and first concrete handler transitions
+
+The exact published authority head
+`e0bfaf7aef1888c4c227dbd65561445191ec0a16`, tree
+`7ff8a370a1dfa115e7a2bc3f2f09ef31cd5079fa`, passed all three pull-request
+workflows. Native run 34685612622 passed both independent jobs. Its artifacts
+10295591371 (SHA-256
+`b38b6d7ff4ea2c1f4087e0cc14d2e111215182ab7a10b6bc265686992e3ef034`)
+and 10295671196 (SHA-256
+`b27ce1bcc35301453ae537bca6b0b1418bfd450446a7dce7c36803e59f440528`)
+were independently downloaded and revalidated: exact commit/tree binding,
+Terraform 1.13.1 validation, zero TFLint issues, 388 tests, 26 killed
+mutations, 478/226 control and 742/292 critical statement/branch coverage at
+100%, equal normalized payloads, and all four source-bound Trivy decisions
+with zero unreviewed findings.
+
+Incremental run 34685612621 artifact 10295987461 (SHA-256
+`ecd723814e3f79a65da673190048c4b12469d65531cfe91788676171ce60c00c`)
+independently binds two clean 465-test, 1,848-statement, 790-branch and
+64-mutation campaigns to that exact head. Broader run 34685612631 passed all
+six jobs. Its Stage 3 producer artifact 10296046508 (SHA-256
+`c2dd14ea46f789a9269063900f06e179834644e0e8b8905c45bc8730615a1666`)
+and inspection artifact 10296135246 (SHA-256
+`d1234887aea2e3c34245d3ba25334cf448436d78b4ea3b516a923b8371d81734`)
+were independently checked: 167 manifest-bound members, equal two-run
+payloads, 166 focused and 219 compatibility tests, 1,924 statements and 614
+branches at 100%, and all 24 mutations killed by assertion. No AWS call or
+mutation occurred.
+
+The next successor adds the first concrete controller transitions. The handler
+configuration is deployment-digest-bound to one versioned execution input and
+one qualified runtime release. Validation streams and verifies that exact input,
+reuses the accepted admission boundary, rejects a different operation bucket,
+and renders the closed Glue start plus three separately confined Athena requests
+with distinct deterministic service tokens. Registration accepts only the
+validated pointer state, creates a durable owner/fence through the authority
+interface, and terminates exact committed replays before any managed workload.
+These transitions use genuine durable SQLite versions and authority in local
+qualification; they are not presented as live AWS evidence or as complete Lambda
+entrypoints.
+
+Two immutable-input local campaigns each passed 480 tests. All 1,964 statements
+and 832 branches are covered at 100% with zero exclusions, and all 69 source
+mutations were killed by assertion in both campaigns. The complete campaigns
+finished before a vanished external Git-worktree administration directory caused
+the receipt writer's final metadata lookup to fail. Their raw JUnit, coverage and
+mutation outputs were independently compared; the retained
+`evidence/part3-stage5/execution-handlers-local.json` binds the verified GitHub
+base head/tree and truthfully records the successor workspace as dirty. The
+incident did not alter test inputs, results or gates. Exact successor CI and
+independent artifact inspection remain mandatory; Stage 5 is not complete.
