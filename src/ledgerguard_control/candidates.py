@@ -28,6 +28,7 @@ _PARQUET = re.compile(
 _MARKER = re.compile(rf"(candidate-manifest|completion)/{_PART}-c[0-9]{{3}}\.txt")
 _FAMILIES = {"transactions", "settlements", "bank-allocations"}
 _DIRECTORIES = _FAMILIES | {"candidate-manifest", "completion"}
+MAX_CANDIDATE_BYTES = 256 * 1024 * 1024
 _PHYSICAL = closed(
     {"path": {"type": "string"}, "size_bytes": {**UINT, "minimum": 1}, "sha256": SHA256}
 )
@@ -158,6 +159,8 @@ def verify_physical_candidate(
     ):
         raise ControlRejected("completion does not bind candidate manifest")
     rows = manifest["physical_files"]
+    if sum(row["size_bytes"] for row in rows) > MAX_CANDIDATE_BYTES:
+        raise ControlRejected("candidate physical inventory exceeds byte bound")
     paths = [row["path"] for row in rows]
     if paths != sorted(set(paths)) or set(paths) != set(physical):
         raise ControlRejected("manifest and actual physical inventory differ")

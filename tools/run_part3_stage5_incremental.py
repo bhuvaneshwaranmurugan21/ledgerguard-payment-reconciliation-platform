@@ -385,10 +385,10 @@ MUTATIONS = (
         'region_name="us-east-1"',
     ),
     (
-        "validator-action-dispatch",
+        "validator-candidate-action-dispatch",
         "validator.py",
-        'event.get("action") != "validate-execution"',
-        "False",
+        '"validate-candidate",',
+        '"wrong-candidate",',
     ),
     (
         "controller-attempt-action-dispatch",
@@ -401,6 +401,48 @@ MUTATIONS = (
         "workflow.py",
         '"Default": "AdmitAttempt",',
         '"Default": "StartGlue",',
+    ),
+    (
+        "candidate-physical-size-bound",
+        "candidates.py",
+        'sum(row["size_bytes"] for row in rows) > MAX_CANDIDATE_BYTES',
+        "False",
+    ),
+    (
+        "candidate-attempt-binding",
+        "candidate_validation.py",
+        'any(value.get(name) != item for name, item in expected.items())',
+        "False",
+    ),
+    (
+        "candidate-state-readmission",
+        "candidate_validation.py",
+        'any(control.get(name) != item for name, item in initial.items())',
+        "False",
+    ),
+    (
+        "candidate-managed-glue-result",
+        "candidate_validation.py",
+        'set(glue) != {"JobRunId"}',
+        "False",
+    ),
+    (
+        "candidate-materialized-digest",
+        "candidate_validation.py",
+        'digest.hexdigest() != reference["sha256"]',
+        "False",
+    ),
+    (
+        "candidate-post-comparison-stability",
+        "candidate_validation.py",
+        "assert_unchanged(objects, arguments.candidate_output_prefix, candidate.versions)",
+        "None",
+    ),
+    (
+        "candidate-receipt-retention-prefix",
+        "candidate_validation.py",
+        'f"s3://{bucket}/publications/validation-receipts/{suffix}/{digest}.json"',
+        'f"s3://{bucket}/runs/validation-receipts/{suffix}/{digest}.json"',
     ),
 )
 

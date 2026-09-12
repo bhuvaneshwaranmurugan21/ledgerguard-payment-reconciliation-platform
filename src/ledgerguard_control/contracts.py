@@ -109,12 +109,48 @@ SCHEMAS = {
             **FENCED,
             "glue_job_name": TEXT,
             "glue_job_run_id": TEXT,
+            "glue_arguments_sha256": SHA256,
+            "glue_observation_sha256": SHA256,
+            "glue_started_at": TEXT,
+            "glue_completed_at": TEXT,
+            "glue_execution_seconds": UINT,
+            "glue_dpu_seconds": {
+                "type": "string",
+                "pattern": r"^(0|[1-9][0-9]{0,3})(?:\.[0-9]{1,6})?$",
+            },
             "completion": OBJECT,
             "candidate_manifest": OBJECT,
             "physical_inventory": OBJECT,
             "version_inventory_sha256": SHA256,
             "logical_sha256": SHA256,
             "expected_results_sha256": SHA256,
+        },
+    ),
+    "physical-inventory": document(
+        "physical-inventory",
+        {
+            "run_id": ID,
+            "attempt_id": ID,
+            "version_inventory_sha256": SHA256,
+            "objects": {
+                "type": "array",
+                "items": OBJECT,
+                "minItems": 3,
+                "maxItems": 1024,
+            },
+            "financial_comparison": closed(
+                {
+                    "expected_sha256": SHA256,
+                    "rows_sha256": SHA256,
+                    "counts": closed(
+                        {
+                            "transactions": UINT,
+                            "settlements": UINT,
+                            "bank-allocations": UINT,
+                        }
+                    ),
+                }
+            ),
         },
     ),
     "query-proof": document(

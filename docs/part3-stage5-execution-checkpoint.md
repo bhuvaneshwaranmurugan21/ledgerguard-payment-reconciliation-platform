@@ -589,3 +589,33 @@ The source-bound receipt is
 the admitted base commit/tree, a dirty successor workspace, and keeps
 `stage5_complete` false. Fresh exact-head CI and independent artifact inspection
 remain mandatory.
+
+## Complete candidate-validation transition
+
+The successor implements the production `ValidateCandidate` Lambda boundary.
+It re-reads and re-admits the deployment-pinned execution input before trusting
+workflow state, requires the exact `StartJobRun` response shape and execution-owned
+attempt fence, and then independently observes the terminal Glue run. The terminal
+receipt binds the job name, run ID, exact start arguments, effective Glue 5.1/G.1X
+configuration, timestamps, execution seconds and DPU seconds. The handler performs
+only Glue and S3 control-plane reads; it cannot start a job.
+
+The same transition reopens the complete candidate version history, rejects
+overwrites, deletion history, hidden objects and physical inventories over 256 MiB,
+and streams each exact Parquet version into an isolated workspace. Real Arrow
+schemas, every financial row, exact integers above 2^53, row identities, deltas and
+family inventories are compared against the independently admitted canonical
+financial JSONL. The candidate version inventory is checked again after comparison,
+closing the read/compare race. Canonical physical-inventory and validation-receipt
+objects are created or exactly replayed under `publications/validation-receipts/`,
+outside the transient `runs/` lifecycle. This is local and transport evidence, not
+a claim of live workload execution or effective AWS permission.
+
+Two immutable-input local campaigns each passed 535 tests. All 2,204 statements
+and 916 branches are covered at 100% with zero exclusions, and all 86 source
+mutations were killed by assertion in both campaigns. Ruff and strict mypy pass.
+The source-bound receipt is
+`evidence/part3-stage5/candidate-validation-local.json`; it records zero AWS calls,
+the admitted base commit/tree, a dirty successor workspace, and keeps
+`stage5_complete` false. Fresh exact-head CI and independent artifact inspection
+remain mandatory.

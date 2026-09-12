@@ -11,7 +11,7 @@ import pytest
 from test_part3_stage5_admission import fixture
 
 from ledgerguard.stage3.canonical import canonical_bytes
-from ledgerguard_control.candidates import verify_physical_candidate
+from ledgerguard_control.candidates import MAX_CANDIDATE_BYTES, verify_physical_candidate
 from ledgerguard_control.contracts import ControlRejected, job_arguments, strict_json
 from ledgerguard_control.objects import (
     LocalVersionedObjects,
@@ -336,6 +336,18 @@ def test_complete_inventory_still_requires_all_three_families(tmp_path: Path) ->
     rewrite_marker(values, "candidate-manifest", edit)
     store, arguments = persist(tmp_path, values)
     with pytest.raises(ControlRejected, match="table family missing"):
+        verify_physical_candidate(store, arguments)
+
+
+def test_candidate_total_physical_size_is_bounded(tmp_path: Path) -> None:
+    _, values = inputs()
+
+    def edit(document: dict[str, Any]) -> None:
+        document["physical_files"][0]["size_bytes"] = MAX_CANDIDATE_BYTES + 1
+
+    rewrite_marker(values, "candidate-manifest", edit)
+    store, arguments = persist(tmp_path, values)
+    with pytest.raises(ControlRejected, match="byte bound"):
         verify_physical_candidate(store, arguments)
 
 
