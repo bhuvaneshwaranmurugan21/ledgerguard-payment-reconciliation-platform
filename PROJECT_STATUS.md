@@ -1,6 +1,28 @@
 # Project status
 
-## Active boundary — Part 3 Stage 4
+## Active boundary — Part 3 Stage 5
+
+Stage 4 is externally accepted at PR #27 squash
+`7036a1557f815a0aaea9d635278cc687297d6214`. Exact-main native run 34565883871
+and all six broader CI jobs in run 34565883880 passed. Required artifacts were
+downloaded and independently inspected before Stage 5 source admission.
+
+Stage 5 is in progress: strict control contracts, release/input admission, candidate
+byte/version validation, local/S3 object interfaces, durable metadata authority,
+paged financial-store snapshots, independent Parquet financial comparison, bounded
+Athena proof verification with expectations independently derived from the admitted
+financial rows, the Glue successor/terminal-run ownership boundary,
+production authority/publication transports, and distinct validation, registration and
+attempt-admission handler transitions with concrete fail-closed Lambda entrypoints are
+implemented as increments. The latest local successor passed two 510-test campaigns
+with 2,090 statements and 876 branches at 100% and all 79 mutations killed. Remaining actions,
+end-to-end ASL binding, release packaging and the final gate
+qualification remain open. See `docs/part3-stage5-execution-checkpoint.md` for the
+implemented boundary and every remaining Stage 5 gate. Stages 6–8 remain pending.
+Successor IAM is not installed; effective permissions are not verified. No new
+AWS mutation, managed workload execution or Part 3 completion is claimed.
+
+## Historical Stage 4 implementation checkpoint (unchanged below)
 
 Stage 3 is externally accepted at PR #26 squash `3370898d83539fe41594c7cb7ad15e920dcb5674`.
 The immutable external receipt and append-only gate-name correction remain authoritative.

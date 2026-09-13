@@ -97,7 +97,7 @@ locals {
       },
       {
         Sid      = "ConditionalControlMetadata", Effect = "Allow"
-        Action   = ["dynamodb:GetItem", "dynamodb:BatchGetItem", "dynamodb:Query", "dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:ConditionCheckItem"]
+        Action   = ["dynamodb:GetItem", "dynamodb:BatchGetItem", "dynamodb:Query", "dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:ConditionCheckItem", "dynamodb:TransactWriteItems"]
         Resource = [local.control_arn]
       }
     ]

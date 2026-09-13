@@ -44,9 +44,14 @@ qualified operational commit `aa136331e44dcd181f766b42d76ee2616a22f435`, success
 read-only run `34337121587`, successful bounded capability run `34337699794`, complete cleanup,
 and independently accepted artifacts. PR #25 was squash-merged at
 `d0fb01392f7f975909229f418c13a9c73ba8395e`; all 22 Stage 2 requirements and gates G001–G020
-are externally verified. Stage 3 is now implementing deterministic four-profile assets, an
-independent property campaign, native four-family source-to-candidate Spark reconciliation, and an
-offline reproducible Glue 5.1 package. It performs no AWS work and produces no authoritative proof.
+are externally verified. Stage 3 and Stage 4 are accepted. Draft PR #28 now carries the Stage 5
+successor control plane, immutable financial evidence admission, real Parquet comparison, bounded
+Athena-proof verification, fenced durable publication, the complete Standard Workflow, and a
+deterministic installable release for Glue 5.x and Lambda. The release increment passed two clean
+626-test campaigns with all 2,710 statements and 1,104 branches at 100%, zero exclusions, and all
+111 source mutations killed. This is local and exact-head qualification input, not live AWS or
+financial workload evidence. Stage 5 remains incomplete until exact-head CI artifacts, final merge,
+exact-main CI, and exact-main read-only AWS definition validation are independently admitted.
 The overall project remains in progress.
 
 The original master has explicit carryovers beyond the historical Part 2 ledger: generator profiles,
@@ -87,7 +92,9 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Part 2 completion | `LOCAL_RECONCILIATION_VERIFIED` after PR #18 squash and independent main CI |
 | Part 3 Stage 1 | `EXTERNALLY_VERIFIED` after PR #19 squash and independent main CI |
 | Part 3 Stage 2 | `EXTERNALLY_VERIFIED` after PR #25 squash and independent main CI |
-| Part 3 Stage 3 | `IMPLEMENTED_PENDING_EXACT_HEAD_CI` — local assets, native Spark, and reproducible Glue package only; no AWS execution |
+| Part 3 Stage 3 | `EXTERNALLY_VERIFIED` after PR #26 squash and independent main CI |
+| Part 3 Stage 4 | `EXTERNALLY_VERIFIED` after PR #27 squash, native artifact inspection, and all six broader main jobs |
+| Part 3 Stage 5 | `LOCAL_VERIFIED_PENDING_EXACT_HEAD_CI` — complete local control and installable release qualification; no AWS execution |
 | Historical AWS identity-plane execution | `AWS_VERIFIED_WRONG_TARGET` |
 | Frozen-target identity | `AWS_VERIFIED` for Stage 2 qualification only |
 | Managed AWS reconciliation | `UNCLAIMED` |
