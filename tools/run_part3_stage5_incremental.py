@@ -507,6 +507,100 @@ MUTATIONS = (
         "False",
     ),
     (
+        "preparation-input-canonical",
+        "preparation.py",
+        'raw != canonical_bytes(value) + b"\\n"',
+        "False",
+    ),
+    (
+        "preparation-source-physical-binding",
+        "preparation.py",
+        'size != descriptor.get("size_bytes") or reference["sha256"] != descriptor.get(',
+        'False or reference["sha256"] != descriptor.get(',
+    ),
+    (
+        "preparation-expected-digest",
+        "preparation.py",
+        "digest.hexdigest() != trusted_sha256",
+        "False",
+    ),
+    (
+        "preparation-predecessor-binding",
+        "preparation.py",
+        "current_digest != predecessor",
+        "False",
+    ),
+    (
+        "preparation-financial-equality",
+        "preparation.py",
+        "_derived_rows(transaction, settlement) != _expected_rows(",
+        "False and _derived_rows(transaction, settlement) != _expected_rows(",
+    ),
+    (
+        "preparation-sealed-head-binding",
+        "preparation.py",
+        "receipt.commit_sha256 != store.read_head()",
+        "False",
+    ),
+    (
+        "preparation-completed-proof-inventory",
+        "preparation.py",
+        "type(proofs) is not dict or set(proofs) != set(FAMILIES)",
+        "False",
+    ),
+    (
+        "preparation-final-proof-binding",
+        "preparation.py",
+        'final_proof["family"] != "bank_allocations"',
+        "False",
+    ),
+    (
+        "preparation-publication-identity",
+        "preparation.py",
+        "any(preparation.get(name) != value for name, value in expected.items())",
+        "False",
+    ),
+    (
+        "preparation-publication-input-binding",
+        "preparation.py",
+        'admitted_inputs.inventory_sha256 != preparation["input_inventory_sha256"]',
+        "False",
+    ),
+    (
+        "preparation-prepublication-financial-binding",
+        "preparation.py",
+        "if (\n"
+        '            prepared_reader.read_head() != preparation["financial_head"]\n'
+        '            or outcome.commit_sha256 != preparation["financial_head"]\n'
+        '            or len(outcome.proofs) != preparation["proof_count"]\n'
+        '            or len(outcome.cases) != preparation["case_count"]\n'
+        "        ):",
+        "if False:",
+    ),
+    (
+        "preparation-published-root-binding",
+        "preparation.py",
+        "if (\n"
+        "        committed is None\n"
+        "        or canonical_digest(committed) != commit_sha256\n"
+        '        or committed.get("preparation_sha256")\n'
+        '        != preparation["financial_snapshot_sha256"]\n'
+        "    ):",
+        "if False:",
+    ),
+    (
+        "preparation-postpublication-financial-binding",
+        "preparation.py",
+        'if reader.read_head() != preparation["financial_head"]:',
+        "if False:",
+    ),
+    (
+        "controller-success-action-dispatch",
+        "controller.py",
+        'if event["action"] in {"prepare-publication", "publish-authority"}:',
+        "if False:",
+    ),
+    (
         "controller-failure-action-dispatch",
         "controller.py",
         '"record-failure",',
@@ -531,6 +625,7 @@ MUTATION_TEST_PRIORITY = {
     "glue_arguments.py": "tests/test_part3_stage5_admission.py",
     "glue_run.py": "tests/test_part3_stage5_glue_run.py",
     "objects.py": "tests/test_part3_stage5_candidates.py",
+    "preparation.py": "tests/test_part3_stage5_preparation.py",
     "publication.py": "tests/test_part3_stage5_publication.py",
     "query_validation.py": "tests/test_part3_stage5_query_validation.py",
     "runtime.py": "tests/test_part3_stage5_handlers.py",

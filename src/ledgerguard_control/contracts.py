@@ -40,6 +40,7 @@ def closed(properties: dict[str, Any]) -> dict[str, Any]:
 
 
 OBJECT = closed({"uri": TEXT, "version_id": TEXT, "sha256": SHA256, "size_bytes": UINT})
+LOCATED_OBJECT = closed({"locator": TEXT, "reference": OBJECT})
 IDENTITY = {
     "run_id": ID,
     "attempt_id": ID,
@@ -82,6 +83,20 @@ def document(kind: str, properties: dict[str, Any]) -> dict[str, Any]:
 
 
 SCHEMAS = {
+    "input-inventory": document(
+        "input-inventory",
+        {
+            "policy": OBJECT,
+            "manifest": OBJECT,
+            "objects": {
+                "type": "array",
+                "items": LOCATED_OBJECT,
+                "minItems": 1,
+                "maxItems": 4096,
+            },
+            "correction": {"anyOf": [OBJECT, {"type": "null"}]},
+        },
+    ),
     "execution-input": document(
         "execution-input",
         {
@@ -151,6 +166,26 @@ SCHEMAS = {
                     ),
                 }
             ),
+        },
+    ),
+    "preparation-receipt": document(
+        "preparation-receipt",
+        {
+            **FENCED,
+            "namespace": ID,
+            "validation_receipt": OBJECT,
+            "query_proofs": {
+                "type": "array",
+                "items": OBJECT,
+                "minItems": 3,
+                "maxItems": 3,
+            },
+            "input_inventory_sha256": SHA256,
+            "expected_results_sha256": SHA256,
+            "financial_snapshot_sha256": SHA256,
+            "financial_head": SHA256,
+            "proof_count": UINT,
+            "case_count": UINT,
         },
     ),
     "query-proof": document(

@@ -184,7 +184,16 @@ class FinancialSnapshots:
         commit = authority.read_root(self.namespace)
         if commit is None:
             raise ControlRejected("namespace has no published financial snapshot")
-        root = strict_json(self._get(commit["preparation_sha256"]))
+        return self.open_snapshot(commit["preparation_sha256"], repository, destination)
+
+    def open_snapshot(
+        self,
+        snapshot_sha256: str,
+        repository: Path,
+        destination: Path,
+    ) -> FinalizationStore:
+        """Restore and verify an exact snapshot without selecting it as authority."""
+        root = strict_json(self._get(snapshot_sha256))
         if (
             set(root) != {"schema_version", "namespace", "financial_head", "index_sha256"}
             or root["schema_version"] != "ledgerguard.financial-snapshot.v1"

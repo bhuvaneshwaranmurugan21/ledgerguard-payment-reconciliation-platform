@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from importlib import resources
+from pathlib import Path
 from typing import Any
 
 from .aws_authority import DynamoDBAuthority
@@ -9,6 +11,7 @@ from .aws_objects import S3ImmutableObjects
 from .contracts import ControlRejected
 from .execution import HandlerConfig, admit_attempt, register_run
 from .failure import record_failure
+from .preparation import prepare_publication, publish_authority
 from .runtime import aws_client, load_config
 
 
@@ -23,18 +26,47 @@ def _failure_dependencies(config: HandlerConfig) -> tuple[Any, Any]:
     )
 
 
+def _success_dependencies(config: HandlerConfig) -> tuple[Any, Any, Path]:
+    s3 = aws_client("s3")
+    repository = Path(str(resources.files("ledgerguard.contract_data")))
+    if not repository.is_dir():
+        raise ControlRejected("packaged contract root unavailable")
+    return (
+        S3ImmutableObjects(s3, config.bucket),
+        DynamoDBAuthority(aws_client("dynamodb"), config.table),
+        repository,
+    )
+
+
 def handler(event: Any, _context: Any) -> dict[str, Any]:
     """Dispatch only implemented durable controller transitions."""
     if type(event) is not dict or event.get("action") not in {
         "register-run",
         "admit-attempt",
         "record-failure",
+        "prepare-publication",
+        "publish-authority",
     }:
         raise ControlRejected("unsupported controller action")
     config = load_config()
     if event["action"] == "record-failure":
         objects, authority = _failure_dependencies(config)
         return record_failure(event, config, objects, objects, authority)
+    if event["action"] in {"prepare-publication", "publish-authority"}:
+        objects, authority, repository = _success_dependencies(config)
+        transition = (
+            prepare_publication
+            if event["action"] == "prepare-publication"
+            else publish_authority
+        )
+        return transition(
+            event,
+            config,
+            objects,
+            objects,
+            authority,
+            repository,
+        )
     authority = _authority(config)
     if event["action"] == "register-run":
         return register_run(event, authority)

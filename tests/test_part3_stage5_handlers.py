@@ -134,6 +134,7 @@ def test_default_environment_and_transport_factories(
     candidate, glue = validator._candidate_dependencies(config)
     query_objects, athena = validator._query_dependencies(config)
     failure_objects, failure_authority = controller._failure_dependencies(config)
+    success_objects, success_authority, repository = controller._success_dependencies(config)
     assert s3.client == ("client", "s3")
     assert candidate.client == ("client", "s3")
     assert candidate.bucket == config.bucket
@@ -145,6 +146,11 @@ def test_default_environment_and_transport_factories(
     assert failure_objects.bucket == config.bucket
     assert failure_authority.client == ("client", "dynamodb")
     assert failure_authority.table == config.table
+    assert success_objects.client == ("client", "s3")
+    assert success_objects.bucket == config.bucket
+    assert success_authority.client == ("client", "dynamodb")
+    assert success_authority.table == config.table
+    assert repository.is_dir()
     assert authority.client == ("client", "dynamodb")
     assert authority.table == config.table
 
@@ -152,3 +158,44 @@ def test_default_environment_and_transport_factories(
 def test_handler_configuration_is_canonical_json(tmp_path: Any) -> None:
     values, _ = environment(tmp_path)
     assert canonical_bytes(runtime.load_config(values).execution_input).startswith(b"{")
+
+
+@pytest.mark.parametrize("action", ["prepare-publication", "publish-authority"])
+def test_controller_dispatches_success_transitions(
+    tmp_path: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    action: str,
+) -> None:
+    _state, config, objects = admitted(tmp_path)
+    authority = object()
+    monkeypatch.setattr(controller, "load_config", lambda: config)
+    monkeypatch.setattr(
+        controller,
+        "_success_dependencies",
+        lambda actual: (objects, authority, tmp_path) if actual == config else None,
+    )
+    calls: list[tuple[Any, ...]] = []
+
+    def transition(*args: Any) -> dict[str, Any]:
+        calls.append(args)
+        return {"action": action}
+
+    monkeypatch.setattr(controller, "prepare_publication", transition)
+    monkeypatch.setattr(controller, "publish_authority", transition)
+    event = {"action": action}
+    assert controller.handler(event, None) == {"action": action}
+    assert calls == [(event, config, objects, objects, authority, tmp_path)]
+
+
+def test_success_dependency_rejects_missing_packaged_contract_root(
+    tmp_path: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _state, config, _objects = admitted(tmp_path)
+    monkeypatch.setattr(controller, "aws_client", lambda service: ("client", service))
+    monkeypatch.setattr(
+        controller.resources,
+        "files",
+        lambda _package: tmp_path / "missing",
+    )
+    with pytest.raises(ControlRejected, match="packaged contract root"):
+        controller._success_dependencies(config)

@@ -685,3 +685,41 @@ It records zero AWS calls, admitted base head
 `ea070ed4abeef4fba57cfbc7c6e766d8169ca307`, a dirty successor workspace and
 `stage5_complete: false`. Fresh exact-head native, incremental and broader
 compatibility CI plus independent artifact inspection remain mandatory.
+
+## Complete successful preparation and authority transitions
+
+The successor now implements the two production controller actions on the
+workflow's successful path. `PreparePublication` first re-admits the deployment-
+pinned execution, terminal Glue receipt, all three ordered Athena proofs, exact
+versioned input inventory and every Part 2 source byte. It independently runs the
+accepted transaction and settlement reconciliation over those inputs and requires
+the resulting financial rows to equal the previously admitted expected evidence
+before advancing the accepted `FinalizationStore`. Any accepted correction is
+passed through with its exact source context. The full requests, outcomes, commit
+ancestry, proofs, cases and source states are sealed into an immutable paged
+snapshot without selecting it as authority.
+
+`PublishAuthority` re-admits the complete successful state, final Athena proof,
+input inventory and canonical preparation receipt. Before its four-item metadata
+CAS it restores the exact candidate snapshot into a fresh directory, verifies all
+financial history and checks the attempt outcome, financial head and proof/case
+counts. It then publishes using the existing fenced namespace-predecessor CAS,
+requires the exact strongly read metadata commit, and restores the snapshot again
+through the committed root. Exact redelivery returns the same commit and immutable
+publication receipt. Substituted phase state, proofs, input inventory, preparation
+identity, snapshot history and either postcondition fail closed. The controller
+uses only the packaged digest-bound contract root and the scoped S3/DynamoDB
+adapters. These tests use durable local transports; they do not claim live AWS
+permission or mutation.
+
+Two immutable-input local campaigns each passed 619 tests. All 2,710 statements
+and 1,104 branches are covered at 100% with zero exclusions, and all 111 source
+mutations were killed by assertion in both campaigns. Ruff and strict mypy pass.
+The source-bound receipt is
+`evidence/part3-stage5/success-publication-local.json` (SHA-256
+`868e03881d8f90a62b7b0496a2e448a226529a8e763e29949f5a377b40d6da4b`);
+it records zero AWS calls,
+admitted base head `17e47689e47a4c28f6deb1cc33ca6b93d38b00d8`, base tree
+`aa4fdd03f2ac117c03abdda565582e3157cfe271`, a dirty successor workspace and
+`stage5_complete: false`. Fresh exact-head native, incremental and broader
+compatibility CI plus independent artifact inspection remain mandatory.
