@@ -137,16 +137,6 @@ def _distribution_members(site: Path, dist_info: Path) -> dict[str, bytes]:
         pure = PurePosixPath(row[0])
         if pure.is_absolute() or ".." in pure.parts or pure.name == "RECORD":
             continue
-        if pure.parent == PurePosixPath(dist_info.name) and pure.name in {
-            "INSTALLER",
-            "REQUESTED",
-            "direct_url.json",
-            "uv_cache.json",
-        }:
-            # These describe the local installation tool or source, not the
-            # locked wheel payload, and would make a rebuilt wheel depend on
-            # whether pip or uv created the build environment.
-            continue
         source = site.joinpath(*pure.parts)
         if source.is_symlink() or not source.is_file() or "__pycache__" in pure.parts:
             continue

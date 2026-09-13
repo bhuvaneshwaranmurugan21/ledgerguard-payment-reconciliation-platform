@@ -2,7 +2,7 @@
   "aws_calls": 0,
   "claim": "STAGE5_INCREMENT_LOCAL_VERIFIED",
   "clean_runs": 2,
-  "commit": "d8cf72d778078a1793e3c18a7892cbe8eb233f64",
+  "commit": "7925b07039ba3b19b7d444c279505568442a2fbe",
   "coverage": {
     "covered_branches": 1104,
     "covered_lines": 2710,
@@ -53,6 +53,6 @@
     "skipped": 0,
     "tests": 626
   },
-  "tree": "37f1acffc108d64c9c2e986a38f92f8550f64ae3",
+  "tree": "8e0c158c03c632fe7c9ff7d2402af3a54684f9e3",
   "working_tree_dirty": true
 }

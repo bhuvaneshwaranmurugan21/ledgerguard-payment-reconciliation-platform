@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import base64
 import csv
+import email.parser
 import json
 import re
 import sys
@@ -32,7 +33,6 @@ from tools.build_part3_stage3_runtime import (
     _runtime_members,
     _site_packages,
     _zip,
-    build_dependency_wheel,
 )
 
 NATIVE_DEPENDENCIES = {"numpy": "2.1.3", "pyarrow": "17.0.0"}
@@ -45,6 +45,9 @@ LAMBDA_UNZIPPED_LIMIT = 250 * 1024 * 1024
 MAX_MEMBERS = 4096
 PROJECT_WHEEL = "ledgerguard_stage5_runtime-0.1.0-py3-none-any.whl"
 _OBJECT = re.compile(r"[0-9a-f]{40}")
+_INSTALLER_METADATA = frozenset(
+    {"INSTALLER", "REQUESTED", "direct_url.json", "uv_cache.json"}
+)
 
 
 def _digest(raw: bytes) -> str:
@@ -106,6 +109,62 @@ def _verify_installed_distribution(site: Path, name: str, version: str) -> None:
         expected = "sha256=" + base64.urlsafe_b64encode(sha256(raw).digest()).decode().rstrip("=")
         if encoded != expected or size != str(len(raw)):
             raise ValueError(f"installed distribution member differs: {name}")
+
+
+def _stage5_distribution_members(site: Path, info: Path) -> dict[str, bytes]:
+    """Return payload bytes while excluding local installer provenance."""
+    members = _distribution_members(site, info)
+    return {
+        name: raw
+        for name, raw in members.items()
+        if not (
+            PurePosixPath(name).parent == PurePosixPath(info.name)
+            and PurePosixPath(name).name in _INSTALLER_METADATA
+        )
+    }
+
+
+def _build_stage5_dependency_wheel(
+    site: Path, distribution: str, version: str, destination: Path, epoch: int
+) -> dict[str, Any]:
+    """Rebuild one Stage 5 wheel without installation-tool metadata."""
+    info = _distribution(site, distribution, version)
+    metadata = email.parser.Parser().parsestr((info / "METADATA").read_text(encoding="utf-8"))
+    if metadata["Version"] != version:
+        raise ValueError(f"distribution version mismatch: {distribution}")
+    tags = [
+        line.split(":", 1)[1].strip()
+        for line in (info / "WHEEL").read_text(encoding="utf-8").splitlines()
+        if line.startswith("Tag:")
+    ]
+    if not tags:
+        raise ValueError(f"wheel tag unavailable: {distribution}")
+    tag = tags[0]
+    normalized = str(metadata["Name"]).lower().replace("-", "_")
+    filename = f"{normalized}-{version}-{tag}.whl"
+    members = _stage5_distribution_members(site, info)
+    record_name = f"{info.name}/RECORD"
+    record = [_record_line(name, raw) for name, raw in sorted(members.items())]
+    record.append(f"{record_name},,")
+    members[record_name] = ("\n".join(record) + "\n").encode()
+    target = destination / filename
+    _zip(target, members, epoch)
+    if tag == "py3-none-any" and any(
+        name.endswith((".so", ".dll", ".dylib")) for name in members
+    ):
+        raise ValueError(f"native member in pure wheel: {distribution}")
+    if distribution == "rpds_py" and "cp311-cp311-manylinux" not in tag:
+        raise ValueError("rpds-py wheel is not CPython 3.11 manylinux compatible")
+    return {
+        "distribution": str(metadata["Name"]),
+        "version": version,
+        "filename": filename,
+        "tag": tag,
+        "sha256": _digest(target.read_bytes()),
+        "size_bytes": target.stat().st_size,
+        "license_expression": metadata.get("License-Expression", "NOASSERTION"),
+        "member_count": len(members),
+    }
 
 
 def _application_members(repository: Path) -> dict[str, bytes]:
@@ -276,7 +335,7 @@ def build_release(
         }
     ]
     components.extend(
-        build_dependency_wheel(site, name, version, wheelhouse, source_date_epoch)
+        _build_stage5_dependency_wheel(site, name, version, wheelhouse, source_date_epoch)
         for name, version in DEPENDENCIES.items()
     )
     native_components = [
@@ -296,7 +355,7 @@ def build_release(
     lambda_members = dict(project_members)
     for name, version in versions.items():
         info = _distribution(site, name, version)
-        _merge(lambda_members, _distribution_members(site, info))
+        _merge(lambda_members, _stage5_distribution_members(site, info))
     if len(lambda_members) > MAX_MEMBERS:
         raise ValueError("Lambda release member count exceeds bound")
     runtime_path = output / "runtime.zip"
