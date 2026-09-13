@@ -728,11 +728,17 @@ Two immutable-input local campaigns each passed 626 tests. All 2,710 statements 
 1,104 branches are covered at 100% with zero exclusions, and all 111 source mutations
 were killed by assertion in both campaigns. Ruff and strict mypy pass. The source-
 bound receipt is `evidence/part3-stage5/installable-release-local.json`; it records
-zero AWS calls, the admitted base head `7925b07039ba3b19b7d444c279505568442a2fbe`,
-base tree `8e0c158c03c632fe7c9ff7d2402af3a54684f9e3`, a dirty successor
+zero AWS calls, the admitted base head `b553ff90378264be4d98a3c289612fedf83d3f4b`,
+base tree `3130f3fb93dee939645d1e0fcd6331499b2070e4`, a dirty successor
 workspace and `stage5_complete: false`. Exact-head native, Stage 5 and broader CI,
 independent inspection of every raw artifact, final squash merge, exact-main CI and
 the exact-main read-only `ValidateStateMachineDefinition` receipt remain mandatory.
+
+The first repaired exact-head Stage 5 run built and byte-compared both releases, but
+its complete baseline crossed the driver's historical 180-second subprocess limit by
+less than one second on the hosted runner. The per-command ceiling is now 600 seconds
+inside the unchanged 90-minute job boundary; no test, coverage, mutation or evidence
+requirement was removed or weakened.
 
 ## Complete successful preparation and authority transitions
 

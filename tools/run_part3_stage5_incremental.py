@@ -661,7 +661,7 @@ def command(argv: list[str], root: Path, output: Path, name: str) -> int:
         env=env,
         capture_output=True,
         text=True,
-        timeout=180,
+        timeout=600,
     )
     (output / f"{name}.stdout.log").write_text(completed.stdout)
     (output / f"{name}.stderr.log").write_text(completed.stderr)
