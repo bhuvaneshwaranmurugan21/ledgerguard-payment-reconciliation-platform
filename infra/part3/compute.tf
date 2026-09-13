@@ -71,8 +71,10 @@ resource "aws_lambda_function" "validator" {
   tracing_config { mode = "Active" }
   environment {
     variables = {
-      WORKLOAD_BUCKET = local.bucket
-      CONTROL_TABLE   = aws_dynamodb_table.control.name
+      WORKLOAD_BUCKET       = local.bucket
+      CONTROL_TABLE         = aws_dynamodb_table.control.name
+      HANDLER_CONFIG_JSON   = var.stage5_release.handler_config
+      HANDLER_CONFIG_SHA256 = var.stage5_release.handler_config_sha256
     }
   }
   depends_on = [aws_cloudwatch_log_group.platform, aws_iam_role_policy.runtime]
@@ -92,8 +94,10 @@ resource "aws_lambda_function" "controller" {
   tracing_config { mode = "Active" }
   environment {
     variables = {
-      WORKLOAD_BUCKET = local.bucket
-      CONTROL_TABLE   = aws_dynamodb_table.control.name
+      WORKLOAD_BUCKET       = local.bucket
+      CONTROL_TABLE         = aws_dynamodb_table.control.name
+      HANDLER_CONFIG_JSON   = var.stage5_release.handler_config
+      HANDLER_CONFIG_SHA256 = var.stage5_release.handler_config_sha256
     }
   }
   depends_on = [aws_cloudwatch_log_group.platform, aws_iam_role_policy.runtime]

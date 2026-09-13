@@ -707,7 +707,7 @@ def run(
     if not tests:
         raise ValueError("Stage 5 tests missing")
     snapshot: dict[Path, bytes] = {}
-    for directory in ("src", "tests", "spec", "contracts", "glue", "tools"):
+    for directory in (".github", "contracts", "glue", "infra", "spec", "src", "tests", "tools"):
         for path in sorted((root / directory).rglob("*")):
             relative = path.relative_to(root)
             if path.is_symlink():

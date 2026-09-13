@@ -50,7 +50,7 @@ def verify_release(raw: bytes, trusted_sha256: str, artifacts: dict[str, bytes])
         raise ControlRejected("invalid release manifest")
     fields = {
         "runtime.zip": "runtime_package_sha256",
-        "ledgerguard_stage3_job.py": "script_sha256",
+        "ledgerguard_stage5_job.py": "script_sha256",
         "ledgerguard.gluewheels.zip": "wheels_sha256",
     }
     if set(artifacts) != set(fields):

@@ -1,0 +1,6 @@
+{
+  "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+  "size_bytes": 4096,
+  "uri": "s3://ledgerguard-p3-857229544428-release-qual1/runs/run-release1/inputs/execution-input.json",
+  "version_id": "qualification-version-1"
+}

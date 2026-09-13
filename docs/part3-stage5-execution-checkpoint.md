@@ -686,6 +686,47 @@ It records zero AWS calls, admitted base head
 `stage5_complete: false`. Fresh exact-head native, incremental and broader
 compatibility CI plus independent artifact inspection remain mandatory.
 
+## Installable release and deployment wiring increment
+
+The successor now has one deterministic release builder and an independent release
+inspector. The builder first verifies every installed distribution file against its
+wheel `RECORD`, then emits a project wheel, an offline Glue 5.x wheel bundle, and a
+root-layout Lambda runtime. The Glue bundle contains the project wheel plus the exact
+six `jsonschema` dependency wheels. The Lambda runtime contains the project,
+`jsonschema`, NumPy 2.1.3 and PyArrow 17.0.0, including the native Parquet extension.
+The release excludes tests, generators, reference-oracle code and qualification
+expectations. A clean isolated import test installs only the offline Glue bundle; a
+separate `python -S` test imports only the Lambda runtime and writes and reads genuine
+Parquet containing an integer above 2^53.
+
+The release manifest binds every package digest and size, the handler configuration,
+exact Standard Workflow definition and Terraform deployment inputs. SPDX 2.3,
+license inventory and SLSA-style provenance are emitted alongside the artifacts and
+cross-bound by the release bundle. Terraform passes the complete digest-pinned
+handler configuration to both Lambda functions. Validation limits the environment
+payload and binds its hash, operation identity, exact versioned input reference and
+release package identities. The CI workflow builds and inspects the release twice,
+compares every output byte, and retains a separate exact-head release artifact.
+
+The materialized local qualification release is 45,433,184 bytes. Its Lambda runtime
+is 45,071,893 compressed bytes, 150,326,359 expanded bytes and 649 members, within
+the AWS deployment limits. The release-bundle SHA-256 is
+`3079c68f680b1349e21d927cfe72ffa5db56e31ff840ab9b17d8d4e3e42883e6`;
+the runtime SHA-256 is
+`d490ece7a8a81bb63f966dd15c9bf40936dc5b523768163cc66decc4da71ca1b`.
+These hashes bind the local synthetic qualification input and are not yet final
+exact-head release identities.
+
+Two immutable-input local campaigns each passed 625 tests. All 2,710 statements and
+1,104 branches are covered at 100% with zero exclusions, and all 111 source mutations
+were killed by assertion in both campaigns. Ruff and strict mypy pass. The source-
+bound receipt is `evidence/part3-stage5/installable-release-local.json`; it records
+zero AWS calls, the admitted base head `22291c2b9b8569cdfe21aa04404139daed8eea46`,
+base tree `3a77517ad36afd9b59be84ff13dd19f13bcf1f85`, a dirty successor
+workspace and `stage5_complete: false`. Exact-head native, Stage 5 and broader CI,
+independent inspection of every raw artifact, final squash merge, exact-main CI and
+the exact-main read-only `ValidateStateMachineDefinition` receipt remain mandatory.
+
 ## Complete successful preparation and authority transitions
 
 The successor now implements the two production controller actions on the

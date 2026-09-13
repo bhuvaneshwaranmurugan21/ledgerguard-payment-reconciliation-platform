@@ -29,14 +29,14 @@ from ledgerguard_control.glue_arguments import GlueServiceContract, adapt_glue_a
 def fixture() -> tuple[dict[str, Any], bytes, dict[str, bytes], Release]:
     artifacts = {
         "runtime.zip": b"isolated runtime identity test bytes",
-        "ledgerguard_stage3_job.py": b"isolated script identity test bytes",
+        "ledgerguard_stage5_job.py": b"isolated script identity test bytes",
         "ledgerguard.gluewheels.zip": b"isolated wheels identity test bytes",
     }
     runtime = {
         "source_commit": "a" * 40,
         "source_tree": "b" * 40,
         "runtime_package_sha256": sha256(artifacts["runtime.zip"]).hexdigest(),
-        "script_sha256": sha256(artifacts["ledgerguard_stage3_job.py"]).hexdigest(),
+        "script_sha256": sha256(artifacts["ledgerguard_stage5_job.py"]).hexdigest(),
         "wheels_sha256": sha256(artifacts["ledgerguard.gluewheels.zip"]).hexdigest(),
     }
     raw = canonical_bytes({"schema_version": "ledgerguard.release.v1", "runtime": runtime})
@@ -104,7 +104,7 @@ def test_release_input_provenance_and_exact_snapshot() -> None:
     "name",
     [
         "runtime.zip",
-        "ledgerguard_stage3_job.py",
+        "ledgerguard_stage5_job.py",
         "ledgerguard.gluewheels.zip",
     ],
 )

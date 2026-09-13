@@ -9,14 +9,14 @@
   },
   "scope": "PART3_SYNTHETIC_ZERO_WORKLOAD_CONTROL_PLANE_ONLY",
   "master_requirements_sha256": "ffad2f173f413eff53000c2fdd7e3840e395e5b9775f4c32bd1df07c776d2cd9",
-  "resource_controls_sha256": "35d1be23bb54d8734366d219b834de044587b9ce2f80042036cec00618be1d0c",
+  "resource_controls_sha256": "b9f2902826d962db9599800cdb16c05485a2aebe589e36bfdaa51ba28927cdde",
   "source_hashes": {
     "infra/part3/catalog.tf": "58c233e8df5867f360ca9f1ee83291e9e1160e8a78af9f4f49bfd9e19ebe4908",
-    "infra/part3/compute.tf": "c7d212644b235d5584e91071c8eb55d0570a3c3dbd8e8d59354dc887450cbe47",
+    "infra/part3/compute.tf": "24599651ded1769f84bd5cbdf014d0b66ddbab4c10c4926850661cefdf3038f5",
     "infra/part3/monitoring.tf": "a35b1f94b0d7ac39efb3ec2c8258d28ab32ff5f1b5e49cb43a0012c89c389d02",
     "infra/part3/permissions.tf": "0dc7199e2cae26856a0ecf545f90f3c6e498b15b4a1e93a6e5460922b718ce43",
     "infra/part3/storage.tf": "eed1ce39bdecc765e19b9f2000169eae45e14b67013f1cf5e37f25460d1e0f1c",
-    "infra/part3/variables.tf": "59279f7ed98471417d11fd75284c4a845d21e68859a50de61ff8839c9e6e978d",
+    "infra/part3/variables.tf": "d1e140d6b46e45daef02f08b189593d8895daeda26174a31924b242ec9c2486c",
     "infra/part3/versions.tf": "5a2014d9a91c6865e66ce8cded6fd980f236050a8c5ab1fa2dc713a95bab08a8"
   },
   "resolved_findings": [

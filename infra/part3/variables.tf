@@ -43,6 +43,8 @@ variable "stage5_release" {
     runtime_package_sha256   = string
     script_sha256            = string
     wheels_sha256            = string
+    handler_config           = string
+    handler_config_sha256    = string
   })
   validation {
     condition = (
@@ -57,6 +59,20 @@ variable "stage5_release" {
       can(regex("^[0-9a-f]{64}$", var.stage5_release.runtime_package_sha256)) &&
       can(regex("^[0-9a-f]{64}$", var.stage5_release.script_sha256)) &&
       can(regex("^[0-9a-f]{64}$", var.stage5_release.wheels_sha256)) &&
+      sha256(var.stage5_release.handler_config) == var.stage5_release.handler_config_sha256 &&
+      length(var.stage5_release.handler_config) >= 1 &&
+      length(var.stage5_release.handler_config) <= 3000 &&
+      toset(keys(jsondecode(var.stage5_release.handler_config))) == toset(["schema_version", "operation_id", "execution_input", "release_manifest_sha256", "runtime"]) &&
+      jsondecode(var.stage5_release.handler_config).schema_version == "ledgerguard.handler-config.v1" &&
+      jsondecode(var.stage5_release.handler_config).operation_id == var.operation_id &&
+      jsondecode(var.stage5_release.handler_config).release_manifest_sha256 == var.stage5_release.manifest_sha256 &&
+      jsondecode(var.stage5_release.handler_config).runtime.source_commit == var.stage5_release.source_commit &&
+      jsondecode(var.stage5_release.handler_config).runtime.source_tree == var.stage5_release.source_tree &&
+      jsondecode(var.stage5_release.handler_config).runtime.runtime_package_sha256 == var.stage5_release.runtime_package_sha256 &&
+      jsondecode(var.stage5_release.handler_config).runtime.script_sha256 == var.stage5_release.script_sha256 &&
+      jsondecode(var.stage5_release.handler_config).runtime.wheels_sha256 == var.stage5_release.wheels_sha256 &&
+      jsondecode(var.stage5_release.handler_config).execution_input.version_id != "null" &&
+      startswith(jsondecode(var.stage5_release.handler_config).execution_input.uri, "s3://ledgerguard-p3-857229544428-${var.operation_id}/runs/") &&
       var.stage5_release.script_key == "deployment/${var.stage5_release.script_sha256}/ledgerguard_stage5_job.py" &&
       var.stage5_release.wheels_key == "deployment/${var.stage5_release.wheels_sha256}/ledgerguard.gluewheels.zip"
     )
