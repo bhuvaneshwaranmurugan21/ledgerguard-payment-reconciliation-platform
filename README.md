@@ -102,6 +102,9 @@ can be reproduced from later Part 2 trees without changing its historical assert
 | Performance and cost | `UNCLAIMED` |
 | Production custody or compliance | `UNCLAIMED` |
 
+Historical transition record (superseded by the externally verified status above):
+Part 3 Stage 3 | `IMPLEMENTED_PENDING_EXACT_HEAD_CI`.
+
 See the [active architecture](docs/architecture-v2.md), [correctness model](docs/correctness.md),
 [active failure model](docs/failure-model-v2.md), [active scorecard authority](docs/scorecard-v2.md),
 [Stage 5 gap audit](docs/stage5-gap-audit.md), and
