@@ -17,6 +17,8 @@ from tools.build_part3_stage5_release import (
     LAMBDA_UNZIPPED_LIMIT,
     LAMBDA_ZIPPED_LIMIT,
     PROJECT_WHEEL,
+    _record_line,
+    _verify_installed_distribution,
     build_release,
     inspect_release,
 )
@@ -202,6 +204,44 @@ def test_release_inspector_rejects_changed_runtime_archive(
     (copied / "runtime.zip").write_bytes(b"not a zip")
     with pytest.raises((ValueError, zipfile.BadZipFile)):
         inspect_release(copied)
+
+
+def test_distribution_verifier_allows_only_unhashed_generated_bytecode(
+    tmp_path: Path,
+) -> None:
+    site = tmp_path / "environment/lib/python3.11/site-packages"
+    package = site / "attrs"
+    package.mkdir(parents=True)
+    source = b'__version__ = "26.1.0"\n'
+    (package / "__init__.py").write_bytes(source)
+    info = site / "attrs-26.1.0.dist-info"
+    info.mkdir()
+    record = info / "RECORD"
+    record.write_text(
+        "\n".join(
+            (
+                _record_line("attrs/__init__.py", source),
+                "attrs/__pycache__/__init__.cpython-311.pyc,,",
+                "attrs/__pycache__/generated.cpython-311.pyc,sha256=changed,7",
+                "attrs-26.1.0.dist-info/RECORD,,",
+            )
+        )
+        + "\n"
+    )
+    _verify_installed_distribution(site, "attrs", "26.1.0")
+
+    record.write_text(
+        "\n".join(
+            (
+                _record_line("attrs/__init__.py", source),
+                "attrs/unverified.txt,,",
+                "attrs-26.1.0.dist-info/RECORD,,",
+            )
+        )
+        + "\n"
+    )
+    with pytest.raises(ValueError, match="unverified installed RECORD member"):
+        _verify_installed_distribution(site, "attrs", "26.1.0")
 
 
 def test_terraform_and_native_gate_bind_the_exact_handler_configuration() -> None:

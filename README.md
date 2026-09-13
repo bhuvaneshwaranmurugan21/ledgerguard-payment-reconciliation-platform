@@ -48,7 +48,7 @@ are externally verified. Stage 3 and Stage 4 are accepted. Draft PR #28 now carr
 successor control plane, immutable financial evidence admission, real Parquet comparison, bounded
 Athena-proof verification, fenced durable publication, the complete Standard Workflow, and a
 deterministic installable release for Glue 5.x and Lambda. The release increment passed two clean
-625-test campaigns with all 2,710 statements and 1,104 branches at 100%, zero exclusions, and all
+626-test campaigns with all 2,710 statements and 1,104 branches at 100%, zero exclusions, and all
 111 source mutations killed. This is local and exact-head qualification input, not live AWS or
 financial workload evidence. Stage 5 remains incomplete until exact-head CI artifacts, final merge,
 exact-main CI, and exact-main read-only AWS definition validation are independently admitted.

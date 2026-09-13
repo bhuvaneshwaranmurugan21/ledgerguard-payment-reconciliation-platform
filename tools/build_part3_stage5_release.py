@@ -84,10 +84,18 @@ def _verify_installed_distribution(site: Path, name: str, version: str) -> None:
         path = PurePosixPath(relative)
         if path.is_absolute():
             raise ValueError(f"unsafe installed RECORD path: {name}")
-        if path.name == "RECORD":
-            if encoded or size:
-                raise ValueError(f"RECORD self-entry differs: {name}")
+        if "__pycache__" in path.parts and path.suffix == ".pyc":
+            if bool(encoded) != bool(size):
+                raise ValueError(f"partial installed RECORD digest: {name}")
+            # Bytecode may be regenerated after install, even when a wheel's
+            # RECORD happened to hash it. It is never repackaged below.
             continue
+        if not encoded or not size:
+            if encoded or size:
+                raise ValueError(f"partial installed RECORD digest: {name}")
+            if path.name == "RECORD":
+                continue
+            raise ValueError(f"unverified installed RECORD member: {name}")
         source = site.joinpath(*path.parts)
         target = source.resolve()
         if not target.is_relative_to(environment):
@@ -525,6 +533,13 @@ def inspect_release(output: Path) -> dict[str, Any]:
         raise ValueError("Lambda release size identity differs")
     if any("tests" in PurePosixPath(name).parts for name in runtime):
         raise ValueError("Lambda release contains test source")
+    if any(
+        PurePosixPath(name).parent.name.endswith(".dist-info")
+        and PurePosixPath(name).name
+        in {"INSTALLER", "REQUESTED", "direct_url.json", "uv_cache.json"}
+        for name in runtime
+    ):
+        raise ValueError("Lambda release contains installation-specific metadata")
     if any(
         "ledgerguard_reference_oracle" in name
         or name.endswith(("generator.py", "expectations.py"))
