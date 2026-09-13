@@ -1,0 +1,37 @@
+{
+  "source_commit": "1983ceb37ea36ee92bb131c4552f9ad62ee769ff",
+  "source_tree": "c8a6776b0dbe2f1f375276ad94e5a25d4d0449a4",
+  "workflow_run_id": 34571572450,
+  "workflow_run_attempt": 1,
+  "two_clean_payloads_equal": true,
+  "tests": {
+    "focused-tests": {
+      "tests": 166,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "current-compatibility-tests": {
+      "tests": 219,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "coverage": {
+    "covered_lines": 1924,
+    "num_statements": 1924,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "num_branches": 614,
+    "num_partial_branches": 0,
+    "covered_branches": 614,
+    "missing_branches": 0
+  },
+  "mutations_verified_and_killed": 24,
+  "ci_and_local_inspection_bytes_equal": true,
+  "deterministic_payload_sha256": "27395fbf60394030fdb243864b628b5684e79f4bc9fe6f030fb41e6e657aaa2e",
+  "aws_execution": false
+}

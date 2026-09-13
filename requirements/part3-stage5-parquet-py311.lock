@@ -1,0 +1,4 @@
+# LedgerGuard Part 3 Stage 5 Arrow/Parquet runtime for CPython 3.11 on AWS Lambda AL2.
+# Wheel hashes are the admitted manylinux2014 x86_64 artifacts; no source build is allowed.
+numpy==2.1.3 --hash=sha256:bc6f24b3d1ecc1eebfbf5d6051faa49af40b03be1aaa781ebdadcbc090b4539b
+pyarrow==17.0.0 --hash=sha256:0b72e87fe3e1db343995562f7fff8aee354b55ee83d13afba65400c178ab2597

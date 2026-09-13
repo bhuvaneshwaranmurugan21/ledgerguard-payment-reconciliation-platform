@@ -413,6 +413,7 @@
         "S4-RESOURCE-aws_glue_job.reconciliation.execution_property",
         "S4-RESOURCE-aws_glue_job.reconciliation.command",
         "S4-RESOURCE-aws_glue_job.reconciliation.default_arguments",
+        "S4-RESOURCE-aws_glue_job.reconciliation.non_overridable_arguments",
         "S4-RESOURCE-aws_glue_job.reconciliation.tags"
       ],
       "remaining": "Exact-source native CI, Stage 4 acceptance and later Stage 5 implementation / Stage 6-7 AWS observations as applicable; no AWS_VERIFIED claim from source alone."

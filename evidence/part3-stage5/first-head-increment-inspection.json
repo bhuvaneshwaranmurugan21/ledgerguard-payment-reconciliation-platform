@@ -1,0 +1,13 @@
+{
+  "commit": "1983ceb37ea36ee92bb131c4552f9ad62ee769ff",
+  "run_id": "34571572570",
+  "artifact_sha256": "584506d4bfd9ceae484b458b22218e9c006080770fb0ef9d5d17adb3a3bb6169",
+  "clean_runs": 2,
+  "tests": 153,
+  "statements": 465,
+  "branches": 190,
+  "source_inventory_and_executable_lines_verified": true,
+  "mutations_reconstructed_and_killed": 12,
+  "stage5_complete": false,
+  "aws_calls": 0
+}

@@ -1,0 +1,201 @@
+"""Concrete Lambda entrypoints remain deployment-bound and fail closed."""
+
+from __future__ import annotations
+
+import sys
+from hashlib import sha256
+from types import SimpleNamespace
+from typing import Any
+
+import pytest
+
+from ledgerguard.stage3.canonical import canonical_bytes
+from ledgerguard_control import controller, runtime, validator
+from ledgerguard_control.authority import LocalAuthority
+from ledgerguard_control.contracts import ControlRejected
+from ledgerguard_control.objects import LocalVersionedObjects
+from tests.test_part3_stage5_execution import OWNER, admitted, fixture
+
+
+def environment(tmp_path: Any) -> tuple[dict[str, str], LocalVersionedObjects]:
+    value, raw, objects = fixture(tmp_path)
+    return (
+        {
+            "HANDLER_CONFIG_JSON": raw.decode(),
+            "HANDLER_CONFIG_SHA256": sha256(raw).hexdigest(),
+            "WORKLOAD_BUCKET": f"ledgerguard-p3-857229544428-{value['operation_id']}",
+            "CONTROL_TABLE": f"ledgerguard-p3-{value['operation_id']}-control",
+        },
+        objects,
+    )
+
+
+def test_runtime_configuration_and_aws_client_are_exact(tmp_path: Any) -> None:
+    values, _ = environment(tmp_path)
+    config = runtime.load_config(values)
+    assert config.bucket == values["WORKLOAD_BUCKET"]
+    calls = []
+    sys.modules["boto3"] = SimpleNamespace(
+        client=lambda service, **kwargs: calls.append((service, kwargs)) or service
+    )
+    try:
+        assert runtime.aws_client("s3") == "s3"
+        assert runtime.aws_client("glue") == "glue"
+        assert runtime.aws_client("athena") == "athena"
+    finally:
+        del sys.modules["boto3"]
+    assert calls == [
+        ("s3", {"region_name": "ap-southeast-2"}),
+        ("glue", {"region_name": "ap-southeast-2"}),
+        ("athena", {"region_name": "ap-southeast-2"}),
+    ]
+    with pytest.raises(ControlRejected, match="unsupported"):
+        runtime.aws_client("lambda")
+
+
+@pytest.mark.parametrize(
+    "change,match",
+    [
+        (lambda value: value.pop("HANDLER_CONFIG_JSON"), "incomplete"),
+        (lambda value: value.update(HANDLER_CONFIG_JSON=object()), "incomplete"),
+        (lambda value: value.update(HANDLER_CONFIG_SHA256=object()), "incomplete"),
+        (lambda value: value.update(HANDLER_CONFIG_JSON="\ud800"), "invalid"),
+        (lambda value: value.update(WORKLOAD_BUCKET="wrong"), "workload bucket"),
+        (lambda value: value.update(CONTROL_TABLE="wrong"), "control table"),
+    ],
+)
+def test_runtime_configuration_rejects_missing_or_substituted_values(
+    tmp_path: Any, change: Any, match: str
+) -> None:
+    values, _ = environment(tmp_path)
+    change(values)
+    with pytest.raises(ControlRejected, match=match):
+        runtime.load_config(values)
+
+
+def test_validator_handler_executes_real_admission(
+    tmp_path: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    values, objects = environment(tmp_path)
+    config = runtime.load_config(values)
+    monkeypatch.setattr(validator, "load_config", lambda: config)
+    monkeypatch.setattr(validator, "_objects", lambda actual: objects if actual == config else None)
+    event = {
+        "action": "validate-execution",
+        "execution_arn": OWNER,
+        "state": {"execution_input_sha256": config.execution_input["sha256"]},
+    }
+    result = validator.handler(event, object())
+    assert result["control"]["execution_input_sha256"] == config.execution_input["sha256"]
+
+
+def test_controller_handler_executes_durable_registration(
+    tmp_path: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    state, config, _ = admitted(tmp_path / "admitted")
+    authority = LocalAuthority(tmp_path / "authority.sqlite")
+    monkeypatch.setattr(controller, "load_config", lambda: config)
+    monkeypatch.setattr(
+        controller, "_authority", lambda actual: authority if actual == config else None
+    )
+    event = {"action": "register-run", "execution_arn": OWNER, "state": state}
+    result = controller.handler(event, None)
+    assert "attempt" not in result["control"]
+    result = controller.handler(
+        {"action": "admit-attempt", "execution_arn": OWNER, "state": result}, None
+    )
+    assert result["control"]["attempt"]["owner"] == OWNER
+
+
+@pytest.mark.parametrize("entrypoint", [validator.handler, controller.handler])
+@pytest.mark.parametrize("event", [None, {}, {"action": "wrong"}])
+def test_handlers_reject_unknown_actions_before_runtime_access(
+    entrypoint: Any, event: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        validator if entrypoint is validator.handler else controller,
+        "load_config",
+        lambda: (_ for _ in ()).throw(AssertionError("runtime must not be loaded")),
+    )
+    with pytest.raises(ControlRejected, match="unsupported"):
+        entrypoint(event, None)
+
+
+def test_default_environment_and_transport_factories(
+    tmp_path: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    values, _ = environment(tmp_path)
+    monkeypatch.setattr(runtime.os, "environ", values)
+    config = runtime.load_config()
+    monkeypatch.setattr(validator, "aws_client", lambda service: ("client", service))
+    monkeypatch.setattr(controller, "aws_client", lambda service: ("client", service))
+    s3 = validator._objects(config)
+    authority = controller._authority(config)
+    candidate, glue = validator._candidate_dependencies(config)
+    query_objects, athena = validator._query_dependencies(config)
+    failure_objects, failure_authority = controller._failure_dependencies(config)
+    success_objects, success_authority, repository = controller._success_dependencies(config)
+    assert s3.client == ("client", "s3")
+    assert candidate.client == ("client", "s3")
+    assert candidate.bucket == config.bucket
+    assert glue == ("client", "glue")
+    assert query_objects.client == ("client", "s3")
+    assert query_objects.bucket == config.bucket
+    assert athena == ("client", "athena")
+    assert failure_objects.client == ("client", "s3")
+    assert failure_objects.bucket == config.bucket
+    assert failure_authority.client == ("client", "dynamodb")
+    assert failure_authority.table == config.table
+    assert success_objects.client == ("client", "s3")
+    assert success_objects.bucket == config.bucket
+    assert success_authority.client == ("client", "dynamodb")
+    assert success_authority.table == config.table
+    assert repository.is_dir()
+    assert authority.client == ("client", "dynamodb")
+    assert authority.table == config.table
+
+
+def test_handler_configuration_is_canonical_json(tmp_path: Any) -> None:
+    values, _ = environment(tmp_path)
+    assert canonical_bytes(runtime.load_config(values).execution_input).startswith(b"{")
+
+
+@pytest.mark.parametrize("action", ["prepare-publication", "publish-authority"])
+def test_controller_dispatches_success_transitions(
+    tmp_path: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    action: str,
+) -> None:
+    _state, config, objects = admitted(tmp_path)
+    authority = object()
+    monkeypatch.setattr(controller, "load_config", lambda: config)
+    monkeypatch.setattr(
+        controller,
+        "_success_dependencies",
+        lambda actual: (objects, authority, tmp_path) if actual == config else None,
+    )
+    calls: list[tuple[Any, ...]] = []
+
+    def transition(*args: Any) -> dict[str, Any]:
+        calls.append(args)
+        return {"action": action}
+
+    monkeypatch.setattr(controller, "prepare_publication", transition)
+    monkeypatch.setattr(controller, "publish_authority", transition)
+    event = {"action": action}
+    assert controller.handler(event, None) == {"action": action}
+    assert calls == [(event, config, objects, objects, authority, tmp_path)]
+
+
+def test_success_dependency_rejects_missing_packaged_contract_root(
+    tmp_path: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _state, config, _objects = admitted(tmp_path)
+    monkeypatch.setattr(controller, "aws_client", lambda service: ("client", service))
+    monkeypatch.setattr(
+        controller.resources,
+        "files",
+        lambda _package: tmp_path / "missing",
+    )
+    with pytest.raises(ControlRejected, match="packaged contract root"):
+        controller._success_dependencies(config)

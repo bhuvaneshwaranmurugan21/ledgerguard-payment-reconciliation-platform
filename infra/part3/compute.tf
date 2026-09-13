@@ -41,11 +41,19 @@ resource "aws_glue_job" "reconciliation" {
     "--additional-python-modules"             = "s3://${local.bucket}/${var.stage5_release.wheels_key}"
     "--python-modules-installer-option"       = "--no-index"
     "--enable-observability-metrics"          = "true"
-    "--enable-metrics"                        = "true"
+    "--enable-metrics"                        = ""
     "--enable-s3-parquet-optimized-committer" = "true"
     "--custom-logGroup-prefix"                = "/${local.name}/glue"
     "--job-bookmark-option"                   = "job-bookmark-disable"
     "--TempDir"                               = "s3://${local.bucket}/temporary/glue/"
+  }
+  non_overridable_arguments = {
+    "--release-manifest-sha256" = var.stage5_release.manifest_sha256
+    "--runtime-source-commit"   = var.stage5_release.source_commit
+    "--runtime-source-tree"     = var.stage5_release.source_tree
+    "--runtime-package-sha256"  = var.stage5_release.runtime_package_sha256
+    "--runtime-script-sha256"   = var.stage5_release.script_sha256
+    "--runtime-wheels-sha256"   = var.stage5_release.wheels_sha256
   }
   tags = local.tags
 }
@@ -63,8 +71,10 @@ resource "aws_lambda_function" "validator" {
   tracing_config { mode = "Active" }
   environment {
     variables = {
-      WORKLOAD_BUCKET = local.bucket
-      CONTROL_TABLE   = aws_dynamodb_table.control.name
+      WORKLOAD_BUCKET       = local.bucket
+      CONTROL_TABLE         = aws_dynamodb_table.control.name
+      HANDLER_CONFIG_JSON   = var.stage5_release.handler_config
+      HANDLER_CONFIG_SHA256 = var.stage5_release.handler_config_sha256
     }
   }
   depends_on = [aws_cloudwatch_log_group.platform, aws_iam_role_policy.runtime]
@@ -84,8 +94,10 @@ resource "aws_lambda_function" "controller" {
   tracing_config { mode = "Active" }
   environment {
     variables = {
-      WORKLOAD_BUCKET = local.bucket
-      CONTROL_TABLE   = aws_dynamodb_table.control.name
+      WORKLOAD_BUCKET       = local.bucket
+      CONTROL_TABLE         = aws_dynamodb_table.control.name
+      HANDLER_CONFIG_JSON   = var.stage5_release.handler_config
+      HANDLER_CONFIG_SHA256 = var.stage5_release.handler_config_sha256
     }
   }
   depends_on = [aws_cloudwatch_log_group.platform, aws_iam_role_policy.runtime]

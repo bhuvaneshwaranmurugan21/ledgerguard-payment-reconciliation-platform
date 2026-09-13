@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "claim": "STAGE5_INCREMENT_LOCAL_VERIFIED",
+  "stage5_complete": false,
+  "aws_calls": 0,
+  "source_files": {
+    "src/ledgerguard_control/__init__.py": "ded1ab0055197a96de4295b5041a8bd976c983dfbfb475f397b69a4e0caf3daf",
+    "src/ledgerguard_control/admission.py": "9e789f0f1613bd129cd27803f0a1fb4b50dc01176e96531c4f802bbf64256ce0",
+    "src/ledgerguard_control/authority.py": "7d1a34af24dee4725925d9438769f3d29cfa0abcb9f2b945b4984d547753e9f9",
+    "src/ledgerguard_control/aws_objects.py": "676c10f92783a422e9ff7606ae3ba61b46a36bb11234174affb778f71361f7ce",
+    "src/ledgerguard_control/candidates.py": "45d9627c288353e4640bbc9a7488e991b129addde8b2a31d0863d2048e455fd2",
+    "src/ledgerguard_control/contracts.py": "f9fe8ec598a5c4cd7e6115d128efbaa11336a36646a143664bd4b37f0d1943a3",
+    "src/ledgerguard_control/glue_arguments.py": "01cc98844b495eaee0f89a6a7b9c79e44e1f502191c9a88ebd26c5413c0368ed",
+    "src/ledgerguard_control/objects.py": "30c1d04293e0d3bbb9d64716af49c01cc12679d3d402c86dac261cc636602716",
+    "src/ledgerguard_control/publication.py": "fffe985d6bd17f9d6fec23de6f0abdf0df1db869486e8f91ca2887019605675a"
+  },
+  "tests": {
+    "tests": 215,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "covered_lines": 803,
+    "num_statements": 803,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "num_branches": 332,
+    "num_partial_branches": 0,
+    "covered_branches": 332,
+    "missing_branches": 0
+  },
+  "mutations_killed": 23,
+  "clean_runs": 2,
+  "commit": "1983ceb37ea36ee92bb131c4552f9ad62ee769ff",
+  "tree": "c8a6776b0dbe2f1f375276ad94e5a25d4d0449a4",
+  "working_tree_dirty": true,
+  "run_id": null,
+  "run_attempt": null
+}
