@@ -653,3 +653,35 @@ receipt, so it was not admitted. The complete source-bound receipt is
 It records zero AWS calls, the admitted base commit/tree, a dirty successor
 workspace and `stage5_complete: false`. Fresh exact-head native, incremental and
 broader compatibility CI plus independent artifact inspection remain mandatory.
+
+## Attempt-owned terminal failure transition
+
+The successor now implements the production `RecordFailure` Lambda boundary for
+the seven states that execute after attempt admission: `StartGlue`,
+`ValidateCandidate`, the three ordered query states, `PreparePublication` and
+`PublishAuthority`. Failures before a fence exists still terminate through the
+workflow's explicit `FailureEvidenceUnavailable` path and cannot fabricate
+attempt-owned evidence.
+
+The handler re-reads and re-admits the deployment-pinned execution input before
+trusting workflow state. It requires the exact caught error, cause, failed state,
+immutable registration identity, execution-owned attempt fence, managed Glue
+identity and fixed-family Athena identities already present at the failure point.
+It creates or exactly replays a canonical content-addressed
+`ledgerguard.failure-record.v1` below `publications/failure-records/`, outside the
+transient `runs/` lifecycle, before it performs the fenced authority transition.
+The local and DynamoDB authorities accept a retry after an ambiguous response only
+when strongly consistent reads prove the exact failed attempt and released run
+postcondition; every mismatch is rejected.
+
+Two immutable-input local campaigns each passed 573 tests. All 2,460 statements
+and 1,018 branches are covered at 100% with zero exclusions, and all 97 source
+mutations were killed by assertion in both campaigns. Ruff and strict mypy pass.
+The source-bound receipt is
+`evidence/part3-stage5/failure-ownership-local.json` (SHA-256
+`3090f63d8a669a65ff3df6e0ea78682878dd614c1d663a4f200be55df2759d64`).
+It records zero AWS calls, admitted base head
+`8eeca0a0f9001cb5855e560d9bfbab5c8908a292`, base tree
+`ea070ed4abeef4fba57cfbc7c6e766d8169ca307`, a dirty successor workspace and
+`stage5_complete: false`. Fresh exact-head native, incremental and broader
+compatibility CI plus independent artifact inspection remain mandatory.

@@ -133,6 +133,7 @@ def test_default_environment_and_transport_factories(
     authority = controller._authority(config)
     candidate, glue = validator._candidate_dependencies(config)
     query_objects, athena = validator._query_dependencies(config)
+    failure_objects, failure_authority = controller._failure_dependencies(config)
     assert s3.client == ("client", "s3")
     assert candidate.client == ("client", "s3")
     assert candidate.bucket == config.bucket
@@ -140,6 +141,10 @@ def test_default_environment_and_transport_factories(
     assert query_objects.client == ("client", "s3")
     assert query_objects.bucket == config.bucket
     assert athena == ("client", "athena")
+    assert failure_objects.client == ("client", "s3")
+    assert failure_objects.bucket == config.bucket
+    assert failure_authority.client == ("client", "dynamodb")
+    assert failure_authority.table == config.table
     assert authority.client == ("client", "dynamodb")
     assert authority.table == config.table
 

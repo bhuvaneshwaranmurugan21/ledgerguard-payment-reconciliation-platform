@@ -488,6 +488,30 @@ MUTATIONS = (
         'query_actions = {f"validate-{family}-query" for family in FAMILIES}',
         "query_actions = set()",
     ),
+    (
+        "failure-state-readmission",
+        "failure.py",
+        "control.get(name) != value for name, value in initial.items()",
+        "False for name, value in initial.items()",
+    ),
+    (
+        "failure-retention-prefix",
+        "failure.py",
+        'f"s3://{config.bucket}/publications/failure-records/{attempt.run_id}/"',
+        'f"s3://{config.bucket}/runs/failure-records/{attempt.run_id}/"',
+    ),
+    (
+        "failure-managed-athena-order",
+        "failure.py",
+        "set(athena) != set(expected)",
+        "False",
+    ),
+    (
+        "controller-failure-action-dispatch",
+        "controller.py",
+        '"record-failure",',
+        '"wrong-failure",',
+    ),
 )
 
 MUTATION_TEST_PRIORITY = {
@@ -503,6 +527,7 @@ MUTATION_TEST_PRIORITY = {
     "controller.py": "tests/test_part3_stage5_handlers.py",
     "execution.py": "tests/test_part3_stage5_execution.py",
     "financial_rows.py": "tests/test_part3_stage5_financial_rows.py",
+    "failure.py": "tests/test_part3_stage5_failure.py",
     "glue_arguments.py": "tests/test_part3_stage5_admission.py",
     "glue_run.py": "tests/test_part3_stage5_glue_run.py",
     "objects.py": "tests/test_part3_stage5_candidates.py",

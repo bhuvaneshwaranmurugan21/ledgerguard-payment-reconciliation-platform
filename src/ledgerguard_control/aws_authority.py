@@ -216,8 +216,8 @@ class DynamoDBAuthority:
 
     def fail(self, attempt: Attempt) -> None:
         _attempt(attempt)
-        self.client.transact_write_items(
-            TransactItems=[
+        request = {
+            "TransactItems": [
                 {
                     "Update": {
                         "TableName": self.table,
@@ -271,7 +271,33 @@ class DynamoDBAuthority:
                     }
                 },
             ]
-        )
+        }
+        try:
+            self.client.transact_write_items(**request)
+        except Exception as error:
+            try:
+                token = self._get(
+                    f"RUN#{attempt.run_id}", f"ATTEMPT#{attempt.attempt_id}"
+                )
+                run = self._registration(
+                    attempt.namespace, attempt.run_id, attempt.identity_sha256
+                )
+                if (
+                    token is None
+                    or self._s(token, "namespace") != attempt.namespace
+                    or self._s(token, "identity") != attempt.identity_sha256
+                    or self._s(token, "owner") != attempt.owner
+                    or self._n(token, "fence") != attempt.fence
+                    or self._s(token, "status") != "FAILED"
+                    or self._s(run, "status") != "REGISTERED"
+                    or any(name in run for name in ("active_attempt", "owner", "fence"))
+                ):
+                    raise ControlRejected("failed attempt postcondition differs")
+                return
+            except Exception:
+                raise ControlRejected(
+                    "attempt failure was not durably recorded"
+                ) from error
 
     def _commit(self, namespace: str, digest: str) -> dict[str, Any]:
         _id(namespace)

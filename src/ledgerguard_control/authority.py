@@ -187,6 +187,21 @@ class LocalAuthority:
         """Release only the current owned attempt; external recovery must prove termination."""
         _attempt(attempt)
         with self._transaction() as connection:
+            existing = connection.execute(
+                "SELECT a.owner,a.status,a.fence,r.identity,r.status,r.active_attempt "
+                "FROM attempts a JOIN runs r ON r.namespace=a.namespace AND r.run_id=a.run_id "
+                "WHERE a.namespace=? AND a.run_id=? AND a.attempt_id=?",
+                (attempt.namespace, attempt.run_id, attempt.attempt_id),
+            ).fetchone()
+            if existing == (
+                attempt.owner,
+                "FAILED",
+                attempt.fence,
+                attempt.identity_sha256,
+                "REGISTERED",
+                None,
+            ):
+                return
             self._require_owner(connection, attempt)
             connection.execute(
                 "UPDATE attempts SET status='FAILED' WHERE fence=?", (attempt.fence,)

@@ -331,6 +331,7 @@ def test_dynamodb_full_lifecycle_replay_failure_and_ambiguous_publication() -> N
     attempt = store.admit("namespace-one", "run-first", "a" * 64, "attempt-one", OWNER)
     assert attempt.fence == 1
     assert store.admit("namespace-one", "run-first", "a" * 64, "attempt-one", OWNER) == attempt
+    client.raise_after = "ServiceUnavailable"
     store.fail(attempt)
     second = store.admit("namespace-one", "run-first", "a" * 64, "attempt-two", OWNER)
     assert second.fence == 2
@@ -498,6 +499,23 @@ def test_dynamodb_publication_conflict_does_not_become_success() -> None:
     attempt = store.admit("namespace-one", "run-first", "a" * 64, "attempt-one", OWNER)
     with pytest.raises(ControlRejected, match="not authoritative"):
         store.publish(attempt, "c" * 64, "b" * 64)
+
+
+def test_dynamodb_ambiguous_failure_requires_exact_failed_postcondition() -> None:
+    class BadRecovery(Dynamo):
+        def get_item(self, **request: Any) -> dict[str, Any]:
+            response = super().get_item(**request)
+            if request["Key"]["sk"]["S"].startswith("ATTEMPT#") and "Item" in response:
+                response["Item"]["status"] = {"S": "ACTIVE"}
+            return response
+
+    client = BadRecovery()
+    store = DynamoDBAuthority(client, "ledgerguard-test-control")
+    store.register("namespace-one", "run-first", "a" * 64)
+    attempt = store.admit("namespace-one", "run-first", "a" * 64, "attempt-one", OWNER)
+    client.raise_after = "ServiceUnavailable"
+    with pytest.raises(ControlRejected, match="not durably recorded"):
+        store.fail(attempt)
 
 
 def test_dynamodb_failed_admission_cannot_replay_another_owner() -> None:
