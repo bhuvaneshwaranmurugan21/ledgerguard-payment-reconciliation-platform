@@ -777,3 +777,35 @@ admitted base head `17e47689e47a4c28f6deb1cc33ca6b93d38b00d8`, base tree
 `aa4fdd03f2ac117c03abdda565582e3157cfe271`, a dirty successor workspace and
 `stage5_complete: false`. Fresh exact-head native, incremental and broader
 compatibility CI plus independent artifact inspection remain mandatory.
+
+## Exact-main AWS definition rejection and correction
+
+PR #28 was squash-merged as main commit
+`3d1df183c538834609950f2ee5bfc59d75a0c6b8`, tree
+`aa3421c74bd8a532e0ea380f89b6c2400b4a143c`. Its exact-main release archive
+SHA-256 `50e5dbc16bd2a5ad127d30f73a811588e069d75771387fad7e73767c292e50b7`
+and definition SHA-256
+`4ccfcbf0e4258a4814d9b8c9a8b98bfc273ad8f29f5f3778e0a537d5e53fee5a`
+were independently re-admitted in account `857229544428`. The required
+read-only AWS `ValidateStateMachineDefinition` call then returned `FAIL` with
+`SCHEMA_VALIDATION_FAILED`: the optimized Step Functions Glue integration does
+not support `JobRunQueuingEnabled` in `StartGlue.Parameters`. The complete
+returned diagnostic is retained in
+`spec/part3-stage5-aws-definition-failure-v1.json`. No AWS mutation or workload
+execution occurred, and Stage 5 remains unaccepted.
+
+The correction removes that native Glue API field only from the transmitted
+optimized-integration request. It does not weaken execution admission: the
+request still fixes `ExecutionClass` to `STANDARD`; the Terraform Glue job still
+fixes its worker, version, timeout and concurrency configuration; Glue's omitted
+queueing field defaults to disabled; and terminal ownership validation still
+requires the observed `JobRunQueuingEnabled` value to be exactly `false` before
+candidate admission. Static workflow admission now requires the exact supported
+three-field Glue parameter set, and the mutation gate injects the rejected field
+to prove that this boundary fails closed.
+
+This correction requires its own exact-head qualification, independent artifact
+inspection and squash merge. Stage 5 acceptance still requires a newly generated
+exact-main release and a fresh read-only AWS definition result of `OK` with an
+untruncated diagnostic list. IAM installation, AWS mutations, workload runs and
+Stages 6–8 remain blocked until that gate is admitted.

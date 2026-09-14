@@ -70,8 +70,8 @@ def test_managed_tasks_use_exact_integrations_and_pointer_inputs() -> None:
         "JobName.$": "$.control.glue_start.JobName",
         "Arguments.$": "$.control.glue_start.Arguments",
         "ExecutionClass": "STANDARD",
-        "JobRunQueuingEnabled": False,
     }
+    assert "JobRunQueuingEnabled" not in glue["Parameters"]
     for family in FAMILIES:
         title = "".join(part.title() for part in family.split("_"))
         task = states[f"Run{title}Query"]
@@ -138,6 +138,12 @@ def test_invalid_operation_identity_is_rejected(operation: object) -> None:
         (lambda d: d.update(StartAt="Missing"), "valid start"),
         (lambda d: d["States"]["StartGlue"].update(Next="Missing"), "missing state"),
         (lambda d: d["States"]["StartGlue"].update(Retry=[]), "blindly"),
+        (
+            lambda d: d["States"]["StartGlue"]["Parameters"].update(
+                JobRunQueuingEnabled=False
+            ),
+            "Glue start parameters",
+        ),
         (
             lambda d: d["States"]["ValidateExecution"].update(
                 Resource="arn:aws:lambda:us-east-1:000000000000:function:other"

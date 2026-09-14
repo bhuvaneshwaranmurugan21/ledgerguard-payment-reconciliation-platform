@@ -150,7 +150,6 @@ def render_definition(operation_id: str) -> dict[str, Any]:
             "JobName.$": "$.control.glue_start.JobName",
             "Arguments.$": "$.control.glue_start.Arguments",
             "ExecutionClass": "STANDARD",
-            "JobRunQueuingEnabled": False,
         },
         "ResultPath": "$.managed.glue",
         # StartJobRun has no idempotency token.  Retrying an ambiguous response here
@@ -293,8 +292,20 @@ def validate_definition(definition: Mapping[str, Any], operation_id: str) -> Non
                     or retry.get("ErrorEquals") in (["States.ALL"], ["States.TaskFailed"])
                 ):
                     raise ControlRejected("workflow retry is unbounded or indiscriminate")
-        if name == "StartGlue" and "Retry" in state:
-            raise ControlRejected("ambiguous Glue start must not be blindly retried")
+        if name == "StartGlue":
+            # The optimized integration supports a narrower request model than the
+            # evolving native Glue API.  Keep this exact so a newly added native
+            # field cannot silently produce an AWS-invalid state machine.  Queueing
+            # remains disabled by Glue's omitted-field default and is independently
+            # verified from the terminal JobRun before candidate admission.
+            if state.get("Parameters") != {
+                "JobName.$": "$.control.glue_start.JobName",
+                "Arguments.$": "$.control.glue_start.Arguments",
+                "ExecutionClass": "STANDARD",
+            }:
+                raise ControlRejected("optimized Glue start parameters differ")
+            if "Retry" in state:
+                raise ControlRejected("ambiguous Glue start must not be blindly retried")
 
     required_success_chain = [
         "ValidateExecution",

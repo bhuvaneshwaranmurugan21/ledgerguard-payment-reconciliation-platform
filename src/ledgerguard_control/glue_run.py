@@ -73,7 +73,6 @@ def start_request(job_name: str, arguments: JobArguments) -> dict[str, Any]:
         "JobName": job_name,
         "Arguments": start_arguments(arguments),
         "ExecutionClass": "STANDARD",
-        "JobRunQueuingEnabled": False,
     }
 
 

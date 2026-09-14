@@ -127,7 +127,8 @@ def test_terminal_timestamp_bounds(field: str, value: Any) -> None:
 def test_start_request_is_fixed_and_rejects_wrong_job() -> None:
     value = request()
     assert value["ExecutionClass"] == "STANDARD"
-    assert value["JobRunQueuingEnabled"] is False
+    assert set(value) == {"JobName", "Arguments", "ExecutionClass"}
+    assert "JobRunQueuingEnabled" not in value
     assert "--attempt-id" in value["Arguments"]
     assert "--JOB_RUN_ID" not in value["Arguments"]
     with pytest.raises(ControlRejected, match="job name"):

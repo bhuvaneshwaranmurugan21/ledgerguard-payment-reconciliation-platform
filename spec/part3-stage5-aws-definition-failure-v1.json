@@ -1,0 +1,40 @@
+{
+  "schema_version": "ledgerguard.part3-stage5-aws-definition-failure.v1",
+  "gate": "exact-main-read-only-validate-state-machine-definition",
+  "source": {
+    "main_commit": "3d1df183c538834609950f2ee5bfc59d75a0c6b8",
+    "main_tree": "aa3421c74bd8a532e0ea380f89b6c2400b4a143c",
+    "release_archive_sha256": "50e5dbc16bd2a5ad127d30f73a811588e069d75771387fad7e73767c292e50b7",
+    "definition_sha256": "4ccfcbf0e4258a4814d9b8c9a8b98bfc273ad8f29f5f3778e0a537d5e53fee5a"
+  },
+  "request": {
+    "account": "857229544428",
+    "region": "ap-southeast-2",
+    "state_machine_type": "STANDARD",
+    "severity": "WARNING",
+    "max_results": 100
+  },
+  "response": {
+    "result": "FAIL",
+    "diagnostics": [
+      {
+        "severity": "ERROR",
+        "code": "SCHEMA_VALIDATION_FAILED",
+        "message": "The field \"JobRunQueuingEnabled\" is not supported by Step Functions",
+        "location": "/States/StartGlue/Parameters"
+      }
+    ],
+    "truncated": false
+  },
+  "aws_calls": {
+    "read_or_validation": 2,
+    "mutating": 0,
+    "workload": 0
+  },
+  "admission": {
+    "stage5_accepted": false,
+    "failed_receipt_is_accepted": false,
+    "requires_corrected_exact_head_qualification": true,
+    "requires_corrected_exact_main_validation": true
+  }
+}
