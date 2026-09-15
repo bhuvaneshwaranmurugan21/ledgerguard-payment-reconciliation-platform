@@ -312,6 +312,15 @@ MUTATIONS = (
         'return {"Type": "Pass", "Parameters": parameters, "Next": "WorkflowFailed"}',
     ),
     (
+        "workflow-optimized-glue-parameters",
+        "workflow.py",
+        '"ExecutionClass": "STANDARD",\n        },\n        "ResultPath": "$.managed.glue",',
+        '"ExecutionClass": "STANDARD",\n'
+        '            "JobRunQueuingEnabled": False,\n'
+        '        },\n'
+        '        "ResultPath": "$.managed.glue",',
+    ),
+    (
         "handler-config-digest",
         "execution.py",
         "sha256(raw).hexdigest() != trusted_sha256",
