@@ -1,0 +1,173 @@
+{
+  "schema_version": "ledgerguard.part3.stage6-mutations.v1",
+  "mutations": [
+    {
+      "id": "S6-M01-administrator-classification",
+      "path": "tools/part3_stage6/admission.py",
+      "before": "receipt.get(\"classification\") != \"SUCCESSOR_IAM_INSTALLED_AND_EFFECTIVELY_ADMITTED\"",
+      "after": "receipt.get(\"classification\") == \"SUCCESSOR_IAM_INSTALLED_AND_EFFECTIVELY_ADMITTED\"",
+      "test": "tests/test_part3_stage6_admission.py"
+    },
+    {
+      "id": "S6-M02-administrator-mutation-proof",
+      "path": "tools/part3_stage6/admission.py",
+      "before": "calls[\"administrator_iam_mutations\"] <= 0",
+      "after": "calls[\"administrator_iam_mutations\"] < 0",
+      "test": "tests/test_part3_stage6_admission.py"
+    },
+    {
+      "id": "S6-M03-preflight-freshness",
+      "path": "tools/part3_stage6/preflight.py",
+      "before": "now_epoch - observed > 900",
+      "after": "now_epoch - observed > 901",
+      "test": "tests/test_part3_stage6_preflight.py"
+    },
+    {
+      "id": "S6-M04-terraform-locking",
+      "path": "tools/part3_stage6/terraform.py",
+      "before": "required = {\"-input=false\", \"-lock=true\", \"-refresh=true\", \"-detailed-exitcode\"}",
+      "after": "required = {\"-input=false\", \"-refresh=true\", \"-detailed-exitcode\"}",
+      "test": "tests/test_part3_stage6_terraform.py"
+    },
+    {
+      "id": "S6-M05-plan-action",
+      "path": "tools/part3_stage6/plan_policy.py",
+      "before": "change.get(\"actions\") != [\"create\"]",
+      "after": "change.get(\"actions\") not in ([\"create\"], [\"delete\"])",
+      "test": "tests/test_part3_stage6_plan_policy.py"
+    },
+    {
+      "id": "S6-M06-force-destroy",
+      "path": "tools/part3_stage6/property_policy.py",
+      "before": "{\"bucket\": bucket, \"force_destroy\": False, \"tags_all\": tags}",
+      "after": "{\"bucket\": bucket, \"force_destroy\": True, \"tags_all\": tags}",
+      "test": "tests/test_part3_stage6_property_policy.py"
+    },
+    {
+      "id": "S6-M07-computed-relationship",
+      "path": "tools/part3_stage6/relationships.py",
+      "before": "(\"aws_s3_bucket_policy.workload\", \"bucket\"): \"aws_s3_bucket.workload.id\"",
+      "after": "(\"aws_s3_bucket_policy.workload\", \"bucket\"): \"aws_s3_bucket.workload.arn\"",
+      "test": "tests/test_part3_stage6_relationships.py"
+    },
+    {
+      "id": "S6-M08-independent-gate",
+      "path": "tools/part3_stage6/artifact.py",
+      "before": "if gates[\"S6-G04\"] is not False:",
+      "after": "if gates[\"S6-G04\"] is not True:",
+      "test": "tests/test_part3_stage6_artifact.py"
+    },
+    {
+      "id": "S6-M09-closure-apply-count",
+      "path": "tools/part3_stage6/closure.py",
+      "before": "\"plan_applied\": False,\n        \"apply_calls\": 0,",
+      "after": "\"plan_applied\": False,\n        \"apply_calls\": 1,",
+      "test": "tests/test_part3_stage6_closure.py"
+    },
+    {
+      "id": "S6-M10-recovery-required",
+      "path": "tools/part3_stage6/recovery.py",
+      "before": "\"conditional_release_completed\": False,\n        \"recovery_required\": True,",
+      "after": "\"conditional_release_completed\": False,\n        \"recovery_required\": False,",
+      "test": "tests/test_part3_stage6_recovery.py"
+    },
+    {
+      "id": "S6-M11-workflow-prohibition",
+      "path": "tools/part3_stage6/workflow_policy.py",
+      "before": "    \"terraform apply\",\n",
+      "after": "",
+      "test": "tests/test_part3_stage6_workflow_policy.py"
+    },
+    {
+      "id": "S6-M12-runtime-start-allow",
+      "path": "tools/part3_stage6/admin_packet.py",
+      "before": "if statement.get(\"Effect\") == \"Allow\" and set(actions) & set(WORKLOAD_STARTS):",
+      "after": "if statement.get(\"Effect\") == \"Allow\" and not set(actions) & set(WORKLOAD_STARTS):",
+      "test": "tests/test_part3_stage6_admin_packet.py"
+    },
+    {
+      "id": "S6-M13-producer-self-admission",
+      "path": "tools/part3_stage6/controller.py",
+      "before": "\"gates\": {\"S6-G01\": True, \"S6-G02\": True, \"S6-G03\": True, \"S6-G04\": False}",
+      "after": "\"gates\": {\"S6-G01\": True, \"S6-G02\": True, \"S6-G03\": True, \"S6-G04\": True}",
+      "test": "tests/test_part3_stage6_controller.py"
+    },
+    {
+      "id": "S6-M14-lease-condition",
+      "path": "tools/part3_stage6/live.py",
+      "before": "            \"attribute_not_exists(lease_key)\",",
+      "after": "            \"attribute_exists(lease_key)\",",
+      "test": "tests/test_part3_stage6_live.py"
+    },
+    {
+      "id": "S6-M15-private-packet-binding",
+      "path": "tools/part3_stage6/controller.py",
+      "before": "admitted_admin[\"private_packet_sha256\"] != administrator_packet_sha256",
+      "after": "admitted_admin[\"private_packet_sha256\"] == administrator_packet_sha256",
+      "test": "tests/test_part3_stage6_controller.py"
+    },
+    {
+      "id": "S6-M16-provisioner-rejection",
+      "path": "tools/part3_stage6/plan_policy.py",
+      "before": "resource.get(\"provisioners\") not in (None, [])",
+      "after": "resource.get(\"provisioners\") not in (None, [], [{\"type\": \"local-exec\"}])",
+      "test": "tests/test_part3_stage6_plan_policy.py"
+    },
+    {
+      "id": "S6-M17-budget-strict-ceiling",
+      "path": "tools/part3_stage6/artifact.py",
+      "before": "sum(amounts) >= ceiling",
+      "after": "sum(amounts) > ceiling",
+      "test": "tests/test_part3_stage6_artifact.py"
+    },
+    {
+      "id": "S6-M18-quota-visibility",
+      "path": "tools/part3_stage6/live.py",
+      "before": "if not isinstance(rows, list) or not rows:",
+      "after": "if not isinstance(rows, list) or (False and not rows):",
+      "test": "tests/test_part3_stage6_live.py"
+    },
+    {
+      "id": "S6-M19-workflow-attempt-identity",
+      "path": "tools/part3_stage6/artifact.py",
+      "before": "r\"[1-9][0-9]*\", str(source.get(\"workflow_run_attempt\", \"\"))",
+      "after": "r\"[0-9][0-9]*\", str(source.get(\"workflow_run_attempt\", \"\"))",
+      "test": "tests/test_part3_stage6_artifact.py"
+    },
+    {
+      "id": "S6-M20-init-lockfile-readonly",
+      "path": "tools/part3_stage6/terraform.py",
+      "before": "required_init = {\"-input=false\", \"-reconfigure\", \"-lockfile=readonly\"}",
+      "after": "required_init = {\"-input=false\", \"-reconfigure\"}",
+      "test": "tests/test_part3_stage6_terraform.py"
+    },
+    {
+      "id": "S6-M21-tag-inventory",
+      "path": "tools/part3_stage6/live.py",
+      "before": "if \"ledgerguard\" in value.lower()",
+      "after": "if \"ledgerguard\" not in value.lower()",
+      "test": "tests/test_part3_stage6_live.py"
+    },
+    {
+      "id": "S6-M22-backend-latest-version",
+      "path": "tools/part3_stage6/live.py",
+      "before": "active = [row for row in versions.get(\"Versions\", []) if row.get(\"IsLatest\") is True]",
+      "after": "active = [row for row in versions.get(\"Versions\", []) if row.get(\"IsLatest\") is False]",
+      "test": "tests/test_part3_stage6_live.py"
+    },
+    {
+      "id": "S6-M23-runtime-policy-source-proof",
+      "path": "tools/part3_stage6/property_policy.py",
+      "before": "elif role not in runtime_policy_documents:",
+      "after": "elif role in runtime_policy_documents:",
+      "test": "tests/test_part3_stage6_property_policy.py"
+    },
+    {
+      "id": "S6-M24-state-absent-after-plan",
+      "path": "tools/part3_stage6/artifact.py",
+      "before": "backend.get(\"state_absent_before_and_after\") is not True",
+      "after": "backend.get(\"state_absent_before_and_after\") is not False",
+      "test": "tests/test_part3_stage6_artifact.py"
+    }
+  ]
+}

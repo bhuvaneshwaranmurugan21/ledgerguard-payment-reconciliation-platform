@@ -1,0 +1,124 @@
+name: Part 3 Stage 6 owner-bound lease recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact immutable main commit of the failed plan-only run
+        required: true
+        type: string
+      expected_tree:
+        description: Exact immutable main tree of the failed plan-only run
+        required: true
+        type: string
+      failure_handoff_base64:
+        description: Base64 sanitized failure handoff from the failed run
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ledgerguard-part3-stage6-plan-only-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  recover-owned-lease:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      EXPECTED_TREE: ${{ inputs.expected_tree }}
+      CHECKED_OUT_SHA: ${{ inputs.expected_sha }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+    steps:
+      - name: Check out exact failed main source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.expected_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Admit exact source and handoff before OIDC
+        shell: bash
+        env:
+          FAILURE_HANDOFF_BASE64: ${{ inputs.failure_handoff_base64 }}
+        run: |
+          set -euo pipefail
+          test "${{ github.event_name }}" = workflow_dispatch
+          test "${{ github.repository }}" = bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform
+          test "${{ github.ref }}" = refs/heads/main
+          test "${{ github.sha }}" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD^{tree})" = "$EXPECTED_TREE"
+          test -z "$(git status --porcelain)"
+          test "$AWS_REGION" = ap-southeast-2
+          test "$AWS_ROLE_ARN" = arn:aws:iam::857229544428:role/LedgerGuardGitHubOidcRole
+          private="$RUNNER_TEMP/ledgerguard-stage6-recovery-private"
+          mkdir -m 700 "$private"
+          printf '%s' "$FAILURE_HANDOFF_BASE64" | base64 --decode > "$private/failure.json"
+          chmod 600 "$private/failure.json"
+          python - "$private/failure.json" "$EXPECTED_SHA" "$EXPECTED_TREE" <<'PY'
+          import json, sys
+          from tools.part3_stage6.recovery import validate_failure_handoff
+          validate_failure_handoff(
+              json.load(open(sys.argv[1])), source_commit=sys.argv[2], source_tree=sys.argv[3]
+          )
+          PY
+          echo "PRIVATE_STAGE6_RECOVERY=$private" >> "$GITHUB_ENV"
+      - name: Install exact Python and locked dependencies
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Install recovery dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
+          python -m pip install --no-deps .
+      - name: Stage private backend identifier
+        shell: bash
+        env:
+          BACKEND_KMS_KEY_ARN: ${{ secrets.PART3_BACKEND_KMS_KEY_ARN }}
+        run: |
+          set -euo pipefail
+          test -n "$BACKEND_KMS_KEY_ARN"
+          printf '%s\n' "$BACKEND_KMS_KEY_ARN" > "$PRIVATE_STAGE6_RECOVERY/kms-arn"
+          chmod 600 "$PRIVATE_STAGE6_RECOVERY/kms-arn"
+      - name: Assume exact executor role after offline admission
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: ledgerguard-stage6-recovery-${{ github.run_id }}
+          role-duration-seconds: 900
+          mask-aws-account-id: true
+      - name: Recover only the exact owned lease
+        shell: bash
+        run: |
+          set -euo pipefail
+          public="$RUNNER_TEMP/ledgerguard-stage6-recovery-evidence"
+          mkdir -p "$public"
+          python tools/run_part3_stage6_recovery.py \
+            --root . \
+            --expected-sha "$EXPECTED_SHA" \
+            --expected-tree "$EXPECTED_TREE" \
+            --failure-handoff "$PRIVATE_STAGE6_RECOVERY/failure.json" \
+            --backend-kms-key-arn-file "$PRIVATE_STAGE6_RECOVERY/kms-arn" \
+            --output "$public/recovery-receipt.json"
+      - name: Remove all private recovery inputs
+        if: always()
+        shell: bash
+        run: rm -rf -- "$RUNNER_TEMP/ledgerguard-stage6-recovery-private"
+      - name: Upload sanitized recovery receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage6-recovery-${{ inputs.expected_sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/ledgerguard-stage6-recovery-evidence
+          include-hidden-files: false
+          if-no-files-found: error
+          retention-days: 90

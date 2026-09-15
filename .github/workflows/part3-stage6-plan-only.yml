@@ -1,0 +1,158 @@
+name: Part 3 Stage 6 exact-main plan-only proof
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact immutable main commit to qualify
+        required: true
+        type: string
+      expires_at:
+        description: RFC3339 expiry for the create-only candidate
+        required: true
+        type: string
+      administrator_receipt_base64:
+        description: Base64 sanitized separately produced administrator receipt
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ledgerguard-part3-stage6-plan-only-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  plan-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      EXPIRES_AT: ${{ inputs.expires_at }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+      CHECKED_OUT_SHA: ${{ inputs.expected_sha }}
+    steps:
+      - name: Check out exact requested main commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.expected_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Establish all source and dispatch invariants before OIDC
+        shell: bash
+        env:
+          ADMINISTRATOR_RECEIPT_BASE64: ${{ inputs.administrator_receipt_base64 }}
+        run: |
+          set -euo pipefail
+          test "${{ github.event_name }}" = workflow_dispatch
+          test "${{ github.repository }}" = bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform
+          test "${{ github.ref }}" = refs/heads/main
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "${{ github.sha }}" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test -z "$(git status --porcelain)"
+          test "$AWS_REGION" = ap-southeast-2
+          test "$AWS_ROLE_ARN" = arn:aws:iam::857229544428:role/LedgerGuardGitHubOidcRole
+          [[ "$EXPIRES_AT" =~ ^20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$ ]]
+          private="$RUNNER_TEMP/ledgerguard-stage6-private"
+          mkdir -m 700 "$private"
+          printf '%s' "$ADMINISTRATOR_RECEIPT_BASE64" | base64 --decode > "$private/administrator-receipt.json"
+          chmod 600 "$private/administrator-receipt.json"
+          echo "PRIVATE_STAGE6=$private" >> "$GITHUB_ENV"
+      - name: Install exact Python and locked dependencies
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Install qualification dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
+          python -m pip install --require-hashes -r requirements/part3-stage4-parser.lock
+          python -m pip install --no-deps .
+      - name: Install exact verified Terraform
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://releases.hashicorp.com/terraform/1.13.1/terraform_1.13.1_linux_amd64.zip --output "$PRIVATE_STAGE6/terraform.zip"
+          test "$(sha256sum "$PRIVATE_STAGE6/terraform.zip" | cut -d ' ' -f 1)" = 4449e2ddc0dee283f0909dd603eaf98edeebaa950f4635cea94f2caf0ffacc5a
+          unzip -q "$PRIVATE_STAGE6/terraform.zip" -d "$PRIVATE_STAGE6/bin"
+          chmod 700 "$PRIVATE_STAGE6/bin/terraform"
+          echo "$PRIVATE_STAGE6/bin" >> "$GITHUB_PATH"
+      - name: Reproduce exact accepted Stage 5 release
+        shell: bash
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          python -m tools.build_part3_stage5_release \
+            --environment "$pythonLocation" \
+            --output "$PRIVATE_STAGE6/stage5-release" \
+            --source-commit 38576ff8b0592b53cd65fe3cf4241e077484afd8 \
+            --source-tree d789912c580bc4fd7f8059dd5e0ea766cd251750 \
+            --source-date-epoch 1789257600 \
+            --operation-id release-qual1 \
+            --execution-input-reference spec/part3-stage5-release-qualification-input.json
+          test "$(sha256sum "$PRIVATE_STAGE6/stage5-release/state-machine.json" | cut -d ' ' -f 1)" = e9233f551153fe4053575609423802eeed8741612cc16be5017d097746f693d5
+      - name: Compose exact private successor policy packet
+        shell: bash
+        env:
+          BACKEND_KMS_KEY_ARN: ${{ secrets.PART3_BACKEND_KMS_KEY_ARN }}
+        run: |
+          set -euo pipefail
+          test -n "$BACKEND_KMS_KEY_ARN"
+          printf '%s\n' "$BACKEND_KMS_KEY_ARN" > "$PRIVATE_STAGE6/backend-kms-key-arn"
+          python tools/build_part3_stage6_administrator_packet.py \
+            --root . \
+            --release-dir "$PRIVATE_STAGE6/stage5-release" \
+            --backend-kms-key-arn-file "$PRIVATE_STAGE6/backend-kms-key-arn" \
+            --source-commit "$EXPECTED_SHA" \
+            --source-tree "$(git rev-parse HEAD^{tree})" \
+            --output "$PRIVATE_STAGE6/administrator-packet.json"
+      - name: Assume exact executor role after source and administrator admission inputs exist
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: ledgerguard-stage6-plan-${{ github.run_id }}
+          role-duration-seconds: 1800
+          mask-aws-account-id: true
+      - name: Execute plan-only transaction and sanitize evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/ledgerguard-stage6-evidence"
+          python tools/run_part3_stage6_plan.py \
+            --root . \
+            --expected-sha "$EXPECTED_SHA" \
+            --expected-tree "$(git rev-parse HEAD^{tree})" \
+            --administrator-packet "$PRIVATE_STAGE6/administrator-packet.json" \
+            --administrator-receipt "$PRIVATE_STAGE6/administrator-receipt.json" \
+            --release-dir "$PRIVATE_STAGE6/stage5-release" \
+            --expires-at "$EXPIRES_AT" \
+            --private-work-dir "$PRIVATE_STAGE6/execution" \
+            --output "$RUNNER_TEMP/ledgerguard-stage6-evidence/plan-only.zip" \
+            --failure-output "$RUNNER_TEMP/ledgerguard-stage6-evidence/failure-handoff.json" \
+            > "$RUNNER_TEMP/ledgerguard-stage6-evidence/producer-result.json"
+          test ! -e "$PRIVATE_STAGE6/execution"
+          python tools/inspect_part3_stage6_artifact.py \
+            "$RUNNER_TEMP/ledgerguard-stage6-evidence/plan-only.zip" \
+            > "$RUNNER_TEMP/ledgerguard-stage6-evidence/inspection.json"
+          test -z "$(git status --porcelain)"
+      - name: Remove all private plan, state, release and IAM material
+        if: always()
+        shell: bash
+        run: rm -rf -- "$RUNNER_TEMP/ledgerguard-stage6-private"
+      - name: Upload sanitized plan-only evidence only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage6-plan-only-${{ inputs.expected_sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ledgerguard-stage6-evidence
+          include-hidden-files: false
+          if-no-files-found: error
+          retention-days: 90

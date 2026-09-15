@@ -1,0 +1,144 @@
+name: Part 3 Stage 6 plan-only source qualification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: part3-stage6-static-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualify:
+    strategy:
+      fail-fast: false
+      matrix:
+        qualification: [1, 2]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Check out exact event head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Admit exact source before installing tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test -z "$(git status --porcelain)"
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Install hash-locked qualification dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
+          python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
+          python -m pip install --require-hashes -r requirements/part3-stage4-parser.lock
+      - name: Install verified Terraform and TFLint
+        shell: bash
+        run: |
+          set -euo pipefail
+          tool_dir="$RUNNER_TEMP/ledgerguard-stage6-tools"
+          mkdir -p "$tool_dir"
+          curl --fail --location --retry 3 https://releases.hashicorp.com/terraform/1.13.1/terraform_1.13.1_linux_amd64.zip --output "$tool_dir/terraform.zip"
+          curl --fail --location --retry 3 https://github.com/terraform-linters/tflint/releases/download/v0.59.1/tflint_linux_amd64.zip --output "$tool_dir/tflint.zip"
+          python - "$tool_dir" <<'PY'
+          import hashlib, sys, zipfile
+          from pathlib import Path
+          root = Path(sys.argv[1])
+          for name, expected in (
+              ("terraform", "4449e2ddc0dee283f0909dd603eaf98edeebaa950f4635cea94f2caf0ffacc5a"),
+              ("tflint", "6108d84282292f11d793dc8038ce08fbc629dcd25324d6f13c63d8100b52e01f"),
+          ):
+              archive = root / f"{name}.zip"
+              assert hashlib.sha256(archive.read_bytes()).hexdigest() == expected
+              with zipfile.ZipFile(archive) as source:
+                  (root / name).write_bytes(source.read(name))
+              (root / name).chmod(0o755)
+          PY
+          echo "$tool_dir" >> "$GITHUB_PATH"
+      - name: Run full Stage 6 owned qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/part3-stage6-static-${{ matrix.qualification }}"
+          mkdir -p "$evidence"
+          python tools/validate_part3_stage6_preparation.py > "$evidence/preparation.json"
+          python -c 'from pathlib import Path; from tools.part3_stage6.workflow_policy import validate_workflows; validate_workflows(Path("."))'
+          python -m coverage erase
+          python -m coverage run --branch --source=tools.part3_stage6,tools.validate_part3_stage6_preparation -m pytest tests/test_part3_stage6_*.py
+          python -m coverage json -o "$evidence/coverage.json"
+          python -m coverage report --fail-under=100 > "$evidence/coverage.txt"
+          python tools/run_part3_stage6_mutations.py --root . --output "$evidence/mutations"
+          python -m ruff check src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/iam.py tools/part3_stage6 tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py tests/test_part3_stage6_*.py
+          python -m mypy --strict src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/iam.py tools/part3_stage6 tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py
+          terraform -chdir=infra/part3 fmt -check -recursive
+          terraform -chdir=infra/part3 init -backend=false -input=false -lockfile=readonly
+          terraform -chdir=infra/part3 validate -json > "$evidence/terraform-validation.json"
+          tflint --chdir=infra/part3 --format=json > "$evidence/tflint.json"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test -z "$(git status --porcelain)"
+      - name: Reproduce accepted Stage 5 release twice
+        shell: bash
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          release="$RUNNER_TEMP/stage6-stage5-release"
+          for run in 1 2; do
+            python -m tools.build_part3_stage5_release \
+              --environment "$pythonLocation" \
+              --output "$release/run-$run" \
+              --source-commit 38576ff8b0592b53cd65fe3cf4241e077484afd8 \
+              --source-tree d789912c580bc4fd7f8059dd5e0ea766cd251750 \
+              --source-date-epoch 1789257600 \
+              --operation-id release-qual1 \
+              --execution-input-reference spec/part3-stage5-release-qualification-input.json
+          done
+          diff --no-dereference --recursive "$release/run-1" "$release/run-2"
+          test "$(sha256sum "$release/run-1/state-machine.json" | cut -d ' ' -f 1)" = e9233f551153fe4053575609423802eeed8741612cc16be5017d097746f693d5
+      - name: Exercise private administrator packet composition offline
+        shell: bash
+        run: |
+          set -euo pipefail
+          private="$RUNNER_TEMP/private-stage6-admin-${{ matrix.qualification }}"
+          mkdir -m 700 "$private"
+          printf '%s\n' 'arn:aws:kms:ap-southeast-2:857229544428:key/11111111-2222-3333-4444-555555555555' > "$private/kms-arn"
+          python tools/build_part3_stage6_administrator_packet.py \
+            --root . \
+            --release-dir "$RUNNER_TEMP/stage6-stage5-release/run-1" \
+            --backend-kms-key-arn-file "$private/kms-arn" \
+            --source-commit "$EXPECTED_SHA" \
+            --source-tree "$(git rev-parse HEAD^{tree})" \
+            --output "$private/packet.json"
+          python - "$private/packet.json" <<'PY'
+          import json, sys
+          value = json.load(open(sys.argv[1]))
+          assert value["classification"] == "PRIVATE_DESIRED_NOT_INSTALLED_NOT_EFFECTIVELY_VERIFIED"
+          assert value["aws_calls"] == 0
+          assert value["stage6_complete"] is False
+          PY
+          rm -rf "$private"
+      - name: Upload sanitized qualification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage6-static-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_attempt }}-${{ matrix.qualification }}
+          path: ${{ runner.temp }}/part3-stage6-static-${{ matrix.qualification }}
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30

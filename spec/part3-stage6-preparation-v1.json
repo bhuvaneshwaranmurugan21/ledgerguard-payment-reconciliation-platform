@@ -1,0 +1,107 @@
+{
+  "schema_version": "ledgerguard.part3.stage6-preparation.v1",
+  "classification": "PRE_EXECUTION_INPUT_FREEZE_NOT_AWS_EVIDENCE",
+  "accepted_stage5": {
+    "main_commit": "38576ff8b0592b53cd65fe3cf4241e077484afd8",
+    "tree": "d789912c580bc4fd7f8059dd5e0ea766cd251750",
+    "increment_artifact_sha256": "a787a07a0a18c37b128163184268c32f79da5e368171601ac9bb6be7a5bfc585",
+    "release_artifact_sha256": "6a182e1827502bb645f3d4713489d6e0638fd07845dc95ff4215113e9775d530",
+    "release_bundle_sha256": "d51b16fe835f28455cc364600690caaf81e123050cbf4d984a6cbec8fb4ab606",
+    "definition_sha256": "e9233f551153fe4053575609423802eeed8741612cc16be5017d097746f693d5",
+    "runtime_package_sha256": "1dde69c7338d898daa660acd800264d817d15f73bae9b2071156eb909f2291b8",
+    "sbom_sha256": "622e965dc699dd2bb2aac5f638eaaf6945d57ef553965d9cb681d548c58661dc",
+    "provenance_sha256": "d7cf750e5e592a5a53de4b022d31f3de7fe4fed495f6d32d26a20340332d9167",
+    "handler_config_sha256": "f0bd3462aab632c8bccc378d428f3c07eb492f939eb6ff4a0e2e8d2809c1a25a",
+    "exact_main_definition_validation": "OK"
+  },
+  "target": {
+    "account": "857229544428",
+    "region": "ap-southeast-2",
+    "managed_address_count": 33,
+    "resource_inventory_path": "spec/part3-stage4-resource-inventory-v1.json",
+    "resource_inventory_sha256": "6989081789d0ec7fa475e01846b33b4e9c5b60d0fe74ada3b14536ac2e0fa609",
+    "sorted_address_inventory_sha256": "686339e3a53c2ee9e854a273ebae7055ad4a5b24aebe8a79a742f9c5a68e23e2",
+    "resource_controls_path": "spec/part3-stage4-resource-controls-v1.json",
+    "resource_controls_sha256": "b9f2902826d962db9599800cdb16c05485a2aebe589e36bfdaa51ba28927cdde",
+    "provider_actions_path": "spec/part3-stage4-provider-actions-v1.json",
+    "provider_actions_sha256": "0b36e0a162c4efbc4d481c662d0fdf5fe5c3b4bf38003ef39c715f778ec52fa6"
+  },
+  "requirements": [
+    "P3-M-L282-01",
+    "P3-M-L283-01",
+    "P3-M-L283-02"
+  ],
+  "gates": [
+    "S6-G01",
+    "S6-G02",
+    "S6-G03",
+    "S6-G04"
+  ],
+  "toolchain": {
+    "python": "3.11.13",
+    "terraform": "1.13.1",
+    "tflint": "0.59.1",
+    "parser_lock_path": "requirements/part3-stage4-parser.lock",
+    "parser_lock_sha256": "03cd7d355fd74e5974e9286b90a57859fdca52f11c4662bf941eceec86018a68",
+    "terraform_lock_path": "infra/part3/.terraform.lock.hcl",
+    "terraform_lock_sha256": "0d481b58027a189fc1167eed186ba734d671b78c2fc6481c9b890b7afd92b96c",
+    "accepted_static_workflow_path": ".github/workflows/part3-stage4-static.yml",
+    "accepted_static_workflow_sha256": "8f21a683b0ac989f912b3208d14bd78c2a6f2f090a7fee55b74668ad84db4d48"
+  },
+  "hard_invariants": {
+    "gross_project_cost_strictly_below_usd": 10,
+    "plan_only": true,
+    "saved_binary_plan_required": true,
+    "same_binary_json_render_required": true,
+    "full_refresh_required": true,
+    "terraform_locking_required": true,
+    "exact_create_actions": 33,
+    "allowed_plan_actions": ["create"],
+    "prohibited_terraform": [
+      "apply",
+      "force-unlock",
+      "import",
+      "target",
+      "refresh-false",
+      "lock-false"
+    ],
+    "prohibited_workloads": [
+      "reconciliation",
+      "glue-job-run",
+      "athena-query",
+      "step-functions-execution",
+      "lambda-invocation",
+      "helper-workload"
+    ],
+    "executor_iam_mutation": false,
+    "raw_plan_publication": false,
+    "raw_state_publication": false
+  },
+  "pre_execution_dependencies": {
+    "successor_iam_installed": false,
+    "effective_permissions_verified": false,
+    "organization_scp_session_resource_restrictions_resolved": false,
+    "fresh_budget_backend_inventory_quota_lease_admission": false,
+    "stage6_exact_main_source_exists": false,
+    "stage6_saved_plan_exists": false
+  },
+  "workflow_boundary": {
+    "trigger": "workflow_dispatch",
+    "eligible_ref": "refs/heads/main",
+    "arbitrary_ref_allowed": false,
+    "cancel_in_progress": false,
+    "aws_credentials_before_source_admission": false,
+    "shared_operation_guard_required": true,
+    "stale_ttl_proves_runner_stopped": false,
+    "force_unlock_allowed": false
+  },
+  "closure": {
+    "terminal_state": "plan_only_verified",
+    "requires_independent_artifact_inspection": true,
+    "requires_no_apply_proof": true,
+    "requires_no_workload_proof": true,
+    "requires_owned_lease_release_or_recovery_transfer": true,
+    "stage6_complete": false,
+    "part3_complete": false
+  }
+}
