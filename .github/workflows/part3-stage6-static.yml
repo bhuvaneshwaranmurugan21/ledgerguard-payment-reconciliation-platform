@@ -49,6 +49,7 @@ jobs:
           python -m pip install --require-hashes -r requirements/part3-stage3-bootstrap.lock
           python -m pip install --require-hashes -r requirements/part3-stage3-py311.lock
           python -m pip install --require-hashes -r requirements/part3-stage4-parser.lock
+          python -m pip install --only-binary=:all: --require-hashes -r requirements/part3-stage5-parquet-py311.lock
       - name: Install verified Terraform and TFLint
         shell: bash
         run: |
