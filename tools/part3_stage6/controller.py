@@ -130,6 +130,7 @@ def adjudicate_plan_only(
         "properties": properties,
         "closure": closure,
     }
+    policy_sha256 = _sha(policy_projection)
     evidence = {
         "schema_version": "ledgerguard.part3-stage6-plan-only-evidence.v1",
         "source": {
@@ -174,7 +175,7 @@ def adjudicate_plan_only(
         "gates": {"S6-G01": True, "S6-G02": True, "S6-G03": True, "S6-G04": False},
         "plan": {
             **plan_digests,
-            "policy_sha256": _sha(policy_projection),
+            "policy_sha256": policy_sha256,
             "resource_changes": structural["resource_changes"],
             "create_actions": structural["create_actions"],
             "other_actions": structural["other_actions"],
@@ -206,7 +207,7 @@ def adjudicate_plan_only(
     return {
         "classification": "STAGE6_PRODUCER_ARTIFACT_AWAITING_INDEPENDENT_INSPECTION",
         "artifact_sha256": artifact_sha,
-        "policy_sha256": evidence["plan"]["policy_sha256"],
+        "policy_sha256": policy_sha256,
         "producer_gates": 3,
         "S6-G04": False,
         "stage6_complete": False,
