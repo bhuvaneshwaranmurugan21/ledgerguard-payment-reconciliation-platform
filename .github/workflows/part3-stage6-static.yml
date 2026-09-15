@@ -79,13 +79,13 @@ jobs:
           set -euo pipefail
           evidence="$RUNNER_TEMP/part3-stage6-static-${{ matrix.qualification }}"
           mkdir -p "$evidence"
-          python tools/validate_part3_stage6_preparation.py > "$evidence/preparation.json"
+          python -m tools.validate_part3_stage6_preparation > "$evidence/preparation.json"
           python -c 'from pathlib import Path; from tools.part3_stage6.workflow_policy import validate_workflows; validate_workflows(Path("."))'
           python -m coverage erase
           python -m coverage run --branch --source=tools.part3_stage6,tools.validate_part3_stage6_preparation -m pytest tests/test_part3_stage6_*.py
           python -m coverage json -o "$evidence/coverage.json"
           python -m coverage report --fail-under=100 > "$evidence/coverage.txt"
-          python tools/run_part3_stage6_mutations.py --root . --output "$evidence/mutations"
+          python -m tools.run_part3_stage6_mutations --root . --output "$evidence/mutations"
           python -m ruff check src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/iam.py tools/part3_stage6 tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py tests/test_part3_stage6_*.py
           python -m mypy --strict src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/iam.py tools/part3_stage6 tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py
           terraform -chdir=infra/part3 fmt -check -recursive
@@ -120,7 +120,7 @@ jobs:
           private="$RUNNER_TEMP/private-stage6-admin-${{ matrix.qualification }}"
           mkdir -m 700 "$private"
           printf '%s\n' 'arn:aws:kms:ap-southeast-2:857229544428:key/11111111-2222-3333-4444-555555555555' > "$private/kms-arn"
-          python tools/build_part3_stage6_administrator_packet.py \
+          python -m tools.build_part3_stage6_administrator_packet \
             --root . \
             --release-dir "$RUNNER_TEMP/stage6-stage5-release/run-1" \
             --backend-kms-key-arn-file "$private/kms-arn" \

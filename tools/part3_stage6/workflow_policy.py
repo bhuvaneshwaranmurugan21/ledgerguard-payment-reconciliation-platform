@@ -64,8 +64,8 @@ def validate_workflows(root: Path) -> dict[str, Any]:
     _require(
         plan,
         (
-            "tools/run_part3_stage6_plan.py",
-            "tools/inspect_part3_stage6_artifact.py",
+            "python -m tools.run_part3_stage6_plan",
+            "python -m tools.inspect_part3_stage6_artifact",
             "administrator_receipt_base64:",
             'test -z "$(git status --porcelain)"',
         ),
@@ -75,7 +75,7 @@ def validate_workflows(root: Path) -> dict[str, Any]:
         recovery,
         (
             "tools.part3_stage6.recovery import validate_failure_handoff",
-            "tools/run_part3_stage6_recovery.py",
+            "python -m tools.run_part3_stage6_recovery",
             "failure_handoff_base64:",
         ),
         "recovery",

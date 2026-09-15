@@ -107,7 +107,7 @@ jobs:
           set -euo pipefail
           test -n "$BACKEND_KMS_KEY_ARN"
           printf '%s\n' "$BACKEND_KMS_KEY_ARN" > "$PRIVATE_STAGE6/backend-kms-key-arn"
-          python tools/build_part3_stage6_administrator_packet.py \
+          python -m tools.build_part3_stage6_administrator_packet \
             --root . \
             --release-dir "$PRIVATE_STAGE6/stage5-release" \
             --backend-kms-key-arn-file "$PRIVATE_STAGE6/backend-kms-key-arn" \
@@ -127,7 +127,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/ledgerguard-stage6-evidence"
-          python tools/run_part3_stage6_plan.py \
+          python -m tools.run_part3_stage6_plan \
             --root . \
             --expected-sha "$EXPECTED_SHA" \
             --expected-tree "$(git rev-parse HEAD^{tree})" \
@@ -140,7 +140,7 @@ jobs:
             --failure-output "$RUNNER_TEMP/ledgerguard-stage6-evidence/failure-handoff.json" \
             > "$RUNNER_TEMP/ledgerguard-stage6-evidence/producer-result.json"
           test ! -e "$PRIVATE_STAGE6/execution"
-          python tools/inspect_part3_stage6_artifact.py \
+          python -m tools.inspect_part3_stage6_artifact \
             "$RUNNER_TEMP/ledgerguard-stage6-evidence/plan-only.zip" \
             > "$RUNNER_TEMP/ledgerguard-stage6-evidence/inspection.json"
           test -z "$(git status --porcelain)"
