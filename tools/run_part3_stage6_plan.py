@@ -12,9 +12,9 @@ import time
 from pathlib import Path
 from typing import Any
 
-from ledgerguard.stage2.aws_cli import AwsCli
 from tools.part3_stage6.admin_packet import validate_release
 from tools.part3_stage6.admission import validate_administrator_receipt
+from tools.part3_stage6.aws_cli import Stage6AwsCli
 from tools.part3_stage6.controller import adjudicate_plan_only
 from tools.part3_stage6.live import (
     collect_preflight,
@@ -32,7 +32,7 @@ def _load(path: Path) -> dict[str, Any]:
     return value
 
 
-def _journal(cli: AwsCli, terraform: PlanSession) -> list[dict[str, Any]]:
+def _journal(cli: Stage6AwsCli, terraform: PlanSession) -> list[dict[str, Any]]:
     aws = [
         {
             "sequence": index + 1,
@@ -101,7 +101,7 @@ def main() -> None:
     owner_token = hashlib.sha256(
         f"{os.environ.get('GITHUB_RUN_ID')}:{os.environ.get('GITHUB_RUN_ATTEMPT')}:{args.expected_sha}".encode()
     ).hexdigest()
-    cli = AwsCli("ap-southeast-2")
+    cli = Stage6AwsCli("ap-southeast-2")
     session = PlanSession(root / "infra/part3", private / "plan")
     lease_acquired = False
     lease_was_ever_acquired = False

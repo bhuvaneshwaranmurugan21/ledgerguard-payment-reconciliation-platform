@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 from typing import Any
 
-from ledgerguard.stage2.aws_cli import AwsCli
+from tools.part3_stage6.aws_cli import Stage6AwsCli
 from tools.part3_stage6.recovery import recover_owned_lease
 
 
@@ -46,7 +46,7 @@ def main() -> None:
     if not kms_path.is_file() or kms_path.is_symlink():
         raise SystemExit("regular private KMS ARN file required")
     result = recover_owned_lease(
-        cli=AwsCli("ap-southeast-2"),
+        cli=Stage6AwsCli("ap-southeast-2"),
         handoff=_load(args.failure_handoff),
         source_commit=args.expected_sha,
         source_tree=args.expected_tree,

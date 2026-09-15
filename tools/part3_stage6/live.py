@@ -8,7 +8,6 @@ from datetime import date
 from hashlib import sha256
 from typing import Any
 
-from ledgerguard.stage2.aws_cli import AwsCli
 from ledgerguard.stage2.control import (
     canonical_bytes,
     validate_backend,
@@ -17,6 +16,7 @@ from ledgerguard.stage2.control import (
 )
 from tools.part3_stage2_runtime import _cost_headroom_check
 from tools.part3_stage4.administrator import admit_identity_snapshot
+from tools.part3_stage6.aws_cli import Stage6AwsCli
 
 ACCOUNT = "857229544428"
 REGION = "ap-southeast-2"
@@ -30,7 +30,7 @@ def _tag_map(rows: list[dict[str, Any]]) -> dict[str, str]:
     return {row["Key"]: row["Value"] for row in rows}
 
 
-def observe_identity_contract(cli: AwsCli, expected: dict[str, Any]) -> dict[str, Any]:
+def observe_identity_contract(cli: Stage6AwsCli, expected: dict[str, Any]) -> dict[str, Any]:
     roles: dict[str, Any] = {}
     policies: dict[str, Any] = {}
     for arn, desired in expected["roles"].items():
@@ -82,7 +82,7 @@ def observe_identity_contract(cli: AwsCli, expected: dict[str, Any]) -> dict[str
 
 
 def observe_backend(
-    cli: AwsCli, kms_key_arn: str, control_plane: dict[str, Any]
+    cli: Stage6AwsCli, kms_key_arn: str, control_plane: dict[str, Any]
 ) -> dict[str, bool]:
     location = cli.invoke("S3_GET_BUCKET_LOCATION", ["--bucket", BACKEND_BUCKET]).get(
         "LocationConstraint"
@@ -139,7 +139,7 @@ def observe_backend(
     }
 
 
-def acquire_lease(cli: AwsCli, owner_token: str, expires_epoch: int) -> dict[str, bool]:
+def acquire_lease(cli: Stage6AwsCli, owner_token: str, expires_epoch: int) -> dict[str, bool]:
     key = json.dumps({"lease_key": {"S": LEASE_KEY}})
     item = json.dumps(
         {
@@ -173,7 +173,7 @@ def acquire_lease(cli: AwsCli, owner_token: str, expires_epoch: int) -> dict[str
     }
 
 
-def release_lease(cli: AwsCli, owner_token: str) -> dict[str, bool]:
+def release_lease(cli: Stage6AwsCli, owner_token: str) -> dict[str, bool]:
     key = json.dumps({"lease_key": {"S": LEASE_KEY}})
     cli.invoke(
         "DDB_DELETE_ITEM",
@@ -197,7 +197,7 @@ def release_lease(cli: AwsCli, owner_token: str) -> dict[str, bool]:
     }
 
 
-def observe_clean_inventory(cli: AwsCli) -> dict[str, Any]:
+def observe_clean_inventory(cli: Stage6AwsCli) -> dict[str, Any]:
     name = "ledgerguard-p3-release-qual1"
     bucket = f"ledgerguard-p3-{ACCOUNT}-release-qual1"
     buckets = {row["Name"] for row in cli.invoke("S3_LIST_BUCKETS").get("Buckets", [])}
@@ -334,7 +334,7 @@ def observe_clean_inventory(cli: AwsCli) -> dict[str, Any]:
     }
 
 
-def observe_quota_visibility(cli: AwsCli) -> dict[str, bool]:
+def observe_quota_visibility(cli: Stage6AwsCli) -> dict[str, bool]:
     summary = cli.invoke("IAM_GET_ACCOUNT_SUMMARY").get("SummaryMap")
     if not isinstance(summary, dict):
         raise ValueError("IAM quota visibility incomplete")
@@ -369,7 +369,7 @@ def observe_quota_visibility(cli: AwsCli) -> dict[str, bool]:
 
 def collect_preflight(
     *,
-    cli: AwsCli,
+    cli: Stage6AwsCli,
     expected_identity: dict[str, Any],
     administrator_receipt_sha256: str,
     source_commit: str,

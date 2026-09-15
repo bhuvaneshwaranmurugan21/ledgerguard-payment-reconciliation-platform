@@ -80,19 +80,13 @@ def resolve(value: Any, bindings: dict[str, Any]) -> Any:
 
 
 def runtime_policies(
-    module: dict[str, Any],
-    operation_id: str,
-    objects: dict[str, str],
-    *,
-    script_basename: str = "ledgerguard_stage3_job.py",
+    module: dict[str, Any], operation_id: str, objects: dict[str, str]
 ) -> dict[str, Any]:
-    if script_basename not in {"ledgerguard_stage3_job.py", "ledgerguard_stage5_job.py"}:
-        raise ValueError("unqualified deployment script basename")
     names = identities(operation_id)
     if set(objects) != {"script_key", "wheels_key"}:
         raise ValueError("deployment object inventory differs")
     for field, suffix in [
-        ("script_key", script_basename),
+        ("script_key", "ledgerguard_stage3_job.py"),
         ("wheels_key", "ledgerguard.gluewheels.zip"),
     ]:
         if not re.fullmatch(

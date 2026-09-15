@@ -14,7 +14,15 @@ from pathlib import Path
 from typing import Any
 
 from tools.part3_stage4.administrator import compose, identity_contract
-from tools.part3_stage4.iam import ROLES, WORKLOAD_STARTS, runtime_boundaries, runtime_policies
+from tools.part3_stage4.iam import (
+    ACCOUNT,
+    REGION,
+    ROLES,
+    WORKLOAD_STARTS,
+    identities,
+    resolve,
+    runtime_boundaries,
+)
 
 EXPECTED_STAGE5 = {
     "source_commit": "38576ff8b0592b53cd65fe3cf4241e077484afd8",
@@ -75,6 +83,56 @@ def _all_statements(documents: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
+def stage5_runtime_policies(
+    module: dict[str, Any], operation_id: str, objects: dict[str, str]
+) -> dict[str, Any]:
+    """Render runtime grants for the accepted Stage 5 script without editing Stage 4."""
+    names = identities(operation_id)
+    if set(objects) != {"script_key", "wheels_key"}:
+        raise ValueError("deployment object inventory differs")
+    for field, suffix in (
+        ("script_key", "ledgerguard_stage5_job.py"),
+        ("wheels_key", "ledgerguard.gluewheels.zip"),
+    ):
+        if not re.fullmatch(
+            r"deployment/[0-9a-f]{64}/" + re.escape(suffix), objects.get(field, "")
+        ):
+            raise ValueError("unqualified Stage 5 deployment object: " + field)
+    bindings = {"local." + key: value for key, value in names.items()}
+    bindings.update({"var.stage5_release." + key: value for key, value in objects.items()})
+    bindings.update(
+        {f'local.function_arns["{role}"]': arn for role, arn in names["function_arns"].items()}
+    )
+    logs = resolve(module["locals"]["log_names"], bindings)
+    result: dict[str, Any] = {}
+    for role in ROLES:
+        statements = resolve(module["locals"]["runtime_statements"][role], bindings)
+        keys = module["locals"]["role_log_keys"][role]
+        if keys:
+            statements.append(
+                {
+                    "Sid": "WriteOwnStructuredLogs",
+                    "Effect": "Allow",
+                    "Action": ["logs:CreateLogStream", "logs:PutLogEvents"],
+                    "Resource": [
+                        f"arn:aws:logs:{REGION}:{ACCOUNT}:log-group:{logs[key]}:*" for key in keys
+                    ],
+                }
+            )
+        if role in ("validator", "controller"):
+            statements.append(
+                {
+                    "Sid": "LambdaTraceTelemetry",
+                    "Effect": "Allow",
+                    "Action": ["xray:PutTraceSegments", "xray:PutTelemetryRecords"],
+                    "Resource": ["*"],
+                    "Condition": {"StringEquals": {"aws:RequestedRegion": REGION}},
+                }
+            )
+        result[role] = {"Version": "2012-10-17", "Statement": statements}
+    return result
+
+
 def validate_runtime_boundaries(
     policies: dict[str, Any], boundaries: dict[str, Any]
 ) -> dict[str, Any]:
@@ -126,11 +184,10 @@ def compose_successor_packet(
     operation_id = "release-qual1"
     administrator = compose(provider, module, operation_id, backend_kms_key_arn)
     identities = identity_contract(administrator, trust)
-    policies = runtime_policies(
+    policies = stage5_runtime_policies(
         module,
         operation_id,
         {"script_key": release["script_key"], "wheels_key": release["wheels_key"]},
-        script_basename="ledgerguard_stage5_job.py",
     )
     boundaries = runtime_boundaries(policies, operation_id)
     safety = validate_runtime_boundaries(policies, boundaries)

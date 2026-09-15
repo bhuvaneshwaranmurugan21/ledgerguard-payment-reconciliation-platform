@@ -24,6 +24,7 @@ jobs:
     timeout-minutes: 45
     env:
       EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      PYTHONPATH: src
     steps:
       - name: Check out exact event head
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683

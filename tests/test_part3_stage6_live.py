@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import subprocess
 from typing import Any
 
 import pytest
 
+import tools.part3_stage6.aws_cli as stage6_cli
 import tools.part3_stage6.live as live
-from ledgerguard.stage2.aws_cli import COMMANDS
+from ledgerguard.stage2.aws_cli import AwsCli
+from ledgerguard.stage2.control import Stage2Rejected
+from tools.part3_stage6.aws_cli import EXTRA_COMMANDS
 
 
 class FakeCli:
@@ -37,12 +41,84 @@ def empty_inventory_responses() -> dict[str, Any]:
 
 def test_extended_inventory_operations_are_narrowly_allowlisted() -> None:
     assert {
+        "IAM_GET_ACCOUNT_SUMMARY",
         "IAM_LIST_ROLES",
+        "IAM_GET_POLICY",
+        "IAM_GET_POLICY_VERSION",
+        "IAM_LIST_POLICY_VERSIONS",
         "GLUE_GET_DATABASES",
+        "ATHENA_LIST_WORKGROUPS",
         "LAMBDA_LIST_FUNCTIONS",
         "CLOUDWATCH_DESCRIBE_ALARMS",
-        "TAG_GET_RESOURCES",
-    }.issubset(COMMANDS)
+    } == set(EXTRA_COMMANDS)
+    assert "TAG_GET_RESOURCES" not in EXTRA_COMMANDS
+
+
+def test_stage6_cli_delegates_accepted_operations(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        AwsCli,
+        "invoke",
+        lambda self, operation, arguments=None: {"operation": operation, "arguments": arguments},
+    )
+    assert stage6_cli.Stage6AwsCli("ap-southeast-2").invoke(
+        "STS_GET_CALLER_IDENTITY", ["--query", "Account"]
+    ) == {"operation": "STS_GET_CALLER_IDENTITY", "arguments": ["--query", "Account"]}
+
+
+def test_stage6_cli_executes_and_journals_extra_reads(monkeypatch: pytest.MonkeyPatch) -> None:
+    observed: list[list[str]] = []
+
+    def run(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        observed.append(command)
+        return subprocess.CompletedProcess(command, 0, '{"Roles": []}', "")
+
+    monkeypatch.setattr(stage6_cli.subprocess, "run", run)
+    cli = stage6_cli.Stage6AwsCli("ap-southeast-2")
+    assert cli.invoke("IAM_LIST_ROLES", ["--path-prefix", "/ledgerguard/"]) == {"Roles": []}
+    assert observed == [
+        [
+            "aws",
+            "iam",
+            "list-roles",
+            "--path-prefix",
+            "/ledgerguard/",
+            "--region",
+            "ap-southeast-2",
+            "--output",
+            "json",
+            "--no-cli-pager",
+        ]
+    ]
+    assert cli.journal[0]["operation"] == "IAM_LIST_ROLES"
+    assert cli.journal[0]["returncode"] == 0
+
+
+def test_stage6_cli_fail_closed_responses(monkeypatch: pytest.MonkeyPatch) -> None:
+    cli = stage6_cli.Stage6AwsCli("ap-southeast-2")
+    with pytest.raises(Stage2Rejected, match="forbidden AWS argument"):
+        cli.invoke("IAM_LIST_ROLES", ["start-execution"])
+
+    def failed(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(command, 1, "", "denied in 857229544428")
+
+    monkeypatch.setattr(stage6_cli.subprocess, "run", failed)
+    with pytest.raises(Stage2Rejected, match="AWS operation failed"):
+        cli.invoke("IAM_LIST_ROLES")
+    assert "857229544428" not in cli.journal[-1]["error"]
+
+    def malformed(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(command, 0, "not-json", "")
+
+    monkeypatch.setattr(stage6_cli.subprocess, "run", malformed)
+    with pytest.raises(Stage2Rejected, match="non-JSON"):
+        cli.invoke("IAM_LIST_ROLES")
+
+    def non_object(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[str]:
+        return subprocess.CompletedProcess(command, 0, "[]", "")
+
+    monkeypatch.setattr(stage6_cli.subprocess, "run", non_object)
+    with pytest.raises(Stage2Rejected, match="object response"):
+        cli.invoke("IAM_LIST_ROLES")
 
 
 def test_observe_identity_contract_reads_exact_default_versions(

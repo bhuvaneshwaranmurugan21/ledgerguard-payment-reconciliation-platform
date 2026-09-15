@@ -7,8 +7,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from tools.part3_stage4.iam import runtime_policies
 from tools.part3_stage4.resources import parse_module
+from tools.part3_stage6.admin_packet import stage5_runtime_policies as runtime_policies
 from tools.part3_stage6.admission import validate_administrator_receipt
 from tools.part3_stage6.artifact import build_artifact, canonical
 from tools.part3_stage6.closure import validate_closure
@@ -109,7 +109,6 @@ def adjudicate_plan_only(
                 "script_key": stage5_release["script_key"],
                 "wheels_key": stage5_release["wheels_key"],
             },
-            script_basename="ledgerguard_stage5_job.py",
         ),
         catalog_tables=json.loads(
             (root / "spec/part3-stage4-catalog-v1.json").read_text(encoding="utf-8")

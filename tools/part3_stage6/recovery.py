@@ -11,7 +11,7 @@ import hashlib
 import re
 from typing import Any
 
-from ledgerguard.stage2.aws_cli import AwsCli
+from tools.part3_stage6.aws_cli import Stage6AwsCli
 from tools.part3_stage6.live import (
     ACCOUNT,
     LEASE_KEY,
@@ -61,7 +61,7 @@ def validate_failure_handoff(
 
 def recover_owned_lease(
     *,
-    cli: AwsCli,
+    cli: Stage6AwsCli,
     handoff: dict[str, Any],
     source_commit: str,
     source_tree: str,

@@ -8,7 +8,6 @@ from typing import Any
 import pytest
 
 import tools.part3_stage6.admin_packet as packet
-from tools.part3_stage4.iam import runtime_policies
 
 KEY = "arn:aws:kms:ap-southeast-2:857229544428:key/11111111-2222-3333-4444-555555555555"
 
@@ -147,17 +146,27 @@ def test_release_bytes_and_operation_fail_closed(
         packet.validate_release(value, directory)
 
 
-def test_runtime_policy_accepts_only_frozen_script_generations() -> None:
+def test_runtime_policy_accepts_only_frozen_stage5_script() -> None:
     objects = {
         "script_key": "deployment/" + "a" * 64 + "/ledgerguard_stage5_job.py",
         "wheels_key": "deployment/" + "b" * 64 + "/ledgerguard.gluewheels.zip",
     }
-    result = runtime_policies(
-        module(), "release-qual1", objects, script_basename="ledgerguard_stage5_job.py"
-    )
+    result = packet.stage5_runtime_policies(module(), "release-qual1", objects)
     assert set(result) == {"glue", "workflow", "validator", "controller"}
-    with pytest.raises(ValueError, match="basename"):
-        runtime_policies(module(), "release-qual1", objects, script_basename="arbitrary.py")
+    incomplete = dict(objects)
+    incomplete.pop("wheels_key")
+    with pytest.raises(ValueError, match="object inventory"):
+        packet.stage5_runtime_policies(module(), "release-qual1", incomplete)
+    no_glue_logs = module()
+    no_glue_logs["locals"]["role_log_keys"]["glue"] = []
+    without_glue_logs = packet.stage5_runtime_policies(no_glue_logs, "release-qual1", objects)
+    assert all(
+        statement.get("Sid") != "WriteOwnStructuredLogs"
+        for statement in without_glue_logs["glue"]["Statement"]
+    )
+    objects["script_key"] = "deployment/" + "a" * 64 + "/ledgerguard_stage3_job.py"
+    with pytest.raises(ValueError, match="Stage 5 deployment object"):
+        packet.stage5_runtime_policies(module(), "release-qual1", objects)
 
 
 def test_runtime_workload_allow_and_missing_deny_fail(
