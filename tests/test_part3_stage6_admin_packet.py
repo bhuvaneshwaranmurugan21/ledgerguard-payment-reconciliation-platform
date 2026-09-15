@@ -13,7 +13,7 @@ KEY = "arn:aws:kms:ap-southeast-2:857229544428:key/11111111-2222-3333-4444-55555
 
 
 def module() -> dict[str, Any]:
-    return {
+    value = {
         "locals": {
             "log_names": {
                 "glue_error": "/${local.name}/glue/error",
@@ -33,6 +33,19 @@ def module() -> dict[str, Any]:
             },
         }
     }
+    value["locals"]["runtime_statements"]["workflow"] = [
+        {
+            "Sid": "ExactFutureWorkloadStarts",
+            "Effect": "Allow",
+            "Action": [
+                "glue:StartJobRun",
+                "athena:StartQueryExecution",
+                "lambda:InvokeFunction",
+            ],
+            "Resource": ["exact"],
+        }
+    ]
+    return value
 
 
 def release(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[dict[str, Any], Path]:
@@ -109,7 +122,12 @@ def test_packet_is_private_offline_and_stage5_bound(
         "requires_effective_permission_probe": True,
         "requires_restriction_adjudication": True,
     }
-    assert result["safety"] == {"roles": 4, "workload_start_allows": 0, "required_denies": 16}
+    assert result["safety"] == {
+        "roles": 4,
+        "underlying_workload_start_allows": 3,
+        "effective_workload_start_allows": 0,
+        "required_denies": 16,
+    }
     assert result["aws_calls"] == 0
     assert result["stage6_complete"] is False
     assert set(result["document_sha256"]) == set(result["documents"])
@@ -178,7 +196,7 @@ def test_runtime_workload_allow_and_missing_deny_fail(
     policies["glue"]["Statement"].append(
         {"Sid": "Bad", "Effect": "Allow", "Action": ["glue:StartJobRun"], "Resource": "*"}
     )
-    with pytest.raises(ValueError, match="start a workload"):
+    with pytest.raises(ValueError, match="allow inventory"):
         packet.validate_runtime_boundaries(policies, boundaries)
     policies["glue"]["Statement"].pop()
     boundaries["glue"]["Statement"] = [
@@ -234,7 +252,7 @@ def test_runtime_boundary_role_and_action_shapes_fail(
     policies["glue"]["Statement"].append(
         {"Sid": "StringAllow", "Effect": "Allow", "Action": "glue:StartJobRun", "Resource": "*"}
     )
-    with pytest.raises(ValueError, match="start a workload"):
+    with pytest.raises(ValueError, match="allow inventory"):
         packet.validate_runtime_boundaries(policies, boundaries)
     policies["glue"]["Statement"].pop()
     deny = next(
@@ -243,3 +261,34 @@ def test_runtime_boundary_role_and_action_shapes_fail(
     deny["Action"] = ["states:StartExecution"]
     with pytest.raises(ValueError, match="workload-start deny"):
         packet.validate_runtime_boundaries(policies, boundaries)
+
+
+def test_runtime_boundary_must_preserve_underlying_policy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    result = build(tmp_path, monkeypatch)
+    policies = result["documents"]["runtime_policies"]
+    boundaries = result["documents"]["runtime_boundaries"]
+    boundaries["workflow"]["Statement"][0]["Resource"] = ["*"]
+    with pytest.raises(ValueError, match="changed its underlying policy"):
+        packet.validate_runtime_boundaries(policies, boundaries)
+
+
+def test_runtime_boundary_accepts_matching_underlying_deny(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    result = build(tmp_path, monkeypatch)
+    policies = result["documents"]["runtime_policies"]
+    boundaries = result["documents"]["runtime_boundaries"]
+    deny = {
+        "Sid": "AdditionalReadSafety",
+        "Effect": "Deny",
+        "Action": ["s3:DeleteBucket"],
+        "Resource": ["*"],
+    }
+    policies["glue"]["Statement"].insert(0, deny)
+    boundaries["glue"]["Statement"].insert(0, deny)
+    assert (
+        packet.validate_runtime_boundaries(policies, boundaries)["effective_workload_start_allows"]
+        == 0
+    )

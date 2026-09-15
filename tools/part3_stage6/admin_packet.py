@@ -35,6 +35,16 @@ EXPECTED_STAGE5 = {
     "wheels_sha256": "c54d226465141b0a0c368a3745971de85dbb4f23f409658917cb6952d8f61db4",
 }
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+EXPECTED_WORKLOAD_STARTS_BY_ROLE = {
+    "glue": set(),
+    "validator": set(),
+    "controller": set(),
+    "workflow": {
+        "glue:StartJobRun",
+        "athena:StartQueryExecution",
+        "lambda:InvokeFunction",
+    },
+}
 
 
 def _canonical(value: Any) -> bytes:
@@ -139,19 +149,28 @@ def validate_runtime_boundaries(
     """Prove every runtime ceiling contains the non-bypassable safety denies."""
     if set(policies) != set(ROLES) or set(boundaries) != set(ROLES):
         raise ValueError("runtime role inventory differs")
+    underlying_workload_start_allows = 0
     for role in ROLES:
-        allowed = _all_statements({role: policies[role]})
-        for statement in allowed:
+        policy_statements = _all_statements({role: policies[role]})
+        allowed_workload_starts: set[str] = set()
+        for statement in policy_statements:
             actions = statement.get("Action", [])
             actions = [actions] if isinstance(actions, str) else actions
-            if statement.get("Effect") == "Allow" and set(actions) & set(WORKLOAD_STARTS):
-                raise ValueError(f"runtime policy can start a workload: {role}")
+            if statement.get("Effect") == "Allow":
+                allowed_workload_starts.update(set(actions) & set(WORKLOAD_STARTS))
+        if allowed_workload_starts != EXPECTED_WORKLOAD_STARTS_BY_ROLE[role]:
+            raise ValueError(f"runtime workload-start allow inventory differs: {role}")
+        underlying_workload_start_allows += len(allowed_workload_starts)
+        boundary_statements = _all_statements({role: boundaries[role]})
+        if boundary_statements[: len(policy_statements)] != policy_statements:
+            raise ValueError(f"runtime boundary changed its underlying policy: {role}")
+        boundary_denies = boundary_statements[len(policy_statements) :]
         denied = {
             statement.get("Sid"): statement
-            for statement in _all_statements({role: boundaries[role]})
+            for statement in boundary_denies
             if statement.get("Effect") == "Deny"
         }
-        if set(denied) != {
+        if len(boundary_denies) != 4 or set(denied) != {
             "NoPart3WorkloadStart",
             "NoIdentityChaining",
             "NoPart3BusinessObjects",
@@ -161,7 +180,12 @@ def validate_runtime_boundaries(
         actions = denied["NoPart3WorkloadStart"].get("Action")
         if actions != WORKLOAD_STARTS:
             raise ValueError(f"runtime workload-start deny differs: {role}")
-    return {"roles": len(ROLES), "workload_start_allows": 0, "required_denies": 4 * len(ROLES)}
+    return {
+        "roles": len(ROLES),
+        "underlying_workload_start_allows": underlying_workload_start_allows,
+        "effective_workload_start_allows": 0,
+        "required_denies": 4 * len(ROLES),
+    }
 
 
 def compose_successor_packet(

@@ -81,8 +81,8 @@
     {
       "id": "S6-M12-runtime-start-allow",
       "path": "tools/part3_stage6/admin_packet.py",
-      "before": "if statement.get(\"Effect\") == \"Allow\" and set(actions) & set(WORKLOAD_STARTS):",
-      "after": "if statement.get(\"Effect\") == \"Allow\" and not set(actions) & set(WORKLOAD_STARTS):",
+      "before": "if allowed_workload_starts != EXPECTED_WORKLOAD_STARTS_BY_ROLE[role]:",
+      "after": "if allowed_workload_starts == EXPECTED_WORKLOAD_STARTS_BY_ROLE[role]:",
       "test": "tests/test_part3_stage6_admin_packet.py"
     },
     {
