@@ -1,0 +1,92 @@
+name: Part 3 Stage 6 real successor-role admission
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact immutable main commit to probe
+        required: true
+        type: string
+      expected_tree:
+        description: Exact immutable main tree to probe
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: ledgerguard-part3-stage6-role-admission-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  probe-real-role:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - role: deploy
+            role_arn: arn:aws:iam::857229544428:role/LedgerGuardGitHubOidcRole
+          - role: read
+            role_arn: arn:aws:iam::857229544428:role/LedgerGuardPart3ReadOnlyRole
+          - role: recovery
+            role_arn: arn:aws:iam::857229544428:role/LedgerGuardPart3RecoveryRole
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      EXPECTED_SHA: ${{ inputs.expected_sha }}
+      EXPECTED_TREE: ${{ inputs.expected_tree }}
+      AWS_REGION: ap-southeast-2
+    steps:
+      - name: Check out exact requested main commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.expected_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Admit exact source before OIDC
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ github.event_name }}" = workflow_dispatch
+          test "${{ github.repository }}" = bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform
+          test "${{ github.ref }}" = refs/heads/main
+          test "${{ github.sha }}" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD^{tree})" = "$EXPECTED_TREE"
+          test -z "$(git status --porcelain)"
+          public="$RUNNER_TEMP/ledgerguard-stage6-role-admission-${{ matrix.role }}"
+          mkdir -p "$public"
+          echo "PUBLIC_STAGE6_ROLE=$public" >> "$GITHUB_ENV"
+      - name: Install exact Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.11.13"
+      - name: Assume exact successor role
+        uses: aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c
+        with:
+          role-to-assume: ${{ matrix.role_arn }}
+          aws-region: ap-southeast-2
+          role-session-name: ledgerguard-stage6-${{ matrix.role }}-${{ github.run_id }}
+          role-duration-seconds: 900
+          mask-aws-account-id: true
+      - name: Run bounded real-session probes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m tools.run_part3_stage6_role_probe \
+            --expected-role "${{ matrix.role }}" \
+            --source-commit "$EXPECTED_SHA" \
+            --source-tree "$EXPECTED_TREE" \
+            --output "$PUBLIC_STAGE6_ROLE/receipt.json"
+          test -z "$(git status --porcelain)"
+      - name: Upload sanitized role evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: part3-stage6-role-${{ matrix.role }}-${{ inputs.expected_sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ledgerguard-stage6-role-admission-${{ matrix.role }}
+          include-hidden-files: false
+          if-no-files-found: error
+          retention-days: 90

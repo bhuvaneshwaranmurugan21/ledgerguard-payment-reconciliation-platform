@@ -1,4 +1,4 @@
-"""Static admission of the Stage 6 CI, plan-only and recovery workflows."""
+"""Static admission of the Stage 6 CI, role, plan-only and recovery workflows."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ from typing import Any
 
 WORKFLOWS = {
     "static": ".github/workflows/part3-stage6-static.yml",
+    "role": ".github/workflows/part3-stage6-role-admission.yml",
     "plan": ".github/workflows/part3-stage6-plan-only.yml",
     "recovery": ".github/workflows/part3-stage6-recovery.yml",
 }
@@ -33,7 +34,12 @@ def validate_workflows(root: Path) -> dict[str, Any]:
         if not path.is_file() or path.is_symlink():
             raise ValueError(f"regular {name} workflow required")
         sources[name] = path.read_text(encoding="utf-8")
-    static, plan, recovery = sources["static"], sources["plan"], sources["recovery"]
+    static, role, plan, recovery = (
+        sources["static"],
+        sources["role"],
+        sources["plan"],
+        sources["recovery"],
+    )
     _require(
         static,
         ("pull_request:\n", "push:\n", 'python-version: "3.11.13"', "-lockfile=readonly"),
@@ -41,6 +47,26 @@ def validate_workflows(root: Path) -> dict[str, Any]:
     )
     if "id-token: write" in static or "workflow_dispatch:" in static:
         raise ValueError("static workflow authority is broader than required")
+    _require(
+        role,
+        (
+            "on:\n  workflow_dispatch:",
+            "id-token: write",
+            'test "${{ github.ref }}" = refs/heads/main',
+            "cancel-in-progress: false",
+            "LedgerGuardGitHubOidcRole",
+            "LedgerGuardPart3ReadOnlyRole",
+            "LedgerGuardPart3RecoveryRole",
+            "python -m tools.run_part3_stage6_role_probe",
+            "aws-actions/configure-aws-credentials@e6de054238d6b7531b4efff3b6587d9aade6a06c",
+            "retention-days: 90",
+        ),
+        "role",
+    )
+    if any(term in role.lower() for term in PROHIBITED):
+        raise ValueError("role workflow contains prohibited workload or apply command")
+    if "secrets." in role or "backend-kms-key-arn" in role.lower():
+        raise ValueError("role workflow must discover the backend key read-only")
     for label, source in (("plan", plan), ("recovery", recovery)):
         _require(
             source,
@@ -87,10 +113,12 @@ def validate_workflows(root: Path) -> dict[str, Any]:
     for label, source in (("plan", plan), ("recovery", recovery)):
         if source.index(admission_labels[label]) > source.index("configure-aws-credentials"):
             raise ValueError(f"{label} obtains AWS credentials before offline admission")
+    if role.index("Admit exact source before OIDC") > role.index("configure-aws-credentials"):
+        raise ValueError("role obtains AWS credentials before offline admission")
     return {
         "classification": "STAGE6_WORKFLOW_BOUNDARY_ADMITTED",
         "workflows": sorted(WORKFLOWS),
-        "manual_workflows": ["plan", "recovery"],
+        "manual_workflows": ["role", "plan", "recovery"],
         "apply_commands": 0,
         "workload_commands": 0,
         "aws_calls": 0,

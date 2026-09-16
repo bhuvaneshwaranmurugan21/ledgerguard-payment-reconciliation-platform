@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_exact_stage6_workflows_pass() -> None:
     result = validate_workflows(ROOT)
-    assert result["workflows"] == ["plan", "recovery", "static"]
+    assert result["workflows"] == ["plan", "recovery", "role", "static"]
     assert result["apply_commands"] == 0
 
 
@@ -22,6 +22,18 @@ def test_exact_stage6_workflows_pass() -> None:
         ("static", "-lockfile=readonly", "-lockfile=update", "invariant"),
         ("plan", "refs/heads/main", "refs/heads/other", "invariant"),
         ("plan", "cancel-in-progress: false", "cancel-in-progress: true", "invariant"),
+        (
+            "role",
+            "LedgerGuardPart3ReadOnlyRole",
+            "LedgerGuardPart3UnknownRole",
+            "invariant",
+        ),
+        (
+            "role",
+            "retention-days: 90",
+            "retention-days: 90\n          # ${{ secrets.PART3_BACKEND_KMS_KEY_ARN }}",
+            "discover the backend key",
+        ),
         (
             "plan",
             "administrator_receipt_base64:",
@@ -56,6 +68,11 @@ def test_prohibited_command_and_missing_or_symlink_fail(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="prohibited"):
         validate_workflows(tmp_path)
     plan.write_text((ROOT / WORKFLOWS["plan"]).read_text())
+    role = tmp_path / WORKFLOWS["role"]
+    role.write_text(role.read_text() + "\n# start-query-execution\n")
+    with pytest.raises(ValueError, match="role workflow contains prohibited"):
+        validate_workflows(tmp_path)
+    role.write_text((ROOT / WORKFLOWS["role"]).read_text())
     (tmp_path / WORKFLOWS["recovery"]).unlink()
     with pytest.raises(ValueError, match="regular recovery"):
         validate_workflows(tmp_path)
@@ -82,6 +99,14 @@ def test_prohibited_command_and_missing_or_symlink_fail(tmp_path: Path) -> None:
                     1,
                 )
                 + "\n# Establish all source and dispatch invariants\n"
+            ),
+            "before offline admission",
+        ),
+        (
+            "role",
+            lambda value: (
+                value.replace("Admit exact source before OIDC", "Source placeholder", 1)
+                + "\n# Admit exact source before OIDC\n"
             ),
             "before offline admission",
         ),

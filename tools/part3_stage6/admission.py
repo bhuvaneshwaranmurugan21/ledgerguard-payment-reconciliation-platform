@@ -16,6 +16,7 @@ REGION = "ap-southeast-2"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 RESTRICTIONS = {"organization_scp", "permissions_boundary", "session_policy", "resource_policy"}
+REAL_ROLES = {"deploy", "read", "recovery"}
 
 
 def _object(value: Any, label: str) -> dict[str, Any]:
@@ -88,6 +89,26 @@ def validate_administrator_receipt(
             raise ValueError(f"restriction visibility unresolved: {name}")
         if row.get("admitted") is not True:
             raise ValueError(f"restriction not admitted: {name}")
+    role_probes = _object(receipt.get("role_probes"), "role probes")
+    if set(role_probes) != REAL_ROLES:
+        raise ValueError("real role probe inventory differs")
+    for role, probe_value in role_probes.items():
+        probe = _object(probe_value, f"role probe {role}")
+        if probe.get("classification") != "REAL_ROLE_PROBE_ADMITTED":
+            raise ValueError(f"real role probe not admitted: {role}")
+        if probe.get("source_commit") != source_commit or probe.get("source_tree") != source_tree:
+            raise ValueError(f"real role probe source differs: {role}")
+        for key in ("artifact_sha256", "receipt_sha256"):
+            if HEX64.fullmatch(str(probe.get(key, ""))) is None:
+                raise ValueError(f"real role probe binding invalid: {role}/{key}")
+        for key in ("workflow_run_id", "workflow_run_attempt", "artifact_id"):
+            if re.fullmatch(r"[1-9][0-9]*", str(probe.get(key, ""))) is None:
+                raise ValueError(f"real role probe workflow identity invalid: {role}/{key}")
+        probe_epoch = probe.get("completed_epoch")
+        if not isinstance(probe_epoch, int) or isinstance(probe_epoch, bool):
+            raise ValueError(f"real role probe completion invalid: {role}")
+        if probe_epoch > now + 60 or now - probe_epoch > maximum_age_seconds:
+            raise ValueError(f"real role probe stale or future-dated: {role}")
     calls = _object(receipt.get("calls"), "calls")
     if calls.get("workload_calls") != 0 or calls.get("executor_iam_mutations") != 0:
         raise ValueError("administrator transaction crossed a prohibited boundary")
@@ -102,6 +123,7 @@ def validate_administrator_receipt(
         "receipt_age_seconds": now - observed_epoch,
         "restrictions_resolved": True,
         "effective_permissions_verified": True,
+        "real_role_probes": len(role_probes),
         "workload_calls": 0,
         "stage6_complete": False,
     }

@@ -53,6 +53,20 @@ def receipt() -> dict[str, object]:
                 "resource_policy",
             )
         },
+        "role_probes": {
+            role: {
+                "classification": "REAL_ROLE_PROBE_ADMITTED",
+                "source_commit": COMMIT,
+                "source_tree": TREE,
+                "workflow_run_id": str(index + 100),
+                "workflow_run_attempt": "1",
+                "artifact_id": str(index + 200),
+                "artifact_sha256": str(index + 6) * 64,
+                "receipt_sha256": str(index + 1) * 64,
+                "completed_epoch": NOW - 30,
+            }
+            for index, role in enumerate(("deploy", "read", "recovery"))
+        },
         "calls": {
             "administrator_iam_mutations": 12,
             "executor_iam_mutations": 0,
@@ -67,6 +81,7 @@ def test_admits_fresh_complete_separate_transaction() -> None:
     )
     assert result["restrictions_resolved"] is True
     assert result["effective_permissions_verified"] is True
+    assert result["real_role_probes"] == 3
     assert result["workload_calls"] == 0
     assert result["stage6_complete"] is False
 
@@ -140,3 +155,43 @@ def test_rejects_schema_container_source_time_and_restriction_inventory() -> Non
             validate_administrator_receipt(
                 changed, source_commit=commit, source_tree=TREE, now_epoch=NOW
             )
+
+
+@pytest.mark.parametrize(
+    ("path", "value", "match"),
+    [
+        (("role_probes", "deploy", "classification"), "SELF_ASSERTED", "not admitted"),
+        (("role_probes", "read", "source_tree"), "c" * 40, "source differs"),
+        (("role_probes", "recovery", "artifact_sha256"), "bad", "binding invalid"),
+        (("role_probes", "deploy", "workflow_run_id"), "0", "workflow identity"),
+        (("role_probes", "read", "completed_epoch"), True, "completion invalid"),
+        (("role_probes", "recovery", "completed_epoch"), NOW - 3601, "stale"),
+    ],
+)
+def test_real_role_probe_bindings_fail_closed(
+    path: tuple[str, ...], value: object, match: str
+) -> None:
+    changed = deepcopy(receipt())
+    parent = changed
+    for key in path[:-1]:
+        parent = parent[key]  # type: ignore[assignment,index]
+    parent[path[-1]] = value  # type: ignore[index]
+    with pytest.raises(ValueError, match=match):
+        validate_administrator_receipt(
+            changed, source_commit=COMMIT, source_tree=TREE, now_epoch=NOW
+        )
+
+
+def test_real_role_probe_inventory_and_container_fail_closed() -> None:
+    changed = receipt()
+    changed["role_probes"].pop("read")  # type: ignore[union-attr]
+    with pytest.raises(ValueError, match="inventory"):
+        validate_administrator_receipt(
+            changed, source_commit=COMMIT, source_tree=TREE, now_epoch=NOW
+        )
+    changed = receipt()
+    changed["role_probes"]["read"] = []  # type: ignore[index]
+    with pytest.raises(ValueError, match="role probe read must"):
+        validate_administrator_receipt(
+            changed, source_commit=COMMIT, source_tree=TREE, now_epoch=NOW
+        )
