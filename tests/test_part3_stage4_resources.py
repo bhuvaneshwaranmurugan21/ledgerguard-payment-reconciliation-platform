@@ -27,6 +27,22 @@ def test_actual_hcl_meets_reviewed_resource_controls(module: dict[str, Any]) -> 
     assert report["aws_execution"] is False
 
 
+def test_controller_transaction_uses_only_real_constituent_iam_actions(
+    module: dict[str, Any],
+) -> None:
+    statements = module["locals"]["runtime_statements"]["controller"]
+    control = next(row for row in statements if row["Sid"] == "ConditionalControlMetadata")
+    assert control["Action"] == [
+        "dynamodb:GetItem",
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:ConditionCheckItem",
+    ]
+    assert "dynamodb:TransactWriteItems" not in json.dumps(module)
+
+
 @pytest.mark.parametrize("rule", CONTRACT["rules"], ids=lambda r: r["id"])
 def test_each_resource_control_rejects_changed_value(
     module: dict[str, Any], rule: dict[str, Any]

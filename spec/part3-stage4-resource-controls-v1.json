@@ -1951,8 +1951,7 @@
               "dynamodb:Query",
               "dynamodb:PutItem",
               "dynamodb:UpdateItem",
-              "dynamodb:ConditionCheckItem",
-              "dynamodb:TransactWriteItems"
+              "dynamodb:ConditionCheckItem"
             ],
             "Resource": [
               "${local.control_arn}"
