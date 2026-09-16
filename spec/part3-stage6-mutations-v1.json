@@ -168,6 +168,55 @@
       "before": "backend.get(\"state_absent_before_and_after\") is not True",
       "after": "backend.get(\"state_absent_before_and_after\") is not False",
       "test": "tests/test_part3_stage6_artifact.py"
+    },
+    {
+      "id": "S6-M25-real-role-account",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if caller.get(\"Account\") != ACCOUNT:",
+      "after": "if caller.get(\"Account\") == ACCOUNT:",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M26-read-only-real-denial",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if role == \"read\":",
+      "after": "if role != \"read\":",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M27-role-workload-boundary",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if calls.get(\"workload_start_calls\") != 0 or calls.get(\"workload_executions\") != 0:",
+      "after": "if calls.get(\"workload_start_calls\") == 0 or calls.get(\"workload_executions\") != 0:",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M28-real-role-probe-inventory",
+      "path": "tools/part3_stage6/admission.py",
+      "before": "if set(role_probes) != REAL_ROLES:",
+      "after": "if set(role_probes) == REAL_ROLES:",
+      "test": "tests/test_part3_stage6_admission.py"
+    },
+    {
+      "id": "S6-M29-role-probe-call-binding",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if calls.get(\"aws_calls\") != 1 + len(outcomes):",
+      "after": "if calls.get(\"aws_calls\") == 1 + len(outcomes):",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M30-role-workflow-secret-boundary",
+      "path": "tools/part3_stage6/workflow_policy.py",
+      "before": "if \"secrets.\" in role or \"backend-kms-key-arn\" in role.lower():",
+      "after": "if (\"secrets.\" in role or \"backend-kms-key-arn\" in role.lower()) and False:",
+      "test": "tests/test_part3_stage6_workflow_policy.py"
+    },
+    {
+      "id": "S6-M31-exact-discovered-kms-key",
+      "path": "tools/run_part3_stage6_role_probe.py",
+      "before": "if not isinstance(arn, str) or re.fullmatch(key_pattern, arn) is None:",
+      "after": "if not isinstance(arn, str) and re.fullmatch(key_pattern, str(arn)) is None:",
+      "test": "tests/test_part3_stage6_role_probe_runner.py"
     }
   ]
 }
