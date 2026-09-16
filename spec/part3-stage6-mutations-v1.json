@@ -217,6 +217,41 @@
       "before": "if not isinstance(arn, str) or re.fullmatch(key_pattern, arn) is None:",
       "after": "if not isinstance(arn, str) and re.fullmatch(key_pattern, str(arn)) is None:",
       "test": "tests/test_part3_stage6_role_probe_runner.py"
+    },
+    {
+      "id": "S6-M32-organization-observation-no-mutations",
+      "path": "tools/part3_stage6/organization_scp.py",
+      "before": "observation.get(\"mutating_aws_calls\") != 0 or observation.get(\"workload_calls\") != 0",
+      "after": "observation.get(\"mutating_aws_calls\") != 0 and observation.get(\"workload_calls\") != 0",
+      "test": "tests/test_part3_stage6_organization_scp.py"
+    },
+    {
+      "id": "S6-M33-organization-target-allow-path",
+      "path": "tools/part3_stage6/organization_scp.py",
+      "before": "if not any(policies[policy_id][\"full_access\"] is True for policy_id in attachments[target]):",
+      "after": "if any(policies[policy_id][\"full_access\"] is True for policy_id in attachments[target]):",
+      "test": "tests/test_part3_stage6_organization_scp.py"
+    },
+    {
+      "id": "S6-M34-scp-explicit-deny",
+      "path": "tools/part3_stage6/organization_scp.py",
+      "before": "if _deny_matches(statement, request):",
+      "after": "if not _deny_matches(statement, request):",
+      "test": "tests/test_part3_stage6_organization_scp.py"
+    },
+    {
+      "id": "S6-M35-organization-source-binding",
+      "path": "tools/part3_stage6/organization_scp.py",
+      "before": "if observation.get(\"source\") != {\"commit\": source_commit, \"tree\": source_tree}:",
+      "after": "if observation.get(\"source\") == {\"commit\": source_commit, \"tree\": source_tree}:",
+      "test": "tests/test_part3_stage6_organization_scp.py"
+    },
+    {
+      "id": "S6-M36-scp-request-inventory-floor",
+      "path": "tools/part3_stage6/organization_scp.py",
+      "before": "if len(unique) < 50:",
+      "after": "if len(unique) < 1:",
+      "test": "tests/test_part3_stage6_organization_scp.py"
     }
   ]
 }
