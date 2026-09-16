@@ -57,6 +57,7 @@ def evaluate(code: int, junit: Path) -> tuple[dict[str, int], bool]:
 
 def run(root: Path, output: Path) -> list[dict[str, Any]]:
     rows = load_registry(root)
+    frozen_sources = {str(row["path"]): (root / str(row["path"])).read_text() for row in rows}
     output.mkdir(parents=True, exist_ok=False)
     repository = output / "repository"
     repository.mkdir()
@@ -70,7 +71,8 @@ def run(root: Path, output: Path) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     for row in rows:
         path = repository / row["path"]
-        original = path.read_text()
+        original = frozen_sources[str(row["path"])]
+        path.write_text(original)
         mutant = prepare_mutation(original, row)
         trial = output / row["id"]
         trial.mkdir()

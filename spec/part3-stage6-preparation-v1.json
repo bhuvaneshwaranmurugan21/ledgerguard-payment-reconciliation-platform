@@ -22,7 +22,7 @@
     "resource_inventory_sha256": "6989081789d0ec7fa475e01846b33b4e9c5b60d0fe74ada3b14536ac2e0fa609",
     "sorted_address_inventory_sha256": "686339e3a53c2ee9e854a273ebae7055ad4a5b24aebe8a79a742f9c5a68e23e2",
     "resource_controls_path": "spec/part3-stage4-resource-controls-v1.json",
-    "resource_controls_sha256": "b9f2902826d962db9599800cdb16c05485a2aebe589e36bfdaa51ba28927cdde",
+    "resource_controls_sha256": "869f3a8fc33835c298552b02f19bfc48bb3397d331139c0e10e472c8b18d4aa7",
     "provider_actions_path": "spec/part3-stage4-provider-actions-v1.json",
     "provider_actions_sha256": "0b36e0a162c4efbc4d481c662d0fdf5fe5c3b4bf38003ef39c715f778ec52fa6"
   },
