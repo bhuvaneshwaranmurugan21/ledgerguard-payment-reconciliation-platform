@@ -212,11 +212,11 @@
       "test": "tests/test_part3_stage6_workflow_policy.py"
     },
     {
-      "id": "S6-M31-exact-discovered-kms-key",
-      "path": "tools/run_part3_stage6_role_probe.py",
-      "before": "if not isinstance(arn, str) or re.fullmatch(key_pattern, arn) is None:",
-      "after": "if not isinstance(arn, str) and re.fullmatch(key_pattern, str(arn)) is None:",
-      "test": "tests/test_part3_stage6_role_probe_runner.py"
+      "id": "S6-M31-exact-reviewed-kms-key",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if re.fullmatch(pattern, value) is None:",
+      "after": "if re.fullmatch(pattern, value) is not None:",
+      "test": "tests/test_part3_stage6_role_probe.py"
     },
     {
       "id": "S6-M32-organization-observation-no-mutations",
@@ -252,6 +252,20 @@
       "before": "if len(unique) < 50:",
       "after": "if len(unique) < 1:",
       "test": "tests/test_part3_stage6_organization_scp.py"
+    },
+    {
+      "id": "S6-M37-backend-encryption-observation",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if algorithm not in {\"AES256\", \"aws:kms\", \"aws:kms:dsse\"}:",
+      "after": "if algorithm in {\"AES256\", \"aws:kms\", \"aws:kms:dsse\"}:",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M38-runner-reviewed-kms-binding",
+      "path": "tools/run_part3_stage6_role_probe.py",
+      "before": "kms_key_arn = validate_backend_kms_key_arn(BACKEND_KMS_KEY_ARN)",
+      "after": "kms_key_arn = validate_backend_kms_key_arn(\"alias/unreviewed\")",
+      "test": "tests/test_part3_stage6_role_probe_runner.py"
     }
   ]
 }
