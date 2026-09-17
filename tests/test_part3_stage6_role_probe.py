@@ -69,6 +69,22 @@ def successful_athena_recovery_outcomes() -> dict[str, dict[str, object]]:
     return value
 
 
+def successful_glue_batch_recovery_outcomes() -> dict[str, dict[str, object]]:
+    value = outcomes("recovery")
+    value["stop_missing_glue"] = {
+        "returncode": 0,
+        "error_code": None,
+        "response_sha256": "0" * 64,
+        "batch_stop_summary": {
+            "successful_submission_count": 0,
+            "error_count": 1,
+            "error_code": "EntityNotFoundException",
+            "request_identity_match": True,
+        },
+    }
+    return value
+
+
 def receipt(role: str = "deploy") -> dict[str, object]:
     return build_receipt(
         source_commit=COMMIT,
@@ -203,6 +219,22 @@ def test_probe_outcome_inventory_and_permissions_fail_closed() -> None:
         ]
         is True
     )
+    assert (
+        validate_outcomes("recovery", successful_glue_batch_recovery_outcomes())[
+            "recovery_noop_controls_admitted"
+        ]
+        is True
+    )
+    for key, changed_value in (
+        ("successful_submission_count", 1),
+        ("error_count", 2),
+        ("error_code", "Other"),
+        ("request_identity_match", False),
+    ):
+        changed = successful_glue_batch_recovery_outcomes()
+        changed["stop_missing_glue"]["batch_stop_summary"][key] = changed_value  # type: ignore[index]
+        with pytest.raises(ValueError, match="recovery no-op"):
+            validate_outcomes("recovery", changed)
     changed = outcomes("deploy")
     changed["conditional_lease_noop"]["returncode"] = 0
     with pytest.raises(ValueError, match="bounded mutation"):

@@ -33,6 +33,12 @@ RECOVERY_ABSENT_CODES = {
     "stop_missing_execution": {"ExecutionDoesNotExist"},
     "stop_missing_query": {"InvalidRequestException"},
 }
+GLUE_ABSENT_BATCH_SUMMARY = {
+    "successful_submission_count": 0,
+    "error_count": 1,
+    "error_code": "EntityNotFoundException",
+    "request_identity_match": True,
+}
 
 
 def validate_backend_kms_key_arn(value: str) -> str:
@@ -129,6 +135,16 @@ def validate_outcomes(role: str, outcomes: dict[str, dict[str, Any]]) -> dict[st
     if role == "recovery":
         for name, admitted_codes in RECOVERY_ABSENT_CODES.items():
             outcome = outcomes[name]
+            # Glue BatchStopJobRun uses an HTTP-200 batch envelope for per-run
+            # failures.  Admit it only when there were zero successful stops,
+            # exactly one absent-run error, and its identity matched our fixed
+            # nonexistent request.  The raw response remains digest-bound.
+            if name == "stop_missing_glue" and (
+                outcome.get("returncode") == 0
+                and outcome.get("error_code") is None
+                and outcome.get("batch_stop_summary") == GLUE_ABSENT_BATCH_SUMMARY
+            ):
+                continue
             # Athena StopQueryExecution is idempotent and may return success for
             # the fixed nonexistent UUID. Glue and Step Functions must report
             # their service-specific absent-resource errors.
