@@ -10,6 +10,7 @@ from tools.part3_stage6.role_probe import (
     ROLE_NAMES,
     build_receipt,
     validate_backend_kms_key_arn,
+    validate_bucket_encryption,
     validate_caller,
     validate_outcomes,
     validate_receipt,
@@ -91,6 +92,39 @@ def test_backend_kms_key_is_exact_and_fail_closed() -> None:
     ):
         with pytest.raises(ValueError, match="exact backend KMS key ARN"):
             validate_backend_kms_key_arn(changed)
+
+
+def test_bucket_encryption_is_observed_without_becoming_the_key_source() -> None:
+    for algorithm in ("AES256", "aws:kms", "aws:kms:dsse"):
+        observed = {
+            "ServerSideEncryptionConfiguration": {
+                "Rules": [
+                    {
+                        "ApplyServerSideEncryptionByDefault": {
+                            "SSEAlgorithm": algorithm
+                        }
+                    }
+                ]
+            }
+        }
+        assert validate_bucket_encryption(observed) == algorithm
+    for changed in ({}, [], {"ServerSideEncryptionConfiguration": {"Rules": []}}):
+        with pytest.raises(ValueError, match="observation is incomplete"):
+            validate_bucket_encryption(changed)
+    with pytest.raises(ValueError, match="algorithm is unsupported"):
+        validate_bucket_encryption(
+            {
+                "ServerSideEncryptionConfiguration": {
+                    "Rules": [
+                        {
+                            "ApplyServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "unreviewed"
+                            }
+                        }
+                    ]
+                }
+            }
+        )
 
 
 def test_caller_and_source_identity_fail_closed() -> None:

@@ -39,6 +39,17 @@ def validate_backend_kms_key_arn(value: str) -> str:
     return value
 
 
+def validate_bucket_encryption(value: Any) -> str:
+    try:
+        rules = value["ServerSideEncryptionConfiguration"]["Rules"]
+        algorithm = rules[0]["ApplyServerSideEncryptionByDefault"]["SSEAlgorithm"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise ValueError("backend bucket encryption observation is incomplete") from exc
+    if algorithm not in {"AES256", "aws:kms", "aws:kms:dsse"}:
+        raise ValueError("backend bucket encryption algorithm is unsupported")
+    return algorithm
+
+
 def canonical(value: Any) -> bytes:
     return json.dumps(value, sort_keys=True, separators=(",", ":")).encode() + b"\n"
 

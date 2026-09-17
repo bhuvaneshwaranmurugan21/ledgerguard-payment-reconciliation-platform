@@ -84,7 +84,17 @@ def test_runner_fails_closed_before_using_an_unreviewed_kms_key(
                 ),
             }
         if (service, operation) == ("s3api", "get-bucket-encryption"):
-            return _row(), {"ServerSideEncryptionConfiguration": {"Rules": []}}
+            return _row(), {
+                "ServerSideEncryptionConfiguration": {
+                    "Rules": [
+                        {
+                            "ApplyServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                }
+            }
         raise AssertionError("unreviewed KMS key must fail before further AWS calls")
 
     monkeypatch.setattr(runner, "_invoke", invoke)

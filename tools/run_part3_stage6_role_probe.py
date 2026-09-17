@@ -24,6 +24,7 @@ from tools.part3_stage6.role_probe import (
     STATE_LOCK_KEY,
     build_receipt,
     validate_backend_kms_key_arn,
+    validate_bucket_encryption,
 )
 
 
@@ -71,6 +72,7 @@ def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     )
     if encryption_row["returncode"] or not isinstance(encryption, dict):
         raise ValueError("backend encryption probe failed")
+    validate_bucket_encryption(encryption)
     # Terraform supplies this reviewed key explicitly per backend request; the
     # bucket default may independently use SSE-S3 and is not its source of truth.
     kms_key_arn = validate_backend_kms_key_arn(BACKEND_KMS_KEY_ARN)
