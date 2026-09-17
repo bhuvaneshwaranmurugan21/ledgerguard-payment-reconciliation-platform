@@ -15,7 +15,7 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
-REQUIRED_MUTATIONS = tuple(f"S6-M{index:02d}-" for index in range(1, 37))
+REQUIRED_MUTATIONS = tuple(f"S6-M{index:02d}-" for index in range(1, 39))
 
 
 def load_registry(root: Path) -> list[dict[str, Any]]:

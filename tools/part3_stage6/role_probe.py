@@ -11,6 +11,10 @@ from typing import Any
 ACCOUNT = "857229544428"
 REGION = "ap-southeast-2"
 BACKEND_BUCKET = f"ledgerguard-tfstate-{ACCOUNT}-{REGION}"
+BACKEND_KMS_KEY_ARN = (
+    f"arn:aws:kms:{REGION}:{ACCOUNT}:key/f1298457-395b-4e16-8c11-50ee669be834"
+)
+BUCKET_ENCRYPTION_ALGORITHMS = frozenset({"AES256", "aws:kms", "aws:kms:dsse"})
 LEASE_TABLE = "ledgerguard-operation-leases"
 LEASE_KEY = "ledgerguard/part3/platform/deployment"
 STATE_LOCK_KEY = "ledgerguard/terraform/part3/platform/release-qual1/terraform.tfstate.tflock"
@@ -27,6 +31,24 @@ RECOVERY_ABSENT_CODES = {
     "ExecutionDoesNotExist",
     "InvalidRequestException",
 }
+
+
+def validate_backend_kms_key_arn(value: str) -> str:
+    pattern = rf"arn:aws:kms:{REGION}:{ACCOUNT}:key/(?:[0-9a-f-]{{36}}|mrk-[0-9a-f]{{32}})"
+    if re.fullmatch(pattern, value) is None:
+        raise ValueError("exact backend KMS key ARN required")
+    return value
+
+
+def validate_bucket_encryption(value: Any) -> str:
+    try:
+        rules = value["ServerSideEncryptionConfiguration"]["Rules"]
+        algorithm = rules[0]["ApplyServerSideEncryptionByDefault"]["SSEAlgorithm"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise ValueError("backend bucket encryption observation is incomplete") from exc
+    if not isinstance(algorithm, str) or algorithm not in BUCKET_ENCRYPTION_ALGORITHMS:
+        raise ValueError("backend bucket encryption algorithm is unsupported")
+    return algorithm
 
 
 def canonical(value: Any) -> bytes:

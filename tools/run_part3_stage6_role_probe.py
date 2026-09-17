@@ -16,12 +16,15 @@ from typing import Any
 from tools.part3_stage6.role_probe import (
     ACCOUNT,
     BACKEND_BUCKET,
+    BACKEND_KMS_KEY_ARN,
     LEASE_KEY,
     LEASE_TABLE,
     REGION,
     ROLE_NAMES,
     STATE_LOCK_KEY,
     build_receipt,
+    validate_backend_kms_key_arn,
+    validate_bucket_encryption,
 )
 
 
@@ -57,19 +60,6 @@ def _invoke(service: str, operation: str, arguments: list[str]) -> tuple[dict[st
     return row, parsed
 
 
-def _kms_key_arn(value: Any) -> str:
-    try:
-        arn = value["ServerSideEncryptionConfiguration"]["Rules"][0][
-            "ApplyServerSideEncryptionByDefault"
-        ]["KMSMasterKeyID"]
-    except (KeyError, IndexError, TypeError) as exc:
-        raise ValueError("backend KMS key observation is incomplete") from exc
-    key_pattern = rf"arn:aws:kms:{REGION}:{ACCOUNT}:key/(?:[0-9a-f-]{{36}}|mrk-[0-9a-f]{{32}})"
-    if not isinstance(arn, str) or re.fullmatch(key_pattern, arn) is None:
-        raise ValueError("exact backend KMS key ARN required")
-    return arn
-
-
 def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     if role not in ROLE_NAMES:
         raise ValueError("unknown Stage 6 role")
@@ -82,7 +72,10 @@ def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     )
     if encryption_row["returncode"] or not isinstance(encryption, dict):
         raise ValueError("backend encryption probe failed")
-    kms_key_arn = _kms_key_arn(encryption)
+    validate_bucket_encryption(encryption)
+    # Terraform supplies this reviewed key explicitly per backend request; the
+    # bucket default may independently use SSE-S3 and is not its source of truth.
+    kms_key_arn = validate_backend_kms_key_arn(BACKEND_KMS_KEY_ARN)
     commands: dict[str, tuple[str, str, list[str]]] = {
         "get_role": ("iam", "get-role", ["--role-name", ROLE_NAMES[role]]),
         "get_bucket_location": ("s3api", "get-bucket-location", ["--bucket", BACKEND_BUCKET]),
