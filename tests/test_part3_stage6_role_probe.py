@@ -6,8 +6,10 @@ import pytest
 
 from tools.part3_stage6.role_probe import (
     ACCOUNT,
+    BACKEND_KMS_KEY_ARN,
     ROLE_NAMES,
     build_receipt,
+    validate_backend_kms_key_arn,
     validate_caller,
     validate_outcomes,
     validate_receipt,
@@ -77,6 +79,18 @@ def test_real_role_receipts_are_exact_and_nonmutating(role: str) -> None:
     assert result["persistent_mutations"] == 0
     assert result["workload_start_calls"] == 0
     assert len(result["receipt_sha256"]) == 64
+
+
+def test_backend_kms_key_is_exact_and_fail_closed() -> None:
+    assert validate_backend_kms_key_arn(BACKEND_KMS_KEY_ARN) == BACKEND_KMS_KEY_ARN
+    for changed in (
+        BACKEND_KMS_KEY_ARN.replace(ACCOUNT, "000000000000"),
+        BACKEND_KMS_KEY_ARN.replace("ap-southeast-2", "us-east-1"),
+        "alias/ledgerguard",
+        "",
+    ):
+        with pytest.raises(ValueError, match="exact backend KMS key ARN"):
+            validate_backend_kms_key_arn(changed)
 
 
 def test_caller_and_source_identity_fail_closed() -> None:

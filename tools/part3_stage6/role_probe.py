@@ -11,6 +11,9 @@ from typing import Any
 ACCOUNT = "857229544428"
 REGION = "ap-southeast-2"
 BACKEND_BUCKET = f"ledgerguard-tfstate-{ACCOUNT}-{REGION}"
+BACKEND_KMS_KEY_ARN = (
+    f"arn:aws:kms:{REGION}:{ACCOUNT}:key/f1298457-395b-4e16-8c11-50ee669be834"
+)
 LEASE_TABLE = "ledgerguard-operation-leases"
 LEASE_KEY = "ledgerguard/part3/platform/deployment"
 STATE_LOCK_KEY = "ledgerguard/terraform/part3/platform/release-qual1/terraform.tfstate.tflock"
@@ -27,6 +30,13 @@ RECOVERY_ABSENT_CODES = {
     "ExecutionDoesNotExist",
     "InvalidRequestException",
 }
+
+
+def validate_backend_kms_key_arn(value: str) -> str:
+    pattern = rf"arn:aws:kms:{REGION}:{ACCOUNT}:key/(?:[0-9a-f-]{{36}}|mrk-[0-9a-f]{{32}})"
+    if re.fullmatch(pattern, value) is None:
+        raise ValueError("exact backend KMS key ARN required")
+    return value
 
 
 def canonical(value: Any) -> bytes:
