@@ -24,12 +24,14 @@ ROLE_NAMES = {
     "recovery": "LedgerGuardPart3RecoveryRole",
 }
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
-NO_WRITE_CODES = {"ConditionalCheckFailedException", "NoSuchUpload"}
+LEASE_NO_WRITE_CODE = "ConditionalCheckFailedException"
+LOCK_NO_WRITE_CODE = "NoSuchUpload"
 ACCESS_DENIED_CODES = {"AccessDenied", "AccessDeniedException", "UnauthorizedOperation"}
+READ_LOCK_NONMUTATING_CODES = ACCESS_DENIED_CODES | {LOCK_NO_WRITE_CODE}
 RECOVERY_ABSENT_CODES = {
-    "EntityNotFoundException",
-    "ExecutionDoesNotExist",
-    "InvalidRequestException",
+    "stop_missing_glue": {"EntityNotFoundException"},
+    "stop_missing_execution": {"ExecutionDoesNotExist"},
+    "stop_missing_query": {"InvalidRequestException"},
 }
 
 
@@ -103,30 +105,44 @@ def validate_outcomes(role: str, outcomes: dict[str, dict[str, Any]]) -> dict[st
             raise ValueError(f"role probe error code invalid: {name}")
         if re.fullmatch(r"[0-9a-f]{64}", str(outcome.get("response_sha256", ""))) is None:
             raise ValueError(f"role probe response binding invalid: {name}")
-    noops = ("conditional_lease_noop", "conditional_lock_noop")
     if role == "read":
-        if any(
-            outcomes[name].get("returncode") == 0
-            or outcomes[name].get("error_code") not in ACCESS_DENIED_CODES
-            for name in noops
+        lease = outcomes["conditional_lease_noop"]
+        lock = outcomes["conditional_lock_noop"]
+        if lease.get("returncode") == 0 or lease.get("error_code") not in ACCESS_DENIED_CODES:
+            raise ValueError("read-only lease mutation denial was not effective")
+        # S3 can resolve a deliberately nonexistent multipart-upload ID before
+        # returning an authorization denial.  NoSuchUpload therefore proves
+        # this exact request was non-mutating, while the exact installed IAM
+        # policy remains the authority for absence of s3:PutObject.
+        if lock.get("returncode") == 0 or lock.get("error_code") not in READ_LOCK_NONMUTATING_CODES:
+            raise ValueError("read-only lock request was not proven non-mutating")
+    else:
+        lease = outcomes["conditional_lease_noop"]
+        lock = outcomes["conditional_lock_noop"]
+        if (
+            lease.get("returncode") == 0
+            or lease.get("error_code") != LEASE_NO_WRITE_CODE
+            or lock.get("returncode") == 0
+            or lock.get("error_code") != LOCK_NO_WRITE_CODE
         ):
-            raise ValueError("read-only mutation denial was not effective")
-    elif any(
-        outcomes[name].get("returncode") == 0
-        or outcomes[name].get("error_code") not in NO_WRITE_CODES
-        for name in noops
-    ):
-        raise ValueError("bounded mutation permission was not effectively reached")
-    if role == "recovery" and any(
-        outcomes[name].get("returncode") == 0
-        or outcomes[name].get("error_code") not in RECOVERY_ABSENT_CODES
-        for name in ("stop_missing_glue", "stop_missing_execution", "stop_missing_query")
-    ):
-        raise ValueError("recovery no-op permission probe failed")
+            raise ValueError("bounded mutation permission was not effectively reached")
+    if role == "recovery":
+        for name, admitted_codes in RECOVERY_ABSENT_CODES.items():
+            outcome = outcomes[name]
+            # Athena StopQueryExecution is idempotent and may return success for
+            # the fixed nonexistent UUID. Glue and Step Functions must report
+            # their service-specific absent-resource errors.
+            if name == "stop_missing_query" and (
+                outcome.get("returncode") == 0 and outcome.get("error_code") is None
+            ):
+                continue
+            if outcome.get("returncode") == 0 or outcome.get("error_code") not in admitted_codes:
+                raise ValueError(f"recovery no-op permission probe failed: {name}")
     return {
         "real_oidc_session": True,
         "positive_reads_effective": True,
         "conditional_mutation_outcome_admitted": True,
+        "backend_lock_request_nonmutating": True,
         "recovery_noop_controls_admitted": True,
         "persistent_mutation_absent": True,
         "workload_start_absent": True,

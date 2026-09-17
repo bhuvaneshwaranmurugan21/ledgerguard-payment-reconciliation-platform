@@ -161,6 +161,32 @@ def main() -> None:
     if args.output.exists() or args.output.is_symlink():
         raise SystemExit("new regular output path required")
     caller, outcomes = run(args.expected_role)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    observation_path = args.output.with_name("observation.json")
+    if observation_path.exists() or observation_path.is_symlink():
+        raise SystemExit("new regular observation path required")
+    observation = {
+        "schema_version": "ledgerguard.part3-stage6-real-role-observation.v1",
+        "classification": "REAL_OIDC_ROLE_PROBE_OBSERVED_PENDING_ADJUDICATION",
+        "source": {
+            "commit": args.source_commit,
+            "tree": args.source_tree,
+            "ref": "refs/heads/main",
+            "event": "workflow_dispatch",
+            "workflow_run_id": os.environ.get("GITHUB_RUN_ID", ""),
+            "workflow_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", ""),
+        },
+        "target": {"account": ACCOUNT, "region": REGION, "operation_id": "release-qual1"},
+        "expected_role": args.expected_role,
+        "caller_account": caller.get("Account"),
+        "caller_arn_sha256": hashlib.sha256(str(caller.get("Arn", "")).encode()).hexdigest(),
+        "outcomes": outcomes,
+        "persistent_mutations": 0,
+        "workload_start_calls": 0,
+        "stage6_complete": False,
+    }
+    with observation_path.open("xb") as target:
+        target.write(json.dumps(observation, sort_keys=True, indent=2).encode() + b"\n")
     receipt = build_receipt(
         source_commit=args.source_commit,
         source_tree=args.source_tree,
@@ -170,7 +196,6 @@ def main() -> None:
         run_id=os.environ.get("GITHUB_RUN_ID", ""),
         run_attempt=os.environ.get("GITHUB_RUN_ATTEMPT", ""),
     )
-    args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("xb") as target:
         target.write(json.dumps(receipt, sort_keys=True, indent=2).encode() + b"\n")
 

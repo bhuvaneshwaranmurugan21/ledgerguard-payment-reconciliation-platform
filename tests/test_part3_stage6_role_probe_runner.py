@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+import sys
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -8,6 +11,7 @@ from tools import run_part3_stage6_role_probe as runner
 from tools.part3_stage6.role_probe import (
     ACCOUNT,
     BACKEND_KMS_KEY_ARN,
+    ROLE_NAMES,
     validate_outcomes,
 )
 
@@ -103,3 +107,64 @@ def test_run_rejects_unknown_role_and_incomplete_encryption(
     monkeypatch.setattr(runner, "_invoke", invoke)
     with pytest.raises(ValueError, match="bucket encryption observation"):
         runner.run("deploy")
+
+
+def test_main_preserves_sanitized_observation_when_adjudication_fails(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    bad_outcomes = {
+        name: {"returncode": 0, "error_code": None, "response_sha256": "0" * 64}
+        for name in (
+            "get_role",
+            "get_bucket_location",
+            "get_bucket_encryption",
+            "describe_lease_table",
+            "describe_key",
+        )
+    }
+    bad_outcomes["conditional_lease_noop"] = {
+        "returncode": 254,
+        "error_code": "UnexpectedError",
+        "response_sha256": "0" * 64,
+    }
+    bad_outcomes["conditional_lock_noop"] = {
+        "returncode": 254,
+        "error_code": "NoSuchUpload",
+        "response_sha256": "0" * 64,
+    }
+    monkeypatch.setattr(
+        runner,
+        "run",
+        lambda role: (
+            {
+                "Account": ACCOUNT,
+                "Arn": f"arn:aws:sts::{ACCOUNT}:assumed-role/{ROLE_NAMES[role]}/probe",
+            },
+            bad_outcomes,
+        ),
+    )
+    monkeypatch.setenv("GITHUB_RUN_ID", "123")
+    monkeypatch.setenv("GITHUB_RUN_ATTEMPT", "1")
+    output = tmp_path / "evidence" / "receipt.json"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "run_part3_stage6_role_probe.py",
+            "--expected-role",
+            "read",
+            "--source-commit",
+            "a" * 40,
+            "--source-tree",
+            "b" * 40,
+            "--output",
+            str(output),
+        ],
+    )
+    with pytest.raises(ValueError, match="lease mutation denial"):
+        runner.main()
+    observation = json.loads((output.parent / "observation.json").read_text())
+    assert observation["expected_role"] == "read"
+    assert observation["persistent_mutations"] == 0
+    assert observation["workload_start_calls"] == 0
+    assert not output.exists()
