@@ -27,6 +27,9 @@ from tools.part3_stage6.role_probe import (
     validate_bucket_encryption,
 )
 
+GLUE_PROBE_JOB_NAME = "ledgerguard-p3-release-qual1-reconciliation"
+GLUE_PROBE_JOB_RUN_ID = "jr_stage6_permission_probe_never_created"
+
 
 def _error_code(stderr: str) -> str | None:
     match = re.search(r"An error occurred \(([^)]+)\)", stderr)
@@ -58,6 +61,32 @@ def _invoke(service: str, operation: str, arguments: list[str]) -> tuple[dict[st
         "response_sha256": hashlib.sha256(completed.stdout.encode()).hexdigest(),
     }
     return row, parsed
+
+
+def _glue_batch_stop_summary(value: Any) -> dict[str, Any] | None:
+    """Sanitize Glue's HTTP-200 per-run error envelope without losing its proof."""
+    if not isinstance(value, dict):
+        return None
+    successful = value.get("SuccessfulSubmissions")
+    errors = value.get("Errors")
+    if not isinstance(successful, list) or not isinstance(errors, list) or len(errors) != 1:
+        return None
+    error = errors[0]
+    if not isinstance(error, dict):
+        return None
+    detail = error.get("ErrorDetail")
+    if not isinstance(detail, dict):
+        return None
+    error_code = detail.get("ErrorCode")
+    if not isinstance(error_code, str):
+        return None
+    return {
+        "successful_submission_count": len(successful),
+        "error_count": len(errors),
+        "error_code": error_code,
+        "request_identity_match": error.get("JobName") == GLUE_PROBE_JOB_NAME
+        and error.get("JobRunId") == GLUE_PROBE_JOB_RUN_ID,
+    }
 
 
 def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
@@ -125,9 +154,9 @@ def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                         "batch-stop-job-run",
                         [
                             "--job-name",
-                            "ledgerguard-p3-release-qual1-reconciliation",
+                            GLUE_PROBE_JOB_NAME,
                             "--job-run-ids",
-                            "jr_stage6_permission_probe_never_created",
+                            GLUE_PROBE_JOB_RUN_ID,
                         ],
                     ),
                     "stop_missing_execution": (
@@ -147,7 +176,12 @@ def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             )
         outcomes["get_bucket_encryption"] = encryption_row
         for name, (service, operation, arguments) in commands.items():
-            outcomes[name], _ = _invoke(service, operation, arguments)
+            outcome, response = _invoke(service, operation, arguments)
+            if name == "stop_missing_glue" and outcome["returncode"] == 0:
+                summary = _glue_batch_stop_summary(response)
+                if summary is not None:
+                    outcome["batch_stop_summary"] = summary
+            outcomes[name] = outcome
     return caller, outcomes
 
 

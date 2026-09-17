@@ -35,6 +35,62 @@ def test_error_code_parsing() -> None:
     assert runner._error_code("plain failure") is None
 
 
+def glue_batch_stop_response(
+    *, job_name: str = runner.GLUE_PROBE_JOB_NAME, job_run_id: str = runner.GLUE_PROBE_JOB_RUN_ID
+) -> dict[str, object]:
+    return {
+        "SuccessfulSubmissions": [],
+        "Errors": [
+            {
+                "JobName": job_name,
+                "JobRunId": job_run_id,
+                "ErrorDetail": {
+                    "ErrorCode": "EntityNotFoundException",
+                    "ErrorMessage": "sanitized by the probe",
+                },
+            }
+        ],
+    }
+
+
+def test_glue_batch_stop_summary_preserves_only_bounded_noop_proof() -> None:
+    assert runner._glue_batch_stop_summary(glue_batch_stop_response()) == {
+        "successful_submission_count": 0,
+        "error_count": 1,
+        "error_code": "EntityNotFoundException",
+        "request_identity_match": True,
+    }
+    assert runner._glue_batch_stop_summary(glue_batch_stop_response(job_name="other")) == {
+        "successful_submission_count": 0,
+        "error_count": 1,
+        "error_code": "EntityNotFoundException",
+        "request_identity_match": False,
+    }
+    assert runner._glue_batch_stop_summary(glue_batch_stop_response(job_run_id="other")) == {
+        "successful_submission_count": 0,
+        "error_count": 1,
+        "error_code": "EntityNotFoundException",
+        "request_identity_match": False,
+    }
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        None,
+        {},
+        {"SuccessfulSubmissions": {}, "Errors": []},
+        {"SuccessfulSubmissions": [], "Errors": {}},
+        {"SuccessfulSubmissions": [], "Errors": []},
+        {"SuccessfulSubmissions": [], "Errors": [None]},
+        {"SuccessfulSubmissions": [], "Errors": [{"ErrorDetail": None}]},
+        {"SuccessfulSubmissions": [], "Errors": [{"ErrorDetail": {"ErrorCode": 1}}]},
+    ],
+)
+def test_glue_batch_stop_summary_rejects_incomplete_shapes(value: object) -> None:
+    assert runner._glue_batch_stop_summary(value) is None
+
+
 @pytest.mark.parametrize("role", ("deploy", "read", "recovery"))
 def test_run_uses_read_observation_reviewed_key_and_only_bounded_noops(
     monkeypatch: pytest.MonkeyPatch, role: str
@@ -54,12 +110,13 @@ def test_run_uses_read_observation_reviewed_key_and_only_bounded_noops(
             return row, {"Account": ACCOUNT, "Arn": "unused-by-run"}
         if (service, operation) == ("s3api", "get-bucket-encryption"):
             return row, encryption()
+        if (service, operation) == ("glue", "batch-stop-job-run"):
+            return row, glue_batch_stop_response()
         negative = {
             ("dynamodb", "update-item"): (
                 "AccessDenied" if role == "read" else "ConditionalCheckFailedException"
             ),
             ("s3api", "upload-part"): "AccessDenied" if role == "read" else "NoSuchUpload",
-            ("glue", "batch-stop-job-run"): "EntityNotFoundException",
             ("stepfunctions", "stop-execution"): "ExecutionDoesNotExist",
             ("athena", "stop-query-execution"): "InvalidRequestException",
         }

@@ -287,6 +287,13 @@
       "before": "observation_path = args.output.with_name(\"observation.json\")",
       "after": "observation_path = args.output.with_name(\"unbound-observation.json\")",
       "test": "tests/test_part3_stage6_role_probe_runner.py"
+    },
+    {
+      "id": "S6-M42-glue-batch-noop-proof",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "and outcome.get(\"batch_stop_summary\") == GLUE_ABSENT_BATCH_SUMMARY",
+      "after": "and isinstance(outcome.get(\"batch_stop_summary\"), dict)",
+      "test": "tests/test_part3_stage6_role_probe.py"
     }
   ]
 }
