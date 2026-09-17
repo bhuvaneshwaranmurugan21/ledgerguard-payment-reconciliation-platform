@@ -111,20 +111,21 @@ def test_bucket_encryption_is_observed_without_becoming_the_key_source() -> None
     for changed in ({}, [], {"ServerSideEncryptionConfiguration": {"Rules": []}}):
         with pytest.raises(ValueError, match="observation is incomplete"):
             validate_bucket_encryption(changed)
-    with pytest.raises(ValueError, match="algorithm is unsupported"):
-        validate_bucket_encryption(
-            {
-                "ServerSideEncryptionConfiguration": {
-                    "Rules": [
-                        {
-                            "ApplyServerSideEncryptionByDefault": {
-                                "SSEAlgorithm": "unreviewed"
+    for algorithm in ("unreviewed", 1):
+        with pytest.raises(ValueError, match="algorithm is unsupported"):
+            validate_bucket_encryption(
+                {
+                    "ServerSideEncryptionConfiguration": {
+                        "Rules": [
+                            {
+                                "ApplyServerSideEncryptionByDefault": {
+                                    "SSEAlgorithm": algorithm
+                                }
                             }
-                        }
-                    ]
+                        ]
+                    }
                 }
-            }
-        )
+            )
 
 
 def test_caller_and_source_identity_fail_closed() -> None:

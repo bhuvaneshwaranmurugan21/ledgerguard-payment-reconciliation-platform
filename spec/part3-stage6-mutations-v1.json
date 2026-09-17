@@ -256,8 +256,8 @@
     {
       "id": "S6-M37-backend-encryption-observation",
       "path": "tools/part3_stage6/role_probe.py",
-      "before": "if algorithm not in {\"AES256\", \"aws:kms\", \"aws:kms:dsse\"}:",
-      "after": "if algorithm in {\"AES256\", \"aws:kms\", \"aws:kms:dsse\"}:",
+      "before": "if not isinstance(algorithm, str) or algorithm not in BUCKET_ENCRYPTION_ALGORITHMS:",
+      "after": "if isinstance(algorithm, str) and algorithm in BUCKET_ENCRYPTION_ALGORITHMS:",
       "test": "tests/test_part3_stage6_role_probe.py"
     },
     {
