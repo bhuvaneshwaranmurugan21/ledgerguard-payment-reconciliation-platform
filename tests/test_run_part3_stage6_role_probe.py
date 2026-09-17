@@ -4,13 +4,13 @@ from typing import Any
 
 import pytest
 
+from tools import run_part3_stage6_role_probe as runner
 from tools.part3_stage6.role_probe import (
     ACCOUNT,
     BACKEND_KMS_KEY_ARN,
     ROLE_NAMES,
     validate_outcomes,
 )
-from tools import run_part3_stage6_role_probe as runner
 
 
 def _row(returncode: int = 0, error_code: str | None = None) -> dict[str, Any]:
