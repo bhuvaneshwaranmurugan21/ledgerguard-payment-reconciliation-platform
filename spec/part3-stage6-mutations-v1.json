@@ -266,6 +266,27 @@
       "before": "kms_key_arn = validate_backend_kms_key_arn(BACKEND_KMS_KEY_ARN)",
       "after": "kms_key_arn = validate_backend_kms_key_arn(\"alias/unreviewed\")",
       "test": "tests/test_part3_stage6_role_probe_runner.py"
+    },
+    {
+      "id": "S6-M39-read-lock-nosuchupload-admission",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "READ_LOCK_NONMUTATING_CODES = ACCESS_DENIED_CODES | {LOCK_NO_WRITE_CODE}",
+      "after": "READ_LOCK_NONMUTATING_CODES = ACCESS_DENIED_CODES",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M40-athena-idempotent-stop-admission",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "if name == \"stop_missing_query\" and (",
+      "after": "if name == \"stop_missing_query_unreachable\" and (",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M41-failed-probe-observation-retention",
+      "path": "tools/run_part3_stage6_role_probe.py",
+      "before": "observation_path = args.output.with_name(\"observation.json\")",
+      "after": "observation_path = args.output.with_name(\"unbound-observation.json\")",
+      "test": "tests/test_part3_stage6_role_probe_runner.py"
     }
   ]
 }

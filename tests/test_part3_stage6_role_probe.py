@@ -59,6 +59,16 @@ def outcomes(role: str) -> dict[str, dict[str, object]]:
     return value
 
 
+def successful_athena_recovery_outcomes() -> dict[str, dict[str, object]]:
+    value = outcomes("recovery")
+    value["stop_missing_query"] = {
+        "returncode": 0,
+        "error_code": None,
+        "response_sha256": "0" * 64,
+    }
+    return value
+
+
 def receipt(role: str = "deploy") -> dict[str, object]:
     return build_receipt(
         source_commit=COMMIT,
@@ -174,8 +184,11 @@ def test_probe_outcome_inventory_and_permissions_fail_closed() -> None:
         validate_outcomes("deploy", changed)
     changed = outcomes("read")
     changed["conditional_lock_noop"]["error_code"] = "PreconditionFailed"
-    with pytest.raises(ValueError, match="read-only"):
+    with pytest.raises(ValueError, match="lock request"):
         validate_outcomes("read", changed)
+    changed = outcomes("read")
+    changed["conditional_lock_noop"]["error_code"] = "NoSuchUpload"
+    assert validate_outcomes("read", changed)["backend_lock_request_nonmutating"] is True
     changed = outcomes("deploy")
     changed["conditional_lease_noop"]["error_code"] = "AccessDenied"
     with pytest.raises(ValueError, match="bounded mutation"):
@@ -184,6 +197,12 @@ def test_probe_outcome_inventory_and_permissions_fail_closed() -> None:
     changed["stop_missing_query"]["error_code"] = "AccessDenied"
     with pytest.raises(ValueError, match="recovery no-op"):
         validate_outcomes("recovery", changed)
+    assert (
+        validate_outcomes("recovery", successful_athena_recovery_outcomes())[
+            "recovery_noop_controls_admitted"
+        ]
+        is True
+    )
     changed = outcomes("deploy")
     changed["conditional_lease_noop"]["returncode"] = 0
     with pytest.raises(ValueError, match="bounded mutation"):
