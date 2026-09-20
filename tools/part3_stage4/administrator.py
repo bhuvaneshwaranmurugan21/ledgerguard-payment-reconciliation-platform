@@ -199,7 +199,7 @@ def compose(
     read.append(
         statement(
             "ListExactStateAndLock",
-            ["s3:ListBucket"],
+            ["s3:ListBucket", "s3:ListBucketVersions"],
             ["arn:aws:s3:::" + BACKEND_BUCKET],
             {"StringEquals": {"s3:prefix": [state_key, state_key + ".tflock"]}},
         )
