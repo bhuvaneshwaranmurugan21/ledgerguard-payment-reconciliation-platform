@@ -88,6 +88,18 @@ def test_exact_successor_preserves_boundaries_and_separates_rescue(module: dict[
         result["backend"]["key"]
         == "ledgerguard/terraform/part3/platform/platform-canary-01/terraform.tfstate"
     )
+    assert rows["ListExactStateAndLock"]["Action"] == [
+        "s3:ListBucket",
+        "s3:ListBucketVersions",
+    ]
+    assert rows["ListExactStateAndLock"]["Condition"] == {
+        "StringEquals": {
+            "s3:prefix": [
+                result["backend"]["key"],
+                result["backend"]["key"] + ".tflock",
+            ]
+        }
+    }
     assert rows["RemoveExactLockOnly"]["Resource"][0].endswith(".tflock")
     assert rows["ConditionalDeploymentLease"]["Condition"]["ForAllValues:StringEquals"][
         "dynamodb:LeadingKeys"
