@@ -17,6 +17,7 @@ EXTRA_COMMANDS = {
     "IAM_GET_POLICY": ("iam", "get-policy"),
     "IAM_GET_POLICY_VERSION": ("iam", "get-policy-version"),
     "IAM_LIST_POLICY_VERSIONS": ("iam", "list-policy-versions"),
+    "KMS_DESCRIBE_KEY": ("kms", "describe-key"),
     "GLUE_GET_DATABASES": ("glue", "get-databases"),
     "ATHENA_LIST_WORKGROUPS": ("athena", "list-work-groups"),
     "LAMBDA_LIST_FUNCTIONS": ("lambda", "list-functions"),
