@@ -91,6 +91,7 @@ def observe_backend(
     encryption = cli.invoke("S3_GET_BUCKET_ENCRYPTION", ["--bucket", BACKEND_BUCKET])[
         "ServerSideEncryptionConfiguration"
     ]["Rules"][0]["ApplyServerSideEncryptionByDefault"]
+    key_metadata = cli.invoke("KMS_DESCRIBE_KEY", ["--key-id", kms_key_arn]).get("KeyMetadata", {})
     public = cli.invoke("S3_GET_PUBLIC_ACCESS", ["--bucket", BACKEND_BUCKET])[
         "PublicAccessBlockConfiguration"
     ]
@@ -127,7 +128,11 @@ def observe_backend(
         "exact_bucket": True,
         "exact_region": True,
         "versioning_enabled": True,
-        "kms_key_exact": encryption.get("KMSMasterKeyID") == kms_key_arn,
+        # Terraform supplies the reviewed key explicitly for every backend
+        # request.  The bucket default is an independent control and therefore
+        # cannot prove the identity of that request key.
+        "kms_key_exact": key_metadata.get("Arn") == kms_key_arn
+        and key_metadata.get("KeyState") == "Enabled",
         "public_access_blocked": True,
         "tls_only": True,
         "ownership_enforced": True,

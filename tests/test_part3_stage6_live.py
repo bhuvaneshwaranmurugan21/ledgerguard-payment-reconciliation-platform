@@ -46,6 +46,7 @@ def test_extended_inventory_operations_are_narrowly_allowlisted() -> None:
         "IAM_GET_POLICY",
         "IAM_GET_POLICY_VERSION",
         "IAM_LIST_POLICY_VERSIONS",
+        "KMS_DESCRIBE_KEY",
         "GLUE_GET_DATABASES",
         "ATHENA_LIST_WORKGROUPS",
         "LAMBDA_LIST_FUNCTIONS",
@@ -181,12 +182,13 @@ def backend_responses(key: str) -> dict[str, Any]:
                     {
                         "ApplyServerSideEncryptionByDefault": {
                             "SSEAlgorithm": "aws:kms",
-                            "KMSMasterKeyID": key,
+                            "KMSMasterKeyID": "alias/aws/s3",
                         }
                     }
                 ]
             }
         },
+        "KMS_DESCRIBE_KEY": {"KeyMetadata": {"Arn": key, "KeyState": "Enabled"}},
         "S3_GET_PUBLIC_ACCESS": {
             "PublicAccessBlockConfiguration": {
                 key: True
@@ -215,6 +217,17 @@ def test_backend_observation_and_failures(monkeypatch: pytest.MonkeyPatch) -> No
     fake = FakeCli(backend_responses(key))
     result = live.observe_backend(fake, key, {"backend": {}})  # type: ignore[arg-type]
     assert all(result.values())
+    assert fake.calls[3] == ("KMS_DESCRIBE_KEY", ["--key-id", key])
+    changed = backend_responses(key)
+    changed["KMS_DESCRIBE_KEY"] = {
+        "KeyMetadata": {"Arn": key.replace("11111111", "99999999"), "KeyState": "Enabled"}
+    }
+    result = live.observe_backend(FakeCli(changed), key, {"backend": {}})  # type: ignore[arg-type]
+    assert result["kms_key_exact"] is False
+    changed = backend_responses(key)
+    changed["KMS_DESCRIBE_KEY"] = {"KeyMetadata": {"Arn": key, "KeyState": "Disabled"}}
+    result = live.observe_backend(FakeCli(changed), key, {"backend": {}})  # type: ignore[arg-type]
+    assert result["kms_key_exact"] is False
     changed = backend_responses(key)
     changed["S3_LIST_VERSIONS"] = {"IsTruncated": True}
     with pytest.raises(ValueError, match="pagination"):
