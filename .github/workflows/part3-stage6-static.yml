@@ -80,14 +80,15 @@ jobs:
           evidence="$RUNNER_TEMP/part3-stage6-static-${{ matrix.qualification }}"
           mkdir -p "$evidence"
           python -m tools.validate_part3_stage6_preparation > "$evidence/preparation.json"
+          python -m tools.validate_part3_stage6_operations > "$evidence/operation-manifest.json"
           python -c 'from pathlib import Path; from tools.part3_stage6.workflow_policy import validate_workflows; validate_workflows(Path("."))'
           python -m coverage erase
           python -m coverage run --branch --source=tools.part3_stage6,tools.validate_part3_stage6_preparation -m pytest tests/test_part3_stage6_*.py
           python -m coverage json -o "$evidence/coverage.json"
           python -m coverage report --fail-under=100 > "$evidence/coverage.txt"
           python -m tools.run_part3_stage6_mutations --root . --output "$evidence/mutations"
-          python -m ruff check src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/iam.py tools/part3_stage6 tools/adjudicate_part3_stage6_organization_scp.py tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_role_probe.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py tests/test_part3_stage6_*.py
-          python -m mypy --strict src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/iam.py tools/part3_stage6 tools/adjudicate_part3_stage6_organization_scp.py tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_role_probe.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py
+          python -m ruff check src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/administrator.py tools/part3_stage4/iam.py tools/part3_stage6 tools/adjudicate_part3_stage6_organization_scp.py tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_role_probe.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py tools/validate_part3_stage6_operations.py tests/test_part3_stage6_*.py
+          python -m mypy --strict src/ledgerguard/stage2/aws_cli.py tools/part3_stage4/administrator.py tools/part3_stage4/iam.py tools/part3_stage6 tools/adjudicate_part3_stage6_organization_scp.py tools/build_part3_stage6_administrator_packet.py tools/run_part3_stage6_plan.py tools/run_part3_stage6_recovery.py tools/run_part3_stage6_role_probe.py tools/run_part3_stage6_mutations.py tools/inspect_part3_stage6_artifact.py tools/validate_part3_stage6_operations.py
           terraform -chdir=infra/part3 fmt -check -recursive
           terraform -chdir=infra/part3 init -backend=false -input=false -lockfile=readonly
           terraform -chdir=infra/part3 validate -json > "$evidence/terraform-validation.json"

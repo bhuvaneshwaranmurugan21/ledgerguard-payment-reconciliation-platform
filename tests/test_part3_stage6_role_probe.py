@@ -38,6 +38,18 @@ def outcomes(role: str) -> dict[str, dict[str, object]]:
             "describe_key",
         )
     }
+    if role == "read":
+        value["list_workgroups_denied"] = {
+            "returncode": 254,
+            "error_code": "AccessDenied",
+            "response_sha256": "0" * 64,
+        }
+    else:
+        value["list_workgroups"] = {
+            "returncode": 0,
+            "error_code": None,
+            "response_sha256": "0" * 64,
+        }
     noop_code = "AccessDenied" if role == "read" else "ConditionalCheckFailedException"
     value["conditional_lease_noop"] = {
         "returncode": 254,
@@ -124,13 +136,7 @@ def test_bucket_encryption_is_observed_without_becoming_the_key_source() -> None
     for algorithm in ("AES256", "aws:kms", "aws:kms:dsse"):
         observed = {
             "ServerSideEncryptionConfiguration": {
-                "Rules": [
-                    {
-                        "ApplyServerSideEncryptionByDefault": {
-                            "SSEAlgorithm": algorithm
-                        }
-                    }
-                ]
+                "Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": algorithm}}]
             }
         }
         assert validate_bucket_encryption(observed) == algorithm
@@ -143,11 +149,7 @@ def test_bucket_encryption_is_observed_without_becoming_the_key_source() -> None
                 {
                     "ServerSideEncryptionConfiguration": {
                         "Rules": [
-                            {
-                                "ApplyServerSideEncryptionByDefault": {
-                                    "SSEAlgorithm": algorithm
-                                }
-                            }
+                            {"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": algorithm}}
                         ]
                     }
                 }
@@ -198,6 +200,10 @@ def test_probe_outcome_inventory_and_permissions_fail_closed() -> None:
     changed["get_role"]["returncode"] = 1
     with pytest.raises(ValueError, match="positive read"):
         validate_outcomes("deploy", changed)
+    changed = outcomes("read")
+    changed["list_workgroups_denied"]["error_code"] = "InvalidRequestException"
+    with pytest.raises(ValueError, match="Athena inventory denial"):
+        validate_outcomes("read", changed)
     changed = outcomes("read")
     changed["conditional_lock_noop"]["error_code"] = "PreconditionFailed"
     with pytest.raises(ValueError, match="lock request"):

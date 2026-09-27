@@ -287,9 +287,21 @@ def compose(
             ],
         )
     )
+    # Clean Stage 6 inventory must enumerate account workgroups before any
+    # operation lease or Terraform plan. Athena does not define a resource type
+    # for ListWorkGroups, so the unavoidable wildcard is constrained to the
+    # reviewed region and is kept out of the read-only identity.
+    deploy_inventory = [
+        statement(
+            "ListAthenaWorkgroupsForCleanInventory",
+            ["athena:ListWorkGroups"],
+            ["*"],
+            {"StringEquals": {"aws:RequestedRegion": REGION}},
+        )
+    ]
     read_policies = partition_policies([*read, deny], "LedgerGuardPart3Read-v1")
     deploy_policies = partition_policies(
-        read + mutate + cleanup + [deny], "LedgerGuardPart3Deploy-v1"
+        read + deploy_inventory + mutate + cleanup + [deny], "LedgerGuardPart3Deploy-v1"
     )
     rescue = partition_policies(
         [

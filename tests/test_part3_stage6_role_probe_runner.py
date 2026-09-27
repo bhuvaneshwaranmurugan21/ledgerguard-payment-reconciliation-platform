@@ -19,13 +19,7 @@ from tools.part3_stage6.role_probe import (
 def encryption() -> dict[str, object]:
     return {
         "ServerSideEncryptionConfiguration": {
-            "Rules": [
-                {
-                    "ApplyServerSideEncryptionByDefault": {
-                        "SSEAlgorithm": "AES256"
-                    }
-                }
-            ]
+            "Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]
         }
     }
 
@@ -97,9 +91,7 @@ def test_run_uses_read_observation_reviewed_key_and_only_bounded_noops(
 ) -> None:
     calls: list[tuple[str, str, list[str]]] = []
 
-    def invoke(
-        service: str, operation: str, arguments: list[str]
-    ) -> tuple[dict[str, Any], Any]:
+    def invoke(service: str, operation: str, arguments: list[str]) -> tuple[dict[str, Any], Any]:
         calls.append((service, operation, arguments))
         row: dict[str, Any] = {
             "returncode": 0,
@@ -113,6 +105,7 @@ def test_run_uses_read_observation_reviewed_key_and_only_bounded_noops(
         if (service, operation) == ("glue", "batch-stop-job-run"):
             return row, glue_batch_stop_response()
         negative = {
+            ("athena", "list-work-groups"): "AccessDenied" if role == "read" else None,
             ("dynamodb", "update-item"): (
                 "AccessDenied" if role == "read" else "ConditionalCheckFailedException"
             ),
@@ -135,9 +128,13 @@ def test_run_uses_read_observation_reviewed_key_and_only_bounded_noops(
         for service, operation, arguments in calls
         if (service, operation) == ("kms", "describe-key")
     ] == [["--key-id", BACKEND_KMS_KEY_ARN]]
+    assert [
+        arguments
+        for service, operation, arguments in calls
+        if (service, operation) == ("athena", "list-work-groups")
+    ] == [["--max-results", "1"]]
     assert all(
-        operation
-        not in {"start-job-run", "start-query-execution", "start-execution", "invoke"}
+        operation not in {"start-job-run", "start-query-execution", "start-execution", "invoke"}
         for _, operation, _ in calls
     )
     if role != "recovery":
@@ -153,9 +150,7 @@ def test_run_rejects_unknown_role_and_incomplete_encryption(
     with pytest.raises(ValueError, match="unknown"):
         runner.run("other")
 
-    def invoke(
-        service: str, operation: str, arguments: list[str]
-    ) -> tuple[dict[str, Any], Any]:
+    def invoke(service: str, operation: str, arguments: list[str]) -> tuple[dict[str, Any], Any]:
         row = {"returncode": 0, "error_code": None, "response_sha256": "0" * 64}
         if service == "sts":
             return row, {"Account": ACCOUNT}
@@ -177,6 +172,7 @@ def test_main_preserves_sanitized_observation_when_adjudication_fails(
             "get_bucket_encryption",
             "describe_lease_table",
             "describe_key",
+            "list_workgroups_denied",
         )
     }
     bad_outcomes["conditional_lease_noop"] = {
@@ -187,6 +183,11 @@ def test_main_preserves_sanitized_observation_when_adjudication_fails(
     bad_outcomes["conditional_lock_noop"] = {
         "returncode": 254,
         "error_code": "NoSuchUpload",
+        "response_sha256": "0" * 64,
+    }
+    bad_outcomes["list_workgroups_denied"] = {
+        "returncode": 254,
+        "error_code": "AccessDenied",
         "response_sha256": "0" * 64,
     }
     monkeypatch.setattr(

@@ -129,6 +129,18 @@ def run(role: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             ],
         ),
     }
+    if role == "read":
+        commands["list_workgroups_denied"] = (
+            "athena",
+            "list-work-groups",
+            ["--max-results", "1"],
+        )
+    else:
+        commands["list_workgroups"] = (
+            "athena",
+            "list-work-groups",
+            ["--max-results", "1"],
+        )
     with tempfile.NamedTemporaryFile() as body:
         commands["conditional_lock_noop"] = (
             "s3api",

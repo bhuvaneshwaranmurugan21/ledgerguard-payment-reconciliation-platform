@@ -179,8 +179,8 @@
     {
       "id": "S6-M26-read-only-real-denial",
       "path": "tools/part3_stage6/role_probe.py",
-      "before": "if role == \"read\":",
-      "after": "if role != \"read\":",
+      "before": "if role == \"read\":\n        workgroups = outcomes[\"list_workgroups_denied\"]",
+      "after": "if role != \"read\":\n        workgroups = outcomes[\"list_workgroups_denied\"]",
       "test": "tests/test_part3_stage6_role_probe.py"
     },
     {
@@ -294,6 +294,27 @@
       "before": "and outcome.get(\"batch_stop_summary\") == GLUE_ABSENT_BATCH_SUMMARY",
       "after": "and isinstance(outcome.get(\"batch_stop_summary\"), dict)",
       "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M43-athena-inventory-resource-scope",
+      "path": "tools/part3_stage4/administrator.py",
+      "before": "[\"athena:ListWorkGroups\"],\n            [\"*\"],",
+      "after": "[\"athena:ListWorkGroups\"],\n            [f\"arn:aws:athena:{REGION}:{ACCOUNT}:workgroup/*\"],",
+      "test": "tests/test_part3_stage4_administrator.py"
+    },
+    {
+      "id": "S6-M44-read-athena-denial-admission",
+      "path": "tools/part3_stage6/role_probe.py",
+      "before": "workgroups.get(\"returncode\") == 0\n            or workgroups.get(\"error_code\") not in ACCESS_DENIED_CODES",
+      "after": "workgroups.get(\"returncode\") == 0\n            and workgroups.get(\"error_code\") not in ACCESS_DENIED_CODES",
+      "test": "tests/test_part3_stage6_role_probe.py"
+    },
+    {
+      "id": "S6-M45-operation-manifest-workload-denial",
+      "path": "tools/validate_part3_stage6_operations.py",
+      "before": "required_denies = set(requirement[\"all_roles_must_deny_workload_start\"])",
+      "after": "required_denies = set(requirement[\"all_roles_must_deny_workload_start\"]) - {\"athena:StartQueryExecution\"}",
+      "test": "tests/test_part3_stage6_operation_manifest.py"
     }
   ]
 }

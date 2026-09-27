@@ -11,9 +11,7 @@ from typing import Any
 ACCOUNT = "857229544428"
 REGION = "ap-southeast-2"
 BACKEND_BUCKET = f"ledgerguard-tfstate-{ACCOUNT}-{REGION}"
-BACKEND_KMS_KEY_ARN = (
-    f"arn:aws:kms:{REGION}:{ACCOUNT}:key/f1298457-395b-4e16-8c11-50ee669be834"
-)
+BACKEND_KMS_KEY_ARN = f"arn:aws:kms:{REGION}:{ACCOUNT}:key/f1298457-395b-4e16-8c11-50ee669be834"
 BUCKET_ENCRYPTION_ALGORITHMS = frozenset({"AES256", "aws:kms", "aws:kms:dsse"})
 LEASE_TABLE = "ledgerguard-operation-leases"
 LEASE_KEY = "ledgerguard/part3/platform/deployment"
@@ -94,6 +92,11 @@ def validate_outcomes(role: str, outcomes: dict[str, dict[str, Any]]) -> dict[st
         "describe_key",
     }
     required = required_reads | {"conditional_lease_noop", "conditional_lock_noop"}
+    if role == "read":
+        required.add("list_workgroups_denied")
+    else:
+        required_reads.add("list_workgroups")
+        required.add("list_workgroups")
     if role == "recovery":
         required |= {"stop_missing_glue", "stop_missing_execution", "stop_missing_query"}
     if set(outcomes) != required:
@@ -112,6 +115,12 @@ def validate_outcomes(role: str, outcomes: dict[str, dict[str, Any]]) -> dict[st
         if re.fullmatch(r"[0-9a-f]{64}", str(outcome.get("response_sha256", ""))) is None:
             raise ValueError(f"role probe response binding invalid: {name}")
     if role == "read":
+        workgroups = outcomes["list_workgroups_denied"]
+        if (
+            workgroups.get("returncode") == 0
+            or workgroups.get("error_code") not in ACCESS_DENIED_CODES
+        ):
+            raise ValueError("read-only Athena inventory denial was not effective")
         lease = outcomes["conditional_lease_noop"]
         lock = outcomes["conditional_lock_noop"]
         if lease.get("returncode") == 0 or lease.get("error_code") not in ACCESS_DENIED_CODES:
@@ -178,9 +187,10 @@ def build_receipt(
 ) -> dict[str, Any]:
     if HEX40.fullmatch(source_commit) is None or HEX40.fullmatch(source_tree) is None:
         raise ValueError("source identity invalid")
-    if re.fullmatch(r"[1-9][0-9]*", run_id) is None or re.fullmatch(
-        r"[1-9][0-9]*", run_attempt
-    ) is None:
+    if (
+        re.fullmatch(r"[1-9][0-9]*", run_id) is None
+        or re.fullmatch(r"[1-9][0-9]*", run_attempt) is None
+    ):
         raise ValueError("workflow identity invalid")
     identity = validate_caller(caller, role)
     checks = validate_outcomes(role, outcomes)
@@ -228,9 +238,10 @@ def validate_receipt(
         "event": "workflow_dispatch",
     }:
         raise ValueError("role probe source differs")
-    if re.fullmatch(r"[1-9][0-9]*", str(source.get("workflow_run_id", ""))) is None or re.fullmatch(
-        r"[1-9][0-9]*", str(source.get("workflow_run_attempt", ""))
-    ) is None:
+    if (
+        re.fullmatch(r"[1-9][0-9]*", str(source.get("workflow_run_id", ""))) is None
+        or re.fullmatch(r"[1-9][0-9]*", str(source.get("workflow_run_attempt", ""))) is None
+    ):
         raise ValueError("role probe workflow identity invalid")
     expected_identity = {
         "kind": role,

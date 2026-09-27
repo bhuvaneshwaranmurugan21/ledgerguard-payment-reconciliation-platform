@@ -20,6 +20,12 @@ def test_exact_stage6_workflows_pass() -> None:
     [
         ("static", 'python-version: "3.11.13"', 'python-version: "3.12"', "invariant"),
         ("static", "-lockfile=readonly", "-lockfile=update", "invariant"),
+        (
+            "static",
+            "python -m tools.validate_part3_stage6_operations",
+            "python -m tools.validate_part3_stage6_preparation",
+            "invariant",
+        ),
         ("plan", "refs/heads/main", "refs/heads/other", "invariant"),
         ("plan", "cancel-in-progress: false", "cancel-in-progress: true", "invariant"),
         (
