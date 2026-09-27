@@ -1,0 +1,99 @@
+{
+  "schema_version": "ledgerguard.part3-stage6-operation-manifest.v1",
+  "classification": "STATIC_COMPLETE_STAGE6_OPERATION_AUTHORITY",
+  "source": {
+    "baseline_commit": "50d6b00253a8e6e87d78ebcc1a76dba1b754258c",
+    "baseline_tree": "c9c9a893ad43d0e608664d69991b14689fbd7839"
+  },
+  "target": {
+    "account": "857229544428",
+    "region": "ap-southeast-2",
+    "operation_id": "release-qual1"
+  },
+  "controller_operations": [
+    ["ATHENA_LIST_WORKGROUPS", "athena:ListWorkGroups", "READ", ["deploy", "recovery"], "*"],
+    ["CE_GET_COST", "ce:GetCostAndUsage", "READ", ["deploy", "recovery"], "*"],
+    ["CLOUDWATCH_DESCRIBE_ALARMS", "cloudwatch:DescribeAlarms", "READ", ["deploy", "recovery"], "*"],
+    ["DDB_DELETE_ITEM", "dynamodb:DeleteItem", "BOUNDED_CONTROL_MUTATION", ["deploy", "recovery"], "exact-lease-key"],
+    ["DDB_GET_ITEM", "dynamodb:GetItem", "READ", ["deploy", "recovery"], "exact-lease-key"],
+    ["DDB_LIST_TABLES", "dynamodb:ListTables", "READ", ["deploy", "recovery"], "*"],
+    ["DDB_PUT_ITEM", "dynamodb:PutItem", "BOUNDED_CONTROL_MUTATION", ["deploy"], "exact-lease-key"],
+    ["GLUE_GET_DATABASES", "glue:GetDatabases", "READ", ["deploy", "recovery"], "*"],
+    ["GLUE_GET_JOBS", "glue:GetJobs", "READ", ["deploy", "recovery"], "*"],
+    ["IAM_GET_ACCOUNT_SUMMARY", "iam:GetAccountSummary", "READ", ["deploy", "recovery"], "*"],
+    ["IAM_GET_POLICY", "iam:GetPolicy", "READ", ["deploy", "recovery"], "approved-policy-arns"],
+    ["IAM_GET_POLICY_VERSION", "iam:GetPolicyVersion", "READ", ["deploy", "recovery"], "approved-policy-arns"],
+    ["IAM_GET_ROLE", "iam:GetRole", "READ", ["deploy", "recovery"], "approved-role-arns"],
+    ["IAM_LIST_ATTACHED_ROLE_POLICIES", "iam:ListAttachedRolePolicies", "READ", ["deploy", "recovery"], "approved-role-arns"],
+    ["IAM_LIST_ROLES", "iam:ListRoles", "READ", ["deploy", "recovery"], "*"],
+    ["IAM_LIST_ROLE_POLICIES", "iam:ListRolePolicies", "READ", ["deploy", "recovery"], "approved-role-arns"],
+    ["IAM_LIST_ROLE_TAGS", "iam:ListRoleTags", "READ", ["deploy", "recovery"], "approved-role-arns"],
+    ["KMS_DESCRIBE_KEY", "kms:DescribeKey", "READ", ["deploy", "recovery"], "reviewed-backend-key"],
+    ["LAMBDA_LIST_FUNCTIONS", "lambda:ListFunctions", "READ", ["deploy", "recovery"], "*"],
+    ["LOGS_DESCRIBE_GROUPS", "logs:DescribeLogGroups", "READ", ["deploy", "recovery"], "*"],
+    ["QUOTAS_LIST", "servicequotas:ListServiceQuotas", "READ", ["deploy", "recovery"], "*"],
+    ["S3_GET_BUCKET_ENCRYPTION", "s3:GetEncryptionConfiguration", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_GET_BUCKET_LOCATION", "s3:GetBucketLocation", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_GET_BUCKET_POLICY", "s3:GetBucketPolicy", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_GET_BUCKET_VERSIONING", "s3:GetBucketVersioning", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_GET_LIFECYCLE", "s3:GetLifecycleConfiguration", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_GET_OWNERSHIP", "s3:GetBucketOwnershipControls", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_GET_PUBLIC_ACCESS", "s3:GetBucketPublicAccessBlock", "READ", ["deploy", "recovery"], "backend-bucket"],
+    ["S3_LIST_BUCKETS", "s3:ListAllMyBuckets", "READ", ["deploy", "recovery"], "*"],
+    ["S3_LIST_VERSIONS", "s3:ListBucketVersions", "READ", ["deploy", "recovery"], "exact-state-and-lock-prefix"],
+    ["SFN_LIST", "states:ListStateMachines", "READ", ["deploy", "recovery"], "*"],
+    ["STS_GET_CALLER_IDENTITY", "sts:GetCallerIdentity", "READ", ["deploy", "recovery"], "*"],
+    ["TAG_GET_RESOURCES", "tag:GetResources", "READ", ["deploy", "recovery"], "*"]
+  ],
+  "role_probe_operations": [
+    ["athena", "list-work-groups", "athena:ListWorkGroups", "READ_OR_EXPECTED_DENY", ["deploy", "read", "recovery"]],
+    ["athena", "stop-query-execution", "athena:StopQueryExecution", "BOUNDED_ABSENT_RESOURCE_NOOP", ["recovery"]],
+    ["dynamodb", "describe-table", "dynamodb:DescribeTable", "READ", ["deploy", "read", "recovery"]],
+    ["dynamodb", "update-item", "dynamodb:UpdateItem", "CONDITIONALLY_IMPOSSIBLE_NOOP", ["deploy", "read", "recovery"]],
+    ["glue", "batch-stop-job-run", "glue:BatchStopJobRun", "BOUNDED_ABSENT_RESOURCE_NOOP", ["recovery"]],
+    ["iam", "get-role", "iam:GetRole", "READ", ["deploy", "read", "recovery"]],
+    ["kms", "describe-key", "kms:DescribeKey", "READ", ["deploy", "read", "recovery"]],
+    ["s3api", "get-bucket-encryption", "s3:GetEncryptionConfiguration", "READ", ["deploy", "read", "recovery"]],
+    ["s3api", "get-bucket-location", "s3:GetBucketLocation", "READ", ["deploy", "read", "recovery"]],
+    ["s3api", "upload-part", "s3:PutObject", "NONEXISTENT_MULTIPART_NOOP", ["deploy", "read", "recovery"]],
+    ["stepfunctions", "stop-execution", "states:StopExecution", "BOUNDED_ABSENT_RESOURCE_NOOP", ["recovery"]],
+    ["sts", "get-caller-identity", "sts:GetCallerIdentity", "READ", ["deploy", "read", "recovery"]]
+  ],
+  "terraform_provider_authority": {
+    "path": "spec/part3-stage4-provider-actions-v1.json",
+    "provider_version": "6.11.0",
+    "expected_unique_actions": 127,
+    "stage6_invocation": "terraform init, validate, full-refresh plan, and show only",
+    "mutating_capabilities_invoked": false
+  },
+  "policy_requirements": {
+    "deploy_only_inventory_action": "athena:ListWorkGroups",
+    "deploy_only_inventory_resource": "*",
+    "deploy_only_inventory_condition": {
+      "StringEquals": {
+        "aws:RequestedRegion": "ap-southeast-2"
+      }
+    },
+    "read_role_must_deny": ["athena:ListWorkGroups"],
+    "all_roles_must_deny_workload_start": [
+      "athena:StartQueryExecution",
+      "glue:StartJobRun",
+      "lambda:InvokeFunction",
+      "states:StartExecution",
+      "states:StartSyncExecution"
+    ]
+  },
+  "prohibited_execution": [
+    "terraform apply",
+    "terraform destroy",
+    "terraform force-unlock",
+    "terraform import",
+    "terraform -target",
+    "glue:StartJobRun",
+    "athena:StartQueryExecution",
+    "lambda:InvokeFunction",
+    "states:StartExecution",
+    "states:StartSyncExecution"
+  ],
+  "stage6_complete": false
+}

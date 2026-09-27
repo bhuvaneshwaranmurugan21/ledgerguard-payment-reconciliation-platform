@@ -26,34 +26,25 @@ def test_runner_uses_reviewed_kms_key_when_bucket_default_is_sse_s3(
 ) -> None:
     calls: list[tuple[str, str, list[str]]] = []
 
-    def invoke(
-        service: str, operation: str, arguments: list[str]
-    ) -> tuple[dict[str, Any], Any]:
+    def invoke(service: str, operation: str, arguments: list[str]) -> tuple[dict[str, Any], Any]:
         calls.append((service, operation, arguments))
         if (service, operation) == ("sts", "get-caller-identity"):
             return _row(), {
                 "Account": ACCOUNT,
-                "Arn": (
-                    f"arn:aws:sts::{ACCOUNT}:assumed-role/"
-                    f"{ROLE_NAMES['deploy']}/probe"
-                ),
+                "Arn": (f"arn:aws:sts::{ACCOUNT}:assumed-role/{ROLE_NAMES['deploy']}/probe"),
             }
         if (service, operation) == ("s3api", "get-bucket-encryption"):
             return _row(), {
                 "ServerSideEncryptionConfiguration": {
-                    "Rules": [
-                        {
-                            "ApplyServerSideEncryptionByDefault": {
-                                "SSEAlgorithm": "AES256"
-                            }
-                        }
-                    ]
+                    "Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]
                 }
             }
         if (service, operation) == ("dynamodb", "update-item"):
             return _row(254, "ConditionalCheckFailedException"), None
         if (service, operation) == ("s3api", "upload-part"):
             return _row(254, "NoSuchUpload"), None
+        if (service, operation) == ("athena", "list-work-groups"):
+            return _row(), {"WorkGroups": []}
         return _row(), {}
 
     monkeypatch.setattr(runner, "_invoke", invoke)
@@ -72,27 +63,16 @@ def test_runner_uses_reviewed_kms_key_when_bucket_default_is_sse_s3(
 def test_runner_fails_closed_before_using_an_unreviewed_kms_key(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def invoke(
-        service: str, operation: str, arguments: list[str]
-    ) -> tuple[dict[str, Any], Any]:
+    def invoke(service: str, operation: str, arguments: list[str]) -> tuple[dict[str, Any], Any]:
         if (service, operation) == ("sts", "get-caller-identity"):
             return _row(), {
                 "Account": ACCOUNT,
-                "Arn": (
-                    f"arn:aws:sts::{ACCOUNT}:assumed-role/"
-                    f"{ROLE_NAMES['deploy']}/probe"
-                ),
+                "Arn": (f"arn:aws:sts::{ACCOUNT}:assumed-role/{ROLE_NAMES['deploy']}/probe"),
             }
         if (service, operation) == ("s3api", "get-bucket-encryption"):
             return _row(), {
                 "ServerSideEncryptionConfiguration": {
-                    "Rules": [
-                        {
-                            "ApplyServerSideEncryptionByDefault": {
-                                "SSEAlgorithm": "AES256"
-                            }
-                        }
-                    ]
+                    "Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]
                 }
             }
         raise AssertionError("unreviewed KMS key must fail before further AWS calls")

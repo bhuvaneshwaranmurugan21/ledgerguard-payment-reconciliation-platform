@@ -42,7 +42,13 @@ def validate_workflows(root: Path) -> dict[str, Any]:
     )
     _require(
         static,
-        ("pull_request:\n", "push:\n", 'python-version: "3.11.13"', "-lockfile=readonly"),
+        (
+            "pull_request:\n",
+            "push:\n",
+            'python-version: "3.11.13"',
+            "-lockfile=readonly",
+            "python -m tools.validate_part3_stage6_operations",
+        ),
         "static",
     )
     if "id-token: write" in static or "workflow_dispatch:" in static:

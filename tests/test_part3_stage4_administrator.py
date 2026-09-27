@@ -105,6 +105,19 @@ def test_exact_successor_preserves_boundaries_and_separates_rescue(module: dict[
         "dynamodb:LeadingKeys"
     ] == [LEASE_KEY]
     assert rows["ReadBackendKey"]["Resource"] == [KEY_VECTOR]
+    assert rows["ListAthenaWorkgroupsForCleanInventory"] == {
+        "Sid": "ListAthenaWorkgroupsForCleanInventory",
+        "Effect": "Allow",
+        "Action": ["athena:ListWorkGroups"],
+        "Resource": ["*"],
+        "Condition": {"StringEquals": {"aws:RequestedRegion": REGION}},
+    }
+    read_rows = {
+        row["Sid"]: row
+        for policy in result["read_policies"].values()
+        for row in policy["Statement"]
+    }
+    assert "ListAthenaWorkgroupsForCleanInventory" not in read_rows
     for role in names["role_arns"]:
         create = rows["CreateBounded" + role.title()]
         assert create["Resource"] == [names["role_arns"][role]]
