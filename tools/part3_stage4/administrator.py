@@ -299,9 +299,19 @@ def compose(
             {"StringEquals": {"aws:RequestedRegion": REGION}},
         )
     ]
+    # DescribeAlarms without an AlarmNames filter evaluates alarm:* and must
+    # enumerate the account to detect unexpected owned alarms. Preserve the
+    # named-alarm scope for ListTagsForResource and alarm lifecycle mutations.
+    cloudwatch_inventory = statement(
+        "ListCloudWatchAlarmsForCleanInventory",
+        ["cloudwatch:DescribeAlarms"],
+        ["*"],
+        {"StringEquals": {"aws:RequestedRegion": REGION}},
+    )
     read_policies = partition_policies([*read, deny], "LedgerGuardPart3Read-v1")
     deploy_policies = partition_policies(
-        read + deploy_inventory + mutate + cleanup + [deny], "LedgerGuardPart3Deploy-v1"
+        read + deploy_inventory + mutate + cleanup + [cloudwatch_inventory, deny],
+        "LedgerGuardPart3Deploy-v1",
     )
     rescue = partition_policies(
         [

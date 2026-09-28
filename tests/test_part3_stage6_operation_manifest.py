@@ -21,6 +21,8 @@ def test_complete_stage6_operation_manifest_is_locally_verified() -> None:
         "terraform_provider_actions": 127,
         "athena_list_workgroups_deploy_allowed": True,
         "athena_list_workgroups_read_denied": True,
+        "cloudwatch_alarm_inventory_deploy_allowed": True,
+        "cloudwatch_alarm_inventory_read_denied": True,
         "workload_start_denies": 5,
         "manifest_sha256": result["manifest_sha256"],
         "aws_calls": 0,
@@ -82,6 +84,12 @@ def test_complete_stage6_operation_manifest_is_locally_verified() -> None:
                 deploy_only_inventory_resource="arn:aws:athena:ap-southeast-2:857229544428:workgroup/*"
             ),
             "policy scope",
+        ),
+        (
+            lambda value: value["policy_requirements"].update(
+                cloudwatch_inventory_condition={}
+            ),
+            "CloudWatch alarm inventory policy scope",
         ),
         (
             lambda value: value["policy_requirements"].update(
