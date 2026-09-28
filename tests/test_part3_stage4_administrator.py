@@ -118,6 +118,14 @@ def test_exact_successor_preserves_boundaries_and_separates_rescue(module: dict[
         for row in policy["Statement"]
     }
     assert "ListAthenaWorkgroupsForCleanInventory" not in read_rows
+    assert rows["ListCloudWatchAlarmsForCleanInventory"] == {
+        "Sid": "ListCloudWatchAlarmsForCleanInventory",
+        "Effect": "Allow",
+        "Action": ["cloudwatch:DescribeAlarms"],
+        "Resource": ["*"],
+        "Condition": {"StringEquals": {"aws:RequestedRegion": REGION}},
+    }
+    assert "ListCloudWatchAlarmsForCleanInventory" not in read_rows
     for role in names["role_arns"]:
         create = rows["CreateBounded" + role.title()]
         assert create["Resource"] == [names["role_arns"][role]]

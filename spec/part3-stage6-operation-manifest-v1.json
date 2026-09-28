@@ -74,6 +74,13 @@
         "aws:RequestedRegion": "ap-southeast-2"
       }
     },
+    "cloudwatch_inventory_action": "cloudwatch:DescribeAlarms",
+    "cloudwatch_inventory_resource": "*",
+    "cloudwatch_inventory_condition": {
+      "StringEquals": {
+        "aws:RequestedRegion": "ap-southeast-2"
+      }
+    },
     "read_role_must_deny": ["athena:ListWorkGroups"],
     "all_roles_must_deny_workload_start": [
       "athena:StartQueryExecution",

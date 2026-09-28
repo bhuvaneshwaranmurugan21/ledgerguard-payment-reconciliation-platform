@@ -261,6 +261,26 @@ def validate(root: Path, manifest: dict[str, Any] | None = None) -> dict[str, An
         "Condition": requirement["deploy_only_inventory_condition"],
     }:
         raise ValueError("Athena workgroup inventory policy scope differs")
+    alarm_action = requirement["cloudwatch_inventory_action"]
+    alarm_statement = _statement(deploy, "ListCloudWatchAlarmsForCleanInventory")
+    if alarm_statement != {
+        "Sid": "ListCloudWatchAlarmsForCleanInventory",
+        "Effect": "Allow",
+        "Action": [alarm_action],
+        "Resource": [requirement["cloudwatch_inventory_resource"]],
+        "Condition": requirement["cloudwatch_inventory_condition"],
+    } or alarm_action != "cloudwatch:DescribeAlarms" or requirement[
+        "cloudwatch_inventory_resource"
+    ] != "*" or requirement["cloudwatch_inventory_condition"] != {
+        "StringEquals": {"aws:RequestedRegion": "ap-southeast-2"}
+    }:
+        raise ValueError("CloudWatch alarm inventory policy scope differs")
+    if any(
+        alarm_action in row.get("Action", []) and "*" in row.get("Resource", [])
+        for document in read.values()
+        for row in document["Statement"]
+    ):
+        raise ValueError("CloudWatch alarm inventory leaked into read role")
     required_denies = set(requirement["all_roles_must_deny_workload_start"])
     if not required_denies.issubset(_actions(deploy, "Deny")) or not required_denies.issubset(
         _actions(read, "Deny")
@@ -275,6 +295,8 @@ def validate(root: Path, manifest: dict[str, Any] | None = None) -> dict[str, An
         "terraform_provider_actions": len(provider_actions),
         "athena_list_workgroups_deploy_allowed": True,
         "athena_list_workgroups_read_denied": True,
+        "cloudwatch_alarm_inventory_deploy_allowed": True,
+        "cloudwatch_alarm_inventory_read_denied": True,
         "workload_start_denies": len(required_denies),
         "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
         "aws_calls": 0,
