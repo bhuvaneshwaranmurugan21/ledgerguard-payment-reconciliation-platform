@@ -140,15 +140,17 @@ def _admitted_computed_unknown(
     if len(path) == 1 and path[0] in COMPUTED_UNKNOWN_PATHS.get(resource_type, set()):
         return True
     if resource_type == "aws_athena_workgroup" and path == (
-        "configuration", "0", "engine_version", "0", "effective_engine_version"
+        "configuration",
+        "0",
+        "engine_version",
+        "0",
+        "effective_engine_version",
     ):
         configuration = after.get("configuration")
         if not isinstance(configuration, list) or len(configuration) != 1:
             return False
         engine = (
-            configuration[0].get("engine_version")
-            if isinstance(configuration[0], dict)
-            else None
+            configuration[0].get("engine_version") if isinstance(configuration[0], dict) else None
         )
         return (
             isinstance(engine, list)
@@ -223,9 +225,8 @@ def validate_saved_plan(
         critical = [
             ".".join(path)
             for path in paths
-            if _critical(path) and not _admitted_computed_unknown(
-                expected_type, path, change["after"]
-            )
+            if _critical(path)
+            and not _admitted_computed_unknown(expected_type, path, change["after"])
         ]
         if critical:
             raise ValueError(f"security-critical unknown present: {address}: {critical[0]}")

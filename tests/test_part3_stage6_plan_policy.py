@@ -211,7 +211,8 @@ def test_adjacent_nested_critical_unknown_is_not_admitted() -> None:
 def test_athena_provider_computed_effective_engine_requires_pinned_selected_engine() -> None:
     plan = valid_plan()
     row = next(
-        item for item in plan["resource_changes"]
+        item
+        for item in plan["resource_changes"]
         if item["address"] == "aws_athena_workgroup.reconciliation"
     )
     row["change"]["after"]["configuration"] = [
@@ -226,7 +227,8 @@ def test_athena_provider_computed_effective_engine_requires_pinned_selected_engi
     for selected in ("AUTO", "Athena engine version 2", None):
         mutated = copy.deepcopy(plan)
         engine = next(
-            item for item in mutated["resource_changes"]
+            item
+            for item in mutated["resource_changes"]
             if item["address"] == "aws_athena_workgroup.reconciliation"
         )["change"]["after"]["configuration"][0]["engine_version"][0]
         engine["selected_engine_version"] = selected
@@ -240,7 +242,8 @@ def test_athena_provider_computed_effective_engine_requires_pinned_selected_engi
     ):
         mutated = copy.deepcopy(plan)
         engine_unknown = next(
-            item for item in mutated["resource_changes"]
+            item
+            for item in mutated["resource_changes"]
             if item["address"] == "aws_athena_workgroup.reconciliation"
         )["change"]["after_unknown"]["configuration"][0]["engine_version"][0]
         engine_unknown[unknown_field] = True
