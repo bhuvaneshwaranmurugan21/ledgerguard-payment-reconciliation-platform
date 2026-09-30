@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import json
 import subprocess
+import time
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -385,7 +388,20 @@ def test_collect_preflight_composes_only_admitted_results(monkeypatch: pytest.Mo
             "STS_GET_CALLER_IDENTITY": {
                 "Account": live.ACCOUNT,
                 "Arn": "arn:aws:sts::857229544428:assumed-role/LedgerGuardGitHubOidcRole/run",
-            }
+            },
+            "CE_GET_COST": {
+                "ResultsByTime": [
+                    {
+                        "Estimated": True,
+                        "Groups": [
+                            {
+                                "Keys": ["Usage"],
+                                "Metrics": {"UnblendedCost": {"Amount": "1.00", "Unit": "USD"}},
+                            }
+                        ],
+                    }
+                ]
+            },
         }
     )
     monkeypatch.setattr(live, "observe_identity_contract", lambda *args: {"equal": True})
@@ -423,11 +439,6 @@ def test_collect_preflight_composes_only_admitted_results(monkeypatch: pytest.Mo
     )
     monkeypatch.setattr(
         live,
-        "_cost_headroom_check",
-        lambda *args: {"admitted": True, "known_gross_project_spend": "1.00"},
-    )
-    monkeypatch.setattr(
-        live,
         "observe_quota_visibility",
         lambda *args: {
             key: True
@@ -457,6 +468,10 @@ def test_collect_preflight_composes_only_admitted_results(monkeypatch: pytest.Mo
             )
         },
     )
+    cost_contract = json.loads(
+        (Path(__file__).resolve().parents[1] / "contracts/part3-stage2-cost-v1.json").read_text()
+    )
+    now = int(time.time())
     result = live.collect_preflight(
         cli=fake,
         expected_identity={},
@@ -465,14 +480,15 @@ def test_collect_preflight_composes_only_admitted_results(monkeypatch: pytest.Mo
         source_tree="c" * 40,
         kms_key_arn="key",
         control_plane={},
-        cost_contract={"conservative_unbilled_reserve_usd": "1.00"},
+        cost_contract=cost_contract,
         inventory_contract={"complete_pagination_required": True},
         owner_token="owner",
-        lease_expires_epoch=123,
-        now_epoch=100,
+        lease_expires_epoch=now + 3600,
+        now_epoch=now,
     )  # type: ignore[arg-type]
     assert result["classification"] == "FRESH_EXACT_MAIN_PLAN_ONLY_ADMISSION"
-    assert result["budget"]["known_gross_usd"] == "1.00"
+    assert result["budget"]["known_gross_usd"] == "1.0000"
+    assert fake.calls[-1][0] == "CE_GET_COST"
 
 
 @pytest.mark.parametrize("failure", ["identity", "iam", "backend", "inventory-contract", "budget"])
@@ -495,7 +511,9 @@ def test_collect_preflight_rejects_each_live_gate(
     monkeypatch.setattr(live, "observe_clean_inventory", lambda *args: {})
     monkeypatch.setattr(live, "observe_quota_visibility", lambda *args: {})
     monkeypatch.setattr(
-        live, "_cost_headroom_check", lambda *args: {"admitted": failure != "budget"}
+        live,
+        "_cost_headroom_check",
+        lambda *args: {"verdict": "REJECTED" if failure == "budget" else "HEADROOM_VERIFIED"},
     )
     with pytest.raises(ValueError):
         live.collect_preflight(

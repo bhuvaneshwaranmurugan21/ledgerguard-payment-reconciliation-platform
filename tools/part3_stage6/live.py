@@ -404,7 +404,7 @@ def collect_preflight(
     inventory = observe_clean_inventory(cli)
     quota = observe_quota_visibility(cli)
     budget = _cost_headroom_check(cli, cost_contract, date.today(), now)
-    if budget.get("admitted") is not True:
+    if budget.get("verdict") != "HEADROOM_VERIFIED":
         raise ValueError("live budget is not admitted")
     lease = acquire_lease(cli, owner_token, lease_expires_epoch)
     return {
@@ -435,7 +435,7 @@ def collect_preflight(
         "inventory": inventory,
         "budget": {
             "currency": "USD",
-            "known_gross_usd": str(budget["known_gross_project_spend"]),
+            "known_gross_usd": str(budget["known_gross_project_spend_usd"]),
             "reserved_stage6_exposure_usd": "0.05",
             "cleanup_reserve_usd": str(cost_contract["conservative_unbilled_reserve_usd"]),
             "strict_ceiling_usd": "10",
