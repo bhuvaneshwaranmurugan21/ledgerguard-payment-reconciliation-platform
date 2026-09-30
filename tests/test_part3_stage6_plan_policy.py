@@ -233,7 +233,11 @@ def test_athena_provider_computed_effective_engine_requires_pinned_selected_engi
         with pytest.raises(ValueError, match="security-critical unknown"):
             validate_saved_plan(mutated, ADDRESSES)
 
-    for unknown_field in ("selected_engine_version", "kms_key_arn", "effective_engine_version_extra"):
+    for unknown_field in (
+        "selected_engine_version",
+        "kms_key_arn",
+        "effective_engine_version_extra",
+    ):
         mutated = copy.deepcopy(plan)
         engine_unknown = next(
             item for item in mutated["resource_changes"]

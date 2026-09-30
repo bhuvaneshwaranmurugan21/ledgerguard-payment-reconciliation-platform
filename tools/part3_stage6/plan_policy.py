@@ -145,7 +145,11 @@ def _admitted_computed_unknown(
         configuration = after.get("configuration")
         if not isinstance(configuration, list) or len(configuration) != 1:
             return False
-        engine = configuration[0].get("engine_version") if isinstance(configuration[0], dict) else None
+        engine = (
+            configuration[0].get("engine_version")
+            if isinstance(configuration[0], dict)
+            else None
+        )
         return (
             isinstance(engine, list)
             and len(engine) == 1
