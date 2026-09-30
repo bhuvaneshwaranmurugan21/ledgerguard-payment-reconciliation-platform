@@ -208,6 +208,42 @@ def test_adjacent_nested_critical_unknown_is_not_admitted() -> None:
         validate_saved_plan(plan, ADDRESSES)
 
 
+def test_athena_provider_computed_effective_engine_requires_pinned_selected_engine() -> None:
+    plan = valid_plan()
+    row = next(
+        item for item in plan["resource_changes"]
+        if item["address"] == "aws_athena_workgroup.reconciliation"
+    )
+    row["change"]["after"]["configuration"] = [
+        {"engine_version": [{"selected_engine_version": "Athena engine version 3"}]}
+    ]
+    row["change"]["after_unknown"] = {
+        "configuration": [{"engine_version": [{"effective_engine_version": True}]}]
+    }
+    result = validate_saved_plan(plan, ADDRESSES)
+    assert result["benign_computed_unknown_count"] == 33
+
+    for selected in ("AUTO", "Athena engine version 2", None):
+        mutated = copy.deepcopy(plan)
+        engine = next(
+            item for item in mutated["resource_changes"]
+            if item["address"] == "aws_athena_workgroup.reconciliation"
+        )["change"]["after"]["configuration"][0]["engine_version"][0]
+        engine["selected_engine_version"] = selected
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(mutated, ADDRESSES)
+
+    for unknown_field in ("selected_engine_version", "kms_key_arn", "effective_engine_version_extra"):
+        mutated = copy.deepcopy(plan)
+        engine_unknown = next(
+            item for item in mutated["resource_changes"]
+            if item["address"] == "aws_athena_workgroup.reconciliation"
+        )["change"]["after_unknown"]["configuration"][0]["engine_version"][0]
+        engine_unknown[unknown_field] = True
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(mutated, ADDRESSES)
+
+
 def test_invalid_unknown_leaf_and_address_authority_fail() -> None:
     plan = valid_plan()
     first(plan)["change"]["after_unknown"] = {"id": "yes"}
