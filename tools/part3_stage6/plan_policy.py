@@ -34,10 +34,11 @@ CRITICAL_UNKNOWN_TERMS = {
     "version",
 }
 
-# Provider-computed identities are expected for creates and are not configuration
-# ambiguity.  They are admitted only at these exact paths; all other critical
-# unknowns remain terminal failures and their source relationships are checked by
-# ``relationships.validate_relationships``.
+# Provider-computed values are expected for creates and are not configuration
+# ambiguity. They are admitted only at these exact paths; all other critical
+# unknowns remain terminal failures. Source relationships are checked by
+# ``relationships.validate_relationships`` and exact properties by
+# ``property_policy.validate_properties``.
 COMPUTED_UNKNOWN_PATHS = {
     "aws_s3_bucket": {
         "arn",
@@ -133,9 +134,30 @@ def _address_type(address: str) -> str:
     return base.split(".", 1)[0]
 
 
-def _admitted_computed_unknown(resource_type: str, path: tuple[str, ...]) -> bool:
+def _admitted_computed_unknown(
+    resource_type: str, path: tuple[str, ...], after: dict[str, Any]
+) -> bool:
     if len(path) == 1 and path[0] in COMPUTED_UNKNOWN_PATHS.get(resource_type, set()):
         return True
+    if resource_type == "aws_athena_workgroup" and path == (
+        "configuration",
+        "0",
+        "engine_version",
+        "0",
+        "effective_engine_version",
+    ):
+        configuration = after.get("configuration")
+        if not isinstance(configuration, list) or len(configuration) != 1:
+            return False
+        engine = (
+            configuration[0].get("engine_version") if isinstance(configuration[0], dict) else None
+        )
+        return (
+            isinstance(engine, list)
+            and len(engine) == 1
+            and isinstance(engine[0], dict)
+            and engine[0].get("selected_engine_version") == "Athena engine version 3"
+        )
     return (resource_type, path) in {
         ("aws_sfn_state_machine", ("logging_configuration", "0", "log_destination")),
         ("aws_cloudwatch_metric_alarm", ("dimensions", "StateMachineArn")),
@@ -203,7 +225,8 @@ def validate_saved_plan(
         critical = [
             ".".join(path)
             for path in paths
-            if _critical(path) and not _admitted_computed_unknown(expected_type, path)
+            if _critical(path)
+            and not _admitted_computed_unknown(expected_type, path, change["after"])
         ]
         if critical:
             raise ValueError(f"security-critical unknown present: {address}: {critical[0]}")
