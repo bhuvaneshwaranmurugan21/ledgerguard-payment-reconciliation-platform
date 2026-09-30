@@ -224,6 +224,15 @@ def test_athena_provider_computed_effective_engine_requires_pinned_selected_engi
     result = validate_saved_plan(plan, ADDRESSES)
     assert result["benign_computed_unknown_count"] == 33
 
+    without_configuration = copy.deepcopy(plan)
+    next(
+        item
+        for item in without_configuration["resource_changes"]
+        if item["address"] == "aws_athena_workgroup.reconciliation"
+    )["change"]["after"]["configuration"] = []
+    with pytest.raises(ValueError, match="security-critical unknown"):
+        validate_saved_plan(without_configuration, ADDRESSES)
+
     for selected in ("AUTO", "Athena engine version 2", None):
         mutated = copy.deepcopy(plan)
         engine = next(
