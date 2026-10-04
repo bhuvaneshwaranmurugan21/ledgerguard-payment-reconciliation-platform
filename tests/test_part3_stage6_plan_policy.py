@@ -208,6 +208,37 @@ def test_adjacent_nested_critical_unknown_is_not_admitted() -> None:
         validate_saved_plan(plan, ADDRESSES)
 
 
+def test_log_group_unset_name_prefix_requires_known_explicit_name() -> None:
+    plan = valid_plan()
+    row = next(
+        item for item in plan["resource_changes"]
+        if item["address"] == 'aws_cloudwatch_log_group.platform["controller"]'
+    )
+    row["change"]["after"] = {"name": "/aws/lambda/ledgerguard-part3-release-qual1-controller"}
+    row["change"]["after_unknown"] = {"name_prefix": True, "arn": True, "id": True}
+    result = validate_saved_plan(plan, ADDRESSES)
+    assert result["property_policy_required"] is True
+
+    for changed_after in (
+        {},
+        {"name": None},
+        {"name": ""},
+        {"name": row["change"]["after"]["name"], "name_prefix": "unreviewed-"},
+    ):
+        mutated = copy.deepcopy(plan)
+        target = next(
+            item for item in mutated["resource_changes"]
+            if item["address"] == row["address"]
+        )
+        target["change"]["after"] = changed_after
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(mutated, ADDRESSES)
+
+    row["change"]["after_unknown"]["name"] = True
+    with pytest.raises(ValueError, match="security-critical unknown"):
+        validate_saved_plan(plan, ADDRESSES)
+
+
 def test_athena_provider_computed_effective_engine_requires_pinned_selected_engine() -> None:
     plan = valid_plan()
     row = next(

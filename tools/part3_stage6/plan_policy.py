@@ -139,6 +139,15 @@ def _admitted_computed_unknown(
 ) -> bool:
     if len(path) == 1 and path[0] in COMPUTED_UNKNOWN_PATHS.get(resource_type, set()):
         return True
+    if resource_type == "aws_cloudwatch_log_group" and path == ("name_prefix",):
+        # The provider reports its mutually exclusive, unset alternative as
+        # unknown on create.  Admit that placeholder only when the explicit
+        # name is already known; property_policy then checks its exact value.
+        return (
+            isinstance(after.get("name"), str)
+            and bool(after["name"])
+            and after.get("name_prefix") is None
+        )
     if resource_type == "aws_athena_workgroup" and path == (
         "configuration",
         "0",
