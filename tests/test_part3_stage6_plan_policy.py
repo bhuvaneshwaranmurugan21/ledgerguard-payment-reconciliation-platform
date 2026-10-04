@@ -253,7 +253,12 @@ def test_dynamodb_default_managed_key_placeholder_requires_exact_enabled_sse() -
         [],
         [{}],
         [{"enabled": False}],
-        [{"enabled": True, "kms_key_arn": "arn:aws:kms:ap-southeast-2:123456789012:key/unreviewed"}],
+        [
+            {
+                "enabled": True,
+                "kms_key_arn": "arn:aws:kms:ap-southeast-2:123456789012:key/unreviewed",
+            }
+        ],
     ):
         mutated = copy.deepcopy(plan)
         target = next(
