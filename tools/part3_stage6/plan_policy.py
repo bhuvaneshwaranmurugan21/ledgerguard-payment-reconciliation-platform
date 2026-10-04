@@ -148,6 +148,14 @@ def _admitted_computed_unknown(
             and bool(after["name"])
             and after.get("name_prefix") is None
         )
+    if resource_type == "aws_dynamodb_table" and path == (
+        "server_side_encryption", "0", "kms_key_arn"
+    ):
+        # Without an explicit key ARN, enabled SSE uses DynamoDB's default
+        # AWS managed key. The provider may leave its computed ARN unknown
+        # until create. Exact enabled-only SSE is checked again by the
+        # independent property policy.
+        return after.get("server_side_encryption") == [{"enabled": True}]
     if resource_type == "aws_athena_workgroup" and path == (
         "configuration",
         "0",

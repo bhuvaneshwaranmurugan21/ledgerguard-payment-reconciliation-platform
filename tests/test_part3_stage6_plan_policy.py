@@ -239,6 +239,43 @@ def test_log_group_unset_name_prefix_requires_known_explicit_name() -> None:
         validate_saved_plan(plan, ADDRESSES)
 
 
+def test_dynamodb_default_managed_key_placeholder_requires_exact_enabled_sse() -> None:
+    plan = valid_plan()
+    row = next(
+        item for item in plan["resource_changes"] if item["address"] == "aws_dynamodb_table.control"
+    )
+    row["change"]["after"] = {"server_side_encryption": [{"enabled": True}]}
+    row["change"]["after_unknown"] = {"server_side_encryption": [{"kms_key_arn": True}]}
+    assert validate_saved_plan(plan, ADDRESSES)["property_policy_required"] is True
+
+    for sse in (
+        None,
+        [],
+        [{}],
+        [{"enabled": False}],
+        [{"enabled": True, "kms_key_arn": "arn:aws:kms:ap-southeast-2:123456789012:key/unreviewed"}],
+    ):
+        mutated = copy.deepcopy(plan)
+        target = next(
+            item for item in mutated["resource_changes"] if item["address"] == row["address"]
+        )
+        target["change"]["after"] = {"server_side_encryption": sse}
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(mutated, ADDRESSES)
+
+    for unknown in (
+        {"server_side_encryption": True},
+        {"server_side_encryption": [{"kms_key_id": True}]},
+    ):
+        mutated = copy.deepcopy(plan)
+        target = next(
+            item for item in mutated["resource_changes"] if item["address"] == row["address"]
+        )
+        target["change"]["after_unknown"] = unknown
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(mutated, ADDRESSES)
+
+
 def test_athena_provider_computed_effective_engine_requires_pinned_selected_engine() -> None:
     plan = valid_plan()
     row = next(
