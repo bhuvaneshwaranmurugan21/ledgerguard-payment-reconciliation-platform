@@ -156,6 +156,21 @@ def _admitted_computed_unknown(
         # until create. Exact enabled-only SSE is checked again by the
         # independent property policy.
         return after.get("server_side_encryption") == [{"enabled": True}]
+    if resource_type == "aws_glue_job" and path == ("command", "0", "runtime"):
+        # The Glue provider computes this additional command field. Admit it
+        # only for the reviewed ETL command; property_policy checks the exact
+        # command name, Python version, and release script location.
+        command = after.get("command")
+        return (
+            isinstance(command, list)
+            and len(command) == 1
+            and isinstance(command[0], dict)
+            and command[0].get("name") == "glueetl"
+            and command[0].get("python_version") == "3"
+            and isinstance(command[0].get("script_location"), str)
+            and command[0]["script_location"].startswith("s3://")
+            and command[0].get("runtime") is None
+        )
     if resource_type == "aws_athena_workgroup" and path == (
         "configuration",
         "0",
