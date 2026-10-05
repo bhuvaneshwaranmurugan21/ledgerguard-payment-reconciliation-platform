@@ -171,6 +171,20 @@ def _admitted_computed_unknown(
             and command[0]["script_location"].startswith("s3://")
             and command[0].get("runtime") is None
         )
+    if resource_type == "aws_iam_role" and path == ("inline_policy",):
+        # Provider 6.11 marks this unset legacy association as computed. The
+        # reviewed runtime roles configure separate aws_iam_role_policy
+        # resources, with trust and boundary checked by property_policy.
+        return (
+            after.get("inline_policy") is None
+            and isinstance(after.get("name"), str)
+            and bool(after["name"])
+            and after.get("path") == "/ledgerguard/"
+            and isinstance(after.get("permissions_boundary"), str)
+            and after["permissions_boundary"].startswith("arn:aws:iam::")
+            and isinstance(after.get("assume_role_policy"), str)
+            and bool(after["assume_role_policy"])
+        )
     if resource_type == "aws_athena_workgroup" and path == (
         "configuration",
         "0",
