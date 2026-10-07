@@ -28,6 +28,23 @@ All money uses integer minor units plus an explicit currency. Identical redelive
 identity reuse with different content is rejected. Late data creates a new proof revision instead
 of rewriting historical evidence.
 
+## Architecture
+
+```mermaid
+flowchart TD
+    P["Processor events and payout reports"] --> I
+    L["Ledger journals"] --> I
+    B["Bank statement entries"] --> I
+
+    subgraph W["Step Functions orchestration: managed execution pending"]
+        I["Versioned S3 inputs and run manifest"] --> A["Lambda: admission and run registration"]
+        A --> G["Glue and Spark: transaction and settlement reconciliation"]
+        G --> V["Lambda validation and Athena checks"]
+        V --> E["S3: immutable proof snapshots"]
+        E --> D["DynamoDB: conditional authority publication"]
+    end
+```
+
 ## Current status
 
 Part 1 is operationally complete. The failed non-squash PR #8 attempt remains recorded; replacement
