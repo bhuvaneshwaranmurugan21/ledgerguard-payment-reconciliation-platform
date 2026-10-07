@@ -172,12 +172,13 @@ def _admitted_computed_unknown(
             and command[0].get("runtime") is None
         )
     if resource_type == "aws_iam_role" and path in (
-        ("inline_policy",), ("managed_policy_arns",)
+        ("name_prefix",), ("inline_policy",), ("managed_policy_arns",)
     ):
-        # Provider 6.11 computes these unset legacy associations. The reviewed
-        # runtime roles use separate aws_iam_role_policy resources and configure
-        # no managed policy attachments. The property policy checks exact trust,
-        # role identity, boundary and source-derived inline policy documents.
+        # Provider 6.11 also computes the unset, mutually exclusive name_prefix
+        # when an explicit role name is configured. It computes the unset legacy
+        # policy associations as well. The reviewed runtime roles use separate
+        # aws_iam_role_policy resources and no managed policy attachments. The
+        # property policy checks exact name, trust, boundary and policy documents.
         return (
             after.get(path[0]) is None
             and isinstance(after.get("name"), str)
