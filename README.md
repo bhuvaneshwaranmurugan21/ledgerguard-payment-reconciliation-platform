@@ -3,8 +3,18 @@
 **A three-way payment reconciliation platform that proves processor activity, balanced internal
 ledger movement, and bank settlement agree at the correct business grain.**
 
-[![CI](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/ci.yml)
-[![AWS OIDC](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/aws-oidc-identity.yml/badge.svg)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/aws-oidc-identity.yml)
+[![CI](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/ci.yml)
+[![Static qualification](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage4-static.yml/badge.svg?branch=main)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage4-static.yml)
+[![Control qualification](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage5-incremental.yml/badge.svg?branch=main)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage5-incremental.yml)
+[![Plan source qualification](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage6-static.yml/badge.svg?branch=main)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage6-static.yml)
+[![Role admission](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage6-role-admission.yml/badge.svg?branch=main)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage6-role-admission.yml)
+[![Plan-only proof](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage6-plan-only.yml/badge.svg?branch=main)](https://github.com/bhuvaneshwaranmurugan21/ledgerguard-payment-reconciliation-platform/actions/workflows/part3-stage6-plan-only.yml)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![Spark](https://img.shields.io/badge/Spark-3.5.6-E25A1C?logo=apachespark&logoColor=white)
+![AWS Glue](https://img.shields.io/badge/AWS%20Glue-5.1-232F3E)
+![Terraform](https://img.shields.io/badge/Terraform-1.13.1-844FBA?logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/Cloud-AWS-232F3E?logo=amazonwebservices&logoColor=white)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 A completed payment pipeline does not prove that money reconciles. LedgerGuard keeps processor,
 ledger, and bank evidence independent, reconstructs their financial meaning, and emits a versioned
