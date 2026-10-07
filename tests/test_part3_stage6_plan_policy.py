@@ -316,8 +316,10 @@ def test_glue_computed_command_runtime_requires_reviewed_etl_command() -> None:
         validate_saved_plan(plan, ADDRESSES)
 
 
-@pytest.mark.parametrize("computed_field", ["inline_policy", "managed_policy_arns"])
-def test_unset_runtime_role_policy_association_requires_known_role_controls(
+@pytest.mark.parametrize(
+    "computed_field", ["name_prefix", "inline_policy", "managed_policy_arns"]
+)
+def test_unset_runtime_role_computed_field_requires_known_role_controls(
     computed_field: str,
 ) -> None:
     plan = valid_plan()
@@ -352,6 +354,11 @@ def test_unset_runtime_role_policy_association_requires_known_role_controls(
     row["change"]["after_unknown"] = {computed_field: [{"policy": True}]}
     with pytest.raises(ValueError, match="security-critical unknown"):
         validate_saved_plan(plan, ADDRESSES)
+
+    if computed_field == "name_prefix":
+        row["change"]["after_unknown"] = {"name_prefix": True, "name": True}
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(plan, ADDRESSES)
 
 
 def test_athena_provider_computed_effective_engine_requires_pinned_selected_engine() -> None:
