@@ -148,6 +148,15 @@ def _admitted_computed_unknown(
             and bool(after["name"])
             and after.get("name_prefix") is None
         )
+    if resource_type == "aws_iam_role_policy" and path == ("name_prefix",):
+        # Provider 6.11 computes the unset alternative on create even with an
+        # explicit policy name. The property policy checks the exact name and
+        # document; the relationship policy checks its runtime role source.
+        return (
+            isinstance(after.get("name"), str)
+            and bool(after["name"])
+            and after.get("name_prefix") is None
+        )
     if resource_type == "aws_dynamodb_table" and path == (
         "server_side_encryption", "0", "kms_key_arn"
     ):

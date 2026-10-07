@@ -361,6 +361,44 @@ def test_unset_runtime_role_computed_field_requires_known_role_controls(
             validate_saved_plan(plan, ADDRESSES)
 
 
+def test_unset_runtime_role_policy_name_prefix_requires_explicit_name() -> None:
+    plan = valid_plan()
+    row = next(
+        item for item in plan["resource_changes"]
+        if item["address"] == 'aws_iam_role_policy.runtime["controller"]'
+    )
+    row["change"]["after"] = {
+        "name": "ledgerguard-part3-release-qual1-controller",
+        "name_prefix": None,
+        "policy": None,
+        "role": None,
+    }
+    row["change"]["after_unknown"] = {
+        "id": True,
+        "name_prefix": True,
+        "policy": True,
+        "role": True,
+    }
+    assert validate_saved_plan(plan, ADDRESSES)["property_policy_required"] is True
+
+    for changed in (
+        {**row["change"]["after"], "name": None},
+        {**row["change"]["after"], "name": ""},
+        {**row["change"]["after"], "name_prefix": "unreviewed-"},
+    ):
+        mutated = copy.deepcopy(plan)
+        target = next(
+            item for item in mutated["resource_changes"] if item["address"] == row["address"]
+        )
+        target["change"]["after"] = changed
+        with pytest.raises(ValueError, match="security-critical unknown"):
+            validate_saved_plan(mutated, ADDRESSES)
+
+    row["change"]["after_unknown"]["name"] = True
+    with pytest.raises(ValueError, match="security-critical unknown"):
+        validate_saved_plan(plan, ADDRESSES)
+
+
 def test_athena_provider_computed_effective_engine_requires_pinned_selected_engine() -> None:
     plan = valid_plan()
     row = next(
