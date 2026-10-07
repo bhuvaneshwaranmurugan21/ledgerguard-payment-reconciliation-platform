@@ -316,7 +316,10 @@ def test_glue_computed_command_runtime_requires_reviewed_etl_command() -> None:
         validate_saved_plan(plan, ADDRESSES)
 
 
-def test_unset_runtime_role_inline_policy_requires_known_role_controls() -> None:
+@pytest.mark.parametrize("computed_field", ["inline_policy", "managed_policy_arns"])
+def test_unset_runtime_role_policy_association_requires_known_role_controls(
+    computed_field: str,
+) -> None:
     plan = valid_plan()
     row = next(
         item for item in plan["resource_changes"]
@@ -328,12 +331,12 @@ def test_unset_runtime_role_inline_policy_requires_known_role_controls() -> None
         "permissions_boundary": "arn:aws:iam::857229544428:policy/LedgerGuardBoundary",
         "assume_role_policy": '{"Version":"2012-10-17"}',
     }
-    row["change"]["after_unknown"] = {"inline_policy": True}
+    row["change"]["after_unknown"] = {computed_field: True}
     assert validate_saved_plan(plan, ADDRESSES)["property_policy_required"] is True
 
     for changed in (
         {},
-        {**row["change"]["after"], "inline_policy": [{"name": "unreviewed"}]},
+        {**row["change"]["after"], computed_field: ["unreviewed"]},
         {**row["change"]["after"], "permissions_boundary": None},
         {**row["change"]["after"], "assume_role_policy": None},
         {**row["change"]["after"], "path": "/unreviewed/"},
@@ -346,7 +349,7 @@ def test_unset_runtime_role_inline_policy_requires_known_role_controls() -> None
         with pytest.raises(ValueError, match="security-critical unknown"):
             validate_saved_plan(mutated, ADDRESSES)
 
-    row["change"]["after_unknown"] = {"inline_policy": [{"policy": True}]}
+    row["change"]["after_unknown"] = {computed_field: [{"policy": True}]}
     with pytest.raises(ValueError, match="security-critical unknown"):
         validate_saved_plan(plan, ADDRESSES)
 
